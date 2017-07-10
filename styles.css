@@ -1,3 +1,4 @@
+
 /* Default Style Values*/
 
 
@@ -37,6 +38,7 @@ input {
 /* This is used for centered, secondary headers (subtitles, mostly) */
 
 h1 {
+    
     font-size: 22px;
     padding: 0px;
     margin: 0px;
@@ -44,6 +46,7 @@ h1 {
     margin-right: auto;
     margin-top: auto;
     margin-bottom: auto;
+    color: orange;
 }
 
 
@@ -123,6 +126,7 @@ hr {
 .nav-bar {
     background-color: #326ba9;
     height: 85px;
+    width: auto;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
     cursor: default;
@@ -130,10 +134,20 @@ hr {
 
 .nav-menu {
     display: flex;
+    height: 85px;
     align-content: center;
     padding: 0px 5px 0px 30px;
 }
 
+.trWeather {
+    align-content: center;
+    margin-left: 52.88%;
+    margin-top: 37%;
+    width: 100%;
+    height: 85px;
+    
+    
+}
 
 /* Navigation Button Style */
 
@@ -367,7 +381,6 @@ hr {
     margin-top: 15px;
     margin-bottom: 15px;
     white-space: nowrap;
-    &nbsp;
 }
 
 .logo {
@@ -378,6 +391,8 @@ hr {
     margin-left: auto;
     margin-right: auto;
     width: 47%;
+    margin: -60px 0px 0px 27%;
+    
 }
 
 .switch {
@@ -574,8 +589,8 @@ input:checked+.slider:before {
 }
 
 .icontab:hover {
-    border-color: #0076C6;
-    transition: all 0.1s ease-in-out;
+    opacity: 0.4;
+    transition: all 0.2s ease-in-out;
 }
 
 .menuBar {
@@ -1030,7 +1045,7 @@ h1 {
     font-size: 45px;
     text-align: center;
     color: orange;
-    margin-top: 4.5%;
+    margin-top: 1%;
 }
 
 h2 {
@@ -1175,11 +1190,12 @@ td {
 }
 
 .flex-container {
+    position: static; 
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    padding: .5em
+    padding: 0.5em;
 }
 
 .bottom-nav {
@@ -1195,4 +1211,4 @@ td {
     line-height: 45px;
 }
 
-</p>
+
