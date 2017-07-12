@@ -126,7 +126,7 @@ hr {
 .nav-bar {
     background-color: #326ba9;
     height: 85px;
-    width: auto;
+    width: 100%;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
     cursor: default;
