@@ -3,21 +3,11 @@ body {
     padding: 2em;
 }
 
-.hide {
-    display: none;
-}
-
-.show {
-    display: inherit;
-    display: initial;
-}
-
-
-form {
+.form {
     border: 3px solid #b9b9b9;
-    margin-top: 5em;
-    width: 100%;
+    width: 50%;
     padding: 1em;
+    margin: 1em auto;
 }
 
 input[type=text] {
@@ -33,7 +23,7 @@ button {
     background-color: #326ba9;
     color: white;
     padding: 14px 20px;
-    margin: 8px 0;
+    margin: auto;
     border: none;
     cursor: pointer;
     width: 100%;
