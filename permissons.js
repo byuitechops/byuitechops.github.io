@@ -25,8 +25,6 @@ function enterCode(id) {
     //Code Input
     if (code == 'WorkDay') {
         data[id].workDay = true;
-        data[id] = 5;
-        console.log(data[id]);
         console.log(data[id].workDay);
     }
     document.getElementById('input').value = "";
