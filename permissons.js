@@ -204,16 +204,16 @@ var data = [{
         }, {
         "name": "Adrian Whetten",
         "email": "whe15017@byui.edu",
-        "brightspace": true,
-        "trello": true,
-        "equella": true,
-        "teamDynamix": true,
-        "teamDrive": true,
-        "microsoft": true,
-        "workDay": true,
-        "staffHub": true,
-        "canvas": true,
-        "employeeDirectory": true
+        "brightspace": false,
+        "trello": false,
+        "equella": false,
+        "teamDynamix": false,
+        "teamDrive": false,
+        "microsoft": false,
+        "workDay": false,
+        "staffHub": false,
+        "canvas": false,
+        "employeeDirectory": false
         }, {
         "name": "Shayla Salazar",
         "email": "max16011@byui.edu",
