@@ -62,70 +62,71 @@ function enterCode(id) {
 
 function setLink(id) {
     //Create Hyperlinks
-    if (data[id].workDay = true) {
+    if (data[id].workDay == true) {
         var icon = document.getElementById('wd');
         wd.setAttribute('href', "https://www.myworkday.com/byuhi/d/home.htmld#selectedWorklet=501%24162");
+        console.log(data[id].workDay);
     } else {
         var icon = document.getElementById('wd');
         wd.setAttribute('href', "");
     }
-    if (data[id].trello = true) {
+    if (data[id].trello == true) {
         var icon = document.getElementById('trel');
         trel.setAttribute('href', "https://trello.com/");
     } else {
         var icon = document.getElementById('trel');
         trel.setAttribute('href', "");
     }
-    if (data[id].equella = true) {
+    if (data[id].equella == true) {
         var icon = document.getElementById('equ');
         equ.setAttribute('href', "https://content.byui.edu/access/home.do");
     } else {
         var icon = document.getElementById('equ');
         equ.setAttribute('href', "");
     }
-    if (data[id].teamDynamix = true) {
+    if (data[id].teamDynamix == true) {
         var icon = document.getElementById('tdy');
         tdy.setAttribute('href', "https://td.byui.edu");
     } else {
         var icon = document.getElementById('tdy');
         tdy.setAttribute('href', "");
     }
-    if (data[id].teamDrive = true) {
+    if (data[id].teamDrive == true) {
         var icon = document.getElementById('tdr');
         tdr.setAttribute('href', "https://drive.google.com/drive/folders/0AKiJtEpGJEXOUk9PVA");
     } else {
         var icon = document.getElementById('tdr');
         tdr.setAttribute('href', "");
     }
-    if (data[id].brightspace = true) {
+    if (data[id].brightspace == true) {
         var icon = document.getElementById('bs');
         bs.setAttribute('href', "https://byui.brightspace.com/d2l/login?noredirect=true");
     } else {
         var icon = document.getElementById('bs');
         bs.setAttribute('href', "");
     }
-    if (data[id].microsoft = true) {
+    if (data[id].microsoft == true) {
         var icon = document.getElementById('micr');
         micr.setAttribute('href', "https://www.office.com/1/?auth=2&amp;home=1&amp;from=PortalLanding&amp;client-request-id=77ffd374-bbac-4e2b-8a9d-9c1566dea2ed");
     } else {
         var icon = document.getElementById('micr');
         micr.setAttribute('href', "");
     }
-    if (data[id].staffHub = true) {
+    if (data[id].staffHub == true) {
         var icon = document.getElementById('sh');
         sh.setAttribute('href', "https://staffhub.ms/app/TEAM_beb31523bee44c99b3a052306b0a71c4/schedules");
     } else {
         var icon = document.getElementById('sh');
         sh.setAttribute('href', "");
     }
-    if (data[id].canvas = true) {
+    if (data[id].canvas == true) {
         var icon = document.getElementById('can');
         can.setAttribute('href', "https://byui.instructure.com/login/canvas");
     } else {
         var icon = document.getElementById('can');
         can.setAttribute('href', "");
     }
-    if (data[id].employeeDirectory = true) {
+    if (data[id].employeeDirectory == true) {
         var icon = document.getElementById('ed');
         ed.setAttribute('href', "https://web.byui.edu/directory/employees/");
     } else {
@@ -204,16 +205,16 @@ var data = [{
         }, {
         "name": "Adrian Whetten",
         "email": "whe15017@byui.edu",
-        "brightspace": false,
-        "trello": false,
-        "equella": false,
-        "teamDynamix": false,
-        "teamDrive": false,
-        "microsoft": false,
+        "brightspace": true,
+        "trello": true,
+        "equella": true,
+        "teamDynamix": true,
+        "teamDrive": true,
+        "microsoft": true,
         "workDay": false,
-        "staffHub": false,
-        "canvas": false,
-        "employeeDirectory": false
+        "staffHub": true,
+        "canvas": true,
+        "employeeDirectory": true
         }, {
         "name": "Shayla Salazar",
         "email": "max16011@byui.edu",
