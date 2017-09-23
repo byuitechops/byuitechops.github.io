@@ -25,7 +25,36 @@ function enterCode(id) {
     //Code Input
     if (code == 'WorkDay') {
         data[id].workDay = true;
-        console.log(data[id].workDay);
+    }
+    if (code == 'Trello') {
+        data[id].trello = true;
+    }
+    if (code == 'Equella') {
+        data[id].equella = true;
+    }
+    if (code == 'TeamDynamix') {
+        data[id].teamDynamix = true;
+    }
+    if (code == 'TeamDrive') {
+        data[id].teamDrive = true;
+    }
+    if (code == 'Microsoft') {
+        data[id].microsoft = true;
+    }
+    if (code == 'Brightspace') {
+        data[id].brightspace = true;
+    }
+    if (code == 'StaffHub') {
+        data[id].staffHub = true;
+    }
+    if (code == 'Canvas') {
+        data[id].canvas = true;
+    }
+    if (code == 'EmployeeDirectory') {
+        data[id].employeeDirectory = true;
+    }
+    if (code == 'Trello') {
+        data[id].trello = true;
     }
     document.getElementById('input').value = "";
     setLink(id);
