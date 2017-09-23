@@ -149,7 +149,7 @@ var data = [{
         "workDay": false,
         "staffHub": false,
         "canvas": false,
-        "employeeDirectory": true
+        "employeeDirectory": false
         }, {
         "name": "Jessica Heiner",
         "email": "hei15001@byui.edu",
@@ -175,7 +175,7 @@ var data = [{
         "workDay": false,
         "staffHub": false,
         "canvas": false,
-        "employeeDirectory": true
+        "employeeDirectory": false
         }, {
         "name": "Albree Joy",
         "email": "wak13001@byui.edu",
@@ -190,7 +190,7 @@ var data = [{
         "canvas": false,
         "employeeDirectory": true
         }, {
-        "name": "Taylor Wanlass",
+        "name": "Taylor Wanlas",
         "email": "wan15005@byui.edu",
         "brightspace": false,
         "trello": false,
@@ -201,7 +201,7 @@ var data = [{
         "workDay": false,
         "staffHub": false,
         "canvas": false,
-        "employeeDirectory": true
+        "employeeDirectory": false
         }, {
         "name": "Adrian Whetten",
         "email": "whe15017@byui.edu",
@@ -214,7 +214,7 @@ var data = [{
         "workDay": false,
         "staffHub": false,
         "canvas": false,
-        "employeeDirectory": true
+        "employeeDirectory": false
         }, {
         "name": "Shayla Salazar",
         "email": "max16011@byui.edu",
@@ -227,7 +227,7 @@ var data = [{
         "workDay": false,
         "staffHub": false,
         "canvas": false,
-        "employeeDirectory": true
+        "employeeDirectory": false
         }, {
         "name": "Brooklyn Cook",
         "email": "coo15018@byui.edu",
@@ -240,7 +240,7 @@ var data = [{
         "workDay": false,
         "staffHub": false,
         "canvas": false,
-        "employeeDirectory": true
+        "employeeDirectory": false
         }, {
         "name": "Taylor Beavers",
         "email": "bea15001@byui.edu",
@@ -253,7 +253,7 @@ var data = [{
         "workDay": false,
         "staffHub": false,
         "canvas": false,
-        "employeeDirectory": true
+        "employeeDirectory": false
         }, {
         "name": "Kaden Heaton",
         "email": "hea11006@byui.edu",
@@ -266,7 +266,7 @@ var data = [{
         "workDay": false,
         "staffHub": false,
         "canvas": false,
-        "employeeDirectory": true
+        "employeeDirectory": false
         }, {
         "name": "Rachel James",
         "email": "jam17003@byui.edu",
@@ -279,7 +279,7 @@ var data = [{
         "workDay": false,
         "staffHub": false,
         "canvas": false,
-        "employeeDirectory": true
+        "employeeDirectory": false
         }, {
         "name": "Brooke Ericson",
         "email": "eri11006@byui.edu",
@@ -292,7 +292,7 @@ var data = [{
         "workDay": false,
         "staffHub": false,
         "canvas": false,
-        "employeeDirectory": true
+        "employeeDirectory": false
         }, {
         "name": "John Soon",
         "email": "soo16001@byui.edu",
@@ -305,7 +305,7 @@ var data = [{
         "workDay": false,
         "staffHub": false,
         "canvas": false,
-        "employeeDirectory": true
+        "employeeDirectory": false
         }, {
         "name": "Seth Farr",
         "email": "far16016@byui.edu",
@@ -318,7 +318,7 @@ var data = [{
         "workDay": false,
         "staffHub": false,
         "canvas": false,
-        "employeeDirectory": true
+        "employeeDirectory": false
         }, {
         "name": "Emma Stevenson",
         "email": "hou51003@byui.edu",
@@ -331,7 +331,7 @@ var data = [{
         "workDay": false,
         "staffHub": false,
         "canvas": false,
-        "employeeDirectory": true
+        "employeeDirectory": false
         }, {
         "name": "Cal Wilson",
         "email": "wil13034@byui.edu",
@@ -344,7 +344,7 @@ var data = [{
         "workDay": false,
         "staffHub": false,
         "canvas": false,
-        "employeeDirectory": true
+        "employeeDirectory": false
         }, {
         "name": "Casey Streeter",
         "email": "str14028@byui.edu",
@@ -357,7 +357,7 @@ var data = [{
         "workDay": false,
         "staffHub": false,
         "canvas": false,
-        "employeeDirectory": true
+        "employeeDirectory": false
         }, {
         "name": "Julie James",
         "email": "jam15006@byui.edu",
@@ -370,7 +370,7 @@ var data = [{
         "workDay": false,
         "staffHub": false,
         "canvas": false,
-        "employeeDirectory": true
+        "employeeDirectory": false
         }, {
         "name": "Welechele Shabandoje",
         "email": "sha12039@byui.edu",
@@ -383,7 +383,7 @@ var data = [{
         "workDay": false,
         "staffHub": false,
         "canvas": false,
-        "employeeDirectory": true
+        "employeeDirectory": false
         }, {
         "name": "Mahonri Saldana",
         "email": "ste16023@byui.edu",
@@ -396,7 +396,7 @@ var data = [{
         "workDay": false,
         "staffHub": false,
         "canvas": false,
-        "employeeDirectory": true
+        "employeeDirectory": false
         }, {
         "name": "James Rees",
         "email": "ree15011@byui.edu",
@@ -409,7 +409,7 @@ var data = [{
         "workDay": false,
         "staffHub": false,
         "canvas": false,
-        "employeeDirectory": true
+        "employeeDirectory": false
         }, {
         "name": "Corey Moore",
         "email": "mooreco@byui.edu",
@@ -422,7 +422,7 @@ var data = [{
         "workDay": false,
         "staffHub": false,
         "canvas": false,
-        "employeeDirectory": true
+        "employeeDirectory": false
         }, {
         "name": "Ian Caloobanan",
         "email": "cal15034@byui.edu",
@@ -435,7 +435,7 @@ var data = [{
         "workDay": false,
         "staffHub": false,
         "canvas": false,
-        "employeeDirectory": true
+        "employeeDirectory": false
         }, {
         "name": "Sierra Gervasi",
         "email": "ger14005@byui.edu",
@@ -448,7 +448,7 @@ var data = [{
         "workDay": false,
         "staffHub": false,
         "canvas": false,
-        "employeeDirectory": true
+        "employeeDirectory": false
         }, {
         "name": "Logan Jenkins",
         "email": "jen12060@byui.edu",
@@ -461,7 +461,7 @@ var data = [{
         "workDay": false,
         "staffHub": false,
         "canvas": false,
-        "employeeDirectory": true
+        "employeeDirectory": false
         }, {
         "name": "Megan Havens",
         "email": "hav17001@byui.edu",
@@ -474,7 +474,7 @@ var data = [{
         "workDay": false,
         "staffHub": false,
         "canvas": false,
-        "employeeDirectory": true
+        "employeeDirectory": false
         }, {
         "name": "Sophia Beyer",
         "email": "bey16003@byui.edu",
@@ -487,7 +487,7 @@ var data = [{
         "workDay": false,
         "staffHub": false,
         "canvas": false,
-        "employeeDirectory": true
+        "employeeDirectory": false
         }
     ]
 /*
