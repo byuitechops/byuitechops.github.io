@@ -64,74 +64,74 @@ function setLink(id) {
     //Create Hyperlinks
     if (data[id].workDay == true) {
         var icon = document.getElementById('wd');
-        wd.setAttribute('href', "https://www.myworkday.com/byuhi/d/home.htmld#selectedWorklet=501%24162");
+        icon.setAttribute('href', "https://www.myworkday.com/byuhi/d/home.htmld#selectedWorklet=501%24162");
         console.log(data[id].workDay);
     } else {
         var icon = document.getElementById('wd');
-        wd.setAttribute('href', "");
+        icon.setAttribute('href', "");
     }
     if (data[id].trello == true) {
         var icon = document.getElementById('trel');
-        trel.setAttribute('href', "https://trello.com/");
+        icon.setAttribute('href', "https://trello.com/");
     } else {
         var icon = document.getElementById('trel');
-        trel.setAttribute('href', "");
+        icon.setAttribute('href', "");
     }
     if (data[id].equella == true) {
         var icon = document.getElementById('equ');
-        equ.setAttribute('href', "https://content.byui.edu/access/home.do");
+        icon.setAttribute('href', "https://content.byui.edu/access/home.do");
     } else {
         var icon = document.getElementById('equ');
-        equ.setAttribute('href', "");
+        icon.setAttribute('href', "");
     }
     if (data[id].teamDynamix == true) {
         var icon = document.getElementById('tdy');
-        tdy.setAttribute('href', "https://td.byui.edu");
+        icon.setAttribute('href', "https://td.byui.edu");
     } else {
         var icon = document.getElementById('tdy');
-        tdy.setAttribute('href', "");
+        icon.setAttribute('href', "");
     }
     if (data[id].teamDrive == true) {
         var icon = document.getElementById('tdr');
-        tdr.setAttribute('href', "https://drive.google.com/drive/folders/0AKiJtEpGJEXOUk9PVA");
+        icon.setAttribute('href', "https://drive.google.com/drive/folders/0AKiJtEpGJEXOUk9PVA");
     } else {
         var icon = document.getElementById('tdr');
-        tdr.setAttribute('href', "");
+        icon.setAttribute('href', "");
     }
     if (data[id].brightspace == true) {
         var icon = document.getElementById('bs');
-        bs.setAttribute('href', "https://byui.brightspace.com/d2l/login?noredirect=true");
+        icon.setAttribute('href', "https://byui.brightspace.com/d2l/login?noredirect=true");
     } else {
         var icon = document.getElementById('bs');
-        bs.setAttribute('href', "");
+        icon.setAttribute('href', "");
     }
     if (data[id].microsoft == true) {
         var icon = document.getElementById('micr');
-        micr.setAttribute('href', "https://www.office.com/1/?auth=2&amp;home=1&amp;from=PortalLanding&amp;client-request-id=77ffd374-bbac-4e2b-8a9d-9c1566dea2ed");
+        icon.setAttribute('href', "https://www.office.com/1/?auth=2&amp;home=1&amp;from=PortalLanding&amp;client-request-id=77ffd374-bbac-4e2b-8a9d-9c1566dea2ed");
     } else {
         var icon = document.getElementById('micr');
-        micr.setAttribute('href', "");
+        icon.setAttribute('href', "");
     }
     if (data[id].staffHub == true) {
         var icon = document.getElementById('sh');
-        sh.setAttribute('href', "https://staffhub.ms/app/TEAM_beb31523bee44c99b3a052306b0a71c4/schedules");
+        icon.setAttribute('href', "https://staffhub.ms/app/TEAM_beb31523bee44c99b3a052306b0a71c4/schedules");
     } else {
         var icon = document.getElementById('sh');
-        sh.setAttribute('href', "");
+        icon.setAttribute('href', "");
     }
     if (data[id].canvas == true) {
         var icon = document.getElementById('can');
-        can.setAttribute('href', "https://byui.instructure.com/login/canvas");
+        icon.setAttribute('href', "https://byui.instructure.com/login/canvas");
     } else {
         var icon = document.getElementById('can');
-        can.setAttribute('href', "");
+        icon.setAttribute('href', "");
     }
     if (data[id].employeeDirectory == true) {
         var icon = document.getElementById('ed');
-        ed.setAttribute('href', "https://web.byui.edu/directory/employees/");
+        icon.setAttribute('href', "https://web.byui.edu/directory/employees/");
     } else {
         var icon = document.getElementById('ed');
-        ed.setAttribute('href', "");
+        icon.setAttribute('href', "");
     }
 }
 
