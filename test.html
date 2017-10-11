@@ -23,60 +23,237 @@
             <div class="flex-container">
                 <!-- ICON 1 -->
                 <div>
-                    <a id="wd" href="" target="_blank"> <img alt="Workday" width="150" height="150" class="icontab" src="WorkdayLogo.png" />
+                    <a id="wd" target="_blank"> <img alt="Workday" width="150" height="150" class="icontab" src="WorkdayLogo.png" />
                         <p class="tab-header">Workday</p>
                     </a>
                 </div>
                 <!-- ICON 2 -->
                 <div>
-                    <a id="trel" href="" target="_blank" rel="noopener noreferrer"> <img alt="" width="150" height="150" class="icontab" src="trellologo.png" /> </a>
+                    <a id="trel" target="_blank" rel="noopener noreferrer"> <img alt="" width="150" height="150" class="icontab" src="trellologo.png" /> </a>
                     <p class="tab-header">Trello</p>
                 </div>
                 <!-- ICON 3 -->
                 <div>
-                    <a id="equ" href="" target="_blank" rel="noopener noreferrer"> <img alt="Equella" width="150" height="150" class="icontab" src="EquellaLogo.png" /> </a>
+                    <a id="equ" target="_blank" rel="noopener noreferrer"> <img alt="Equella" width="150" height="150" class="icontab" src="EquellaLogo.png" /> </a>
                     <p class="tab-header">Equella</p>
                 </div>
                 <!-- ICON 4 -->
                 <div>
-                    <a id="tdy" href="" target="_blank" rel="noopener noreferrer"> <img alt="TeamDynamix" width="150" height="150" class="icontab" src="TDLogo.png" /> </a>
+                    <a id="tdy" target="_blank" rel="noopener noreferrer"> <img alt="TeamDynamix" width="150" height="150" class="icontab" src="TDLogo.png" /> </a>
                     <p class="tab-header">TeamDynamix</p>
                 </div>
                 <!-- ICON 5 -->
                 <div>
-                    <a id="tdr" href="" target="_blank" rel="noopener noreferrer"> <img alt="Google Team Drive" width="150" height="150" class="icontab" src="googledrivelogo.png" /> </a>
+                    <a id="tdr" target="_blank" rel="noopener noreferrer"> <img alt="Google Team Drive" width="150" height="150" class="icontab" src="googledrivelogo.png" /> </a>
                     <p class="tab-header">Google Team Drive</p>
                 </div>
                 <!-- ICON 6 -->
                 <div>
-                    <a id="micr" href="" target="_blank" rel="noopener noreferrer"> <img alt="Microsoft 365" width="150" height="150" class="icontab" src="microsoftdrivelogo.png" /></a>
+                    <a id="micr" target="_blank" rel="noopener noreferrer"> <img alt="Microsoft 365" width="150" height="150" class="icontab" src="microsoftdrivelogo.png" /></a>
                     <p class="tab-header">Microsoft 365</p>
                 </div>
                 <!-- ICON 7 -->
                 <div>
-                    <a id="bs" href="" target="_blank" rel="noopener noreferrer"> <img alt="Brightspace" width="150" height="150" class="icontab" src="BrightspaceLogo.png" /> </a>
+                    <a id="bs" target="_blank" rel="noopener noreferrer"> <img alt="Brightspace" width="150" height="150" class="icontab" src="BrightspaceLogo.png" /> </a>
                     <p class="tab-header">Brightspace</p>
                 </div>
                 <!-- ICON 9 -->
                 <div>
-                    <a id="sh" href="" target="_blank" rel="noopener noreferrer"> <img alt="Staffhub" width="150" height="150" class="icontab" src="staffhublogo.png" /> </a>
+                    <a id="sh" target="_blank" rel="noopener noreferrer"> <img alt="Staffhub" width="150" height="150" class="icontab" src="staffhublogo.png" /> </a>
                     <p class="tab-header">Staff Hub</p>
                 </div>
                 <!-- ICON 10 -->
                 <div>
-                    <a id="can" href="" target="_blank" rel="noopener noreferrer"> <img alt="DTOM" width="150" height="150" class="icontab" src="dtom.png" /> </a>
+                    <a id="can" target="_blank" rel="noopener noreferrer"> <img alt="DTOM" width="150" height="150" class="icontab" src="dtom.png" /> </a>
                     <p class="tab-header">Canvas</p>
                 </div>
                 <!-- ICON 11 -->
                 <div>
-                    <a id="ed" href="" target="_blank" rel="noopener noreferrer"> <img alt="Equella" width="150" height="150" class="icontab" src="employeeLogo.png" /> </a>
+                    <a id="ed" target="_blank" rel="noopener noreferrer"> <img alt="Equella" width="150" height="150" class="icontab" src="employeeLogo.png" /> </a>
                     <p class="tab-header">Employee Directory</p>
                 </div>
             </div>
         </div>
     </main>
-    <footer>
-    <script src="permissons.js"></script></footer>
+    <footer></footer>
+    <script src="https://www.gstatic.com/firebasejs/4.4.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase-database.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyA_I75-CU5_GlNP1QSKvvH8nbYVkaAUgNA",
+            authDomain: "techopsportal.firebaseapp.com",
+            databaseURL: "https://techopsportal.firebaseio.com",
+            projectId: "techopsportal",
+            storageBucket: "techopsportal.appspot.com",
+            messagingSenderId: "265124430634"
+        };
+        firebase.initializeApp(config);
+
+        var database = firebase.database();
+        var siteArray = ["brightspace", "canvas", "equella", "microsoft", "staffHub", "teamDrive", "teamDynamix", "trello", "workDay"];
+
+        function updateData(userId, site) {
+            for (var i = 0; i <= siteArray.length; i++) {
+                if (siteArray[i] == site) {
+                    firebase.database().ref('users/' + userId).set({
+                        site: true
+                    });
+                }
+                console.log(siteArray[i]);
+            }
+        }
+
+        var ref = firebase.database().ref();
+
+        function getShot() {
+            ref.on("value", function(snapshot) {
+                var data = JSON.stringify(snapshot.val(), null, 2);
+                return data;
+            });
+        }
+        var id;
+
+        function logIn() {
+            var data = getShot();
+            console.log(data);
+            //Select User
+            var email = document.getElementById('input').value;
+            var user = "";
+            for (var i = 0; i <= 26; i++) {
+                var e = data[i].email;
+                if (e == email) {
+                    user = data[i].name;
+                    id = i;
+                }
+            }
+            setLink(id);
+            //clear input
+            document.getElementById('input').value = "";
+            document.getElementById('input').setAttribute('placeholder', 'Enter Code')
+            var funcCode = 'enterCode(' + id + ')';
+            document.getElementById('button').setAttribute('onclick', funcCode);
+            document.getElementById('button').innerHTML = 'Enter Code';
+            console.log(user);
+        }
+
+        function enterCode() {
+            var code = document.getElementById('input').value;
+            //Code Input
+            if (code == 'WorkDay') {
+                updateData(id, workDay);
+            }
+            if (code == 'Trello') {
+                data[id].trello = true;
+            }
+            if (code == 'Equella') {
+                data[id].equella = true;
+            }
+            if (code == 'TeamDynamix') {
+                data[id].teamDynamix = true;
+            }
+            if (code == 'TeamDrive') {
+                data[id].teamDrive = true;
+            }
+            if (code == 'Microsoft') {
+                data[id].microsoft = true;
+            }
+            if (code == 'Brightspace') {
+                data[id].brightspace = true;
+            }
+            if (code == 'StaffHub') {
+                data[id].staffHub = true;
+            }
+            if (code == 'Canvas') {
+                data[id].canvas = true;
+            }
+            if (code == 'EmployeeDirectory') {
+                data[id].employeeDirectory = true;
+            }
+            if (code == 'Trello') {
+                data[id].trello = true;
+            }
+            document.getElementById('input').value = "";
+            setLink(id);
+        }
+
+        function setLink(id) {
+            //Create Hyperlinks
+            console.log(data[id])
+            if (data[id].workDay == true) {
+                var icon = document.getElementById('wd');
+                icon.setAttribute('href', "https://www.myworkday.com/byuhi/d/home.htmld#selectedWorklet=501%24162");
+                console.log(data[id].workDay);
+            } else {
+                var icon = document.getElementById('wd');
+                icon.setAttribute('href', "");
+            }
+            if (data[id].trello == true) {
+                var icon = document.getElementById('trel');
+                icon.setAttribute('href', "https://trello.com/");
+            } else {
+                var icon = document.getElementById('trel');
+                icon.setAttribute('href', "");
+            }
+            if (data[id].equella == true) {
+                var icon = document.getElementById('equ');
+                icon.setAttribute('href', "https://content.byui.edu/access/home.do");
+            } else {
+                var icon = document.getElementById('equ');
+                icon.setAttribute('href', "");
+            }
+            if (data[id].teamDynamix == true) {
+                var icon = document.getElementById('tdy');
+                icon.setAttribute('href', "https://td.byui.edu");
+            } else {
+                var icon = document.getElementById('tdy');
+                icon.setAttribute('href', "");
+            }
+            if (data[id].teamDrive == true) {
+                var icon = document.getElementById('tdr');
+                icon.setAttribute('href', "https://drive.google.com/drive/folders/0AKiJtEpGJEXOUk9PVA");
+            } else {
+                var icon = document.getElementById('tdr');
+                icon.setAttribute('href', "");
+            }
+            if (data[id].brightspace == true) {
+                var icon = document.getElementById('bs');
+                icon.setAttribute('href', "https://byui.brightspace.com/d2l/login?noredirect=true");
+            } else {
+                var icon = document.getElementById('bs');
+                icon.setAttribute('href', "");
+            }
+            if (data[id].microsoft == true) {
+                var icon = document.getElementById('micr');
+                icon.setAttribute('href', "https://www.office.com/1/?auth=2&amp;home=1&amp;from=PortalLanding&amp;client-request-id=77ffd374-bbac-4e2b-8a9d-9c1566dea2ed");
+            } else {
+                var icon = document.getElementById('micr');
+                icon.setAttribute('href', "");
+            }
+            if (data[id].staffHub == true) {
+                var icon = document.getElementById('sh');
+                icon.setAttribute('href', "https://staffhub.ms/app/TEAM_beb31523bee44c99b3a052306b0a71c4/schedules");
+            } else {
+                var icon = document.getElementById('sh');
+                icon.setAttribute('href', "");
+            }
+            if (data[id].canvas == true) {
+                var icon = document.getElementById('can');
+                icon.setAttribute('href', "https://byui.instructure.com/login/canvas");
+            } else {
+                var icon = document.getElementById('can');
+                icon.setAttribute('href', "");
+            }
+            if (data[id].employeeDirectory == true) {
+                var icon = document.getElementById('ed');
+                icon.setAttribute('href', "https://web.byui.edu/directory/employees/");
+            } else {
+                var icon = document.getElementById('ed');
+                icon.setAttribute('href', "");
+            }
+        }
+
+    </script>
 </body>
 
 </html>
