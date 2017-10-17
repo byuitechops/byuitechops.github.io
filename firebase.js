@@ -75,20 +75,6 @@
             dbRefUsers.child(user).update(data);
             loadUser();
             document.getElementById('txtCode').value = "";
-        } else if (code == 'Equella') {
-            var data = {
-                equella: true
-            }
-            dbRefUsers.child(user).update(data);
-            loadUser();
-            document.getElementById('txtCode').value = "";
-        } else if (code == 'TeamDynamix') {
-            var data = {
-                teamDynamix: true
-            }
-            dbRefUsers.child(user).update(data);
-            loadUser();
-            document.getElementById('txtCode').value = "";
         } else if (code == 'TeamDrive') {
             var data = {
                 teamDrive: true
@@ -124,9 +110,9 @@
             dbRefUsers.child(user).update(data);
             loadUser();
             document.getElementById('txtCode').value = "";
-        } else if (code == 'EmployeeDirectory') {
+        } else if (code == 'MicTeams') {
             var data = {
-                employeeDirectory: true
+                microsoftTeams: true
             }
             dbRefUsers.child(user).update(data);
             loadUser();
@@ -154,14 +140,18 @@
         var data = {
             "brightspace": false,
             "trello": false,
-            "equella": false,
-            "teamDynamix": false,
             "teamDrive": false,
             "microsoft": false,
             "workDay": false,
             "staffHub": false,
             "canvas": false,
-            "employeeDirectory": false
+            "microsoftTeams": false,
+            "equella": true,
+            "teamDynamix": true,
+            "employeeDirectory": true,
+            "proDev": true,
+            "pathway": true,
+            "screenSteps": true
         };
         dbRefUsers.child(user).set(data);
     }
@@ -173,6 +163,7 @@
             if (array.workDay == true) {
                 var icon = document.getElementById('wd');
                 icon.setAttribute('href', "https://www.myworkday.com/byuhi/d/home.htmld#selectedWorklet=501%24162");
+                wdpic.classList.remove('locked');
             } else {
                 var icon = document.getElementById('wd');
                 icon.setAttribute('href', "http://www.google.com");
@@ -180,6 +171,7 @@
             if (array.trello == true) {
                 var icon = document.getElementById('trel');
                 icon.setAttribute('href', "https://trello.com/");
+                trellpic.classList.remove('locked');
             } else {
                 var icon = document.getElementById('trel');
                 icon.setAttribute('href', "http://www.google.com");
@@ -187,6 +179,7 @@
             if (array.equella == true) {
                 var icon = document.getElementById('equ');
                 icon.setAttribute('href', "https://content.byui.edu/access/home.do");
+                equpic.classList.remove('locked');
             } else {
                 var icon = document.getElementById('equ');
                 icon.setAttribute('href', "http://www.google.com");
@@ -194,6 +187,7 @@
             if (array.teamDynamix == true) {
                 var icon = document.getElementById('tdy');
                 icon.setAttribute('href', "https://td.byui.edu");
+                tdypic.classList.remove('locked');
             } else {
                 var icon = document.getElementById('tdy');
                 icon.setAttribute('href', "http://www.google.com");
@@ -201,6 +195,7 @@
             if (array.teamDrive == true) {
                 var icon = document.getElementById('tdr');
                 icon.setAttribute('href', "https://drive.google.com/drive/folders/0AKiJtEpGJEXOUk9PVA");
+                tdrpic.classList.remove('locked');
             } else {
                 var icon = document.getElementById('tdr');
                 icon.setAttribute('href', "http://www.google.com");
@@ -208,6 +203,7 @@
             if (array.brightspace == true) {
                 var icon = document.getElementById('bs');
                 icon.setAttribute('href', "https://byui.brightspace.com/d2l/login?noredirect=true");
+                bspic.classList.remove('locked');
             } else {
                 var icon = document.getElementById('bs');
                 icon.setAttribute('href', "http://www.google.com");
@@ -215,6 +211,7 @@
             if (array.microsoft == true) {
                 var icon = document.getElementById('micr');
                 icon.setAttribute('href', "https://www.office.com/1/?auth=2&amp;home=1&amp;from=PortalLanding&amp;client-request-id=77ffd374-bbac-4e2b-8a9d-9c1566dea2ed");
+                micrpic.classList.remove('locked');
             } else {
                 var icon = document.getElementById('micr');
                 icon.setAttribute('href', "http://www.google.com");
@@ -222,6 +219,7 @@
             if (array.staffHub == true) {
                 var icon = document.getElementById('sh');
                 icon.setAttribute('href', "https://staffhub.ms/app/TEAM_beb31523bee44c99b3a052306b0a71c4/schedules");
+                shpic.classList.remove('locked');
             } else {
                 var icon = document.getElementById('sh');
                 icon.setAttribute('href', "http://www.google.com");
@@ -229,6 +227,7 @@
             if (array.canvas == true) {
                 var icon = document.getElementById('can');
                 icon.setAttribute('href', "https://byui.instructure.com/login/canvas");
+                canpic.classList.remove('locked');
             } else {
                 var icon = document.getElementById('can');
                 icon.setAttribute('href', "http://www.google.com");
@@ -236,8 +235,41 @@
             if (array.employeeDirectory == true) {
                 var icon = document.getElementById('ed');
                 icon.setAttribute('href', "https://web.byui.edu/directory/employees/");
+                edpic.classList.remove('locked');
             } else {
                 var icon = document.getElementById('ed');
+                icon.setAttribute('href', "http://www.google.com");
+            }
+            if (array.microsoftTeams == true) {
+                var icon = document.getElementById('mteam');
+                icon.setAttribute('href', "https://teams.microsoft.com/start");
+                mteampic.classList.remove('locked');
+            } else {
+                var icon = document.getElementById('mteam');
+                icon.setAttribute('href', "http://www.google.com");
+            }
+            if (array.proDev == true) {
+                var icon = document.getElementById('pd');
+                icon.setAttribute('href', "https://docs.google.com/spreadsheets/u/1/d/15j8TFY49aBn2eC_-yqffvNEQOiw6wK4pfRf7CE-OTu8/edit?usp=drive_web");
+                pdpic.classList.remove('locked');
+            } else {
+                var icon = document.getElementById('pd');
+                icon.setAttribute('href', "http://www.google.com");
+            }
+            if (array.pathway == true) {
+                var icon = document.getElementById('path');
+                icon.setAttribute('href', "https://pathway.brightspace.com/d2l/login?noredirect=true");
+                pathpic.classList.remove('locked');
+            } else {
+                var icon = document.getElementById('path');
+                icon.setAttribute('href', "http://www.google.com");
+            }
+            if (array.screenSteps == true) {
+                var icon = document.getElementById('ss');
+                icon.setAttribute('href', "https://byu-idaho.screenstepslive.com/admin/v2/sites/18626/manuals/70917/chapters/225697/articles");
+                sspic.classList.remove('locked');
+            } else {
+                var icon = document.getElementById('ss');
                 icon.setAttribute('href', "http://www.google.com");
             }
 

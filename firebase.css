@@ -39,3 +39,7 @@ input {
     box-sizing: border-box;
     height: 2em;
 }
+
+.locked {
+    opacity: .1;
+}
