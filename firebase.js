@@ -61,7 +61,49 @@
 
     submitCode.addEventListener('click', e => {
         var code = txtCode.value;
-        if (code == 'WorkDay') {
+
+        if (user == 'byuitech') {
+            if (code == 'workday') {
+                checkFirebase("workDay");
+                document.getElementById('txtCode').value = "";
+            }
+
+            if (code == 'trello') {
+                checkFirebase("trello");
+                document.getElementById('txtCode').value = "";
+            }
+            
+            if (code == 'brightspace') {
+                checkFirebase("brightspace");
+                document.getElementById('txtCode').value = "";
+            }
+            
+            if (code == 'teamdrive') {
+                checkFirebase("teamDrive");
+                document.getElementById('txtCode').value = "";
+            }
+            
+            if (code == 'microsoft') {
+                checkFirebase("microsoft");
+                document.getElementById('txtCode').value = "";
+            }
+
+            if (code == 'staffhub') {
+                checkFirebase("staffHub");
+                document.getElementById('txtCode').value = "";
+            }
+            
+            if (code == 'canvas') {
+                checkFirebase("canvas");
+                document.getElementById('txtCode').value = "";
+            }
+            
+            if (code == 'microsoftteams') {
+                checkFirebase("microsoftTeams");
+                document.getElementById('txtCode').value = "";
+            }
+            
+        } else if (code == 'WorkDay') {
             var data = {
                 workDay: true
             }
@@ -274,7 +316,6 @@
             }
 
         });
-
     }
 
     const preObject = document.getElementById('object');
@@ -322,4 +363,67 @@
         });
     }
 
+    function checkFirebase(text) {
+        var base = firebase.database().ref().on('value', snap => {
+            var data = (snap.val());
+            var key0;
+            for (key0 in data) {
+                if (key0 == "users") {
+                    console.log("first true");
+                    var users = data[key0];
+                    var key1;
+                    for (key1 in users) {
+                        {
+                            var key2;
+                            for (key2 in users[key1]) {
+                                if (text == 'workDay') {
+                                    var dataUpdate = {
+                                        workDay: false
+                                    }
+                                    dbRefUsers.child(key1).update(dataUpdate);
+                                } else if (text == 'trello') {
+                                    var dataUpdate = {
+                                        trello: false
+                                    }
+                                    dbRefUsers.child(key1).update(dataUpdate);
+                                } else if (text == 'brightspace') {
+                                    var dataUpdate = {
+                                        brightspace: false
+                                    }
+                                    dbRefUsers.child(key1).update(dataUpdate);
+                                } else if (text == 'teamDrive') {
+                                    var dataUpdate = {
+                                        teamDrive: false
+                                    }
+                                    dbRefUsers.child(key1).update(dataUpdate);
+                                } else if (text == 'microsoft') {
+                                    var dataUpdate = {
+                                        microsoft: false
+                                    }
+                                    dbRefUsers.child(key1).update(dataUpdate);
+                                } else if (text == 'staffHub') {
+                                    var dataUpdate = {
+                                        staffHub: false
+                                    }
+                                    dbRefUsers.child(key1).update(dataUpdate);
+                                } else if (text == 'canvas') {
+                                    var dataUpdate = {
+                                        canvas: false
+                                    }
+                                    dbRefUsers.child(key1).update(dataUpdate);
+                                } else if (text == 'microsoftTeams') {
+                                    var dataUpdate = {
+                                        microsoftTeams: false
+                                    }
+                                    dbRefUsers.child(key1).update(dataUpdate);
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+    }
 }());
