@@ -173,14 +173,14 @@
 
     function setUser() {
         var data = {
-            "brightspace": false,
-            "trello": false,
-            "teamDrive": false,
-            "microsoft": false,
-            "workDay": false,
-            "staffHub": false,
-            "canvas": false,
-            "microsoftTeams": false,
+            "brightspace": true,
+            "trello": true,
+            "teamDrive": true,
+            "microsoft": true,
+            "workDay": true,
+            "staffHub": true,
+            "canvas": true,
+            "microsoftTeams": true,
             "equella": true,
             "teamDynamix": true,
             "employeeDirectory": true,
