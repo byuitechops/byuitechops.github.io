@@ -36,7 +36,6 @@
             document.getElementById('txtEmail').value = "";
             document.getElementById('txtEmail').placeholder = "Incorrect Email or Password";
             document.getElementById('txtPassword').value = "";
-            formId.classList.remove('formLogout');
         });
     });
 
