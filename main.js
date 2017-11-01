@@ -29,9 +29,15 @@
         localStorage.setItem("user", user);
 
         const promise = auth.signInWithEmailAndPassword(email, pass);
-        promise.catch(e => alert('Incorrect Email or Password'));
-
-        loadUser();
+        promise.then(e => {
+            loadUser();
+        });
+        promise.catch(e => {
+            document.getElementById('txtEmail').value = "";
+            document.getElementById('txtEmail').placeholder = "Incorrect Email or Password";
+            document.getElementById('txtPassword').value = "";
+            formId.classList.remove('formLogout');
+        });
     });
 
 
@@ -46,7 +52,7 @@
         localStorage.setItem("user", user);
 
         const promise = auth.createUserWithEmailAndPassword(email, pass);
-        promise.catch(e => console.log(e.message));
+        promise.catch(e => alert(e.message));
 
         setUser();
         loadUser();
@@ -148,7 +154,8 @@
             }
 
         } else {
-            document.getElementById('txtCode').value = "Wrong Code";
+            document.getElementById('txtCode').placeholder = "Wrong Code";
+            document.getElementById('txtCode').value = "";
         }
 
     });
@@ -161,7 +168,7 @@
             btnSignUp.classList.add('hide');
             btnLogout.classList.remove('hide');
         } else {
-            console.log('not logged in')
+            console.log('not logged in');
         }
     });
 
@@ -192,12 +199,12 @@
 
             txtCode.classList.add('hide');
             submitCode.classList.add('hide');
-            formId.classList.add('formLogout');
 
             if (array.workDay == true) {
                 var icon = document.getElementById('wd');
                 icon.setAttribute('href', "https://www.myworkday.com/byuhi/d/home.htmld#selectedWorklet=501%24162");
                 wdpic.classList.remove('locked');
+                formId.classList.add('formLogout');
             } else {
                 var icon = document.getElementById('wd');
                 icon.setAttribute('href', "https://byui.instructure.com/courses/78/pages/workday?module_item_id=15941");
