@@ -62,48 +62,7 @@
     submitCode.addEventListener('click', e => {
         var code = txtCode.value;
 
-        if (user == 'byuitech') {
-            if (code == 'workday') {
-                checkFirebase("workDay");
-                document.getElementById('txtCode').value = "";
-            }
-
-            if (code == 'trello') {
-                checkFirebase("trello");
-                document.getElementById('txtCode').value = "";
-            }
-            
-            if (code == 'brightspace') {
-                checkFirebase("brightspace");
-                document.getElementById('txtCode').value = "";
-            }
-            
-            if (code == 'teamdrive') {
-                checkFirebase("teamDrive");
-                document.getElementById('txtCode').value = "";
-            }
-            
-            if (code == 'microsoft') {
-                checkFirebase("microsoft");
-                document.getElementById('txtCode').value = "";
-            }
-
-            if (code == 'staffhub') {
-                checkFirebase("staffHub");
-                document.getElementById('txtCode').value = "";
-            }
-            
-            if (code == 'canvas') {
-                checkFirebase("canvas");
-                document.getElementById('txtCode').value = "";
-            }
-            
-            if (code == 'microsoftteams') {
-                checkFirebase("microsoftTeams");
-                document.getElementById('txtCode').value = "";
-            }
-            
-        } else if (code == 'Ch3ck1N') {
+        if (code == 'Ch3ck1N') {
             var data = {
                 workDay: true
             }
@@ -159,19 +118,47 @@
             dbRefUsers.child(user).update(data);
             loadUser();
             document.getElementById('txtCode').value = "";
+        } else if (user == 'byuitech') {
+            if (code == 'workday') {
+                checkFirebase("workDay");
+                document.getElementById('txtCode').value = "";
+            } else if (code == 'trello') {
+                checkFirebase("trello");
+                loadUser();
+                document.getElementById('txtCode').value = "";
+            } else if (code == 'brightspace') {
+                checkFirebase("brightspace");
+                document.getElementById('txtCode').value = "";
+            } else if (code == 'teamdrive') {
+                checkFirebase("teamDrive");
+                document.getElementById('txtCode').value = "";
+            } else if (code == 'microsoft') {
+                checkFirebase("microsoft");
+                document.getElementById('txtCode').value = "";
+            } else if (code == 'staffhub') {
+                checkFirebase("staffHub");
+                document.getElementById('txtCode').value = "";
+            } else if (code == 'canvas') {
+                checkFirebase("canvas");
+                document.getElementById('txtCode').value = "";
+                txtCode.classList.remove('hide');
+            } else if (code == 'microsoftteams') {
+                checkFirebase("microsoftTeams");
+                document.getElementById('txtCode').value = "";
+            }
+
         } else {
             document.getElementById('txtCode').value = "Wrong Code";
         }
+
     });
 
     firebase.auth().onAuthStateChanged(firebaseUser => {
         if (firebaseUser) {
             txtEmail.classList.add('hide');
             txtPassword.classList.add('hide');
-            txtCode.classList.remove('hide');
             btnLogin.classList.add('hide');
             btnSignUp.classList.add('hide');
-            submitCode.classList.remove('hide');
             btnLogout.classList.remove('hide');
         } else {
             console.log('not logged in')
@@ -180,14 +167,14 @@
 
     function setUser() {
         var data = {
-            "brightspace": true,
-            "trello": true,
-            "teamDrive": true,
-            "microsoft": true,
-            "workDay": true,
-            "staffHub": true,
-            "canvas": true,
-            "microsoftTeams": true,
+            "brightspace": false,
+            "trello": false,
+            "teamDrive": false,
+            "microsoft": false,
+            "workDay": false,
+            "staffHub": false,
+            "canvas": false,
+            "microsoftTeams": false,
             "equella": true,
             "teamDynamix": true,
             "employeeDirectory": true,
@@ -202,6 +189,11 @@
         dbRefUsers.child(user).on('value', snap => {
             var string = JSON.stringify(snap.val(), null, 3);
             var array = JSON.parse(string);
+
+            txtCode.classList.add('hide');
+            submitCode.classList.add('hide');
+            formId.classList.add('formLogout');
+
             if (array.workDay == true) {
                 var icon = document.getElementById('wd');
                 icon.setAttribute('href', "https://www.myworkday.com/byuhi/d/home.htmld#selectedWorklet=501%24162");
@@ -209,14 +201,21 @@
             } else {
                 var icon = document.getElementById('wd');
                 icon.setAttribute('href', "https://byui.instructure.com/courses/78/pages/workday?module_item_id=15941");
+                txtCode.classList.remove('hide');
+                submitCode.classList.remove('hide');
+                formId.classList.remove('formLogout');
             }
             if (array.trello == true) {
                 var icon = document.getElementById('trel');
                 icon.setAttribute('href', "https://trello.com/");
                 trellpic.classList.remove('locked');
+
             } else {
                 var icon = document.getElementById('trel');
                 icon.setAttribute('href', "https://byui.instructure.com/courses/78/pages/trello?module_item_id=17657");
+                txtCode.classList.remove('hide');
+                submitCode.classList.remove('hide');
+                formId.classList.remove('formLogout');
             }
             if (array.equella == true) {
                 var icon = document.getElementById('equ');
@@ -225,6 +224,9 @@
             } else {
                 var icon = document.getElementById('equ');
                 icon.setAttribute('href', "http://www.google.com");
+                txtCode.classList.remove('hide');
+                submitCode.classList.remove('hide');
+                formId.classList.remove('formLogout');
             }
             if (array.teamDynamix == true) {
                 var icon = document.getElementById('tdy');
@@ -233,6 +235,9 @@
             } else {
                 var icon = document.getElementById('tdy');
                 icon.setAttribute('href', "http://www.google.com");
+                txtCode.classList.remove('hide');
+                submitCode.classList.remove('hide');
+                formId.classList.remove('formLogout');
             }
             if (array.teamDrive == true) {
                 var icon = document.getElementById('tdr');
@@ -241,6 +246,9 @@
             } else {
                 var icon = document.getElementById('tdr');
                 icon.setAttribute('href', "https://byui.instructure.com/courses/78/pages/google-team-drive?module_item_id=17654");
+                txtCode.classList.remove('hide');
+                submitCode.classList.remove('hide');
+                formId.classList.remove('formLogout');
             }
             if (array.brightspace == true) {
                 var icon = document.getElementById('bs');
@@ -249,6 +257,9 @@
             } else {
                 var icon = document.getElementById('bs');
                 icon.setAttribute('href', "https://byui.instructure.com/courses/78/modules");
+                txtCode.classList.remove('hide');
+                submitCode.classList.remove('hide');
+                formId.classList.remove('formLogout');
             }
             if (array.microsoft == true) {
                 var icon = document.getElementById('micr');
@@ -257,6 +268,9 @@
             } else {
                 var icon = document.getElementById('micr');
                 icon.setAttribute('href', "https://byui.instructure.com/courses/78/pages/microsoft-365?module_item_id=17288");
+                txtCode.classList.remove('hide');
+                submitCode.classList.remove('hide');
+                formId.classList.remove('formLogout');
             }
             if (array.staffHub == true) {
                 var icon = document.getElementById('sh');
@@ -265,6 +279,9 @@
             } else {
                 var icon = document.getElementById('sh');
                 icon.setAttribute('href', "https://byui.instructure.com/courses/78/pages/staff-hub?module_item_id=17287");
+                txtCode.classList.remove('hide');
+                submitCode.classList.remove('hide');
+                formId.classList.remove('formLogout');
             }
             if (array.canvas == true) {
                 var icon = document.getElementById('can');
@@ -273,6 +290,9 @@
             } else {
                 var icon = document.getElementById('can');
                 icon.setAttribute('href', "https://byui.instructure.com/courses/78/modules");
+                txtCode.classList.remove('hide');
+                submitCode.classList.remove('hide');
+                formId.classList.remove('formLogout');
             }
             if (array.employeeDirectory == true) {
                 var icon = document.getElementById('ed');
@@ -281,6 +301,9 @@
             } else {
                 var icon = document.getElementById('ed');
                 icon.setAttribute('href', "http://www.google.com");
+                txtCode.classList.remove('hide');
+                submitCode.classList.remove('hide');
+                formId.classList.remove('formLogout');
             }
             if (array.microsoftTeams == true) {
                 var icon = document.getElementById('mteam');
@@ -289,6 +312,9 @@
             } else {
                 var icon = document.getElementById('mteam');
                 icon.setAttribute('href', "https://byui.instructure.com/courses/78/pages/microsoft-teams?module_item_id=18558");
+                txtCode.classList.remove('hide');
+                submitCode.classList.remove('hide');
+                formId.classList.remove('formLogout');
             }
             if (array.proDev == true) {
                 var icon = document.getElementById('pd');
@@ -297,6 +323,9 @@
             } else {
                 var icon = document.getElementById('pd');
                 icon.setAttribute('href', "http://www.google.com");
+                txtCode.classList.remove('hide');
+                submitCode.classList.remove('hide');
+                formId.classList.remove('formLogout');
             }
             if (array.pathway == true) {
                 var icon = document.getElementById('path');
@@ -305,6 +334,9 @@
             } else {
                 var icon = document.getElementById('path');
                 icon.setAttribute('href', "http://www.google.com");
+                txtCode.classList.remove('hide');
+                submitCode.classList.remove('hide');
+                formId.classList.remove('formLogout');
             }
             if (array.screenSteps == true) {
                 var icon = document.getElementById('ss');
@@ -313,8 +345,15 @@
             } else {
                 var icon = document.getElementById('ss');
                 icon.setAttribute('href', "http://www.google.com");
+                txtCode.classList.remove('hide');
+                submitCode.classList.remove('hide');
+                formId.classList.remove('formLogout');
             }
-
+            if (user == 'byuitech') {
+                txtCode.classList.remove('hide');
+                submitCode.classList.remove('hide');
+                formId.classList.remove('formLogout');
+            }
         });
     }
 
@@ -369,7 +408,6 @@
             var key0;
             for (key0 in data) {
                 if (key0 == "users") {
-                    console.log("first true");
                     var users = data[key0];
                     var key1;
                     for (key1 in users) {
@@ -424,6 +462,5 @@
                 }
             }
         });
-
     }
 }());
