@@ -51,6 +51,17 @@ input {
     margin: 1.5em auto;
     margin-left: 110em;
     margin-bottom: 2em;
-    margin-top: -3.25em;
+    margin-top: -8em;
+    display: flex;
+}
+
+.monthButton {
+    border: .5px solid #b9b9b9;
+    width: 8%;
+    padding: .25em;
+    margin: 1.5em auto;
+    margin-left: 110em;
+    margin-bottom: 2em;
+    margin-top: -1.25em;
     display: flex;
 }

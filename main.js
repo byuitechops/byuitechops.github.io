@@ -202,7 +202,8 @@
             "employeeDirectory": true,
             "proDev": true,
             "pathway": true,
-            "screenSteps": true
+            "screenSteps": true,
+            "monthlyTraining": true
         };
         dbRefUsers.child(user).set(data);
     }
@@ -215,11 +216,20 @@
             txtCode.classList.add('hide');
             submitCode.classList.add('hide');
 
+            formId.classList.add('formLogout');
+            month.classList.remove('hide');
+            month.classList.add('monthButton');
+            month.addEventListener('click', e =>  {
+                var data = {
+                    "monthlyTraining": true
+                }
+                dbRefUsers.child(user).update(data);
+            });
+
             if (array.workDay == true) {
                 var icon = document.getElementById('wd');
                 icon.setAttribute('href', "https://www.myworkday.com/byuhi/d/home.htmld#selectedWorklet=501%24162");
                 wdpic.classList.remove('locked');
-                formId.classList.add('formLogout');
             } else {
                 var icon = document.getElementById('wd');
                 icon.addEventListener('click', e => {
