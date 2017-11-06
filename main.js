@@ -75,6 +75,7 @@
             dbRefUsers.child(user).update(data);
             loadUser();
             document.getElementById('txtCode').value = "";
+            document.getElementById('txtCode').placeholder = "Enter Code";
         } else if (code == 'c4Rds') {
             var data = {
                 trello: true
@@ -82,6 +83,7 @@
             dbRefUsers.child(user).update(data);
             loadUser();
             document.getElementById('txtCode').value = "";
+            document.getElementById('txtCode').placeholder = "Enter Code";
         } else if (code == 'G00g13') {
             var data = {
                 teamDrive: true
@@ -89,6 +91,7 @@
             dbRefUsers.child(user).update(data);
             loadUser();
             document.getElementById('txtCode').value = "";
+            document.getElementById('txtCode').placeholder = "Enter Code";
         } else if (code == '5m41150d4') {
             var data = {
                 microsoft: true
@@ -96,6 +99,7 @@
             dbRefUsers.child(user).update(data);
             loadUser();
             document.getElementById('txtCode').value = "";
+            document.getElementById('txtCode').placeholder = "Enter Code";
         } else if (code == 'L1ghtr00m') {
             var data = {
                 brightspace: true
@@ -103,6 +107,7 @@
             dbRefUsers.child(user).update(data);
             loadUser();
             document.getElementById('txtCode').value = "";
+            document.getElementById('txtCode').placeholder = "Enter Code";
         } else if (code == '5ch3du13') {
             var data = {
                 staffHub: true
@@ -110,6 +115,7 @@
             dbRefUsers.child(user).update(data);
             loadUser();
             document.getElementById('txtCode').value = "";
+            document.getElementById('txtCode').placeholder = "Enter Code";
         } else if (code == 'P4p3r') {
             var data = {
                 canvas: true
@@ -117,6 +123,7 @@
             dbRefUsers.child(user).update(data);
             loadUser();
             document.getElementById('txtCode').value = "";
+            document.getElementById('txtCode').placeholder = "Enter Code";
         } else if (code == 'T41k') {
             var data = {
                 microsoftTeams: true
@@ -124,6 +131,7 @@
             dbRefUsers.child(user).update(data);
             loadUser();
             document.getElementById('txtCode').value = "";
+            document.getElementById('txtCode').placeholder = "Enter Code";
         } else if (code == 'T0T41') {
             var data = {
                 "brightspace": true,
@@ -144,14 +152,17 @@
             dbRefUsers.child(user).update(data);
             loadUser();
             document.getElementById('txtCode').value = "";
+            document.getElementById('txtCode').placeholder = "Enter Code";
         } else if (user == 'byuitech') {
             if (code == 'all') {
                 checkFirebase('all');
                 document.getElementById('txtCode').value = "";
+                document.getElementById('txtCode').placeholder = "Enter Code";
                 console.log('calling all');
             } else if (code == 'every') {
                 checkFirebase('every');
                 document.getElementById('txtCode').value = "";
+                document.getElementById('txtCode').placeholder = "Enter Code";
                 console.log('calling every');
             } else {
                 document.getElementById('txtCode').placeholder = "Wrong Code";
