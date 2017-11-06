@@ -123,35 +123,39 @@
             dbRefUsers.child(user).update(data);
             loadUser();
             document.getElementById('txtCode').value = "";
+        } else if (code == 'T0T41') {
+            var data = {
+                "brightspace": true,
+                "trello": true,
+                "teamDrive": true,
+                "microsoft": true,
+                "workDay": true,
+                "staffHub": true,
+                "canvas": true,
+                "microsoftTeams": true,
+                "equella": true,
+                "teamDynamix": true,
+                "employeeDirectory": true,
+                "proDev": true,
+                "pathway": true,
+                "screenSteps": true
+            }
+            dbRefUsers.child(user).update(data);
+            loadUser();
+            document.getElementById('txtCode').value = "";
         } else if (user == 'byuitech') {
-            if (code == 'workday') {
-                checkFirebase("workDay");
+            if (code == 'all') {
+                checkFirebase('all');
                 document.getElementById('txtCode').value = "";
-            } else if (code == 'trello') {
-                checkFirebase("trello");
-                loadUser();
+                console.log('calling all');
+            } else if (code == 'every') {
+                checkFirebase('every');
                 document.getElementById('txtCode').value = "";
-            } else if (code == 'brightspace') {
-                checkFirebase("brightspace");
-                document.getElementById('txtCode').value = "";
-            } else if (code == 'teamdrive') {
-                checkFirebase("teamDrive");
-                document.getElementById('txtCode').value = "";
-            } else if (code == 'microsoft') {
-                checkFirebase("microsoft");
-                document.getElementById('txtCode').value = "";
-            } else if (code == 'staffhub') {
-                checkFirebase("staffHub");
-                document.getElementById('txtCode').value = "";
-            } else if (code == 'canvas') {
-                checkFirebase("canvas");
-                document.getElementById('txtCode').value = "";
-                txtCode.classList.remove('hide');
-            } else if (code == 'microsoftteams') {
-                checkFirebase("microsoftTeams");
+                console.log('calling every');
+            } else {
+                document.getElementById('txtCode').placeholder = "Wrong Code";
                 document.getElementById('txtCode').value = "";
             }
-
         } else {
             document.getElementById('txtCode').placeholder = "Wrong Code";
             document.getElementById('txtCode').value = "";
@@ -173,14 +177,14 @@
 
     function setUser() {
         var data = {
-            "brightspace": true,
-            "trello": true,
-            "teamDrive": true,
-            "microsoft": true,
-            "workDay": true,
-            "staffHub": true,
-            "canvas": true,
-            "microsoftTeams": true,
+            "brightspace": false,
+            "trello": false,
+            "teamDrive": false,
+            "microsoft": false,
+            "workDay": false,
+            "staffHub": false,
+            "canvas": false,
+            "microsoftTeams": false,
             "equella": true,
             "teamDynamix": true,
             "employeeDirectory": true,
@@ -206,7 +210,9 @@
                 formId.classList.add('formLogout');
             } else {
                 var icon = document.getElementById('wd');
-                icon.setAttribute('href', "https://byui.instructure.com/courses/78/pages/workday?module_item_id=15941");
+                icon.addEventListener('click', e => {
+                    window.alert('You are blocked for training purposes. Check your email for training link');
+                });
                 txtCode.classList.remove('hide');
                 submitCode.classList.remove('hide');
                 formId.classList.remove('formLogout');
@@ -218,7 +224,9 @@
 
             } else {
                 var icon = document.getElementById('trel');
-                icon.setAttribute('href', "https://byui.instructure.com/courses/78/pages/trello?module_item_id=17657");
+                icon.addEventListener('click', e => {
+                    window.alert('You are blocked for training purposes. Check your email for training link');
+                });
                 txtCode.classList.remove('hide');
                 submitCode.classList.remove('hide');
                 formId.classList.remove('formLogout');
@@ -229,7 +237,9 @@
                 equpic.classList.remove('locked');
             } else {
                 var icon = document.getElementById('equ');
-                icon.setAttribute('href', "http://www.google.com");
+                icon.addEventListener('click', e => {
+                    window.alert('You are blocked for training purposes. Check your email for training link');
+                });
                 txtCode.classList.remove('hide');
                 submitCode.classList.remove('hide');
                 formId.classList.remove('formLogout');
@@ -240,7 +250,9 @@
                 tdypic.classList.remove('locked');
             } else {
                 var icon = document.getElementById('tdy');
-                icon.setAttribute('href', "http://www.google.com");
+                icon.addEventListener('click', e => {
+                    window.alert('You are blocked for training purposes. Check your email for training link');
+                });
                 txtCode.classList.remove('hide');
                 submitCode.classList.remove('hide');
                 formId.classList.remove('formLogout');
@@ -251,7 +263,9 @@
                 tdrpic.classList.remove('locked');
             } else {
                 var icon = document.getElementById('tdr');
-                icon.setAttribute('href', "https://byui.instructure.com/courses/78/pages/google-team-drive?module_item_id=17654");
+                icon.addEventListener('click', e => {
+                    window.alert('You are blocked for training purposes. Check your email for training link');
+                });
                 txtCode.classList.remove('hide');
                 submitCode.classList.remove('hide');
                 formId.classList.remove('formLogout');
@@ -262,7 +276,9 @@
                 bspic.classList.remove('locked');
             } else {
                 var icon = document.getElementById('bs');
-                icon.setAttribute('href', "https://byui.instructure.com/courses/78/modules");
+                icon.addEventListener('click', e => {
+                    window.alert('You are blocked for training purposes. Check your email for training link');
+                });
                 txtCode.classList.remove('hide');
                 submitCode.classList.remove('hide');
                 formId.classList.remove('formLogout');
@@ -273,7 +289,9 @@
                 micrpic.classList.remove('locked');
             } else {
                 var icon = document.getElementById('micr');
-                icon.setAttribute('href', "https://byui.instructure.com/courses/78/pages/microsoft-365?module_item_id=17288");
+                icon.addEventListener('click', e => {
+                    window.alert('You are blocked for training purposes. Check your email for training link');
+                });
                 txtCode.classList.remove('hide');
                 submitCode.classList.remove('hide');
                 formId.classList.remove('formLogout');
@@ -284,7 +302,9 @@
                 shpic.classList.remove('locked');
             } else {
                 var icon = document.getElementById('sh');
-                icon.setAttribute('href', "https://byui.instructure.com/courses/78/pages/staff-hub?module_item_id=17287");
+                icon.addEventListener('click', e => {
+                    window.alert('You are blocked for training purposes. Check your email for training link');
+                });
                 txtCode.classList.remove('hide');
                 submitCode.classList.remove('hide');
                 formId.classList.remove('formLogout');
@@ -295,7 +315,9 @@
                 canpic.classList.remove('locked');
             } else {
                 var icon = document.getElementById('can');
-                icon.setAttribute('href', "https://byui.instructure.com/courses/78/modules");
+                icon.addEventListener('click', e => {
+                    window.alert('You are blocked for training purposes. Check your email for training link');
+                });
                 txtCode.classList.remove('hide');
                 submitCode.classList.remove('hide');
                 formId.classList.remove('formLogout');
@@ -306,7 +328,9 @@
                 edpic.classList.remove('locked');
             } else {
                 var icon = document.getElementById('ed');
-                icon.setAttribute('href', "http://www.google.com");
+                icon.addEventListener('click', e => {
+                    window.alert('You are blocked for training purposes. Check your email for training link');
+                });
                 txtCode.classList.remove('hide');
                 submitCode.classList.remove('hide');
                 formId.classList.remove('formLogout');
@@ -317,7 +341,9 @@
                 mteampic.classList.remove('locked');
             } else {
                 var icon = document.getElementById('mteam');
-                icon.setAttribute('href', "https://byui.instructure.com/courses/78/pages/microsoft-teams?module_item_id=18558");
+                icon.addEventListener('click', e => {
+                    window.alert('You are blocked for training purposes. Check your email for training link');
+                });
                 txtCode.classList.remove('hide');
                 submitCode.classList.remove('hide');
                 formId.classList.remove('formLogout');
@@ -328,7 +354,9 @@
                 pdpic.classList.remove('locked');
             } else {
                 var icon = document.getElementById('pd');
-                icon.setAttribute('href', "http://www.google.com");
+                icon.addEventListener('click', e => {
+                    window.alert('You are blocked for training purposes. Check your email for training link');
+                });
                 txtCode.classList.remove('hide');
                 submitCode.classList.remove('hide');
                 formId.classList.remove('formLogout');
@@ -339,7 +367,9 @@
                 pathpic.classList.remove('locked');
             } else {
                 var icon = document.getElementById('path');
-                icon.setAttribute('href', "http://www.google.com");
+                icon.addEventListener('click', e => {
+                    window.alert('You are blocked for training purposes. Check your email for training link');
+                });
                 txtCode.classList.remove('hide');
                 submitCode.classList.remove('hide');
                 formId.classList.remove('formLogout');
@@ -350,7 +380,9 @@
                 sspic.classList.remove('locked');
             } else {
                 var icon = document.getElementById('ss');
-                icon.setAttribute('href', "http://www.google.com");
+                icon.addEventListener('click', e => {
+                    window.alert('You are blocked for training purposes. Check your email for training link');
+                });
                 txtCode.classList.remove('hide');
                 submitCode.classList.remove('hide');
                 formId.classList.remove('formLogout');
@@ -409,6 +441,7 @@
     }
 
     function checkFirebase(text) {
+
         var base = firebase.database().ref().on('value', snap => {
             var data = (snap.val());
             var key0;
@@ -417,52 +450,44 @@
                     var users = data[key0];
                     var key1;
                     for (key1 in users) {
-                        {
-                            var key2;
-                            for (key2 in users[key1]) {
-                                if (text == 'workDay') {
-                                    var dataUpdate = {
-                                        workDay: false
-                                    }
-                                    dbRefUsers.child(key1).update(dataUpdate);
-                                } else if (text == 'trello') {
-                                    var dataUpdate = {
-                                        trello: false
-                                    }
-                                    dbRefUsers.child(key1).update(dataUpdate);
-                                } else if (text == 'brightspace') {
-                                    var dataUpdate = {
-                                        brightspace: false
-                                    }
-                                    dbRefUsers.child(key1).update(dataUpdate);
-                                } else if (text == 'teamDrive') {
-                                    var dataUpdate = {
-                                        teamDrive: false
-                                    }
-                                    dbRefUsers.child(key1).update(dataUpdate);
-                                } else if (text == 'microsoft') {
-                                    var dataUpdate = {
-                                        microsoft: false
-                                    }
-                                    dbRefUsers.child(key1).update(dataUpdate);
-                                } else if (text == 'staffHub') {
-                                    var dataUpdate = {
-                                        staffHub: false
-                                    }
-                                    dbRefUsers.child(key1).update(dataUpdate);
-                                } else if (text == 'canvas') {
-                                    var dataUpdate = {
-                                        canvas: false
-                                    }
-                                    dbRefUsers.child(key1).update(dataUpdate);
-                                } else if (text == 'microsoftTeams') {
-                                    var dataUpdate = {
-                                        microsoftTeams: false
-                                    }
-                                    dbRefUsers.child(key1).update(dataUpdate);
-                                }
-
+                        console.log(key1);
+                        if (text == 'all') {
+                            var dataUpdate = {
+                                "brightspace": true,
+                                "trello": true,
+                                "teamDrive": true,
+                                "microsoft": true,
+                                "workDay": true,
+                                "staffHub": true,
+                                "canvas": true,
+                                "microsoftTeams": true,
+                                "equella": true,
+                                "teamDynamix": true,
+                                "employeeDirectory": true,
+                                "proDev": true,
+                                "pathway": true,
+                                "screenSteps": true
                             }
+                            dbRefUsers.child(key1).update(dataUpdate);
+                        }
+                        if (text == 'every') {
+                            var dataUpdate = {
+                                "brightspace": false,
+                                "trello": false,
+                                "teamDrive": false,
+                                "microsoft": false,
+                                "workDay": true,
+                                "staffHub": false,
+                                "canvas": true,
+                                "microsoftTeams": false,
+                                "equella": false,
+                                "teamDynamix": false,
+                                "employeeDirectory": false,
+                                "proDev": false,
+                                "pathway": false,
+                                "screenSteps": false
+                            }
+                            dbRefUsers.child(key1).update(dataUpdate);
                         }
                     }
                 }
