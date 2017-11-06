@@ -51,10 +51,11 @@
         localStorage.setItem("user", user);
 
         const promise = auth.createUserWithEmailAndPassword(email, pass);
+        promise.then(e => {
+            setUser();
+            loadUser();
+        });
         promise.catch(e => alert(e.message));
-
-        setUser();
-        loadUser();
     });
 
     btnLogout.addEventListener('click', e => {
