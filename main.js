@@ -224,6 +224,7 @@
                     "monthlyTraining": true
                 }
                 dbRefUsers.child(user).update(data);
+                window.alert('Congration You Done It!');
             });
 
             if (array.workDay == true) {
