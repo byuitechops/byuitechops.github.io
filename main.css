@@ -65,3 +65,18 @@ input {
     margin-top: -1.25em;
     display: flex;
 }
+
+@media only screen and (max-width: 1250px) {
+    .form {
+/*        background-color: black;*/
+        display: flex;
+        justify-content: center;
+        flex-flow: row wrap;
+    }
+    button {
+        width: 20em;
+    }
+    input {
+        width: 95%;
+    }
+}
