@@ -521,51 +521,52 @@
                 if (key0 == "users") {
                     var users = data[key0];
                     var key1;
-                    for (key1 in users) {
-                        console.log(key1);
-                        if (key1 == 'acodes') {
-                            console.log('codes');
-                        } else {
+                    if (key1 == 'acodes') {
+                        console.log('codes');
+                    } else {
+                        for (key1 in users) {
+                            console.log(key1);
+
                             if (text == code) {
-                            var dataUpdate = {
-                                "brightspace": true,
-                                "trello": true,
-                                "teamDrive": true,
-                                "microsoft": true,
-                                "workDay": true,
-                                "staffHub": true,
-                                "canvas": true,
-                                "microsoftTeams": true,
-                                "equella": true,
-                                "teamDynamix": true,
-                                "employeeDirectory": true,
-                                "proDev": true,
-                                "pathway": true,
-                                "screenSteps": true
+                                var dataUpdate = {
+                                    "brightspace": true,
+                                    "trello": true,
+                                    "teamDrive": true,
+                                    "microsoft": true,
+                                    "workDay": true,
+                                    "staffHub": true,
+                                    "canvas": true,
+                                    "microsoftTeams": true,
+                                    "equella": true,
+                                    "teamDynamix": true,
+                                    "employeeDirectory": true,
+                                    "proDev": true,
+                                    "pathway": true,
+                                    "screenSteps": true
+                                }
+                                dbRefUsers.child(key1).update(dataUpdate);
                             }
-                            dbRefUsers.child(key1).update(dataUpdate);
-                        }
-                        if (text == code) {
-                            var dataUpdate = {
-                                "brightspace": false,
-                                "trello": false,
-                                "teamDrive": false,
-                                "microsoft": false,
-                                "workDay": true,
-                                "staffHub": false,
-                                "canvas": true,
-                                "microsoftTeams": false,
-                                "equella": false,
-                                "teamDynamix": false,
-                                "employeeDirectory": false,
-                                "proDev": false,
-                                "pathway": false,
-                                "screenSteps": false
+                            if (text == code) {
+                                var dataUpdate = {
+                                    "brightspace": false,
+                                    "trello": false,
+                                    "teamDrive": false,
+                                    "microsoft": false,
+                                    "workDay": true,
+                                    "staffHub": false,
+                                    "canvas": true,
+                                    "microsoftTeams": false,
+                                    "equella": false,
+                                    "teamDynamix": false,
+                                    "employeeDirectory": false,
+                                    "proDev": false,
+                                    "pathway": false,
+                                    "screenSteps": false
+                                }
+                                dbRefUsers.child(key1).update(dataUpdate);
                             }
-                            dbRefUsers.child(key1).update(dataUpdate);
                         }
-                        }
-                        
+
                     }
                 }
             }
