@@ -107,7 +107,7 @@
                 if (key0 == 'trainingall') {
                     trainingallcode = key1;
                 }
-                if (key0 == 'trello') {
+                if (key0 == 'trellO') {
                     trellocode = key1;
                 }
                 if (key0 == 'unblockall') {
