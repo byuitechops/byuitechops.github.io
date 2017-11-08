@@ -107,7 +107,7 @@
                 if (key0 == 'trainingall') {
                     trainingallcode = key1;
                 }
-                if (key0 == 'trellO') {
+                if (key0 == 'trello') {
                     trellocode = key1;
                 }
                 if (key0 == 'unblockall') {
@@ -523,7 +523,10 @@
                     var key1;
                     for (key1 in users) {
                         console.log(key1);
-                        if (text == code) {
+                        if (key1 == 'acodes') {
+                            console.log('codes');
+                        } else {
+                            if (text == code) {
                             var dataUpdate = {
                                 "brightspace": true,
                                 "trello": true,
@@ -561,6 +564,8 @@
                             }
                             dbRefUsers.child(key1).update(dataUpdate);
                         }
+                        }
+                        
                     }
                 }
             }
