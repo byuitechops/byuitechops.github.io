@@ -67,8 +67,60 @@
 
     submitCode.addEventListener('click', e => {
         var code = txtCode.value;
+        var blockallcode = null;
+        var brightspacecode = null;
+        var canvascode = null;
+        var microsoftcode = null;
+        var staffhubcode = null;
+        var teamdrivecode = null;
+        var teamscode = null;
+        var trainingallcode = null;
+        var trellocode = null;
+        var unblockallcode = null;
+        var workdaycode = null;
+        var base = firebase.database().ref().child('users').child('acodes').on('value', snap => {
+            var data = (snap.val());
+            var key0;
+            for (key0 in data) {
+                var key1 = data[key0];
+                if (key0 == 'blockall') {
+                    blockallcode = key1;
+                }
+                if (key0 == 'brightspace') {
+                    brightspacecode = key1;
+                }
+                if (key0 == 'canvas') {
+                    canavscode = key1;
+                }
+                if (key0 == 'microsoft') {
+                    microsoftcode = key1;
+                }
+                if (key0 == 'staffhub') {
+                    staffhubcode = key1;
+                }
+                if (key0 == 'teamdrive') {
+                    teamdrivecode = key1;
+                }
+                if (key0 == 'teams') {
+                    teamscode = key1;
+                }
+                if (key0 == 'trainingall') {
+                    trainingallcode = key1;
+                }
+                if (key0 == 'trello') {
+                    trellocode = key1;
+                }
+                if (key0 == 'unblockall') {
+                    unblockallcode = key1;
+                }
+                if (key0 == 'workday') {
+                    workdaycode = key1;
+                }
+            }
+        });
 
-        if (code == 'Ch3ck1N') {
+
+        if (code == workdaycode) {
             var data = {
                 workDay: true
             }
@@ -76,7 +128,7 @@
             loadUser();
             document.getElementById('txtCode').value = "";
             document.getElementById('txtCode').placeholder = "Enter Code";
-        } else if (code == 'c4Rds') {
+        } else if (code == trellocode) {
             var data = {
                 trello: true
             }
@@ -84,7 +136,7 @@
             loadUser();
             document.getElementById('txtCode').value = "";
             document.getElementById('txtCode').placeholder = "Enter Code";
-        } else if (code == 'G00g13') {
+        } else if (code == teamdrivecode) {
             var data = {
                 teamDrive: true
             }
@@ -92,7 +144,7 @@
             loadUser();
             document.getElementById('txtCode').value = "";
             document.getElementById('txtCode').placeholder = "Enter Code";
-        } else if (code == '5m41150d4') {
+        } else if (code == microsoftcode) {
             var data = {
                 microsoft: true
             }
@@ -100,7 +152,7 @@
             loadUser();
             document.getElementById('txtCode').value = "";
             document.getElementById('txtCode').placeholder = "Enter Code";
-        } else if (code == 'L1ghtr00m') {
+        } else if (code == brightspacecode) {
             var data = {
                 brightspace: true
             }
@@ -108,7 +160,7 @@
             loadUser();
             document.getElementById('txtCode').value = "";
             document.getElementById('txtCode').placeholder = "Enter Code";
-        } else if (code == '5ch3du13') {
+        } else if (code == staffhubcode) {
             var data = {
                 staffHub: true
             }
@@ -116,7 +168,7 @@
             loadUser();
             document.getElementById('txtCode').value = "";
             document.getElementById('txtCode').placeholder = "Enter Code";
-        } else if (code == 'P4p3r') {
+        } else if (code == canvascode) {
             var data = {
                 canvas: true
             }
@@ -124,7 +176,7 @@
             loadUser();
             document.getElementById('txtCode').value = "";
             document.getElementById('txtCode').placeholder = "Enter Code";
-        } else if (code == 'T41k') {
+        } else if (code == teamscode) {
             var data = {
                 microsoftTeams: true
             }
@@ -132,7 +184,7 @@
             loadUser();
             document.getElementById('txtCode').value = "";
             document.getElementById('txtCode').placeholder = "Enter Code";
-        } else if (code == 'T0T41') {
+        } else if (code == trainingallcode) {
             var data = {
                 "brightspace": true,
                 "trello": true,
@@ -154,16 +206,14 @@
             document.getElementById('txtCode').value = "";
             document.getElementById('txtCode').placeholder = "Enter Code";
         } else if (user == 'byuitech') {
-            if (code == 'all') {
-                checkFirebase('all');
+            if (code == unblockallcode) {
+                checkFirebase(code, unblockallcode);
                 document.getElementById('txtCode').value = "";
                 document.getElementById('txtCode').placeholder = "Enter Code";
-                console.log('calling all');
-            } else if (code == 'every') {
-                checkFirebase('every');
+            } else if (code == blockallcode) {
+                checkFirebase(code, blockallcode);
                 document.getElementById('txtCode').value = "";
                 document.getElementById('txtCode').placeholder = "Enter Code";
-                console.log('calling every');
             } else {
                 document.getElementById('txtCode').placeholder = "Wrong Code";
                 document.getElementById('txtCode').value = "";
@@ -219,7 +269,7 @@
             formId.classList.add('formLogout');
             month.classList.remove('hide');
             month.classList.add('monthButton');
-            month.addEventListener('click', e =>  {
+            month.addEventListener('click', e => {
                 var data = {
                     "monthlyTraining": true
                 }
@@ -463,8 +513,7 @@
         });
     }
 
-    function checkFirebase(text) {
-
+    function checkFirebase(text, code) {
         var base = firebase.database().ref().on('value', snap => {
             var data = (snap.val());
             var key0;
@@ -474,7 +523,7 @@
                     var key1;
                     for (key1 in users) {
                         console.log(key1);
-                        if (text == 'all') {
+                        if (text == code) {
                             var dataUpdate = {
                                 "brightspace": true,
                                 "trello": true,
@@ -493,7 +542,7 @@
                             }
                             dbRefUsers.child(key1).update(dataUpdate);
                         }
-                        if (text == 'every') {
+                        if (text == code) {
                             var dataUpdate = {
                                 "brightspace": false,
                                 "trello": false,
