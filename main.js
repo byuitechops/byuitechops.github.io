@@ -65,61 +65,93 @@
     });
 
 
+    var blockallcode;
+    var brightspacecode;
+    var canvascode;
+    var microsoftcode;
+    var staffhubcode;
+    var teamdrivecode;
+    var teamscode;
+    var trainingallcode;
+    var trellocode;
+    var unblockallcode;
+    var workdaycode;
+    var dataUpdateUn = {
+        "brightspace": true,
+        "trello": true,
+        "teamDrive": true,
+        "microsoft": true,
+        "workDay": true,
+        "staffHub": true,
+        "canvas": true,
+        "microsoftTeams": true,
+        "equella": true,
+        "teamDynamix": true,
+        "employeeDirectory": true,
+        "proDev": true,
+        "pathway": true,
+        "screenSteps": true
+    };
+    var dataUpdateBlock = {
+        "brightspace": false,
+        "trello": false,
+        "teamDrive": false,
+        "microsoft": false,
+        "workDay": true,
+        "staffHub": false,
+        "canvas": true,
+        "microsoftTeams": false,
+        "equella": false,
+        "teamDynamix": false,
+        "employeeDirectory": false,
+        "proDev": false,
+        "pathway": false,
+        "screenSteps": false
+    };
+    var base = firebase.database().ref().child('acodes').on('value', snap => {
+        var codes = (snap.val());
+        var key0;
+        for (key0 in codes) {
+            var key1 = codes[key0];
+            if (key0 == 'blockall') {
+                blockallcode = key1;
+            }
+            if (key0 == 'brightspace') {
+                brightspacecode = key1;
+            }
+            if (key0 == 'canvas') {
+                canvascode = key1;
+            }
+            if (key0 == 'microsoft') {
+                microsoftcode = key1;
+            }
+            if (key0 == 'staffhub') {
+                staffhubcode = key1;
+            }
+            if (key0 == 'teamdrive') {
+                teamdrivecode = key1;
+            }
+            if (key0 == 'teams') {
+                teamscode = key1;
+            }
+            if (key0 == 'trainingall') {
+                trainingallcode = key1;
+            }
+            if (key0 == 'trello') {
+                trellocode = key1;
+            }
+            if (key0 == 'unblockall') {
+                unblockallcode = key1;
+            }
+            if (key0 == 'workday') {
+                workdaycode = key1;
+            }
+        }
+    });
+
+
     submitCode.addEventListener('click', e => {
         var code = txtCode.value;
-        var blockallcode = null;
-        var brightspacecode = null;
-        var canvascode = null;
-        var microsoftcode = null;
-        var staffhubcode = null;
-        var teamdrivecode = null;
-        var teamscode = null;
-        var trainingallcode = null;
-        var trellocode = null;
-        var unblockallcode = null;
-        var workdaycode = null;
-        var base = firebase.database().ref().child('users').child('acodes').on('value', snap => {
-            var data = (snap.val());
-            var key0;
-            for (key0 in data) {
-                var key1 = data[key0];
-                if (key0 == 'blockall') {
-                    blockallcode = key1;
-                }
-                if (key0 == 'brightspace') {
-                    brightspacecode = key1;
-                }
-                if (key0 == 'canvas') {
-                    canavscode = key1;
-                }
-                if (key0 == 'microsoft') {
-                    microsoftcode = key1;
-                }
-                if (key0 == 'staffhub') {
-                    staffhubcode = key1;
-                }
-                if (key0 == 'teamdrive') {
-                    teamdrivecode = key1;
-                }
-                if (key0 == 'teams') {
-                    teamscode = key1;
-                }
-                if (key0 == 'trainingall') {
-                    trainingallcode = key1;
-                }
-                if (key0 == 'trello') {
-                    trellocode = key1;
-                }
-                if (key0 == 'unblockall') {
-                    unblockallcode = key1;
-                }
-                if (key0 == 'workday') {
-                    workdaycode = key1;
-                }
-            }
-        });
-
-
         if (code == workdaycode) {
             var data = {
                 workDay: true
@@ -202,25 +234,27 @@
                 "screenSteps": true
             }
             dbRefUsers.child(user).update(data);
+            console.log('akldfj');
             loadUser();
             document.getElementById('txtCode').value = "";
             document.getElementById('txtCode').placeholder = "Enter Code";
-        } else if (user == 'byuitech') {
+        } else {
+            document.getElementById('txtCode').placeholder = "Wrong Code";
+            document.getElementById('txtCode').value = "";
+        }
+        if (user == 'byuitech') {
             if (code == unblockallcode) {
-                checkFirebase(code, unblockallcode);
+                checkFirebase(dataUpdateUn);
                 document.getElementById('txtCode').value = "";
                 document.getElementById('txtCode').placeholder = "Enter Code";
             } else if (code == blockallcode) {
-                checkFirebase(code, blockallcode);
+                checkFirebase(dataUpdateBlock);
                 document.getElementById('txtCode').value = "";
                 document.getElementById('txtCode').placeholder = "Enter Code";
             } else {
                 document.getElementById('txtCode').placeholder = "Wrong Code";
                 document.getElementById('txtCode').value = "";
             }
-        } else {
-            document.getElementById('txtCode').placeholder = "Wrong Code";
-            document.getElementById('txtCode').value = "";
         }
 
     });
@@ -289,12 +323,12 @@
                 txtCode.classList.remove('hide');
                 submitCode.classList.remove('hide');
                 formId.classList.remove('formLogout');
+                wdpic.classList.add('locked');
             }
             if (array.trello == true) {
                 var icon = document.getElementById('trel');
                 icon.setAttribute('href', "https://trello.com/");
                 trellpic.classList.remove('locked');
-
             } else {
                 var icon = document.getElementById('trel');
                 icon.addEventListener('click', e => {
@@ -303,6 +337,7 @@
                 txtCode.classList.remove('hide');
                 submitCode.classList.remove('hide');
                 formId.classList.remove('formLogout');
+                trellpic.classList.add('locked');
             }
             if (array.equella == true) {
                 var icon = document.getElementById('equ');
@@ -316,6 +351,7 @@
                 txtCode.classList.remove('hide');
                 submitCode.classList.remove('hide');
                 formId.classList.remove('formLogout');
+                equpic.classList.add('locked');
             }
             if (array.teamDynamix == true) {
                 var icon = document.getElementById('tdy');
@@ -329,6 +365,7 @@
                 txtCode.classList.remove('hide');
                 submitCode.classList.remove('hide');
                 formId.classList.remove('formLogout');
+                tdypic.classList.add('locked');
             }
             if (array.teamDrive == true) {
                 var icon = document.getElementById('tdr');
@@ -342,6 +379,7 @@
                 txtCode.classList.remove('hide');
                 submitCode.classList.remove('hide');
                 formId.classList.remove('formLogout');
+                tdrpic.classList.add('locked');
             }
             if (array.brightspace == true) {
                 var icon = document.getElementById('bs');
@@ -355,6 +393,7 @@
                 txtCode.classList.remove('hide');
                 submitCode.classList.remove('hide');
                 formId.classList.remove('formLogout');
+                bspic.classList.add('locked');
             }
             if (array.microsoft == true) {
                 var icon = document.getElementById('micr');
@@ -368,6 +407,7 @@
                 txtCode.classList.remove('hide');
                 submitCode.classList.remove('hide');
                 formId.classList.remove('formLogout');
+                micrpic.classList.add('locked');
             }
             if (array.staffHub == true) {
                 var icon = document.getElementById('sh');
@@ -381,6 +421,7 @@
                 txtCode.classList.remove('hide');
                 submitCode.classList.remove('hide');
                 formId.classList.remove('formLogout');
+                shpic.classList.add('locked');
             }
             if (array.canvas == true) {
                 var icon = document.getElementById('can');
@@ -394,6 +435,7 @@
                 txtCode.classList.remove('hide');
                 submitCode.classList.remove('hide');
                 formId.classList.remove('formLogout');
+                canpic.classList.add('locked');
             }
             if (array.employeeDirectory == true) {
                 var icon = document.getElementById('ed');
@@ -407,6 +449,7 @@
                 txtCode.classList.remove('hide');
                 submitCode.classList.remove('hide');
                 formId.classList.remove('formLogout');
+                edpic.classList.add('locked');
             }
             if (array.microsoftTeams == true) {
                 var icon = document.getElementById('mteam');
@@ -420,6 +463,7 @@
                 txtCode.classList.remove('hide');
                 submitCode.classList.remove('hide');
                 formId.classList.remove('formLogout');
+                mteampic.classList.add('locked');
             }
             if (array.proDev == true) {
                 var icon = document.getElementById('pd');
@@ -433,6 +477,7 @@
                 txtCode.classList.remove('hide');
                 submitCode.classList.remove('hide');
                 formId.classList.remove('formLogout');
+                pdpic.classList.add('locked');
             }
             if (array.pathway == true) {
                 var icon = document.getElementById('path');
@@ -446,6 +491,7 @@
                 txtCode.classList.remove('hide');
                 submitCode.classList.remove('hide');
                 formId.classList.remove('formLogout');
+                pathpic.classList.add('locked');
             }
             if (array.screenSteps == true) {
                 var icon = document.getElementById('ss');
@@ -459,6 +505,7 @@
                 txtCode.classList.remove('hide');
                 submitCode.classList.remove('hide');
                 formId.classList.remove('formLogout');
+                sspic.classList.add('locked');
             }
             if (user == 'byuitech') {
                 txtCode.classList.remove('hide');
@@ -468,36 +515,7 @@
         });
     }
 
-    const preObject = document.getElementById('object');
-    const ulList = document.getElementById('list');
-
     const dbRefUsers = firebase.database().ref('users');
-    const dbRefList = dbRefUsers.child(0);
-
-    var array = null;
-
-    dbRefUsers.on('value', snap => {
-        var string = JSON.stringify(snap.val(), null, 3);
-        array = JSON.parse(string);
-    });
-
-    dbRefList.on('child_added', snap => {
-        const li = document.createElement('li');
-        li.innerText = snap.val();
-        li.id = snap.key;
-        ulList.appendChild(li);
-    });
-
-    dbRefList.on('child_changed', snap => {
-        const liChanged = document.getElementById(snap.key);
-        liChanged.innerText = snap.val();
-    });
-
-    dbRefList.on('child_removed', snap => {
-        const liToRemove = document.getElementById(snap.key);
-        liToRemove.remove();
-    });
-
 
     document.onload = pageReload();
 
@@ -513,63 +531,12 @@
         });
     }
 
-    function checkFirebase(text, code) {
-        var base = firebase.database().ref().on('value', snap => {
-            var data = (snap.val());
-            var key0;
-            for (key0 in data) {
-                if (key0 == "users") {
-                    var users = data[key0];
-                    var key1;
-                    console.log(key1);
-                    if (key1 == 'acodes') {
-                        console.log('codes');
-                    } else {
-                        for (key1 in users) {
-                            console.log(key1);
-
-                            if (text == code) {
-                                var dataUpdate = {
-                                    "brightspace": true,
-                                    "trello": true,
-                                    "teamDrive": true,
-                                    "microsoft": true,
-                                    "workDay": true,
-                                    "staffHub": true,
-                                    "canvas": true,
-                                    "microsoftTeams": true,
-                                    "equella": true,
-                                    "teamDynamix": true,
-                                    "employeeDirectory": true,
-                                    "proDev": true,
-                                    "pathway": true,
-                                    "screenSteps": true
-                                }
-                                dbRefUsers.child(key1).update(dataUpdate);
-                            }
-                            if (text == code) {
-                                var dataUpdate = {
-                                    "brightspace": false,
-                                    "trello": false,
-                                    "teamDrive": false,
-                                    "microsoft": false,
-                                    "workDay": true,
-                                    "staffHub": false,
-                                    "canvas": true,
-                                    "microsoftTeams": false,
-                                    "equella": false,
-                                    "teamDynamix": false,
-                                    "employeeDirectory": false,
-                                    "proDev": false,
-                                    "pathway": false,
-                                    "screenSteps": false
-                                }
-                                dbRefUsers.child(key1).update(dataUpdate);
-                            }
-                        }
-
-                    }
-                }
+    function checkFirebase(dataUpdate) {
+        var key2;
+        dbRefUsers.once('value').then(function (snap) {
+            var users = (snap.val());
+            for (key2 in users) {
+                dbRefUsers.child(key2).update(dataUpdate);
             }
         });
     }
