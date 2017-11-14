@@ -523,7 +523,7 @@
                 txtCode.classList.remove('hide');
                 submitCode.classList.remove('hide');
                 formId.classList.remove('formLogout');
-                sspic.classList.add('locked');
+                fbpic.classList.add('locked');
             }
             if (user == 'byuitech') {
                 txtCode.classList.remove('hide');
