@@ -514,7 +514,7 @@
             if (array.firebaseConsole == true) {
                 var icon = document.getElementById('fb');
                 icon.setAttribute('href', "https://console.firebase.google.com/");
-                sspic.classList.remove('locked');
+                fbpic.classList.remove('locked');
             } else {
                 var icon = document.getElementById('fb');
                 icon.addEventListener('click', e => {
