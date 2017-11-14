@@ -1,0 +1,73 @@
+<html>
+
+<head>
+    <script src="https://cdn.firebase.com/libs/firebaseui/2.4.0/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.4.0/firebaseui.css" />
+    <script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyA_I75-CU5_GlNP1QSKvvH8nbYVkaAUgNA",
+            authDomain: "techopsportal.firebaseapp.com",
+            databaseURL: "https://techopsportal.firebaseio.com",
+            projectId: "techopsportal",
+            storageBucket: "techopsportal.appspot.com",
+            messagingSenderId: "265124430634"
+        };
+        firebase.initializeApp(config);
+
+        // FirebaseUI config.
+        var uiConfig = {
+            signInSuccessUrl: '/',
+            signInOptions: [
+                // Leave the lines as is for the providers you want to offer your users.
+                firebase.auth.EmailAuthProvider.PROVIDER_ID
+            ],
+        };
+
+        // Initialize the FirebaseUI Widget using Firebase.
+        var ui = new firebaseui.auth.AuthUI(firebase.auth());
+        // The start method will wait until the DOM is loaded.
+        ui.start('#firebaseui-auth-container', uiConfig);
+
+        firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // ...
+        });
+
+        firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // ...
+        });
+
+        firebase.auth().signOut().then(function() {
+            // Sign-out successful.
+        }).catch(function(error) {
+            // An error happened.
+        });
+
+        let ref = Database.database().reference()
+// Write
+ref.child("users/(userId)").setValue(user)
+// Read / listen
+ref.child("users").observe(.value) { snapshot in
+  let dict = snapshot.value as? [String : AnyObject] ?? [:]
+  // ...
+}
+  
+  firebase.auth().onAuthStateChanged(firebaseUser => { });
+        
+    </script>
+</head>
+
+<body>
+    <h1>Title</h1>
+    <p>Paragraph</p>
+    <div id="firebaseui-auth-container"></div>
+</body>
+
+</html>
