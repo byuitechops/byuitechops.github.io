@@ -90,7 +90,8 @@
         "employeeDirectory": true,
         "proDev": true,
         "pathway": true,
-        "screenSteps": true
+        "screenSteps": true,
+        "firebaseConsole": true
     };
     var dataUpdateBlock = {
         "brightspace": false,
@@ -106,7 +107,8 @@
         "employeeDirectory": false,
         "proDev": false,
         "pathway": false,
-        "screenSteps": false
+        "screenSteps": false,
+        "firebaseConsole": false
     };
     var base = firebase.database().ref().child('acodes').on('value', snap => {
         var codes = (snap.val());
@@ -231,7 +233,8 @@
                 "employeeDirectory": true,
                 "proDev": true,
                 "pathway": true,
-                "screenSteps": true
+                "screenSteps": true,
+                "firebaseConsole": true
             }
             dbRefUsers.child(user).update(data);
             console.log('akldfj');
@@ -287,7 +290,8 @@
             "proDev": true,
             "pathway": true,
             "screenSteps": true,
-            "monthlyTraining": true
+            "monthlyTraining": true,
+            "firebaseConsole": true
         };
         dbRefUsers.child(user).set(data);
     }
@@ -499,6 +503,20 @@
                 sspic.classList.remove('locked');
             } else {
                 var icon = document.getElementById('ss');
+                icon.addEventListener('click', e => {
+                    window.alert('You are blocked for training purposes. Check your email for training link');
+                });
+                txtCode.classList.remove('hide');
+                submitCode.classList.remove('hide');
+                formId.classList.remove('formLogout');
+                sspic.classList.add('locked');
+            }
+            if (array.firebaseConsole == true) {
+                var icon = document.getElementById('fb');
+                icon.setAttribute('href', "https://console.firebase.google.com/");
+                sspic.classList.remove('locked');
+            } else {
+                var icon = document.getElementById('fb');
                 icon.addEventListener('click', e => {
                     window.alert('You are blocked for training purposes. Check your email for training link');
                 });
