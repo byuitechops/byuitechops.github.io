@@ -320,7 +320,7 @@ th {
     font-weight: 400;
     line-height: 1;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .glyphicon-asterisk:before {
@@ -7491,12 +7491,12 @@ button.close {
         -webkit-transform: translate3d(-100%, 0, 0);
         transform: translate3d(-100%, 0, 0)
     }
-    .carousel-inner>.item.active,
+    .carousel-inner>.item.active,    
     .carousel-inner>.item.next.left,
     .carousel-inner>.item.prev.right {
         left: 0;
         -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0)
+        transform: translate3d(0, 0, 0);
     }
 }
 
