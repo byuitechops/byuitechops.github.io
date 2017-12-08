@@ -157,7 +157,7 @@ ul.sidenav li a:hover:not(.active) {
 
 div.content {
     margin: 0 -475px 0 230px;
-    height: 947px;
+    height: 900px;
 }
 
 #pagetime {
@@ -228,7 +228,7 @@ input[type=radio]:checked {
 
 .iframes {
     margin: 0 29%;
-    border-style: ridge
+    border-style: ridge;
 }
 
 @media screen and (max-width: 1200px) {
