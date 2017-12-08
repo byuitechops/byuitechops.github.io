@@ -310,6 +310,14 @@ input[type=radio]:checked {
     display: flex;
 }
 
+.formLogout button {
+    width: 100%;
+}
+
+.monthButton button {
+    width: 100%;
+}
+
 .monthButton {
     border: .5px solid #b9b9b9;
     width: 10em;
@@ -468,8 +476,12 @@ input[type=radio]:checked {
 }
 
 .container {
-    position: fixed;
+    position: absolute;
     right: 0;
     display: flex;
     flex-shrink: 1;
+}
+
+a {
+    text-decoration: none;
 }
