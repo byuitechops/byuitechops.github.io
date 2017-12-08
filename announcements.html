@@ -2,38 +2,46 @@
 <html>
 
 <head>
-    <meta name="viewport" content="IE=Edge" charset="UTF-8" http-equiv="X-UA-Compatible">
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.gif">
-    <title>
-        Technical Operations Announcements
-    </title>
-
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="main.css">
 </head>
 
 <body>
-    <p></p>
-    <!-- ~~~~~~~~~~~~~~~ TITLE/NAV BAR ~~~~~~~~~~~~~~~ -->
-    <div class="nav-bar noselect">
-        <div class="nav-menu">
-            <div class="logo">
-                <a href="http://www.byui.edu/" target="_blank" rel="noopener noreferrer"><img alt="BYUI Logo" height="60px" width="93px" src="BYU-Idaho-Text-White.svg" /></a>
+    <div class="row">
+        <div class="col-2">
+            <ul class="sidenav">
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+                <li>
+                    <a class="active" href="announcements.html">Announcements</a>
+                </li>
+                <li>
+                    <a href="videoTimeCalculator.html">Time Calculator</a>
+                </li>
+                <li>
+                    <a href="employeehandbook.html">Employee Handbook</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-10">
+            <div class="content" id="pagetime">
+                <h1 style="text-align: center">Announcements</h1>
+                <div class="announcements">
+                    <div class="item">
+                        <h2>Present Exchange</h2>
+                        <p>Thursday the 14th<br> 2:00-3:00<br> $1 Price Limit<br> Bring wrapped presents ASAP</p>
+                    </div>
+                    <div class="item">
+                        <h2>Finals Week</h2>
+                        <p>Good Luck on Finals<br> Have a very merry Christmas!</p>
+                    </div>
+                </div>
             </div>
-            <div class="line"></div>
-            <div class="title">Technical Operations Announcements</div>
-            <div class="container" id="cont_0c7ab06866b9e58d6d5e2b5563633a02">
-                <script type="text/javascript" async src="https://www.theweather.com/wid_loader/0c7ab06866b9e58d6d5e2b5563633a02"></script></div>
         </div>
     </div>
-    <!--                                               -->
+    <script src="slideshow.js"></script>
+</body>
 
-    <!-- ~~~~~~~~~~~~~~~ Main Body ~~~~~~~~~~~~~~~ -->
-
-    <!--                                               -->
-    <div class="flex-container">
-        <h2><iframe src="https://docs.google.com/presentation/d/1c_--qsMXX80V6ueuWnFr35sXw3m7FB79HURy-_Nz0x4/embed?start=true&loop=true&delayms=5000" frameborder="0" width="1875" height="950" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe></h2>
-    </div>
+</html>
