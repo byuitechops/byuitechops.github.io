@@ -1,19 +1,32 @@
-.hide {
-    display: none;
+/* Default Style Values*/
+
+body {
+    margin: 0;
+    font-family: Verdana;
+    font-size: 20px;
 }
 
-.form {
-    border: .5px solid #b9b9b9;
-    width: 55%;
-    padding: .25em;
-    margin: 1.5em auto;
-    display: flex;
+h1 {
+    color: #f89901;
 }
 
-.flex-box {
-    width: 100%;
-    margin: 1em;
-    padding: 1em;
+h2 {
+    color: #326ba9;
+}
+
+h3 {
+    color: #f89901;
+}
+
+input {
+    font-size: 14px;
+    margin: .5em;
+    padding: .5em;
+    height: 3em;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    width: 48%;
 }
 
 button {
@@ -22,22 +35,263 @@ button {
     margin: .5em;
     border: none;
     cursor: pointer;
-    width: 100%;
-    height: 2em;
-
+    height: 2.5em;
 }
 
 button:hover {
     opacity: 0.8;
 }
 
-input {
-    margin: .5em;
-    padding: .5em;
+form button {
+    width: 50%;
+    margin: 0 25%;
+}
+
+.form button {
+    width: 48%;
+}
+
+/*************** CLASSES ***************/
+
+.icontab {
+    border-style: solid;
+    border-width: 1px;
+    border-color: transparent;
+    margin: 50px 0px 0px 0px;
+    height: 150px;
+    width: 150px;
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+    z-index: 1000;
+}
+
+.icontab:hover {
+    opacity: 0.4;
+    transition: all 0.2s ease-in-out;
+}
+
+
+.col-1 {
+    width: 8.33%;
+}
+
+.col-2 {
+    width: 16.66%;
+}
+
+.col-3 {
+    width: 25%;
+}
+
+.col-4 {
+    width: 33.33%;
+}
+
+.col-5 {
+    width: 41.66%;
+}
+
+.col-6 {
+    width: 50%;
+}
+
+.col-7 {
+    width: 58.33%;
+}
+
+.col-8 {
+    width: 66.66%;
+}
+
+.col-9 {
+    width: 75%;
+}
+
+.col-10 {
+    width: 83.33%;
+}
+
+.col-11 {
+    width: 91.66%;
+}
+
+.col-12 {
+    width: 100%;
+}
+
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+[class*="col-"] {
+    float: left;
+}
+
+ul.sidenav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: #f1f1f1;
+    position: fixed;
+    height: 100%;
+}
+
+ul.sidenav li a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+ul.sidenav li a.active {
+    background-color: #326ba9;
+    color: white;
+}
+
+ul.sidenav li a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+}
+
+div.content {
+    margin: 0 -480px 0 180px;
+    height: 1000px;
+}
+
+#time {
+    margin-left: 0px;
+}
+
+table {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+form input {
+    width: 100%
+}
+
+input[type=checkbox] {
+    -webkit-appearance: none;
+    background-color: #fafafa;
+    border: 1px solid #808080;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+    padding: 9px;
+    border-radius: 3px;
     display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    height: 2em;
+}
+
+input[type=checkbox]:hover {
+    background-color: #9cb7d4
+}
+
+input[type=checkbox]:active,
+input[type=checkbox]:checked:active {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+input[type=checkbox]:checked {
+    background-color: #326ba9;
+    border: 1px solid #adb8c0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
+    color: #99a1a7;
+}
+
+input[type=radio] {
+    -webkit-appearance: none;
+    background-color: #fafafa;
+    border: 1px solid #808080;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+    padding: 9px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+input[type=radio]:hover {
+    background-color: #9cb7d4
+}
+
+input[type=radio]:active,
+input[type=radio]:checked:active {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+input[type=radio]:checked {
+    background-color: #326ba9;
+    border: 1px solid #adb8c0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
+    color: #99a1a7;
+}
+
+@media screen and (max-width: 1200px) {
+    ul.sidenav {
+        width: 100%;
+        height: auto;
+        position: fixed;
+    }
+    ul.sidenav li a {
+        float: left;
+        padding: 15px;
+        text-align: center;
+    }
+    div.content {
+        padding-top: 100px;
+        margin-left: 0;
+    }
+    [class*="col-"] {
+        width: 100%;
+        text-align: center;
+    }
+    .form {
+        justify-content: center;
+        flex-flow: row wrap;
+    }
+    button {
+        width: 20em;
+    }
+    input {
+        width: 20em;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    ul.sidenav {
+        width: 100%;
+        height: auto;
+/*        position: relative;*/
+    }
+    ul.sidenav li a {
+        font-size: 15px;
+        text-align: center;
+        float: none;
+    }
+    div.content {
+        margin-left: 0;
+        padding-top: 100px;
+        text-align: center;
+    }
+}
+
+.hide {
+    display: none;
+}
+
+.form {
+    border: .5px solid #b9b9b9;
+    width: 75%;
+    padding: .25em;
+    margin: 1.5em auto;
+    flex-flow: row wrap;
+    align-content: center;
+}
+
+.flex-box {
+    margin: 1em;
+    padding: 1em;
+    display: flex;
+    flex-flow: row wrap;
 }
 
 .locked {
@@ -67,25 +321,7 @@ input {
     display: flex;
 }
 
-@media only screen and (max-width: 1250px) {
-    .form {
-        display: flex;
-        justify-content: center;
-        flex-flow: row wrap;
-    }
-    button {
-        width: 20em;
-    }
-    input {
-        width: 95%;
-    }
-}
 
-/* ---- Carousel ----- */
-
-* {
-    box-sizing: border-box
-}
 
 /* Slideshow container */
 
@@ -157,4 +393,83 @@ input {
     to {
         opacity: 1
     }
+}
+
+/* ---- Styles CSS --------- */
+.flex-container {
+    position: static;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5em;
+}
+
+.centered {
+    margin-left: auto;
+    margin-right: auto;
+    width: 47%;
+    margin: -60px 0px 0px 27%;
+}
+
+.tab-header {
+    text-align: center;
+    margin-top: 10px;
+    font-family: verdana;
+    font-weight: bold;
+    font-size: 12px;
+    color: gray;
+    text-transform: uppercase;
+    transition: all 0.15s ease-out;
+}
+
+.nav-bar {
+    background-color: #326ba9;
+    height: 85px;
+    width: 100%;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    cursor: default;
+}
+
+.nav-menu {
+    display: flex;
+    height: 85px;
+    align-content: center;
+    padding: 0px 5px 0px 30px;
+}
+
+.trWeather {
+    align-content: center;
+    margin-left: 52.88%;
+    margin-top: 37%;
+    width: 100%;
+    height: 85px;
+}
+
+.logo {
+    margin-top: 13px;
+}
+
+.line {
+    border-left: 1px solid white;
+    padding-left: 21px;
+    margin: 10px 0px 10px 21px;
+}
+
+.title {
+    display: inline-block;
+    font-size: 30px;
+    color: white;
+    line-height: 55px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    white-space: nowrap;
+}
+
+.container {
+    position: fixed;
+    right: 0;
+    display: flex;
+    flex-shrink: 1;
 }
