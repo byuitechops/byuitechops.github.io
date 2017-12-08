@@ -156,12 +156,13 @@ ul.sidenav li a:hover:not(.active) {
 }
 
 div.content {
-    margin: 0 -480px 0 230px;
+    margin: 0 -475px 0 230px;
     height: 1000px;
 }
 
 #pagetime {
-    margin-left: 55px;
+    margin-left: 240px;
+    margin-right: -315px;
 }
 
 table {
