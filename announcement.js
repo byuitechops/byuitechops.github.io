@@ -30,8 +30,7 @@ db.on('value', snap => {
         var childKey = snapshot.key;
         var childData = snapshot.val();
 
-        html = html + "<div class='item'><img src='" + childData.image + "'><h2>" + childData.title + "</h2><p>" + childData.message + "</p></div>";
-
+        html = "<div class='item'><img src='" + childData.image + "'><h2>" + childData.title + "</h2><p>" + childData.message + "</p></div>" + html;        
     });
 
     document.getElementById('display').innerHTML = html;
