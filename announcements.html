@@ -4,6 +4,7 @@
 <head>
     <title>Template</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
     <link type="text/css" rel="stylesheet" href="main.css">
 </head>
 
@@ -28,20 +29,34 @@
         <div class="col-10">
             <div class="content" id="pagetime">
                 <h1 style="text-align: center">Announcements</h1>
-                <div class="announcements">
-                    <div class="item">
-                        <h2>Present Exchange</h2>
-                        <p>Thursday the 14th<br> 2:00-3:00<br> $1 Price Limit<br> Bring wrapped presents ASAP</p>
+                <div id="display" class="announcements">
+                    
+                </div>
+                <!-- Trigger/Open The Modal -->
+                <button id="myBtn" class="announcementButton">Make An Announcement</button>
+                <!-- The Modal -->
+                <div id="myModal" class="modal">
+
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <p>Fill out the fields, then click "Submit":</p>
+
+                        <form>
+                            <p>Title: <input type="text" id='title'></p>
+                            <p>Message: <textarea wrap="hard" rows="4" cols="50" id="message" placeholder="Enter message here..."></textarea></p>
+                            <p>Would you like to input an image: <input type="checkbox" id="imagecheck" onclick="isChecked()"></p>
+                            <p id="selectImage" class="hide">Find an image you want in google and copy the image address: <input type="url" id="image"></p>
+                            <p> When does the announcement expire: <input type="date" id="date"></p>
+                            <input type="button" onclick="makeAnAnouncement()" value="Submit">
+                        </form>
                     </div>
-                    <div class="item">
-                        <h2>Finals Week</h2>
-                        <p>Good Luck on Finals<br> Have a very merry Christmas!</p>
-                    </div>
+
                 </div>
             </div>
         </div>
     </div>
-    <script src="slideshow.js"></script>
+    <script src="announcement.js"></script>
 </body>
 
 </html>
