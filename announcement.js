@@ -30,7 +30,7 @@ db.on('value', snap => {
         var childKey = snapshot.key;
         var childData = snapshot.val();
 
-        html = "<div class='item'><img src='" + childData.image + "'><h2>" + childData.title + "</h2><p>" + childData.message + "</p></div>" + html;        
+        html = "<div class='item'><img src='" + childData.image + "'><h2>" + childData.title + "</h2><p>" + childData.message + "</p></div>" + html;
     });
 
     document.getElementById('display').innerHTML = html;
@@ -45,7 +45,7 @@ db.on('value', snap => {
         var firebasedate = childData.date;
         var d = new Date();
         var today = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
-        
+
         if (firebasedate < today) {
             db.child(childKey).set(null);
         };
@@ -95,15 +95,20 @@ function isChecked() {
 // Submit the form
 function makeAnAnouncement() {
     var title = document.getElementById('title').value;
-    var message = document.getElementById('message').value;
-    message = message.replace(/\n/g, "<br>");
+    var message = tinymce.get('message').getContent();
     var image = document.getElementById('image').value;
     var date = document.getElementById('date').value;
     sendAnnouncementToFirebase(title, message, image, date);
     document.getElementById('title').value = "";
-    document.getElementById('message').value = "";
     document.getElementById('image').value = "";
     document.getElementById('date').value = "";
     document.getElementById('imagecheck').checked = false;
     isChecked();
+    
+    tinymce.get('message').setContent("");
 }
+
+// WYSIWYG
+tinymce.init({
+    selector: 'textarea'
+});

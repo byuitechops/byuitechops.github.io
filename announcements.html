@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
     <link type="text/css" rel="stylesheet" href="main.css">
+    <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
 </head>
 
 <body>
@@ -30,7 +31,7 @@
             <div class="content" id="pagetime">
                 <h1 style="text-align: center">Announcements</h1>
                 <div id="display" class="announcements">
-                    
+
                 </div>
                 <!-- Trigger/Open The Modal -->
                 <button id="myBtn" class="announcementButton">Make An Announcement</button>
@@ -44,7 +45,7 @@
 
                         <form>
                             <p>Title: <input type="text" id='title'></p>
-                            <p>Message: <textarea wrap="hard" rows="4" cols="50" id="message" placeholder="Enter message here..."></textarea></p>
+                            <p>Message: <textarea id="message"></textarea></p>
                             <p>Would you like to input an image: <input type="checkbox" id="imagecheck" onclick="isChecked()"></p>
                             <p id="selectImage" class="hide">Find an image you want in google and copy the image address: <input type="url" id="image"></p>
                             <p> When does the announcement expire: <input type="date" id="date"></p>

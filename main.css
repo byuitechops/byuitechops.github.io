@@ -519,6 +519,7 @@ input[type=radio]:checked {
     cursor: pointer;
 }
 
+/* --- Module Box ---*/
 textarea {
     width: 99%;
     margin-top: 5px;
@@ -530,4 +531,8 @@ p input[type=checkbox] {
     height: 1em;
     position: relative;
     top: 10px
+}
+
+#mceu_31 {
+    display: none;
 }
