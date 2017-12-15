@@ -7,11 +7,11 @@ body {
 }
 
 h1 {
-    color: #f89901;
+    color: #0076c6;
 }
 
 h2 {
-    color: #326ba9;
+    color: #0076c6;
 }
 
 h3 {
@@ -30,7 +30,7 @@ input {
 }
 
 button {
-    background-color: #326ba9;
+    background-color: #0076c6;
     color: white;
     margin: .5em;
     border: none;
@@ -53,6 +53,10 @@ form button {
 
 .form button {
     width: 48%;
+}
+
+hr {
+    width: 90%
 }
 
 /*************** CLASSES ***************/
@@ -137,14 +141,14 @@ ul.sidenav {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    background-color: #f1f1f1;
+    background-color: #0076c6;
     position: fixed;
     height: 100%;
 }
 
 ul.sidenav li a {
     display: block;
-    color: #000;
+    color: white;
     padding: 8px 16px;
     text-decoration: none;
 }
@@ -160,13 +164,9 @@ ul.sidenav li a:hover:not(.active) {
 }
 
 div.content {
-    margin: 0 -480px 0 230px;
+    margin: 0 0 0 600px;
     height: 900px;
-}
-
-#pagetime {
-    margin-left: 240px;
-    margin-right: -315px;
+    width: 68%
 }
 
 table {
@@ -198,7 +198,7 @@ input[type=checkbox]:checked:active {
 }
 
 input[type=checkbox]:checked {
-    background-color: #326ba9;
+    background-color: #0076c6;
     border: 1px solid #adb8c0;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
     color: #99a1a7;
@@ -224,7 +224,7 @@ input[type=radio]:checked:active {
 }
 
 input[type=radio]:checked {
-    background-color: #326ba9;
+    background-color: #0076c6;
     border: 1px solid #adb8c0;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
     color: #99a1a7;
@@ -238,9 +238,9 @@ input[type=radio]:checked {
 .iframing {
     margin: 0 auto;
     margin-top: 50px;
-    height: 700px;
+    height: 800px;
     overflow-y: scroll;
-    width: 50%;
+    border-left: 1px solid black;
 }
 
 .iframing::-webkit-scrollbar {
@@ -249,7 +249,7 @@ input[type=radio]:checked {
 }
 
 .iframing::-webkit-scrollbar-thumb {
-    background-color: #326ba9;
+    background-color: #0076c6;
     border-radius: 10px;
     margin-top: 10px;
 }
@@ -260,10 +260,9 @@ input[type=radio]:checked {
     border-radius: 10px;
 }
 
-@media screen and (max-width: 1700px) {
-    .container iframe {
-        display: none;
-    }
+form {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
 }
 
 @media screen and (max-width: 1200px) {
@@ -321,7 +320,6 @@ input[type=radio]:checked {
 
 .form {
     border: .5px solid #b9b9b9;
-    width: 75%;
     padding: .25em;
     margin-top: 4%;
     margin-bottom: 0;
@@ -359,7 +357,6 @@ input[type=radio]:checked {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
     padding: 0 0.75em;
 }
 
@@ -371,11 +368,8 @@ input[type=radio]:checked {
     margin-top: 1em;
 }
 
-.centered {
-    margin-left: auto;
-    margin-right: auto;
-    width: 76%;
-    margin-left: 12%;
+h1 {
+    text-align: center;
 }
 
 .tab-header {
@@ -387,40 +381,6 @@ input[type=radio]:checked {
     color: gray;
     text-transform: uppercase;
     transition: all 0.15s ease-out;
-}
-
-.nav-bar {
-    background-color: #326ba9;
-    height: 80px;
-    width: 100%;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-    cursor: default;
-}
-
-.nav-menu {
-    display: flex;
-    height: 85px;
-    align-content: center;
-    padding: 0px 5px 0px 30px;
-}
-
-.trWeather {
-    align-content: center;
-    margin-left: 52.88%;
-    margin-top: 37%;
-    width: 100%;
-    height: 85px;
-}
-
-.logo {
-    margin-top: 13px;
-}
-
-.line {
-    border-left: 1px solid white;
-    padding-left: 21px;
-    margin: 10px 0px 10px 21px;
 }
 
 .title {
@@ -442,22 +402,21 @@ input[type=radio]:checked {
 
 .item {
     margin: 0 auto;
-    width: 500px;
-    position: relative;
+    width: 900px;
     border-bottom: 1px solid black;
 }
 
 .item img {
-    width: 125px;
+    height: 7em;
     float: right;
     margin-left: 1em;
 }
 
 .announcements {
     height: 90%;
-    width: 50%;
     margin: 0 auto;
     overflow-y: scroll;
+    border-left: 1px solid black;
 }
 
 .announcements::-webkit-scrollbar {
@@ -466,7 +425,7 @@ input[type=radio]:checked {
 }
 
 .announcements::-webkit-scrollbar-thumb {
-    background-color: #326ba9;
+    background-color: #0076c6;
     border-radius: 10px;
     margin-top: 10px;
 }
