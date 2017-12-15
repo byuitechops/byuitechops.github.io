@@ -91,7 +91,9 @@
         "proDev": true,
         "pathway": true,
         "screenSteps": true,
-        "firebaseConsole": true
+        "firebaseConsole": true,
+        "canvasStyleGuide": true,
+        "totStyleGuide": true
     };
     var dataUpdateBlock = {
         "brightspace": false,
@@ -108,7 +110,9 @@
         "proDev": false,
         "pathway": false,
         "screenSteps": false,
-        "firebaseConsole": false
+        "firebaseConsole": false,
+        "canvasStyleGuide": false,
+        "totStyleGuide": false
     };
     var base = firebase.database().ref().child('acodes').on('value', snap => {
         var codes = (snap.val());
@@ -234,7 +238,9 @@
                 "proDev": true,
                 "pathway": true,
                 "screenSteps": true,
-                "firebaseConsole": true
+                "firebaseConsole": true,
+                "canvasStyleGuide": true,
+                "totStyleGuide": true
             }
             dbRefUsers.child(user).update(data);
             console.log('akldfj');
@@ -291,7 +297,9 @@
             "pathway": true,
             "screenSteps": true,
             "monthlyTraining": true,
-            "firebaseConsole": true
+            "firebaseConsole": true,
+            "canvasStyleGuide": true,
+            "totStyleGuide": true
         };
         dbRefUsers.child(user).set(data);
     }
@@ -524,6 +532,34 @@
                 submitCode.classList.remove('hide');
                 formId.classList.remove('formLogout');
                 fbpic.classList.add('locked');
+            }
+            if (array.canvasStyleGuide == true) {
+                var icon = document.getElementById('csg');
+                icon.setAttribute('href', "https://canvas.instructure.com/styleguide");
+                csgpic.classList.remove('locked');
+            } else {
+                var icon = document.getElementById('csg');
+                icon.addEventListener('click', e => {
+                    window.alert('You are blocked for training purposes. Check your email for training link');
+                });
+                txtCode.classList.remove('hide');
+                submitCode.classList.remove('hide');
+                formId.classList.remove('formLogout');
+                csgpic.classList.add('locked');
+            }
+            if (array.totStyleGuide == true) {
+                var icon = document.getElementById('tsg');
+                icon.setAttribute('href', "https://byui.instructure.com/courses/78/pages/web-features?module_item_id=12334");
+                tsgpic.classList.remove('locked');
+            } else {
+                var icon = document.getElementById('csg');
+                icon.addEventListener('click', e => {
+                    window.alert('You are blocked for training purposes. Check your email for training link');
+                });
+                txtCode.classList.remove('hide');
+                submitCode.classList.remove('hide');
+                formId.classList.remove('formLogout');
+                tsgpic.classList.add('locked');
             }
             if (user == 'byuitech') {
                 txtCode.classList.remove('hide');
