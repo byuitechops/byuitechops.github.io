@@ -9,15 +9,18 @@ const config = {
 };
 firebase.initializeApp(config);
 
-const db = firebase.database().ref('announcements');
+var db = firebase.database().ref('announcements');
 
-function sendAnnouncementToFirebase(title, message, image, date) {
+function sendAnnouncementToFirebase(title, message, image, text, link, date) {
     var data = {
         "title": title,
         "message": message,
         "image": image,
+        "text": text,
+        "link": link,
         "date": date
     }
+    var key = db.push().key;
     db.push(data);
     modal.style.display = "none";
 }
@@ -26,11 +29,13 @@ function sendAnnouncementToFirebase(title, message, image, date) {
 db.on('value', snap => {
     var html = "";
     snap.forEach(function (snapshot) {
-        var i = 1;
         var childKey = snapshot.key;
         var childData = snapshot.val();
 
-        html = "<div class='item'><img src='" + childData.image + "'><h2>" + childData.title + "</h2><p>" + childData.message + "</p></div>" + html;
+        if (childData != "null") {
+            html = "<div class='item'><img src='" + childData.image + "'><h2>" + childData.title + "</h2><p>" + childData.message + "</p><a href='" + childData.link + "' target='_blank'>" + childData.text + "</a></div>" + html;
+        };
+
     });
 
     document.getElementById('display').innerHTML = html;
@@ -46,7 +51,7 @@ db.on('value', snap => {
         var d = new Date();
         var today = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
 
-        if (firebasedate < today) {
+        if (firebasedate > today) {
             db.child(childKey).set(null);
         };
     });
@@ -69,17 +74,32 @@ btn.onclick = function () {
 // When the user clicks on <span> (x), close the modal
 span.onclick = function () {
     modal.style.display = "none";
+    document.getElementById('title').value = "";
+    document.getElementById('image').value = "";
+    document.getElementById('text').value = "";
+    document.getElementById('link').value = "";
+    document.getElementById('date').value = "";
+    document.getElementById('imagecheck').checked = false;
+    document.getElementById('linkcheck').checked = false;
+    isChecked();
+    tinymce.get('message').setContent("");
 }
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {
     if (event.target == modal) {
         modal.style.display = "none";
+        document.getElementById('title').value = "";
+        document.getElementById('image').value = "";
+        document.getElementById('text').value = "";
+        document.getElementById('link').value = "";
+        document.getElementById('date').value = "";
+        document.getElementById('imagecheck').checked = false;
+        document.getElementById('linkcheck').checked = false;
+        isChecked();
+        tinymce.get('message').setContent("");
     }
 }
-
-// Get the image checkbox
-var img = document.getElementById('imagecheck');
 
 // Is the Checkbox checked
 function isChecked() {
@@ -90,6 +110,14 @@ function isChecked() {
     } else {
         selectImage.classList.add('hide');
     }
+
+    var linkcheck = document.getElementById('linkcheck');
+    var addLink = document.getElementById('addLink');
+    if (linkcheck.checked) {
+        addLink.classList.remove('hide');
+    } else {
+        addLink.classList.add('hide');
+    }
 }
 
 // Submit the form
@@ -97,14 +125,20 @@ function makeAnAnouncement() {
     var title = document.getElementById('title').value;
     var message = tinymce.get('message').getContent();
     var image = document.getElementById('image').value;
+    var text = document.getElementById('text').value;
+    var link = document.getElementById('link').value;
     var date = document.getElementById('date').value;
-    sendAnnouncementToFirebase(title, message, image, date);
+
+    sendAnnouncementToFirebase(title, message, image, text, link, date);
+
     document.getElementById('title').value = "";
     document.getElementById('image').value = "";
+    document.getElementById('text').value = "";
+    document.getElementById('link').value = "";
     document.getElementById('date').value = "";
     document.getElementById('imagecheck').checked = false;
+    document.getElementById('linkcheck').checked = false;
     isChecked();
-    
     tinymce.get('message').setContent("");
 }
 
