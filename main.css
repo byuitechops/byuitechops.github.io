@@ -313,8 +313,6 @@ form {
     position: static;
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    padding: 0 0.75em;
 }
 
 .flex-container div {
