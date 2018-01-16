@@ -82,7 +82,6 @@
         "teamDrive": true,
         "microsoft": true,
         "workDay": true,
-        "staffHub": true,
         "canvas": true,
         "microsoftTeams": true,
         "equella": true,
@@ -101,7 +100,6 @@
         "teamDrive": false,
         "microsoft": false,
         "workDay": true,
-        "staffHub": false,
         "canvas": true,
         "microsoftTeams": false,
         "equella": false,
@@ -130,9 +128,6 @@
             }
             if (key0 == 'microsoft') {
                 microsoftcode = key1;
-            }
-            if (key0 == 'staffhub') {
-                staffhubcode = key1;
             }
             if (key0 == 'teamdrive') {
                 teamdrivecode = key1;
@@ -198,15 +193,7 @@
             loadUser();
             document.getElementById('txtCode').value = "";
             document.getElementById('txtCode').placeholder = "Enter Code";
-        } else if (code == staffhubcode) {
-            var data = {
-                staffHub: true
-            }
-            dbRefUsers.child(user).update(data);
-            loadUser();
-            document.getElementById('txtCode').value = "";
-            document.getElementById('txtCode').placeholder = "Enter Code";
-        } else if (code == canvascode) {
+        }  else if (code == canvascode) {
             var data = {
                 canvas: true
             }
@@ -229,7 +216,6 @@
                 "teamDrive": true,
                 "microsoft": true,
                 "workDay": true,
-                "staffHub": true,
                 "canvas": true,
                 "microsoftTeams": true,
                 "equella": true,
@@ -287,7 +273,6 @@
             "teamDrive": false,
             "microsoft": false,
             "workDay": false,
-            "staffHub": false,
             "canvas": false,
             "microsoftTeams": false,
             "equella": true,
@@ -420,20 +405,6 @@
                 submitCode.classList.remove('hide');
                 formId.classList.remove('formLogout');
                 micrpic.classList.add('locked');
-            }
-            if (array.staffHub == true) {
-                var icon = document.getElementById('sh');
-                icon.setAttribute('href', "https://staffhub.ms/app/TEAM_beb31523bee44c99b3a052306b0a71c4/schedules");
-                shpic.classList.remove('locked');
-            } else {
-                var icon = document.getElementById('sh');
-                icon.addEventListener('click', e => {
-                    window.alert('You are blocked for training purposes. Check your email for training link');
-                });
-                txtCode.classList.remove('hide');
-                submitCode.classList.remove('hide');
-                formId.classList.remove('formLogout');
-                shpic.classList.add('locked');
             }
             if (array.canvas == true) {
                 var icon = document.getElementById('can');
