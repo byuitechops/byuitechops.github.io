@@ -597,10 +597,11 @@
         window.open('https://www.myworkday.com/byuhi/d/home.htmld#selectedWorklet=501%24162');
         window.open('https://teams.microsoft.com/start', '_blank');
         var comment = {
-            Comment: document.getElementById('comment').innerhtml
+            CommentIn: document.getElementById('comment').innerhtml
         };
         if (comment != "") {
-            ref.child(date).child('In').update(comment);
+            ref.child(date).update(comment);
+            document.getElementById('comment').innerHTML = "";
         };
     });
 
@@ -621,10 +622,11 @@
         ref.child(date).update(data);
         localStorage.removeItem('timekey');
         var comment = {
-          Comment: document.getElementById('comment').innerhtml  
+            CommentOut: document.getElementById('comment').innerhtml
         };
         if (comment != "") {
-            ref.child(date).child('Out').update(comment);
+            ref.child(date).update(comment);
+            document.getElementById('comment').innerHTML = "";
         };
     });
 
