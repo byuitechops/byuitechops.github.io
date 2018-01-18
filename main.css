@@ -314,13 +314,21 @@ form {
     opacity: .1;
 }
 
-.formLogout {
+.formLoggedIn {
     border: none;
 }
 
-.formLogout button {
+.formLoggedIn button {
     width: 100%;
     margin: 10px;
+}
+
+.loggedIn {
+    border: none;
+}
+
+.loggedIn button {
+    border-radius: 1em;
 }
 
 /* ---- Styles CSS --------- */
