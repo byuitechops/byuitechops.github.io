@@ -59,6 +59,22 @@ hr {
     width: 90%
 }
 
+.dropdown-content {
+    display: none;
+    position: relative;
+    top: -2em;
+    left: 100%;
+    color: #0076c6;
+    background-color: #0076c6;
+    min-width: 235px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
 /*************** CLASSES ***************/
 
 .icontab {
@@ -164,7 +180,7 @@ ul.sidenav li a:hover:not(.active) {
 }
 
 div.content {
-    margin: 0 0 0 600px;
+    margin: 0 0 0 550px;
     height: 900px;
     width: 68%
 }
@@ -536,21 +552,32 @@ p input[type=checkbox] {
         /* Could be more or less, depending on screen size */
     }
 
+
+    .dropdown-content {
+        position: fixed;
+        left: 0;
+        top: 2.5em;
+        width: 100%;
+    }
+
 }
 
 @media screen and (max-width: 768px) {
     ul.sidenav {
         width: 100%;
         height: auto;
-        /*        position: relative;*/
+        position: relative;
     }
     ul.sidenav li a {
         font-size: 15px;
         text-align: center;
         float: none;
     }
-    div.content {
-        padding-top: 200px;
-        text-align: center;
+
+    .dropdown-content {
+        position: relative;
+        top: 0;
+        width: 100%;
     }
+
 }
