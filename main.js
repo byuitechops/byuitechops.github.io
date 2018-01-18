@@ -275,6 +275,7 @@
             btnLogin.classList.add('hide');
             btnSignUp.classList.add('hide');
             btnLogout.classList.remove('hide');
+            document.getElementById('loggedInForm').classList.remove('hide');
         } else {
             console.log('not logged in');
         }
@@ -312,10 +313,10 @@
             txtCode.classList.add('hide');
             submitCode.classList.add('hide');
 
-            formId.classList.add('formLogout');
-            month.classList.remove('hide');
-            month.classList.add('monthButton');
-            month.addEventListener('click', e => {
+            document.getElementById('formId').classList.add('loggedIn');
+            document.getElementById('month').classList.remove('hide');
+
+            document.getElementById('month').addEventListener('click', e => {
                 var data = {
                     "monthlyTraining": true
                 }
@@ -594,4 +595,50 @@
             }
         });
     }
+
+    document.getElementById('checkIn').addEventListener('click', e => {
+        var ref = dbRefUsers.child(user).child('TimeClock').child('HoursWorked');
+        var d = new Date();
+        var time = d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+        var date = (d.getMonth() + 1) + '-' + d.getDate() + '-' + d.getFullYear() + ' ' + time;
+        var data = {
+            IN: time
+        }
+        console.log(date);
+        localStorage.setItem("checked", true);
+        isCheckedIn();
+        ref.child(date).update(data);
+        localStorage.setItem('timekey', date);
+    });
+
+    document.getElementById('checkOut').addEventListener('click', e => {
+        var ref = dbRefUsers.child(user).child('TimeClock').child('HoursWorked');
+        var d = new Date();
+        var time = d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+        var date = localStorage.getItem('timekey');
+        var data = {
+            Out: time
+        }
+        console.log(date);
+        localStorage.setItem("checked", false);
+        isCheckedIn();
+        ref.child(date).update(data);
+        localStorage.removeItem('timekey');
+    });
+
+    function isCheckedIn() {
+        var checkInBtn = document.getElementById('checkIn');
+        var checkOutBtn = document.getElementById('checkOut');
+        var check = localStorage.getItem("checked");
+
+        if (check) {
+            checkOutBtn.classList.remove('hide');
+            checkInBtn.classList.add('hide');
+        } else {
+            checkOutBtn.classList.add('hide');
+            checkInBtn.classList.remove('hide');
+        }
+
+    }
+    isCheckedIn();
 }());
