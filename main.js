@@ -561,6 +561,7 @@
                 };
                 dbRefUsers.child(user).child('TimeClock').update(checkdata);
                 isCheckedIn();
+                document.getElementById('comment').classList.remove('hide');
             } else {
                 console.log("not logged in");
             }
@@ -583,7 +584,7 @@
         var time = d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
         var date = (d.getMonth() + 1) + '-' + d.getDate() + '-' + d.getFullYear() + ' ' + time;
         var data = {
-            IN: time
+            In: time
         }
         console.log(date);
         var checkdata = {
@@ -595,6 +596,10 @@
         localStorage.setItem('timekey', date);
         window.open('https://www.myworkday.com/byuhi/d/home.htmld#selectedWorklet=501%24162');
         window.open('https://teams.microsoft.com/start', '_blank');
+        var comment = document.getElementById('comment').innerhtml;
+        if (comment != "") {
+            ref.child(date).child('In').update(comment);
+        };
     });
 
     document.getElementById('checkOut').addEventListener('click', e => {
@@ -613,6 +618,10 @@
         isCheckedIn();
         ref.child(date).update(data);
         localStorage.removeItem('timekey');
+        var comment = document.getElementById('comment').innerhtml;
+        if (comment != "") {
+            ref.child(date).child('Out').update(comment);
+        };
     });
 
     function isCheckedIn() {
@@ -656,7 +665,7 @@
         var time = d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
         var date = localStorage.getItem('breakkey');
         var data = {
-            Out: time
+            In: time
         }
         console.log(date);
         var breakdata = {
