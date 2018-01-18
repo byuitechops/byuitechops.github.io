@@ -193,7 +193,7 @@
             loadUser();
             document.getElementById('txtCode').value = "";
             document.getElementById('txtCode').placeholder = "Enter Code";
-        }  else if (code == canvascode) {
+        } else if (code == canvascode) {
             var data = {
                 canvas: true
             }
@@ -596,7 +596,9 @@
         localStorage.setItem('timekey', date);
         window.open('https://www.myworkday.com/byuhi/d/home.htmld#selectedWorklet=501%24162');
         window.open('https://teams.microsoft.com/start', '_blank');
-        var comment = document.getElementById('comment').innerhtml;
+        var comment = {
+            Comment = document.getElementById('comment').innerhtml;
+        }
         if (comment != "") {
             ref.child(date).child('In').update(comment);
         };
