@@ -551,6 +551,16 @@
                 user = localStorage.getItem('user');
                 console.log(user);
                 loadUser();
+                var breakdata = {
+                    break: true
+                };
+                dbRefUsers.child(user).child('TimeClock').update(breakdata);
+                isBreak();
+                var checkdata = {
+                    check: false
+                };
+                dbRefUsers.child(user).child('TimeClock').update(checkdata);
+                isCheckedIn();
             } else {
                 console.log("not logged in");
             }
@@ -577,7 +587,7 @@
         }
         console.log(date);
         var checkdata = {
-            check:true
+            check: true
         };
         dbRefUsers.child(user).child('TimeClock').update(checkdata);
         isCheckedIn();
@@ -597,7 +607,7 @@
         }
         console.log(date);
         var checkdata = {
-            check:false
+            check: false
         };
         dbRefUsers.child(user).child('TimeClock').update(checkdata);
         isCheckedIn();
@@ -610,7 +620,7 @@
         var checkOutBtn = document.getElementById('checkOut');
         var check = null;
         dbRefUsers.child(user).child('TimeClock').child('check').on('value', snap => {
-           check = snap.val();
+            check = snap.val();
         });
         if (check) {
             checkOutBtn.classList.remove('hide');
@@ -621,7 +631,7 @@
         }
 
     }
-    
+
     document.getElementById('breakOut').addEventListener('click', e => {
         var ref = dbRefUsers.child(user).child('TimeClock').child('Breaks');
         var d = new Date();
@@ -632,7 +642,7 @@
         }
         console.log(date);
         var breakdata = {
-            break:false
+            break: false
         };
         dbRefUsers.child(user).child('TimeClock').update(breakdata);
         isBreak();
@@ -650,7 +660,7 @@
         }
         console.log(date);
         var breakdata = {
-            break:true
+            break: true
         };
         dbRefUsers.child(user).child('TimeClock').update(breakdata);
         isBreak();
@@ -663,7 +673,7 @@
         var breakIn = document.getElementById('breakIn');
         var breaks = null;
         dbRefUsers.child(user).child('TimeClock').child('break').on('value', snap => {
-           breaks = snap.val();
+            breaks = snap.val();
         });
         if (breaks) {
             breakOut.classList.remove('hide');
