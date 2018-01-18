@@ -722,6 +722,4 @@
         }
 
     }
-    isBreak();
-    isCheckedIn();
 }());
