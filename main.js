@@ -33,8 +33,8 @@
             loadUser();
         });
         promise.catch(e => {
+            window.alert(e);
             document.getElementById('txtEmail').value = "";
-            document.getElementById('txtEmail').placeholder = "Incorrect Email or Password";
             document.getElementById('txtPassword').value = "";
         });
     });
@@ -581,7 +581,7 @@
                 console.log(user);
                 loadUser();
             } else {
-                console.log("not logged in")
+                console.log("not logged in");
             }
         });
     }
@@ -605,10 +605,15 @@
             IN: time
         }
         console.log(date);
-        localStorage.setItem("checked", true);
+        var checkdata = {
+            check:true
+        };
+        dbRefUsers.child(user).child('TimeClock').update(checkdata);
         isCheckedIn();
         ref.child(date).update(data);
         localStorage.setItem('timekey', date);
+        window.open('https://www.myworkday.com/byuhi/d/home.htmld#selectedWorklet=501%24162');
+        window.open('https://teams.microsoft.com/start', '_blank');
     });
 
     document.getElementById('checkOut').addEventListener('click', e => {
@@ -620,7 +625,10 @@
             Out: time
         }
         console.log(date);
-        localStorage.setItem("checked", false);
+        var checkdata = {
+            check:false
+        };
+        dbRefUsers.child(user).child('TimeClock').update(checkdata);
         isCheckedIn();
         ref.child(date).update(data);
         localStorage.removeItem('timekey');
@@ -629,8 +637,10 @@
     function isCheckedIn() {
         var checkInBtn = document.getElementById('checkIn');
         var checkOutBtn = document.getElementById('checkOut');
-        var check = localStorage.getItem("checked");
-
+        var check = null;
+        dbRefUsers.child(user).child('TimeClock').child('check').on('value', snap => {
+           check = snap.val();
+        });
         if (check) {
             checkOutBtn.classList.remove('hide');
             checkInBtn.classList.add('hide');
@@ -640,5 +650,59 @@
         }
 
     }
+    
+    document.getElementById('breakOut').addEventListener('click', e => {
+        var ref = dbRefUsers.child(user).child('TimeClock').child('Breaks');
+        var d = new Date();
+        var time = d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+        var date = (d.getMonth() + 1) + '-' + d.getDate() + '-' + d.getFullYear() + ' ' + time;
+        var data = {
+            Out: time
+        }
+        console.log(date);
+        var breakdata = {
+            break:false
+        };
+        dbRefUsers.child(user).child('TimeClock').update(breakdata);
+        isBreak();
+        ref.child(date).update(data);
+        localStorage.setItem('breakkey', date);
+    });
+
+    document.getElementById('breakIn').addEventListener('click', e => {
+        var ref = dbRefUsers.child(user).child('TimeClock').child('Breaks');
+        var d = new Date();
+        var time = d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+        var date = localStorage.getItem('breakkey');
+        var data = {
+            Out: time
+        }
+        console.log(date);
+        var breakdata = {
+            break:true
+        };
+        dbRefUsers.child(user).child('TimeClock').update(breakdata);
+        isBreak();
+        ref.child(date).update(data);
+        localStorage.removeItem('breakkey');
+    });
+
+    function isBreak() {
+        var breakOut = document.getElementById('breakOut');
+        var breakIn = document.getElementById('breakIn');
+        var breaks = null;
+        dbRefUsers.child(user).child('TimeClock').child('break').on('value', snap => {
+           breaks = snap.val();
+        });
+        if (breaks) {
+            breakOut.classList.remove('hide');
+            breakIn.classList.add('hide');
+        } else {
+            breakOut.classList.add('hide');
+            breakIn.classList.remove('hide');
+        }
+
+    }
+    isBreak();
     isCheckedIn();
 }());
