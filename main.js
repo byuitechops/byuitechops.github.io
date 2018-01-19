@@ -601,7 +601,7 @@
         var comment = {
             CommentIn: cmessage
         };
-        if (comment != "") {
+        if (comment != null) {
             ref.child(date).update(comment);
             document.getElementById('comment').innerHTML = "";
         };
@@ -627,7 +627,7 @@
         var comment = {
             CommentOut: cmessage
         };
-        if (comment != "") {
+        if (comment != null) {
             ref.child(date).update(comment);
             document.getElementById('comment').innerHTML = "";
         };
