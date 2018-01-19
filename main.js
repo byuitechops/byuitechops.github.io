@@ -596,8 +596,10 @@
         localStorage.setItem('timekey', date);
         window.open('https://www.myworkday.com/byuhi/d/home.htmld#selectedWorklet=501%24162');
         window.open('https://teams.microsoft.com/start', '_blank');
+        var cmessage= document.getElementById('comment').innerHTML;
+        console.log(cmessage);
         var comment = {
-            CommentIn: document.getElementById('comment').innerhtml
+            CommentIn: cmessage
         };
         if (comment != "") {
             ref.child(date).update(comment);
