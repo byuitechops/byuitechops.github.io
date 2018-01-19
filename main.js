@@ -604,9 +604,7 @@
         if (cmessage != "") {
             ref.child(date).update(comment);
             document.getElementById('comment').innerHTML = "";
-        } else {
-            break;
-        }
+        };
     });
 
     document.getElementById('checkOut').addEventListener('click', e => {
@@ -632,9 +630,7 @@
         if (cmessage != "") {
             ref.child(date).update(comment);
             document.getElementById('comment').innerHTML = "";
-        } else {
-            break;
-        }
+        };
         localStorage.removeItem('timekey');
     });
 
