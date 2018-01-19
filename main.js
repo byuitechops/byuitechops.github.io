@@ -682,7 +682,7 @@
     function isBreak() {
         var breakOut = document.getElementById('breakOut');
         var breakIn = document.getElementById('breakIn');
-        var breaks = null;
+        var breaks;
         dbRefUsers.child(user).child('TimeClock').child('break').on('value', snap => {
             breaks = snap.val();
         });
