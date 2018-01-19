@@ -596,13 +596,13 @@
         localStorage.setItem('timekey', date);
         window.open('https://www.myworkday.com/byuhi/d/home.htmld#selectedWorklet=501%24162');
         window.open('https://teams.microsoft.com/start', '_blank');
-        var cmessage= document.getElementById('comment').innerHTML;
+        var cmessage = document.getElementById('comment').innerHTML;
         console.log(cmessage);
         var comment = {
             CommentIn: cmessage
         };
         if (comment != "") {
-            ref.child(date).update(comment);
+            ref.child(timekey).update(comment);
             document.getElementById('comment').innerHTML = "";
         };
     });
@@ -622,14 +622,16 @@
         dbRefUsers.child(user).child('TimeClock').update(checkdata);
         isCheckedIn();
         ref.child(date).update(data);
-        localStorage.removeItem('timekey');
+        var cmessage = document.getElementById('comment').innerHTML;
+        console.log(cmessage);
         var comment = {
-            CommentOut: document.getElementById('comment').innerhtml
+            CommentOut: cmessage
         };
         if (comment != "") {
-            ref.child(date).update(comment);
+            ref.child(timekey).update(comment);
             document.getElementById('comment').innerHTML = "";
         };
+        localStorage.removeItem('timekey');
     });
 
     function isCheckedIn() {
