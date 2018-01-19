@@ -551,15 +551,7 @@
                 user = localStorage.getItem('user');
                 console.log(user);
                 loadUser();
-                var breakdata = {
-                    break: true
-                };
-                dbRefUsers.child(user).child('TimeClock').update(breakdata);
                 isBreak();
-                var checkdata = {
-                    check: false
-                };
-                dbRefUsers.child(user).child('TimeClock').update(checkdata);
                 isCheckedIn();
                 document.getElementById('comment').classList.remove('hide');
             } else {
