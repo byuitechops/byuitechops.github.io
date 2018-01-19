@@ -573,23 +573,28 @@
     document.getElementById('checkIn').addEventListener('click', e => {
         var ref = dbRefUsers.child(user).child('TimeClock').child('HoursWorked');
         var d = new Date();
-        var time = d.getHours() + ':' + ('0'+d.getMinutes()).slice(-2) + ':' + d.getSeconds();
+        var hours = d.getHours();
+        var mer = "am";
+        if (hours - 12 > 0) {
+            hours = '0' + (hours - 12);
+            mer = "pm";
+        };
+        var min = ('0' + d.getMinutes()).slice(-2);
+        var sec = ('0' + d.getSeconds()).slice(-2);
+        var time = hours + ':' + min + ':' + sec + " " + mer;
         var date = (d.getMonth() + 1) + '-' + d.getDate() + '-' + d.getFullYear() + ' ' + time;
         var data = {
             In: time
         }
-        console.log(date);
         var checkdata = {
             check: true
         };
         dbRefUsers.child(user).child('TimeClock').update(checkdata);
-        isCheckedIn();
         ref.child(date).update(data);
         localStorage.setItem('timekey', date);
         window.open('https://www.myworkday.com/byuhi/d/home.htmld#selectedWorklet=501%24162');
         window.open('https://teams.microsoft.com/start', '_blank');
         var cmessage = document.getElementById('comment').value;
-        console.log(cmessage);
         var comment = {
             CommentIn: cmessage
         };
@@ -598,17 +603,27 @@
             document.getElementById('comment').innerHTML = "";
         };
         document.getElementById('comment').value = "";
+        isCheckedIn();
     });
 
     document.getElementById('checkOut').addEventListener('click', e => {
+        window.open('https://www.myworkday.com/byuhi/d/home.htmld#selectedWorklet=501%24162');
         var ref = dbRefUsers.child(user).child('TimeClock').child('HoursWorked');
         var d = new Date();
-        var time = d.getHours() + ':' + ('0'+d.getMinutes()).slice(-2) + ':' + d.getSeconds();
+        var time = d.getHours() + ':' + ('0' + d.getMinutes()).slice(-2) + ':' + ('0' + d.getSeconds()).slice(-2);
+        var hours = d.getHours();
+        var mer = "am";
+        if (hours - 12 > 0) {
+            hours = '0' + (hours - 12);
+            mer = "pm";
+        };
+        var min = ('0' + d.getMinutes()).slice(-2);
+        var sec = ('0' + d.getSeconds()).slice(-2);
+        var time = hours + ':' + min + ':' + sec + " " + mer;
         var date = localStorage.getItem('timekey');
         var data = {
             Out: time
         }
-        console.log(date);
         var checkdata = {
             check: false
         };
@@ -616,7 +631,6 @@
         isCheckedIn();
         ref.child(date).update(data);
         var cmessage = document.getElementById('comment').value;
-        console.log(cmessage);
         var comment = {
             CommentOut: cmessage
         };
@@ -634,13 +648,22 @@
         var check;
         dbRefUsers.child(user).child('TimeClock').child('check').on('value', snap => {
             if (snap.val()) {
-            checkOutBtn.classList.remove('hide');
-            checkInBtn.classList.add('hide');
-        } else {
-            checkOutBtn.classList.add('hide');
-            checkInBtn.classList.remove('hide');
-        }
-        });     
+                checkOutBtn.classList.remove('hide');
+                checkInBtn.classList.add('hide');
+                var timekey = localStorage.getItem('timekey');
+                if (timekey != null) {
+                    dbRefUsers.child(user).child('TimeClock').child('HoursWorked').child(timekey).child('In').on('value', snap => {
+                        document.getElementById('showclocked').innerHTML = "Clocked In At: " + snap.val();
+                    });
+                };
+
+            } else {
+                checkOutBtn.classList.add('hide');
+                checkInBtn.classList.remove('hide');
+                document.getElementById('showclocked').innerHTML = "";
+            }
+        });
+
 
     }
 
@@ -652,7 +675,6 @@
         var data = {
             Out: time
         }
-        console.log(date);
         var breakdata = {
             break: true
         };
@@ -670,7 +692,6 @@
         var data = {
             In: time
         }
-        console.log(date);
         var breakdata = {
             break: false
         };
@@ -686,12 +707,12 @@
         var breaks;
         dbRefUsers.child(user).child('TimeClock').child('break').on('value', snap => {
             if (snap.val()) {
-            breakOut.classList.add('hide');
-            breakIn.classList.remove('hide');
-        } else {
-            breakOut.classList.remove('hide');
-            breakIn.classList.add('hide');
-        }
+                breakOut.classList.add('hide');
+                breakIn.classList.remove('hide');
+            } else {
+                breakOut.classList.remove('hide');
+                breakIn.classList.add('hide');
+            }
         });
     }
 }());
