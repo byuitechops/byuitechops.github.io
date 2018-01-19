@@ -629,11 +629,10 @@
     function isCheckedIn() {
         var checkInBtn = document.getElementById('checkIn');
         var checkOutBtn = document.getElementById('checkOut');
-        var check = null;
+        var check;
         dbRefUsers.child(user).child('TimeClock').child('check').on('value', snap => {
             check = snap.val();
         });
-        console.log(check);
         if (check) {
             checkOutBtn.classList.remove('hide');
             checkInBtn.classList.add('hide');
