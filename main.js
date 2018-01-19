@@ -602,7 +602,7 @@
             CommentIn: cmessage
         };
         if (comment != "") {
-            ref.child(timekey).update(comment);
+            ref.child(date).update(comment);
             document.getElementById('comment').innerHTML = "";
         };
     });
@@ -628,7 +628,7 @@
             CommentOut: cmessage
         };
         if (comment != "") {
-            ref.child(timekey).update(comment);
+            ref.child(date).update(comment);
             document.getElementById('comment').innerHTML = "";
         };
         localStorage.removeItem('timekey');
