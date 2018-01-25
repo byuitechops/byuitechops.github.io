@@ -18,7 +18,7 @@
 
     var user = null;
 
-    btnLogin.addEventListener('click', e => {
+    btnLogin.addEventListener('submit', e => {
         const email = txtEmail.value;
         const pass = txtPassword.value;
         const auth = firebase.auth();
@@ -64,6 +64,8 @@
         localStorage.setItem("user", null);
     });
 
+    
+    document.getElementById('resetPassword').addEventListener('click',)
 
     var blockallcode;
     var brightspacecode;
@@ -261,6 +263,7 @@
             btnLogin.classList.add('hide');
             btnSignUp.classList.add('hide');
             btnLogout.classList.remove('hide');
+            document.getElementById('resetPassword').classList.remove('hide');
             document.getElementById('loggedInForm').classList.remove('hide');
         } else {
             console.log('not logged in');
