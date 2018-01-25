@@ -64,8 +64,17 @@
         localStorage.setItem("user", null);
     });
 
-    
-    document.getElementById('resetPassword').addEventListener('click',)
+
+    document.getElementById('resetPassword').addEventListener('click', e => {
+        var emailAddress = prompt('Input Email Address');
+        firebase.auth().sendPasswordResetEmail(emailAddress).then(function () {
+            // Email sent.
+            alert("An email has been sent. Please check your email.");
+        }).catch(function (error) {
+            // An error happened.
+            alert(error);
+        });
+    });
 
     var blockallcode;
     var brightspacecode;
@@ -263,7 +272,7 @@
             btnLogin.classList.add('hide');
             btnSignUp.classList.add('hide');
             btnLogout.classList.remove('hide');
-            document.getElementById('resetPassword').classList.remove('hide');
+            document.getElementById('resetPassword').classList.add('hide');
             document.getElementById('loggedInForm').classList.remove('hide');
         } else {
             console.log('not logged in');
