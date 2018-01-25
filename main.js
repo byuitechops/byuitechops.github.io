@@ -18,6 +18,13 @@
 
     var user = null;
 
+    document.getElementById('txtPassword').addEventListener("keyup", function(event) {
+        event.preventDefault();
+        if (event.keyCode === 13) {
+            btnLogin.click();
+        }
+    })
+    
     btnLogin.addEventListener('click', e => {
         const email = txtEmail.value;
         const pass = txtPassword.value;
