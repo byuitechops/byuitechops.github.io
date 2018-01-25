@@ -742,5 +742,4 @@
             }
         });
     }
-// This is a comment
 }());
