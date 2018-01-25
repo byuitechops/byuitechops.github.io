@@ -18,13 +18,13 @@
 
     var user = null;
 
-    document.getElementById('txtPassword').addEventListener("keyup", function(event) {
+    document.getElementById('txtPassword').addEventListener("keyup", function (event) {
         event.preventDefault();
         if (event.keyCode === 13) {
             btnLogin.click();
         }
     })
-    
+
     btnLogin.addEventListener('click', e => {
         const email = txtEmail.value;
         const pass = txtPassword.value;
@@ -327,6 +327,14 @@
                 dbRefUsers.child(user).update(data);
                 window.alert('Congration You Done It!');
             });
+
+            document.getElementById('home').setAttribute('href', "index.html");
+            document.getElementById('announce').setAttribute('href', "announcements.html");
+            document.getElementById('calc').setAttribute('href', "videoTimeCalculator.html");
+            document.getElementById('hand').setAttribute('href', "employeehandbook.html");
+            document.getElementById('canvasTeam').setAttribute('href', "https://docs.google.com/spreadsheets/d/1ge7AlgKH_0nkvmbZ_BxWiP6WfAg2rynA1ccXMFei22k/edit#gid=1630866338");
+            document.getElementById('techTeam').setAttribute('href', "https://docs.google.com/spreadsheets/d/1mY6vvcCC7ptSYrlnoFrhwgWh4DMqGwQNdcgtjUz4f9M/edit#gid=266358356");
+            document.getElementById('scriptTeam').setAttribute('href', "https://docs.google.com/spreadsheets/d/1BMVKAqfiPspOLZy4OFPHdccCWWJVtkHMrLoNobFCkTI/edit#gid=2021360543");
 
             if (array.workDay == true) {
                 var icon = document.getElementById('wd');
