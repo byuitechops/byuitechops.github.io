@@ -5,6 +5,7 @@
     <title>Time Tracking</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="text/css" rel="stylesheet" href="main.css">
+    <!--<script type="text/javascript" src = "timeTracking.js"></script>-->
 </head>
 
 <body>
@@ -39,30 +40,35 @@
         <div class="col-10">
             <div class="content" id="pagetime">
                 <h1 style="text-align: center">Time Tracking</h1>
-                <select>
+                <select id="drop-down" id="team-dropdown">
                    <option value="" selected disabled hidden>Team</option>
                    <option value="canvas">Canvas Team</option>
                    <option value="tech">Tech Team</option>
                    <option value="transcript">Transcript Team</option>
                 </select>
-                <select>
+                <select id="drop-down" id="month-dropdown">
                     <option value="" selected disabled hidden>Month</option>
-                    <option value="jan">January</option>
-                    <option value="feb">February</option>
-                    <option value="mar">March</option>
-                    <option value="apr">April</option>
-                    <option value="may">May</option>
-                    <option value="jun">June</option> 
-                    <option value="july">July</option>
-                    <option value="aug">August</option>
-                    <option value="sep">September</option>
-                    <option value="oct">October</option>
-                    <option value="nov">November</option>
-                    <option value="dec">December</option>
+                    <option value="0">January</option>
+                    <option value="1">February</option>
+                    <option value="2">March</option>
+                    <option value="3">April</option>
+                    <option value="4">May</option>
+                    <option value="5">June</option> 
+                    <option value="6">July</option>
+                    <option value="7">August</option>
+                    <option value="8">September</option>
+                    <option value="9">October</option>
+                    <option value="10">November</option>
+                    <option value="11">December</option>
                 </select>
-                <select>
+                <select id="drop-down" id="name-dropdown">
                    <option value="" selected disabled hidden>Name</option>
+                     <option value="name1">Alexander George Hamilton</option> 
+                     <option value="name2">Emma Fisher</option> 
+                     <option value="name3">My name is really really really really long</option> 
+                     <option value="name3">Mine is short</option> 
                 </select>
+                 <script type="text/javascript" src = "timeTracking.js"></script>
                 <h4>Weekly Totals: Monthly Total:<br></h4>
                 <p>Week 1: <br> Week 2: <br> Week 3: <br> Week 4: <br> Week 5: </p>
 

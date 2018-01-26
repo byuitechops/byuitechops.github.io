@@ -499,6 +499,28 @@ p input[type=checkbox] {
 .modal-content form {
     border: none;
 }
+/* New code added by Emma for dropdown menus*/
+
+select#drop-down {
+    -webkit-border-radius: 13px;
+    border: 1px solid #AAA;
+    background-color: #0076c6;
+    color: white;
+    margin: 0.6em;
+    border: none;
+    cursor: pointer;
+    height: 2.5em;
+    border-radius: 1em;
+    font-size: 19px;
+    margin-left: 75px;
+    margin-right: 75px;
+    overflow: hidden;
+    padding: 5px 10px;
+    white-space: nowrap;
+    width: 200px;
+    height: 35px;
+  
+}
 
 @media screen and (max-width: 1200px) {
     ul.sidenav {
@@ -561,8 +583,29 @@ p input[type=checkbox] {
         top: 2.5em;
         width: 100%;
     }
+    select#drop-down {
+    -webkit-border-radius: 13px;
+    border: 1px solid #AAA;
+    background-color: #0076c6;
+    color: white;
+    margin: 0.6em;
+    border: none;
+    cursor: pointer;
+    height: 2.5em;
+    border-radius: 1em;
+    font-size: 19px;
+    margin-left: 0px;
+    margin-right: 0px;
+    overflow: hidden;
+    padding: 5px 10px;
+    white-space: nowrap;
+    width: 200px;
+    height: 35px;
 
 }
+
+}
+
 
 @media screen and (max-width: 768px) {
     ul.sidenav {
@@ -581,5 +624,26 @@ p input[type=checkbox] {
         top: 0;
         width: 100%;
     }
+    select#drop-down {
+    -webkit-border-radius: 13px;
+    border: 1px solid #AAA;
+    background-color: #0076c6;
+    color: white;
+    margin: 0.6em;
+    border: none;
+    cursor: pointer;
+    height: 2.5em;
+    border-radius: 1em;
+    font-size: 19px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+    padding: 5px 10px;
+    white-space: nowrap;
+    width: 200px;
+    height: 35px;
 
 }
+
+}
+
