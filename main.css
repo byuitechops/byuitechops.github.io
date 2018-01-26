@@ -336,6 +336,13 @@ form {
 #showclocked {
     text-align: left;
     font-size: 1em;
+    width: 45%;
+}
+
+#showbreak {
+    text-align: left;
+    font-size: 1em;
+    width: 45%;
 }
 
 /* ---- Styles CSS --------- */

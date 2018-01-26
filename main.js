@@ -678,8 +678,7 @@
                 checkOutBtn.classList.remove('hide');
                 checkInBtn.classList.add('hide');
                 var timekey = localStorage.getItem('timekey');
-                if (timekey != null) {
-                    dbRefUsers.child(user).child('TimeClock').child('HoursWorked').child(timekey).child('In').on('value', snap => {
+                if (timekey != null) { dbRefUsers.child(user).child('TimeClock').child('HoursWorked').child(timekey).child('In').on('value', snap => {
                         document.getElementById('showclocked').innerHTML = "Clocked In At: " + snap.val();
                     });
                 };
@@ -734,14 +733,21 @@
         var breaks;
         dbRefUsers.child(user).child('TimeClock').child('break').on('value', snap => {
             if (snap.val()) {
+                var breakkey = localStorage.getItem('breakkey');
+                console.log(breakkey);
+                if (breakkey != null) {
+                    dbRefUsers.child(user).child('TimeClock').child('Breaks').child(breakkey).child('Out').on('value', snap => {
+                        document.getElementById('showbreak').innerHTML = "Took Break At: " + snap.val();
+                    });
+                };
                 breakOut.classList.add('hide');
                 breakIn.classList.remove('hide');
             } else {
                 breakOut.classList.remove('hide');
                 breakIn.classList.add('hide');
+                document.getElementById('showbreak').innerHTML = "";
             }
         });
     }
-// This is a comment
+    // This is a comment
 }());
-
