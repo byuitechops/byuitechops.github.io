@@ -1,29 +1,5 @@
 setCal()
 
-/*function getTime() {
-  // initialize time-related variables with current time settings
-  var now = new Date()
-  var hour = now.getHours()
-  var minute = now.getMinutes()
-  now = null
-  var ampm = ""
-
-  // validate hour values and set value of ampm
-  if (hour >= 12) {
-    hour -= 12
-    ampm = "PM"
-  } else
-    ampm = "AM"
-  hour = (hour == 0) ? 12 : hour
-
-  // add zero digit to a one digit minute
-  if (minute < 10)
-    minute = "0" + minute // do not parse this number!
-
-  // return time string
-  return hour + ":" + minute + " " + ampm
-}*/
-
 function leapYear(year) {
   if (year % 4 == 0) // basic rule
     return true // is leap year
@@ -96,16 +72,16 @@ function setCal() {
 
 function drawCal(firstDay, lastDate, date, monthName, year) {
   // constant table settings
-  var headerHeight = 50 // height of the table's header cell
+  var headerHeight = 70 // height of the table's header cell
   var border = 2 // 3D height of table's border
   var cellspacing = 4 // width of table's border
-  var headerColor = "midnightblue" // color of table's header
+  var headerColor = "#0076C6" // color of table's header
   var headerSize = "+3" // size of tables header font
-  var colWidth = 60 // width of columns in table
+  var colWidth = 150 // width of columns in table
   var dayCellHeight = 25 // height of cells containing days of the week
-  var dayColor = "darkblue" // color of font representing week days
-  var cellHeight = 40 // height of cells representing dates in the calendar
-  var todayColor = "red" // color specifying today's date in the calendar
+  var dayColor = "black" // color of font representing week days
+  var cellHeight = 100 // height of cells representing dates in the calendar
+  var todayColor = "black" // color specifying today's date in the calendar
   var timeColor = "purple" // color of font representing current time
 
   // create basic table structure
@@ -159,7 +135,7 @@ function drawCal(firstDay, lastDate, date, monthName, year) {
           text += digit
           text += '</FONT><BR>'
           text += '<FONT COLOR="' + timeColor + '" SIZE=2>'
-          text += '<CENTER>' /*+ getTime()*/ + '</CENTER>'
+          text += '<CENTER>' + '</CENTER>'
           text += '</FONT>'
           text += '</TD>'
         } else
