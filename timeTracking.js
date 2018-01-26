@@ -1,29 +1,5 @@
 setCal()
 
-/*function getTime() {
-  // initialize time-related variables with current time settings
-  var now = new Date()
-  var hour = now.getHours()
-  var minute = now.getMinutes()
-  now = null
-  var ampm = ""
-
-  // validate hour values and set value of ampm
-  if (hour >= 12) {
-    hour -= 12
-    ampm = "PM"
-  } else
-    ampm = "AM"
-  hour = (hour == 0) ? 12 : hour
-
-  // add zero digit to a one digit minute
-  if (minute < 10)
-    minute = "0" + minute // do not parse this number!
-
-  // return time string
-  return hour + ":" + minute + " " + ampm
-}*/
-
 function leapYear(year) {
     if (year % 4 == 0) // basic rule
         return true // is leap year
@@ -94,6 +70,7 @@ function setCal(month) {
 }
 
 function drawCal(firstDay, lastDate, date, monthName, year) {
+<<<<<<< HEAD
     // constant table settings
     var headerHeight = 50 // height of the table's header cell
     var border = 2 // 3D height of table's border
@@ -136,6 +113,79 @@ function drawCal(firstDay, lastDate, date, monthName, year) {
     text += '<TR ALIGN="center" VALIGN="center">'
     for (var dayNum = 0; dayNum < 7; ++dayNum) {
         text += openCol + weekDay[dayNum] + closeCol
+=======
+  // constant table settings
+  var headerHeight = 70 // height of the table's header cell
+  var border = 2 // 3D height of table's border
+  var cellspacing = 4 // width of table's border
+  var headerColor = "#0076C6" // color of table's header
+  var headerSize = "+3" // size of tables header font
+  var colWidth = 150 // width of columns in table
+  var dayCellHeight = 25 // height of cells containing days of the week
+  var dayColor = "black" // color of font representing week days
+  var cellHeight = 100 // height of cells representing dates in the calendar
+  var todayColor = "black" // color specifying today's date in the calendar
+  var timeColor = "purple" // color of font representing current time
+
+  // create basic table structure
+  var text = "" // initialize accumulative variable to empty string
+  text += '<CENTER>'
+  text += '<TABLE BORDER=' + border + ' CELLSPACING=' + cellspacing + '>' // table settings
+  text += '<TH COLSPAN=7 HEIGHT=' + headerHeight + '>' // create table header cell
+  text += '<FONT COLOR="' + headerColor + '" SIZE=' + headerSize + '>' // set font for table header
+  text += monthName + ' ' + year
+  text += '</FONT>' // close table header's font settings
+  text += '</TH>' // close header cell
+
+  // variables to hold constant settings
+  var openCol = '<TD WIDTH=' + colWidth + ' HEIGHT=' + dayCellHeight + '>'
+  openCol += '<FONT COLOR="' + dayColor + '">'
+  var closeCol = '</FONT></TD>'
+
+  // create array of abbreviated day names
+  var weekDay = new Array(7)
+  weekDay[0] = "Sun"
+  weekDay[1] = "Mon"
+  weekDay[2] = "Tues"
+  weekDay[3] = "Wed"
+  weekDay[4] = "Thu"
+  weekDay[5] = "Fri"
+  weekDay[6] = "Sat"
+
+  // create first row of table to set column width and specify week day
+  text += '<TR ALIGN="center" VALIGN="center">'
+  for (var dayNum = 0; dayNum < 7; ++dayNum) {
+    text += openCol + weekDay[dayNum] + closeCol
+  }
+  text += '</TR>'
+
+  // declaration and initialization of two variables to help with tables
+  var digit = 1
+  var curCell = 1
+
+  for (var row = 1; row <= Math.ceil((lastDate + firstDay - 1) / 7); ++row) {
+    text += '<TR ALIGN="right" VALIGN="top">'
+    for (var col = 1; col <= 7; ++col) {
+      if (digit > lastDate)
+        break
+      if (curCell < firstDay) {
+        text += '<TD></TD>';
+        curCell++
+      } else {
+        if (digit == date) { // current cell represent today's date
+          text += '<TD HEIGHT=' + cellHeight + '>'
+          text += '<FONT COLOR="' + todayColor + '">'
+          text += digit
+          text += '</FONT><BR>'
+          text += '<FONT COLOR="' + timeColor + '" SIZE=2>'
+          text += '<CENTER>' + '</CENTER>'
+          text += '</FONT>'
+          text += '</TD>'
+        } else
+          text += '<TD HEIGHT=' + cellHeight + '>' + digit + '</TD>'
+        digit++
+      }
+>>>>>>> 2a04b6b6ee13609a0d0e91764674755dad24cb52
     }
     text += '</TR>'
 
