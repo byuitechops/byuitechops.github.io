@@ -635,6 +635,28 @@ select#drop-down {
 }
 /* --------------------------- End of Resize for Mobile -------------------------- */
 
+/* -------------------------------- Styling totals-Emma ----------------------------------*/
+
+td#col1 {
+    height: 50px;
+    text-align: left;
+}
+
+tr#totals {
+    height: 20px;
+    width: 100px;
+    text-align: right;
+}
+
+
+
+
+
+
+
+/* ----------------------------- End of Styling totals-Emma ------------------------------*/
+
+
 /* ---------------------------- Styling calendar-Emma -----------------------------*/
 
 .grayout {
@@ -648,18 +670,27 @@ th {
     text-align: center;
     font-size: 30px;
     padding: 2px 10px;
+    background-color: #0076c6;
+    color: white;
+}
+
+table {
+     
 }
 
 table,
 td {
     border: 3px solid black;
     margin-left: 28.5%;
+   
 }
 
 td {
     padding: 2px 10px;
     height: 100px;
     width: 125px;
+    text-align: right;
+    vertical-align: text-top;
 }
 
 tr#heading td {
@@ -671,9 +702,13 @@ tr#title th {
     text-align: center;
     border: 3px solid black;
     height: 60px;
+   
 }
 <<<<<<< HEAD
 /* ---------------------------- End of Styling calendar-Emma -----------------------------*/
+
+
+
 
 /* --------------------- Code added for styling modal boxes-Emma ------------------------ */
 

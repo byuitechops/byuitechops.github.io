@@ -98,6 +98,7 @@ function setCal(sMonth) {
             }
         }
     }
+    document.getElementById("title").innerHTML = monthName + " " + year;
 }
 
 function clearCal() {
@@ -111,8 +112,8 @@ function clearCal() {
         }
     }
 } //----------------- End Calendar Functions ----------------// 
-document.getElementById("title").innerHTML = monthName + " " + year;
-}
+
+
 
 
 function modalBox() {
