@@ -249,34 +249,15 @@ input[type=radio]:checked {
 
 .iframes {
     border-style: none;
-    height: 2679%;
     width: 100%;
+    height: 800px;
 }
 
 .iframing {
     margin: 0 auto;
     margin-top: 50px;
-    height: 90%;
-    width: 75%;
-    overflow-y: scroll;
     border-left: 1px solid black;
-}
-
-.iframing::-webkit-scrollbar {
-    width: 6px;
-    background-color: #F5F5F5;
-}
-
-.iframing::-webkit-scrollbar-thumb {
-    background-color: #0076c6;
-    border-radius: 10px;
-    margin-top: 10px;
-}
-
-.iframing::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    background-color: #F5F5F5;
-    border-radius: 10px;
+    width: 75%;
 }
 
 form {
@@ -285,8 +266,6 @@ form {
     padding: 1em;
     text-align: left;
 }
-
-
 
 .hide {
     display: none;
@@ -561,12 +540,11 @@ select#drop-down {
     }
 
     .iframes {
-        height: 36600px;
+        height: 100%;
     }
 
     .iframing {
-        width: 100%;
-        height: 80%;
+/*        height: 100%;*/
     }
 
     .announcementButton {

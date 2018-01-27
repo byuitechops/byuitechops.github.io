@@ -1,3 +1,8 @@
+//------------------ Connect to Firebase -----------------------//
+
+//---------------- End of Connect to Firebase ------------------//
+
+//------------------ Calendar Functions ----------------------- //
 function leapYear(year) {
     if (year % 4 == 0) // basic rule
         return true // is leap year
@@ -70,3 +75,4 @@ function setCal(sMonth) {
     // number of days in current month
     var days = getDays(sMonth, year)
 }
+//----------------- End Calendar Functions ----------------//
