@@ -74,7 +74,7 @@ function setCal(sMonth) {
 
     // number of days in current month
     var days = getDays(sMonth, year)
-<<<<<<< HEAD
+
     
     //
     document.getElementById("title").innerHTML = monthName + " " + year;
@@ -106,7 +106,5 @@ function modalBox() {
         }
     }
 }
-=======
-}
 //----------------- End Calendar Functions ----------------//
->>>>>>> 6f9418c0ede68d605eaea3442322ede885a8da4e
+
