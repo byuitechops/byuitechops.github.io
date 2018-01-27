@@ -734,7 +734,6 @@
         dbRefUsers.child(user).child('TimeClock').child('break').on('value', snap => {
             if (snap.val()) {
                 var breakkey = localStorage.getItem('breakkey');
-                console.log(breakkey);
                 if (breakkey != null) {
                     dbRefUsers.child(user).child('TimeClock').child('Breaks').child(breakkey).child('Out').on('value', snap => {
                         document.getElementById('showbreak').innerHTML = "Took Break At: " + snap.val();
