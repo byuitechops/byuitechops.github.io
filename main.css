@@ -8,6 +8,7 @@ body {
 
 h1 {
     color: #0076c6;
+    text-align: center;
 }
 
 h2 {
@@ -338,10 +339,6 @@ form {
     margin-top: 1em;
 }
 
-h1 {
-    text-align: center;
-}
-
 .tab-header {
     text-align: center;
     margin-top: 10px;
@@ -382,6 +379,7 @@ h1 {
     margin-left: 1em;
 }
 
+/* --------------------------- Announement Page ---------------- */
 .announcements {
     height: 80%;
     width: 75%;
@@ -410,6 +408,7 @@ h1 {
 .announcementButton {
     margin: 0 45%;
 }
+/* --------------------------- End of Announement Page ---------------- */
 
 /* The Modal (background) */
 
@@ -434,8 +433,7 @@ h1 {
     overflow-y: scroll;
 }
 
-/* Modal Content/Box */
-
+/* --- Modal Content ---- */
 .modal-content {
     background-color: #fefefe;
     margin: 3em auto;
@@ -448,7 +446,6 @@ h1 {
 }
 
 /* The Close Button */
-
 .close {
     color: #aaa;
     float: right;
@@ -463,8 +460,7 @@ h1 {
     cursor: pointer;
 }
 
-/* --- Module Box ---*/
-
+/* -------------------- Module Box -------------------- */
 textarea {
     width: 100%;
     margin-top: 5px;
@@ -487,6 +483,8 @@ p input[type=checkbox] {
 .modal-content form {
     border: none;
 }
+/* ---------------- End of Module Box ---------------- */
+
 /* New code added by Emma for dropdown menus*/
 
 select#drop-down {
@@ -507,9 +505,10 @@ select#drop-down {
     white-space: nowrap;
     width: 200px;
     height: 35px;
-  
+
 }
 
+/* --------------------------- Resize for Laptops -------------------------- */
 @media screen and (max-width: 1200px) {
     ul.sidenav {
         width: 100%;
@@ -544,7 +543,7 @@ select#drop-down {
     }
 
     .iframing {
-/*        height: 100%;*/
+        /*        height: 100%;*/
     }
 
     .announcementButton {
@@ -563,7 +562,6 @@ select#drop-down {
         /* Could be more or less, depending on screen size */
     }
 
-
     .dropdown-content {
         position: fixed;
         left: 0;
@@ -571,28 +569,30 @@ select#drop-down {
         width: 100%;
     }
     select#drop-down {
-    -webkit-border-radius: 13px;
-    border: 1px solid #AAA;
-    background-color: #0076c6;
-    color: white;
-    margin: 0.6em;
-    border: none;
-    cursor: pointer;
-    height: 2.5em;
-    border-radius: 1em;
-    font-size: 19px;
-    margin-left: 0px;
-    margin-right: 0px;
-    overflow: hidden;
-    padding: 5px 10px;
-    white-space: nowrap;
-    width: 200px;
-    height: 35px;
+        -webkit-border-radius: 13px;
+        border: 1px solid #AAA;
+        background-color: #0076c6;
+        color: white;
+        margin: 0.6em;
+        border: none;
+        cursor: pointer;
+        height: 2.5em;
+        border-radius: 1em;
+        font-size: 19px;
+        margin-left: 0px;
+        margin-right: 0px;
+        overflow: hidden;
+        padding: 5px 10px;
+        white-space: nowrap;
+        width: 200px;
+        height: 35px;
+
+    }
 
 }
+/* --------------------------- End of Resize for Laptops -------------------------- */
 
-}
-
+/* --------------------------- Resize for Mobile -------------------------- */
 
 @media screen and (max-width: 768px) {
     ul.sidenav {
@@ -612,28 +612,28 @@ select#drop-down {
         width: 100%;
     }
     select#drop-down {
-    -webkit-border-radius: 13px;
-    border: 1px solid #AAA;
-    background-color: #0076c6;
-    color: white;
-    margin: 0.6em;
-    border: none;
-    cursor: pointer;
-    height: 2.5em;
-    border-radius: 1em;
-    font-size: 19px;
-    margin-left: auto;
-    margin-right: auto;
-    overflow: hidden;
-    padding: 5px 10px;
-    white-space: nowrap;
-    width: 200px;
-    height: 35px;
+        -webkit-border-radius: 13px;
+        border: 1px solid #AAA;
+        background-color: #0076c6;
+        color: white;
+        margin: 0.6em;
+        border: none;
+        cursor: pointer;
+        height: 2.5em;
+        border-radius: 1em;
+        font-size: 19px;
+        margin-left: auto;
+        margin-right: auto;
+        overflow: hidden;
+        padding: 5px 10px;
+        white-space: nowrap;
+        width: 200px;
+        height: 35px;
+
+    }
 
 }
-
-}
-
+/* --------------------------- End of Resize for Mobile -------------------------- */
 
 /* Code added for styling calendar-Emma */
 
@@ -643,14 +643,15 @@ select#drop-down {
 }
 
 th {
-  /*  grid-row-start: 1;
+    /*  grid-row-start: 1;
     grid-row-end: 7; */
     text-align: center;
     font-size: 30px;
     padding: 2px 10px;
 }
 
-table, td {
+table,
+td {
     border: 3px solid black;
 }
 
@@ -659,10 +660,12 @@ td {
     height: 75px;
     width: 90px;
 }
-tr#heading td{
+
+tr#heading td {
     height: 35px;
     width: 100px;
 }
+
 tr#title th {
     text-align: center;
     border: 3px solid black;
