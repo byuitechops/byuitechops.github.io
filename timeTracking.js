@@ -52,6 +52,7 @@ function getMonthName(month) {
 
 function setCal(sMonth) {
     // standard time attributes
+    clearCal();
     var now = new Date()
     var cMonth = now.getMonth();
     var year = now.getYear();
@@ -70,9 +71,43 @@ function setCal(sMonth) {
     // create instance of first day of month, and extract the day on which it occurs
     var firstDayInstance = new Date(year, sMonth, 1)
     var firstDay = firstDayInstance.getDay()
+    if (firstDay > 0) {
+        firstDay -= 1;
+    }
     firstDayInstance = null
 
     // number of days in current month
     var days = getDays(sMonth, year)
+
+    var table = document.getElementById("table");
+    var d = 1;
+    var j = firstDay
+    for (var i = 2, row; row = table.rows[i]; i++) {
+        //iterate through rows
+        //rows would be accessed using the "row" variable assigned in the for loop
+        for (var col, j; col = row.cells[j]; j++) {
+            //iterate through columns
+            //columns would be accessed using the "col" variable assigned in the for loop
+            if (d <= days) {
+                col.innerHTML = d;
+                d++;
+            }
+            if (j == 6) {
+                j = 0;
+                break;
+            }
+        }
+    }
 }
-//----------------- End Calendar Functions ----------------//
+
+function clearCal() {
+    for (var i = 2, row; row = table.rows[i]; i++) {
+        //iterate through rows
+        //rows would be accessed using the "row" variable assigned in the for loop
+        for (var j = 0, col; col = row.cells[j]; j++) {
+            //iterate through columns
+            //columns would be accessed using the "col" variable assigned in the for loop
+            col.innerHTML = "";
+        }
+    }
+} //----------------- End Calendar Functions ----------------//
