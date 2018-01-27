@@ -110,10 +110,8 @@ function clearCal() {
             col.innerHTML = "";
         }
     }
-} //----------------- End Calendar Functions ----------------//
-    
-    //
-    document.getElementById("title").innerHTML = monthName + " " + year;
+} //----------------- End Calendar Functions ----------------// 
+document.getElementById("title").innerHTML = monthName + " " + year;
 }
 
 
@@ -129,7 +127,7 @@ function modalBox() {
 
     // Displays the modal 
     modal.style.display = "block";
-    
+
     // When the x is clicked, the box closes
     span.onclick = function () {
         modal.style.display = "none";
@@ -142,5 +140,3 @@ function modalBox() {
         }
     }
 }
-}
-//----------------- End Calendar Functions ----------------//

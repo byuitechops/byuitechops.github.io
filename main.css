@@ -379,7 +379,7 @@ form {
     margin-left: 1em;
 }
 
-/* --------------------------- Announement Page ---------------- */
+/* --------------------------- Announcement Page ---------------- */
 .announcements {
     height: 80%;
     width: 75%;
@@ -635,7 +635,7 @@ select#drop-down {
 }
 /* --------------------------- End of Resize for Mobile -------------------------- */
 
-/* Code added for styling calendar-Emma */
+/* ---------------------------- Styling calendar-Emma -----------------------------*/
 
 .grayout {
     background-color: gray;
@@ -653,12 +653,13 @@ th {
 table,
 td {
     border: 3px solid black;
+    margin-left: 28.5%;
 }
 
 td {
     padding: 2px 10px;
-    height: 75px;
-    width: 90px;
+    height: 100px;
+    width: 125px;
 }
 
 tr#heading td {
@@ -672,9 +673,9 @@ tr#title th {
     height: 60px;
 }
 <<<<<<< HEAD
+/* ---------------------------- End of Styling calendar-Emma -----------------------------*/
 
-
-/* Code added for styling modal boxes-Emma */
+/* --------------------- Code added for styling modal boxes-Emma ------------------------ */
 
 /* The Modal (background) */
 .modal {
@@ -693,10 +694,10 @@ tr#title th {
 /* Modal Content/Box */
 .modal-content {
     background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
+    margin: 15% 15% 0% 31%; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+    width: 50%; /* Could be more or less, depending on screen size */
 }
 
 /* The Close Button */
@@ -713,8 +714,7 @@ tr#title th {
     text-decoration: none;
     cursor: pointer;
 }
-
-
+/* ---------------------------- End of styling modal boxes-Emma -----------------------------*/
 
 
 
