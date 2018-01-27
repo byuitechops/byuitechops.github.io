@@ -1,5 +1,3 @@
-setCal()
-
 function leapYear(year) {
     if (year % 4 == 0) // basic rule
         return true // is leap year
@@ -47,24 +45,28 @@ function getMonthName(month) {
     return ar[month]
 }
 
-function setCal(month) {
+function setCal(sMonth) {
     // standard time attributes
     var now = new Date()
-    var year = now.getYear()
-    if (year < 1000)
+    var cMonth = now.getMonth();
+    var year = now.getYear();
+    if (year < 1000) {
         year += 1900
-    var monthName = getMonthName(month)
+    }
+    if ((cMonth - sMonth) >= 0) {
+        //year is the same
+    } else {
+        year = (year - 1);
+    }
+    var monthName = getMonthName(sMonth)
     var date = now.getDate()
     now = null
 
     // create instance of first day of month, and extract the day on which it occurs
-    var firstDayInstance = new Date(year, month, 1)
+    var firstDayInstance = new Date(year, sMonth, 1)
     var firstDay = firstDayInstance.getDay()
     firstDayInstance = null
 
     // number of days in current month
-    var days = getDays(month, year)
-
-    // call function to draw calendar
-    drawCal(firstDay + 1, days, date, monthName, year)
+    var days = getDays(sMonth, year)
 }
