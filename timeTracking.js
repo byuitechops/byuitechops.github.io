@@ -75,9 +75,16 @@ function setCal(sMonth) {
         firstDay -= 1;
     }
     firstDayInstance = null
-
+    
     // number of days in current month
     var days = getDays(sMonth, year)
+
+    // Add Extra Row if neccesary
+    if ((firstDay == 5 && days == 31) || (firstDay == 6 && days >= 30)) {
+        document.getElementById('rowsix').classList.remove('hide');
+    } else {
+        document.getElementById('rowsix').classList.add('hide');
+    }
 
     var table = document.getElementById("table");
     var d = 1;
@@ -98,6 +105,11 @@ function setCal(sMonth) {
             }
         }
     }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> bf28f80d15130a006271449eaa509651fc5dbfd2
     document.getElementById("title").innerHTML = monthName + " " + year;
 }
 
@@ -111,9 +123,13 @@ function clearCal() {
             col.innerHTML = "";
         }
     }
+
 } //----------------- End Calendar Functions ----------------// 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> bf28f80d15130a006271449eaa509651fc5dbfd2
 
 
 function modalBox() {
