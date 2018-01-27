@@ -336,12 +336,15 @@ form {
 #showclocked {
     text-align: left;
     font-size: 1em;
+    width: 50%;
+    text-align: center;
 }
 
 #showbreak {
     text-align: left;
     font-size: 1em;
-    width: 45%;
+    width: 50%;
+    text-align: center;
 }
 
 /* ---- Styles CSS --------- */
