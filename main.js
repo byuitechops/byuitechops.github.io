@@ -36,13 +36,22 @@
 
         const promise = auth.signInWithEmailAndPassword(email, pass);
         promise.then(e => {
-            loadUser();
             var profile = firebase.auth().currentUser;
             profile.providerData.forEach(function (prof) {
+                if (prof.displayName == null) {
+                   var getName = prompt('Enter your first and last name. Example: Zoe Miner');
+                    if (getName != null) {
+                        profile.updateProfile({
+                            displayName: getName
+                        });
+                    };
+                };
                 user = prof.displayName;
                 console.log(user);
                 localStorage.setItem('user', user);
             });
+            
+            loadUser();
         });
         promise.catch(e => {
             window.alert(e);
