@@ -360,6 +360,7 @@
 
     function loadUser() {
         dbRefUsers.child(user).on('value', snap => {
+            snap = snap.val();
 
             txtCode.classList.add('hide');
             submitCode.classList.add('hide');
