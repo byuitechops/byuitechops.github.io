@@ -29,9 +29,6 @@
         const pass = txtPassword.value;
         const auth = firebase.auth();
 
-        user = String(email);
-        user = user.slice(0, 8);
-        console.log(user);
         localStorage.setItem("user", user);
 
         const promise = auth.signInWithEmailAndPassword(email, pass);
@@ -39,7 +36,7 @@
             var profile = firebase.auth().currentUser;
             profile.providerData.forEach(function (prof) {
                 if (prof.displayName == null) {
-                   var getName = prompt('Enter your first and last name. Example: Zoe Miner');
+                    var getName = prompt('Enter your first and last name. Example: Zoe Miner');
                     if (getName != null) {
                         profile.updateProfile({
                             displayName: getName
@@ -50,7 +47,7 @@
                 console.log(user);
                 localStorage.setItem('user', user);
             });
-            
+
             loadUser();
         });
         promise.catch(e => {
@@ -100,10 +97,10 @@
             setUser();
             loadUser();
             var profile = firebase.auth().currentUser;
-            
+
             profile.updateProfile({
                 displayName: user
-            }).catch(function(error) {
+            }).catch(function (error) {
                 console.log(error);
             });
             document.getElementById('myModal').style.display = "none";
