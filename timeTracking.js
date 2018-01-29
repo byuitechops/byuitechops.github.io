@@ -84,11 +84,13 @@ function setCal(sMonth) {
     // Add Extra Row if neccesary
     if ((firstDay == 5 && days == 31) || (firstDay == 6 && days >= 30)) {
         document.getElementById('rowsix').classList.remove('hide');
+        document.getElementById('week6').classList.remove('hide');
     } else {
         document.getElementById('rowsix').classList.add('hide');
+        document.getElementById('week6').classList.add('hide');
     }
 
-    var table = document.getElementById("table");
+    var table = document.getElementById("t1");
     var d = 1;
     var j = firstDay
     for (var i = 2, row; row = table.rows[i]; i++) {
@@ -113,6 +115,7 @@ function setCal(sMonth) {
 }
 
 function clearCal() {
+    var table = document.getElementById('t1');
     for (var i = 2, row; row = table.rows[i]; i++) {
         //iterate through rows
         //rows would be accessed using the "row" variable assigned in the for loop

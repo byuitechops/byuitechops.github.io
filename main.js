@@ -16,7 +16,6 @@
     const btnSignup = document.getElementById('btnSignUp');
     const btnLogout = document.getElementById('btnLogout');
 
-    var user = null;
 
     document.getElementById('txtPassword').addEventListener("keyup", function (event) {
         event.preventDefault();
@@ -38,6 +37,12 @@
         const promise = auth.signInWithEmailAndPassword(email, pass);
         promise.then(e => {
             loadUser();
+            var profile = firebase.auth().currentUser;
+            profile.providerData.forEach(function (prof) {
+                user = prof.displayName;
+                console.log(user);
+                localStorage.setItem('user', user);
+            });
         });
         promise.catch(e => {
             window.alert(e);
@@ -48,21 +53,55 @@
 
 
     btnSignup.addEventListener('click', e => {
-        const email = txtEmail.value;
-        const pass = txtPassword.value;
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // Get the modal
+        var modal = document.getElementById('myModal');
+
+        modal.style.display = "block";
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    });
+
+
+    var user = null;
+    document.getElementById('submitSignUp').addEventListener('click', e => {
+        user = signUpName.value;
+        const email = signUpEmail.value;
+        const pass = signUpPassword.value;
         const auth = firebase.auth();
 
-        user = String(email);
-        user = user.slice(0, 8);
-        console.log(user);
+        user = String(user);
+
         localStorage.setItem("user", user);
 
         const promise = auth.createUserWithEmailAndPassword(email, pass);
         promise.then(e => {
             setUser();
             loadUser();
+            var profile = firebase.auth().currentUser;
+            
+            profile.updateProfile({
+                displayName: user
+            }).catch(function(error) {
+                console.log(error);
+            });
+            document.getElementById('myModal').style.display = "none";
         });
         promise.catch(e => alert(e.message));
+
+
     });
 
     btnLogout.addEventListener('click', e => {
@@ -306,13 +345,12 @@
             "canvasStyleGuide": true,
             "totStyleGuide": true
         };
+        console.log(user);
         dbRefUsers.child(user).set(data);
     }
 
     function loadUser() {
         dbRefUsers.child(user).on('value', snap => {
-            var string = JSON.stringify(snap.val(), null, 3);
-            var array = JSON.parse(string);
 
             txtCode.classList.add('hide');
             submitCode.classList.add('hide');
@@ -336,7 +374,7 @@
             document.getElementById('techTeam').setAttribute('href', "https://docs.google.com/spreadsheets/d/1mY6vvcCC7ptSYrlnoFrhwgWh4DMqGwQNdcgtjUz4f9M/edit#gid=266358356");
             document.getElementById('scriptTeam').setAttribute('href', "https://docs.google.com/spreadsheets/d/1BMVKAqfiPspOLZy4OFPHdccCWWJVtkHMrLoNobFCkTI/edit#gid=2021360543");
 
-            if (array.workDay == true) {
+            if (snap.workDay == true) {
                 var icon = document.getElementById('wd');
                 icon.setAttribute('href', "https://www.myworkday.com/byuhi/d/home.htmld#selectedWorklet=501%24162");
                 wdpic.classList.remove('locked');
@@ -350,7 +388,7 @@
                 formId.classList.remove('formLogout');
                 wdpic.classList.add('locked');
             }
-            if (array.trello == true) {
+            if (snap.trello == true) {
                 var icon = document.getElementById('trel');
                 icon.setAttribute('href', "https://trello.com/");
                 trellpic.classList.remove('locked');
@@ -364,7 +402,7 @@
                 formId.classList.remove('formLogout');
                 trellpic.classList.add('locked');
             }
-            if (array.equella == true) {
+            if (snap.equella == true) {
                 var icon = document.getElementById('equ');
                 icon.setAttribute('href', "https://content.byui.edu/access/home.do");
                 equpic.classList.remove('locked');
@@ -378,7 +416,7 @@
                 formId.classList.remove('formLogout');
                 equpic.classList.add('locked');
             }
-            if (array.teamDynamix == true) {
+            if (snap.teamDynamix == true) {
                 var icon = document.getElementById('tdy');
                 icon.setAttribute('href', "https://td.byui.edu");
                 tdypic.classList.remove('locked');
@@ -392,7 +430,7 @@
                 formId.classList.remove('formLogout');
                 tdypic.classList.add('locked');
             }
-            if (array.teamDrive == true) {
+            if (snap.teamDrive == true) {
                 var icon = document.getElementById('tdr');
                 icon.setAttribute('href', "https://drive.google.com/drive/folders/0AKiJtEpGJEXOUk9PVA");
                 tdrpic.classList.remove('locked');
@@ -406,7 +444,7 @@
                 formId.classList.remove('formLogout');
                 tdrpic.classList.add('locked');
             }
-            if (array.brightspace == true) {
+            if (snap.brightspace == true) {
                 var icon = document.getElementById('bs');
                 icon.setAttribute('href', "https://byui.brightspace.com/d2l/login?noredirect=true");
                 bspic.classList.remove('locked');
@@ -420,7 +458,7 @@
                 formId.classList.remove('formLogout');
                 bspic.classList.add('locked');
             }
-            if (array.microsoft == true) {
+            if (snap.microsoft == true) {
                 var icon = document.getElementById('micr');
                 icon.setAttribute('href', "https://www.office.com/1/?auth=2&amp;home=1&amp;from=PortalLanding&amp;client-request-id=77ffd374-bbac-4e2b-8a9d-9c1566dea2ed");
                 micrpic.classList.remove('locked');
@@ -434,7 +472,7 @@
                 formId.classList.remove('formLogout');
                 micrpic.classList.add('locked');
             }
-            if (array.canvas == true) {
+            if (snap.canvas == true) {
                 var icon = document.getElementById('can');
                 icon.setAttribute('href', "https://byui.instructure.com/login/canvas");
                 canpic.classList.remove('locked');
@@ -448,7 +486,7 @@
                 formId.classList.remove('formLogout');
                 canpic.classList.add('locked');
             }
-            if (array.employeeDirectory == true) {
+            if (snap.employeeDirectory == true) {
                 var icon = document.getElementById('ed');
                 icon.setAttribute('href', "https://web.byui.edu/directory/employees/");
                 edpic.classList.remove('locked');
@@ -462,7 +500,7 @@
                 formId.classList.remove('formLogout');
                 edpic.classList.add('locked');
             }
-            if (array.microsoftTeams == true) {
+            if (snap.microsoftTeams == true) {
                 var icon = document.getElementById('mteam');
                 icon.setAttribute('href', "https://teams.microsoft.com/start");
                 mteampic.classList.remove('locked');
@@ -476,7 +514,7 @@
                 formId.classList.remove('formLogout');
                 mteampic.classList.add('locked');
             }
-            if (array.proDev == true) {
+            if (snap.proDev == true) {
                 var icon = document.getElementById('pd');
                 icon.setAttribute('href', "https://docs.google.com/spreadsheets/u/1/d/15j8TFY49aBn2eC_-yqffvNEQOiw6wK4pfRf7CE-OTu8/edit?usp=drive_web");
                 pdpic.classList.remove('locked');
@@ -490,7 +528,7 @@
                 formId.classList.remove('formLogout');
                 pdpic.classList.add('locked');
             }
-            if (array.pathway == true) {
+            if (snap.pathway == true) {
                 var icon = document.getElementById('path');
                 icon.setAttribute('href', "https://pathway.brightspace.com/d2l/login?noredirect=true");
                 pathpic.classList.remove('locked');
@@ -504,7 +542,7 @@
                 formId.classList.remove('formLogout');
                 pathpic.classList.add('locked');
             }
-            if (array.screenSteps == true) {
+            if (snap.screenSteps == true) {
                 var icon = document.getElementById('ss');
                 icon.setAttribute('href', "https://byu-idaho.screenstepslive.com/admin/v2/sites/18626/manuals/70917/chapters/225697/articles");
                 sspic.classList.remove('locked');
@@ -518,7 +556,7 @@
                 formId.classList.remove('formLogout');
                 sspic.classList.add('locked');
             }
-            if (array.firebaseConsole == true) {
+            if (snap.firebaseConsole == true) {
                 var icon = document.getElementById('fb');
                 icon.setAttribute('href', "https://console.firebase.google.com/");
                 fbpic.classList.remove('locked');
@@ -532,7 +570,7 @@
                 formId.classList.remove('formLogout');
                 fbpic.classList.add('locked');
             }
-            if (array.canvasStyleGuide == true) {
+            if (snap.canvasStyleGuide == true) {
                 var icon = document.getElementById('csg');
                 icon.setAttribute('href', "https://canvas.instructure.com/styleguide");
                 csgpic.classList.remove('locked');
@@ -546,7 +584,7 @@
                 formId.classList.remove('formLogout');
                 csgpic.classList.add('locked');
             }
-            if (array.totStyleGuide == true) {
+            if (snap.totStyleGuide == true) {
                 var icon = document.getElementById('tsg');
                 icon.setAttribute('href', "https://byui.instructure.com/courses/78/pages/web-features?module_item_id=12334");
                 tsgpic.classList.remove('locked');
@@ -678,7 +716,8 @@
                 checkOutBtn.classList.remove('hide');
                 checkInBtn.classList.add('hide');
                 var timekey = localStorage.getItem('timekey');
-                if (timekey != null) { dbRefUsers.child(user).child('TimeClock').child('HoursWorked').child(timekey).child('In').on('value', snap => {
+                if (timekey != null) {
+                    dbRefUsers.child(user).child('TimeClock').child('HoursWorked').child(timekey).child('In').on('value', snap => {
                         document.getElementById('showclocked').innerHTML = "Clocked In At: " + snap.val();
                     });
                 };
