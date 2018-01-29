@@ -41,13 +41,13 @@
             <div class="col-10">
                 <h1 style="text-align: center">Time Tracking</h1>
                 <select id="drop-down" id="team-dropdown">
-                   <option value="" selected disabled hidden>Team</option>
+                   <option value="" selected disabled hidden>TEAM</option>
                    <option value="canvas">Canvas Team</option>
                    <option value="tech">Tech Team</option>
                    <option value="transcript">Transcript Team</option>
                 </select>
                 <select id="drop-down" id="month-dropdown" onChange="setCal(this.value)">
-                    <option value="" selected disabled hidden>Month</option>
+                    <option value="" selected disabled hidden>MONTH</option>
                     <option value="0">January</option>
                     <option value="1">February</option>
                     <option value="2">March</option>
@@ -62,7 +62,7 @@
                     <option value="11">December</option>
                 </select>
                 <select id="drop-down" id="name-dropdown">
-                   <option value="" selected disabled hidden>Name</option>
+                   <option value="" selected disabled hidden>NAME</option>
                      <option value="name1">Alexander George Hamilton</option> 
                      <option value="name2">Emma Fisher</option> 
                      <option value="name3">My name is really really really really long</option> 
@@ -76,7 +76,7 @@
 
             </div>
         </div>
-        <table id="table">
+        <table id="t1">
             <tr>
                 <th colspan="7" id="title">Month Year</th>
             </tr>
@@ -157,40 +157,39 @@
             </div>
 
         </div>
-        <table>
+        <table id="t2">
             <tr>
-                <th colspan = "2">Totals:</th>
+                <th colspan="2">Totals:</th>
             </tr>
-            <tr id="totals">
-                <td id = "col1">Week 1: </td>
-                <td>1</td>
+            <tr>
+                <td id="week">Week 1: </td>
+                <td id="totals"></td>
             </tr>
-            <tr id="totals">
-                <td id = "col1">Week 2: </td>
-                <td>45</td>
+            <tr>
+                <td id="week">Week 2: </td>
+                <td id="totals"></td>
             </tr>
-            <tr id="totals">
-                <td id = "col1">Week 3: </td>
-                <td></td>
+            <tr>
+                <td id="week">Week 3: </td>
+                <td id="totals"></td>
             </tr>
-            <tr id="totals">
-                <td id = "col1">Week 4: </td>
-                <td></td>
+            <tr>
+                <td id="week">Week 4: </td>
+                <td id="totals"></td>
             </tr>
-            <tr id="totals">
-                <td id = "col1">Week 5: </td>
-                <td></td>
+            <tr>
+                <td id="week">Week 5: </td>
+                <td id="totals"></td>
             </tr>
-            <tr id="totals">
-                <td id = "col1">Week 6: </td>
-                <td></td>
+            <tr>
+                <td id="week">Week 6: </td>
+                <td id="totals"></td>
+            </tr>
+            <tr>
+                <td id="monthly">Monthly Total:</td>
+                <td id="totals"></td>
             </tr>
         </table>
-        <div class="content" id="pagetime">
-            <h4>Weekly Totals: <br></h4>
-            <p>Week 1: <br> Week 2: <br> Week 3: <br> Week 4: <br> Week 5: </p>
-            <h4>Monthly Total: </h4>
-        </div>
     </div>
 </body>
 

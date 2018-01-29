@@ -50,6 +50,8 @@ function getMonthName(month) {
     return ar[month]
 }
 
+
+
 function setCal(sMonth) {
     // standard time attributes
     clearCal();
@@ -75,7 +77,7 @@ function setCal(sMonth) {
         firstDay -= 1;
     }
     firstDayInstance = null
-    
+
     // number of days in current month
     var days = getDays(sMonth, year)
 
@@ -105,11 +107,8 @@ function setCal(sMonth) {
             }
         }
     }
-<<<<<<< HEAD
-=======
 
 
->>>>>>> bf28f80d15130a006271449eaa509651fc5dbfd2
     document.getElementById("title").innerHTML = monthName + " " + year;
 }
 
@@ -124,12 +123,9 @@ function clearCal() {
         }
     }
 
-} //----------------- End Calendar Functions ----------------// 
-<<<<<<< HEAD
+}
+//----------------- End Calendar Functions ----------------// 
 
-
-=======
->>>>>>> bf28f80d15130a006271449eaa509651fc5dbfd2
 
 
 function modalBox() {

@@ -637,27 +637,42 @@ select#drop-down {
 
 /* -------------------------------- Styling totals-Emma ----------------------------------*/
 
-td#col1 {
-    height: 50px;
+table#t2 {
+    margin-top: 8.27%;
+}
+
+td#week {
+    height: 35px;
+    width: 100px;
+    text-align: left;
+    vertical-align: bottom;
+}
+
+td#totals {
+    height: 20px;
+    width: 40px;
+    text-align: right;
+    vertical-align: bottom
+}
+
+td#monthly {
+    font-size: 20px;
+    font-weight: bold;
+    height: 35px;
+    width: 100px;
     text-align: left;
 }
-
-tr#totals {
-    height: 20px;
-    width: 100px;
-    text-align: right;
-}
-
-
-
-
-
 
 
 /* ----------------------------- End of Styling totals-Emma ------------------------------*/
 
 
 /* ---------------------------- Styling calendar-Emma -----------------------------*/
+
+table#t1 {
+    float: left;
+    margin-right:0;
+}
 
 .grayout {
     background-color: gray;
@@ -674,9 +689,6 @@ th {
     color: white;
 }
 
-table {
-     
-}
 
 table,
 td {
