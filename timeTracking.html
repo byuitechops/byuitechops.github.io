@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Time Tracking</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="main.css">
+    <!--<script type="text/javascript" src = "timeTracking.js"></script>-->
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-2">
+            <ul class="sidenav">
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+                <li>
+                    <a href="announcements.html">Announcements</a>
+                </li>
+                <li>
+                    <a href="videoTimeCalculator.html">Time Calculator</a>
+                </li>
+                <li>
+                    <a class="active" href="timeTracking.html">Time Tracking</a>
+                </li>
+                <li>
+                    <a href="employeehandbook.html">Employee Handbook</a>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">Schedules</a>
+                    <div class="dropdown-content">
+                        <a href="https://docs.google.com/spreadsheets/d/1ge7AlgKH_0nkvmbZ_BxWiP6WfAg2rynA1ccXMFei22k/edit#gid=1630866338" target="_blank">Canvas Team</a>
+                        <a href="https://docs.google.com/spreadsheets/d/1mY6vvcCC7ptSYrlnoFrhwgWh4DMqGwQNdcgtjUz4f9M/edit#gid=266358356" target="_blank">Tech Team</a>
+                        <a href="https://docs.google.com/spreadsheets/d/1BMVKAqfiPspOLZy4OFPHdccCWWJVtkHMrLoNobFCkTI/edit#gid=2021360543" target="_blank">Transcript Team</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="content" id="pagetime">
+            <div class="col-10">
+                <h1 style="text-align: center">Time Tracking</h1>
+                <select id="drop-down" id="team-dropdown">
+                   <option value="" selected disabled hidden>TEAM</option>
+                   <option value="canvas">Canvas Team</option>
+                   <option value="tech">Tech Team</option>
+                   <option value="transcript">Transcript Team</option>
+                </select>
+                <select id="drop-down" id="month-dropdown" onChange="setCal(this.value)">
+                    <option value="" selected disabled hidden>MONTH</option>
+                    <option value="0">January</option>
+                    <option value="1">February</option>
+                    <option value="2">March</option>
+                    <option value="3">April</option>
+                    <option value="4">May</option>
+                    <option value="5">June</option> 
+                    <option value="6">July</option>
+                    <option value="7">August</option>
+                    <option value="8">September</option>
+                    <option value="9">October</option>
+                    <option value="10">November</option>
+                    <option value="11">December</option>
+                </select>
+                <select id="drop-down" id="name-dropdown">
+                   <option value="" selected disabled hidden>NAME</option>
+                     <option value="name1">Alexander George Hamilton</option> 
+                     <option value="name2">Emma Fisher</option> 
+                     <option value="name3">My name is really really really really long</option> 
+                     <option value="name3">Mine is short</option> 
+                </select>
+                <script type="text/javascript" src="timeTracking.js"></script>
+                <br>
+                <br>
+                <br>
+
+
+            </div>
+        </div>
+        <table id="t1">
+            <tr>
+                <th colspan="7" id="title">Month Year</th>
+            </tr>
+            <tr id="heading">
+                <td>Mon</td>
+                <td>Tues</td>
+                <td>Wed</td>
+                <td>Thurs</td>
+                <td>Fri</td>
+                <td>Sat</td>
+                <td class="grayout">Sun</td>
+            </tr>
+            <tr>
+                <td onclick="modalBox()"></td>
+                <td onclick="modalBox()"></td>
+                <td onclick="modalBox()"></td>
+                <td onclick="modalBox()"></td>
+                <td onclick="modalBox()"></td>
+                <td onclick="modalBox()"></td>
+                <td class="grayout"></td>
+            </tr>
+            <tr>
+                <td onclick="modalBox()"></td>
+                <td onclick="modalBox()"></td>
+                <td onclick="modalBox()"></td>
+                <td onclick="modalBox()"></td>
+                <td onclick="modalBox()"></td>
+                <td onclick="modalBox()"></td>
+                <td class="grayout"></td>
+            </tr>
+            <tr>
+                <td onclick="modalBox()"></td>
+                <td onclick="modalBox()"></td>
+                <td onclick="modalBox()"></td>
+                <td onclick="modalBox()"></td>
+                <td onclick="modalBox()"></td>
+                <td onclick="modalBox()"></td>
+                <td class="grayout"></td>
+            </tr>
+            <tr>
+                <td onclick="modalBox()"></td>
+                <td onclick="modalBox()"></td>
+                <td onclick="modalBox()"></td>
+                <td onclick="modalBox()"></td>
+                <td onclick="modalBox()"></td>
+                <td onclick="modalBox()"></td>
+                <td class="grayout"></td>
+            </tr>
+            <tr>
+                <td onclick="modalBox()"></td>
+                <td onclick="modalBox()"></td>
+                <td onclick="modalBox()"></td>
+                <td onclick="modalBox()"></td>
+                <td onclick="modalBox()"></td>
+                <td onclick="modalBox()"></td>
+                <td class="grayout"></td>
+            </tr>
+            <tr id="rowsix" class="hide">
+                <td onclick="modalBox()"></td>
+                <td onclick="modalBox()"></td>
+                <td onclick="modalBox()"></td>
+                <td onclick="modalBox()"></td>
+                <td onclick="modalBox()"></td>
+                <td onclick="modalBox()"></td>
+                <td class="grayout"></td>
+            </tr>
+        </table>
+        <br>
+        <br>
+
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>Some text in the Modal..</p>
+            </div>
+
+        </div>
+        <table id="t2">
+            <tr>
+                <th colspan="2">Totals:</th>
+            </tr>
+            <tr>
+                <td id="week">Week 1: </td>
+                <td id="totals"></td>
+            </tr>
+            <tr>
+                <td id="week">Week 2: </td>
+                <td id="totals"></td>
+            </tr>
+            <tr>
+                <td id="week">Week 3: </td>
+                <td id="totals"></td>
+            </tr>
+            <tr>
+                <td id="week">Week 4: </td>
+                <td id="totals"></td>
+            </tr>
+            <tr>
+                <td id="week">Week 5: </td>
+                <td id="totals"></td>
+            </tr>
+            <tr id="week6" class="hide">
+                <td id="week">Week 6: </td>
+                <td id="totals"></td>
+            </tr>
+            <tr>
+                <td id="monthly">Monthly Total:</td>
+                <td id="totals"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

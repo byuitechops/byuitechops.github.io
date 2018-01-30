@@ -2,7 +2,7 @@
 
 <head>
     <meta name="viewport" charset="UTF-8" http-equiv="X-UA-Compatible">
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.gif">
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.gif">
     <title>
         Technical Operations Portal
     </title>
@@ -40,8 +40,8 @@
                 </li>
             </ul>
         </div>
-        <div class="col-10">
-            <div class="content">
+        <div class="content">
+            <div class="col-10">
                 <!-- ~~~~~~~~~~~~~~~ TITLE ~~~~~~~~~~~~~~~ -->
                 <h1>BYUI Technical Operations Team Portal</h1>
                 <!--                                               -->
@@ -59,8 +59,26 @@
 
                     <button id="btnLogin" type="submit">Login</button>
 
+                    <!-- Trigger/Open The Modal -->
                     <button id="btnSignUp">Sign Up</button>
-                    
+
+                    <!-- The Modal -->
+                    <div id="myModal" class="modal">
+
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            
+                            <input id="signUpName" placeholder="Full Name">
+                            
+                            <input id="signUpEmail" placeholder="Email">
+
+                            <input id="signUpPassword" type="password" placeholder="Password">
+                            <button type="submit" id="submitSignUp">Submit</button>
+                        </div>
+
+                    </div>
+
                     <button id="resetPassword">Reset Password</button>
 
                     <button id="submitCode" class="hide">Enter Code</button>
@@ -70,6 +88,7 @@
                     <button id="breakOut" class="hide">Take a Break</button>
                     <button id="breakIn" class="hide">Return From Break</button>
                     <p id="showclocked"></p>
+                    <p id="showbreak"></p>
                     <textarea id="comment" class="hide" placeholder="Use this box to explain why you are late or why you are leaving early."></textarea>
                 </div>
 
@@ -80,83 +99,83 @@
                     <div class="flex-container">
                         <!-- ICON 1 -->
                         <div>
-                            <a id="wd" target="_blank" rel="noopener noreferrer"> <img alt="Workday" width="150" height="150" id="wdpic" class="icontab locked" src="WorkdayLogo.png" />
+                            <a id="wd" target="_blank" rel="noopener noreferrer"> <img alt="Workday" width="150" height="150" id="wdpic" class="icontab locked" src="images/WorkdayLogo.png" />
                         <p class="tab-header">Workday</p>
                     </a>
                         </div>
                         <!-- ICON 2 -->
                         <div>
-                            <a id="trel" target="_blank" rel="noopener noreferrer"> <img alt="" width="150" height="150" id="trellpic" class="icontab locked" src="trellologo.png" /> </a>
+                            <a id="trel" target="_blank" rel="noopener noreferrer"> <img alt="" width="150" height="150" id="trellpic" class="icontab locked" src="images/trellologo.png" /> </a>
                             <p class="tab-header">Trello</p>
                         </div>
                         <!-- ICON 3 -->
                         <div>
-                            <a id="equ" target="_blank" rel="noopener noreferrer"> <img alt="Equella" width="150" height="150" id="equpic" class="icontab locked" src="EquellaLogo.png" /> </a>
+                            <a id="equ" target="_blank" rel="noopener noreferrer"> <img alt="Equella" width="150" height="150" id="equpic" class="icontab locked" src="images/EquellaLogo.png" /> </a>
                             <p class="tab-header">Equella</p>
                         </div>
                         <!-- ICON 4 -->
                         <div>
-                            <a id="tdy" target="_blank" rel="noopener noreferrer"> <img alt="TeamDynamix" width="150" height="150" id="tdypic" class="icontab locked" src="TDLogo.png" /> </a>
+                            <a id="tdy" target="_blank" rel="noopener noreferrer"> <img alt="TeamDynamix" width="150" height="150" id="tdypic" class="icontab locked" src="images/TDLogo.png" /> </a>
                             <p class="tab-header">TeamDynamix</p>
                         </div>
                         <!-- ICON 5 -->
                         <div>
-                            <a id="tdr" target="_blank" rel="noopener noreferrer"> <img alt="Google Team Drive" width="150" height="150" id="tdrpic" class="icontab locked" src="googledrivelogo.png" /> </a>
+                            <a id="tdr" target="_blank" rel="noopener noreferrer"> <img alt="Google Team Drive" width="150" height="150" id="tdrpic" class="icontab locked" src="images/googledrivelogo.png" /> </a>
                             <p class="tab-header">Google Team Drive</p>
                         </div>
                         <!-- ICON 6 -->
                         <div>
-                            <a id="micr" target="_blank" rel="noopener noreferrer"> <img alt="Microsoft 365" width="150" height="150" id="micrpic" class="icontab locked" src="microsoftdrivelogo.png" /></a>
+                            <a id="micr" target="_blank" rel="noopener noreferrer"> <img alt="Microsoft 365" width="150" height="150" id="micrpic" class="icontab locked" src="images/microsoftdrivelogo.png" /></a>
                             <p class="tab-header">Microsoft 365</p>
                         </div>
                         <!-- ICON 7 -->
                         <div>
-                            <a id="bs" target="_blank" rel="noopener noreferrer"> <img alt="Brightspace" width="150" height="150" id="bspic" class="icontab locked" src="BrightspaceLogo.png" /> </a>
+                            <a id="bs" target="_blank" rel="noopener noreferrer"> <img alt="Brightspace" width="150" height="150" id="bspic" class="icontab locked" src="images/BrightspaceLogo.png" /> </a>
                             <p class="tab-header">Brightspace</p>
                         </div>
                         <!-- ICON 10 -->
                         <div>
-                            <a id="can" target="_blank" rel="noopener noreferrer"> <img alt="DTOM" width="150" height="150" id="canpic" class="icontab locked" src="dtom.png" /> </a>
+                            <a id="can" target="_blank" rel="noopener noreferrer"> <img alt="DTOM" width="150" height="150" id="canpic" class="icontab locked" src="images/dtom.png" /> </a>
                             <p class="tab-header">Canvas</p>
                         </div>
                         <!-- ICON 11 -->
                         <div>
-                            <a id="ed" target="_blank" rel="noopener noreferrer"> <img alt="Equella" width="150" height="150" id="edpic" class="icontab locked" src="employeeLogo.png" /> </a>
+                            <a id="ed" target="_blank" rel="noopener noreferrer"> <img alt="Equella" width="150" height="150" id="edpic" class="icontab locked" src="images/employeeLogo.png" /> </a>
                             <p class="tab-header">Employee Directory</p>
                         </div>
                         <!-- ICON 12 -->
                         <div>
-                            <a id="mteam" target="_blank" rel="noopener noreferrer"> <img alt="Microsoft Teams" width="150" height="150" id="mteampic" class="icontab locked" src="teamLogo.png" /> </a>
+                            <a id="mteam" target="_blank" rel="noopener noreferrer"> <img alt="Microsoft Teams" width="150" height="150" id="mteampic" class="icontab locked" src="images/teamLogo.png" /> </a>
                             <p class="tab-header">Microsoft Teams</p>
                         </div>
                         <!-- ICON 13 -->
                         <div>
-                            <a id="pd" target="_blank" rel="noopener noreferrer"> <img alt="Professional Development" width="150" height="150" id="pdpic" class="icontab locked" src="pdicon.png" /> </a>
+                            <a id="pd" target="_blank" rel="noopener noreferrer"> <img alt="Professional Development" width="150" height="150" id="pdpic" class="icontab locked" src="images/pdicon.png" /> </a>
                             <p class="tab-header">Prof Dev</p>
                         </div>
                         <!-- ICON 14 -->
                         <div>
-                            <a id="path" target="_blank" rel="noopener noreferrer"> <img alt="Pathway" width="150" height="150" id="pathpic" class="icontab locked" src="pathway.png" /> </a>
+                            <a id="path" target="_blank" rel="noopener noreferrer"> <img alt="Pathway" width="150" height="150" id="pathpic" class="icontab locked" src="images/pathway.png" /> </a>
                             <p class="tab-header">Pathway</p>
                         </div>
                         <!-- ICON 15 -->
                         <div>
-                            <a id="ss" target="_blank" rel="noopener noreferrer"> <img alt="Screen Steps" width="150" height="150" id="sspic" class="icontab locked" src="steps.png" /> </a>
+                            <a id="ss" target="_blank" rel="noopener noreferrer"> <img alt="Screen Steps" width="150" height="150" id="sspic" class="icontab locked" src="images/steps.png" /> </a>
                             <p class="tab-header">Screen Steps</p>
                         </div>
                         <!-- ICON 16 -->
                         <div>
-                            <a id="fb" target="_blank" rel="noopener noreferrer"> <img alt="Firebase" width="150" height="150" id="fbpic" class="icontab locked" src="firebaseicon.png" /> </a>
+                            <a id="fb" target="_blank" rel="noopener noreferrer"> <img alt="Firebase" width="150" height="150" id="fbpic" class="icontab locked" src="images/firebaseicon.png" /> </a>
                             <p class="tab-header">Firebase</p>
                         </div>
                         <!-- ICON 17 -->
                         <div>
-                            <a id="csg" target="_blank" rel="noopener noreferrer"> <img alt="Canvas Style Guide" width="150" height="150" id="csgpic" class="icontab locked" src="canvasstyleguide.png" /> </a>
+                            <a id="csg" target="_blank" rel="noopener noreferrer"> <img alt="Canvas Style Guide" width="150" height="150" id="csgpic" class="icontab locked" src="images/canvasstyleguide.png" /> </a>
                             <p class="tab-header">Canvas Style Guide</p>
                         </div>
                         <!-- ICON 18 -->
                         <div>
-                            <a id="tsg" target="_blank" rel="noopener noreferrer"> <img alt="Tech Ops Style Guide" width="150" height="150" id="tsgpic" class="icontab locked" src="totstyleguide.png" /> </a>
+                            <a id="tsg" target="_blank" rel="noopener noreferrer"> <img alt="Tech Ops Style Guide" width="150" height="150" id="tsgpic" class="icontab locked" src="images/totstyleguide.png" /> </a>
                             <p class="tab-header">TOT Style Guide</p>
                         </div>
                     </div>
