@@ -751,9 +751,9 @@
             break: true
         };
         dbRefUsers.child(user).child('TimeClock').update(breakdata);
-        isBreak();
         ref.child(date).update(data);
         localStorage.setItem('breakkey', date);
+        isBreak();
     });
 
     document.getElementById('breakIn').addEventListener('click', e => {
@@ -768,9 +768,9 @@
             break: false
         };
         dbRefUsers.child(user).child('TimeClock').update(breakdata);
-        isBreak();
         ref.child(date).update(data);
         localStorage.removeItem('breakkey');
+        isBreak();
     });
 
     function isBreak() {
