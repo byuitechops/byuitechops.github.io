@@ -638,7 +638,9 @@ select#drop-down {
 /* -------------------------------- Styling totals-Emma ----------------------------------*/
 
 table#t2 {
-    margin-top: 8.27%;
+    padding-left: 0;
+    margin: 10px;
+    margin-top: 9.5%;
 }
 
 td#week {
@@ -671,7 +673,7 @@ td#monthly {
 
 table#t1 {
     float: left;
-    margin-right:0;
+    margin-bottom: 5%;
 }
 
 .grayout {
@@ -691,9 +693,11 @@ th {
 
 
 table,
-td {
+td{
     border: 3px solid black;
     margin-left: 28.5%;
+    
+
    
 }
 
@@ -703,6 +707,7 @@ td {
     width: 125px;
     text-align: right;
     vertical-align: text-top;
+
 }
 
 tr#heading td {
@@ -716,9 +721,8 @@ tr#title th {
     height: 60px;
    
 }
-<<<<<<< HEAD
-/* ---------------------------- End of Styling calendar-Emma -----------------------------*/
 
+/* ---------------------------- End of Styling calendar-Emma -----------------------------*/
 
 
 
@@ -762,11 +766,3 @@ tr#title th {
     cursor: pointer;
 }
 /* ---------------------------- End of styling modal boxes-Emma -----------------------------*/
-
-
-
-
-
-
-=======
->>>>>>> 6f9418c0ede68d605eaea3442322ede885a8da4e

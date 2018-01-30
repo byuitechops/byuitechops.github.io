@@ -1,5 +1,18 @@
 //------------------ Connect to Firebase -----------------------//
 
+//const config = {
+//    apiKey: "AIzaSyA_I75-CU5_GlNP1QSKvvH8nbYVkaAUgNA",
+//    authDomain: "techopsportal.firebaseapp.com",
+//    databaseURL: "https://techopsportal.firebaseio.com",
+//    projectId: "techopsportal",
+//    storageBucket: "techopsportal.appspot.com",
+//    messagingSenderId: "265124430634"
+//};
+//firebase.initializeApp(config);
+//
+//firebase.database().ref().child('users').on('value', snap => {
+//            var codes = (snap.val());
+
 //---------------- End of Connect to Firebase ------------------//
 
 //------------------ Calendar Functions ----------------------- //
@@ -88,10 +101,10 @@ function setCal(sMonth) {
         document.getElementById('rowsix').classList.add('hide');
     }
 
-    var table = document.getElementById("table");
+    var t1 = document.getElementById("t1");
     var d = 1;
     var j = firstDay
-    for (var i = 2, row; row = table.rows[i]; i++) {
+    for (var i = 2, row; row = t1.rows[i]; i++) {
         //iterate through rows
         //rows would be accessed using the "row" variable assigned in the for loop
         for (var col, j; col = row.cells[j]; j++) {
@@ -113,7 +126,7 @@ function setCal(sMonth) {
 }
 
 function clearCal() {
-    for (var i = 2, row; row = table.rows[i]; i++) {
+    for (var i = 2, row; row = t1.rows[i]; i++) {
         //iterate through rows
         //rows would be accessed using the "row" variable assigned in the for loop
         for (var j = 0, col; col = row.cells[j]; j++) {
