@@ -43,7 +43,7 @@
         <div class="content" id="pagetime">
             <div class="col-10">
                 <h1 style="text-align: center">Time Tracking</h1>
-                <select id="drop-down" id="team-dropdown">
+                <select class="drop-down" id="team-dropdown">
                    <option value="" selected disabled hidden>TEAM</option>
                    <option value="canvas">Canvas Team</option>
                    <option value="tech">Tech Team</option>
@@ -64,18 +64,14 @@
                     <option value="11">November</option>
                     <option value="12">December</option>
                 </select>
-                <select id="drop-down" id="name-dropdown">
+                <select class="drop-down" id="name-dropdown" onChange="selectName(this.value)">
                    <option value="" selected disabled hidden>NAME</option>
                      <option value="name1">Alexander George Hamilton</option> 
-                     <option value="name2">Emma Fisher</option> 
-                     <option value="name3">My name is really really really really long</option> 
-                     <option value="name3">Mine is short</option> 
                 </select>
                 <script type="text/javascript" src="timeTracking.js"></script>
                 <br>
                 <br>
                 <br>
-
 
             </div>
         </div>
@@ -159,6 +155,7 @@
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <p id="modalText">No time logged</p>
+                <p id="breakText">No breaks logged</p>
             </div>
 
         </div>

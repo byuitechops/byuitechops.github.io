@@ -11,8 +11,10 @@ firebase.initializeApp(config);
 
 
 function showModal(num) {
-    var ppl = firebase.database().ref('users/Cal Wilson/TimeClock/HoursWorked').once('value');
+    var user = firebase.auth().currentUser;
+    var ppl = firebase.database().ref('users/' + user.displayName + '/TimeClock/HoursWorked').once('value');
     ppl.then(function (snapshot) {
+
         var person = (snapshot.val());
         var dates = Object.keys(person);
         var monthDays = [];
@@ -53,9 +55,53 @@ function showModal(num) {
         }
 
         count = 0;
-        //        for (var i = 1; i < 31 i++) {
-        //            if (document.getElementById(i).value = currentMonth[count])
-        //        }
+
+
+    });
+    ppl.catch(function (error) {
+        alert(error);
+        return;
+    });
+
+    var breaks = firebase.database().ref('users/' + user.displayName + '/TimeClock/Breaks').once('value');
+    breaks.then(function (snapshot) {
+        var person = (snapshot.val());
+
+        var dates = Object.keys(person);
+        var monthDays = [];
+        var currentMonth = [];
+        var count = 0;
+        for (var i = 0; i < dates.length; i++) {
+            if (document.getElementById("month-dropdown").value == dates[i][0]) {
+                currentMonth[count] = dates[i];
+                var firstDash = currentMonth[count].indexOf("-");
+                var lastDash = currentMonth[count].lastIndexOf("-");
+                monthDays[count] = currentMonth[count].slice(firstDash + 1, lastDash);
+                count++;
+            }
+        }
+        var check = false;
+        var txt = "";
+        for (var i = 0; i < monthDays.length; i++) {
+            if (num == monthDays[i]) {
+                if (person[currentMonth[i]].Out == "") {
+                    person[currentMonth[i]].Out = "N/A";
+                }
+                if (person[currentMonth[i]].In == "") {
+                    person[currentMonth[i]].In = "N/A";
+                }
+                txt += "<br />Break In: " + person[currentMonth[i]].In + "<br />";
+                txt += "Break Out: " + person[currentMonth[i]].Out + "<br />";
+                document.getElementById("breakText").innerHTML = txt;
+                check = true;
+                break;
+            }
+        }
+        if (!check) {
+            document.getElementById("breakText").innerHTML = "No breaks logged";
+        }
+
+        count = 0;
 
     });
     ppl.catch(function (error) {
@@ -237,4 +283,26 @@ function modalBox(number) {
             modal.style.display = "none";
         }
     }
+}
+
+function selectName() {
+    var user;
+    var ppl = firebase.database().ref('users/' + user + '/TimeClock/HoursWorked').once('value');
+    ppl.then(function (snapshot) {
+        name = user;
+        for (name in ppl) {
+            var opt = document.createElement("option");
+            opt.value = index;
+            opt.innerHTML = element;
+
+            newSelect.appendChild(opt);
+            index++;
+            var sel = document.getElementById("name-dropdown");
+
+            select.options[select.options.length] = new Option(name, 'name[name]')
+        }
+    });
+    var sel = document.getElementById("name-dropdown");
+
+    select.options[select.options.length] = new Option(name, 'name[name]')
 }
