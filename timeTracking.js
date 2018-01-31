@@ -163,6 +163,14 @@ function getMonthName(month) {
     return ar[month]
 }
 
+function selectTeam() {
+    var user = firebase.auth().currentUser;
+    var Admin = firebase.database().ref('users/' + user + '/Admin').once('value');
+
+    if (Admin = true) {
+        document.getElementById("team-dropdown").classList.add('hide')
+    }
+}
 
 
 function setCal(sMonth) {
@@ -255,7 +263,7 @@ function clearCal() {
 }
 //----------------- End Calendar Functions ----------------// 
 
-
+//----------------- Start of Modal Boxes Function ----------------// 
 
 function modalBox(number) {
     // Get the modal
@@ -285,24 +293,89 @@ function modalBox(number) {
     }
 }
 
-function selectName() {
-    var user;
-    var ppl = firebase.database().ref('users/' + user + '/TimeClock/HoursWorked').once('value');
-    ppl.then(function (snapshot) {
-        name = user;
-        for (name in ppl) {
-            var opt = document.createElement("option");
-            opt.value = index;
-            opt.innerHTML = element;
+//----------------- End of Modal Boxes Function ----------------// 
 
-            newSelect.appendChild(opt);
-            index++;
-            var sel = document.getElementById("name-dropdown");
 
-            select.options[select.options.length] = new Option(name, 'name[name]')
-        }
-    });
-    var sel = document.getElementById("name-dropdown");
+//----All the code I've been using to try to get the name select tag to display names from firebase----//
+//---------------------------------I would love some guidance on this----------------------------------//
 
-    select.options[select.options.length] = new Option(name, 'name[name]')
-}
+//function selectName() {
+//    admin.auth().getUser(uid)
+//        .then(function (userRecord) {
+//            // See the UserRecord reference doc for the contents of userRecord.
+//            console.log("Successfully fetched user data:", userRecord.toJSON());
+//        })
+//        .catch(function (error) {
+//            console.log("Error fetching user data:", error);
+//        });
+//}
+
+//function listAllUsers(nextPageToken) {
+//  // List batch of users, 1000 at a time.
+//  admin.auth().listUsers(1000, nextPageToken)
+//    .then(function(listUsersResult) {
+//      listUsersResult.users.forEach(function(userRecord) {
+//        console.log("user", userRecord.toJSON());
+//      });
+//      if (listUsersResult.pageToken) {
+//        // List next batch of users.
+//        listAllUsers(listUsersResult.pageToken)
+//      }
+//    })
+//    .catch(function(error) {
+//      console.log("Error listing users:", error);
+//    });
+//}
+//// Start listing users from the beginning, 1000 at a time.
+//listAllUsers();
+
+
+//function selectName() {
+//    var user = firebase.auth().currentUser;
+//    var names = firebase.database().ref('users/Emma Fisher').orderByChild('value');
+//    document.getElementById("name-dropdown").innerHTML = "";
+//
+//   
+//    var count  = 0;
+//    names.once('value', function(snapshot){
+//         alert("hey " + names);
+//        var nameCount = snapshot.numChildren();
+//        snapshot.forEach(function(childSnapshot) {
+//            count++;
+//           
+//          //  var name = childData.user;
+//           
+//            
+//            document.getElementById("name-dropdown").innerHTML = document.getElementById("name-dropdown") + name;
+//            
+//        });
+//    });
+//}
+//
+//
+// myDropdown.options.Clear();
+//      foreach(string str in data)
+//      {
+//         myDropdown.options.Add(new Dropdown.OptionData(str));
+//     }
+
+
+
+//    ppl.then(function (snapshot) {
+//        name = user;
+//        for (name in ppl) {
+//            var opt = document.createElement("option");
+//            opt.value = index;
+//            opt.innerHTML = element;
+//
+//            newSelect.appendChild(opt);
+//            index++;
+//            var sel = document.getElementById("name-dropdown");
+//
+//            select.options[select.options.length] = new Option(name, 'name[name]')
+//        }
+//    });
+//    var sel = document.getElementById("name-dropdown");
+//
+//    select.options[select.options.length] = new Option(name, 'name[name]')
+//}
