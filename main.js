@@ -29,8 +29,6 @@
         const pass = txtPassword.value;
         const auth = firebase.auth();
 
-        localStorage.setItem("user", user);
-
         const promise = auth.signInWithEmailAndPassword(email, pass);
         promise.then(e => {
             var profile = firebase.auth().currentUser;
@@ -377,10 +375,8 @@
             document.getElementById('announce').setAttribute('href', "announcements.html");
             document.getElementById('calc').setAttribute('href', "videoTimeCalculator.html");
             document.getElementById('hand').setAttribute('href', "employeehandbook.html");
-            document.getElementById('canvasTeam').setAttribute('href', "https://docs.google.com/spreadsheets/d/1ge7AlgKH_0nkvmbZ_BxWiP6WfAg2rynA1ccXMFei22k/edit#gid=1630866338");
-            document.getElementById('techTeam').setAttribute('href', "https://docs.google.com/spreadsheets/d/1mY6vvcCC7ptSYrlnoFrhwgWh4DMqGwQNdcgtjUz4f9M/edit#gid=266358356");
-            document.getElementById('scriptTeam').setAttribute('href', "https://docs.google.com/spreadsheets/d/1BMVKAqfiPspOLZy4OFPHdccCWWJVtkHMrLoNobFCkTI/edit#gid=2021360543");
-
+            document.getElementById('schedule').setAttribute('href', "schedule.html");
+            
             if (snap.workDay == true) {
                 var icon = document.getElementById('wd');
                 icon.setAttribute('href', "https://www.myworkday.com/byuhi/d/home.htmld#selectedWorklet=501%24162");
