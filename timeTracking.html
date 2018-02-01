@@ -64,133 +64,129 @@
                     <option value="11">November</option>
                     <option value="12">December</option>
                 </select>
-                <select class="drop-down" id="name-dropdown" onclick = "selectName(this)">
+                <select class="drop-down" id="name-dropdown" onclick="selectName(this)">
                    <option value="" selected disabled hidden>NAME</option>
                 </select>
                 <script type="text/javascript" src="timeTracking.js"></script>
                 <br>
                 <br>
                 <br>
+                <table id="t1" style="overflow-x:auto;">
+                    <tr>
+                        <th colspan="7" id="title">Month Year</th>
+                    </tr>
+                    <tr id="heading">
+                        <td>Mon</td>
+                        <td>Tues</td>
+                        <td>Wed</td>
+                        <td>Thurs</td>
+                        <td>Fri</td>
+                        <td>Sat</td>
+                        <td class="grayout">Sun</td>
+                    </tr>
+                    <tr>
+                        <td onclick="modalBox(this)"></td>
+                        <td onclick="modalBox(this)"></td>
+                        <td onclick="modalBox(this)"></td>
+                        <td onclick="modalBox(this)"></td>
+                        <td onclick="modalBox(this)"></td>
+                        <td onclick="modalBox(this)"></td>
+                        <td class="grayout"></td>
+                    </tr>
+                    <tr>
+                        <td onclick="modalBox(this)"></td>
+                        <td onclick="modalBox(this)"></td>
+                        <td onclick="modalBox(this)"></td>
+                        <td onclick="modalBox(this)"></td>
+                        <td onclick="modalBox(this)"></td>
+                        <td onclick="modalBox(this)"></td>
+                        <td class="grayout"></td>
+                    </tr>
+                    <tr>
+                        <td onclick="modalBox(this)"></td>
+                        <td onclick="modalBox(this)"></td>
+                        <td onclick="modalBox(this)"></td>
+                        <td onclick="modalBox(this)"></td>
+                        <td onclick="modalBox(this)"></td>
+                        <td onclick="modalBox(this)"></td>
+                        <td class="grayout"></td>
+                    </tr>
+                    <tr>
+                        <td onclick="modalBox(this)"></td>
+                        <td onclick="modalBox(this)"></td>
+                        <td onclick="modalBox(this)"></td>
+                        <td onclick="modalBox(this)"></td>
+                        <td onclick="modalBox(this)"></td>
+                        <td onclick="modalBox(this)"></td>
+                        <td class="grayout"></td>
+                    </tr>
+                    <tr>
+                        <td onclick="modalBox(this)"></td>
+                        <td onclick="modalBox(this)"></td>
+                        <td onclick="modalBox(this)"></td>
+                        <td onclick="modalBox(this)"></td>
+                        <td onclick="modalBox(this)"></td>
+                        <td onclick="modalBox(this)"></td>
+                        <td class="grayout"></td>
+                    </tr>
+                    <tr id="rowsix" class="hide">
+                        <td onclick="modalBox(this)"></td>
+                        <td onclick="modalBox(this)"></td>
+                        <td onclick="modalBox(this)"></td>
+                        <td onclick="modalBox(this)"></td>
+                        <td onclick="modalBox(this)"></td>
+                        <td onclick="modalBox(this)"></td>
+                        <td class="grayout"></td>
+                    </tr>
+                </table>
+                <br>
+                <!-- The Modal -->
+                <div id="myModal" class="modal">
 
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <p id="modalText">No time logged</p>
+                        <p id="breakText">No breaks logged</p>
+                    </div>
+
+                </div>
+                <table id="t2">
+                    <tr>
+                        <th colspan="2">Totals:</th>
+                    </tr>
+                    <tr>
+                        <td id="week">Week 1: </td>
+                        <td id="totals"></td>
+                    </tr>
+                    <tr>
+                        <td id="week">Week 2: </td>
+                        <td id="totals"></td>
+                    </tr>
+                    <tr>
+                        <td id="week">Week 3: </td>
+                        <td id="totals"></td>
+                    </tr>
+                    <tr>
+                        <td id="week">Week 4: </td>
+                        <td id="totals"></td>
+                    </tr>
+                    <tr>
+                        <td id="week">Week 5: </td>
+                        <td id="totals"></td>
+                    </tr>
+                    <tr id="week6" class="hide">
+                        <td id="week">Week 6: </td>
+                        <td id="totals"></td>
+                    </tr>
+                    <tr>
+                        <td id="monthly">Monthly Total:</td>
+                        <td id="totals"></td>
+                    </tr>
+                </table>
             </div>
         </div>
-        <table id="t1" style="overflow-x:auto;">
-            <tr>
-                <th colspan="7" id="title">Month Year</th>
-            </tr>
-            <tr id="heading">
-                <td>Mon</td>
-                <td>Tues</td>
-                <td>Wed</td>
-                <td>Thurs</td>
-                <td>Fri</td>
-                <td>Sat</td>
-                <td class="grayout">Sun</td>
-            </tr>
-            <tr>
-                <td onclick="modalBox(this)"></td>
-                <td onclick="modalBox(this)"></td>
-                <td onclick="modalBox(this)"></td>
-                <td onclick="modalBox(this)"></td>
-                <td onclick="modalBox(this)"></td>
-                <td onclick="modalBox(this)"></td>
-                <td class="grayout"></td>
-            </tr>
-            <tr>
-                <td onclick="modalBox(this)"></td>
-                <td onclick="modalBox(this)"></td>
-                <td onclick="modalBox(this)"></td>
-                <td onclick="modalBox(this)"></td>
-                <td onclick="modalBox(this)"></td>
-                <td onclick="modalBox(this)"></td>
-                <td class="grayout"></td>
-            </tr>
-            <tr>
-                <td onclick="modalBox(this)"></td>
-                <td onclick="modalBox(this)"></td>
-                <td onclick="modalBox(this)"></td>
-                <td onclick="modalBox(this)"></td>
-                <td onclick="modalBox(this)"></td>
-                <td onclick="modalBox(this)"></td>
-                <td class="grayout"></td>
-            </tr>
-            <tr>
-                <td onclick="modalBox(this)"></td>
-                <td onclick="modalBox(this)"></td>
-                <td onclick="modalBox(this)"></td>
-                <td onclick="modalBox(this)"></td>
-                <td onclick="modalBox(this)"></td>
-                <td onclick="modalBox(this)"></td>
-                <td class="grayout"></td>
-            </tr>
-            <tr>
-                <td onclick="modalBox(this)"></td>
-                <td onclick="modalBox(this)"></td>
-                <td onclick="modalBox(this)"></td>
-                <td onclick="modalBox(this)"></td>
-                <td onclick="modalBox(this)"></td>
-                <td onclick="modalBox(this)"></td>
-                <td class="grayout"></td>
-            </tr>
-            <tr id="rowsix" class="hide">
-                <td onclick="modalBox(this)"></td>
-                <td onclick="modalBox(this)"></td>
-                <td onclick="modalBox(this)"></td>
-                <td onclick="modalBox(this)"></td>
-                <td onclick="modalBox(this)"></td>
-                <td onclick="modalBox(this)"></td>
-                <td class="grayout"></td>
-            </tr>
-        </table>
-        <br>
 
-
-
-
-        <!-- The Modal -->
-        <div id="myModal" class="modal">
-
-            <!-- Modal content -->
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <p id="modalText">No time logged</p>
-                <p id="breakText">No breaks logged</p>
-            </div>
-
-        </div>
-        <table id="t2">
-            <tr>
-                <th colspan="2">Totals:</th>
-            </tr>
-            <tr>
-                <td id="week">Week 1: </td>
-                <td id="totals"></td>
-            </tr>
-            <tr>
-                <td id="week">Week 2: </td>
-                <td id="totals"></td>
-            </tr>
-            <tr>
-                <td id="week">Week 3: </td>
-                <td id="totals"></td>
-            </tr>
-            <tr>
-                <td id="week">Week 4: </td>
-                <td id="totals"></td>
-            </tr>
-            <tr>
-                <td id="week">Week 5: </td>
-                <td id="totals"></td>
-            </tr>
-            <tr id="week6" class="hide">
-                <td id="week">Week 6: </td>
-                <td id="totals"></td>
-            </tr>
-            <tr>
-                <td id="monthly">Monthly Total:</td>
-                <td id="totals"></td>
-            </tr>
-        </table>
     </div>
 </body>
 

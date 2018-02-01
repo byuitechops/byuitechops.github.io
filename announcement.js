@@ -49,9 +49,17 @@ db.on('value', snap => {
         var childData = snapshot.val();
         var firebasedate = childData.date;
         var d = new Date();
-        var today = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+        var month = d.getMonth() + 1;
+        if (month < 10) {
+            month = '0' + month;
+        }
+        var date = d.getDate();
+        if (date < 10) {
+            date = '0' + date;
+        }
+        var today = d.getFullYear() + "-" + (month) + "-" + d.getDate();
 
-        if (firebasedate > today) {
+        if (firebasedate < today) {
             db.child(childKey).set(null);
         };
     });
