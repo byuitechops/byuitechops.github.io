@@ -233,9 +233,8 @@ ul.sidenav li a:hover:not(.active) {
 }
 
 div.content {
-    margin: 0 0 0 550px;
+    margin-left: 35%;
     height: 100%;
-    width: 68%
 }
 
 table {
@@ -378,9 +377,9 @@ form {
 /* ---- Styles CSS --------- */
 
 .flex-container {
-    position: static;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .flex-container div {
@@ -510,7 +509,7 @@ select.drop-down {
 
 }
 
-/* --------------------------- Resize for Laptops -------------------------- */
+/* --------------------------- Resize for Tablets -------------------------- */
 
 @media screen and (max-width: 1200px) {
     ul.sidenav {
