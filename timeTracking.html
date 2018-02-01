@@ -7,8 +7,8 @@
     <link rel="stylesheet" type="text/css" href="timeTracking.css">
     <link type="text/css" rel="stylesheet" href="main.css">
     <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase-database.js"></script>
     <script type="text/javascript" src="timeTracking.js"></script>
 </head>
 
@@ -39,7 +39,7 @@
         <div class="content" id="pagetime">
             <div class="col-10">
                 <h1 style="text-align: center">Time Tracking</h1>
-                <select class="drop-down" id="team-dropdown">
+                <select class="hide" id="team-dropdown" onChange="selectTeam(this.value)">
                    <option value="" selected disabled hidden>TEAM</option>
                    <option value="canvas">Canvas Team</option>
                    <option value="tech">Tech Team</option>
@@ -61,7 +61,7 @@
                     <option value="12">December</option>
                 </select>
 
-                <select class="drop-down" id="name-dropdown">
+                <select class="hide" id="name-dropdown" onChange="selectName(this.value)">
                    <option value="" selected disabled hidden>NAME</option>
                 </select>
                 <script type="text/javascript" src="timeTracking.js"></script>
