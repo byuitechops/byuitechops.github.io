@@ -1,3 +1,7 @@
+select.hide {
+    display: none;
+}
+
 /* -------------------------------- Styling totals-Emma ----------------------------------*/
 
 table#t2 {
@@ -139,3 +143,25 @@ tr#title th {
 }
 
 /* ---------------------------- End of styling modal boxes-Emma -----------------------------*/
+
+#team-dropdown,
+#name-dropdown {
+    /*    display: none;*/
+    -webkit-border-radius: 13px;
+    border: 1px solid #AAA;
+    background-color: #0076c6;
+    color: white;
+    margin: 0.6em;
+    border: none;
+    cursor: pointer;
+    height: 2.5em;
+    border-radius: 1em;
+    font-size: 19px;
+    margin-left: 75px;
+    margin-right: 75px;
+    overflow: hidden;
+    padding: 5px 10px;
+    white-space: nowrap;
+    width: 200px;
+    height: 35px;
+}
