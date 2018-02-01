@@ -233,9 +233,9 @@ ul.sidenav li a:hover:not(.active) {
 }
 
 div.content {
-    margin: 0 0 0 550px;
+    margin-left: 500px;
     height: 100%;
-    width: 68%
+/*    width: 68%*/
 }
 
 table {
