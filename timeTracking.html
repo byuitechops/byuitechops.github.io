@@ -4,6 +4,7 @@
 <head>
     <title>Time Tracking</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="timeTracking.css">
     <link type="text/css" rel="stylesheet" href="main.css">
     <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase-database.js"></script>
@@ -64,7 +65,8 @@
                     <option value="11">November</option>
                     <option value="12">December</option>
                 </select>
-                <select class="drop-down" id="name-dropdown" onclick="selectName(this)">
+
+                <select class="drop-down" id="name-dropdown">
                    <option value="" selected disabled hidden>NAME</option>
                 </select>
                 <script type="text/javascript" src="timeTracking.js"></script>
@@ -184,10 +186,25 @@
                         <td id="totals"></td>
                     </tr>
                 </table>
+
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h3>First Shift</h3>
+                    <p id="modalText">No time logged</p>
+                    <h3>Second Shift</h3>
+                    <p id="secondShift">No time logged</p>
+                    <h3>Breaks</h3>
+                    <p id="breakText">No breaks logged</p>
+                    <p id="breakText2"> No more breaks</p>
+                    <p id="breakText3"> No more breaks</p>
+                    <p id="breakText4"> No more breaks</p>
+                    <p id="breakText5"> No more breaks</p>
+                </div>
             </div>
         </div>
-
     </div>
 </body>
 
 </html>
+<!--onclick = "selectName(this)"-->
