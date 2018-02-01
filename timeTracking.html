@@ -4,7 +4,7 @@
 <head>
     <title>Time Tracking</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link type="text/css" rel="stylesheet" href="timeTracking.css">
+    <link rel="stylesheet" type="text/css" href="timeTracking.css">
     <link type="text/css" rel="stylesheet" href="main.css">
     <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase-database.js"></script>
@@ -144,14 +144,19 @@
                 <br>
                 <!-- The Modal -->
                 <div id="myModal" class="modal">
-
-                    <!-- Modal content -->
                     <div class="modal-content">
                         <span class="close">&times;</span>
+                        <h3>First Shift</h3>
                         <p id="modalText">No time logged</p>
-                        <p id="breakText">No breaks logged</p>
+                        <h3>Second Shift</h3>
+                        <p id="secondShift">No time logged</p>
+                        <h3>Breaks</h3>
+                        <p id="breakText1">No breaks logged</p>
+                        <p id="breakText2"> </p>
+                        <p id="breakText3"> </p>
+                        <p id="breakText4"> </p>
+                        <p id="breakText5"> </p>
                     </div>
-
                 </div>
                 <table id="t2">
                     <tr>
@@ -188,19 +193,7 @@
                 </table>
 
                 <!-- Modal content -->
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <h3>First Shift</h3>
-                    <p id="modalText">No time logged</p>
-                    <h3>Second Shift</h3>
-                    <p id="secondShift">No time logged</p>
-                    <h3>Breaks</h3>
-                    <p id="breakText">No breaks logged</p>
-                    <p id="breakText2"> No more breaks</p>
-                    <p id="breakText3"> No more breaks</p>
-                    <p id="breakText4"> No more breaks</p>
-                    <p id="breakText5"> No more breaks</p>
-                </div>
+
             </div>
         </div>
     </div>
