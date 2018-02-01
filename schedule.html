@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="main.css">
+    <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-2">
+            <ul class="sidenav">
+                <li>
+                    <a class="active" href="index.html">Home</a>
+                </li>
+                <li>
+                    <a href="announcements.html">Announcements</a>
+                </li>
+                <li>
+                    <a href="videoTimeCalculator.html">Time Calculator</a>
+                </li>
+                <li>
+                    <a href="employeehandbook.html">Employee Handbook</a>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">Schedules</a>
+                    <div class="dropdown-content">
+                        <a href="https://docs.google.com/spreadsheets/d/1ge7AlgKH_0nkvmbZ_BxWiP6WfAg2rynA1ccXMFei22k/edit#gid=1630866338" target="_blank">Canvas Team</a>
+                        <a href="https://docs.google.com/spreadsheets/d/1mY6vvcCC7ptSYrlnoFrhwgWh4DMqGwQNdcgtjUz4f9M/edit#gid=266358356" target="_blank">Tech Team</a>
+                        <a href="https://docs.google.com/spreadsheets/d/1BMVKAqfiPspOLZy4OFPHdccCWWJVtkHMrLoNobFCkTI/edit#gid=2021360543" target="_blank">Transcript Team</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="content">
+            <div class="col-10">
+                <div>
+                    <h1 style="text-align: center">Schedules</h1>
+                    <iframe class="iframes"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="schedule.js"></script>
+</body>
+
+</html>
