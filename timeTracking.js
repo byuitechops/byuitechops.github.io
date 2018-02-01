@@ -16,6 +16,7 @@ function showModal(num) {
     ppl.then(function (snapshot) {
 
         var person = (snapshot.val());
+
         var dates = Object.keys(person);
         var monthDays = [];
         var currentMonth = [];
@@ -30,8 +31,25 @@ function showModal(num) {
             }
         }
         var check = false;
+
         for (var i = 0; i < monthDays.length; i++) {
-            if (num == monthDays[i]) {
+            if(num == monthDays[i + 1]) {
+                if (person[currentMonth[i + 1]].CommentIn == undefined) {
+                    person[currentMonth[i + 1]].CommentIn = "N/A";
+                }
+                if (person[currentMonth[i + 1]].CommentOut == undefined) {
+                    person[currentMonth[i + 1]].CommentOut = "N/A";
+                }
+                if (person[currentMonth[i + 1]].Out == undefined) {
+                    person[currentMonth[i + 1]].Out = "N/A";
+                }
+                var txt = "Clocked in at: " + person[currentMonth[i + 1]].In + "<br />";
+                txt += "CommentIn: " + person[currentMonth[i + 1]].CommentIn + "<br />";
+                txt += "Clock out at: " + person[currentMonth[i + 1]].Out + "<br />";
+                txt += "CommentOut: " + person[currentMonth[i + 1]].CommentOut + "<br />";
+                document.getElementById("modalText").innerHTML = txt;
+                check = true;
+            } else if (num == monthDays[i]) {
                 if (person[currentMonth[i]].CommentIn == undefined) {
                     person[currentMonth[i]].CommentIn = "N/A";
                 }
@@ -46,9 +64,31 @@ function showModal(num) {
                 txt += "Clock out at: " + person[currentMonth[i]].Out + "<br />";
                 txt += "CommentOut: " + person[currentMonth[i]].CommentOut + "<br />";
                 document.getElementById("modalText").innerHTML = txt;
+                document.getElementById("secondShift").innerHTML = "No time logged";
+                check = true;
+                break;
+            } else {
+                document.getElementById("secondShift").innerHTML = "No time logged";
+            }
+            if (num == monthDays[i]) {
+                if (person[currentMonth[i]].CommentIn == undefined) {
+                    person[currentMonth[i]].CommentIn = "N/A";
+                }
+                if (person[currentMonth[i]].CommentOut == undefined) {
+                    person[currentMonth[i]].CommentOut = "N/A";
+                }
+                if (person[currentMonth[i]].Out == undefined) {
+                    person[currentMonth[i]].Out = "N/A";
+                }
+                var txt = "Clocked in at: " + person[currentMonth[i]].In + "<br />";
+                txt += "CommentIn: " + person[currentMonth[i]].CommentIn + "<br />";
+                txt += "Clock out at: " + person[currentMonth[i]].Out + "<br />";
+                txt += "CommentOut: " + person[currentMonth[i]].CommentOut + "<br />";
+                document.getElementById("secondShift").innerHTML = txt;
                 check = true;
                 break;
             }
+            
         }
         if (!check) {
             document.getElementById("modalText").innerHTML = "No time logged";
@@ -56,8 +96,7 @@ function showModal(num) {
 
         count = 0;
 
-
-    });
+  });
     ppl.catch(function (error) {
         alert(error);
         return;
@@ -83,36 +122,234 @@ function showModal(num) {
         var check = false;
         var txt = "";
         for (var i = 0; i < monthDays.length; i++) {
-            if (num == monthDays[i]) {
-                if (person[currentMonth[i]].Out == "") {
-                    person[currentMonth[i]].Out = "N/A";
+            if (num == monthDays[i + 4]) {
+                if (person[currentMonth[i + 4]].In == undefined) {
+                    person[currentMonth[i + 4]].In = "N/A";
                 }
-                if (person[currentMonth[i]].In == "") {
-                    person[currentMonth[i]].In = "N/A";
+                if (person[currentMonth[i + 4]].Out == undefined) {
+                    person[currentMonth[i + 4]].Out = "N/A";
                 }
-                txt += "<br />Break In: " + person[currentMonth[i]].In + "<br />";
-                txt += "Break Out: " + person[currentMonth[i]].Out + "<br />";
+                txt += "Break Out: " + person[currentMonth[i + 4]].Out + "<br />";
+                txt += "<br />Break In: " + person[currentMonth[i + 4]].In + "<br />";
                 document.getElementById("breakText").innerHTML = txt;
                 check = true;
+            } else if (num == monthDays[i + 3]) {
+                if (person[currentMonth[i + 3]].In == undefined) {
+                    person[currentMonth[i + 3]].In = "N/A";
+                }
+                if (person[currentMonth[i + 3]].Out == undefined) {
+                    person[currentMonth[i + 3]].Out = "N/A";
+                }
+                txt += "Break Out: " + person[currentMonth[i + 3]].Out + "<br />";
+                txt += "<br />Break In: " + person[currentMonth[i + 3]].In + "<br />";
+                document.getElementById("breakText2").innerHTML = txt;
+                check = true;
                 break;
+            } else {
+                document.getElementById("").innerHTML = "";
             }
-        }
+            if (num == monthDays[i + 3]) {
+                if (person[currentMonth[i + 3]].In == undefined) {
+                    person[currentMonth[i + 3]].In = "N/A";
+                }
+                if (person[currentMonth[i + 3]].Out == undefined) {
+                    person[currentMonth[i + 3]].Out = "N/A";
+                }
+                txt += "Break Out: " + person[currentMonth[i + 3]].Out + "<br />";
+                txt += "<br />Break In: " + person[currentMonth[i + 3]].In + "<br />";
+                document.getElementById("breakText2").innerHTML = txt;
+                check = true;
+            }  else if (num == monthDays[i + 2]) {
+                if (person[currentMonth[i + 2]].In == undefined) {
+                    person[currentMonth[i + 2]].In = "N/A";
+                }
+                if (person[currentMonth[i + 2]].Out == undefined) {
+                    person[currentMonth[i + 2]].Out = "N/A";
+                }
+                txt += "Break Out: " + person[currentMonth[i + 2]].Out + "<br />";
+                txt += "<br />Break In: " + person[currentMonth[i + 2]].In + "<br />";
+                document.getElementById("breakText2").innerHTML = txt;
+                check = true;
+                break;
+            } else {
+                document.getElementById("").innerHTML = "";
+            } if (num == monthDays[i + 2]) {
+                if (person[currentMonth[i + 2]].In == undefined) {
+                    person[currentMonth[i + 2]].In = "N/A";
+                }
+                if (person[currentMonth[i + 2]].Out == undefined) {
+                    person[currentMonth[i + 2]].Out = "N/A";
+                }
+                txt += "Break Out: " + person[currentMonth[i + 2]].Out + "<br />";
+                txt += "<br />Break In: " + person[currentMonth[i + 2]].In + "<br />";
+                document.getElementById("breakText2").innerHTML = txt;
+                check = true;
+            }  else if (num == monthDays[i + 1]) {
+                if (person[currentMonth[i + 1]].In == undefined) {
+                    person[currentMonth[i + 1]].In = "N/A";
+                }
+                if (person[currentMonth[i + 1]].Out == undefined) {
+                    person[currentMonth[i + 1]].Out = "N/A";
+                }
+                txt += "Break Out: " + person[currentMonth[i + 1]].Out + "<br />";
+                txt += "<br />Break In: " + person[currentMonth[i + 1]].In + "<br />";
+                document.getElementById("breakText2").innerHTML = txt;
+                check = true;
+                break;
+            } else {
+                document.getElementById("").innerHTML = "";
+            } if (num == monthDays[i + 1]) {
+                if (person[currentMonth[i + 1]].In == undefined) {
+                    person[currentMonth[i + 1]].In = "N/A";
+                }
+                if (person[currentMonth[i + 1]].Out == undefined) {
+                    person[currentMonth[i + 1]].Out = "N/A";
+                }
+                txt += "Break Out: " + person[currentMonth[i + 1]].Out + "<br />";
+                txt += "<br />Break In: " + person[currentMonth[i + 1]].In + "<br />";
+                document.getElementById("breakText2").innerHTML = txt;
+                check = true;
+            }  else if (num == monthDays[i]) {
+                if (person[currentMonth[i]].In == undefined) {
+                    person[currentMonth[i]].In = "N/A";
+                }
+                if (person[currentMonth[i]].Out == undefined) {
+                    person[currentMonth[i]].Out = "N/A";
+                }
+                txt += "Break Out: " + person[currentMonth[i]].Out + "<br />";
+                txt += "<br />Break In: " + person[currentMonth[i]].In + "<br />";
+                document.getElementById("breakText2").innerHTML = txt;
+                check = true;
+                break;
+            } 
+            
+            
+                }
+                });
         if (!check) {
             document.getElementById("breakText").innerHTML = "No breaks logged";
         }
 
+
         count = 0;
 
-    });
+   
     ppl.catch(function (error) {
         alert(error);
         return;
-    });
-
+});
+   
 }
 
-//("users/" + names + "/TimeClock/HoursWorked")
-//base.getData
+
+
+
+//---------------------------------------new---------------------------------------//
+
+//function showModal(num) {
+//    var user = firebase.auth().currentUser;
+//    var ppl = firebase.database().ref('users/' + user.displayName + '/TimeClock/HoursWorked').once('value');
+//    ppl.then(function (snapshot) {
+//
+//        var person = (snapshot.val());
+//        var dates = Object.keys(person);
+//        var monthDays = [];
+//        var currentMonth = [];
+//        var count = 0;
+//        for (var i = 0; i < dates.length; i++) {
+//            if (document.getElementById("month-dropdown").value == dates[i][0]) {
+//                currentMonth[count] = dates[i];
+//                var firstDash = currentMonth[count].indexOf("-");
+//                var lastDash = currentMonth[count].lastIndexOf("-");
+//                monthDays[count] = currentMonth[count].slice(firstDash + 1, lastDash);
+//                count++;
+//            }
+//        }
+//        var check = false;
+//        for (var i = 0; i < monthDays.length; i++) {
+//            if (num == monthDays[i]) {
+//                if (person[currentMonth[i]].CommentIn == undefined) {
+//                    person[currentMonth[i]].CommentIn = "N/A";
+//                }
+//                if (person[currentMonth[i]].CommentOut == undefined) {
+//                    person[currentMonth[i]].CommentOut = "N/A";
+//                }
+//                if (person[currentMonth[i]].Out == undefined) {
+//                    person[currentMonth[i]].Out = "N/A";
+//                }
+//                var txt = "Clocked in at: " + person[currentMonth[i]].In + "<br />";
+//                txt += "CommentIn: " + person[currentMonth[i]].CommentIn + "<br />";
+//                txt += "Clock out at: " + person[currentMonth[i]].Out + "<br />";
+//                txt += "CommentOut: " + person[currentMonth[i]].CommentOut + "<br />";
+//                document.getElementById("modalText").innerHTML = txt;
+//                check = true;
+//                break;
+//            }
+//        }
+//        if (!check) {
+//            document.getElementById("modalText").innerHTML = "No time logged";
+//        }
+//
+//        count = 0;
+//
+//
+//    });
+//    ppl.catch(function (error) {
+//        alert(error);
+//        return;
+//    });
+//
+//    var breaks = firebase.database().ref('users/' + user.displayName + '/TimeClock/Breaks').once('value');
+//    breaks.then(function (snapshot) {
+//        var person = (snapshot.val());
+//
+//        var dates = Object.keys(person);
+//        var monthDays = [];
+//        var currentMonth = [];
+//        var count = 0;
+//        for (var i = 0; i < dates.length; i++) {
+//            if (document.getElementById("month-dropdown").value == dates[i][0]) {
+//                currentMonth[count] = dates[i];
+//                var firstDash = currentMonth[count].indexOf("-");
+//                var lastDash = currentMonth[count].lastIndexOf("-");
+//                monthDays[count] = currentMonth[count].slice(firstDash + 1, lastDash);
+//                count++;
+//            }
+//        }
+//        var check = false;
+//        var txt = "";
+//        for (var i = 0; i < monthDays.length; i++) {
+//            if (num == monthDays[i]) {
+//                if (person[currentMonth[i]].Out == "") {
+//                    person[currentMonth[i]].Out = "N/A";
+//                }
+//                if (person[currentMonth[i]].In == "") {
+//                    person[currentMonth[i]].In = "N/A";
+//                }
+//                txt += "<br />Break In: " + person[currentMonth[i]].In + "<br />";
+//                txt += "Break Out: " + person[currentMonth[i]].Out + "<br />";
+//                document.getElementById("breakText").innerHTML = txt;
+//                check = true;
+//                break;
+//            }
+//        }
+//        if (!check) {
+//            document.getElementById("breakText").innerHTML = "No breaks logged";
+//        }
+//
+//        count = 0;
+//
+//    });
+//    ppl.catch(function (error) {
+//        alert(error);
+//        return;
+//    });
+//
+//}
+
+//-------------------------------------end new-------------------------------------//
+
+
 //---------------- End of Connect to Firebase ------------------//
 
 //------------------ Calendar Functions ----------------------- //
@@ -163,14 +400,14 @@ function getMonthName(month) {
     return ar[month]
 }
 
-function selectTeam() {
-    var user = firebase.auth().currentUser;
-    var Admin = firebase.database().ref('users/' + user + '/Admin').once('value');
-
-    if (Admin = true) {
-        document.getElementById("team-dropdown").classList.add('hide')
-    }
-}
+//function selectTeam() {
+//    var user = firebase.auth().currentUser;
+//    var Admin = firebase.database().ref('users/' + user + '/Admin').once('value');
+//
+//    if (Admin = true) {
+//        document.getElementById("team-dropdown").classList.add('hide')
+//    }
+//}
 
 
 function setCal(sMonth) {
@@ -299,83 +536,27 @@ function modalBox(number) {
 //----All the code I've been using to try to get the name select tag to display names from firebase----//
 //---------------------------------I would love some guidance on this----------------------------------//
 
-//function selectName() {
-//    admin.auth().getUser(uid)
-//        .then(function (userRecord) {
-//            // See the UserRecord reference doc for the contents of userRecord.
-//            console.log("Successfully fetched user data:", userRecord.toJSON());
-//        })
-//        .catch(function (error) {
-//            console.log("Error fetching user data:", error);
-//        });
-//}
 
-//function listAllUsers(nextPageToken) {
-//  // List batch of users, 1000 at a time.
-//  admin.auth().listUsers(1000, nextPageToken)
-//    .then(function(listUsersResult) {
-//      listUsersResult.users.forEach(function(userRecord) {
-//        console.log("user", userRecord.toJSON());
-//      });
-//      if (listUsersResult.pageToken) {
-//        // List next batch of users.
-//        listAllUsers(listUsersResult.pageToken)
-//      }
-//    })
-//    .catch(function(error) {
-//      console.log("Error listing users:", error);
-//    });
-//}
-//// Start listing users from the beginning, 1000 at a time.
-//listAllUsers();
+(function () {
+    firebase.database().ref('users').on('value', snapshot => {
+        var names = snapshot.val();
+        var name;
+        for (name in names) {
+            var teams = names[name];
+            var i;
+            for (i in teams) {
+                if (i == 'Team') {
+                    if (teams[i] == "tech") {
+                        var opt = document.createElement("option");
+                        opt.value = name;
+                        opt.innerHTML = name;
+                        document.getElementById('name-dropdown').appendChild(opt);
+                    }
+                }
 
 
-//function selectName() {
-//    var user = firebase.auth().currentUser;
-//    var names = firebase.database().ref('users/Emma Fisher').orderByChild('value');
-//    document.getElementById("name-dropdown").innerHTML = "";
-//
-//   
-//    var count  = 0;
-//    names.once('value', function(snapshot){
-//         alert("hey " + names);
-//        var nameCount = snapshot.numChildren();
-//        snapshot.forEach(function(childSnapshot) {
-//            count++;
-//           
-//          //  var name = childData.user;
-//           
-//            
-//            document.getElementById("name-dropdown").innerHTML = document.getElementById("name-dropdown") + name;
-//            
-//        });
-//    });
-//}
-//
-//
-// myDropdown.options.Clear();
-//      foreach(string str in data)
-//      {
-//         myDropdown.options.Add(new Dropdown.OptionData(str));
-//     }
+            }
+        }
+    });
 
-
-
-//    ppl.then(function (snapshot) {
-//        name = user;
-//        for (name in ppl) {
-//            var opt = document.createElement("option");
-//            opt.value = index;
-//            opt.innerHTML = element;
-//
-//            newSelect.appendChild(opt);
-//            index++;
-//            var sel = document.getElementById("name-dropdown");
-//
-//            select.options[select.options.length] = new Option(name, 'name[name]')
-//        }
-//    });
-//    var sel = document.getElementById("name-dropdown");
-//
-//    select.options[select.options.length] = new Option(name, 'name[name]')
-//}
+}());
