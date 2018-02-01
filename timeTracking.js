@@ -435,6 +435,8 @@ function setCal(sMonth) {
     var firstDay = firstDayInstance.getDay()
     if (firstDay > 0) {
         firstDay -= 1;
+    } else if (firstDay == 0) {
+        firstDay = 6;
     }
     firstDayInstance = null;
 
