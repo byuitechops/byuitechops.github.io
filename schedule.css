@@ -1,0 +1,13 @@
+.sFrames {
+    width: 100%;
+    border: none;
+}
+
+#scheduleFrame {
+    height: 1000px;
+}
+
+#team-dropdown {
+    margin-left: 40%;
+    margin-right: 40%;
+}
