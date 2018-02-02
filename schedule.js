@@ -13,7 +13,7 @@
     // Check if Logged In
     firebase.auth().onAuthStateChanged(firebaseUser => {
         if (firebaseUser) {
-            // Function to check which team
+            // Check which team
             var name;
             var user = firebase.auth().currentUser;
             user.providerData.forEach(function (profile) {
