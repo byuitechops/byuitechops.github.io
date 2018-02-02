@@ -6,8 +6,8 @@ select.hide {
 
 table#t2 {
     padding-left: 0;
-    /*    margin: 10px;*/
     margin-top: 9.5%;
+    float: right;
 }
 
 td#week {
@@ -39,7 +39,9 @@ td#monthly {
 
 table#t1 {
     margin-bottom: 5%;
+    float: left;
 }
+
 
 .grayout {
     background-color: gray;
@@ -47,8 +49,6 @@ table#t1 {
 }
 
 th {
-    /*  grid-row-start: 1;
-    grid-row-end: 7; */
     text-align: center;
     font-size: 30px;
     padding: 2px 10px;
@@ -61,9 +61,6 @@ table,
 td {
     border: 3px solid black;
     margin-left: 28.5%;
-
-
-
 }
 
 td {
@@ -72,7 +69,6 @@ td {
     width: 125px;
     text-align: right;
     vertical-align: text-top;
-
 }
 
 tr#heading td {

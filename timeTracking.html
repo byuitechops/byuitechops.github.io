@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <!-- Include all CSS, Javascript, and Firebase files needed -->
     <title>Time Tracking</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="timeTracking.css">
@@ -10,11 +11,13 @@
     <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase-database.js"></script>
     <script type="text/javascript" src="timeTracking.js"></script>
+    <!-- End of include all CSS, Javascript, and Firebase files needed -->
 </head>
 
 <body>
     <div class="row">
         <div class="col-2">
+            <!-- Display and link to sidebar menu -->
             <ul class="sidenav">
                 <li>
                     <a href="index.html">Home</a>
@@ -35,9 +38,11 @@
                     <a href="schedule.html">Schedules</a>
                 </li>
             </ul>
+            <!-- End of display and link to sidebar menu -->
         </div>
-        <div class="content" id="pagetime">
-            <div class="col-10">
+        <div class="col-10">
+            <div class="content">
+                <!-- Team name dropdown menu -->
                 <h1 style="text-align: center">Time Tracking</h1>
                 <select class="hide" id="team-dropdown" onChange="selectTeam(this.value)">
                    <option value="" selected disabled hidden>TEAM</option>
@@ -45,6 +50,9 @@
                    <option value="tech">Tech Team</option>
                    <option value="transcript">Transcript Team</option>
                 </select>
+                <!-- End of team name dropdown menu -->
+
+                <!-- Dropdown menu for each month of the year -->
                 <select class="drop-down" id="month-dropdown" onChange="setCal(this.value)">
                     <option value="" selected disabled hidden>MONTH</option>
                     <option value="1">January</option>
@@ -60,87 +68,100 @@
                     <option value="11">November</option>
                     <option value="12">December</option>
                 </select>
+                <!-- End of dropdown menu for each month of the year -->
 
+                <!--Dropdown populated with each team member through Javascript-->
                 <select class="hide" id="name-dropdown" onChange="selectName(this.value)">
                    <option value="" selected disabled hidden>NAME</option>
                 </select>
-                <script type="text/javascript" src="timeTracking.js"></script>
-                <br>
-                <br>
-                <br>
-                <table id="t1" style="overflow-x:auto;">
-                    <tr>
-                        <th colspan="7" id="title">Month Year</th>
-                    </tr>
-                    <tr id="heading">
-                        <td>Mon</td>
-                        <td>Tues</td>
-                        <td>Wed</td>
-                        <td>Thurs</td>
-                        <td>Fri</td>
-                        <td>Sat</td>
-                        <td class="grayout">Sun</td>
-                    </tr>
-                    <tr>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td class="grayout"></td>
-                    </tr>
-                    <tr>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td class="grayout"></td>
-                    </tr>
-                    <tr>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td class="grayout"></td>
-                    </tr>
-                    <tr>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td class="grayout"></td>
-                    </tr>
-                    <tr>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td class="grayout"></td>
-                    </tr>
-                    <tr id="rowsix" class="hide">
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td class="grayout"></td>
-                    </tr>
-                </table>
-                <br>
-                <!-- The Modal -->
+                <!--End of dropdown populated with each team member through Javascript-->
+                <br><br><br>
+                <!-- Calendar -->
+                <div>
+                    <table id="t1" style="overflow-x:auto;">
+                        <tr>
+                            <th colspan="7" id="title">Month Year</th>
+                        </tr>
+                        <!-- Display headings for each day of the week -->
+                        <tr id="heading">
+                            <td>Mon</td>
+                            <td>Tues</td>
+                            <td>Wed</td>
+                            <td>Thurs</td>
+                            <td>Fri</td>
+                            <td>Sat</td>
+                            <!-- Gray out Sundays (since no one works then) -->
+                            <td class="grayout">Sun</td>
+                        </tr>
+                        <!-- End of display headings for each day of the week -->
+
+                        <!-- Display each individual box and link to a modal box -->
+                        <tr>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td class="grayout"></td>
+                        </tr>
+                        <tr>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td class="grayout"></td>
+                        </tr>
+                        <tr>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td class="grayout"></td>
+                        </tr>
+                        <tr>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td class="grayout"></td>
+                        </tr>
+                        <tr>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td class="grayout"></td>
+                        </tr>
+                        <!-- Add extra row only for months with six weeks -->
+                        <tr id="rowsix" class="hide">
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td class="grayout"></td>
+                        </tr>
+                        <!-- End of add extra row only for months with six weeks -->
+                        <!-- End of display each individual box and link to a modal box -->
+                    </table>
+                </div>
+                <!-- End of Calendar -->
+
+                <!-- The Modal Boxes -->
                 <div id="myModal" class="modal">
                     <div class="modal-content">
                         <span class="close">&times;</span>
+                        <!-- Shows shifts & breaks from firebase in modal boxes -->
                         <h3>First Shift</h3>
                         <p id="modalText">No time logged</p>
                         <h3>Second Shift</h3>
@@ -153,6 +174,9 @@
                         <p id="breakText5"> </p>
                     </div>
                 </div>
+                <!-- End of the Modal Boxes -->
+
+                <!-- Display weekly and monthly hour totals -->
                 <table id="t2">
                     <tr>
                         <th colspan="2">Totals:</th>
@@ -186,13 +210,10 @@
                         <td id="totals"></td>
                     </tr>
                 </table>
-
-                <!-- Modal content -->
-
+                <!-- End of display weekly and monthly hour totals -->
             </div>
         </div>
     </div>
 </body>
 
 </html>
-<!--onclick = "selectName(this)"-->
