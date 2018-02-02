@@ -301,7 +301,7 @@ input[type=radio]:checked {
 .iframes {
     border-style: none;
     width: 100%;
-    height: 800px;
+    height: 20710px;
 }
 
 .iframing {
@@ -456,7 +456,7 @@ form {
 
 .announcementButton {
     margin: 0 35%;
-    width: 25%;
+    width: 31%;
 }
 
 /* --------------------------- End of Announement Page ---------------- */
@@ -547,7 +547,7 @@ select.drop-down {
     }
 
     .iframing {
-        /*        height: 100%;*/
+                height: 100%;
     }
 
     .announcementButton {
