@@ -111,7 +111,6 @@ function showModal(num) {
         var currentMonth = [];
         var count = 0;
         for (var i = 0; i < dates.length; i++) {
-            //            console.log(dates.length)
             if (document.getElementById("month-dropdown").value == dates[i][0]) {
                 currentMonth[count] = dates[i];
                 var firstDash = currentMonth[count].indexOf("-");
@@ -137,15 +136,12 @@ function showModal(num) {
                 txt += "<br />Break In: " + person[currentMonth[i]].In + "<br />";
                 document.getElementById("breakText1").innerHTML = txt;
                 check = true;
-                console.log("I'm here #1'");
-                console.log(txt);
             } else {
                 document.getElementById("breakText1").innerHTML = "No breaks logged";
                 document.getElementById("breakText2").innerHTML = "";
                 document.getElementById("breakText3").innerHTML = "";
                 document.getElementById("breakText4").innerHTML = "";
                 document.getElementById("breakText5").innerHTML = "";
-                console.log("else #1");
                 continue;
             }
             if (num == monthDays[i + 1]) {
@@ -159,11 +155,8 @@ function showModal(num) {
                 txt += "<br />Break In: " + person[currentMonth[i + 1]].In + "<br />";
                 document.getElementById("breakText2").innerHTML = txt;
                 check = true;
-                console.log("I'm here #2");
-                console.log(txt);
             } else {
                 document.getElementById("breakText2").innerHTML = "No more breaks";
-                console.log("else #2");
                 break;
             }
             if (num == monthDays[i + 2]) {
@@ -177,11 +170,8 @@ function showModal(num) {
                 txt += "<br />Break In: " + person[currentMonth[i + 2]].In + "<br />";
                 document.getElementById("breakText3").innerHTML = txt;
                 check = true;
-                console.log("I'm here #3'");
-                console.log(txt);
             } else {
                 document.getElementById("breakText3").innerHTML = "No more breaks";
-                console.log("else #3");
                 break;
             }
             if (num == monthDays[i + 4]) {
@@ -195,11 +185,8 @@ function showModal(num) {
                 txt += "<br />Break In: " + person[currentMonth[i + 3]].In + "<br />";
                 document.getElementById("breakText4").innerHTML = txt;
                 check = true;
-                console.log("I'm here #4'");
-                console.log(txt);
             } else {
                 document.getElementById("breakText4").innerHTML = "No more breaks";
-                console.log("else #3");
                 break;
             }
             if (num == monthDays[i + 4]) {
@@ -213,11 +200,8 @@ function showModal(num) {
                 txt += "<br />Break In: " + person[currentMonth[i + 4]].In + "<br />";
                 document.getElementById("breakText5").innerHTML = txt;
                 check = true;
-                console.log("I'm here #3'");
-                console.log(txt);
             } else {
                 document.getElementById("breakText").innerHTML = "No more breaks";
-                console.log("else #4");
                 break;
             }
         }
@@ -237,7 +221,6 @@ function showModal(num) {
     });
 
 }
-
 //-------------------------------- End of Connect to Firebase --------------------------------//
 
 
@@ -246,234 +229,233 @@ function showModal(num) {
 
 function selectName(selected) {
     firebase.database().ref('users').on('value', snapshot => {
-        var names = snapshot.val();
-        var name;
-        for (name in names) {
+        var names = (snapshot.val());
+        var i;
+        for (i in names) {
+            var member = names[i];
             var j;
-            if (j == 'HoursWorked')
-                var dates = Object.keys(person);
-            var monthDays = [];
-            var currentMonth = [];
-            var count = 0;
-            for (var i = 0; i < dates.length; i++) {
-                if (document.getElementById("month-dropdown").value == dates[i][0]) {
-                    currentMonth[count] = dates[i];
-                    var firstDash = currentMonth[count].indexOf("-");
-                    var lastDash = currentMonth[count].lastIndexOf("-");
-                    monthDays[count] = currentMonth[count].slice(firstDash + 1, lastDash);
-                    count++;
-                }
-            }
-            var check = false;
+            for (j in member) {
+                var individual = member[j];
+                var o;
+                for (o in individual) {
+                    if (o == "HoursWorked") {
+                        var dates = Object.keys(individual[o]);
+                        var monthDays = [];
+                        var currentMonth = [];
+                        var count = 0;
+                        for (var i = 0; i < dates.length; i++) {
 
-            for (var i = 0; i < monthDays.length; i++) {
-                if (num == monthDays[i + 1]) {
-                    if (person[currentMonth[i + 1]].CommentIn == undefined) {
-                        person[currentMonth[i + 1]].CommentIn = "N/A";
-                    }
-                    if (person[currentMonth[i + 1]].CommentOut == undefined) {
-                        person[currentMonth[i + 1]].CommentOut = "N/A";
-                    }
-                    if (person[currentMonth[i + 1]].Out == undefined) {
-                        person[currentMonth[i + 1]].Out = "N/A";
-                    }
-                    var txt = "Clocked in at: " + person[currentMonth[i + 1]].In + "<br />";
-                    txt += "CommentIn: " + person[currentMonth[i + 1]].CommentIn + "<br />";
-                    txt += "Clock out at: " + person[currentMonth[i + 1]].Out + "<br />";
-                    txt += "CommentOut: " + person[currentMonth[i + 1]].CommentOut + "<br />";
-                    document.getElementById("modalText").innerHTML = txt;
-                    check = true;
-                } else if (num == monthDays[i]) {
-                    if (person[currentMonth[i]].CommentIn == undefined) {
-                        person[currentMonth[i]].CommentIn = "N/A";
-                    }
-                    if (person[currentMonth[i]].CommentOut == undefined) {
-                        person[currentMonth[i]].CommentOut = "N/A";
-                    }
-                    if (person[currentMonth[i]].Out == undefined) {
-                        person[currentMonth[i]].Out = "N/A";
-                    }
-                    var txt = "Clocked in at: " + person[currentMonth[i]].In + "<br />";
-                    txt += "CommentIn: " + person[currentMonth[i]].CommentIn + "<br />";
-                    txt += "Clock out at: " + person[currentMonth[i]].Out + "<br />";
-                    txt += "CommentOut: " + person[currentMonth[i]].CommentOut + "<br />";
-                    document.getElementById("modalText").innerHTML = txt;
-                    document.getElementById("secondShift").innerHTML = "No time logged";
-                    check = true;
-                    break;
-                } else {
-                    document.getElementById("secondShift").innerHTML = "No time logged";
-                }
-                if (num == monthDays[i]) {
-                    if (person[currentMonth[i]].CommentIn == undefined) {
-                        person[currentMonth[i]].CommentIn = "N/A";
-                    }
-                    if (person[currentMonth[i]].CommentOut == undefined) {
-                        person[currentMonth[i]].CommentOut = "N/A";
-                    }
-                    if (person[currentMonth[i]].Out == undefined) {
-                        person[currentMonth[i]].Out = "N/A";
-                    }
-                    var txt = "Clocked in at: " + person[currentMonth[i]].In + "<br />";
-                    txt += "CommentIn: " + person[currentMonth[i]].CommentIn + "<br />";
-                    txt += "Clock out at: " + person[currentMonth[i]].Out + "<br />";
-                    txt += "CommentOut: " + person[currentMonth[i]].CommentOut + "<br />";
-                    document.getElementById("secondShift").innerHTML = txt;
-                    check = true;
-                    break;
-                }
+                            if (document.getElementById("month-dropdown").value == dates[i][0]) {
+                                currentMonth[count] = dates[i];
+                                var firstDash = currentMonth[count].indexOf("-");
+                                var lastDash = currentMonth[count].lastIndexOf("-");
+                                monthDays[count] = currentMonth[count].slice(firstDash + 1, lastDash);
+                                count++;
+                            }
+                        }
+                        var check = false;
 
-            }
-        }
-    });
-    if (!check) {
-        document.getElementById("modalText").innerHTML = "No time logged";
-    }
+                        for (var i = 0; i < monthDays.length; i++) {
+                            if (selected == monthDays[i + 1]) {
+                                if (names[currentMonth[i + 1]].CommentIn == undefined) {
+                                    names[currentMonth[i + 1]].CommentIn = "N/A";
+                                }
+                                if (names[currentMonth[i + 1]].CommentOut == undefined) {
+                                    names[currentMonth[i + 1]].CommentOut = "N/A";
+                                }
+                                if (names[currentMonth[i + 1]].Out == undefined) {
+                                    names[currentMonth[i + 1]].Out = "N/A";
+                                }
+                                var txt = "Clocked in at: " + names[currentMonth[i + 1]].In + "<br />";
+                                txt += "CommentIn: " + names[currentMonth[i + 1]].CommentIn + "<br />";
+                                txt += "Clock out at: " + names[currentMonth[i + 1]].Out + "<br />";
+                                txt += "CommentOut: " + names[currentMonth[i + 1]].CommentOut + "<br />";
+                                document.getElementById("modalText").innerHTML = txt;
+                                check = true;
+                            } else if (selected == monthDays[i]) {
+                                if (names[currentMonth[i]].CommentIn == undefined) {
+                                    names[currentMonth[i]].CommentIn = "N/A";
+                                }
+                                if (names[currentMonth[i]].CommentOut == undefined) {
+                                    names[currentMonth[i]].CommentOut = "N/A";
+                                }
+                                if (names[currentMonth[i]].Out == undefined) {
+                                    names[currentMonth[i]].Out = "N/A";
+                                }
+                                var txt = "Clocked in at: " + names[currentMonth[i]].In + "<br />";
+                                txt += "CommentIn: " + names[currentMonth[i]].CommentIn + "<br />";
+                                txt += "Clock out at: " + names[currentMonth[i]].Out + "<br />";
+                                txt += "CommentOut: " + names[currentMonth[i]].CommentOut + "<br />";
+                                document.getElementById("modalText").innerHTML = txt;
+                                document.getElementById("secondShift").innerHTML = "No time logged";
+                                check = true;
+                                console.log("else if 1");
+                                break;
+                            } else {
+                                document.getElementById("secondShift").innerHTML = "No time logged";
+                                console.log("else");
+                            }
+                            if (selected == monthDays[i]) {
+                                if (names[currentMonth[i]].CommentIn == undefined) {
+                                    names[currentMonth[i]].CommentIn = "N/A";
+                                }
+                                if (names[currentMonth[i]].CommentOut == undefined) {
+                                    names[currentMonth[i]].CommentOut = "N/A";
+                                }
+                                if (names[currentMonth[i]].Out == undefined) {
+                                    names[currentMonth[i]].Out = "N/A";
+                                }
+                                var txt = "Clocked in at: " + names[currentMonth[i]].In + "<br />";
+                                txt += "CommentIn: " + names[currentMonth[i]].CommentIn + "<br />";
+                                txt += "Clock out at: " + names[currentMonth[i]].Out + "<br />";
+                                txt += "CommentOut: " + names[currentMonth[i]].CommentOut + "<br />";
+                                document.getElementById("secondShift").innerHTML = txt;
+                                check = true;
+                                console.log("if 2");
+                                break;
+                            }
 
-    count = 0;
+                        }
+                    }
 
-
-
-    ppl.catch(function (error) {
-        alert(error);
-        return;
-    });
-
-
-    var breaks = firebase.database().ref('users/' + user.displayName + '/TimeClock/Breaks').once('value');
-    breaks.then(function (snapshot) {
-        var person = (snapshot.val());
-
-        var dates = Object.keys(person);
-        var monthDays = [];
-        var currentMonth = [];
-        var count = 0;
-        for (var i = 0; i < dates.length; i++) {
-            //            console.log(dates.length)
-            if (document.getElementById("month-dropdown").value == dates[i][0]) {
-                currentMonth[count] = dates[i];
-                var firstDash = currentMonth[count].indexOf("-");
-                var lastDash = currentMonth[count].lastIndexOf("-");
-                monthDays[count] = currentMonth[count].slice(firstDash + 1, lastDash);
-                count++;
-            }
-        }
-        var check = false;
-        var txt = "";
-        for (var i = 0; i < monthDays.length; i++) {
-            if (num < monthDays[i]) {
-                return;
-            }
-            if (num == monthDays[i]) {
-                if (person[currentMonth[i]].In == undefined) {
-                    person[currentMonth[i]].In = "N/A";
                 }
-                if (person[currentMonth[i]].Out == undefined) {
-                    person[currentMonth[i]].Out = "N/A";
-                }
-                var txt = "Break Out: " + person[currentMonth[i]].Out;
-                txt += "<br />Break In: " + person[currentMonth[i]].In + "<br />";
-                document.getElementById("breakText1").innerHTML = txt;
-                check = true;
-                console.log("I'm here #1'");
-                console.log(txt);
-            } else {
-                document.getElementById("breakText1").innerHTML = "No breaks logged";
-                document.getElementById("breakText2").innerHTML = "";
-                document.getElementById("breakText3").innerHTML = "";
-                document.getElementById("breakText4").innerHTML = "";
-                document.getElementById("breakText5").innerHTML = "";
-                console.log("else #1");
-                continue;
-            }
-            if (num == monthDays[i + 1]) {
-                if (person[currentMonth[i + 1]].In == undefined) {
-                    person[currentMonth[i + 1]].In = "N/A";
-                }
-                if (person[currentMonth[i + 1]].Out == undefined) {
-                    person[currentMonth[i + 1]].Out = "N/A";
-                }
-                var txt = "Break Out: " + person[currentMonth[i + 1]].Out;
-                txt += "<br />Break In: " + person[currentMonth[i + 1]].In + "<br />";
-                document.getElementById("breakText2").innerHTML = txt;
-                check = true;
-                console.log("I'm here #2");
-                console.log(txt);
-            } else {
-                document.getElementById("breakText2").innerHTML = "No more breaks";
-                console.log("else #2");
-                break;
-            }
-            if (num == monthDays[i + 2]) {
-                if (person[currentMonth[i + 2]].In == undefined) {
-                    person[currentMonth[i + 2]].In = "N/A";
-                }
-                if (person[currentMonth[i + 2]].Out == undefined) {
-                    person[currentMonth[i + 2]].Out = "N/A";
-                }
-                var txt = "Break Out: " + person[currentMonth[i + 2]].Out;
-                txt += "<br />Break In: " + person[currentMonth[i + 2]].In + "<br />";
-                document.getElementById("breakText3").innerHTML = txt;
-                check = true;
-                console.log("I'm here #3'");
-                console.log(txt);
-            } else {
-                document.getElementById("breakText3").innerHTML = "No more breaks";
-                console.log("else #3");
-                break;
-            }
-            if (num == monthDays[i + 4]) {
-                if (person[currentMonth[i + 3]].In == undefined) {
-                    person[currentMonth[i]].In = "N/A";
-                }
-                if (person[currentMonth[i + 3]].Out == undefined) {
-                    person[currentMonth[i + 3]].Out = "N/A";
-                }
-                var txt = "Break Out: " + person[currentMonth[i + 3]].Out;
-                txt += "<br />Break In: " + person[currentMonth[i + 3]].In + "<br />";
-                document.getElementById("breakText4").innerHTML = txt;
-                check = true;
-                console.log("I'm here #4'");
-                console.log(txt);
-            } else {
-                document.getElementById("breakText4").innerHTML = "No more breaks";
-                console.log("else #3");
-                break;
-            }
-            if (num == monthDays[i + 4]) {
-                if (person[currentMonth[i + 4]].In == undefined) {
-                    person[currentMonth[i + 4]].In = "N/A";
-                }
-                if (person[currentMonth[i + 4]].Out == undefined) {
-                    person[currentMonth[i + 4]].Out = "N/A";
-                }
-                var txt = "Break Out: " + person[currentMonth[i + 4]].Out;
-                txt += "<br />Break In: " + person[currentMonth[i + 4]].In + "<br />";
-                document.getElementById("breakText5").innerHTML = txt;
-                check = true;
-                console.log("I'm here #3'");
-                console.log(txt);
-            } else {
-                document.getElementById("breakText").innerHTML = "No more breaks";
-                console.log("else #4");
-                break;
             }
         }
         if (!check) {
-            document.getElementById("breakText1").innerHTML = "No breaks logged";
+            document.getElementById("modalText").innerHTML = "No time logged";
         }
     });
-
-
 
 
     count = 0;
 
 
-    breaks.catch(function (error) {
-        alert(error);
-        return;
-    });
+
+    //    ppl.catch(function (error) {
+    //        alert(error);
+    //        return;
+    //    });
+
+
+    //    var breaks = firebase.database().ref('users/' + user.displayName + '/TimeClock/Breaks').once('value');
+    //    breaks.then(function (snapshot) {
+    //        var person = (snapshot.val());
+    //
+    //        var dates = Object.keys(person);
+    //        var monthDays = [];
+    //        var currentMonth = [];
+    //        var count = 0;
+    //        for (var i = 0; i < dates.length; i++) {
+    //            if (document.getElementById("month-dropdown").value == dates[i][0]) {
+    //                currentMonth[count] = dates[i];
+    //                var firstDash = currentMonth[count].indexOf("-");
+    //                var lastDash = currentMonth[count].lastIndexOf("-");
+    //                monthDays[count] = currentMonth[count].slice(firstDash + 1, lastDash);
+    //                count++;
+    //            }
+    //        }
+    //        var check = false;
+    //        var txt = "";
+    //        for (var i = 0; i < monthDays.length; i++) {
+    //            if (num < monthDays[i]) {
+    //                return;
+    //            }
+    //            if (num == monthDays[i]) {
+    //                if (person[currentMonth[i]].In == undefined) {
+    //                    person[currentMonth[i]].In = "N/A";
+    //                }
+    //                if (person[currentMonth[i]].Out == undefined) {
+    //                    person[currentMonth[i]].Out = "N/A";
+    //                }
+    //                var txt = "Break Out: " + person[currentMonth[i]].Out;
+    //                txt += "<br />Break In: " + person[currentMonth[i]].In + "<br />";
+    //                document.getElementById("breakText1").innerHTML = txt;
+    //                check = true;
+    //            } else {
+    //                document.getElementById("breakText1").innerHTML = "No breaks logged";
+    //                document.getElementById("breakText2").innerHTML = "";
+    //                document.getElementById("breakText3").innerHTML = "";
+    //                document.getElementById("breakText4").innerHTML = "";
+    //                document.getElementById("breakText5").innerHTML = "";
+    //                continue;
+    //            }
+    //            if (num == monthDays[i + 1]) {
+    //                if (person[currentMonth[i + 1]].In == undefined) {
+    //                    person[currentMonth[i + 1]].In = "N/A";
+    //                }
+    //                if (person[currentMonth[i + 1]].Out == undefined) {
+    //                    person[currentMonth[i + 1]].Out = "N/A";
+    //                }
+    //                var txt = "Break Out: " + person[currentMonth[i + 1]].Out;
+    //                txt += "<br />Break In: " + person[currentMonth[i + 1]].In + "<br />";
+    //                document.getElementById("breakText2").innerHTML = txt;
+    //                check = true;
+    //            } else {
+    //                document.getElementById("breakText2").innerHTML = "No more breaks";
+    //                break;
+    //            }
+    //            if (num == monthDays[i + 2]) {
+    //                if (person[currentMonth[i + 2]].In == undefined) {
+    //                    person[currentMonth[i + 2]].In = "N/A";
+    //                }
+    //                if (person[currentMonth[i + 2]].Out == undefined) {
+    //                    person[currentMonth[i + 2]].Out = "N/A";
+    //                }
+    //                var txt = "Break Out: " + person[currentMonth[i + 2]].Out;
+    //                txt += "<br />Break In: " + person[currentMonth[i + 2]].In + "<br />";
+    //                document.getElementById("breakText3").innerHTML = txt;
+    //                check = true;
+    //            } else {
+    //                document.getElementById("breakText3").innerHTML = "No more breaks";
+    //                document.getElementById("breakText3").innerHTML = "No more breaks";
+    //                break;
+    //            }
+    //            if (num == monthDays[i + 4]) {
+    //                if (person[currentMonth[i + 3]].In == undefined) {
+    //                    person[currentMonth[i]].In = "N/A";
+    //                }
+    //                if (person[currentMonth[i + 3]].Out == undefined) {
+    //                    person[currentMonth[i + 3]].Out = "N/A";
+    //                }
+    //                var txt = "Break Out: " + person[currentMonth[i + 3]].Out;
+    //                txt += "<br />Break In: " + person[currentMonth[i + 3]].In + "<br />";
+    //                document.getElementById("breakText4").innerHTML = txt;
+    //                check = true;
+    //            } else {
+    //                document.getElementById("breakText4").innerHTML = "No more breaks";
+    //                break;
+    //            }
+    //            if (num == monthDays[i + 4]) {
+    //                if (person[currentMonth[i + 4]].In == undefined) {
+    //                    person[currentMonth[i + 4]].In = "N/A";
+    //                }
+    //                if (person[currentMonth[i + 4]].Out == undefined) {
+    //                    person[currentMonth[i + 4]].Out = "N/A";
+    //                }
+    //                var txt = "Break Out: " + person[currentMonth[i + 4]].Out;
+    //                txt += "<br />Break In: " + person[currentMonth[i + 4]].In + "<br />";
+    //                document.getElementById("breakText5").innerHTML = txt;
+    //                check = true;
+    //            } else {
+    //                document.getElementById("breakText").innerHTML = "No more breaks";
+    //                break;
+    //            }
+    //        }
+    //        if (!check) {
+    //            document.getElementById("breakText1").innerHTML = "No breaks logged";
+    //        }
+    //    });
+    //
+    //
+    //
+    //
+    //    count = 0;
+    //
+    //
+    //    breaks.catch(function (error) {
+    //        alert(error);
+    //        return;
+    //    });
 }
 
 
@@ -634,6 +616,7 @@ function modalBox(number) {
     var modal = document.getElementById('myModal');
 
     showModal(num);
+    //    selectName(selected);
     // Get the button that opens the modal
     var btn = document.getElementById("myBtn");
 
@@ -667,7 +650,6 @@ function modalBox(number) {
             firebase.database().ref('users/' + user.displayName).on('value', snapshot => {
                 var currentUser = (snapshot.val());
                 var i;
-                //        console.log(user.displayName)
                 for (i in currentUser) {
                     if (i == 'TeamLead') {
                         var team = currentUser[i];
@@ -682,7 +664,6 @@ function modalBox(number) {
                                 for (j in userData) {
                                     if (j == 'Team') {
                                         if (userData[j] == team) {
-                                            console.log(userData[j])
                                             var opt = document.createElement("option");
                                             opt.value = user;
                                             opt.innerHTML = user;
