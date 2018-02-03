@@ -141,8 +141,12 @@ tr#title th {
 /* ---------------------------- End of styling modal boxes-Emma -----------------------------*/
 
 #team-dropdown,
-#name-dropdown {
-    /*    display: none;*/
+#name-dropdown,
+#month-dropdown {
+float: right;
+    display: flex;
+    justify-content: center;
+    flex-direction: row-reverse;
     -webkit-border-radius: 13px;
     border: 1px solid #AAA;
     background-color: #0076c6;
