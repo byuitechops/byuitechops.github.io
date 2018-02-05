@@ -2,12 +2,65 @@ select.hide {
     display: none;
 }
 
+
+
+/* ---------------------------- Styling calendar-Emma -----------------------------*/
+
+table#t1 {
+    margin-bottom: 5%;
+    float: left;
+    margin-left: 27%;
+    margin-top: 2%;
+}
+
+.grayout {
+    background-color: gray;
+    opacity: 0.6;
+}
+
+th {
+    text-align: center;
+    font-size: 30px;
+    padding: 2px 10px;
+    background-color: #0076c6;
+    color: white;
+}
+
+table,
+td,
+th {
+    border: 3px solid black;
+}
+
+td {
+    padding: 2px 10px;
+    height: 100px;
+    width: 125px;
+    text-align: right;
+    vertical-align: text-top;
+}
+
+tr#heading td {
+    height: 35px;
+    width: 100px;
+    font-weight: 550;
+}
+
+tr#title th {
+    text-align: center;
+    height: 60px;
+
+}
+
+/* ---------------------------- End of Styling calendar-Emma -----------------------------*/
+
 /* -------------------------------- Styling totals-Emma ----------------------------------*/
 
 table#t2 {
-    padding-left: 0;
-    margin-top: 9.5%;
-    float: right;
+    display: inline-block;
+    position: absolute;
+    margin-top: 1.7%;
+    margin-left: 10px;
 }
 
 td#week {
@@ -26,7 +79,7 @@ td#totals {
 
 td#monthly {
     font-size: 20px;
-    font-weight: bold;
+    font-weight: 550;
     height: 35px;
     width: 100px;
     text-align: left;
@@ -34,56 +87,6 @@ td#monthly {
 
 
 /* ----------------------------- End of Styling totals-Emma ------------------------------*/
-
-/* ---------------------------- Styling calendar-Emma -----------------------------*/
-
-table#t1 {
-    margin-bottom: 5%;
-    float: left;
-}
-
-
-.grayout {
-    background-color: gray;
-    opacity: 0.6;
-}
-
-th {
-    text-align: center;
-    font-size: 30px;
-    padding: 2px 10px;
-    background-color: #0076c6;
-    color: white;
-}
-
-
-table,
-td {
-    border: 3px solid black;
-    margin-left: 28.5%;
-}
-
-td {
-    padding: 2px 10px;
-    height: 100px;
-    width: 125px;
-    text-align: right;
-    vertical-align: text-top;
-}
-
-tr#heading td {
-    height: 35px;
-    width: 100px;
-}
-
-tr#title th {
-    text-align: center;
-    border: 3px solid black;
-    height: 60px;
-
-}
-
-/* ---------------------------- End of Styling calendar-Emma -----------------------------*/
 
 /* --------------------- Code added for styling modal boxes-Emma ------------------------ */
 
@@ -116,7 +119,7 @@ tr#title th {
     background-color: #fefefe;
     margin: 15% 15% 0% 31%;
     /* 15% from the top and centered */
-    padding: 20px;
+    padding: 0px;
     border: 1px solid #888;
     width: 50%;
     /* Could be more or less, depending on screen size */
@@ -143,12 +146,11 @@ tr#title th {
 #team-dropdown,
 #name-dropdown,
 #month-dropdown {
-float: right;
-    display: flex;
-    justify-content: center;
-    flex-direction: row-reverse;
+    float: right;
+    position: relative;
+    right: 4.4%;
+    text-align: left;
     -webkit-border-radius: 13px;
-    border: 1px solid #AAA;
     background-color: #0076c6;
     color: white;
     margin: 0.6em;
@@ -157,8 +159,8 @@ float: right;
     height: 2.5em;
     border-radius: 1em;
     font-size: 19px;
-    margin-left: 75px;
-    margin-right: 75px;
+    margin-left: 50px;
+    margin-right: 50px;
     overflow: hidden;
     padding: 5px 10px;
     white-space: nowrap;
@@ -168,27 +170,6 @@ float: right;
 
 
 /*New code added by Emma for dropdown menus*/
-
-select.drop-down {
-    -webkit-border-radius: 13px;
-    border: 1px solid #AAA;
-    background-color: #0076c6;
-    color: white;
-    margin: 0.6em;
-    border: none;
-    cursor: pointer;
-    height: 2.5em;
-    border-radius: 1em;
-    font-size: 19px;
-    margin-left: 75px;
-    margin-right: 75px;
-    overflow: hidden;
-    padding: 5px 10px;
-    white-space: nowrap;
-    width: 200px;
-    height: 35px;
-
-}
 
 @media screen and (max-width: 1200px) {
     select#drop-down {
@@ -235,4 +216,8 @@ select.drop-down {
 
     }
 
+}
+
+h1 {
+    margin-left: 35%;
 }

@@ -14,216 +14,218 @@ firebase.initializeApp(config);
 
 /*--------------------------------- Display current user's time logs ----------------------------------*/
 
-/* Describe what the function does */
+/* Retrieves info from Firebase to display the current user's check ins and outs */
 function showModal(num) {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
-        var user = firebase.auth().currentUser;
-        var ppl = firebase.database().ref('users/' + user.displayName + '/TimeClock/HoursWorked').once('value');
-        ppl.then(function (snapshot) {
+            var user = firebase.auth().currentUser;
+            console.log(user);
+            var ppl = firebase.database().ref('users/' + user.displayName + '/TimeClock/HoursWorked').once('value');
+            ppl.then(function (snapshot) {
 
-            var person = (snapshot.val());
+                var person = (snapshot.val());
 
-            var dates = Object.keys(person);
-            var monthDays = [];
-            var currentMonth = [];
-            var count = 0;
-            for (var i = 0; i < dates.length; i++) {
-                if (document.getElementById("month-dropdown").value == dates[i][0]) {
-                    currentMonth[count] = dates[i];
-                    var firstDash = currentMonth[count].indexOf("-");
-                    var lastDash = currentMonth[count].lastIndexOf("-");
-                    monthDays[count] = currentMonth[count].slice(firstDash + 1, lastDash);
-                    count++;
+                var dates = Object.keys(person);
+                var monthDays = [];
+                var currentMonth = [];
+                var count = 0;
+                // Finds the day of the month by taking the value between the two dashes
+                // For example, the date 2-14-2017 would turn into 14
+                for (var i = 0; i < dates.length; i++) {
+                    if (document.getElementById("month-dropdown").value == dates[i][0]) {
+                        currentMonth[count] = dates[i];
+                        var firstDash = currentMonth[count].indexOf("-");
+                        var lastDash = currentMonth[count].lastIndexOf("-");
+                        monthDays[count] = currentMonth[count].slice(firstDash + 1, lastDash);
+                        count++;
+                    }
                 }
-            }
-            var check = false;
+                var check = false;
 
-            for (var i = 0; i < monthDays.length; i++) {
-                if (num == monthDays[i + 1]) {
-                    if (person[currentMonth[i + 1]].CommentIn == undefined) {
-                        person[currentMonth[i + 1]].CommentIn = "N/A";
+                for (var i = 0; i < monthDays.length; i++) {
+                    if (num == monthDays[i + 1]) {
+                        if (person[currentMonth[i + 1]].CommentIn == undefined) {
+                            person[currentMonth[i + 1]].CommentIn = "N/A";
+                        }
+                        if (person[currentMonth[i + 1]].CommentOut == undefined) {
+                            person[currentMonth[i + 1]].CommentOut = "N/A";
+                        }
+                        if (person[currentMonth[i + 1]].Out == undefined) {
+                            person[currentMonth[i + 1]].Out = "N/A";
+                        }
+                        var txt = "Clocked in at: " + person[currentMonth[i + 1]].In + "<br />";
+                        txt += "CommentIn: " + person[currentMonth[i + 1]].CommentIn + "<br />";
+                        txt += "Clock out at: " + person[currentMonth[i + 1]].Out + "<br />";
+                        txt += "CommentOut: " + person[currentMonth[i + 1]].CommentOut + "<br />";
+                        document.getElementById("modalText").innerHTML = txt;
+                        check = true;
+                    } else if (num == monthDays[i]) {
+                        if (person[currentMonth[i]].CommentIn == undefined) {
+                            person[currentMonth[i]].CommentIn = "N/A";
+                        }
+                        if (person[currentMonth[i]].CommentOut == undefined) {
+                            person[currentMonth[i]].CommentOut = "N/A";
+                        }
+                        if (person[currentMonth[i]].Out == undefined) {
+                            person[currentMonth[i]].Out = "N/A";
+                        }
+                        var txt = "Clocked in at: " + person[currentMonth[i]].In + "<br />";
+                        txt += "CommentIn: " + person[currentMonth[i]].CommentIn + "<br />";
+                        txt += "Clock out at: " + person[currentMonth[i]].Out + "<br />";
+                        txt += "CommentOut: " + person[currentMonth[i]].CommentOut + "<br />";
+                        document.getElementById("modalText").innerHTML = txt;
+                        document.getElementById("secondShift").innerHTML = "No time logged";
+                        check = true;
+                        break;
+                    } else {
+                        document.getElementById("secondShift").innerHTML = "No time logged";
                     }
-                    if (person[currentMonth[i + 1]].CommentOut == undefined) {
-                        person[currentMonth[i + 1]].CommentOut = "N/A";
+                    if (num == monthDays[i]) {
+                        if (person[currentMonth[i]].CommentIn == undefined) {
+                            person[currentMonth[i]].CommentIn = "N/A";
+                        }
+                        if (person[currentMonth[i]].CommentOut == undefined) {
+                            person[currentMonth[i]].CommentOut = "N/A";
+                        }
+                        if (person[currentMonth[i]].Out == undefined) {
+                            person[currentMonth[i]].Out = "N/A";
+                        }
+                        var txt = "Clocked in at: " + person[currentMonth[i]].In + "<br />";
+                        txt += "CommentIn: " + person[currentMonth[i]].CommentIn + "<br />";
+                        txt += "Clock out at: " + person[currentMonth[i]].Out + "<br />";
+                        txt += "CommentOut: " + person[currentMonth[i]].CommentOut + "<br />";
+                        document.getElementById("secondShift").innerHTML = txt;
+                        check = true;
+                        break;
                     }
-                    if (person[currentMonth[i + 1]].Out == undefined) {
-                        person[currentMonth[i + 1]].Out = "N/A";
-                    }
-                    var txt = "Clocked in at: " + person[currentMonth[i + 1]].In + "<br />";
-                    txt += "CommentIn: " + person[currentMonth[i + 1]].CommentIn + "<br />";
-                    txt += "Clock out at: " + person[currentMonth[i + 1]].Out + "<br />";
-                    txt += "CommentOut: " + person[currentMonth[i + 1]].CommentOut + "<br />";
-                    document.getElementById("modalText").innerHTML = txt;
-                    check = true;
-                } else if (num == monthDays[i]) {
-                    if (person[currentMonth[i]].CommentIn == undefined) {
-                        person[currentMonth[i]].CommentIn = "N/A";
-                    }
-                    if (person[currentMonth[i]].CommentOut == undefined) {
-                        person[currentMonth[i]].CommentOut = "N/A";
-                    }
-                    if (person[currentMonth[i]].Out == undefined) {
-                        person[currentMonth[i]].Out = "N/A";
-                    }
-                    var txt = "Clocked in at: " + person[currentMonth[i]].In + "<br />";
-                    txt += "CommentIn: " + person[currentMonth[i]].CommentIn + "<br />";
-                    txt += "Clock out at: " + person[currentMonth[i]].Out + "<br />";
-                    txt += "CommentOut: " + person[currentMonth[i]].CommentOut + "<br />";
-                    document.getElementById("modalText").innerHTML = txt;
-                    document.getElementById("secondShift").innerHTML = "No time logged";
-                    check = true;
-                    break;
-                } else {
-                    document.getElementById("secondShift").innerHTML = "No time logged";
+
                 }
-                if (num == monthDays[i]) {
-                    if (person[currentMonth[i]].CommentIn == undefined) {
-                        person[currentMonth[i]].CommentIn = "N/A";
-                    }
-                    if (person[currentMonth[i]].CommentOut == undefined) {
-                        person[currentMonth[i]].CommentOut = "N/A";
-                    }
-                    if (person[currentMonth[i]].Out == undefined) {
-                        person[currentMonth[i]].Out = "N/A";
-                    }
-                    var txt = "Clocked in at: " + person[currentMonth[i]].In + "<br />";
-                    txt += "CommentIn: " + person[currentMonth[i]].CommentIn + "<br />";
-                    txt += "Clock out at: " + person[currentMonth[i]].Out + "<br />";
-                    txt += "CommentOut: " + person[currentMonth[i]].CommentOut + "<br />";
-                    document.getElementById("secondShift").innerHTML = txt;
-                    check = true;
-                    break;
+                if (!check) {
+                    document.getElementById("modalText").innerHTML = "No time logged";
                 }
 
-            }
-            if (!check) {
-                document.getElementById("modalText").innerHTML = "No time logged";
-            }
+                count = 0;
 
-            count = 0;
+            });
+            ppl.catch(function (error) {
+                alert(error);
+                return;
+            });
 
-        });
-        ppl.catch(function (error) {
-            alert(error);
-            return;
-        });
+            // Does the same thing as part of function above, with more if/else statements since there are typically more breaks than checkin/outs
+            var breaks = firebase.database().ref('users/' + user.displayName + '/TimeClock/Breaks').once('value');
+            breaks.then(function (snapshot) {
+                var person = (snapshot.val());
 
-        var breaks = firebase.database().ref('users/' + user.displayName + '/TimeClock/Breaks').once('value');
-        breaks.then(function (snapshot) {
-            var person = (snapshot.val());
-
-            var dates = Object.keys(person);
-            var monthDays = [];
-            var currentMonth = [];
-            var count = 0;
-            for (var i = 0; i < dates.length; i++) {
-                if (document.getElementById("month-dropdown").value == dates[i][0]) {
-                    currentMonth[count] = dates[i];
-                    var firstDash = currentMonth[count].indexOf("-");
-                    var lastDash = currentMonth[count].lastIndexOf("-");
-                    monthDays[count] = currentMonth[count].slice(firstDash + 1, lastDash);
-                    count++;
-                }
-            }
-            var check = false;
-            var txt = "";
-            for (var i = 0; i < monthDays.length; i++) {
-                if (num < monthDays[i]) {
-                    return;
-                }
-                if (num == monthDays[i]) {
-                    if (person[currentMonth[i]].In == undefined) {
-                        person[currentMonth[i]].In = "N/A";
+                var dates = Object.keys(person);
+                var monthDays = [];
+                var currentMonth = [];
+                var count = 0;
+                for (var i = 0; i < dates.length; i++) {
+                    if (document.getElementById("month-dropdown").value == dates[i][0]) {
+                        currentMonth[count] = dates[i];
+                        var firstDash = currentMonth[count].indexOf("-");
+                        var lastDash = currentMonth[count].lastIndexOf("-");
+                        monthDays[count] = currentMonth[count].slice(firstDash + 1, lastDash);
+                        count++;
                     }
-                    if (person[currentMonth[i]].Out == undefined) {
-                        person[currentMonth[i]].Out = "N/A";
+                }
+                var check = false;
+                var txt = "";
+                for (var i = 0; i < monthDays.length; i++) {
+                    if (num < monthDays[i]) {
+                        return;
                     }
-                    var txt = "Break Out: " + person[currentMonth[i]].Out;
-                    txt += "<br />Break In: " + person[currentMonth[i]].In + "<br />";
-                    document.getElementById("breakText1").innerHTML = txt;
-                    check = true;
-                } else {
+                    if (num == monthDays[i]) {
+                        if (person[currentMonth[i]].In == undefined) {
+                            person[currentMonth[i]].In = "N/A";
+                        }
+                        if (person[currentMonth[i]].Out == undefined) {
+                            person[currentMonth[i]].Out = "N/A";
+                        }
+                        var txt = "Break Out: " + person[currentMonth[i]].Out;
+                        txt += "<br />Break In: " + person[currentMonth[i]].In + "<br />";
+                        document.getElementById("breakText1").innerHTML = txt;
+                        check = true;
+                    } else {
+                        document.getElementById("breakText1").innerHTML = "No breaks logged";
+                        document.getElementById("breakText2").innerHTML = "";
+                        document.getElementById("breakText3").innerHTML = "";
+                        document.getElementById("breakText4").innerHTML = "";
+                        document.getElementById("breakText5").innerHTML = "";
+                        continue;
+                    }
+                    if (num == monthDays[i + 1]) {
+                        if (person[currentMonth[i + 1]].In == undefined) {
+                            person[currentMonth[i + 1]].In = "N/A";
+                        }
+                        if (person[currentMonth[i + 1]].Out == undefined) {
+                            person[currentMonth[i + 1]].Out = "N/A";
+                        }
+                        var txt = "Break Out: " + person[currentMonth[i + 1]].Out;
+                        txt += "<br />Break In: " + person[currentMonth[i + 1]].In + "<br />";
+                        document.getElementById("breakText2").innerHTML = txt;
+                        check = true;
+                    } else {
+                        document.getElementById("breakText2").innerHTML = "No more breaks";
+                        break;
+                    }
+                    if (num == monthDays[i + 2]) {
+                        if (person[currentMonth[i + 2]].In == undefined) {
+                            person[currentMonth[i + 2]].In = "N/A";
+                        }
+                        if (person[currentMonth[i + 2]].Out == undefined) {
+                            person[currentMonth[i + 2]].Out = "N/A";
+                        }
+                        var txt = "Break Out: " + person[currentMonth[i + 2]].Out;
+                        txt += "<br />Break In: " + person[currentMonth[i + 2]].In + "<br />";
+                        document.getElementById("breakText3").innerHTML = txt;
+                        check = true;
+                    } else {
+                        document.getElementById("breakText3").innerHTML = "No more breaks";
+                        break;
+                    }
+                    if (num == monthDays[i + 4]) {
+                        if (person[currentMonth[i + 3]].In == undefined) {
+                            person[currentMonth[i]].In = "N/A";
+                        }
+                        if (person[currentMonth[i + 3]].Out == undefined) {
+                            person[currentMonth[i + 3]].Out = "N/A";
+                        }
+                        var txt = "Break Out: " + person[currentMonth[i + 3]].Out;
+                        txt += "<br />Break In: " + person[currentMonth[i + 3]].In + "<br />";
+                        document.getElementById("breakText4").innerHTML = txt;
+                        check = true;
+                    } else {
+                        document.getElementById("breakText4").innerHTML = "No more breaks";
+                        break;
+                    }
+                    if (num == monthDays[i + 4]) {
+                        if (person[currentMonth[i + 4]].In == undefined) {
+                            person[currentMonth[i + 4]].In = "N/A";
+                        }
+                        if (person[currentMonth[i + 4]].Out == undefined) {
+                            person[currentMonth[i + 4]].Out = "N/A";
+                        }
+                        var txt = "Break Out: " + person[currentMonth[i + 4]].Out;
+                        txt += "<br />Break In: " + person[currentMonth[i + 4]].In + "<br />";
+                        document.getElementById("breakText5").innerHTML = txt;
+                        check = true;
+                    } else {
+                        document.getElementById("breakText").innerHTML = "No more breaks";
+                        break;
+                    }
+                }
+                if (!check) {
                     document.getElementById("breakText1").innerHTML = "No breaks logged";
-                    document.getElementById("breakText2").innerHTML = "";
-                    document.getElementById("breakText3").innerHTML = "";
-                    document.getElementById("breakText4").innerHTML = "";
-                    document.getElementById("breakText5").innerHTML = "";
-                    continue;
                 }
-                if (num == monthDays[i + 1]) {
-                    if (person[currentMonth[i + 1]].In == undefined) {
-                        person[currentMonth[i + 1]].In = "N/A";
-                    }
-                    if (person[currentMonth[i + 1]].Out == undefined) {
-                        person[currentMonth[i + 1]].Out = "N/A";
-                    }
-                    var txt = "Break Out: " + person[currentMonth[i + 1]].Out;
-                    txt += "<br />Break In: " + person[currentMonth[i + 1]].In + "<br />";
-                    document.getElementById("breakText2").innerHTML = txt;
-                    check = true;
-                } else {
-                    document.getElementById("breakText2").innerHTML = "No more breaks";
-                    break;
-                }
-                if (num == monthDays[i + 2]) {
-                    if (person[currentMonth[i + 2]].In == undefined) {
-                        person[currentMonth[i + 2]].In = "N/A";
-                    }
-                    if (person[currentMonth[i + 2]].Out == undefined) {
-                        person[currentMonth[i + 2]].Out = "N/A";
-                    }
-                    var txt = "Break Out: " + person[currentMonth[i + 2]].Out;
-                    txt += "<br />Break In: " + person[currentMonth[i + 2]].In + "<br />";
-                    document.getElementById("breakText3").innerHTML = txt;
-                    check = true;
-                } else {
-                    document.getElementById("breakText3").innerHTML = "No more breaks";
-                    break;
-                }
-                if (num == monthDays[i + 4]) {
-                    if (person[currentMonth[i + 3]].In == undefined) {
-                        person[currentMonth[i]].In = "N/A";
-                    }
-                    if (person[currentMonth[i + 3]].Out == undefined) {
-                        person[currentMonth[i + 3]].Out = "N/A";
-                    }
-                    var txt = "Break Out: " + person[currentMonth[i + 3]].Out;
-                    txt += "<br />Break In: " + person[currentMonth[i + 3]].In + "<br />";
-                    document.getElementById("breakText4").innerHTML = txt;
-                    check = true;
-                } else {
-                    document.getElementById("breakText4").innerHTML = "No more breaks";
-                    break;
-                }
-                if (num == monthDays[i + 4]) {
-                    if (person[currentMonth[i + 4]].In == undefined) {
-                        person[currentMonth[i + 4]].In = "N/A";
-                    }
-                    if (person[currentMonth[i + 4]].Out == undefined) {
-                        person[currentMonth[i + 4]].Out = "N/A";
-                    }
-                    var txt = "Break Out: " + person[currentMonth[i + 4]].Out;
-                    txt += "<br />Break In: " + person[currentMonth[i + 4]].In + "<br />";
-                    document.getElementById("breakText5").innerHTML = txt;
-                    check = true;
-                } else {
-                    document.getElementById("breakText").innerHTML = "No more breaks";
-                    break;
-                }
-            }
-            if (!check) {
-                document.getElementById("breakText1").innerHTML = "No breaks logged";
-            }
-        });
-        count = 0;
-        breaks.catch(function (error) {
-            alert(error);
-            return;
-        });
-        }
-        else {
-        }
+            });
+            count = 0;
+            breaks.catch(function (error) {
+                alert(error);
+                return;
+            });
+        } else {}
     });
 }
 /*------------------------------ End of display current user's time logs ------------------------------*/
@@ -583,11 +585,11 @@ function clearCal() {
 
     }
 }
-/*-------------------------------------- End Calendar Functions ---------------------------------------*/ 
+/*-------------------------------------- End Calendar Functions ---------------------------------------*/
 
 
 
-/*----------------------------------- Start of Modal Boxes Function -----------------------------------*/ 
+/*----------------------------------- Start of Modal Boxes Function -----------------------------------*/
 
 /* Describe what the function does */
 function modalBox(number) {
@@ -597,19 +599,19 @@ function modalBox(number) {
     //    var selected = document.getElementById('name-dropdown');
 
 
-//    firebase.auth().onAuthStateChanged(function (user) {
-//        if (user) {
-//            firebase.database().ref('users/' + user.displayName).on('value', snapshot => {
-//                var currentUser = (snapshot.val());
-//                var i;
-//                for (i in currentUser) {
-//                    if ((i == 'TeamLead') || (i == 'Admin')) {
-//                        selectName(selected, num);
-//                    }
-//                }
-//            });
-//        }
-//    });
+    //    firebase.auth().onAuthStateChanged(function (user) {
+    //        if (user) {
+    //            firebase.database().ref('users/' + user.displayName).on('value', snapshot => {
+    //                var currentUser = (snapshot.val());
+    //                var i;
+    //                for (i in currentUser) {
+    //                    if ((i == 'TeamLead') || (i == 'Admin')) {
+    //                        selectName(selected, num);
+    //                    }
+    //                }
+    //            });
+    //        }
+    //    });
 
 
     showModal(num);
@@ -635,11 +637,11 @@ function modalBox(number) {
         }
     }
 }
-/*------------------------------------ End of Modal Boxes Function ------------------------------------*/ 
+/*------------------------------------ End of Modal Boxes Function ------------------------------------*/
 
 
 
-/*--------------------------------- Start of specific access Functions --------------------------------*/ 
+/*--------------------------------- Start of specific access Functions --------------------------------*/
 
 /* Describe what the function does */
 (function () {
