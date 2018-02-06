@@ -6,7 +6,7 @@
     <title>Time Tracking</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="timeTracking.css">
-    <link type="text/css" rel="stylesheet" href="main.css">
+    <!--    <link type="text/css" rel="stylesheet" href="main.css">-->
     <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase-database.js"></script>
@@ -80,18 +80,18 @@
             <div>
                 <table id="t1" style="overflow-x:auto;">
                     <tr>
-                        <th colspan="7" id="title">Month Year</th>
+                        <th colspan="7" id="title">Month Year &#9731;</th>
                     </tr>
                     <!-- Display headings for each day of the week -->
                     <tr id="heading">
-                        <td>Mon</td>
-                        <td>Tues</td>
-                        <td>Wed</td>
+                        <td>&nbsp;&nbsp;Mon</td>
+                        <td>&nbsp;Tues</td>
+                        <td>&nbsp;&nbsp;Wed</td>
                         <td>Thurs</td>
-                        <td>Fri</td>
-                        <td>Sat</td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;Fri</td>
+                        <td>&nbsp;&nbsp;&nbsp;Sat</td>
                         <!-- Gray out Sundays (since no one works then) -->
-                        <td class="grayout">Sun</td>
+                        <td class="grayout">&nbsp;&nbsp;Sun</td>
                     </tr>
                     <!-- End of display headings for each day of the week -->
 

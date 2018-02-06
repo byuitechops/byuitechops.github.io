@@ -1,4 +1,4 @@
-//------------------------------------- Connect to Firebase ----------------------------------//
+/*--------------------------------------- Connect to Firebase -----------------------------------------*/
 var config = {
     apiKey: "AIzaSyA_I75-CU5_GlNP1QSKvvH8nbYVkaAUgNA",
     authDomain: "techopsportal.firebaseapp.com",
@@ -234,7 +234,7 @@ function showModal(num) {
 
 /*------------------------------ Connect personal time clock to each user -----------------------------*/
 
-/* Describe what the function does */
+/* Displays all Hours Worked and Breaks for the name selected from the dropdown */
 function selectName(selected, num) {
     var name = firebase.database().ref('users/' + selected + '/TimeClock/HoursWorked').once('value');
     name.then(function (snapshot) {
@@ -445,7 +445,7 @@ function selectName(selected, num) {
 
 /*---------------------------------------- Calendar Functions ---------------------------------------- */
 
-/* Describe what the function does */
+/* Determines if the year is a leap year */
 function leapYear(year) {
     if (year % 4 == 0) // basic rule
         return true // is leap year
@@ -495,7 +495,7 @@ function getMonthName(month) {
     return ar[month]
 }
 
-/* Describe what the function does */
+/* Populates calendar with the days in the month */
 function setCal(sMonth) {
     // standard time attributes
     clearCal();
@@ -566,7 +566,7 @@ function setCal(sMonth) {
     document.getElementById("title").innerHTML = monthName + " " + year;
 }
 
-/* Describe what the function does */
+/* Clears/resets the calendar days before it is set with another month */
 function clearCal() {
 
     for (var i = 2, row; row = t1.rows[i]; i++) {
@@ -591,7 +591,7 @@ function clearCal() {
 
 /*----------------------------------- Start of Modal Boxes Function -----------------------------------*/
 
-/* Describe what the function does */
+/* Causes modal box to open when clicked on */
 function modalBox(number) {
     // Get the modal
     var num = number.getAttribute("value");
@@ -643,7 +643,7 @@ function modalBox(number) {
 
 /*--------------------------------- Start of specific access Functions --------------------------------*/
 
-/* Describe what the function does */
+/* Allows use for name dropdowns for team leads and admin, as well as team dropdown for admin */
 (function () {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
@@ -689,7 +689,7 @@ function modalBox(number) {
     });
 }());
 
-/* Describe what the function does */
+/* Inserts the names of each member of the team based on which team is selected in the dropdown */
 function selectTeam(selected) {
     var select = document.getElementById("name-dropdown");
     var length = select.options.length;
@@ -716,3 +716,12 @@ function selectTeam(selected) {
     })
 }
 /*---------------------------------- End of specific access Functions ---------------------------------*/
+
+
+
+/*-------------------------------------- Start of Totals Function -------------------------------------*/
+(function () {
+    // Add up all times from each day
+
+}());
+/*--------------------------------------- End of Totals Function --------------------------------------*/
