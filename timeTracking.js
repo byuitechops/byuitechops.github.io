@@ -1,4 +1,4 @@
-/*--------------------------------------- Connect to Firebase -----------------------------------------*/
+/*----------------------------- Connect to Firebase ----------------------------*/
 var config = {
     apiKey: "AIzaSyA_I75-CU5_GlNP1QSKvvH8nbYVkaAUgNA",
     authDomain: "techopsportal.firebaseapp.com",
@@ -8,11 +8,11 @@ var config = {
     messagingSenderId: "265124430634"
 };
 firebase.initializeApp(config);
-/*------------------------------------ End of Connect to Firebase -------------------------------------*/
+/*------------------------- End of Connect to Firebase -------------------------*/
 
 
 
-/*--------------------------------- Display current user's time logs ----------------------------------*/
+/*--------------------- Display current user's time logs -----------------------*/
 
 /* Retrieves info from Firebase to display the current user's check ins and outs */
 function showModal(num) {
@@ -228,11 +228,11 @@ function showModal(num) {
         } else {}
     });
 }
-/*------------------------------ End of display current user's time logs ------------------------------*/
+/*------------------ End of display current user's time logs -------------------*/
 
 
 
-/*------------------------------ Connect personal time clock to each user -----------------------------*/
+/*------------------- Connect personal time clock to each user -----------------*/
 
 /* Displays all Hours Worked and Breaks for the name selected from the dropdown */
 function selectName(selected, num) {
@@ -439,11 +439,11 @@ function selectName(selected, num) {
         return;
     });
 }
-/*-------------------------- End of Connect personal time clock to each user --------------------------*/
+/*--------------- End of Connect personal time clock to each user --------------*/
 
 
 
-/*---------------------------------------- Calendar Functions ---------------------------------------- */
+/*----------------------------- Calendar Functions ---------------------------- */
 
 /* Determines if the year is a leap year */
 function leapYear(year) {
@@ -478,7 +478,7 @@ function getDays(month, year) {
 function getMonthName(month) {
     // create array to hold name of each month
     var ar = new Array(12)
-    ar[1] = "January"
+    ar[1] = "January  &#9731;"
     ar[2] = "February"
     ar[3] = "March"
     ar[4] = "April"
@@ -585,11 +585,11 @@ function clearCal() {
 
     }
 }
-/*-------------------------------------- End Calendar Functions ---------------------------------------*/
+/*---------------------------- End Calendar Functions --------------------------*/
 
 
 
-/*----------------------------------- Start of Modal Boxes Function -----------------------------------*/
+/*----------------------- Start of Modal Boxes Function ------------------------*/
 
 /* Causes modal box to open when clicked on */
 function modalBox(number) {
@@ -637,11 +637,11 @@ function modalBox(number) {
         }
     }
 }
-/*------------------------------------ End of Modal Boxes Function ------------------------------------*/
+/*------------------------ End of Modal Boxes Function -------------------------*/
 
 
 
-/*--------------------------------- Start of specific access Functions --------------------------------*/
+/*--------------------- Start of specific access Functions ---------------------*/
 
 /* Allows use for name dropdowns for team leads and admin, as well as team dropdown for admin */
 (function () {
@@ -715,13 +715,13 @@ function selectTeam(selected) {
         }
     })
 }
-/*---------------------------------- End of specific access Functions ---------------------------------*/
+/*---------------------- End of specific access Functions ----------------------*/
 
 
 
-/*-------------------------------------- Start of Totals Function -------------------------------------*/
+/*-------------------------- Start of Totals Function --------------------------*/
 (function () {
     // Add up all times from each day
 
 }());
-/*--------------------------------------- End of Totals Function --------------------------------------*/
+/*--------------------------- End of Totals Function ---------------------------*/
