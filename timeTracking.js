@@ -233,7 +233,20 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 
 
 
+
         /*------------------- Connect personal time clock to each user -----------------*/
+
+/* Retrieves info from Firebase to display the current user's check ins and outs */
+function showModal(num, selected) {
+    firebase.auth().onAuthStateChanged(function (user) {
+        if(selected != user.displayName) {
+            selectName(selected, num);
+            return
+        }
+        if (user) {
+            var user = firebase.auth().currentUser;
+            var ppl = firebase.database().ref('users/' + user.displayName + '/TimeClock/HoursWorked').once('value');
+            ppl.then(function (snapshot) {
 
         /* Displays all Hours Worked and Breaks for the name selected from the dropdown */
         function selectName(selected, num) {
@@ -444,6 +457,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 
 
 
+
         /*----------------------------- Calendar Functions ---------------------------- */
 
         /* Determines if the year is a leap year */
@@ -473,6 +487,84 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 
             // return number of days in the specified month (parameter)
             return ar[month]
+
+        var individual = snapshot.val();
+        var dates = Object.keys(individual);
+        var monthDays = [];
+        var currentMonth = [];
+        var count = 0;
+        for (var i = 0; i < dates.length; i++) {
+            if (document.getElementById("month-dropdown").value == dates[i][0]) {
+                currentMonth[count] = dates[i];
+                var firstDash = currentMonth[count].indexOf("-");
+                var lastDash = currentMonth[count].lastIndexOf("-");
+                monthDays[count] = currentMonth[count].slice(firstDash + 1, lastDash);
+                count++;
+            }
+        }
+        var check = false;
+        for (var i = 0; i < monthDays.length; i++) {
+            if (num == monthDays[i + 1]) {
+                console.log(monthDays);
+                console.log(individual[currentMonth[i]]);
+                if (individual[currentMonth[i + 1]].CommentIn == undefined) {
+                    individual[currentMonth[i + 1]].CommentIn = "N/A";
+                }
+                if (individual[currentMonth[i + 1]].CommentOut == undefined) {
+                    individual[currentMonth[i + 1]].CommentOut = "N/A";
+                }
+                if (individual[currentMonth[i + 1]].Out == undefined) {
+                    individual[currentMonth[i + 1]].Out = "N/A";
+                }
+                var txt = "Clocked in at: " + individual[currentMonth[i + 1]].In + "<br />";
+                txt += "CommentIn: " + individual[currentMonth[i + 1]].CommentIn + "<br />";
+                txt += "Clock out at: " + individual[currentMonth[i + 1]].Out + "<br />";
+                txt += "CommentOut: " + individual[currentMonth[i + 1]].CommentOut + "<br />";
+                document.getElementById("modalText").innerHTML = txt;
+                check = true;
+            } else if (num == monthDays[i]) {
+                if (individual[currentMonth[i]].CommentIn == undefined) {
+                    individual[currentMonth[i]].CommentIn = "N/A";
+                }
+                if (individual[currentMonth[i]].CommentOut == undefined) {
+                    individual[currentMonth[i]].CommentOut = "N/A";
+                }
+                if (individual[currentMonth[i]].Out == undefined) {
+                    individual[currentMonth[i]].Out = "N/A";
+                }
+                var txt = "Clocked in at: " + individual[currentMonth[i]].In + "<br />";
+                txt += "CommentIn: " + individual[currentMonth[i]].CommentIn + "<br />";
+                txt += "Clock out at: " + individual[currentMonth[i]].Out + "<br />";
+                txt += "CommentOut: " + individual[currentMonth[i]].CommentOut + "<br />";
+                document.getElementById("modalText").innerHTML = txt;
+                document.getElementById("secondShift").innerHTML = "No time logged";
+                check = true;
+                break;
+            } else {
+                document.getElementById("secondShift").innerHTML = "No time logged";
+            }
+            if (num == monthDays[i]) {
+                if (individual[currentMonth[i]].CommentIn == undefined) {
+                    individual[currentMonth[i]].CommentIn = "N/A";
+                }
+                if (individual[currentMonth[i]].CommentOut == undefined) {
+                    individual[currentMonth[i]].CommentOut = "N/A";
+                }
+                if (individual[currentMonth[i]].Out == undefined) {
+                    individual[currentMonth[i]].Out = "N/A";
+                }
+                var txt = "Clocked in at: " + individual[currentMonth[i]].In + "<br />";
+                txt += "CommentIn: " + individual[currentMonth[i]].CommentIn + "<br />";
+                txt += "Clock out at: " + individual[currentMonth[i]].Out + "<br />";
+                txt += "CommentOut: " + individual[currentMonth[i]].CommentOut + "<br />";
+                document.getElementById("secondShift").innerHTML = txt;
+                check = true;
+                break;
+            }
+
+        }
+        if (!check) {
+            document.getElementById("modalText").innerHTML = "No time logged";
         }
 
         /* Describe what the function does */
@@ -526,6 +618,119 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                 firstDay = 6;
             }
             firstDayInstance = null;
+
+            if (num == monthDays[i + 4]) {
+                if (individual[currentMonth[i + 4]].In == undefined) {
+                    individual[currentMonth[i + 4]].In = "N/A";
+                }
+                if (individual[currentMonth[i + 4]].Out == undefined) {
+                    individual[currentMonth[i + 4]].Out = "N/A";
+                }
+                var txt = "Break Out: " + individual[currentMonth[i + 4]].Out;
+                txt += "<br />Break In: " + individual[currentMonth[i + 4]].In + "<br />";
+                document.getElementById("breakText5").innerHTML = txt;
+                check = true;
+            } else {
+                document.getElementById("breakText").innerHTML = "No more breaks";
+                break;
+            }
+        }
+        if (!check) {
+            document.getElementById("breakText1").innerHTML = "No breaks logged";
+        }
+    });
+    count = 0;
+    breaks.catch(function (error) {
+        alert(error);
+        return;
+    });
+}
+/*--------------- End of Connect personal time clock to each user --------------*/
+
+
+
+/*----------------------------- Calendar Functions ---------------------------- */
+
+/* Determines if the year is a leap year */
+function leapYear(year) {
+    if (year % 4 == 0) // basic rule
+        return true // is leap year
+    /* else */ // else not needed when statement is "return"
+    return false // is not leap year
+}
+
+/* Describe what the function does */
+function getDays(month, year) {
+    // create array to hold number of days in each month
+    var ar = new Array(11)
+    ar[1] = 31 // January
+    ar[2] = (leapYear(year)) ? 29 : 28 // February
+    ar[3] = 31 // March
+    ar[4] = 30 // April
+    ar[5] = 31 // May
+    ar[6] = 30 // June
+    ar[7] = 31 // July
+    ar[8] = 31 // August
+    ar[9] = 30 // September
+    ar[10] = 31 // October
+    ar[11] = 30 // November
+    ar[12] = 31 // December
+
+    // return number of days in the specified month (parameter)
+    return ar[month]
+}
+
+/* Describe what the function does */
+function getMonthName(month) {
+    // create array to hold name of each month
+    var ar = new Array(12)
+    ar[1] = "January  &#9731;"
+    ar[2] = "February &#9825"
+    ar[3] = "March &#9752"
+    ar[4] = "April &#9730"
+    ar[5] = "May &#9880"
+    ar[6] = "June &#9728"
+    ar[7] = "July  &#x1F30A"
+    ar[8] = "August &#9969"
+    ar[9] = "September"
+    ar[10] = "October"
+    ar[11] = "November"
+    ar[12] = "December"
+
+    // return name of specified month (parameter)
+    return ar[month]
+}
+
+/* Populates calendar with the days in the month */
+function setCal(sMonth) {
+    // standard time attributes
+    clearCal();
+    var now = new Date()
+    var cMonth = now.getMonth();
+    sMonth = Number(sMonth);
+    sMonth -= 1;
+    var year = now.getYear();
+    if (year < 1000) {
+        year += 1900
+    }
+    if ((cMonth - sMonth) >= 0) {
+        //year is the same
+    } else {
+        year = (year - 1);
+    }
+    var monthName = getMonthName(sMonth + 1)
+    var date = now.getDate()
+    now = null
+
+    // create instance of first day of month, and extract the day on which it occurs
+    var firstDayInstance = new Date(year, sMonth, 1)
+    var firstDay = firstDayInstance.getDay()
+    if (firstDay > 0) {
+        firstDay -= 1;
+    } else if (firstDay == 0) {
+        firstDay = 6;
+    }
+    firstDayInstance = null;
 
             // number of days in current month
             var days = getDays(sMonth + 1, year)
@@ -592,6 +797,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 
         /*----------------------- Start of Modal Boxes Function ------------------------*/
 
+
         /* Causes modal box to open when clicked on */
         function modalBox(number) {
             // Get the modal
@@ -616,6 +822,15 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 
 
             showModal(num);
+
+/* Causes modal box to open when clicked on */
+function modalBox(number) {
+    // Get the modal
+    var num = number.getAttribute("value");
+    var modal = document.getElementById('myModal');
+    var selected = document.getElementById('name-dropdown').value;
+
+    showModal(num, selected);
 
             // Get the button that opens the modal
             var btn = document.getElementById("myBtn");
@@ -724,6 +939,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
         (function () {
             // Add up all times from each day
 
+
         }());
         /*--------------------------- End of Totals Function ---------------------------*/
     } else {
@@ -732,3 +948,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
         // ...
     }
 });
+
+}());
+/*--------------------------- End of Totals Function ---------------------------*/
+

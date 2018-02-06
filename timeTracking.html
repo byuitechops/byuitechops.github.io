@@ -43,7 +43,7 @@
             <!--            <div class="content">-->
             <!-- Team name dropdown menu -->
             <h1 style="text-align: center">Time Tracking</h1>
-            <select id="team-dropdown" onChange="selectTeam(this.value)">
+            <select id="team-dropdown" class="hide" onChange="selectTeam(this.value)">
                    <option value="" selected disabled hidden>TEAM</option>
                    <option value="canvas">Canvas Team</option>
                    <option value="tech">Tech Team</option>
@@ -70,7 +70,7 @@
             <!-- End of dropdown menu for each month of the year -->
 
             <!--Dropdown populated with each team member through Javascript-->
-            <select id="name-dropdown" onChange="selectName(this.value)">
+            <select id="name-dropdown" class="hide">
                    <option value="" selected disabled hidden>NAME</option>
                 </select>
             <!--End of dropdown populated with each team member through Javascript-->
