@@ -11,7 +11,7 @@
 
     firebase.auth().onAuthStateChanged(firebaseUser => {
         if (firebaseUser) {
-            
+
             var loggedinUser = firebase.auth().currentUser;
             var user;
             loggedinUser.providerData.forEach(function (profile) {
@@ -224,12 +224,6 @@
                         dbRefUsers.child(user).update(data);
                         window.alert('Congration You Done It!');
                     });
-
-                    document.getElementById('home').setAttribute('href', "index.html");
-                    document.getElementById('announce').setAttribute('href', "announcements.html");
-                    document.getElementById('calc').setAttribute('href', "videoTimeCalculator.html");
-                    document.getElementById('hand').setAttribute('href', "employeehandbook.html");
-                    document.getElementById('schedule').setAttribute('href', "schedule.html");
 
                     if (snap.workDay == true) {
                         var icon = document.getElementById('wd');
@@ -643,13 +637,14 @@
                     }
                 });
             }
+
+            document.getElementById('btnLogout').addEventListener('click', e => {
+                firebase.auth().signOut();
+            })
+
         } else {
             // User is signed out.
-            var url = window.location.href;
-            if (url === "https://byui-product-documentation.github.io/" || url.includes("index.html")) {
-                return;
-            } else
-                window.location = "index.html";
+            window.location.replace("index.html");
             // ...
         }
     });

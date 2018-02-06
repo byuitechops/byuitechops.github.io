@@ -73,19 +73,5 @@ textarea {
     font-size: 0.8em;
 }
 
-p input[type=checkbox] {
-    width: 1em;
-    height: 1em;
-    position: relative;
-    top: 10px
-}
-
-#mceu_31 {
-    display: none;
-}
-
-.modal-content form {
-    border: none;
-}
 
 /* ---------------- End of Module Box ---------------- */
