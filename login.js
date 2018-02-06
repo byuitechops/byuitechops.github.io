@@ -1,24 +1,21 @@
 (function () {
 
-    firebase.auth().onAuthStateChanged(firebaseUser => {
-        if (firebaseUser) {
-            txtEmail.classList.add('hide');
-            txtPassword.classList.add('hide');
-            btnLogin.classList.add('hide');
-            btnSignUp.classList.add('hide');
-            btnLogout.classList.remove('hide');
-            document.getElementById('resetPassword').classList.add('hide');
-            document.getElementById('loggedInForm').classList.remove('hide');
+    const config = {
+        apiKey: "AIzaSyA_I75-CU5_GlNP1QSKvvH8nbYVkaAUgNA",
+        authDomain: "techopsportal.firebaseapp.com",
+        databaseURL: "https://techopsportal.firebaseio.com",
+        projectId: "techopsportal",
+        storageBucket: "techopsportal.appspot.com",
+        messagingSenderId: "265124430634"
+    };
+    firebase.initializeApp(config);
 
-            const config = {
-                apiKey: "AIzaSyA_I75-CU5_GlNP1QSKvvH8nbYVkaAUgNA",
-                authDomain: "techopsportal.firebaseapp.com",
-                databaseURL: "https://techopsportal.firebaseio.com",
-                projectId: "techopsportal",
-                storageBucket: "techopsportal.appspot.com",
-                messagingSenderId: "265124430634"
-            };
-            firebase.initializeApp(config);
+
+    firebase.auth().onAuthStateChanged(firebaseUser => {
+        if (firebaseUser) {            
+             window.location.replace("home.html");
+        } else {
+
 
             const txtEmail = document.getElementById('txtEmail');
             const txtPassword = document.getElementById('txtPassword');
@@ -117,13 +114,6 @@
 
             });
 
-            btnLogout.addEventListener('click', e => {
-                firebase.auth().signOut();
-                location.reload(true);
-                localStorage.setItem("user", null);
-            });
-
-
             document.getElementById('resetPassword').addEventListener('click', e => {
                 var emailAddress = prompt('Input Email Address');
                 firebase.auth().sendPasswordResetEmail(emailAddress).then(function () {
@@ -159,7 +149,7 @@
                 dbRefUsers.child(user).set(data);
             }
 
-        } else {
+
             console.log('not logged in');
         }
     });

@@ -11,17 +11,10 @@
 
     firebase.auth().onAuthStateChanged(firebaseUser => {
         if (firebaseUser) {
-            txtEmail.classList.add('hide');
-            txtPassword.classList.add('hide');
-            btnLogin.classList.add('hide');
-            btnSignUp.classList.add('hide');
-            btnLogout.classList.remove('hide');
-            document.getElementById('resetPassword').classList.add('hide');
-            document.getElementById('loggedInForm').classList.remove('hide');
-
-            var currentUser = firebase.auth().currentUser;
+            
+            var loggedinUser = firebase.auth().currentUser;
             var user;
-            currentUserser.providerData.forEach(function (profile) {
+            loggedinUser.providerData.forEach(function (profile) {
                 user = profile.displayName;
             });
 
@@ -222,7 +215,6 @@
                     txtCode.classList.add('hide');
                     submitCode.classList.add('hide');
 
-                    document.getElementById('formId').classList.add('loggedIn');
                     document.getElementById('month').classList.remove('hide');
 
                     document.getElementById('month').addEventListener('click', e => {
@@ -348,7 +340,6 @@
                         });
                         txtCode.classList.remove('hide');
                         submitCode.classList.remove('hide');
-                        formId.classList.remove('formLogout');
                         canpic.classList.add('locked');
                     }
                     if (snap.employeeDirectory == true) {
