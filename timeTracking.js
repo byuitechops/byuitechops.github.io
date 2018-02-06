@@ -15,11 +15,14 @@ firebase.initializeApp(config);
 /*--------------------- Display current user's time logs -----------------------*/
 
 /* Retrieves info from Firebase to display the current user's check ins and outs */
-function showModal(num) {
+function showModal(num, selected) {
     firebase.auth().onAuthStateChanged(function (user) {
+        if(selected != user.displayName) {
+            selectName(selected, num);
+            return
+        }
         if (user) {
             var user = firebase.auth().currentUser;
-            console.log(user);
             var ppl = firebase.database().ref('users/' + user.displayName + '/TimeClock/HoursWorked').once('value');
             ppl.then(function (snapshot) {
 
@@ -239,8 +242,7 @@ function selectName(selected, num) {
     var name = firebase.database().ref('users/' + selected + '/TimeClock/HoursWorked').once('value');
     name.then(function (snapshot) {
 
-        var individual = (snapshot.val());
-
+        var individual = snapshot.val();
         var dates = Object.keys(individual);
         var monthDays = [];
         var currentMonth = [];
@@ -255,9 +257,10 @@ function selectName(selected, num) {
             }
         }
         var check = false;
-
         for (var i = 0; i < monthDays.length; i++) {
             if (num == monthDays[i + 1]) {
+                console.log(monthDays);
+                console.log(individual[currentMonth[i]]);
                 if (individual[currentMonth[i + 1]].CommentIn == undefined) {
                     individual[currentMonth[i + 1]].CommentIn = "N/A";
                 }
@@ -479,13 +482,13 @@ function getMonthName(month) {
     // create array to hold name of each month
     var ar = new Array(12)
     ar[1] = "January  &#9731;"
-    ar[2] = "February"
-    ar[3] = "March"
-    ar[4] = "April"
-    ar[5] = "May"
-    ar[6] = "June"
-    ar[7] = "July"
-    ar[8] = "August"
+    ar[2] = "February &#9825"
+    ar[3] = "March &#9752"
+    ar[4] = "April &#9730"
+    ar[5] = "May &#9880"
+    ar[6] = "June &#9728"
+    ar[7] = "July  &#x1F30A"
+    ar[8] = "August &#9969"
     ar[9] = "September"
     ar[10] = "October"
     ar[11] = "November"
@@ -596,25 +599,9 @@ function modalBox(number) {
     // Get the modal
     var num = number.getAttribute("value");
     var modal = document.getElementById('myModal');
-    //    var selected = document.getElementById('name-dropdown');
+    var selected = document.getElementById('name-dropdown').value;
 
-
-    //    firebase.auth().onAuthStateChanged(function (user) {
-    //        if (user) {
-    //            firebase.database().ref('users/' + user.displayName).on('value', snapshot => {
-    //                var currentUser = (snapshot.val());
-    //                var i;
-    //                for (i in currentUser) {
-    //                    if ((i == 'TeamLead') || (i == 'Admin')) {
-    //                        selectName(selected, num);
-    //                    }
-    //                }
-    //            });
-    //        }
-    //    });
-
-
-    showModal(num);
+    showModal(num, selected);
 
     // Get the button that opens the modal
     var btn = document.getElementById("myBtn");
