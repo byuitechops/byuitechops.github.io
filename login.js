@@ -13,7 +13,7 @@
 
     firebase.auth().onAuthStateChanged(firebaseUser => {
         if (firebaseUser) {
-            //             window.location.replace("home.html");
+            window.location.replace("home.html");
         } else {
             var user;
             const txtEmail = document.getElementById('txtEmail');
