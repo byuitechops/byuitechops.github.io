@@ -17,20 +17,18 @@ firebase.initializeApp(config);
 /* Retrieves info from Firebase to display the current user's check ins and outs */
 function showModal(num, selected) {
     firebase.auth().onAuthStateChanged(function (user) {
+        // if a name is selected and the selection isn't blank, show the data for the person selected
         if (selected != user.displayName && selected != "") {
-            console.log("hey");
             selectName(selected, num);
             return
         }
         else {
         if (user) {
             var user = firebase.auth().currentUser;
-            console.log(user);
             var ppl = firebase.database().ref('users/' + user.displayName + '/TimeClock/HoursWorked').once('value');
             ppl.then(function (snapshot) {
 
                 var person = (snapshot.val());
-
                 var dates = Object.keys(person);
                 var monthDays = [];
                 var currentMonth = [];
@@ -48,8 +46,11 @@ function showModal(num, selected) {
                 }
                 var check = false;
 
+                // loops through each in/out and comment and sets it equal to the HTML to display
                 for (var i = 0; i < monthDays.length; i++) {
+                    // gets the first instance of clock in/out
                     if (num == monthDays[i + 1]) {
+                        // if there isn't an instance of this, it sets the text to 'N/A'
                         if (person[currentMonth[i + 1]].CommentIn == undefined) {
                             person[currentMonth[i + 1]].CommentIn = "N/A";
                         }
@@ -59,6 +60,7 @@ function showModal(num, selected) {
                         if (person[currentMonth[i + 1]].Out == undefined) {
                             person[currentMonth[i + 1]].Out = "N/A";
                         }
+                        // code for diaplying info in modal boxes
                         var txt = "Clocked in at: " + person[currentMonth[i + 1]].In + "<br />";
                         txt += "CommentIn: " + person[currentMonth[i + 1]].CommentIn + "<br />";
                         txt += "Clock out at: " + person[currentMonth[i + 1]].Out + "<br />";
@@ -86,6 +88,7 @@ function showModal(num, selected) {
                     } else {
                         document.getElementById("secondShift").innerHTML = "No time logged";
                     }
+                    // gets the second instance of clock in/out if there are two instances
                     if (num == monthDays[i]) {
                         if (person[currentMonth[i]].CommentIn == undefined) {
                             person[currentMonth[i]].CommentIn = "N/A";
@@ -106,13 +109,15 @@ function showModal(num, selected) {
                     }
 
                 }
+                // if none of the above are true, just display 'No time logged'
                 if (!check) {
                     document.getElementById("modalText").innerHTML = "No time logged";
                 }
-
+                // resets the loop
                 count = 0;
 
             });
+            // if there is an error, return
             ppl.catch(function (error) {
                 alert(error);
                 return;
@@ -241,7 +246,7 @@ function showModal(num, selected) {
 
 
 /*------------------- Connect personal time clock to each user -----------------*/
-
+/* Does the same thing as the above function, for users other than the one logged in */
 function selectName(selected, num) {
     var name = firebase.database().ref('users/' + selected + '/TimeClock/HoursWorked').once('value');
     name.then(function (snapshot) {
@@ -450,120 +455,6 @@ function selectName(selected, num) {
 
 
 
-
-/*----------------------------- Calendar Functions ---------------------------- */
-
-/* Determines if the year is a leap year */
-function leapYear(year) {
-    if (year % 4 == 0) // basic rule
-        return true // is leap year
-    /* else */ // else not needed when statement is "return"
-    return false // is not leap year
-}
-
-/* Describe what the function does */
-function getDays(month, year) {
-    // create array to hold number of days in each month
-    var ar = new Array(11)
-    ar[1] = 31 // January
-    ar[2] = (leapYear(year)) ? 29 : 28 // February
-    ar[3] = 31 // March
-    ar[4] = 30 // April
-    ar[5] = 31 // May
-    ar[6] = 30 // June
-    ar[7] = 31 // July
-    ar[8] = 31 // August
-    ar[9] = 30 // September
-    ar[10] = 31 // October
-    ar[11] = 30 // November
-    ar[12] = 31 // December
-
-    // return number of days in the specified month (parameter)
-    return ar[month]
-
-    var individual = snapshot.val();
-    var dates = Object.keys(individual);
-    var monthDays = [];
-    var currentMonth = [];
-    var count = 0;
-    for (var i = 0; i < dates.length; i++) {
-        if (document.getElementById("month-dropdown").value == dates[i][0]) {
-            currentMonth[count] = dates[i];
-            var firstDash = currentMonth[count].indexOf("-");
-            var lastDash = currentMonth[count].lastIndexOf("-");
-            monthDays[count] = currentMonth[count].slice(firstDash + 1, lastDash);
-            count++;
-        }
-    }
-    var check = false;
-    for (var i = 0; i < monthDays.length; i++) {
-        if (num == monthDays[i + 1]) {
-            console.log(monthDays);
-            console.log(individual[currentMonth[i]]);
-            if (individual[currentMonth[i + 1]].CommentIn == undefined) {
-                individual[currentMonth[i + 1]].CommentIn = "N/A";
-            }
-            if (individual[currentMonth[i + 1]].CommentOut == undefined) {
-                individual[currentMonth[i + 1]].CommentOut = "N/A";
-            }
-            if (individual[currentMonth[i + 1]].Out == undefined) {
-                individual[currentMonth[i + 1]].Out = "N/A";
-            }
-            var txt = "Clocked in at: " + individual[currentMonth[i + 1]].In + "<br />";
-            txt += "CommentIn: " + individual[currentMonth[i + 1]].CommentIn + "<br />";
-            txt += "Clock out at: " + individual[currentMonth[i + 1]].Out + "<br />";
-            txt += "CommentOut: " + individual[currentMonth[i + 1]].CommentOut + "<br />";
-            document.getElementById("modalText").innerHTML = txt;
-            check = true;
-        } else if (num == monthDays[i]) {
-            if (individual[currentMonth[i]].CommentIn == undefined) {
-                individual[currentMonth[i]].CommentIn = "N/A";
-            }
-            if (individual[currentMonth[i]].CommentOut == undefined) {
-                individual[currentMonth[i]].CommentOut = "N/A";
-            }
-            if (individual[currentMonth[i]].Out == undefined) {
-                individual[currentMonth[i]].Out = "N/A";
-            }
-            var txt = "Clocked in at: " + individual[currentMonth[i]].In + "<br />";
-            txt += "CommentIn: " + individual[currentMonth[i]].CommentIn + "<br />";
-            txt += "Clock out at: " + individual[currentMonth[i]].Out + "<br />";
-            txt += "CommentOut: " + individual[currentMonth[i]].CommentOut + "<br />";
-            document.getElementById("modalText").innerHTML = txt;
-            document.getElementById("secondShift").innerHTML = "No time logged";
-            check = true;
-            break;
-        } else {
-            document.getElementById("secondShift").innerHTML = "No time logged";
-        }
-        if (num == monthDays[i]) {
-            if (individual[currentMonth[i]].CommentIn == undefined) {
-                individual[currentMonth[i]].CommentIn = "N/A";
-            }
-            if (individual[currentMonth[i]].CommentOut == undefined) {
-                individual[currentMonth[i]].CommentOut = "N/A";
-            }
-            if (individual[currentMonth[i]].Out == undefined) {
-                individual[currentMonth[i]].Out = "N/A";
-            }
-            var txt = "Clocked in at: " + individual[currentMonth[i]].In + "<br />";
-            txt += "CommentIn: " + individual[currentMonth[i]].CommentIn + "<br />";
-            txt += "Clock out at: " + individual[currentMonth[i]].Out + "<br />";
-            txt += "CommentOut: " + individual[currentMonth[i]].CommentOut + "<br />";
-            document.getElementById("secondShift").innerHTML = txt;
-            check = true;
-            break;
-        }
-
-    }
-    if (!check) {
-        document.getElementById("modalText").innerHTML = "No time logged";
-    }
-}
-/*--------------- End of Connect personal time clock to each user --------------*/
-
-
-
 /*----------------------------- Calendar Functions ---------------------------- */
 
 /* Determines if the year is a leap year */
@@ -611,7 +502,6 @@ function getMonthName(month) {
     ar[10] = "October &#9760"
     ar[11] = "November 🍽️"
     ar[12] = "December &#10053"
-    //9773
 
     // return name of specified month (parameter)
     return ar[month]
@@ -757,6 +647,7 @@ function clearCal() {
             firebase.database().ref('users/' + user.displayName).on('value', snapshot => {
                 var currentUser = (snapshot.val());
                 var i;
+                // iterates through each user to check for a TeamLead or Admin category
                 for (i in currentUser) {
                     if (i == 'TeamLead') {
                         var team = currentUser[i];
@@ -803,6 +694,7 @@ function selectTeam(selected) {
     for (var i = 0; i < length; i++) {
         select.options[1] = null;
     }
+    // iterates through each user and adds their name to the current dropdown if their team matches the team that was selected in the previous dropdown
     firebase.database().ref('users').on('value', snapshot => {
         var names = snapshot.val();
         var name;
@@ -827,18 +719,11 @@ function selectTeam(selected) {
 
 
 /*-------------------------- Start of Totals Function --------------------------*/
-//    (function () {
-//        // Add up all times from each day
-//
-//
-//    }());
-//    /*--------------------------- End of Totals Function ---------------------------*/
-//} else {
-//    // User is signed out.
-//    window.location.replace("index.html");
-//    // ...
-//}
-//});
+/* Describe what this function does */
+    (function () {
+         
 
-//}());
+    }());
+
+
 /*--------------------------- End of Totals Function ---------------------------*/

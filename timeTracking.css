@@ -110,7 +110,7 @@ td#week {
     vertical-align: bottom;
 }
 
-td#totals {
+td.totals {
     height: 20px;
     width: 40px;
     text-align: right;
