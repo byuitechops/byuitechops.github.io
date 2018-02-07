@@ -1,0 +1,18 @@
+form {
+    padding: 1em;
+    text-align: left;
+}
+
+form input {
+    width: 100%
+}
+
+table {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+form button {
+    width: 50%;
+    margin: 0 25%;
+}

@@ -17,7 +17,7 @@
 }
 
 button {
-    width: 100%;
+    width: 45%;
 }
 
 /* ---------------------- Icon box -------------------- */
@@ -75,3 +75,8 @@ textarea {
 
 
 /* ---------------- End of Module Box ---------------- */
+
+
+input[type='text'] {
+    width: 45%;
+}

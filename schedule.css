@@ -4,8 +4,10 @@
 }
 
 #scheduleFrame {
-    height: 900px;
+    height: 800px;
+    width: 1800px;
     margin-bottom: 2em;
+    margin-left: -300px;
 }
 
 #team-dropdown {

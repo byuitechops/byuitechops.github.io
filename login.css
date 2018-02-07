@@ -1,11 +1,5 @@
-/*
 body {
-    margin: 10em;
-}
-*/
-.form {
-    margin: 10em;
-    border: none;
+    margin: 0 10em;
 }
 
 .form button {
@@ -14,8 +8,9 @@ body {
 
 .form {
     border: .5px solid #b9b9b9;
+    width: 70%;
     padding: .25em;
-    margin-top: 4%;
+    margin-top: 10%;
     margin-bottom: 0;
     margin-left: auto;
     margin-right: auto;

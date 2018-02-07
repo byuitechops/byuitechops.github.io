@@ -236,7 +236,6 @@
                         });
                         txtCode.classList.remove('hide');
                         submitCode.classList.remove('hide');
-                        formId.classList.remove('formLogout');
                         wdpic.classList.add('locked');
                     }
                     if (snap.trello == true) {
@@ -250,7 +249,6 @@
                         });
                         txtCode.classList.remove('hide');
                         submitCode.classList.remove('hide');
-                        formId.classList.remove('formLogout');
                         trellpic.classList.add('locked');
                     }
                     if (snap.equella == true) {
@@ -264,7 +262,6 @@
                         });
                         txtCode.classList.remove('hide');
                         submitCode.classList.remove('hide');
-                        formId.classList.remove('formLogout');
                         equpic.classList.add('locked');
                     }
                     if (snap.teamDynamix == true) {
@@ -278,7 +275,6 @@
                         });
                         txtCode.classList.remove('hide');
                         submitCode.classList.remove('hide');
-                        formId.classList.remove('formLogout');
                         tdypic.classList.add('locked');
                     }
                     if (snap.teamDrive == true) {
@@ -292,7 +288,6 @@
                         });
                         txtCode.classList.remove('hide');
                         submitCode.classList.remove('hide');
-                        formId.classList.remove('formLogout');
                         tdrpic.classList.add('locked');
                     }
                     if (snap.brightspace == true) {
@@ -306,7 +301,6 @@
                         });
                         txtCode.classList.remove('hide');
                         submitCode.classList.remove('hide');
-                        formId.classList.remove('formLogout');
                         bspic.classList.add('locked');
                     }
                     if (snap.microsoft == true) {
@@ -320,7 +314,6 @@
                         });
                         txtCode.classList.remove('hide');
                         submitCode.classList.remove('hide');
-                        formId.classList.remove('formLogout');
                         micrpic.classList.add('locked');
                     }
                     if (snap.canvas == true) {
@@ -347,7 +340,6 @@
                         });
                         txtCode.classList.remove('hide');
                         submitCode.classList.remove('hide');
-                        formId.classList.remove('formLogout');
                         edpic.classList.add('locked');
                     }
                     if (snap.microsoftTeams == true) {
@@ -361,7 +353,6 @@
                         });
                         txtCode.classList.remove('hide');
                         submitCode.classList.remove('hide');
-                        formId.classList.remove('formLogout');
                         mteampic.classList.add('locked');
                     }
                     if (snap.proDev == true) {
@@ -375,7 +366,6 @@
                         });
                         txtCode.classList.remove('hide');
                         submitCode.classList.remove('hide');
-                        formId.classList.remove('formLogout');
                         pdpic.classList.add('locked');
                     }
                     if (snap.pathway == true) {
@@ -389,7 +379,6 @@
                         });
                         txtCode.classList.remove('hide');
                         submitCode.classList.remove('hide');
-                        formId.classList.remove('formLogout');
                         pathpic.classList.add('locked');
                     }
                     if (snap.screenSteps == true) {
@@ -403,7 +392,6 @@
                         });
                         txtCode.classList.remove('hide');
                         submitCode.classList.remove('hide');
-                        formId.classList.remove('formLogout');
                         sspic.classList.add('locked');
                     }
                     if (snap.firebaseConsole == true) {
@@ -417,7 +405,6 @@
                         });
                         txtCode.classList.remove('hide');
                         submitCode.classList.remove('hide');
-                        formId.classList.remove('formLogout');
                         fbpic.classList.add('locked');
                     }
                     if (snap.canvasStyleGuide == true) {
@@ -431,7 +418,6 @@
                         });
                         txtCode.classList.remove('hide');
                         submitCode.classList.remove('hide');
-                        formId.classList.remove('formLogout');
                         csgpic.classList.add('locked');
                     }
                     if (snap.totStyleGuide == true) {
@@ -445,13 +431,11 @@
                         });
                         txtCode.classList.remove('hide');
                         submitCode.classList.remove('hide');
-                        formId.classList.remove('formLogout');
                         tsgpic.classList.add('locked');
                     }
                     if (user == 'byuitech') {
                         txtCode.classList.remove('hide');
                         submitCode.classList.remove('hide');
-                        formId.classList.remove('formLogout');
                     }
                 });
             }
