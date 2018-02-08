@@ -1,47 +1,67 @@
-select.hide {
+/* ----------------------------------- General Styling -----------------------------------*/
+
+h1 {
+    color: #0076c6;
+    text-align: center;
+    margin-top: auto;
+    margin-left: 13%;
+    padding-top: 1%;
+}
+
+h3 {
+    color: #f89901;
+}
+
+body {
+    margin: 0;
+    font-family: Verdana;
+    font-size: 20px;
+}
+
+.hide {
     display: none;
 }
 
-/* -------------------------------- Styling totals-Emma ----------------------------------*/
+/* ------------------------------- End of General Styling --------------------------------*/
 
-table#t2 {
-    padding-left: 0;
-    margin-top: 9.5%;
-    float: right;
+/* -------------------------------------- Side Menu --------------------------------------*/
+
+ul.sidenav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: #0076c6;
+    position: fixed;
+    height: 100%;
 }
 
-td#week {
-    height: 35px;
-    width: 100px;
-    text-align: left;
-    vertical-align: bottom;
+ul.sidenav li a {
+    display: block;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
 }
 
-td#totals {
-    height: 20px;
-    width: 40px;
-    text-align: right;
-    vertical-align: bottom
+ul.sidenav li a.active {
+    background-color: #f89901;
+    color: white;
 }
 
-td#monthly {
-    font-size: 20px;
-    font-weight: bold;
-    height: 35px;
-    width: 100px;
-    text-align: left;
+ul.sidenav li a:hover:not(.active) {
+    background-color: #555;
+    color: white;
 }
 
+/* ----------------------------------- End of Side Menu ----------------------------------*/
 
-/* ----------------------------- End of Styling totals-Emma ------------------------------*/
-
-/* ---------------------------- Styling calendar-Emma -----------------------------*/
+/* --------------------------------------- Calendar---------------------------------------*/
 
 table#t1 {
     margin-bottom: 5%;
     float: left;
+    margin-left: 28%;
+    border: 3px solid black;
 }
-
 
 .grayout {
     background-color: gray;
@@ -54,13 +74,7 @@ th {
     padding: 2px 10px;
     background-color: #0076c6;
     color: white;
-}
-
-
-table,
-td {
     border: 3px solid black;
-    margin-left: 28.5%;
 }
 
 td {
@@ -69,23 +83,51 @@ td {
     width: 125px;
     text-align: right;
     vertical-align: text-top;
+    border: 3px solid black;
 }
 
 tr#heading td {
     height: 35px;
     width: 100px;
+    font-weight: 550;
 }
 
-tr#title th {
-    text-align: center;
+/* ----------------------------------- End of Calendar -----------------------------------*/
+
+/* ---------------------------------------- Totals ---------------------------------------*/
+
+table#t2 {
+    display: inline-table;
+    float: right;
+    margin-right: 4%;
     border: 3px solid black;
-    height: 60px;
-
 }
 
-/* ---------------------------- End of Styling calendar-Emma -----------------------------*/
+td#week {
+    height: 35px;
+    width: 100px;
+    text-align: left;
+    vertical-align: bottom;
+}
 
-/* --------------------- Code added for styling modal boxes-Emma ------------------------ */
+td.totals {
+    height: 20px;
+    width: 40px;
+    text-align: right;
+    vertical-align: bottom;
+}
+
+td#monthly {
+    font-size: 20px;
+    font-weight: 550;
+    height: 35px;
+    width: 100px;
+    text-align: left;
+}
+
+/* ----------------------------------- End of Totals -------------------------------------*/
+
+/* ------------------------------------ Modal Boxes ------------------------------------- */
 
 /* The Modal (background) */
 
@@ -116,7 +158,7 @@ tr#title th {
     background-color: #fefefe;
     margin: 15% 15% 0% 31%;
     /* 15% from the top and centered */
-    padding: 20px;
+    padding: 0 15px;
     border: 1px solid #888;
     width: 50%;
     /* Could be more or less, depending on screen size */
@@ -138,26 +180,141 @@ tr#title th {
     cursor: pointer;
 }
 
-/* ---------------------------- End of styling modal boxes-Emma -----------------------------*/
+/* ---------------------------------- End of Modal boxes ---------------------------------*/
+
+/* ------------------------------------ Dropdown Menus -----------------------------------*/
 
 #team-dropdown,
-#name-dropdown {
-    /*    display: none;*/
-    -webkit-border-radius: 13px;
-    border: 1px solid #AAA;
+#name-dropdown,
+#month-dropdown {
+    position: relative;
+    left: 32.5%;
+    text-align: left;
     background-color: #0076c6;
     color: white;
-    margin: 0.6em;
-    border: none;
-    cursor: pointer;
-    height: 2.5em;
+    margin: 0.9em;
     border-radius: 1em;
     font-size: 19px;
-    margin-left: 75px;
-    margin-right: 75px;
+    margin-left: 50px;
+    margin-right: 50px;
     overflow: hidden;
     padding: 5px 10px;
     white-space: nowrap;
     width: 200px;
     height: 35px;
 }
+
+/* -------------------------------- End of Dropdown Menus --------------------------------*/
+
+/* ---------------------------------- Resize for Tablets -------------------------------- */
+
+@media screen and (max-width: 1200px) {
+    ul.sidenav {
+        width: 100%;
+        height: auto;
+        position: fixed;
+    }
+    ul.sidenav li a {
+        float: left;
+        padding: 15px;
+        text-align: center;
+    }
+    div.content {
+        padding-top: 50px;
+        margin: 0 auto;
+    }
+    [class*="col-"] {
+        width: 100%;
+        text-align: center;
+    }
+    #team-dropdown,
+    #name-dropdown,
+    #month-dropdown {
+        left: 0%;
+        text-align: left;
+        background-color: #0076c6;
+        color: white;
+        margin: 0.9em;
+        border-radius: 1em;
+        font-size: 19px;
+        margin-left: 50px;
+        margin-right: 50px;
+        overflow: hidden;
+        padding: 5px 10px;
+        white-space: nowrap;
+        width: 200px;
+        height: 35px;
+    }
+    h1 {
+        color: #0076c6;
+        text-align: center;
+        margin-top: auto;
+        padding-top: 5%;
+        margin-right: 13%;
+    }
+    /*  Calendar  */
+    table#t1 {
+        margin-bottom: 5%;
+        margin-left: 0%;
+        border: 3px solid black;
+    }
+    /*  Totals  */
+    table#t2 {
+        margin-right: 35.8%;
+        border: 3px solid black;
+    }
+}
+
+/* ------------------------------ End of Resize for Tablets ----------------------------- */
+
+/* ---------------------------------- Resize for Mobile --------------------------------- */
+
+@media screen and (max-width: 768px) {
+    ul.sidenav {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+    ul.sidenav li a {
+        font-size: 15px;
+        text-align: center;
+        float: none;
+    }
+    /*  Dropdown menus  */
+    #team-dropdown,
+    #name-dropdown,
+    #month-dropdown {
+        left: 2%;
+        text-align: left;
+        background-color: #0076c6;
+        color: white;
+        margin: 0.9em;
+        border-radius: 1em;
+        font-size: 19px;
+        overflow: hidden;
+        padding: 5px 10px;
+        white-space: nowrap;
+        width: 200px;
+        height: 35px;
+    }
+    h1 {
+        color: #0076c6;
+        text-align: center;
+        margin-top: auto;
+        padding-top: 5%;
+    }
+    /*  Calendar  */
+    table#t1 {
+        margin-bottom: 5%;
+        border: 3px solid black;
+        overflow: auto;
+        overflow-y: scroll;
+    }
+    /*  Totals  */
+    table#t2 {
+        border: 3px solid black;
+    }
+
+}
+
+/* ------------------------------- End of Resize for Mobile ----------------------------- */

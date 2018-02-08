@@ -1,4 +1,4 @@
-//------------------------------------- Connect to Firebase ----------------------------------//
+/*----------------------------- Connect to Firebase ----------------------------*/
 var config = {
     apiKey: "AIzaSyA_I75-CU5_GlNP1QSKvvH8nbYVkaAUgNA",
     authDomain: "techopsportal.firebaseapp.com",
@@ -8,16 +8,252 @@ var config = {
     messagingSenderId: "265124430634"
 };
 firebase.initializeApp(config);
+/*------------------------- End of Connect to Firebase -------------------------*/
 
 
-function showModal(num) {
-    var user = firebase.auth().currentUser;
-    var ppl = firebase.database().ref('users/' + user.displayName + '/TimeClock/HoursWorked').once('value');
-    ppl.then(function (snapshot) {
 
-        var person = (snapshot.val());
+/*--------------------- Display current user's time logs -----------------------*/
 
-        var dates = Object.keys(person);
+/* Retrieves info from Firebase to display the current user's check ins and outs */
+function showModal(num, selected) {
+    firebase.auth().onAuthStateChanged(function (user) {
+        // if a name is selected and the selection isn't blank, show the data for the person selected
+        if (selected != user.displayName && selected != "") {
+            selectName(selected, num);
+            return
+        } else {
+            if (user) {
+                var user = firebase.auth().currentUser;
+                var ppl = firebase.database().ref('users/' + user.displayName + '/TimeClock/HoursWorked').once('value');
+                ppl.then(function (snapshot) {
+
+                    var person = (snapshot.val());
+                    var dates = Object.keys(person);
+                    var monthDays = [];
+                    var currentMonth = [];
+                    var count = 0;
+                    // Finds the day of the month by taking the value between the two dashes
+                    // For example, the date 2-14-2017 would turn into 14
+                    for (var i = 0; i < dates.length; i++) {
+                        if (document.getElementById("month-dropdown").value == dates[i][0]) {
+                            currentMonth[count] = dates[i];
+
+                            var firstDash = currentMonth[count].indexOf("-");
+                            var lastDash = currentMonth[count].lastIndexOf("-");
+                            monthDays[count] = currentMonth[count].slice(firstDash + 1, lastDash);
+                            count++;
+                        }
+                    }
+                    var check = false;
+
+                    // loops through each in/out and comment and sets it equal to the HTML to display
+                    for (var i = 0; i < monthDays.length; i++) {
+                        // gets the first instance of clock in/out
+                        if (num == monthDays[i + 1]) {
+                            // if there isn't an instance of this, it sets the text to 'N/A'
+                            if (person[currentMonth[i + 1]].CommentIn == undefined) {
+                                person[currentMonth[i + 1]].CommentIn = "N/A";
+                            }
+                            if (person[currentMonth[i + 1]].CommentOut == undefined) {
+                                person[currentMonth[i + 1]].CommentOut = "N/A";
+                            }
+                            if (person[currentMonth[i + 1]].Out == undefined) {
+                                person[currentMonth[i + 1]].Out = "N/A";
+                            }
+                            // code for diaplying info in modal boxes
+                            var txt = "Clocked in at: " + person[currentMonth[i + 1]].In + "<br />";
+                            txt += "CommentIn: " + person[currentMonth[i + 1]].CommentIn + "<br />";
+                            txt += "Clock out at: " + person[currentMonth[i + 1]].Out + "<br />";
+                            txt += "CommentOut: " + person[currentMonth[i + 1]].CommentOut + "<br />";
+                            document.getElementById("modalText").innerHTML = txt;
+                            check = true;
+                        } else if (num == monthDays[i]) {
+                            if (person[currentMonth[i]].CommentIn == undefined) {
+                                person[currentMonth[i]].CommentIn = "N/A";
+                            }
+                            if (person[currentMonth[i]].CommentOut == undefined) {
+                                person[currentMonth[i]].CommentOut = "N/A";
+                            }
+                            if (person[currentMonth[i]].Out == undefined) {
+                                person[currentMonth[i]].Out = "N/A";
+                            }
+                            var txt = "Clocked in at: " + person[currentMonth[i]].In + "<br />";
+                            txt += "CommentIn: " + person[currentMonth[i]].CommentIn + "<br />";
+                            txt += "Clock out at: " + person[currentMonth[i]].Out + "<br />";
+                            txt += "CommentOut: " + person[currentMonth[i]].CommentOut + "<br />";
+                            document.getElementById("modalText").innerHTML = txt;
+                            document.getElementById("secondShift").innerHTML = "No time logged";
+                            check = true;
+                            break;
+                        } else {
+                            document.getElementById("secondShift").innerHTML = "No time logged";
+                        }
+                        // gets the second instance of clock in/out if there are two instances
+                        if (num == monthDays[i]) {
+                            if (person[currentMonth[i]].CommentIn == undefined) {
+                                person[currentMonth[i]].CommentIn = "N/A";
+                            }
+                            if (person[currentMonth[i]].CommentOut == undefined) {
+                                person[currentMonth[i]].CommentOut = "N/A";
+                            }
+                            if (person[currentMonth[i]].Out == undefined) {
+                                person[currentMonth[i]].Out = "N/A";
+                            }
+                            var txt = "Clocked in at: " + person[currentMonth[i]].In + "<br />";
+                            txt += "CommentIn: " + person[currentMonth[i]].CommentIn + "<br />";
+                            txt += "Clock out at: " + person[currentMonth[i]].Out + "<br />";
+                            txt += "CommentOut: " + person[currentMonth[i]].CommentOut + "<br />";
+                            document.getElementById("secondShift").innerHTML = txt;
+                            check = true;
+                            break;
+                        }
+
+                    }
+                    // if none of the above are true, just display 'No time logged'
+                    if (!check) {
+                        document.getElementById("modalText").innerHTML = "No time logged";
+                    }
+                    // resets the loop
+                    count = 0;
+
+                });
+                // if there is an error, return
+                ppl.catch(function (error) {
+                    alert(error);
+                    return;
+                });
+
+                // Does the same thing as part of function above, with more if/else statements since there are typically more breaks than checkin/outs
+                var breaks = firebase.database().ref('users/' + user.displayName + '/TimeClock/Breaks').once('value');
+                breaks.then(function (snapshot) {
+                    var person = (snapshot.val());
+
+                    var dates = Object.keys(person);
+                    var monthDays = [];
+                    var currentMonth = [];
+                    var count = 0;
+                    for (var i = 0; i < dates.length; i++) {
+                        if (document.getElementById("month-dropdown").value == dates[i][0]) {
+                            currentMonth[count] = dates[i];
+                            var firstDash = currentMonth[count].indexOf("-");
+                            var lastDash = currentMonth[count].lastIndexOf("-");
+                            monthDays[count] = currentMonth[count].slice(firstDash + 1, lastDash);
+                            count++;
+                        }
+                    }
+                    var check = false;
+                    var txt = "";
+                    for (var i = 0; i < monthDays.length; i++) {
+                        if (num < monthDays[i]) {
+                            return;
+                        }
+                        if (num == monthDays[i]) {
+                            if (person[currentMonth[i]].In == undefined) {
+                                person[currentMonth[i]].In = "N/A";
+                            }
+                            if (person[currentMonth[i]].Out == undefined) {
+                                person[currentMonth[i]].Out = "N/A";
+                            }
+                            var txt = "Break Out: " + person[currentMonth[i]].Out;
+                            txt += "<br />Break In: " + person[currentMonth[i]].In + "<br />";
+                            document.getElementById("breakText1").innerHTML = txt;
+                            check = true;
+                        } else {
+                            document.getElementById("breakText1").innerHTML = "No breaks logged";
+                            document.getElementById("breakText2").innerHTML = "";
+                            document.getElementById("breakText3").innerHTML = "";
+                            document.getElementById("breakText4").innerHTML = "";
+                            document.getElementById("breakText5").innerHTML = "";
+                            continue;
+                        }
+                        if (num == monthDays[i + 1]) {
+                            if (person[currentMonth[i + 1]].In == undefined) {
+                                person[currentMonth[i + 1]].In = "N/A";
+                            }
+                            if (person[currentMonth[i + 1]].Out == undefined) {
+                                person[currentMonth[i + 1]].Out = "N/A";
+                            }
+                            var txt = "Break Out: " + person[currentMonth[i + 1]].Out;
+                            txt += "<br />Break In: " + person[currentMonth[i + 1]].In + "<br />";
+                            document.getElementById("breakText2").innerHTML = txt;
+                            check = true;
+                        } else {
+                            document.getElementById("breakText2").innerHTML = "No more breaks";
+                            break;
+                        }
+                        if (num == monthDays[i + 2]) {
+                            if (person[currentMonth[i + 2]].In == undefined) {
+                                person[currentMonth[i + 2]].In = "N/A";
+                            }
+                            if (person[currentMonth[i + 2]].Out == undefined) {
+                                person[currentMonth[i + 2]].Out = "N/A";
+                            }
+                            var txt = "Break Out: " + person[currentMonth[i + 2]].Out;
+                            txt += "<br />Break In: " + person[currentMonth[i + 2]].In + "<br />";
+                            document.getElementById("breakText3").innerHTML = txt;
+                            check = true;
+                        } else {
+                            document.getElementById("breakText3").innerHTML = "No more breaks";
+                            break;
+                        }
+                        if (num == monthDays[i + 4]) {
+                            if (person[currentMonth[i + 3]].In == undefined) {
+                                person[currentMonth[i]].In = "N/A";
+                            }
+                            if (person[currentMonth[i + 3]].Out == undefined) {
+                                person[currentMonth[i + 3]].Out = "N/A";
+                            }
+                            var txt = "Break Out: " + person[currentMonth[i + 3]].Out;
+                            txt += "<br />Break In: " + person[currentMonth[i + 3]].In + "<br />";
+                            document.getElementById("breakText4").innerHTML = txt;
+                            check = true;
+                        } else {
+                            document.getElementById("breakText4").innerHTML = "No more breaks";
+                            break;
+                        }
+                        if (num == monthDays[i + 4]) {
+                            if (person[currentMonth[i + 4]].In == undefined) {
+                                person[currentMonth[i + 4]].In = "N/A";
+                            }
+                            if (person[currentMonth[i + 4]].Out == undefined) {
+                                person[currentMonth[i + 4]].Out = "N/A";
+                            }
+                            var txt = "Break Out: " + person[currentMonth[i + 4]].Out;
+                            txt += "<br />Break In: " + person[currentMonth[i + 4]].In + "<br />";
+                            document.getElementById("breakText5").innerHTML = txt;
+                            check = true;
+                        } else {
+                            document.getElementById("breakText").innerHTML = "No more breaks";
+                            break;
+                        }
+                    }
+                    if (!check) {
+                        document.getElementById("breakText1").innerHTML = "No breaks logged";
+                    }
+                });
+                count = 0;
+                breaks.catch(function (error) {
+                    alert(error);
+                    return;
+                });
+            } else {}
+        }
+    });
+}
+/*------------------ End of display current user's time logs -------------------*/
+
+
+
+
+/*------------------- Connect personal time clock to each user -----------------*/
+/* Does the same thing as the above function, for users other than the one logged in */
+function selectName(selected, num) {
+    var name = firebase.database().ref('users/' + selected + '/TimeClock/HoursWorked').once('value');
+    name.then(function (snapshot) {
+
+        var individual = (snapshot.val());
+
+        var dates = Object.keys(individual);
         var monthDays = [];
         var currentMonth = [];
         var count = 0;
@@ -34,35 +270,35 @@ function showModal(num) {
 
         for (var i = 0; i < monthDays.length; i++) {
             if (num == monthDays[i + 1]) {
-                if (person[currentMonth[i + 1]].CommentIn == undefined) {
-                    person[currentMonth[i + 1]].CommentIn = "N/A";
+                if (individual[currentMonth[i + 1]].CommentIn == undefined) {
+                    individual[currentMonth[i + 1]].CommentIn = "N/A";
                 }
-                if (person[currentMonth[i + 1]].CommentOut == undefined) {
-                    person[currentMonth[i + 1]].CommentOut = "N/A";
+                if (individual[currentMonth[i + 1]].CommentOut == undefined) {
+                    individual[currentMonth[i + 1]].CommentOut = "N/A";
                 }
-                if (person[currentMonth[i + 1]].Out == undefined) {
-                    person[currentMonth[i + 1]].Out = "N/A";
+                if (individual[currentMonth[i + 1]].Out == undefined) {
+                    individual[currentMonth[i + 1]].Out = "N/A";
                 }
-                var txt = "Clocked in at: " + person[currentMonth[i + 1]].In + "<br />";
-                txt += "CommentIn: " + person[currentMonth[i + 1]].CommentIn + "<br />";
-                txt += "Clock out at: " + person[currentMonth[i + 1]].Out + "<br />";
-                txt += "CommentOut: " + person[currentMonth[i + 1]].CommentOut + "<br />";
+                var txt = "Clocked in at: " + individual[currentMonth[i + 1]].In + "<br />";
+                txt += "CommentIn: " + individual[currentMonth[i + 1]].CommentIn + "<br />";
+                txt += "Clock out at: " + individual[currentMonth[i + 1]].Out + "<br />";
+                txt += "CommentOut: " + individual[currentMonth[i + 1]].CommentOut + "<br />";
                 document.getElementById("modalText").innerHTML = txt;
                 check = true;
             } else if (num == monthDays[i]) {
-                if (person[currentMonth[i]].CommentIn == undefined) {
-                    person[currentMonth[i]].CommentIn = "N/A";
+                if (individual[currentMonth[i]].CommentIn == undefined) {
+                    individual[currentMonth[i]].CommentIn = "N/A";
                 }
-                if (person[currentMonth[i]].CommentOut == undefined) {
-                    person[currentMonth[i]].CommentOut = "N/A";
+                if (individual[currentMonth[i]].CommentOut == undefined) {
+                    individual[currentMonth[i]].CommentOut = "N/A";
                 }
-                if (person[currentMonth[i]].Out == undefined) {
-                    person[currentMonth[i]].Out = "N/A";
+                if (individual[currentMonth[i]].Out == undefined) {
+                    individual[currentMonth[i]].Out = "N/A";
                 }
-                var txt = "Clocked in at: " + person[currentMonth[i]].In + "<br />";
-                txt += "CommentIn: " + person[currentMonth[i]].CommentIn + "<br />";
-                txt += "Clock out at: " + person[currentMonth[i]].Out + "<br />";
-                txt += "CommentOut: " + person[currentMonth[i]].CommentOut + "<br />";
+                var txt = "Clocked in at: " + individual[currentMonth[i]].In + "<br />";
+                txt += "CommentIn: " + individual[currentMonth[i]].CommentIn + "<br />";
+                txt += "Clock out at: " + individual[currentMonth[i]].Out + "<br />";
+                txt += "CommentOut: " + individual[currentMonth[i]].CommentOut + "<br />";
                 document.getElementById("modalText").innerHTML = txt;
                 document.getElementById("secondShift").innerHTML = "No time logged";
                 check = true;
@@ -71,19 +307,19 @@ function showModal(num) {
                 document.getElementById("secondShift").innerHTML = "No time logged";
             }
             if (num == monthDays[i]) {
-                if (person[currentMonth[i]].CommentIn == undefined) {
-                    person[currentMonth[i]].CommentIn = "N/A";
+                if (individual[currentMonth[i]].CommentIn == undefined) {
+                    individual[currentMonth[i]].CommentIn = "N/A";
                 }
-                if (person[currentMonth[i]].CommentOut == undefined) {
-                    person[currentMonth[i]].CommentOut = "N/A";
+                if (individual[currentMonth[i]].CommentOut == undefined) {
+                    individual[currentMonth[i]].CommentOut = "N/A";
                 }
-                if (person[currentMonth[i]].Out == undefined) {
-                    person[currentMonth[i]].Out = "N/A";
+                if (individual[currentMonth[i]].Out == undefined) {
+                    individual[currentMonth[i]].Out = "N/A";
                 }
-                var txt = "Clocked in at: " + person[currentMonth[i]].In + "<br />";
-                txt += "CommentIn: " + person[currentMonth[i]].CommentIn + "<br />";
-                txt += "Clock out at: " + person[currentMonth[i]].Out + "<br />";
-                txt += "CommentOut: " + person[currentMonth[i]].CommentOut + "<br />";
+                var txt = "Clocked in at: " + individual[currentMonth[i]].In + "<br />";
+                txt += "CommentIn: " + individual[currentMonth[i]].CommentIn + "<br />";
+                txt += "Clock out at: " + individual[currentMonth[i]].Out + "<br />";
+                txt += "CommentOut: " + individual[currentMonth[i]].CommentOut + "<br />";
                 document.getElementById("secondShift").innerHTML = txt;
                 check = true;
                 break;
@@ -97,16 +333,16 @@ function showModal(num) {
         count = 0;
 
     });
-    ppl.catch(function (error) {
+    name.catch(function (error) {
         alert(error);
         return;
     });
 
-    var breaks = firebase.database().ref('users/' + user.displayName + '/TimeClock/Breaks').once('value');
+    var breaks = firebase.database().ref('users/' + selected + '/TimeClock/Breaks').once('value');
     breaks.then(function (snapshot) {
-        var person = (snapshot.val());
+        var individual = (snapshot.val());
 
-        var dates = Object.keys(person);
+        var dates = Object.keys(individual);
         var monthDays = [];
         var currentMonth = [];
         var count = 0;
@@ -126,14 +362,14 @@ function showModal(num) {
                 return;
             }
             if (num == monthDays[i]) {
-                if (person[currentMonth[i]].In == undefined) {
-                    person[currentMonth[i]].In = "N/A";
+                if (individual[currentMonth[i]].In == undefined) {
+                    individual[currentMonth[i]].In = "N/A";
                 }
-                if (person[currentMonth[i]].Out == undefined) {
-                    person[currentMonth[i]].Out = "N/A";
+                if (individual[currentMonth[i]].Out == undefined) {
+                    individual[currentMonth[i]].Out = "N/A";
                 }
-                var txt = "Break Out: " + person[currentMonth[i]].Out;
-                txt += "<br />Break In: " + person[currentMonth[i]].In + "<br />";
+                var txt = "Break Out: " + individual[currentMonth[i]].Out;
+                txt += "<br />Break In: " + individual[currentMonth[i]].In + "<br />";
                 document.getElementById("breakText1").innerHTML = txt;
                 check = true;
             } else {
@@ -145,14 +381,14 @@ function showModal(num) {
                 continue;
             }
             if (num == monthDays[i + 1]) {
-                if (person[currentMonth[i + 1]].In == undefined) {
-                    person[currentMonth[i + 1]].In = "N/A";
+                if (individual[currentMonth[i + 1]].In == undefined) {
+                    individual[currentMonth[i + 1]].In = "N/A";
                 }
-                if (person[currentMonth[i + 1]].Out == undefined) {
-                    person[currentMonth[i + 1]].Out = "N/A";
+                if (individual[currentMonth[i + 1]].Out == undefined) {
+                    individual[currentMonth[i + 1]].Out = "N/A";
                 }
-                var txt = "Break Out: " + person[currentMonth[i + 1]].Out;
-                txt += "<br />Break In: " + person[currentMonth[i + 1]].In + "<br />";
+                var txt = "Break Out: " + individual[currentMonth[i + 1]].Out;
+                txt += "<br />Break In: " + individual[currentMonth[i + 1]].In + "<br />";
                 document.getElementById("breakText2").innerHTML = txt;
                 check = true;
             } else {
@@ -160,14 +396,14 @@ function showModal(num) {
                 break;
             }
             if (num == monthDays[i + 2]) {
-                if (person[currentMonth[i + 2]].In == undefined) {
-                    person[currentMonth[i + 2]].In = "N/A";
+                if (individual[currentMonth[i + 2]].In == undefined) {
+                    individual[currentMonth[i + 2]].In = "N/A";
                 }
-                if (person[currentMonth[i + 2]].Out == undefined) {
-                    person[currentMonth[i + 2]].Out = "N/A";
+                if (individual[currentMonth[i + 2]].Out == undefined) {
+                    individual[currentMonth[i + 2]].Out = "N/A";
                 }
-                var txt = "Break Out: " + person[currentMonth[i + 2]].Out;
-                txt += "<br />Break In: " + person[currentMonth[i + 2]].In + "<br />";
+                var txt = "Break Out: " + individual[currentMonth[i + 2]].Out;
+                txt += "<br />Break In: " + individual[currentMonth[i + 2]].In + "<br />";
                 document.getElementById("breakText3").innerHTML = txt;
                 check = true;
             } else {
@@ -175,14 +411,14 @@ function showModal(num) {
                 break;
             }
             if (num == monthDays[i + 4]) {
-                if (person[currentMonth[i + 3]].In == undefined) {
-                    person[currentMonth[i]].In = "N/A";
+                if (individual[currentMonth[i + 3]].In == undefined) {
+                    individual[currentMonth[i]].In = "N/A";
                 }
-                if (person[currentMonth[i + 3]].Out == undefined) {
-                    person[currentMonth[i + 3]].Out = "N/A";
+                if (individual[currentMonth[i + 3]].Out == undefined) {
+                    individual[currentMonth[i + 3]].Out = "N/A";
                 }
-                var txt = "Break Out: " + person[currentMonth[i + 3]].Out;
-                txt += "<br />Break In: " + person[currentMonth[i + 3]].In + "<br />";
+                var txt = "Break Out: " + individual[currentMonth[i + 3]].Out;
+                txt += "<br />Break In: " + individual[currentMonth[i + 3]].In + "<br />";
                 document.getElementById("breakText4").innerHTML = txt;
                 check = true;
             } else {
@@ -190,14 +426,14 @@ function showModal(num) {
                 break;
             }
             if (num == monthDays[i + 4]) {
-                if (person[currentMonth[i + 4]].In == undefined) {
-                    person[currentMonth[i + 4]].In = "N/A";
+                if (individual[currentMonth[i + 4]].In == undefined) {
+                    individual[currentMonth[i + 4]].In = "N/A";
                 }
-                if (person[currentMonth[i + 4]].Out == undefined) {
-                    person[currentMonth[i + 4]].Out = "N/A";
+                if (individual[currentMonth[i + 4]].Out == undefined) {
+                    individual[currentMonth[i + 4]].Out = "N/A";
                 }
-                var txt = "Break Out: " + person[currentMonth[i + 4]].Out;
-                txt += "<br />Break In: " + person[currentMonth[i + 4]].In + "<br />";
+                var txt = "Break Out: " + individual[currentMonth[i + 4]].Out;
+                txt += "<br />Break In: " + individual[currentMonth[i + 4]].In + "<br />";
                 document.getElementById("breakText5").innerHTML = txt;
                 check = true;
             } else {
@@ -209,264 +445,19 @@ function showModal(num) {
             document.getElementById("breakText1").innerHTML = "No breaks logged";
         }
     });
-
-
-
     count = 0;
-
-
     breaks.catch(function (error) {
         alert(error);
         return;
     });
-
 }
-//-------------------------------- End of Connect to Firebase --------------------------------//
+/*--------------- End of Connect personal time clock to each user --------------*/
 
 
 
-//--------------------------Connect personal time clock to each user--------------------------//
+/*----------------------------- Calendar Functions ---------------------------- */
 
-function selectName(selected) {
-    firebase.database().ref('users').on('value', snapshot => {
-        var names = (snapshot.val());
-        var i;
-        for (i in names) {
-            var member = names[i];
-            var j;
-            for (j in member) {
-                var individual = member[j];
-                var o;
-                for (o in individual) {
-                    if (o == "HoursWorked") {
-                        var dates = Object.keys(individual[o]);
-                        var monthDays = [];
-                        var currentMonth = [];
-                        var count = 0;
-                        for (var i = 0; i < dates.length; i++) {
-
-                            if (document.getElementById("month-dropdown").value == dates[i][0]) {
-                                currentMonth[count] = dates[i];
-                                var firstDash = currentMonth[count].indexOf("-");
-                                var lastDash = currentMonth[count].lastIndexOf("-");
-                                monthDays[count] = currentMonth[count].slice(firstDash + 1, lastDash);
-                                count++;
-                            }
-                        }
-                        var check = false;
-
-                        for (var i = 0; i < monthDays.length; i++) {
-                            if (selected == monthDays[i + 1]) {
-                                if (names[currentMonth[i + 1]].CommentIn == undefined) {
-                                    names[currentMonth[i + 1]].CommentIn = "N/A";
-                                }
-                                if (names[currentMonth[i + 1]].CommentOut == undefined) {
-                                    names[currentMonth[i + 1]].CommentOut = "N/A";
-                                }
-                                if (names[currentMonth[i + 1]].Out == undefined) {
-                                    names[currentMonth[i + 1]].Out = "N/A";
-                                }
-                                var txt = "Clocked in at: " + names[currentMonth[i + 1]].In + "<br />";
-                                txt += "CommentIn: " + names[currentMonth[i + 1]].CommentIn + "<br />";
-                                txt += "Clock out at: " + names[currentMonth[i + 1]].Out + "<br />";
-                                txt += "CommentOut: " + names[currentMonth[i + 1]].CommentOut + "<br />";
-                                document.getElementById("modalText").innerHTML = txt;
-                                check = true;
-                            } else if (selected == monthDays[i]) {
-                                if (names[currentMonth[i]].CommentIn == undefined) {
-                                    names[currentMonth[i]].CommentIn = "N/A";
-                                }
-                                if (names[currentMonth[i]].CommentOut == undefined) {
-                                    names[currentMonth[i]].CommentOut = "N/A";
-                                }
-                                if (names[currentMonth[i]].Out == undefined) {
-                                    names[currentMonth[i]].Out = "N/A";
-                                }
-                                var txt = "Clocked in at: " + names[currentMonth[i]].In + "<br />";
-                                txt += "CommentIn: " + names[currentMonth[i]].CommentIn + "<br />";
-                                txt += "Clock out at: " + names[currentMonth[i]].Out + "<br />";
-                                txt += "CommentOut: " + names[currentMonth[i]].CommentOut + "<br />";
-                                document.getElementById("modalText").innerHTML = txt;
-                                document.getElementById("secondShift").innerHTML = "No time logged";
-                                check = true;
-                                console.log("else if 1");
-                                break;
-                            } else {
-                                document.getElementById("secondShift").innerHTML = "No time logged";
-                                console.log("else");
-                            }
-                            if (selected == monthDays[i]) {
-                                if (names[currentMonth[i]].CommentIn == undefined) {
-                                    names[currentMonth[i]].CommentIn = "N/A";
-                                }
-                                if (names[currentMonth[i]].CommentOut == undefined) {
-                                    names[currentMonth[i]].CommentOut = "N/A";
-                                }
-                                if (names[currentMonth[i]].Out == undefined) {
-                                    names[currentMonth[i]].Out = "N/A";
-                                }
-                                var txt = "Clocked in at: " + names[currentMonth[i]].In + "<br />";
-                                txt += "CommentIn: " + names[currentMonth[i]].CommentIn + "<br />";
-                                txt += "Clock out at: " + names[currentMonth[i]].Out + "<br />";
-                                txt += "CommentOut: " + names[currentMonth[i]].CommentOut + "<br />";
-                                document.getElementById("secondShift").innerHTML = txt;
-                                check = true;
-                                console.log("if 2");
-                                break;
-                            }
-
-                        }
-                    }
-
-                }
-            }
-        }
-        if (!check) {
-            document.getElementById("modalText").innerHTML = "No time logged";
-        }
-    });
-
-
-    count = 0;
-
-
-
-    //    ppl.catch(function (error) {
-    //        alert(error);
-    //        return;
-    //    });
-
-
-    //    var breaks = firebase.database().ref('users/' + user.displayName + '/TimeClock/Breaks').once('value');
-    //    breaks.then(function (snapshot) {
-    //        var person = (snapshot.val());
-    //
-    //        var dates = Object.keys(person);
-    //        var monthDays = [];
-    //        var currentMonth = [];
-    //        var count = 0;
-    //        for (var i = 0; i < dates.length; i++) {
-    //            if (document.getElementById("month-dropdown").value == dates[i][0]) {
-    //                currentMonth[count] = dates[i];
-    //                var firstDash = currentMonth[count].indexOf("-");
-    //                var lastDash = currentMonth[count].lastIndexOf("-");
-    //                monthDays[count] = currentMonth[count].slice(firstDash + 1, lastDash);
-    //                count++;
-    //            }
-    //        }
-    //        var check = false;
-    //        var txt = "";
-    //        for (var i = 0; i < monthDays.length; i++) {
-    //            if (num < monthDays[i]) {
-    //                return;
-    //            }
-    //            if (num == monthDays[i]) {
-    //                if (person[currentMonth[i]].In == undefined) {
-    //                    person[currentMonth[i]].In = "N/A";
-    //                }
-    //                if (person[currentMonth[i]].Out == undefined) {
-    //                    person[currentMonth[i]].Out = "N/A";
-    //                }
-    //                var txt = "Break Out: " + person[currentMonth[i]].Out;
-    //                txt += "<br />Break In: " + person[currentMonth[i]].In + "<br />";
-    //                document.getElementById("breakText1").innerHTML = txt;
-    //                check = true;
-    //            } else {
-    //                document.getElementById("breakText1").innerHTML = "No breaks logged";
-    //                document.getElementById("breakText2").innerHTML = "";
-    //                document.getElementById("breakText3").innerHTML = "";
-    //                document.getElementById("breakText4").innerHTML = "";
-    //                document.getElementById("breakText5").innerHTML = "";
-    //                continue;
-    //            }
-    //            if (num == monthDays[i + 1]) {
-    //                if (person[currentMonth[i + 1]].In == undefined) {
-    //                    person[currentMonth[i + 1]].In = "N/A";
-    //                }
-    //                if (person[currentMonth[i + 1]].Out == undefined) {
-    //                    person[currentMonth[i + 1]].Out = "N/A";
-    //                }
-    //                var txt = "Break Out: " + person[currentMonth[i + 1]].Out;
-    //                txt += "<br />Break In: " + person[currentMonth[i + 1]].In + "<br />";
-    //                document.getElementById("breakText2").innerHTML = txt;
-    //                check = true;
-    //            } else {
-    //                document.getElementById("breakText2").innerHTML = "No more breaks";
-    //                break;
-    //            }
-    //            if (num == monthDays[i + 2]) {
-    //                if (person[currentMonth[i + 2]].In == undefined) {
-    //                    person[currentMonth[i + 2]].In = "N/A";
-    //                }
-    //                if (person[currentMonth[i + 2]].Out == undefined) {
-    //                    person[currentMonth[i + 2]].Out = "N/A";
-    //                }
-    //                var txt = "Break Out: " + person[currentMonth[i + 2]].Out;
-    //                txt += "<br />Break In: " + person[currentMonth[i + 2]].In + "<br />";
-    //                document.getElementById("breakText3").innerHTML = txt;
-    //                check = true;
-    //            } else {
-    //                document.getElementById("breakText3").innerHTML = "No more breaks";
-    //                document.getElementById("breakText3").innerHTML = "No more breaks";
-    //                break;
-    //            }
-    //            if (num == monthDays[i + 4]) {
-    //                if (person[currentMonth[i + 3]].In == undefined) {
-    //                    person[currentMonth[i]].In = "N/A";
-    //                }
-    //                if (person[currentMonth[i + 3]].Out == undefined) {
-    //                    person[currentMonth[i + 3]].Out = "N/A";
-    //                }
-    //                var txt = "Break Out: " + person[currentMonth[i + 3]].Out;
-    //                txt += "<br />Break In: " + person[currentMonth[i + 3]].In + "<br />";
-    //                document.getElementById("breakText4").innerHTML = txt;
-    //                check = true;
-    //            } else {
-    //                document.getElementById("breakText4").innerHTML = "No more breaks";
-    //                break;
-    //            }
-    //            if (num == monthDays[i + 4]) {
-    //                if (person[currentMonth[i + 4]].In == undefined) {
-    //                    person[currentMonth[i + 4]].In = "N/A";
-    //                }
-    //                if (person[currentMonth[i + 4]].Out == undefined) {
-    //                    person[currentMonth[i + 4]].Out = "N/A";
-    //                }
-    //                var txt = "Break Out: " + person[currentMonth[i + 4]].Out;
-    //                txt += "<br />Break In: " + person[currentMonth[i + 4]].In + "<br />";
-    //                document.getElementById("breakText5").innerHTML = txt;
-    //                check = true;
-    //            } else {
-    //                document.getElementById("breakText").innerHTML = "No more breaks";
-    //                break;
-    //            }
-    //        }
-    //        if (!check) {
-    //            document.getElementById("breakText1").innerHTML = "No breaks logged";
-    //        }
-    //    });
-    //
-    //
-    //
-    //
-    //    count = 0;
-    //
-    //
-    //    breaks.catch(function (error) {
-    //        alert(error);
-    //        return;
-    //    });
-}
-
-
-
-
-//--------------------End of Connect personal time clock to each user---------------------//
-
-
-
-
-//----------------------------------- Calendar Functions ------------------------------------ //
+/* Determines if the year is a leap year */
 function leapYear(year) {
     if (year % 4 == 0) // basic rule
         return true // is leap year
@@ -474,6 +465,7 @@ function leapYear(year) {
     return false // is not leap year
 }
 
+/* Describe what the function does */
 function getDays(month, year) {
     // create array to hold number of days in each month
     var ar = new Array(11)
@@ -494,30 +486,31 @@ function getDays(month, year) {
     return ar[month]
 }
 
+/* Describe what the function does */
 function getMonthName(month) {
     // create array to hold name of each month
     var ar = new Array(12)
-    ar[1] = "January"
-    ar[2] = "February"
-    ar[3] = "March"
-    ar[4] = "April"
-    ar[5] = "May"
-    ar[6] = "June"
-    ar[7] = "July"
-    ar[8] = "August"
-    ar[9] = "September"
-    ar[10] = "October"
-    ar[11] = "November"
-    ar[12] = "December"
+    ar[1] = "January  &#9731;"
+    ar[2] = "February &#9825"
+    ar[3] = "March &#9752"
+    ar[4] = "April &#9730"
+    ar[5] = "May &#10048"
+    ar[6] = "June &#9928"
+    ar[7] = "July &#9728"
+    ar[8] = "August &#9969"
+    ar[9] = "September &#9998"
+    ar[10] = "October &#9760"
+    ar[11] = "November 🍽️"
+    ar[12] = "December &#10053"
 
     // return name of specified month (parameter)
     return ar[month]
 }
 
-
-
+/* Populates calendar with the days in the month */
 function setCal(sMonth) {
     // standard time attributes
+    //    calcTotals();
     clearCal();
     var now = new Date()
     var cMonth = now.getMonth();
@@ -583,11 +576,10 @@ function setCal(sMonth) {
             }
         }
     }
-
-
     document.getElementById("title").innerHTML = monthName + " " + year;
 }
 
+/* Clears/resets the calendar days before it is set with another month */
 function clearCal() {
 
     for (var i = 2, row; row = t1.rows[i]; i++) {
@@ -606,17 +598,22 @@ function clearCal() {
 
     }
 }
-//--------------------------------- End Calendar Functions -----------------------------------// 
+/*---------------------------- End Calendar Functions --------------------------*/
 
-//------------------------------ Start of Modal Boxes Function -------------------------------// 
 
+
+/*----------------------- Start of Modal Boxes Function ------------------------*/
+
+
+/* Causes modal box to open when clicked on */
 function modalBox(number) {
     // Get the modal
     var num = number.getAttribute("value");
     var modal = document.getElementById('myModal');
+    var selected = document.getElementById('name-dropdown').value;
 
-    showModal(num);
-    //    selectName(selected);
+    showModal(num, selected);
+
     // Get the button that opens the modal
     var btn = document.getElementById("myBtn");
 
@@ -638,18 +635,35 @@ function modalBox(number) {
         }
     }
 }
+/*------------------------ End of Modal Boxes Function -------------------------*/
 
-//------------------------------- End of Modal Boxes Function --------------------------------// 
 
 
-//---------------------------- Start of specific access Functions ----------------------------// 
+/*--------------------- Start of specific access Functions ---------------------*/
 
+function setMonth() {
+    var now = new Date()
+    var cMonth = now.getMonth() + 1;
+    var selected = document.getElementById("month-dropdown").options;
+    selected.selectedIndex = cMonth;
+
+    setCal(cMonth);
+
+
+}
+
+/* Allows use for name dropdowns for team leads and admin, as well as team dropdown for admin */
 (function () {
+
+
+    //    calcTotals();
+
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             firebase.database().ref('users/' + user.displayName).on('value', snapshot => {
                 var currentUser = (snapshot.val());
                 var i;
+                // iterates through each user to check for a TeamLead or Admin category
                 for (i in currentUser) {
                     if (i == 'TeamLead') {
                         var team = currentUser[i];
@@ -689,13 +703,14 @@ function modalBox(number) {
     });
 }());
 
-
+/* Inserts the names of each member of the team based on which team is selected in the dropdown */
 function selectTeam(selected) {
     var select = document.getElementById("name-dropdown");
     var length = select.options.length;
     for (var i = 0; i < length; i++) {
         select.options[1] = null;
     }
+    // iterates through each user and adds their name to the current dropdown if their team matches the team that was selected in the previous dropdown
     firebase.database().ref('users').on('value', snapshot => {
         var names = snapshot.val();
         var name;
@@ -715,5 +730,178 @@ function selectTeam(selected) {
         }
     })
 }
+/*---------------------- End of specific access Functions ----------------------*/
 
-//------------------------------ End of specific access Functions ----------------------------//
+
+
+/*-------------------------- Start of Totals Function --------------------------*/
+/* Describe what this function does */
+
+//function calcTotals() {
+//    var selected = document.getElementById("month-dropdown").value;
+//    firebase.auth().onAuthStateChanged(function (user) {
+//        if (user) {
+//            var user = firebase.auth().currentUser;
+//            var ppl = firebase.database().ref('users/' + user.displayName + '/TimeClock/HoursWorked').once('value');
+//            ppl.then(function (snapshot) {
+//
+//                var person = (snapshot.val());
+//                var dates = Object.keys(person);
+//                var monthDays = [];
+//                var currentMonth = [];
+//
+//                var count = 0;
+//                for (var i = 0; i < dates.length; i++) {
+//                    if (document.getElementById("month-dropdown").value == dates[i][0]) {
+//                        currentMonth[count] = dates[i];
+//                        var firstDash = currentMonth[count].indexOf("-");
+//                        var lastDash = currentMonth[count].lastIndexOf("-");
+//                        monthDays[count] = currentMonth[count].slice(firstDash + 1, lastDash);
+//                        count++;
+//                    }
+//                }
+//
+//                var count = 0;
+//
+//                var rowone = document.getElementById("rowone").cells;
+//                var weekOne = [];
+//                for (var x = 0; x < rowone.length - 1; x++) {
+//                    if (rowone[x].innerHTML != "") {
+//                        //                        alert(rowone[x].innerHTML + " " + monthDays[count]);
+//                        if (rowone[x].innerHTML != monthDays[count]) {
+//                            continue;
+//                        }
+//                        if (person[currentMonth[count + 1]].Out && person[currentMonth[count + 1]].In) {
+//                            //                            alert(person[currentMonth[count + 1]].In);
+//
+//                            if (person[currentMonth[count]].Out && person[currentMonth[count]].In) {
+//                                alert(person[currentMonth[count]].In);
+//                                count++;
+//                            }
+//                            count++;
+//                        }
+//
+//
+//                    }
+//
+//                }
+//                var rowtwo = document.getElementById("rowtwo").cells;
+//
+//                var weekTwo = [];
+//                for (var x = 0; x < rowtwo.length - 1; x++) {
+//                    if (rowtwo[x].innerHTML != "") {
+//                        if (rowtwo[x].innerHTML != monthDays[count]) {
+//                            continue;
+//                        }
+//                        if (person[currentMonth[count + 1]].Out && person[currentMonth[count + 1]].In) {
+//                            if (person[currentMonth[count]].Out && person[currentMonth[count]].In) {
+//                                count++;
+//                            }
+//                            count++;
+//                        }
+//
+//
+//                    }
+//
+//                }
+//                var rowthree = document.getElementById("rowthree").cells;
+//
+//                var weekThree = [];
+//                for (var x = 0; x < rowthree.length - 1; x++) {
+//                    if (rowthree[x].innerHTML != "") {
+//                        if (rowthree[x].innerHTML != monthDays[count]) {
+//
+//                            continue;
+//                        }
+//                        if (person[currentMonth[count + 1]].Out && person[currentMonth[count + 1]].In) {
+//
+//                            if (person[currentMonth[count]].Out && person[currentMonth[count]].In) {
+//                                count++;
+//                            }
+//                            count++;
+//                        }
+//
+//                    }
+//
+//                }
+//                var rowfour = document.getElementById("rowfour").cells;
+//                var weekFour = [];
+//                for (var x = 0; x < rowfour.length - 1; x++) {
+//                    if (rowfour[x].innerHTML != "") {
+//                        if (rowfour[x].innerHTML != monthDays[count]) {
+//                            continue;
+//                        }
+//                        if (person[currentMonth[count + 1]].Out && person[currentMonth[count + 1]].In) {
+//                            if (person[currentMonth[count + 1]].Out.search("pm") != -1) {
+//                                console.log(person[currentMonth[count + 1]].Out);
+//                            }
+//
+//
+//                            if (person[currentMonth[count]].Out && person[currentMonth[count]].In) {
+//                                count++;
+//                            }
+//                            count++;
+//                        }
+//                    }
+//
+//                }
+//                var rowfive = document.getElementById("rowfive").cells;
+//                var weekFive = [];
+//                for (var x = 0; x < rowfive.length - 1; x++) {
+//                    if (rowfive[x].innerHTML != "") {
+//                        if (rowfive[x].innerHTML != monthDays[count]) {
+//                            continue;
+//                        }
+//                        if (count + 1 > currentMonth.length - 1) {
+//                            if (person[currentMonth[count]].Out && person[currentMonth[count]].In) {
+//
+//                            }
+//                            break;
+//                        }
+//                        if (person[currentMonth[count + 1]].Out && person[currentMonth[count + 1]].In) {
+//
+//                            if (person[currentMonth[count]].Out && person[currentMonth[count]].In) {
+//                                count++;
+//                            }
+//                            count++;
+//                        }
+//                    }
+//
+//                }
+//                var rowsix = document.getElementById("rowsix").cells;
+//                var weekSix = [];
+//                for (var x = 0; x < rowsix.length - 1; x++) {
+//                    if (rowsix[x].innerHTML != "") {
+//                        if (rowsix[x].innerHTML != monthDays[count]) {
+//                            continue;
+//                        }
+//                        if (count + 1 > currentMonth.length - 1) {
+//                            if (person[currentMonth[count]].Out && person[currentMonth[count]].In) {
+//
+//                            }
+//                            break;
+//                        }
+//                        if (person[currentMonth[count + 1]].Out && person[currentMonth[count + 1]].In) {
+//
+//                            if (person[currentMonth[count]].Out && person[currentMonth[count]].In) {
+//                                count++;
+//                            }
+//                            count++;
+//                        }
+//
+//
+//                    }
+//
+//                }
+//
+//
+//
+//
+//            });
+//
+//        }
+//    })
+//}
+
+
+/*--------------------------- End of Totals Function ---------------------------*/
