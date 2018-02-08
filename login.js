@@ -12,23 +12,22 @@
 
 
     firebase.auth().onAuthStateChanged(firebaseUser => {
-        if (firebaseUser) {            
-             window.location.replace("home.html");
+        if (firebaseUser) {
+            window.location.replace("home.html");
         } else {
-
+            var user;
             const txtEmail = document.getElementById('txtEmail');
             const txtPassword = document.getElementById('txtPassword');
             const btnLogin = document.getElementById('btnLogin');
             const btnSignup = document.getElementById('btnSignUp');
             const btnLogout = document.getElementById('btnLogout');
 
-
             document.getElementById('txtPassword').addEventListener("keyup", function (event) {
                 event.preventDefault();
                 if (event.keyCode === 13) {
                     btnLogin.click();
                 }
-            })
+            });
 
             btnLogin.addEventListener('click', e => {
                 const email = txtEmail.value;
@@ -51,8 +50,6 @@
                         console.log(user);
                         localStorage.setItem('user', user);
                     });
-
-                    loadUser();
                 });
                 promise.catch(e => {
                     window.alert(e);
@@ -98,7 +95,6 @@
                 const promise = auth.createUserWithEmailAndPassword(email, pass);
                 promise.then(e => {
                     setUser();
-                    loadUser();
                     var profile = firebase.auth().currentUser;
 
                     profile.updateProfile({
@@ -144,12 +140,9 @@
                     "canvasStyleGuide": true,
                     "totStyleGuide": true
                 };
-                console.log(user);
-                dbRefUsers.child(user).set(data);
+                firebase.database().ref('users/' + user).update(data);
             }
 
-
-            console.log('not logged in');
         }
     });
 
