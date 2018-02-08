@@ -225,6 +225,39 @@
                         window.alert('Congration You Done It!');
                     });
 
+                    var titles;
+                    for (titles in snap) {
+                        if (titles == 'Admin') {
+                            // Access to all
+                        } else if (titles == 'Team') {
+                            if (snap[titles] == 'tech') {
+                                // Access to Basic & Firebase & Trello
+                                document.getElementById('pathway').classList.add('hide');
+                                document.getElementById('canvasstyle').classList.add('hide');
+                                document.getElementById('totstyle').classList.add('hide');
+                                document.getElementById('screensteps').classList.add('hide');
+                            }
+                            if (snap[titles] == 'canvas') {
+                                // Access to Basic & Trello & Style Guides
+                                document.getElementById('pathway').classList.add('hide');
+                                document.getElementById('firebase').classList.add('hide');
+                                document.getElementById('screensteps').classList.add('hide');
+                            } 
+                            if (snap[titles] = 'transcript') {
+                                // Access to Basic & Pathway
+                                document.getElementById('trello').classList.add('hide');
+                                document.getElementById('screensteps').classList.add('hide');
+                                document.getElementById('firebase').classList.add('hide');
+                                document.getElementById('canvasstyle').classList.add('hide');
+                                document.getElementById('totstyle').classList.add('hide');
+                            }
+                        }
+                    }
+
+                    if (user == 'Brooklyn Cook') {
+                        document.getElementById('screensteps').classList.remove('hide');
+                    }
+
                     if (snap.workDay == true) {
                         var icon = document.getElementById('wd');
                         icon.setAttribute('href', "https://www.myworkday.com/byuhi/d/home.htmld#selectedWorklet=501%24162");
@@ -263,19 +296,6 @@
                         txtCode.classList.remove('hide');
                         submitCode.classList.remove('hide');
                         equpic.classList.add('locked');
-                    }
-                    if (snap.teamDynamix == true) {
-                        var icon = document.getElementById('tdy');
-                        icon.setAttribute('href', "https://td.byui.edu");
-                        tdypic.classList.remove('locked');
-                    } else {
-                        var icon = document.getElementById('tdy');
-                        icon.addEventListener('click', e => {
-                            window.alert('You are blocked for training purposes. Check your email for training link');
-                        });
-                        txtCode.classList.remove('hide');
-                        submitCode.classList.remove('hide');
-                        tdypic.classList.add('locked');
                     }
                     if (snap.teamDrive == true) {
                         var icon = document.getElementById('tdr');
