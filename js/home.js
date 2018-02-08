@@ -255,6 +255,10 @@
                     if (user == 'Brooklyn Cook') {
                         document.getElementById('screensteps').classList.remove('hide');
                     }
+                    
+                     if (user == 'Logan Jenkins') {
+                        document.getElementById('trello').classList.remove('hide');
+                    }
 
                     if (snap.workDay == true) {
                         var icon = document.getElementById('wd');
