@@ -255,6 +255,7 @@
                                 document.getElementById('firebase').classList.add('hide');
                                 document.getElementById('canvasstyle').classList.add('hide');
                                 document.getElementById('totstyle').classList.add('hide');
+                                document.getElementById('pathway').classList.add('hide');
                             }
                         }
                     }
@@ -503,7 +504,7 @@
                 var d = new Date();
                 var hours = d.getHours();
                 var mer = "am";
-                if (hours - 12 > 0) {
+                if (hours - 12 >= 0) {
                     hours = '0' + (hours - 12);
                     mer = "pm";
                 };
