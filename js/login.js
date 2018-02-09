@@ -130,6 +130,7 @@
 
             function setUser() {
                 var data = {
+                    "Team": 'default',
                     "brightspace": false,
                     "trello": false,
                     "teamDrive": false,
