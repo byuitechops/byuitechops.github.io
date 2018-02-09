@@ -241,8 +241,15 @@
                                 document.getElementById('pathway').classList.add('hide');
                                 document.getElementById('firebase').classList.add('hide');
                                 document.getElementById('screensteps').classList.add('hide');
-                            } else if (snap[titles] = 'transcript') {
+                            } else if (snap[titles] == 'transcript') {
                                 // Access to Basic & Pathway
+                                document.getElementById('trello').classList.add('hide');
+                                document.getElementById('screensteps').classList.add('hide');
+                                document.getElementById('firebase').classList.add('hide');
+                                document.getElementById('canvasstyle').classList.add('hide');
+                                document.getElementById('totstyle').classList.add('hide');
+                            } else if (snap[titles] == 'default') {
+                                // Access to Basic
                                 document.getElementById('trello').classList.add('hide');
                                 document.getElementById('screensteps').classList.add('hide');
                                 document.getElementById('firebase').classList.add('hide');
@@ -255,8 +262,8 @@
                     if (user == 'Brooklyn Cook') {
                         document.getElementById('screensteps').classList.remove('hide');
                     }
-                    
-                     if (user == 'Logan Jenkins') {
+
+                    if (user == 'Logan Jenkins') {
                         document.getElementById('trello').classList.remove('hide');
                     }
 
