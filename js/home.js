@@ -496,7 +496,7 @@
                 var d = new Date();
                 var hours = d.getHours();
                 var mer = "am";
-                if (hours - 12 > 0) {
+                if (hours - 12 >= 0) {
                     hours = '0' + (hours - 12);
                     mer = "pm";
                 };
