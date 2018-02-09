@@ -82,6 +82,14 @@
             });
 
             var user = null;
+            
+            document.getElementById('signUpPassword').addEventListener("keyup", function (event) {
+                event.preventDefault();
+                if (event.keyCode === 13) {
+                    document.getElementById('submitSignUp').click();
+                }
+            });
+            
             document.getElementById('submitSignUp').addEventListener('click', e => {
                 user = signUpName.value;
                 const email = signUpEmail.value;
@@ -130,7 +138,6 @@
                     "canvas": false,
                     "microsoftTeams": false,
                     "equella": true,
-                    "teamDynamix": true,
                     "employeeDirectory": true,
                     "proDev": true,
                     "pathway": true,
