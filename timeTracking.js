@@ -510,7 +510,7 @@ function getMonthName(month) {
 /* Populates calendar with the days in the month */
 function setCal(sMonth) {
     // standard time attributes
-    //    calcTotals();
+    calcTotals();
     clearCal();
     var now = new Date()
     var cMonth = now.getMonth();
@@ -656,7 +656,7 @@ function setMonth() {
 (function () {
 
 
-    //    calcTotals();
+    calcTotals();
 
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
@@ -737,171 +737,173 @@ function selectTeam(selected) {
 /*-------------------------- Start of Totals Function --------------------------*/
 /* Describe what this function does */
 
-//function calcTotals() {
-//    var selected = document.getElementById("month-dropdown").value;
-//    firebase.auth().onAuthStateChanged(function (user) {
-//        if (user) {
-//            var user = firebase.auth().currentUser;
-//            var ppl = firebase.database().ref('users/' + user.displayName + '/TimeClock/HoursWorked').once('value');
-//            ppl.then(function (snapshot) {
-//
-//                var person = (snapshot.val());
-//                var dates = Object.keys(person);
-//                var monthDays = [];
-//                var currentMonth = [];
-//
-//                var count = 0;
-//                for (var i = 0; i < dates.length; i++) {
-//                    if (document.getElementById("month-dropdown").value == dates[i][0]) {
-//                        currentMonth[count] = dates[i];
-//                        var firstDash = currentMonth[count].indexOf("-");
-//                        var lastDash = currentMonth[count].lastIndexOf("-");
-//                        monthDays[count] = currentMonth[count].slice(firstDash + 1, lastDash);
-//                        count++;
-//                    }
-//                }
-//
-//                var count = 0;
-//
-//                var rowone = document.getElementById("rowone").cells;
-//                var weekOne = [];
-//                for (var x = 0; x < rowone.length - 1; x++) {
-//                    if (rowone[x].innerHTML != "") {
-//                        //                        alert(rowone[x].innerHTML + " " + monthDays[count]);
-//                        if (rowone[x].innerHTML != monthDays[count]) {
-//                            continue;
-//                        }
-//                        if (person[currentMonth[count + 1]].Out && person[currentMonth[count + 1]].In) {
-//                            //                            alert(person[currentMonth[count + 1]].In);
-//
-//                            if (person[currentMonth[count]].Out && person[currentMonth[count]].In) {
-//                                alert(person[currentMonth[count]].In);
-//                                count++;
-//                            }
-//                            count++;
-//                        }
-//
-//
-//                    }
-//
-//                }
-//                var rowtwo = document.getElementById("rowtwo").cells;
-//
-//                var weekTwo = [];
-//                for (var x = 0; x < rowtwo.length - 1; x++) {
-//                    if (rowtwo[x].innerHTML != "") {
-//                        if (rowtwo[x].innerHTML != monthDays[count]) {
-//                            continue;
-//                        }
-//                        if (person[currentMonth[count + 1]].Out && person[currentMonth[count + 1]].In) {
-//                            if (person[currentMonth[count]].Out && person[currentMonth[count]].In) {
-//                                count++;
-//                            }
-//                            count++;
-//                        }
-//
-//
-//                    }
-//
-//                }
-//                var rowthree = document.getElementById("rowthree").cells;
-//
-//                var weekThree = [];
-//                for (var x = 0; x < rowthree.length - 1; x++) {
-//                    if (rowthree[x].innerHTML != "") {
-//                        if (rowthree[x].innerHTML != monthDays[count]) {
-//
-//                            continue;
-//                        }
-//                        if (person[currentMonth[count + 1]].Out && person[currentMonth[count + 1]].In) {
-//
-//                            if (person[currentMonth[count]].Out && person[currentMonth[count]].In) {
-//                                count++;
-//                            }
-//                            count++;
-//                        }
-//
-//                    }
-//
-//                }
-//                var rowfour = document.getElementById("rowfour").cells;
-//                var weekFour = [];
-//                for (var x = 0; x < rowfour.length - 1; x++) {
-//                    if (rowfour[x].innerHTML != "") {
-//                        if (rowfour[x].innerHTML != monthDays[count]) {
-//                            continue;
-//                        }
-//                        if (person[currentMonth[count + 1]].Out && person[currentMonth[count + 1]].In) {
-//                            if (person[currentMonth[count + 1]].Out.search("pm") != -1) {
-//                                console.log(person[currentMonth[count + 1]].Out);
-//                            }
-//
-//
-//                            if (person[currentMonth[count]].Out && person[currentMonth[count]].In) {
-//                                count++;
-//                            }
-//                            count++;
-//                        }
-//                    }
-//
-//                }
-//                var rowfive = document.getElementById("rowfive").cells;
-//                var weekFive = [];
-//                for (var x = 0; x < rowfive.length - 1; x++) {
-//                    if (rowfive[x].innerHTML != "") {
-//                        if (rowfive[x].innerHTML != monthDays[count]) {
-//                            continue;
-//                        }
-//                        if (count + 1 > currentMonth.length - 1) {
-//                            if (person[currentMonth[count]].Out && person[currentMonth[count]].In) {
-//
-//                            }
-//                            break;
-//                        }
-//                        if (person[currentMonth[count + 1]].Out && person[currentMonth[count + 1]].In) {
-//
-//                            if (person[currentMonth[count]].Out && person[currentMonth[count]].In) {
-//                                count++;
-//                            }
-//                            count++;
-//                        }
-//                    }
-//
-//                }
-//                var rowsix = document.getElementById("rowsix").cells;
-//                var weekSix = [];
-//                for (var x = 0; x < rowsix.length - 1; x++) {
-//                    if (rowsix[x].innerHTML != "") {
-//                        if (rowsix[x].innerHTML != monthDays[count]) {
-//                            continue;
-//                        }
-//                        if (count + 1 > currentMonth.length - 1) {
-//                            if (person[currentMonth[count]].Out && person[currentMonth[count]].In) {
-//
-//                            }
-//                            break;
-//                        }
-//                        if (person[currentMonth[count + 1]].Out && person[currentMonth[count + 1]].In) {
-//
-//                            if (person[currentMonth[count]].Out && person[currentMonth[count]].In) {
-//                                count++;
-//                            }
-//                            count++;
-//                        }
-//
-//
-//                    }
-//
-//                }
-//
-//
-//
-//
-//            });
-//
-//        }
-//    })
-//}
+function calcTotals() {
+    var selected = document.getElementById("month-dropdown").value;
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            var user = firebase.auth().currentUser;
+            var ppl = firebase.database().ref('users/' + user.displayName + '/TimeClock/HoursWorked').once('value');
+            ppl.then(function (snapshot) {
+
+                var person = (snapshot.val());
+                var dates = Object.keys(person);
+                var monthDays = [];
+                var currentMonth = [];
+
+                var count = 0;
+                for (var i = 0; i < dates.length; i++) {
+                    if (document.getElementById("month-dropdown").value == dates[i][0]) {
+                        currentMonth[count] = dates[i];
+                        var firstDash = currentMonth[count].indexOf("-");
+                        var lastDash = currentMonth[count].lastIndexOf("-");
+                        monthDays[count] = currentMonth[count].slice(firstDash + 1, lastDash);
+                        count++;
+                    }
+                }
+
+                var count = 0;
+
+                //                var rowone = document.getElementById("rowone").cells;
+                //                var weekOne = [];
+                //                for (var x = 0; x < rowone.length - 1; x++) {
+                //                    if (rowone[x].innerHTML != "") {
+                //                        //                        alert(rowone[x].innerHTML + " " + monthDays[count]);
+                //                        if (rowone[x].innerHTML != monthDays[count]) {
+                //                            continue;
+                //                        }
+                //                        if (person[currentMonth[count + 1]].Out && person[currentMonth[count + 1]].In) {
+                //                            //                            alert(person[currentMonth[count + 1]].In);
+                //
+                //                            if (person[currentMonth[count]].Out && person[currentMonth[count]].In) {
+                //                                alert(person[currentMonth[count]].In);
+                //                                count++;
+                //                            }
+                //                            count++;
+                //                        }
+                //
+                //
+                //                    }
+                //
+                //                }
+                //                var rowtwo = document.getElementById("rowtwo").cells;
+                //
+                //                var weekTwo = [];
+                //                for (var x = 0; x < rowtwo.length - 1; x++) {
+                //                    if (rowtwo[x].innerHTML != "") {
+                //                        if (rowtwo[x].innerHTML != monthDays[count]) {
+                //                            continue;
+                //                        }
+                //                        if (person[currentMonth[count + 1]].Out && person[currentMonth[count + 1]].In) {
+                //                            if (person[currentMonth[count]].Out && person[currentMonth[count]].In) {
+                //                                count++;
+                //                            }
+                //                            count++;
+                //                        }
+                //
+                //
+                //                    }
+                //
+                //                }
+                //                var rowthree = document.getElementById("rowthree").cells;
+                //
+                //                var weekThree = [];
+                //                for (var x = 0; x < rowthree.length - 1; x++) {
+                //                    if (rowthree[x].innerHTML != "") {
+                //                        if (rowthree[x].innerHTML != monthDays[count]) {
+                //
+                //                            continue;
+                //                        }
+                //                        if (person[currentMonth[count + 1]].Out && person[currentMonth[count + 1]].In) {
+                //
+                //                            if (person[currentMonth[count]].Out && person[currentMonth[count]].In) {
+                //                                count++;
+                //                            }
+                //                            count++;
+                //                        }
+                //
+                //                    }
+                //
+                //                }
+                var rowfour = document.getElementById("rowfour").cells;
+                var weekFour = [];
+                for (var x = 0; x < rowfour.length - 1; x++) {
+                    if (rowfour[x].innerHTML != "") {
+                        if (rowfour[x].innerHTML != monthDays[count]) {
+                            console.log("hey");
+                            continue;
+                        }
+                        if (person[currentMonth[count + 1]].Out && person[currentMonth[count + 1]].In) {
+                            //                            if (person[currentMonth[count + 1]].("pm") != -1) {
+                            //                                console.log(person[currentMonth[count + 1]].Out);
+                            //                            }
+                            //                            console.log(person[currentMonth[count + 1]].Out);
+
+
+                            if (person[currentMonth[count]].Out && person[currentMonth[count]].In) {
+                                count++;
+                            }
+                            count++;
+                        }
+                    }
+
+                }
+                //                var rowfive = document.getElementById("rowfive").cells;
+                //                var weekFive = [];
+                //                for (var x = 0; x < rowfive.length - 1; x++) {
+                //                    if (rowfive[x].innerHTML != "") {
+                //                        if (rowfive[x].innerHTML != monthDays[count]) {
+                //                            continue;
+                //                        }
+                //                        if (count + 1 > currentMonth.length - 1) {
+                //                            if (person[currentMonth[count]].Out && person[currentMonth[count]].In) {
+                //
+                //                            }
+                //                            break;
+                //                        }
+                //                        if (person[currentMonth[count + 1]].Out && person[currentMonth[count + 1]].In) {
+                //
+                //                            if (person[currentMonth[count]].Out && person[currentMonth[count]].In) {
+                //                                count++;
+                //                            }
+                //                            count++;
+                //                        }
+                //                    }
+                //
+                //                }
+                //                var rowsix = document.getElementById("rowsix").cells;
+                //                var weekSix = [];
+                //                for (var x = 0; x < rowsix.length - 1; x++) {
+                //                    if (rowsix[x].innerHTML != "") {
+                //                        if (rowsix[x].innerHTML != monthDays[count]) {
+                //                            continue;
+                //                        }
+                //                        if (count + 1 > currentMonth.length - 1) {
+                //                            if (person[currentMonth[count]].Out && person[currentMonth[count]].In) {
+                //
+                //                            }
+                //                            break;
+                //                        }
+                //                        if (person[currentMonth[count + 1]].Out && person[currentMonth[count + 1]].In) {
+                //
+                //                            if (person[currentMonth[count]].Out && person[currentMonth[count]].In) {
+                //                                count++;
+                //                            }
+                //                            count++;
+                //                        }
+                //
+                //
+                //                    }
+                //
+                //                }
+
+
+
+
+            });
+
+        }
+    })
+}
 
 
 /*--------------------------- End of Totals Function ---------------------------*/
