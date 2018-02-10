@@ -611,6 +611,7 @@
                 ref.child(date).update(data);
                 localStorage.setItem('breakkey', date);
                 isBreak();
+                alert('Remember to return from break');
             });
 
             document.getElementById('breakIn').addEventListener('click', e => {
