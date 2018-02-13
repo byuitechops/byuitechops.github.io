@@ -760,9 +760,12 @@ function calcTotals() {
                 for (var i = 0; i < dates.length; i++) {
                     if (document.getElementById("month-dropdown").value == dates[i][0]) {
                         currentMonth[count] = dates[i];
+
+
                         var firstDash = currentMonth[count].indexOf("-");
                         var lastDash = currentMonth[count].lastIndexOf("-");
                         monthDays[count] = currentMonth[count].slice(firstDash + 1, lastDash);
+
                         count++;
                     }
                 }
@@ -772,15 +775,12 @@ function calcTotals() {
                 var weekOne = [];
                 for (var x = 0; x < rowone.length - 1; x++) {
                     if (rowone[x].innerHTML != "") {
-                        //                        alert(rowone[x].innerHTML + " " + monthDays[count]);
                         if (rowone[x].innerHTML != monthDays[count]) {
                             continue;
                         }
                         if (person[currentMonth[count + 1]].Out && person[currentMonth[count + 1]].In) {
-                            //                            alert(person[currentMonth[count + 1]].In);
 
                             if (person[currentMonth[count]].Out && person[currentMonth[count]].In) {
-                                alert(person[currentMonth[count]].In);
                                 count++;
                             }
                             count++;
@@ -832,47 +832,79 @@ function calcTotals() {
                 var rowfour = document.getElementById("rowfour").cells;
                 var weekFour = [];
                 var weekFourPm = [];
-                for (var x = 0; x < rowfour.length; x++) {
+                for (var x = 0; x < rowfour.length - 1; x++) {
                     if (rowfour[x].innerHTML != "") {
                         if (rowfour[x].innerHTML != monthDays[count]) {
                             continue;
                         }
 
+                        // date = currentMonth[count].split(" ");
+                        // date1 = currentMonth[count + 1].split(" ");
 
 
-                        if (person[currentMonth[count + 1]].Out && person[currentMonth[count + 1]].In) {
-                            if (person[currentMonth[count + 1]].Out.search("pm") != -1) {
-                                var a = "";
-                                a = person[currentMonth[count + 1]].Out;
-                                a = a.slice(0, 8);
-                                //                                a =
-                                console.log(a);
-                            }
-                            if (person[currentMonth[count + 1]].In.search("pm") != -1) {
-                                var b = "";
-                                b = person[currentMonth[count + 1]].In;
-                                b = b.slice(0, 8);
-                                console.log(b);
-                            }
-                            if (person[currentMonth[count]].Out.search("pm") != -1) {
-                                var c = "";
-                                c = person[currentMonth[count]].Out;
-                                c = c.slice(0, 8);
-                                console.log(c);
-                            }
-                            if (person[currentMonth[count]].In.search("pm") != -1) {
-                                var d = "";
-                                d = person[currentMonth[count]].In;
-                                d = d.slice(0, 8);
-                                console.log(d);
-                            }
+                        var b = "";
+                        b = person[currentMonth[count + 1]].In.slice(0, 8);
+                        b = b.split(":");
+                        var bHours = b[0] * 3600;
+                        var bMinutes = b[1] * 60;
+                        var bSeconds = b[2] * 1;
+                        var bTotal = bHours + bMinutes + bSeconds;
+                        //                        console.log(bTotal);
 
-                            if (person[currentMonth[count]].Out && person[currentMonth[count]].In) {
-                                count++;
-                            }
-                            count++;
+
+
+                        var a = "";
+                        a = person[currentMonth[count + 1]].Out.slice(0, 8);
+                        a = a.split(":");
+                        var aHours = a[0] * 3600;
+                        var aMinutes = a[1] * 60;
+                        var aSeconds = a[2] * 1;
+                        var aTotal = aHours + aMinutes + aSeconds;
+                        //                        console.log(aTotal);
+
+
+
+                        var d = "";
+                        d = person[currentMonth[count]].In.slice(0, 8);
+                        d = d.split(":");
+                        var dHours = d[0] * 3600;
+                        var dMinutes = d[1] * 60;
+                        var dSeconds = d[2] * 1;
+                        var dTotal = dHours + dMinutes + dSeconds;
+                        //                        console.log(dTotal);
+
+
+
+                        var c = "";
+                        c = person[currentMonth[count]].Out.slice(0, 8);
+                        c = c.split(":");
+                        var cHours = c[0] * 3600;
+                        var cMinutes = c[1] * 60;
+                        var cSeconds = c[2] * 1;
+                        var cTotal = cHours + cMinutes + cSeconds;
+                        //                        console.log(cTotal);
+
+
+                        var total1 = aTotal - bTotal;
+                        var total2 = cTotal - dTotal;
+                        if (total1 < 0) {
+                            total1 *= -1;
                         }
+                        if (total2 < 0) {
+                            total2 *= -1;
+                        }
+                        console.log(total1);
+                        console.log(total2);
+
+                        count++;
+                        count++;
+
                     }
+                    var grandTotal = total1 + total2;
+                    var end;
+                    end += grandTotal;
+                    console.log(" grand " + grandTotal);
+
 
                 }
                 var rowfive = document.getElementById("rowfive").cells;
