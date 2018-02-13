@@ -41,18 +41,18 @@
         </div>
         <div class="col-10">
             <div class="content">
-            <!-- Team name dropdown menu -->
-            <h1 style="text-align: center">Time Tracking</h1>
-            <select id="team-dropdown" class="hide" onChange="selectTeam(this.value)">
+                <!-- Team name dropdown menu -->
+                <h1 style="text-align: center">Time Tracking</h1>
+                <select id="team-dropdown" class="hide" onChange="selectTeam(this.value)">
                    <option value="" selected disabled hidden>TEAM</option>
                    <option value="canvas">Canvas Team</option>
                    <option value="tech">Tech Team</option>
                    <option value="transcript">Transcript Team</option>
                 </select>
-            <!-- End of team name dropdown menu -->
+                <!-- End of team name dropdown menu -->
 
-            <!-- Dropdown menu for each month of the year -->
-            <select class="drop-down" id="month-dropdown" onChange="setCal(this.value)">
+                <!-- Dropdown menu for each month of the year -->
+                <select class="drop-down" id="month-dropdown" onChange="setCal(this.value)">
                     <option value="" selected disabled hidden>MONTH</option>
                     <option value="1">January</option>
                     <option value="2">February</option>
@@ -67,149 +67,152 @@
                     <option value="11">November</option>
                     <option value="12">December</option>
                 </select>
-            <!-- End of dropdown menu for each month of the year -->
+                <!-- End of dropdown menu for each month of the year -->
 
-            <!--Dropdown populated with each team member through Javascript-->
-            <select id="name-dropdown" class="hide">
+                <!--Dropdown populated with each team member through Javascript-->
+                <select id="name-dropdown" class="hide">
                    <option value="" selected disabled hidden>NAME</option>
                 </select>
-            <!--End of dropdown populated with each team member through Javascript-->
-            <br><br><br>
-            <!-- Calendar -->
-            <div>
-                <table id="t1" style="overflow-x:auto;">
-                    <tr>
-                        <th colspan="7" id="title">Month Year</th>
-                    </tr>
-                    <!-- Display headings for each day of the week -->
-                    <tr id="heading">
-                        <td>&nbsp;&nbsp;Mon</td>
-                        <td>&nbsp;Tues</td>
-                        <td>&nbsp;&nbsp;Wed</td>
-                        <td>Thurs</td>
-                        <td>&nbsp;&nbsp;&nbsp;&nbsp;Fri</td>
-                        <td>&nbsp;&nbsp;&nbsp;Sat</td>
-                        <!-- Gray out Sundays (since no one works then) -->
-                        <td class="grayout">&nbsp;&nbsp;Sun</td>
-                    </tr>
-                    <!-- End of display headings for each day of the week -->
+                <!--End of dropdown populated with each team member through Javascript-->
+                <br><br><br>
+                <!-- Calendar -->
+                <div>
+                    <table id="t1" style="overflow-x:auto;">
+                        <tr>
+                            <th colspan="7" id="title">Month Year</th>
+                        </tr>
+                        <!-- Display headings for each day of the week -->
+                        <tr id="heading">
+                            <td>&nbsp;&nbsp;Mon</td>
+                            <td>&nbsp;Tues</td>
+                            <td>&nbsp;&nbsp;Wed</td>
+                            <td>Thurs</td>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;Fri</td>
+                            <td>&nbsp;&nbsp;&nbsp;Sat</td>
+                            <!-- Gray out Sundays (since no one works then) -->
+                            <td class="grayout">&nbsp;&nbsp;Sun</td>
+                        </tr>
+                        <!-- End of display headings for each day of the week -->
 
-                    <!-- Display each individual box and link to a modal box -->
-                    <tr id="rowone">
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td class="grayout"></td>
-                    </tr>
-                    <tr id="rowtwo">
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td class="grayout"></td>
-                    </tr>
-                    <tr id="rowthree">
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td class="grayout"></td>
-                    </tr>
-                    <tr id="rowfour">
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td class="grayout"></td>
-                    </tr>
-                    <tr id="rowfive">
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td class="grayout"></td>
-                    </tr>
-                    <!-- Add extra row only for months with six weeks -->
-                    <tr id="rowsix" class="hide">
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td onclick="modalBox(this)"></td>
-                        <td class="grayout"></td>
-                    </tr>
-                    <!-- End of add extra row only for months with six weeks -->
-                    <!-- End of display each individual box and link to a modal box -->
-                </table>
+                        <!-- Display each individual box and link to a modal box -->
+                        <tr id="rowone">
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td class="grayout"></td>
+                        </tr>
+                        <tr id="rowtwo">
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td class="grayout"></td>
+                        </tr>
+                        <tr id="rowthree">
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td class="grayout"></td>
+                        </tr>
+                        <tr id="rowfour">
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td class="grayout"></td>
+                        </tr>
+                        <tr id="rowfive">
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td class="grayout"></td>
+                        </tr>
+                        <!-- Add extra row only for months with six weeks -->
+                        <tr id="rowsix" class="hide">
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td onclick="modalBox(this)"></td>
+                            <td class="grayout"></td>
+                        </tr>
+                        <!-- End of add extra row only for months with six weeks -->
+                        <!-- End of display each individual box and link to a modal box -->
+                    </table>
 
-                <!-- Display weekly and monthly hour totals -->
-                <table id="t2">
-                    <tr>
-                        <th colspan="2">Totals:</th>
-                    </tr>
-                    <tr>
-                        <td id="week">Week 1: </td>
-                        <td class="totals" id="weekOne"></td>
-                    </tr>
-                    <tr>
-                        <td id="week">Week 2: </td>
-                        <td class="totals" id="weekTwo"></td>
-                    </tr>
-                    <tr>
-                        <td id="week">Week 3: </td>
-                        <td class="totals" id="weekThree"></td>
-                    </tr>
-                    <tr>
-                        <td id="week">Week 4: </td>
-                        <td class="totals" id="weekFour"></td>
-                    </tr>
-                    <tr>
-                        <td id="week">Week 5: </td>
-                        <td class="totals" id="weekFive"></td>
-                    </tr>
-                    <tr id="week6" class="hide">
-                        <td id="week">Week 6: </td>
-                        <td class="totals" id="weekSix"></td>
-                    </tr>
-                    <tr>
-                        <td id="monthly">Monthly Total:</td>
-                        <td class="totals" id="grandTotal"></td>
-                    </tr>
-                </table>
-                <!-- End of display weekly and monthly hour totals -->
-            </div>
-            <!-- End of Calendar -->
-
-            <!-- The Modal Boxes -->
-            <div id="myModal" class="modal">
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <!-- Shows shifts & breaks from firebase in modal boxes -->
-                    <h3>First Shift</h3>
-                    <p id="modalText">No time logged</p>
-                    <h3>Second Shift</h3>
-                    <p id="secondShift">No time logged</p>
-                    <h3>Breaks</h3>
-                    <p id="breakText1">No breaks logged</p>
-                    <p id="breakText2"> </p>
-                    <p id="breakText3"> </p>
-                    <p id="breakText4"> </p>
-                    <p id="breakText5"> </p>
+                    <!-- Display weekly and monthly hour totals -->
+                    <table id="t2">
+                        <tr>
+                            <th colspan="2">Totals:</th>
+                        </tr>
+                        <tr>
+                            <td id="week">Week 1: </td>
+                            <td class="totals" id="weekOne"></td>
+                        </tr>
+                        <tr>
+                            <td id="week">Week 2: </td>
+                            <td class="totals" id="weekTwo"></td>
+                        </tr>
+                        <tr>
+                            <td id="week">Week 3: </td>
+                            <td class="totals" id="weekThree"></td>
+                        </tr>
+                        <tr>
+                            <td id="week">Week 4: </td>
+                            <td class="totals" id="weekFour"></td>
+                        </tr>
+                        <tr>
+                            <td id="week">Week 5: </td>
+                            <td class="totals" id="weekFive"></td>
+                        </tr>
+                        <tr id="week6" class="hide">
+                            <td id="week">Week 6: </td>
+                            <td class="totals" id="weekSix"></td>
+                        </tr>
+                        <tr>
+                            <td id="monthly">Monthly Total:</td>
+                            <td class="totals" id="grandTotal"></td>
+                        </tr>
+                    </table>
+                    <!-- End of display weekly and monthly hour totals -->
                 </div>
-            </div>
-            <!-- End of the Modal Boxes -->
+                <!-- End of Calendar -->
+
+                <!-- The Modal Boxes -->
+                <div id="myModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <!-- Shows shifts & breaks from firebase in modal boxes -->
+                        <h3>First Shift</h3>
+                        <p id="modalText">No time logged</p>
+                        <h3>Second Shift</h3>
+                        <p id="secondShift">No time logged</p>
+                        <h3>Breaks</h3>
+                        <p id="breakText1">No breaks logged</p>
+                        <p id="breakText2"> </p>
+                        <p id="breakText3"> </p>
+                        <p id="breakText4"> </p>
+                        <p id="breakText5"> </p>
+                        <h3>Scheduled Times</h3>
+                        <p id="schedule1"></p>
+                        <p id="schedule2"></p>
+                    </div>
+                </div>
+                <!-- End of the Modal Boxes -->
             </div>
         </div>
     </div>

@@ -50,8 +50,6 @@ function showModal(num, selected) {
                     for (var i = 0; i < monthDays.length; i++) {
                         // gets the first instance of clock in/out
                         if (num == monthDays[i + 1]) {
-                            //                            console.log(person[currentMonth[i + 1]].In);
-                            //                            console.log(person[currentMonth[i + 1]].Out);
                             // if there isn't an instance of this, it sets the text to 'N/A'
                             if (person[currentMonth[i + 1]].CommentIn == undefined) {
                                 person[currentMonth[i + 1]].CommentIn = "N/A";
@@ -70,8 +68,6 @@ function showModal(num, selected) {
                             document.getElementById("modalText").innerHTML = txt;
                             check = true;
                         } else if (num == monthDays[i]) {
-                            //                            console.log(person[currentMonth[i]].In);
-                            //                            console.log(person[currentMonth[i]].Out);
                             if (person[currentMonth[i]].CommentIn == undefined) {
                                 person[currentMonth[i]].CommentIn = "N/A";
                             }
@@ -94,8 +90,6 @@ function showModal(num, selected) {
                         }
                         // gets the second instance of clock in/out if there are two instances
                         if (num == monthDays[i]) {
-                            //                            console.log(person[currentMonth[i]].In);
-                            //                            console.log(person[currentMonth[i]].Out);
                             if (person[currentMonth[i]].CommentIn == undefined) {
                                 person[currentMonth[i]].CommentIn = "N/A";
                             }
@@ -619,6 +613,7 @@ function modalBox(number) {
     var selected = document.getElementById('name-dropdown').value;
 
     showModal(num, selected);
+    showSchedule(num, selected);
 
     // Get the button that opens the modal
     var btn = document.getElementById("myBtn");
@@ -770,77 +765,22 @@ function calcTotals() {
                     }
                 }
 
+                var thisDay = new Date();
+                today = thisDay.toString();
+                day = today.substring(8, 10);
+
                 var count = 0;
+
+                // Code for row one
                 var rowone = document.getElementById("rowone").cells;
-                var weekOne = [];
+                var weekOne = 0;
+
                 for (var x = 0; x < rowone.length - 1; x++) {
                     if (rowone[x].innerHTML != "") {
                         if (rowone[x].innerHTML != monthDays[count]) {
                             continue;
+                            One
                         }
-                        if (person[currentMonth[count + 1]].Out && person[currentMonth[count + 1]].In) {
-
-                            if (person[currentMonth[count]].Out && person[currentMonth[count]].In) {
-                                count++;
-                            }
-                            count++;
-                        }
-
-
-                    }
-
-                }
-                var rowtwo = document.getElementById("rowtwo").cells;
-
-                var weekTwo = [];
-                for (var x = 0; x < rowtwo.length - 1; x++) {
-                    if (rowtwo[x].innerHTML != "") {
-                        if (rowtwo[x].innerHTML != monthDays[count]) {
-                            continue;
-                        }
-                        if (person[currentMonth[count + 1]].Out && person[currentMonth[count + 1]].In) {
-                            if (person[currentMonth[count]].Out && person[currentMonth[count]].In) {
-                                count++;
-                            }
-                            count++;
-                        }
-
-
-                    }
-
-                }
-                var rowthree = document.getElementById("rowthree").cells;
-
-                var weekThree = [];
-                for (var x = 0; x < rowthree.length - 1; x++) {
-                    if (rowthree[x].innerHTML != "") {
-                        if (rowthree[x].innerHTML != monthDays[count]) {
-
-                            continue;
-                        }
-                        if (person[currentMonth[count + 1]].Out && person[currentMonth[count + 1]].In) {
-
-                            if (person[currentMonth[count]].Out && person[currentMonth[count]].In) {
-                                count++;
-                            }
-                            count++;
-                        }
-
-                    }
-
-                }
-                var rowfour = document.getElementById("rowfour").cells;
-                var weekFour = [];
-                var weekFourPm = [];
-                for (var x = 0; x < rowfour.length - 1; x++) {
-                    if (rowfour[x].innerHTML != "") {
-                        if (rowfour[x].innerHTML != monthDays[count]) {
-                            continue;
-                        }
-
-                        // date = currentMonth[count].split(" ");
-                        // date1 = currentMonth[count + 1].split(" ");
-
 
                         var b = "";
                         b = person[currentMonth[count + 1]].In.slice(0, 8);
@@ -849,8 +789,210 @@ function calcTotals() {
                         var bMinutes = b[1] * 60;
                         var bSeconds = b[2] * 1;
                         var bTotal = bHours + bMinutes + bSeconds;
-                        //                        console.log(bTotal);
 
+                        var a = "";
+                        a = person[currentMonth[count + 1]].Out.slice(0, 8);
+                        a = a.split(":");
+                        var aHours = a[0] * 3600;
+                        var aMinutes = a[1] * 60;
+                        var aSeconds = a[2] * 1;
+                        var aTotal = aHours + aMinutes + aSeconds;
+
+                        var d = "";
+                        d = person[currentMonth[count]].In.slice(0, 8);
+                        d = d.split(":");
+                        var dHours = d[0] * 3600;
+                        var dMinutes = d[1] * 60;
+                        var dSeconds = d[2] * 1;
+                        var dTotal = dHours + dMinutes + dSeconds;
+
+                        if (currentMonth[count].Out != undefined) {
+
+                            var c = "";
+                            c = person[currentMonth[count]].Out.slice(0, 8);
+                            c = c.split(":");
+                            var cHours = c[0] * 3600;
+                            var cMinutes = c[1] * 60;
+                            var cSeconds = c[2] * 1;
+                            var cTotal = cHours + cMinutes + cSeconds;
+                        } else {
+                            cTotal = 0;
+                            dTotal = 0;
+                        }
+
+                        var total1 = aTotal - bTotal;
+                        var total2 = cTotal - dTotal;
+                        if (total1 < 0) {
+                            total1 *= -1;
+                        }
+                        if (total2 < 0) {
+                            total2 *= -1;
+                        }
+
+                        count += 2;
+                        var grandTotal = total1 + total2;
+                        weekOne += grandTotal;
+
+                    }
+                }
+                weekOne /= 3600;
+                weekOne = weekOne.toFixed(1);
+                document.getElementById("weekOne").innerHTML = weekOne;
+
+
+                // Code for row two
+                var rowtwo = document.getElementById("rowtwo").cells;
+                var weekTwo = 0;
+
+                for (var x = 0; x < rowtwo.length - 1; x++) {
+                    if (rowtwo[x].innerHTML != "") {
+                        if (rowtwo[x].innerHTML != monthDays[count]) {
+                            continue;
+                        }
+
+                        var b = "";
+                        b = person[currentMonth[count + 1]].In.slice(0, 8);
+                        b = b.split(":");
+                        var bHours = b[0] * 3600;
+                        var bMinutes = b[1] * 60;
+                        var bSeconds = b[2] * 1;
+                        var bTotal = bHours + bMinutes + bSeconds;
+
+                        var a = "";
+                        a = person[currentMonth[count + 1]].Out.slice(0, 8);
+                        a = a.split(":");
+                        var aHours = a[0] * 3600;
+                        var aMinutes = a[1] * 60;
+                        var aSeconds = a[2] * 1;
+                        var aTotal = aHours + aMinutes + aSeconds;
+
+                        var d = "";
+                        d = person[currentMonth[count]].In.slice(0, 8);
+                        d = d.split(":");
+                        var dHours = d[0] * 3600;
+                        var dMinutes = d[1] * 60;
+                        var dSeconds = d[2] * 1;
+                        var dTotal = dHours + dMinutes + dSeconds;
+
+                        if (currentMonth[count].Out != undefined) {
+
+                            var c = "";
+                            c = person[currentMonth[count]].Out.slice(0, 8);
+                            c = c.split(":");
+                            var cHours = c[0] * 3600;
+                            var cMinutes = c[1] * 60;
+                            var cSeconds = c[2] * 1;
+                            var cTotal = cHours + cMinutes + cSeconds;
+                        } else {
+                            cTotal = 0;
+                            dTotal = 0;
+                        }
+
+                        var total1 = aTotal - bTotal;
+                        var total2 = cTotal - dTotal;
+                        if (total1 < 0) {
+                            total1 *= -1;
+                        }
+                        if (total2 < 0) {
+                            total2 *= -1;
+                        }
+
+                        count += 2;
+                        var grandTotal = total1 + total2;
+                        weekTwo += grandTotal;
+
+                    }
+                }
+                weekTwo /= 3600;
+                weekTwo = weekTwo.toFixed(1);
+                document.getElementById("weekTwo").innerHTML = weekTwo;
+
+
+                // Code for row three
+                var rowthree = document.getElementById("rowthree").cells;
+                var weekThree = 0;
+
+                for (var x = 0; x < rowthree.length - 1; x++) {
+                    if (rowthree[x].innerHTML != "") {
+                        if (rowthree[x].innerHTML != monthDays[count]) {
+                            continue;
+                        }
+
+                        var b = "";
+                        b = person[currentMonth[count + 1]].In.slice(0, 8);
+                        b = b.split(":");
+                        var bHours = b[0] * 3600;
+                        var bMinutes = b[1] * 60;
+                        var bSeconds = b[2] * 1;
+                        var bTotal = bHours + bMinutes + bSeconds;
+
+                        var a = "";
+                        a = person[currentMonth[count + 1]].Out.slice(0, 8);
+                        a = a.split(":");
+                        var aHours = a[0] * 3600;
+                        var aMinutes = a[1] * 60;
+                        var aSeconds = a[2] * 1;
+                        var aTotal = aHours + aMinutes + aSeconds;
+
+                        var d = "";
+                        d = person[currentMonth[count]].In.slice(0, 8);
+                        d = d.split(":");
+                        var dHours = d[0] * 3600;
+                        var dMinutes = d[1] * 60;
+                        var dSeconds = d[2] * 1;
+                        var dTotal = dHours + dMinutes + dSeconds;
+
+                        if (currentMonth[count].Out != undefined) {
+
+                            var c = "";
+                            c = person[currentMonth[count]].Out.slice(0, 8);
+                            c = c.split(":");
+                            var cHours = c[0] * 3600;
+                            var cMinutes = c[1] * 60;
+                            var cSeconds = c[2] * 1;
+                            var cTotal = cHours + cMinutes + cSeconds;
+                        } else {
+                            cTotal = 0;
+                            dTotal = 0;
+                        }
+
+                        var total1 = aTotal - bTotal;
+                        var total2 = cTotal - dTotal;
+                        if (total1 < 0) {
+                            total1 *= -1;
+                        }
+                        if (total2 < 0) {
+                            total2 *= -1;
+                        }
+
+                        count += 2;
+                        var grandTotal = total1 + total2;
+                        weekThree += grandTotal;
+
+                    }
+                }
+                weekThree /= 3600;
+                weekThree = weekThree.toFixed(1);
+                document.getElementById("weekThree").innerHTML = weekThree;
+
+
+                // Code for row four
+                var rowfour = document.getElementById("rowfour").cells;
+                var weekFour = 0;
+                for (var x = 0; x < rowfour.length - 1; x++) {
+
+                    if (rowfour[x].innerHTML != "") {
+                        if (rowfour[x].innerHTML != monthDays[count]) {
+                            continue;
+                        }
+
+                        var b = "";
+                        b = person[currentMonth[count + 1]].In.slice(0, 8);
+                        b = b.split(":");
+                        var bHours = b[0] * 3600;
+                        var bMinutes = b[1] * 60;
+                        var bSeconds = b[2] * 1;
+                        var bTotal = bHours + bMinutes + bSeconds;
 
 
                         var a = "";
@@ -860,8 +1002,6 @@ function calcTotals() {
                         var aMinutes = a[1] * 60;
                         var aSeconds = a[2] * 1;
                         var aTotal = aHours + aMinutes + aSeconds;
-                        //                        console.log(aTotal);
-
 
 
                         var d = "";
@@ -871,8 +1011,6 @@ function calcTotals() {
                         var dMinutes = d[1] * 60;
                         var dSeconds = d[2] * 1;
                         var dTotal = dHours + dMinutes + dSeconds;
-                        //                        console.log(dTotal);
-
 
 
                         var c = "";
@@ -882,7 +1020,6 @@ function calcTotals() {
                         var cMinutes = c[1] * 60;
                         var cSeconds = c[2] * 1;
                         var cTotal = cHours + cMinutes + cSeconds;
-                        //                        console.log(cTotal);
 
 
                         var total1 = aTotal - bTotal;
@@ -893,76 +1030,302 @@ function calcTotals() {
                         if (total2 < 0) {
                             total2 *= -1;
                         }
-                        console.log(total1);
-                        console.log(total2);
 
-                        count++;
-                        count++;
+                        count += 2;
+                        var grandTotal = total1 + total2;
+                        weekFour += grandTotal;
 
                     }
-                    var grandTotal = total1 + total2;
-                    var end;
-                    end += grandTotal;
-                    console.log(" grand " + grandTotal);
-
 
                 }
+                weekFour /= 3600;
+                weekFour = weekFour.toFixed(1);
+                document.getElementById("weekFour").innerHTML = weekFour;
+
+
+                // Code for row five
                 var rowfive = document.getElementById("rowfive").cells;
-                var weekFive = [];
+                var weekFive = 0;
                 for (var x = 0; x < rowfive.length - 1; x++) {
+
                     if (rowfive[x].innerHTML != "") {
                         if (rowfive[x].innerHTML != monthDays[count]) {
                             continue;
                         }
-                        if (count + 1 > currentMonth.length - 1) {
-                            if (person[currentMonth[count]].Out && person[currentMonth[count]].In) {
 
-                            }
-                            break;
-                        }
-                        if (person[currentMonth[count + 1]].Out && person[currentMonth[count + 1]].In) {
+                        var b = "";
+                        b = person[currentMonth[count + 1]].In.slice(0, 8);
+                        b = b.split(":");
+                        var bHours = b[0] * 3600;
+                        var bMinutes = b[1] * 60;
+                        var bSeconds = b[2] * 1;
+                        var bTotal = bHours + bMinutes + bSeconds;
 
-                            if (person[currentMonth[count]].Out && person[currentMonth[count]].In) {
-                                count++;
-                            }
-                            count++;
+
+                        var a = "";
+                        a = person[currentMonth[count + 1]].Out.slice(0, 8);
+                        a = a.split(":");
+                        var aHours = a[0] * 3600;
+                        var aMinutes = a[1] * 60;
+                        var aSeconds = a[2] * 1;
+                        var aTotal = aHours + aMinutes + aSeconds;
+
+
+                        var d = "";
+                        d = person[currentMonth[count]].In.slice(0, 8);
+                        d = d.split(":");
+                        var dHours = d[0] * 3600;
+                        var dMinutes = d[1] * 60;
+                        var dSeconds = d[2] * 1;
+                        var dTotal = dHours + dMinutes + dSeconds;
+
+
+                        var c = "";
+                        c = person[currentMonth[count]].Out.slice(0, 8);
+                        c = c.split(":");
+                        var cHours = c[0] * 3600;
+                        var cMinutes = c[1] * 60;
+                        var cSeconds = c[2] * 1;
+                        var cTotal = cHours + cMinutes + cSeconds;
+
+
+                        var total1 = aTotal - bTotal;
+                        var total2 = cTotal - dTotal;
+                        if (total1 < 0) {
+                            total1 *= -1;
                         }
+                        if (total2 < 0) {
+                            total2 *= -1;
+                        }
+
+                        count += 2;
+                        var grandTotal = total1 + total2;
+                        weekFive += grandTotal;
+
                     }
 
                 }
+                weekFive /= 3600;
+                weekFive = weekFive.toFixed(1);
+                document.getElementById("weekFive").innerHTML = weekFive;
+
+
+                // Code for row six
                 var rowsix = document.getElementById("rowsix").cells;
-                var weekSix = [];
+                var weekSix = 0;
                 for (var x = 0; x < rowsix.length - 1; x++) {
+
                     if (rowsix[x].innerHTML != "") {
                         if (rowsix[x].innerHTML != monthDays[count]) {
                             continue;
                         }
-                        if (count + 1 > currentMonth.length - 1) {
-                            if (person[currentMonth[count]].Out && person[currentMonth[count]].In) {
 
-                            }
-                            break;
+                        var b = "";
+                        b = person[currentMonth[count + 1]].In.slice(0, 8);
+                        b = b.split(":");
+                        var bHours = b[0] * 3600;
+                        var bMinutes = b[1] * 60;
+                        var bSeconds = b[2] * 1;
+                        var bTotal = bHours + bMinutes + bSeconds;
+
+
+                        var a = "";
+                        a = person[currentMonth[count + 1]].Out.slice(0, 8);
+                        a = a.split(":");
+                        var aHours = a[0] * 3600;
+                        var aMinutes = a[1] * 60;
+                        var aSeconds = a[2] * 1;
+                        var aTotal = aHours + aMinutes + aSeconds;
+
+
+                        var d = "";
+                        d = person[currentMonth[count]].In.slice(0, 8);
+                        d = d.split(":");
+                        var dHours = d[0] * 3600;
+                        var dMinutes = d[1] * 60;
+                        var dSeconds = d[2] * 1;
+                        var dTotal = dHours + dMinutes + dSeconds;
+
+
+                        var c = "";
+                        c = person[currentMonth[count]].Out.slice(0, 8);
+                        c = c.split(":");
+                        var cHours = c[0] * 3600;
+                        var cMinutes = c[1] * 60;
+                        var cSeconds = c[2] * 1;
+                        var cTotal = cHours + cMinutes + cSeconds;
+
+
+                        var total1 = aTotal - bTotal;
+                        var total2 = cTotal - dTotal;
+                        if (total1 < 0) {
+                            total1 *= -1;
                         }
-                        if (person[currentMonth[count + 1]].Out && person[currentMonth[count + 1]].In) {
-
-                            if (person[currentMonth[count]].Out && person[currentMonth[count]].In) {
-                                count++;
-                            }
-                            count++;
+                        if (total2 < 0) {
+                            total2 *= -1;
                         }
 
+                        count += 2;
+                        var grandTotal = total1 + total2;
+                        weekSix += grandTotal;
 
                     }
 
                 }
+                weekSix /= 3600;
+                weekSix = weekSix.toFixed(1);
+                document.getElementById("weekSix").innerHTML = weekSix;
 
 
-
-
+                monthlyTotal = weekOne * 1 + weekTwo * 1 + weekThree * 1 + weekFour * 1 + weekFive * 1 + weekSix * 1;
+                document.getElementById("grandTotal").innerHTML = monthlyTotal;
             });
-
         }
     })
 }
 
 /*--------------------------- End of Totals Function ---------------------------*/
+
+
+/*--------------------------- Display current user's schedule ---------------------------*/
+
+function showSchedule(num, selected) {
+    firebase.auth().onAuthStateChanged(function (user) {
+        // if a name is selected and the selection isn't blank, show the data for the person selected
+        if (selected != user.displayName && selected != "") {
+            selectSchedule(selected, num);
+            return
+        } else {
+            if (user) {
+                var user = firebase.auth().currentUser;
+                var ppl = firebase.database().ref('users/' + user.displayName + '/TimeClock/ScheduledTime').once('value');
+                ppl.then(function (snapshot) {
+
+                    var person = (snapshot.val());
+                    var dates = Object.keys(person);
+                    var monthDays = [];
+                    var currentMonth = [];
+                    var count = 0;
+                    // Finds the day of the month by taking the value between the two dashes
+                    // For example, the date 2-14-2017 would turn into 14
+                    for (var i = 0; i < dates.length; i++) {
+                        if (document.getElementById("month-dropdown").value == dates[i][0]) {
+                            currentMonth[count] = dates[i];
+                            var firstDash = currentMonth[count].indexOf("-");
+                            var lastDash = currentMonth[count].lastIndexOf("-");
+                            monthDays[count] = currentMonth[count].slice(firstDash + 1, lastDash);
+                            count++;
+                        }
+                    }
+                    var check = false;
+
+                    // loops through each in/out and comment and sets it equal to the HTML to display
+                    for (var i = 0; i < monthDays.length; i++) {
+                        // gets the first instance of clock in/out
+                        if (num == monthDays[i + 1]) {
+                            // code for displaying info in modal boxes
+                            var txt = person[currentMonth[i + 1]].Start + "-" + person[currentMonth[i + 1]].End + "<br />";
+                            document.getElementById("schedule1").innerHTML = txt;
+                            check = true;
+                        } else if (num == monthDays[i]) {
+                            var txt = person[currentMonth[i]].Start + "-" + person[currentMonth[i]].End + "<br />";
+                            txt += "Clock out at: " + +"<br />";
+                            document.getElementById("schedule1").innerHTML = txt;
+                            document.getElementById("schedule2").innerHTML = "No time scheduled";
+                            check = true;
+                            break;
+                        } else {
+                            document.getElementById("schedule2").innerHTML = "No time scheduled";
+                        }
+                        // gets the second instance of clock in/out if there are two instances
+                        if (num == monthDays[i]) {
+                            var txt = "Clocked in at: " + person[currentMonth[i]].Start + "-" + person[currentMonth[i]].End + "<br />";
+                            document.getElementById("schedule2").innerHTML = txt;
+                            check = true;
+                            break;
+                        }
+
+                    }
+                    // if none of the above are true, just display 'No time scheduled'
+                    if (!check) {
+                        document.getElementById("schedule1").innerHTML = "No time scheduled";
+                    }
+                    // resets the loop
+                    count = 0;
+
+                });
+                // if there is an error, return
+                ppl.catch(function (error) {
+                    alert(error);
+                    return;
+                });
+
+            } else {}
+        }
+    });
+}
+/*------------------ End of display current user's schedule -------------------*/
+
+
+
+
+/*------------------- Connect personal schedule to each user -----------------*/
+/* Does the same thing as the above function, for users other than the one logged in */
+function selectSchedule(selected, num) {
+    var name = firebase.database().ref('users/' + selected + '/TimeClock/ScheduledTime').once('value');
+    name.then(function (snapshot) {
+
+        var individual = (snapshot.val());
+
+        var dates = Object.keys(individual);
+        var monthDays = [];
+        var currentMonth = [];
+        var count = 0;
+        for (var i = 0; i < dates.length; i++) {
+            if (document.getElementById("month-dropdown").value == dates[i][0]) {
+                currentMonth[count] = dates[i];
+                var firstDash = currentMonth[count].indexOf("-");
+                var lastDash = currentMonth[count].lastIndexOf("-");
+                monthDays[count] = currentMonth[count].slice(firstDash + 1, lastDash);
+                count++;
+            }
+        }
+        var check = false;
+
+        for (var i = 0; i < monthDays.length; i++) {
+            if (num == monthDays[i + 1]) {
+                var txt = individual[currentMonth[i + 1]].Start + "-" + individual[currentMonth[i + 1]].End + "<br />";
+                document.getElementById("schedule1").innerHTML = txt;
+                check = true;
+            } else if (num == monthDays[i]) {
+                var txt = individual[currentMonth[i]].Start + "-" + individual[currentMonth[i]].End + "<br />";
+                document.getElementById("schedule1").innerHTML = txt;
+                document.getElementById("schedule2").innerHTML = "No time scheduled";
+                check = true;
+                break;
+            } else {
+                document.getElementById("schedule2").innerHTML = "No time scheduled";
+            }
+            if (num == monthDays[i]) {
+                var txt = "Clocked in at: " + individual[currentMonth[i]].Start + "-" + individual[currentMonth[i]].End + "<br />";
+                document.getElementById("schedule2").innerHTML = txt;
+                check = true;
+                break;
+            }
+
+        }
+        if (!check) {
+            document.getElementById("schedule1").innerHTML = "No time scheduled";
+        }
+
+        count = 0;
+
+    });
+    name.catch(function (error) {
+        alert(error);
+        return;
+    });
+
+    count = 0;
+}
+/*--------------- End of Connect personal schedule to each user --------------*/
