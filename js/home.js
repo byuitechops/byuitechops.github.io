@@ -511,7 +511,7 @@
                 var min = ('0' + d.getMinutes()).slice(-2);
                 var sec = ('0' + d.getSeconds()).slice(-2);
                 var time = hours + ':' + min + ':' + sec + " " + mer;
-                var date = (d.getMonth() + 1) + '-' + d.getDate() + '-' + d.getFullYear() + ' ' + time;
+                var date = (d.getMonth() + 1) + '-' + ('0' + d.getDate()).slice(-2) + '-' + d.getFullYear() + ' ' + time;
                 var data = {
                     In: time
                 }

@@ -885,6 +885,8 @@ function calcTotals(selected) {
 
                     if (rowtwo[x].innerHTML != "") {
                         if (rowtwo[x].innerHTML != monthDays[count]) {
+                            //                            console.log(rowtwo[x].innerHTML);
+                            console.log(monthDays[count]);
                             continue;
                         }
 
@@ -939,7 +941,9 @@ function calcTotals(selected) {
                             total2 = cTotal - dTotal;
                         }
 
+
                         count += 2;
+                        console.log(total1 + " " + total2);
                         var grandTotal = total1 + total2;
                         weekTwo += grandTotal;
 
@@ -1049,7 +1053,7 @@ function calcTotals(selected) {
                         var bMinutes = b[1] * 60;
                         var bSeconds = b[2] * 1;
                         var bTotal = bHours + bMinutes + bSeconds;
-                        console.log(bTotal);
+
 
 
                         var a = "";
@@ -1059,7 +1063,6 @@ function calcTotals(selected) {
                         var aMinutes = a[1] * 60;
                         var aSeconds = a[2] * 1;
                         var aTotal = aHours + aMinutes + aSeconds;
-                        console.log(aTotal);
 
 
 
@@ -1070,7 +1073,6 @@ function calcTotals(selected) {
                         var dMinutes = d[1] * 60;
                         var dSeconds = d[2] * 1;
                         var dTotal = dHours + dMinutes + dSeconds;
-                        //                        console.log(dTotal);
 
 
                         var c = "";
@@ -1080,13 +1082,11 @@ function calcTotals(selected) {
                         var cMinutes = c[1] * 60;
                         var cSeconds = c[2] * 1;
                         var cTotal = cHours + cMinutes + cSeconds;
-                        //                        console.log(cTotal);
 
 
                         var total1 = 0;
                         var total2 = 0;
                         if (aTotal < bTotal) {
-                            console.log("hello");
                             total1 = bTotal - aTotal;
                         } else {
                             total1 = aTotal - bTotal;
@@ -1303,6 +1303,7 @@ function selectedTotals(selected) {
                         var firstDash = currentMonth[count].indexOf("-");
                         var lastDash = currentMonth[count].lastIndexOf("-");
                         monthDays[count] = currentMonth[count].slice(firstDash + 1, lastDash);
+
 
                         count++;
                     }
@@ -1579,7 +1580,6 @@ function selectedTotals(selected) {
                         var bMinutes = b[1] * 60;
                         var bSeconds = b[2] * 1;
                         var bTotal = bHours + bMinutes + bSeconds;
-                        console.log(bTotal);
 
 
                         if (person[currentMonth[count]].Out != undefined) {
@@ -1590,7 +1590,6 @@ function selectedTotals(selected) {
                             var aMinutes = a[1] * 60;
                             var aSeconds = a[2] * 1;
                             var aTotal = aHours + aMinutes + aSeconds;
-                            console.log(aTotal);
                         } else {
                             aTotal = 0;
                             bTotal = 0;
@@ -1604,8 +1603,6 @@ function selectedTotals(selected) {
                         var dMinutes = d[1] * 60;
                         var dSeconds = d[2] * 1;
                         var dTotal = dHours + dMinutes + dSeconds;
-                        //                        console.log(dTotal);
-
 
                         var c = "";
                         c = person[currentMonth[count]].Out.slice(0, 8);
@@ -1822,7 +1819,6 @@ function showSchedule(num, selected) {
                         }
                     }
                     var check = false;
-                    console.log(monthDays.length);
 
                     // loops through each in/out and comment and sets it equal to the HTML to display
                     for (var i = 0; i < monthDays.length; i++) {
@@ -1919,7 +1915,7 @@ function selectSchedule(selected, num) {
 
         }
         if (!check) {
-            document.getElementById("schedule1").innerHTML = "";
+            document.getElementById("schedule1").innerHTML = "No time scheduled";
         }
 
         count = 0;
