@@ -71,7 +71,7 @@ function tableCreate(list) {
 
                 var btnE = document.createElement("BUTTON");
                 btnE.setAttribute('value', list[z]);
-                btnE.setAttribute('onclick', "location.href='permissions.html?edit");
+                btnE.setAttribute('onclick', "editUser(this.value)");
                 var tE = document.createTextNode("Edit");
                 btnE.appendChild(tE);
 
@@ -102,26 +102,37 @@ function tableCreate(list) {
     view.appendChild(tbl)
 }
 
+// This function displays the users and their permissions
 function viewUser(user) {
     viewModal.style.display = "block";
-    var content = document.getElementById('viewModalContent');
-    if (content.firstChild) {
-        content.insertBefore(document.createTextNode(user), content.firstChild);
-    }
     var shot;
     var list = [];
+    var data = [];
     firebase.database().ref('users/' + user).on('value', snapshot => {
         shot = snapshot.val();
         var titles;
         for (titles in shot) {
-            list.push(titles);
+            if (titles == 'TimeClock') {
+                continue;
+            } else {
+                list.push(titles);
+                data.push(shot[titles]);
+            }
         }
     })
     var viewTable = document.getElementById('viewTable');
     var tbl = document.createElement('table');
-    tbl.setAttribute('width', '50%');
-    tbl.style.width = '100%';
+    tbl.style.width = '75%';
+    tbl.style.margin = "0 auto 1em auto";
     tbl.setAttribute('border', '1');
+
+    var heading = document.createElement('caption');
+    var node = document.createTextNode(user);
+    heading.appendChild(node);
+    heading.style.fontSize = "1.5em";
+    heading.style.margin = "15px auto 20px auto";
+    tbl.appendChild(heading);
+
     var tbdy = document.createElement('tbody');
     var z = 0;
     for (var i = 0; i < list.length; i++) {
@@ -129,23 +140,97 @@ function viewUser(user) {
         for (var j = 0; j < 2; j++) {
             var td = document.createElement('td');
             td.style.textAlign = 'center';
+            td.style.padding = "0.3em";
+            td.style.textTransform = "capitalize";
             if (j == 0) {
                 td.appendChild(document.createTextNode(list[z]));
             } else if (j == 1) {
-                var t = document.createTextNode("Fire");
+                var t = document.createTextNode(data[z]);
                 td.appendChild(t);
             }
-            tr.appendChild(td); 
+            tr.appendChild(td);
         }
-            z++;
+        z++;
         tbdy.appendChild(tr);
     }
     tbl.appendChild(tbdy);
     viewTable.appendChild(tbl)
 }
 
+// This function edits the users and their permissions
+function editUser(user) {
+    editModal.style.display = "block";
+    var shot;
+    var list = [];
+    var data = [];
+    firebase.database().ref('users/' + user).on('value', snapshot => {
+        shot = snapshot.val();
+        var titles;
+        for (titles in shot) {
+            if (titles == 'TimeClock') {
+                continue;
+            } else {
+                list.push(titles);
+                data.push(shot[titles]);
+            }
+        }
+    })
+    var editTable = document.getElementById('editTable');
+    var tbl = document.createElement('table');
+    tbl.style.width = '75%';
+    tbl.style.margin = "0 auto 1em auto";
+    tbl.setAttribute('border', '1');
+
+    var heading = document.createElement('caption');
+    var node = document.createTextNode(user);
+    heading.appendChild(node);
+    heading.style.fontSize = "1.5em";
+    heading.style.margin = "15px auto 20px auto";
+    tbl.appendChild(heading);
+
+    var tbdy = document.createElement('tbody');
+    var z = 0;
+    for (var i = 0; i < list.length; i++) {
+        var tr = document.createElement('tr');
+        for (var j = 0; j < 2; j++) {
+            var td = document.createElement('td');
+            td.style.textAlign = 'center';
+            td.style.padding = "0.3em";
+            td.style.textTransform = "capitalize";
+            if (j == 0) {
+                var t = document.createTextNode(list[z]);
+                td.setAttribute('value', list[z]);
+                td.appendChild(t);
+                td.value
+            } else if (j == 1) {
+                var t = document.createElement('input')
+                td.setAttribute('type', 'text');
+                t.setAttribute('value', data[z]);
+                t.setAttribute('name', list[z]);
+                t.setAttribute('onchange', "updateFirebase('" + user + "', this.name, this.value)");
+                td.appendChild(t);
+            }
+            tr.appendChild(td);
+        }
+        z++;
+        tbdy.appendChild(tr);
+    }
+    tbl.appendChild(tbdy);
+    editTable.appendChild(tbl);
+}
+
+// This function sends the updated info to firebase
+function updateFirebase(user, title, value) {
+    console.log(user, title, value);
+    var info = '{"' + title + '": "' + value + '"}';
+    info = JSON.parse(info);
+    console.log(info);
+    firebase.database().ref('users/' + user).update(info);
+}
+
+// Deletes the user from the database
 function deleteUser(user) {
-    if (confirm('Are you sure you want to delete ' + user + ' from authentication and from the database?')) {
+    if (confirm('Are you sure you want to delete ' + user + ' from the database?')) {
         return firebase.database().ref('users').child(user).remove()
             .then(function () {
                 alert(user + 'is deleted');
@@ -163,31 +248,47 @@ var viewModal = document.getElementById('viewModal');
 var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks on <span> (x), close the modal
-span.onclick = function () {
+span.addEventListener('click', e => {
+    var tableContent = document.getElementById('viewTable');
+    while (tableContent.firstChild) {
+        tableContent.removeChild(tableContent.firstChild);
+    }
     viewModal.style.display = "none";
-}
+});
 
 // When the user clicks anywhere outside of the modal, close it
-window.onclick = function (event) {
+window.addEventListener('click', e => {
     if (event.target == viewModal) {
+        var tableContent = document.getElementById('viewTable');
+        while (tableContent.firstChild) {
+            tableContent.removeChild(tableContent.firstChild);
+        }
         viewModal.style.display = "none";
     }
-}
+});
 
-// Get the modal
-var viewModal = document.getElementById('viewModal');
+// Get the Edit modal
+var editModal = document.getElementById('editModal');
 
 // Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+var span2 = document.getElementsByClassName("close")[1];
 
 // When the user clicks on <span> (x), close the modal
-span.onclick = function () {
-    viewModal.style.display = "none";
-}
+span2.addEventListener('click', e => {
+    var tableContent = document.getElementById('editTable');
+    while (tableContent.firstChild) {
+        tableContent.removeChild(tableContent.firstChild);
+    }
+    editModal.style.display = "none";
+});
 
 // When the user clicks anywhere outside of the modal, close it
-window.onclick = function (event) {
-    if (event.target == viewModal) {
-        viewModal.style.display = "none";
+window.addEventListener('click', e => {
+    if (event.target == editModal) {
+        var tableContent = document.getElementById('editTable');
+        while (tableContent.firstChild) {
+            tableContent.removeChild(tableContent.firstChild);
+        }
+        editModal.style.display = "none";
     }
-}
+});
