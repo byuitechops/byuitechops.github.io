@@ -9,6 +9,7 @@ const config = {
 };
 firebase.initializeApp(config);
 
+var c = 0;
 
 firebase.auth().onAuthStateChanged(firebaseUser => {
     if (firebaseUser) {
@@ -32,7 +33,10 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                             for (users in snap) {
                                 list.push(users);
                             }
-                            tableCreate(list);
+                            if (c == 0) {
+                                tableCreate(list);
+                                c++;
+                            };
                         });
                         break;
                     } else {
@@ -51,7 +55,9 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 function tableCreate(list) {
     var view = document.getElementById('view');
     var tbl = document.createElement('table');
-    tbl.style.width = '100%';
+    tbl.style.width = '60%';
+    tbl.style.minWidth = '600px';
+    tbl.style.margin = "0 auto 30px auto";
     tbl.setAttribute('border', '1');
     var tbdy = document.createElement('tbody');
     var z = 0;
@@ -87,6 +93,11 @@ function tableCreate(list) {
                 btnF.setAttribute('onclick', "if (confirm('Are your sure you want to fire ' + this.value)){ window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank')}");
                 var tF = document.createTextNode("Fire");
                 btnF.appendChild(tF);
+                
+                btnV.style.width = "5em";
+                btnE.style.width = "5em";
+                btnD.style.width = "5em";
+                btnF.style.width = "5em";
 
                 td.appendChild(btnV);
                 td.appendChild(btnE);
@@ -195,7 +206,7 @@ function editUser(user) {
         for (var j = 0; j < 2; j++) {
             var td = document.createElement('td');
             td.style.textAlign = 'center';
-            td.style.padding = "0.3em";
+            td.style.padding = "0";
             td.style.textTransform = "capitalize";
             if (j == 0) {
                 var t = document.createTextNode(list[z]);
@@ -204,10 +215,11 @@ function editUser(user) {
                 td.value
             } else if (j == 1) {
                 var t = document.createElement('input')
+                t.style.height = "1.75em";
                 td.setAttribute('type', 'text');
                 t.setAttribute('value', data[z]);
                 t.setAttribute('name', list[z]);
-                t.setAttribute('onchange', "updateFirebase('" + user + "', this.name, this.value)");
+                t.setAttribute('onkeyup', "updateFirebase('" + user + "', this.name, this.value, event)");
                 td.appendChild(t);
             }
             tr.appendChild(td);
@@ -220,12 +232,26 @@ function editUser(user) {
 }
 
 // This function sends the updated info to firebase
-function updateFirebase(user, title, value) {
-    console.log(user, title, value);
-    var info = '{"' + title + '": "' + value + '"}';
-    info = JSON.parse(info);
-    console.log(info);
-    firebase.database().ref('users/' + user).update(info);
+function updateFirebase(user, title, value, e) {
+    var k = e.keyCode;
+    if (k == 13) {
+        if (value === 'true') {
+            value === true;
+        } else if (value === 'false') {
+            value === false;
+        }
+        var info = '{"' + title + '": ' + value + '}';
+        info = JSON.parse(info);
+        console.log(info);
+        firebase.database().ref('users/' + user).update(info)
+            .then(function () {
+                alert('Firebase has been updated.')
+            })
+            .catch(function (error) {
+                alert(error);
+            });
+        location.reload();
+    }
 }
 
 // Deletes the user from the database
