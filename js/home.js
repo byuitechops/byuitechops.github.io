@@ -16,8 +16,8 @@
             var user;
             loggedinUser.providerData.forEach(function (profile) {
                 user = profile.displayName;
+                console.log(user);
             });
-            localStorage.setItem('user', user);
 
             firebase.database().ref('users').child(user).on('value', snap => {
                 var titles;
