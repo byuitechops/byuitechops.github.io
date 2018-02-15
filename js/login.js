@@ -91,7 +91,7 @@
             });
 
             document.getElementById('submitSignUp').addEventListener('click', e => {
-                user = document.getElementById('signUpName').value;
+                var user = document.getElementById('signUpName').value;
                 const email = document.getElementById('signUpEmail').value;
                 const pass = document.getElementById('signUpPassword').value;
                 const auth = firebase.auth();
