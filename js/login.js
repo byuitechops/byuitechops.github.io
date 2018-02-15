@@ -82,18 +82,18 @@
             });
 
             var user = null;
-            
+
             document.getElementById('signUpPassword').addEventListener("keyup", function (event) {
                 event.preventDefault();
                 if (event.keyCode === 13) {
                     document.getElementById('submitSignUp').click();
                 }
             });
-            
+
             document.getElementById('submitSignUp').addEventListener('click', e => {
-                user = signUpName.value;
-                const email = signUpEmail.value;
-                const pass = signUpPassword.value;
+                user = document.getElementById('signUpName').value;
+                const email = document.getElementById('signUpEmail').value;
+                const pass = document.getElementById('signUpPassword').value;
                 const auth = firebase.auth();
 
                 user = String(user);
