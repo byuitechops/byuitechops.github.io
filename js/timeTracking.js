@@ -150,9 +150,12 @@ function showModal(num, selected) {
                     var check = false;
                     var txt = "";
                     for (var i = 0; i < monthDays.length; i++) {
-                        if (num < monthDays[i]) {
-                            return;
-                        }
+
+                        document.getElementById("breakText1").innerHTML = "";
+                        document.getElementById("breakText2").innerHTML = "";
+                        document.getElementById("breakText3").innerHTML = "";
+                        document.getElementById("breakText4").innerHTML = "";
+                        document.getElementById("breakText5").innerHTML = "";
                         if (num == monthDays[i]) {
                             if (person[currentMonth[i]].In == undefined) {
                                 person[currentMonth[i]].In = "N/A";
@@ -356,8 +359,10 @@ function selectName(selected, num) {
                 var monthDays = [];
                 var currentMonth = [];
                 var count = 0;
+                //                console.log(dates);
                 for (var i = 0; i < dates.length; i++) {
                     if (document.getElementById("month-dropdown").value == dates[i][0]) {
+                        //                        console.log(dates[i]);
                         currentMonth[count] = dates[i];
                         var firstDash = currentMonth[count].indexOf("-");
                         var lastDash = currentMonth[count].lastIndexOf("-");
@@ -365,16 +370,16 @@ function selectName(selected, num) {
                         if (monthDays[count][0] == 0) {
                             monthDays[count] = monthDays[count].slice(1);
                         }
+                        //                        console.log(monthDays[count]);
                         count++;
                     }
                 }
                 var check = false;
                 var txt = "";
                 for (var i = 0; i < monthDays.length; i++) {
-                    if (num < monthDays[i]) {
-                        return;
-                    }
+
                     if (num == monthDays[i]) {
+                        //                        console.log(num);
                         if (individual[currentMonth[i]].In == undefined) {
                             individual[currentMonth[i]].In = "N/A";
                         }
@@ -394,6 +399,7 @@ function selectName(selected, num) {
                         continue;
                     }
                     if (num == monthDays[i + 1]) {
+                        //                        console.log(num + " 2");
                         if (individual[currentMonth[i + 1]].In == undefined) {
                             individual[currentMonth[i + 1]].In = "N/A";
                         }
@@ -406,9 +412,13 @@ function selectName(selected, num) {
                         check = true;
                     } else {
                         document.getElementById("breakText2").innerHTML = "No more breaks";
+                        document.getElementById("breakText3").innerHTML = "";
+                        document.getElementById("breakText4").innerHTML = "";
+                        document.getElementById("breakText5").innerHTML = "";
                         break;
                     }
                     if (num == monthDays[i + 2]) {
+                        //                        console.log(num + " 3");
                         if (individual[currentMonth[i + 2]].In == undefined) {
                             individual[currentMonth[i + 2]].In = "N/A";
                         }
@@ -421,11 +431,14 @@ function selectName(selected, num) {
                         check = true;
                     } else {
                         document.getElementById("breakText3").innerHTML = "No more breaks";
+                        document.getElementById("breakText4").innerHTML = "";
+                        document.getElementById("breakText5").innerHTML = "";
                         break;
                     }
-                    if (num == monthDays[i + 4]) {
+                    if (num == monthDays[i + 3]) {
+                        //                        console.log(num + " 4");
                         if (individual[currentMonth[i + 3]].In == undefined) {
-                            individual[currentMonth[i]].In = "N/A";
+                            individual[currentMonth[i + 3]].In = "N/A";
                         }
                         if (individual[currentMonth[i + 3]].Out == undefined) {
                             individual[currentMonth[i + 3]].Out = "N/A";
@@ -436,9 +449,11 @@ function selectName(selected, num) {
                         check = true;
                     } else {
                         document.getElementById("breakText4").innerHTML = "No more breaks";
+                        document.getElementById("breakText5").innerHTML = "";
                         break;
                     }
                     if (num == monthDays[i + 4]) {
+                        //                        console.log(num + " 5");
                         if (individual[currentMonth[i + 4]].In == undefined) {
                             individual[currentMonth[i + 4]].In = "N/A";
                         }
@@ -450,12 +465,16 @@ function selectName(selected, num) {
                         document.getElementById("breakText5").innerHTML = txt;
                         check = true;
                     } else {
-                        document.getElementById("breakText").innerHTML = "No more breaks";
+                        document.getElementById("breakText5").innerHTML = "No more breaks";
                         break;
                     }
                 }
                 if (!check) {
                     document.getElementById("breakText1").innerHTML = "No breaks logged";
+                    document.getElementById("breakText2").innerHTML = "";
+                    document.getElementById("breakText3").innerHTML = "";
+                    document.getElementById("breakText4").innerHTML = "";
+                    document.getElementById("breakText5").innerHTML = "";
                 }
             });
             count = 0;
@@ -624,8 +643,15 @@ function clearCal() {
 function modalBox(number) {
     // Get the modal
     var num = number.getAttribute("value");
+    console.log(num);
     var modal = document.getElementById('myModal');
     var selected = document.getElementById('name-dropdown').value;
+
+    document.getElementById("breakText1").innerHTML = "hey";
+    document.getElementById("breakText2").innerHTML = "";
+    document.getElementById("breakText3").innerHTML = "";
+    document.getElementById("breakText4").innerHTML = "";
+    document.getElementById("breakText5").innerHTML = "";
 
     showModal(num, selected);
     showSchedule(num, selected);
