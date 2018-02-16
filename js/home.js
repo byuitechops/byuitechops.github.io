@@ -16,8 +16,27 @@
             var user;
             loggedinUser.providerData.forEach(function (profile) {
                 user = profile.displayName;
+                console.log(user);
             });
 
+            firebase.database().ref('users').child(user).on('value', snap => {
+                var titles;
+                var shot = snap.val();
+                for (titles in shot) {
+                    if (titles == 'Admin') {
+                        //Load Admin Link
+                        var ul = document.getElementById('sidenav');
+                        var li = document.createElement('li');
+                        var a = document.createElement('a');
+                        a.setAttribute('href', 'admin.html');
+                        var t = document.createTextNode('Admin');
+                        a.appendChild(t);
+                        li.appendChild(a);
+                        var ref = ul.lastChild;
+                        ref.parentNode.insertBefore(li, ref.nextSibling);
+                    }
+                }
+            });
 
             var blockallcode;
             var brightspacecode;
