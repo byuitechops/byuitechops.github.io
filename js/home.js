@@ -523,8 +523,11 @@
                 var d = new Date();
                 var hours = d.getHours();
                 var mer = "am";
-                if (hours - 12 >= 0) {
+                if (hours - 12 > 0) {
                     hours = '0' + (hours - 12);
+                    mer = "pm";
+                };
+                if (hours - 12 == 0) {
                     mer = "pm";
                 };
                 var min = ('0' + d.getMinutes()).slice(-2);
@@ -563,6 +566,9 @@
                 var mer = "am";
                 if (hours - 12 > 0) {
                     hours = '0' + (hours - 12);
+                    mer = "pm";
+                };
+                if (hours - 12 == 0) {
                     mer = "pm";
                 };
                 var min = ('0' + d.getMinutes()).slice(-2);
@@ -618,8 +624,19 @@
             document.getElementById('breakOut').addEventListener('click', e => {
                 var ref = dbRefUsers.child(user).child('TimeClock').child('Breaks');
                 var d = new Date();
-                var time = d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
-                var date = (d.getMonth() + 1) + '-' + d.getDate() + '-' + d.getFullYear() + ' ' + time;
+                var hours = d.getHours();
+                var mer = "am";
+                if (hours - 12 > 0) {
+                    hours = '0' + (hours - 12);
+                    mer = "pm";
+                };
+                if (hours - 12 == 0) {
+                    mer = "pm";
+                };
+                var min = ('0' + d.getMinutes()).slice(-2);
+                var sec = ('0' + d.getSeconds()).slice(-2);
+                var time = hours + ':' + min + ':' + sec + " " + mer;
+                var date = (d.getMonth() + 1) + '-' + ('0' + d.getDate()).slice(-2) + '-' + d.getFullYear() + ' ' + time;
                 var data = {
                     Out: time
                 }
@@ -636,8 +653,19 @@
             document.getElementById('breakIn').addEventListener('click', e => {
                 var ref = dbRefUsers.child(user).child('TimeClock').child('Breaks');
                 var d = new Date();
-                var time = d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
-                var date = localStorage.getItem('breakkey');
+                var hours = d.getHours();
+                var mer = "am";
+                if (hours - 12 > 0) {
+                    hours = '0' + (hours - 12);
+                    mer = "pm";
+                };
+                if (hours - 12 == 0) {
+                    mer = "pm";
+                };
+                var min = ('0' + d.getMinutes()).slice(-2);
+                var sec = ('0' + d.getSeconds()).slice(-2);
+                var time = hours + ':' + min + ':' + sec + " " + mer;
+                var date = (d.getMonth() + 1) + '-' + ('0' + d.getDate()).slice(-2) + '-' + d.getFullYear() + ' ' + time;
                 var data = {
                     In: time
                 }
