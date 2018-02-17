@@ -81,10 +81,55 @@ input[type='text'] {
     width: 45%;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1200px) {
+    #showclocked {
+    font-size: 1.5em;
+    }
+    button {
+        font-size: 30px
+    }
+
+    #showbreak {
+    text-align: left;
+    font-size: 1em;
+    width: 50%;
+    text-align: center;
+    }
+
     textarea {
     font-size: 1.5em;
     }
+
+    .tab-header {
+    font-size: 20px;
+    }
+}
+
+
+
+@media screen and (max-width: 1000px) {
+    .icontab { 
+    height: 300px;
+    width: 300px;
+    border-width: 0px;
+    margin: 0px;
+    }
+
+    #showclocked {
+    font-size: 1.5em;
+    }
+
+    #showbreak {
+    text-align: left;
+    font-size: 1em;
+    width: 50%;
+    text-align: center;
+    }
+
+    textarea {
+    font-size: 1.5em;
+    }
+
     .tab-header {
     font-size: 25px;
     }
