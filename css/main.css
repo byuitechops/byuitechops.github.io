@@ -199,6 +199,9 @@ input[type=radio]:checked {
 /* --------------------------- Resize for Tablets -------------------------- */
 
 @media screen and (max-width: 1200px) {
+    h1 {
+        font-size: 45px;
+    }
     ul.sidenav {
         width: 100%;
         height: auto;
@@ -210,7 +213,7 @@ input[type=radio]:checked {
         text-align: center;
     }
     div.content {
-        padding-top: 125px;
+        padding-top: 10%;
         margin: 0 auto;
     }
     [class*="col-"] {
@@ -225,9 +228,15 @@ input[type=radio]:checked {
 /* --------------------------- Resize for Mobile -------------------------- */
 
 @media screen and (max-width: 1000px) {
-    .content {
-        padding: 2em;
+    * {
+        font-size: 1.1em;
     }
+    h1 {
+        font-size: 60px;
+    }
+    div.content {
+        padding-top: 1%;
+            }
     
     ul.sidenav {
         width: 100%;
@@ -235,9 +244,13 @@ input[type=radio]:checked {
         position: relative;
     }
     ul.sidenav li a {
-        font-size: 15px;
+        
         text-align: center;
         float: none;
+    }
+    .flex-container {
+        display: flex;
+        flex-direction: column;
     }
 }
 
