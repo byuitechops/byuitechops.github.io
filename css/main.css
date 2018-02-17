@@ -228,9 +228,6 @@ input[type=radio]:checked {
 /* --------------------------- Resize for Mobile -------------------------- */
 
 @media screen and (max-width: 1000px) {
-    * {
-        font-size: 1.1em;
-    }
     h1 {
         font-size: 60px;
     }
