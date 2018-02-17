@@ -80,3 +80,12 @@ textarea {
 input[type='text'] {
     width: 45%;
 }
+
+@media screen and (max-width: 1000px) {
+    textarea {
+    font-size: 1.5em;
+    }
+    .tab-header {
+    font-size: 25px;
+    }
+}
