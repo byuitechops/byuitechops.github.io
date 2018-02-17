@@ -269,14 +269,13 @@ td#monthly {
 
 /* ---------------------------------- Resize for Mobile --------------------------------- */
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1000px) {
     ul.sidenav {
         width: 100%;
         height: auto;
         position: relative;
     }
     ul.sidenav li a {
-        font-size: 15px;
         text-align: center;
         float: none;
     }
