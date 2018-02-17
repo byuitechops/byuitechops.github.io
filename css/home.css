@@ -83,21 +83,22 @@ input[type='text'] {
 
 @media screen and (max-width: 1200px) {
     #showclocked {
+    text-align: center;
     font-size: 1.5em;
+    width: 100%;
     }
     button {
-        font-size: 30px
+        font-size: 25px
     }
 
     #showbreak {
-    text-align: left;
-    font-size: 1em;
-    width: 50%;
     text-align: center;
+    font-size: 1.2em;
+    width: 100%;
     }
 
     textarea {
-    font-size: 1.5em;
+    font-size: 1em;
     }
 
     .tab-header {
@@ -106,31 +107,19 @@ input[type='text'] {
 }
 
 
-
 @media screen and (max-width: 1000px) {
     .icontab { 
-    height: 300px;
-    width: 300px;
+    height: 150px;
+    width: 150px;
     border-width: 0px;
     margin: 0px;
     }
-
-    #showclocked {
-    font-size: 1.5em;
-    }
-
-    #showbreak {
-    text-align: left;
-    font-size: 1em;
-    width: 50%;
-    text-align: center;
-    }
-
-    textarea {
-    font-size: 1.5em;
+    
+    t-size: 1.2em;
     }
 
     .tab-header {
-    font-size: 25px;
+    font-size: 20px;
     }
 }
+
