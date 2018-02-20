@@ -87,22 +87,13 @@ function tableCreate(list) {
                 var tD = document.createTextNode("Delete");
                 btnD.appendChild(tD);
 
-                var btnF = document.createElement("BUTTON");
-                btnF.setAttribute('value', list[z]);
-                btnF.style.backgroundColor = '#f22500';
-                btnF.setAttribute('onclick', "if (confirm('Are your sure you want to fire ' + this.value)){ window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank')}");
-                var tF = document.createTextNode("Fire");
-                btnF.appendChild(tF);
-                
                 btnV.style.width = "5em";
                 btnE.style.width = "5em";
                 btnD.style.width = "5em";
-                btnF.style.width = "5em";
 
                 td.appendChild(btnV);
                 td.appendChild(btnE);
                 td.appendChild(btnD);
-                td.appendChild(btnF);
                 z++;
             }
             tr.appendChild(td);
@@ -208,20 +199,30 @@ function editUser(user) {
             td.style.textAlign = 'center';
             td.style.padding = "0";
             td.style.textTransform = "capitalize";
+            var sTF = document.createElement('select');
+            sTF.setAttribute('onChange', "updateFirebase('" + user + "', this.value, '" + list[z] + "')");
+            sTF.style.margin = '0.5em';
+            var caps = data[z];
+            caps = String(caps);
+            caps = caps.charAt(0).toUpperCase() + caps.slice(1);
+            sTF.innerHTML = "<option value='' selected disabled hidden>" + caps + "</option>";
+
             if (j == 0) {
                 var t = document.createTextNode(list[z]);
                 td.setAttribute('value', list[z]);
                 td.appendChild(t);
                 td.value
+            } else if (j == 1 && list[z] == 'Team') {
+                sTF.innerHTML += "<select><option value='canvas'>Canvas</option><option value='tech'>Tech</option><option value='transcript'>Transcript</option></select>";
+                td.appendChild(sTF);
+            } else if (j == 1 && list[z] == 'TeamLead') {
+                sTF.innerHTML += "<select><option value='canvas'>Canvas</option><option value='tech'>Tech</option><option value='transcript'>Transcript</option><option value='false'>False</option></select>";
+                td.appendChild(sTF);
             } else if (j == 1) {
-                var t = document.createElement('input')
-                t.style.height = "1.75em";
-                td.setAttribute('type', 'text');
-                t.setAttribute('value', data[z]);
-                t.setAttribute('name', list[z]);
-                t.setAttribute('onkeyup', "updateFirebase('" + user + "', this.name, this.value, event)");
-                td.appendChild(t);
+                sTF.innerHTML += "<select><option value='true'>True</option><option value='false'>False</option></select>";
+                td.appendChild(sTF);
             }
+            td.style.padding = '0.25em';
             tr.appendChild(td);
         }
         z++;
@@ -232,26 +233,23 @@ function editUser(user) {
 }
 
 // This function sends the updated info to firebase
-function updateFirebase(user, title, value, e) {
-    var k = e.keyCode;
-    if (k == 13) {
-        if (value === 'true') {
-            value === true;
-        } else if (value === 'false') {
-            value === false;
-        }
-        var info = '{"' + title + '": ' + value + '}';
-        info = JSON.parse(info);
-        console.log(info);
-        firebase.database().ref('users/' + user).update(info)
-            .then(function () {
-                alert('Firebase has been updated.')
-            })
-            .catch(function (error) {
-                alert(error);
-            });
-        location.reload();
-    }
+function updateFirebase(user, value, title) {
+    if (value === 'true') {
+        value === true;
+    } else if (value === 'false') {
+        value === false;
+    };
+    var info = '{"' + title + '": ' + value + '}';
+    info = JSON.parse(info);
+    console.log(info);
+    firebase.database().ref('users/' + user).update(info)
+        .then(function () {
+            alert('Firebase has been updated.')
+        })
+        .catch(function (error) {
+            alert(error);
+        });
+    location.reload();
 }
 
 // Deletes the user from the database
