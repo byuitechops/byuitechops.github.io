@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon.gif">
     <link type="text/css" rel="stylesheet" href="css/main.css">
-    <link type="text/css" rel="stylesheet" href="css/schedule.css">
     <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
 </head>
 
@@ -43,11 +42,14 @@
                     <option value="canvas">Canvas</option>
                     <option value="transcript">Transcript</option>
                 </select>
-                <iframe class="sFrames" id='scheduleFrame'></iframe>
+                <div id='frame'>
+                    <iframe class="sFrames" id='scheduleFrame'></iframe>
+                </div>
             </div>
         </div>
     </div>
     <script src="js/schedule.js"></script>
+    <link type="text/css" rel="stylesheet" href="css/schedule.css">
 </body>
 
 </html>

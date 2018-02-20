@@ -41,3 +41,7 @@ table {
     text-decoration: none;
     cursor: pointer;
 }
+
+#view {
+    overflow-x: auto;
+}

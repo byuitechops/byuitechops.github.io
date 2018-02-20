@@ -14,3 +14,16 @@
     margin-left: 40%;
     margin-right: 40%;
 }
+
+#frame {
+    overflow-x: auto;
+}
+
+#scheduleFrame #top-bar {
+    margin: 0;
+    position: static;
+}
+
+@media screen and (max-width: 1200px) {
+    margin-left: 0;
+}
