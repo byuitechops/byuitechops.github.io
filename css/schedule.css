@@ -1,29 +1,17 @@
-.sFrames {
-    width: 100%;
-    border: none;
+#frame {
+    overflow-x: auto;
+    margin: 0;
 }
 
 #scheduleFrame {
     height: 800px;
-    width: 1800px;
-    margin-bottom: 2em;
-    margin-left: -27%;
+    width: 100%;
+    margin: 0 2em;
+    border: none;
+    max-width: 100%;
 }
 
 #team-dropdown {
     margin-left: 40%;
     margin-right: 40%;
-}
-
-#frame {
-    overflow-x: auto;
-}
-
-#scheduleFrame #top-bar {
-    margin: 0;
-    position: static;
-}
-
-@media screen and (max-width: 1200px) {
-    margin-left: 0;
 }
