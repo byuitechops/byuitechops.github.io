@@ -132,6 +132,7 @@ document.getElementById('resetPassword').addEventListener('click', e => {
 function setUser() {
     var data = {
         "Team": 'default',
+        "TeamLead": false,
         "brightspace": false,
         "trello": false,
         "teamDrive": false,
