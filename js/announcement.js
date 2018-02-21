@@ -64,8 +64,10 @@
                     }
                     else var urgent = "";
                     if (childData != "null") {
-                        console.log(keys[i])
-                        html += "<div class='item'>" + urgent + "<h2>" + childData.title + "</h2><p>" + childData.message + "</p><input style='max-width: 50%;' type='button' onclick=\"deleteAnnouncement('" + keys[i] + "')\" value='Delete'></div>";
+                        html += "<hr><div class='item'>" + urgent + "<h2>" + childData.title + "</h2><p>" + childData.message + "</p><input class='deleteButton' type='button' onclick=\"deleteAnnouncement('" + keys[i] + "')\" value='Delete'></div>";
+                        if (i == (keys.length - 1)) {
+                            html += "<hr>";
+                        }
                     }
                 }
                 document.getElementById('display').innerHTML = html;
@@ -144,6 +146,18 @@
         var message = document.getElementById("message").value;
         var urgency = document.getElementById("urgency").checked;
         var date = document.getElementById("date").value;
+        if (title == "") {
+            if (confirm('Please include a title in your announcement.')) {
+                return;
+            }
+            else {
+                return;
+            }
+        }
+        document.getElementById('title').value = "";
+        document.getElementById('message').value = "";
+        document.getElementById('urgency').value = "";
+        document.getElementById('date').value = "";
         var data = {
             "title": title
             , "message": message

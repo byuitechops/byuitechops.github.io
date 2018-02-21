@@ -30,9 +30,7 @@
     width: 31%;
 }
 
-.item:hover {
-    background-color: #ddd;
-}
+.item:hover {}
 
 .item {
     text-align: center;
@@ -44,6 +42,15 @@
 
 .modal-content form {
     border: none;
+}
+
+.deleteButton:hover {
+    opacity: .8;
+}
+
+.deleteButton {
+    max-width: 50%;
+    margin-bottom: 2em;
 }
 
 
