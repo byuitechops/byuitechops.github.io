@@ -6,8 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon.gif">
     <script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
-    <link type="text/css" rel="stylesheet" href="/css/main.css">
-    <link type="text/css" rel="stylesheet" href="/css/announcement.css">
+    <link type="text/css" rel="stylesheet" href="main.css">
+    <link type="text/css" rel="stylesheet" href="announcement.css">
+    <script src="announcement.js"></script>
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
 </head>
 
@@ -15,58 +16,36 @@
     <div class="row">
         <div class="col-2">
             <ul class="sidenav" id="sidenav">
-                <li>
-                    <a href="home.html">Home</a>
-                </li>
-                <li>
-                    <a class="active" href="announcements.html">Announcements</a>
-                </li>
-                <li>
-                    <a href="timeTracking.html">Time Tracking</a>
-                </li>
-                <li>
-                    <a href="videoTimeCalculator.html">Time Calculator</a>
-                </li>
-                <li>
-                    <a href="employeehandbook.html">Employee Handbook</a>
-                </li>
-                <li>
-                    <a href="schedule.html">Schedules</a>
-                </li>
+                <li> <a href="home.html">Home</a> </li>
+                <li> <a class="active" href="announcements.html">Announcements</a> </li>
+                <li> <a href="timeTracking.html">Time Tracking</a> </li>
+                <li> <a href="videoTimeCalculator.html">Time Calculator</a> </li>
+                <li> <a href="employeehandbook.html">Employee Handbook</a> </li>
+                <li> <a href="schedule.html">Schedules</a> </li>
             </ul>
         </div>
         <div class="col-10">
             <div class="content">
                 <h1>Announcements</h1>
-                <div id="display" class="announcements">
-
-                </div>
+                <div id="display" class="announcements"> </div>
                 <!-- Trigger/Open The Modal -->
                 <button id="myBtn" class="announcementButton">Make An Announcement</button>
                 <!-- The Modal -->
                 <div id="myModal" class="modal">
-
                     <!-- Modal content -->
-                    <div class="modal-content">
-                        <span class="close">&times;</span>
+                    <div class="modal-content"> <span class="close">&times;</span>
                         <p>Fill out the fields, then click "Submit":</p>
-
-                        <form>
-                            <p>Title: <input type="text" id='title'></p>
-                            <p>Message: <textarea id="message"></textarea></p>
-
-                            <p>Would you like to input an image: <input type="checkbox" id="imagecheck" onclick="isChecked()"></p>
-
-                            <p id="selectImage" class="hide">Find an image you want in google and copy the image address: <input type="url" id="image"></p>
-
-                            <p>Do you want to add a link: <input type="checkbox" id="linkcheck" onclick="isChecked()"></p>
-
-                            <p id="addLink" class="hide">Shown Text:<input type="text" id="text">Link:<input type="text" id="link"></p>
-                            <p> When does the announcement expire: <input type="date" id="date"></p>
-                            <input type="button" id="submitAnnounce" value="Submit">
-                        </form>
+                        <form action="announcement.js">
+                            <p>Title:
+                                <input type="text" id='title'> </p>
+                            <p>Message:</p>
+                            <textarea id="message" placeholder="[Enter brief synopsis here]"></textarea>
+                            <p>Urgent:
+                                <input type=checkbox id='urgency'> </p>
+                            <p>When does the announcement expire:
+                                <input type="date" id="date"> </p>
+                            <input type="button" id="submitAnnounce" value="Submit" onclick="sendAnnouncementToFirebase()"> </form>
                     </div>
-
                 </div>
             </div>
         </div>
