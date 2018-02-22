@@ -53,6 +53,22 @@ body {
     border: 1px solid #888;
     width: 50%;
     /* Could be more or less, depending on screen size */
+    
+}
+
+.modal-content button {
+    width: 100%;
+}
+
+.modal-content input {
+    width: 45%;
+}
+
+.modal-content select {
+    margin: 6px;
+    width: 45%;
+    height: 3em; 
+    font-size: 14px;
 }
 
 /* The Close Button */
@@ -62,6 +78,7 @@ body {
     float: right;
     font-size: 28px;
     font-weight: bold;
+    display: inline;
 }
 
 .close:hover,
