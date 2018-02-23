@@ -35,6 +35,17 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                         li.appendChild(a);
                         var ref = ul.lastChild;
                         ref.parentNode.insertBefore(li, ref.nextSibling);
+                        
+                        firebase.database().ref('users').on('value', snap => {
+                            snap = snap.val();
+                            var list = [];
+                            var x;
+                            for (x in snap) {
+                                list.push(snap);
+                            }
+                            console.log(list);
+//                        document.getElementById('names').innerHTML = "<select><"
+                        })
                     }
                 }
             });
