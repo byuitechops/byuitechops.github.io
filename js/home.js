@@ -648,6 +648,9 @@
                 localStorage.setItem('breakkey', date);
                 isBreak();
                 alert('Remember to return from break');
+                setTimeout(function () {
+                    alert('Remember to return from break');
+                }, 900000);
             });
 
             document.getElementById('breakIn').addEventListener('click', e => {
