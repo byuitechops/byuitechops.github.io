@@ -1,9 +1,24 @@
 table {
-    margin: auto;
+    margin-left: 150px;
+    font-size: 22px;
 }
 
 th {
     text-align: right;
     padding: 0.25em;
-    width: 1em;
+/*    width: 200px;*/
+}
+
+tr {
+    height: 2em;
+}
+
+tr :first-child + td {
+    padding-left: 0.5em;
+    width: 2em;
+}
+
+button {
+    height: 2em;
+    width: 5em;
 }
