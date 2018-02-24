@@ -9,9 +9,11 @@ const config = {
 firebase.initializeApp(config);
 
 
-if (firebase.auth().currentUser != null) {
-    window.location.replace("home.html");
-}
+firebase.auth().onAuthStateChanged(firebaseUser => {
+    if (firebaseUser) {
+        window.location.replace("home.html");
+    }
+})
 
 var user;
 const txtEmail = document.getElementById('txtEmail');
@@ -111,8 +113,8 @@ document.getElementById('submitSignUp').addEventListener('click', e => {
         });
         document.getElementById('myModal').style.display = "none";
         setTimeout(function () {
-            
-        window.location.replace("home.html");
+
+            window.location.replace("home.html");
         }, 1400);
     });
     promise.catch(e => alert(e.message));
