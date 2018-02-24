@@ -707,11 +707,11 @@
                 firebase.auth().signOut();
             })
 
+
         } else {
             // User is signed out.
             window.location.replace("index.html");
             // ...
         }
     });
-
 }());
