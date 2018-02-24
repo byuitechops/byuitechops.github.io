@@ -617,8 +617,6 @@
                         document.getElementById('showclocked').innerHTML = "";
                     }
                 });
-
-
             }
 
             document.getElementById('breakOut').addEventListener('click', e => {
