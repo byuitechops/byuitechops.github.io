@@ -66,7 +66,7 @@ function showModal(num, selected) {
                             // code for displaying info in modal boxes
                             var txt = "Clocked in at: " + person[currentMonth[i + 1]].In + "<br />";
                             txt += "CommentIn: " + person[currentMonth[i + 1]].CommentIn + "<br />";
-                            txt += "Clock out at: " + person[currentMonth[i + 1]].Out + "<br />";
+                            txt += "Clocked out at: " + person[currentMonth[i + 1]].Out + "<br />";
                             txt += "CommentOut: " + person[currentMonth[i + 1]].CommentOut + "<br />";
                             document.getElementById("modalText").innerHTML = txt;
                             check = true;
@@ -82,7 +82,7 @@ function showModal(num, selected) {
                             }
                             var txt = "Clocked in at: " + person[currentMonth[i]].In + "<br />";
                             txt += "CommentIn: " + person[currentMonth[i]].CommentIn + "<br />";
-                            txt += "Clock out at: " + person[currentMonth[i]].Out + "<br />";
+                            txt += "Clocked out at: " + person[currentMonth[i]].Out + "<br />";
                             txt += "CommentOut: " + person[currentMonth[i]].CommentOut + "<br />";
                             document.getElementById("modalText").innerHTML = txt;
                             document.getElementById("secondShift").innerHTML = "No time logged";
@@ -294,7 +294,7 @@ function selectName(selected, num) {
                         }
                         var txt = "Clocked in at: " + individual[currentMonth[i + 1]].In + "<br />";
                         txt += "CommentIn: " + individual[currentMonth[i + 1]].CommentIn + "<br />";
-                        txt += "Clock out at: " + individual[currentMonth[i + 1]].Out + "<br />";
+                        txt += "Clocked out at: " + individual[currentMonth[i + 1]].Out + "<br />";
                         txt += "CommentOut: " + individual[currentMonth[i + 1]].CommentOut + "<br />";
                         document.getElementById("modalText").innerHTML = txt;
                         check = true;
@@ -310,7 +310,7 @@ function selectName(selected, num) {
                         }
                         var txt = "Clocked in at: " + individual[currentMonth[i]].In + "<br />";
                         txt += "CommentIn: " + individual[currentMonth[i]].CommentIn + "<br />";
-                        txt += "Clock out at: " + individual[currentMonth[i]].Out + "<br />";
+                        txt += "Clocked out at: " + individual[currentMonth[i]].Out + "<br />";
                         txt += "CommentOut: " + individual[currentMonth[i]].CommentOut + "<br />";
                         document.getElementById("modalText").innerHTML = txt;
                         document.getElementById("secondShift").innerHTML = "No time logged";
@@ -331,7 +331,7 @@ function selectName(selected, num) {
                         }
                         var txt = "Clocked in at: " + individual[currentMonth[i]].In + "<br />";
                         txt += "CommentIn: " + individual[currentMonth[i]].CommentIn + "<br />";
-                        txt += "Clock out at: " + individual[currentMonth[i]].Out + "<br />";
+                        txt += "Clocked out at: " + individual[currentMonth[i]].Out + "<br />";
                         txt += "CommentOut: " + individual[currentMonth[i]].CommentOut + "<br />";
                         document.getElementById("secondShift").innerHTML = txt;
                         check = true;
@@ -643,7 +643,7 @@ function modalBox(number) {
     var modal = document.getElementById('myModal');
     var selected = document.getElementById('name-dropdown').value;
 
-    document.getElementById("breakText1").innerHTML = "hey";
+    document.getElementById("breakText1").innerHTML = "No breaks logged";
     document.getElementById("breakText2").innerHTML = "";
     document.getElementById("breakText3").innerHTML = "";
     document.getElementById("breakText4").innerHTML = "";
