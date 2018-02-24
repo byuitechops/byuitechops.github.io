@@ -106,6 +106,12 @@ function updateInfo(title) {
         }
     }
 
+    if (title == "phoneNum") {
+        var newItem = '<input'
+
+        document.getElementsByClassName[0].innerHTML += newItem;
+    }
+
     //    var info = prompt("What is the updated information?");
     //    info = String(info);
     //
