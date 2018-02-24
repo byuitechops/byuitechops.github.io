@@ -18,6 +18,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
     if (firebaseUser) {
         // If logged in do this
         user = firebase.auth().currentUser;
+        console.log(user);
         user.providerData.forEach(function (profile) {
             name = profile.displayName;
             firebase.database().ref('users').child(name).on('value', snap => {
@@ -35,7 +36,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                         li.appendChild(a);
                         var ref = ul.lastChild;
                         ref.parentNode.insertBefore(li, ref.nextSibling);
-                        
+
                         firebase.database().ref('users').on('value', snap => {
                             snap = snap.val();
                             var list = [];
@@ -44,7 +45,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                                 list.push(snap);
                             }
                             console.log(list);
-//                        document.getElementById('names').innerHTML = "<select><"
+                            //                        document.getElementById('names').innerHTML = "<select><"
                         })
                     }
                 }
@@ -68,11 +69,11 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
             document.getElementById('dSick').innerHTML = snap.sick;
 
         });
-        
+
         teamBase = firebase.database().ref('users').child(name);
         teamBase.on('value', snapshot => {
             var snap = snapshot.val();
-            
+
             document.getElementById('dTeam').innerHTML = snap.Team;
             document.getElementById('dTeam').style.textTransform = 'capitalize';
         });
@@ -83,19 +84,42 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 });
 
 function updateInfo(title) {
-    var data = firebase.database().ref('users').child(name).child("info");
-    var info = prompt("What is the updated information?");
-    info = String(info);
-    if (info != null) {
-        var j = '{"' + title + '": "' + info + '"}';
-        j = JSON.parse(j);
-        data.update(j)
-            .then(function () {
-                //Update successful
-                alert('Update successful');
-            }).catch(function (error) {
-                //An error happened
-                alert(error);
-            })
+
+    // Get the modal
+    var modal = document.getElementById('myModal');
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // Open the modal 
+    modal.style.display = "block";
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
     }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    //    var info = prompt("What is the updated information?");
+    //    info = String(info);
+    //
+    //    var data = firebase.database().ref('users').child(name).child("info");
+    //    if (info != null) {
+    //        var j = '{"' + title + '": "' + info + '"}';
+    //        j = JSON.parse(j);
+    //        data.update(j)
+    //            .then(function () {
+    //                //Update successful
+    //                alert('Update successful');
+    //            }).catch(function (error) {
+    //                //An error happened
+    //                alert(error);
+    //            })
+    //    }
 }

@@ -617,8 +617,6 @@
                         document.getElementById('showclocked').innerHTML = "";
                     }
                 });
-
-
             }
 
             document.getElementById('breakOut').addEventListener('click', e => {
@@ -654,6 +652,7 @@
             });
 
             document.getElementById('breakIn').addEventListener('click', e => {
+                var breakkey = localStorage.getItem('breakkey');
                 var ref = dbRefUsers.child(user).child('TimeClock').child('Breaks');
                 var d = new Date();
                 var hours = d.getHours();
@@ -676,7 +675,7 @@
                     break: false
                 };
                 dbRefUsers.child(user).child('TimeClock').update(breakdata);
-                ref.child(date).update(data);
+                ref.child(breakkey).update(data);
                 localStorage.removeItem('breakkey');
                 isBreak();
             });
