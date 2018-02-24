@@ -1786,9 +1786,6 @@ function selectedTotals(selected) {
 
                     if (rowtwo[x].innerHTML != "") {
 
-                        console.log(rowtwo[x].innerHTML);
-                        console.log(monthDays[count]);
-
                         if (rowtwo[x].innerHTML != monthDays[count]) {
                             continue;
                         }
@@ -1826,7 +1823,6 @@ function selectedTotals(selected) {
                         } else {
                             dTotal = 0;
                         }
-
 
                         if (person[currentMonth[count]].Out != undefined) {
 
@@ -1901,14 +1897,11 @@ function selectedTotals(selected) {
                                 count++;
                             }
                         }
-
                         count++;
 
                         var grandTotal = total1 + total2;
                         weekTwo += grandTotal;
-
                     }
-
                 }
                 weekTwo + extra2;
                 weekTwo /= 3600;
@@ -1920,7 +1913,6 @@ function selectedTotals(selected) {
                 var rowthree = document.getElementById("rowthree").cells;
                 var weekThree = 0;
                 var stop3 = document.getElementById("rowfour").cells[0].id;
-
 
                 for (var x = 0; x < rowthree.length - 1; x++) {
 
@@ -1959,7 +1951,6 @@ function selectedTotals(selected) {
                         var dMinutes = d[1] * 60;
                         var dSeconds = d[2] * 1;
                         var dTotal = dHours + dMinutes + dSeconds + add1;
-
 
                         if (person[currentMonth[count]].Out != undefined) {
 
@@ -2027,18 +2018,15 @@ function selectedTotals(selected) {
                                     aTotal = 0;
                                     bTotal = 0;
                                 }
-
                                 total1 = aTotal - bTotal;
                                 count++;
                             }
-
                         }
 
                         count++;
                         var grandTotal = total1 + total2;
 
                         weekThree += grandTotal;
-
                     }
                 }
                 weekThree /= 3600;
@@ -2088,7 +2076,6 @@ function selectedTotals(selected) {
                         var dMinutes = d[1] * 60;
                         var dSeconds = d[2] * 1;
                         var dTotal = dHours + dMinutes + dSeconds + add1;
-
 
                         if (person[currentMonth[count]].Out != undefined) {
 
@@ -2160,15 +2147,12 @@ function selectedTotals(selected) {
                                 total1 = aTotal - bTotal;
                                 count++;
                             }
-
                         }
-
                         count++;
                         var grandTotal = total1 + total2;
 
                         weekFour += grandTotal;
                     }
-
                 }
                 weekFour /= 3600;
                 weekFour = weekFour.toFixed(1);
@@ -2201,7 +2185,6 @@ function selectedTotals(selected) {
                             add3 = 0;
                         }
 
-
                         if (person[currentMonth[count]].In != undefined) {
                             var d = "";
                             d = person[currentMonth[count]].In.slice(0, 8);
@@ -2218,7 +2201,6 @@ function selectedTotals(selected) {
                         } else {
                             dTotal = 0;
                         }
-
 
                         if (person[currentMonth[count]].Out != undefined) {
 
@@ -2258,8 +2240,6 @@ function selectedTotals(selected) {
                             }
                             if (monthDays[count + 1] < stop5) {
 
-
-
                                 var b = "";
                                 b = person[currentMonth[count + 1]].In.slice(0, 8);
                                 b = b.split(":");
@@ -2290,7 +2270,6 @@ function selectedTotals(selected) {
                                     aTotal = 0;
                                     bTotal = 0;
                                 }
-
                                 total1 = aTotal - bTotal;
                                 count++;
                             }
@@ -2299,7 +2278,6 @@ function selectedTotals(selected) {
                         var grandTotal = total1 + total2;
                         weekFive += grandTotal;
                     }
-
                 }
                 weekFive /= 3600;
                 weekFive = weekFive.toFixed(1);
@@ -2357,7 +2335,6 @@ function selectedTotals(selected) {
                         var bSeconds = b[2] * 1;
                         var bTotal = bHours + bMinutes + bSeconds + add2;
 
-
                         if (person[currentMonth[count + 1]].Out != undefined) {
                             var a = "";
                             a = person[currentMonth[count + 1]].Out.slice(0, 8);
@@ -2389,7 +2366,6 @@ function selectedTotals(selected) {
                         var dSeconds = d[2] * 1;
                         var dTotal = dHours + dMinutes + dSeconds + add1;
 
-
                         if (person[currentMonth[count]].Out != undefined) {
 
                             var c = "";
@@ -2415,14 +2391,11 @@ function selectedTotals(selected) {
                         count += 2;
                         var grandTotal = total1 + total2;
                         weekSix += grandTotal;
-
                     }
-
                 }
                 weekSix /= 3600;
                 weekSix = weekSix.toFixed(1);
                 document.getElementById("weekSix").innerHTML = weekSix;
-
 
                 monthlyTotal = weekOne * 1 + weekTwo * 1 + weekThree * 1 + weekFour * 1 + weekFive * 1 + weekSix * 1;
                 monthlyTotal = monthlyTotal.toFixed(1);
@@ -2430,7 +2403,6 @@ function selectedTotals(selected) {
             });
         }
     })
-
 }
 
 
