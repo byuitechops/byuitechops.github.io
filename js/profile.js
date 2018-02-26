@@ -18,7 +18,6 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
     if (firebaseUser) {
         // If logged in do this
         user = firebase.auth().currentUser;
-        console.log(user);
         user.providerData.forEach(function (profile) {
             name = profile.displayName;
             firebase.database().ref('users').child(name).on('value', snap => {
@@ -37,15 +36,26 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                         var ref = ul.lastChild;
                         ref.parentNode.insertBefore(li, ref.nextSibling);
 
+                        // Build drop down list
                         firebase.database().ref('users').on('value', snap => {
                             snap = snap.val();
-                            var list = [];
+                            var namesList = [];
                             var x;
                             for (x in snap) {
-                                list.push(snap);
+                                namesList.push(x);
                             }
-                            console.log(list);
-                            //                        document.getElementById('names').innerHTML = "<select><"
+                            var namesDiv = document.getElementById('names');
+                            var selectTag = "<select id='sNames'>";
+                            for (y = 0; y < namesList.length; y++) {
+                                if (name == namesList[y]) {
+                                    selectTag += "<option value='" + namesList[y] + "' selected>" + namesList[y] + "</option>";
+                                } else {
+                                    console.log(namesList[y]);
+                                    selectTag += "<option value='" + namesList[y] + "'>" + namesList[y] + "</option>";
+                                }
+                            }
+                            selectTag += "</select>";
+                            namesDiv.innerHTML = selectTag;
                         })
                     }
                 }
@@ -89,7 +99,7 @@ function updateInfo(title) {
     var modal = document.getElementById('myModal');
 
     // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
+    var span = document.getElementById("close");
 
     // Open the modal 
     modal.style.display = "block";
@@ -97,35 +107,88 @@ function updateInfo(title) {
     // When the user clicks on <span> (x), close the modal
     span.onclick = function () {
         modal.style.display = "none";
+        document.getElementById('haha').remove();
+        document.getElementById('hahaSubmit').remove();
     }
 
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function (event) {
         if (event.target == modal) {
             modal.style.display = "none";
+            document.getElementById('haha').remove();
+            document.getElementById('hahaSubmit').remove();
         }
     }
 
-    if (title == "phoneNum") {
-        var newItem = '<input'
+    if (title == "phoneNum" || title == "major" || title == "position" || title == "speed") {
+        var newItem = document.createElement('input');
+        newItem.setAttribute('id', 'haha');
+        newItem.setAttribute('type', 'text');
 
-        document.getElementsByClassName[0].innerHTML += newItem;
+        var newSubmit = document.createElement('button');
+        newSubmit.setAttribute('id', 'hahaSubmit');
+        var t = document.createTextNode('Submit');
+        newSubmit.appendChild(t);
+
+        var modolly = document.getElementById('modal-content');
+        modolly.insertBefore(newItem, modolly.lastChild.nextSibling);
+        modolly.insertBefore(newSubmit, modolly.lastChild.nextSibling);
+    } else if (title == "graduation") {
+        var newItem = document.createElement('select');
+        newItem.setAttribute('id', 'haha');
+        newItem.setAttribute('required', '');
+        newItem.innerHTML = "<option value='' disabled hidden selected>Select One</option>"
+        var sem = ['Winter', 'Spring', 'Fall'];
+        var year = ['2018', '2019', '2020', '2021', '2022'];
+        for (i = 0; i < year.length; i++) {
+            for (y = 0; y < sem.length; y++) {
+                var t = sem[y] + " " + year[i];
+                newItem.innerHTML += "<option value='" + t + "'>" + t + "</option>";
+            }
+        }
+
+        var newSubmit = document.createElement('button');
+        newSubmit.setAttribute('id', 'hahaSubmit');
+        var t = document.createTextNode('Submit');
+        newSubmit.appendChild(t);
+
+        var modolly = document.getElementById('modal-content');
+        modolly.insertBefore(newItem, modolly.lastChild.nextElementSibling);
+        modolly.insertBefore(newSubmit, modolly.lastChild.nextSibling);
+    } else if (title == "track") {
+        var newItem = document.createElement('select');
+        newItem.setAttribute('id', 'haha');
+        newItem.setAttribute('required', '');
+        newItem.innerHTML = "<option value='' disabled hidden selected>Select One</option><option value='Winter/Spring'>Winter/Spring</option><option value='Spring/Fall'>Spring/Fall</option><option value='Fall/Winter'>Fall/Winter</option>";
+
+        var newSubmit = document.createElement('button');
+        newSubmit.setAttribute('id', 'hahaSubmit');
+        var t = document.createTextNode('Submit');
+        newSubmit.appendChild(t);
+
+        var modolly = document.getElementById('modal-content');
+        modolly.insertBefore(newItem, modolly.lastChild.nextElementSibling);
+        modolly.insertBefore(newSubmit, modolly.lastChild.nextSibling);
     }
 
-    //    var info = prompt("What is the updated information?");
-    //    info = String(info);
-    //
-    //    var data = firebase.database().ref('users').child(name).child("info");
-    //    if (info != null) {
-    //        var j = '{"' + title + '": "' + info + '"}';
-    //        j = JSON.parse(j);
-    //        data.update(j)
-    //            .then(function () {
-    //                //Update successful
-    //                alert('Update successful');
-    //            }).catch(function (error) {
-    //                //An error happened
-    //                alert(error);
-    //            })
-    //    }
+    document.getElementById("hahaSubmit").addEventListener("click", function () {
+        var info = document.getElementById('haha').value;
+        info = String(info);
+        var data = firebase.database().ref('users').child(name).child("info");
+        if (info != null) {
+            var j = '{"' + title + '": "' + info + '"}';
+            j = JSON.parse(j);
+            data.update(j)
+                .then(function () {
+                    //Update successful
+                    modal.style.display = "none";
+                    document.getElementById('haha').remove();
+                    document.getElementById('hahaSubmit').remove();
+                }).catch(function (error) {
+                    //An error happened
+                    alert(error);
+                })
+        }
+
+    });
 }

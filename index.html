@@ -36,13 +36,13 @@
                 <input id="signUpEmail" type="email" placeholder="Email" required>
 
                 <input id="signUpPassword" type="password" placeholder="Password" required>
-                
+
                 <input id="signUpPhone" type="tel" placeholder="Phone Number">
-                
+
                 <input id="signUpBirthday" type="text" placeholder="Birthday mm/dd/yyyy" required>
-                
-                <select>
-                    <option disabled selected hidden>Estimated Graduation</option>
+
+                <select id="signUpGraduation" required>
+                    <option value="" disabled selected hidden>Estimated Graduation</option>
                     <option value='Winter 2018'>Winter 2018</option>
                     <option value='Spring 2018'>Spring 2018</option>
                     <option value='Fall 2018'>Fall 2018</option>
@@ -59,16 +59,16 @@
                     <option value='Spring 2022'>Spring 2022</option>
                     <option value='Fall 2022'>Fall 2022</option>
                 </select>
-                
+
                 <input id="signUpMajor" type="text" placeholder="Major" required>
-                
+
                 <select id="signUpTrack" required>
-                    <option disabled selected hidden>Track</option>
+                    <option value="" disabled selected hidden>Track</option>
                     <option value='Winter/Spring'>Winter/Spring</option>
                     <option value='Spring/Fall'>Spring/Fall</option>
                     <option value='Fall/Winter'>Fall/Winter</option>
                 </select>
-                
+
                 <button type="submit" id="submitSignUp">Submit</button>
             </div>
 

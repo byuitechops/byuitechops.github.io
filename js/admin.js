@@ -114,7 +114,11 @@ function viewUser(user) {
         shot = snapshot.val();
         var titles;
         for (titles in shot) {
+<<<<<<< HEAD
             if (titles == 'TimeClock' || titles == 'info') {
+=======
+            if (titles == 'TimeClock' || titles == "info") {
+>>>>>>> updates
                 continue;
             } else {
                 list.push(titles);
@@ -169,7 +173,7 @@ function editUser(user) {
         shot = snapshot.val();
         var titles;
         for (titles in shot) {
-            if (titles == 'TimeClock') {
+            if (titles == 'TimeClock' || titles == 'info') {
                 continue;
             } else {
                 list.push(titles);
@@ -234,12 +238,22 @@ function editUser(user) {
 
 // This function sends the updated info to firebase
 function updateFirebase(user, value, title) {
+    var info;
     if (value === 'true') {
         value === true;
+        info = '{"' + title + '": ' + value + '}';
     } else if (value === 'false') {
         value === false;
+        info = '{"' + title + '": ' + value + '}';
+    } else {
+        info = '{"' + title + '": "' + value + '"}';
     };
+<<<<<<< HEAD
     var info = '{"' + title + '": ' + value + '}';
+=======
+    console.log(value);
+    info = JSON.parse(info);
+>>>>>>> updates
     console.log(info);
     info = JSON.parse(info);
     firebase.database().ref('users/' + user).update(info)
@@ -257,7 +271,7 @@ function deleteUser(user) {
     if (confirm('Are you sure you want to delete ' + user + ' from the database?')) {
         return firebase.database().ref('users').child(user).remove()
             .then(function () {
-                alert(user + 'is deleted');
+                alert(user + ' is deleted');
             })
             .catch(function (error) {
                 alert(error)

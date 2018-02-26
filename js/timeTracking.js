@@ -702,6 +702,7 @@ function setMonth() {
 
 
     calcTotals();
+    editCalendar();
 
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
@@ -2553,3 +2554,86 @@ function selectSchedule(selected, num) {
     count = 0;
 }
 /*--------------- End of Connect personal schedule to each user --------------*/
+
+function editCalendar() {
+    //    editModal.style.display = "block";
+    firebase.auth().onAuthStateChanged(function (user) {
+        var selected = document.getElementById('name-dropdown').value;
+        var user;
+        if (selected != user.displayName && selected != "") {
+            user = selected;
+        } else {
+            user = firebase.auth().currentUser;
+            user = user.displayName;
+        }
+        var shot;
+        var list = [];
+        var data = [];
+        firebase.database().ref('users/' + user).on('value', snapshot => {
+            shot = snapshot.val();
+            console.log(shot);
+            var titles;
+            for (titles in shot) {
+                if (titles != 'TimeClock') {
+                    continue;
+                } else {
+                    list.push(titles);
+                    data.push(shot[titles]);
+                }
+            }
+        })
+        var editTable = document.getElementById('editTable');
+        var tbl = document.createElement('table');
+        tbl.style.width = '75%';
+        tbl.style.margin = "0 auto 1em auto";
+        tbl.setAttribute('border', '1');
+
+        var heading = document.createElement('caption');
+        var node = document.createTextNode(user);
+        heading.appendChild(node);
+        heading.style.fontSize = "1.5em";
+        heading.style.margin = "15px auto 20px auto";
+        tbl.appendChild(heading);
+
+        var tbdy = document.createElement('tbody');
+        var z = 0;
+        for (var i = 0; i < list.length; i++) {
+            var tr = document.createElement('tr');
+            for (var j = 0; j < 2; j++) {
+                var td = document.createElement('td');
+                td.style.textAlign = 'center';
+                td.style.padding = "0";
+                td.style.textTransform = "capitalize";
+                var sTF = document.createElement('select');
+                sTF.setAttribute('onChange', "updateFirebase('" + user + "', this.value, '" + list[z] + "')");
+                sTF.style.margin = '0.5em';
+                var caps = data[z];
+                caps = String(caps);
+                caps = caps.charAt(0).toUpperCase() + caps.slice(1);
+                sTF.innerHTML = "<option value='' selected disabled hidden>" + caps + "</option>";
+
+                if (j == 0) {
+                    var t = document.createTextNode(list[z]);
+                    td.setAttribute('value', list[z]);
+                    td.appendChild(t);
+                    td.value
+                } else if (j == 1 && list[z] == 'Team') {
+                    sTF.innerHTML += "<select><option value='canvas'>Canvas</option><option value='tech'>Tech</option><option value='transcript'>Transcript</option></select>";
+                    td.appendChild(sTF);
+                } else if (j == 1 && list[z] == 'TeamLead') {
+                    sTF.innerHTML += "<select><option value='canvas'>Canvas</option><option value='tech'>Tech</option><option value='transcript'>Transcript</option><option value='false'>False</option></select>";
+                    td.appendChild(sTF);
+                } else if (j == 1) {
+                    sTF.innerHTML += "<select><option value='true'>True</option><option value='false'>False</option></select>";
+                    td.appendChild(sTF);
+                }
+                td.style.padding = '0.25em';
+                tr.appendChild(td);
+            }
+            z++;
+            tbdy.appendChild(tr);
+        }
+        tbl.appendChild(tbdy);
+        //        editTable.appendChild(tbl);
+    })
+}
