@@ -114,7 +114,7 @@ function viewUser(user) {
         shot = snapshot.val();
         var titles;
         for (titles in shot) {
-            if (titles == 'TimeClock') {
+            if (titles == 'TimeClock' || titles == "info") {
                 continue;
             } else {
                 list.push(titles);
@@ -169,7 +169,7 @@ function editUser(user) {
         shot = snapshot.val();
         var titles;
         for (titles in shot) {
-            if (titles == 'TimeClock') {
+            if (titles == 'TimeClock' || titles == 'info') {
                 continue;
             } else {
                 list.push(titles);
@@ -234,12 +234,17 @@ function editUser(user) {
 
 // This function sends the updated info to firebase
 function updateFirebase(user, value, title) {
+    var info;
     if (value === 'true') {
         value === true;
+        info = '{"' + title + '": ' + value + '}';
     } else if (value === 'false') {
         value === false;
+        info = '{"' + title + '": ' + value + '}';
+    } else {
+        info = '{"' + title + '": "' + value + '"}';
     };
-    var info = '{"' + title + '": ' + value + '}';
+    console.log(value);
     info = JSON.parse(info);
     console.log(info);
     firebase.database().ref('users/' + user).update(info)
