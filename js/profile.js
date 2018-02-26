@@ -18,7 +18,6 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
     if (firebaseUser) {
         // If logged in do this
         user = firebase.auth().currentUser;
-        console.log(user);
         user.providerData.forEach(function (profile) {
             name = profile.displayName;
             firebase.database().ref('users').child(name).on('value', snap => {
@@ -37,15 +36,26 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                         var ref = ul.lastChild;
                         ref.parentNode.insertBefore(li, ref.nextSibling);
 
+                        // Build drop down list
                         firebase.database().ref('users').on('value', snap => {
                             snap = snap.val();
-                            var list = [];
+                            var namesList = [];
                             var x;
                             for (x in snap) {
-                                list.push(snap);
+                                namesList.push(x);
                             }
-                            console.log(list);
-                            //                        document.getElementById('names').innerHTML = "<select><"
+                            var namesDiv = document.getElementById('names');
+                            var selectTag = "<select id='sNames'>";
+                            for (y = 0; y < namesList.length; y++) {
+                                if (name == namesList[y]) {
+                                    selectTag += "<option value='" + namesList[y] + "' selected>" + namesList[y] + "</option>";
+                                } else {
+                                    console.log(namesList[y]);
+                                    selectTag += "<option value='" + namesList[y] + "'>" + namesList[y] + "</option>";
+                                }
+                            }
+                            selectTag += "</select>";
+                            namesDiv.innerHTML = selectTag;
                         })
                     }
                 }

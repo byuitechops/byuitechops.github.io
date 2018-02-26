@@ -262,7 +262,7 @@ function deleteUser(user) {
     if (confirm('Are you sure you want to delete ' + user + ' from the database?')) {
         return firebase.database().ref('users').child(user).remove()
             .then(function () {
-                alert(user + 'is deleted');
+                alert(user + ' is deleted');
             })
             .catch(function (error) {
                 alert(error)
