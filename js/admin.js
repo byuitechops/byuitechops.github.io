@@ -114,11 +114,8 @@ function viewUser(user) {
         shot = snapshot.val();
         var titles;
         for (titles in shot) {
-<<<<<<< HEAD
-            if (titles == 'TimeClock' || titles == 'info') {
-=======
             if (titles == 'TimeClock' || titles == "info") {
->>>>>>> updates
+
                 continue;
             } else {
                 list.push(titles);
@@ -248,12 +245,7 @@ function updateFirebase(user, value, title) {
     } else {
         info = '{"' + title + '": "' + value + '"}';
     };
-<<<<<<< HEAD
-    var info = '{"' + title + '": ' + value + '}';
-=======
-    console.log(value);
-    info = JSON.parse(info);
->>>>>>> updates
+
     console.log(info);
     info = JSON.parse(info);
     firebase.database().ref('users/' + user).update(info)
