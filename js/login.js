@@ -103,19 +103,25 @@ document.getElementById('submitSignUp').addEventListener('click', e => {
 
     const promise = auth.createUserWithEmailAndPassword(email, pass);
     promise.then(e => {
-        setUser();
-        var profile = firebase.auth().currentUser;
+        var itWorked = setUser(user)
+        if (itWorked) {
+            var profile = firebase.auth().currentUser;
 
-        profile.updateProfile({
-            displayName: user
-        }).catch(function (error) {
-            console.log(error);
-        });
-        document.getElementById('myModal').style.display = "none";
-        setTimeout(function () {
+            profile.updateProfile({
+                displayName: user
+            }).catch(function (error) {
+                console.log(error);
+            });
+            document.getElementById('myModal').style.display = "none";
+            setTimeout(function () {
 
-            window.location.replace("home.html");
-        }, 1400);
+                window.location.replace("home.html");
+            }, 1400);
+        } else {
+            alert('Sorry Registration did not work, try again.');
+            window.location.reload();
+        }
+
     });
     promise.catch(e => alert(e.message));
 });
@@ -131,7 +137,7 @@ document.getElementById('resetPassword').addEventListener('click', e => {
     });
 });
 
-function setUser() {
+function setUser(user) {
     var data = {
         "Team": 'default',
         "TeamLead": false,
@@ -139,8 +145,8 @@ function setUser() {
         "trello": false,
         "teamDrive": false,
         "microsoft": false,
-        "workDay": false,
-        "canvas": false,
+        "workDay": true,
+        "canvas": true,
         "microsoftTeams": false,
         "equella": true,
         "employeeDirectory": true,
@@ -153,7 +159,7 @@ function setUser() {
         "totStyleGuide": true
     };
     try {
-        firebase.database().ref('users/' + document.getElementById("signUpName").value).update(data);
+        firebase.database().ref('users/' + user).update(data);
         return true;
     } catch (err) {
         alert(err);
