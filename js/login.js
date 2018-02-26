@@ -103,7 +103,7 @@ document.getElementById('submitSignUp').addEventListener('click', e => {
 
     const promise = auth.createUserWithEmailAndPassword(email, pass);
     promise.then(e => {
-        var itWorked = setUser(user)
+        var itWorked = setUser(user);
         if (itWorked) {
             var profile = firebase.auth().currentUser;
 
@@ -114,7 +114,6 @@ document.getElementById('submitSignUp').addEventListener('click', e => {
             });
             document.getElementById('myModal').style.display = "none";
             setTimeout(function () {
-
                 window.location.replace("home.html");
             }, 1400);
         } else {
