@@ -114,7 +114,7 @@ function viewUser(user) {
         shot = snapshot.val();
         var titles;
         for (titles in shot) {
-            if (titles == 'TimeClock') {
+            if (titles == 'TimeClock' || titles == 'info') {
                 continue;
             } else {
                 list.push(titles);
@@ -240,8 +240,8 @@ function updateFirebase(user, value, title) {
         value === false;
     };
     var info = '{"' + title + '": ' + value + '}';
-    info = JSON.parse(info);
     console.log(info);
+    info = JSON.parse(info);
     firebase.database().ref('users/' + user).update(info)
         .then(function () {
             alert('Firebase has been updated.')
