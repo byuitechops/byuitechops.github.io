@@ -633,6 +633,7 @@ function clearCal() {
 function setTotals() {
     var selected = document.getElementById('name-dropdown').value;
     selectedTotals(selected);
+    editCalendar(selected);
 }
 
 
@@ -2555,7 +2556,7 @@ function selectSchedule(selected, num) {
 }
 /*--------------- End of Connect personal schedule to each user --------------*/
 
-function editCalendar() {
+function editCalendar(selected) {
     //    editModal.style.display = "block";
     firebase.auth().onAuthStateChanged(function (user) {
         var selected = document.getElementById('name-dropdown').value;
