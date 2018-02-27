@@ -14,8 +14,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
         var loggedinUser = firebase.auth().currentUser;
         var user;
         loggedinUser.providerData.forEach(function (profile) {
-            user = profile.displayName;
-            console.log(user);
+            user = profile.displayName
         });
 
         firebase.database().ref('users').child(user).on('value', snap => {
@@ -201,7 +200,6 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                     "totStyleGuide": true
                 }
                 dbRefUsers.child(user).update(data);
-                console.log('akldfj');
                 loadUser();
                 document.getElementById('txtCode').value = "";
                 document.getElementById('txtCode').placeholder = "Enter Code";
@@ -496,13 +494,12 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
             firebase.auth().onAuthStateChanged(firebaseUser => {
                 if (firebaseUser) {
                     user = localStorage.getItem('user');
-                    console.log(user);
                     loadUser();
                     isBreak();
                     isCheckedIn();
                     document.getElementById('comment').classList.remove('hide');
                 } else {
-                    console.log("not logged in");
+                    window.location.replace('index.html');
                 }
             });
         }
