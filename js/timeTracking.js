@@ -24,10 +24,8 @@ function showModal(num, selected) {
         } else {
             user = firebase.auth().currentUser.displayName;
         }
-        console.log(user);
         var ppl = firebase.database().ref('users/' + user + '/TimeClock/HoursWorked').once('value');
         ppl.then(function (snapshot) {
-
             var person = (snapshot.val());
             var dates = Object.keys(person);
             var monthDays = [];
@@ -38,7 +36,6 @@ function showModal(num, selected) {
             for (var i = 0; i < dates.length; i++) {
                 if (document.getElementById("month-dropdown").value == dates[i][0]) {
                     currentMonth[count] = dates[i];
-
                     var firstDash = currentMonth[count].indexOf("-");
                     var lastDash = currentMonth[count].lastIndexOf("-");
                     monthDays[count] = currentMonth[count].slice(firstDash + 1, lastDash);
@@ -111,7 +108,6 @@ function showModal(num, selected) {
                     check = true;
                     break;
                 }
-
             }
             // if none of the above are true, just display 'No time logged'
             if (!check) {
@@ -119,7 +115,6 @@ function showModal(num, selected) {
             }
             // resets the loop
             count = 0;
-
         });
         // if there is an error, return
         ppl.catch(function (error) {
@@ -131,7 +126,6 @@ function showModal(num, selected) {
         var breaks = firebase.database().ref('users/' + user + '/TimeClock/Breaks').once('value');
         breaks.then(function (snapshot) {
             var person = (snapshot.val());
-
             var dates = Object.keys(person);
             var monthDays = [];
             var currentMonth = [];
@@ -338,9 +332,7 @@ function setCal(sMonth) {
         document.getElementById('week6').classList.add('hide');
     }
 
-
     var t1 = document.getElementById("t1");
-
     var table = document.getElementById("t1");
 
     var d = 1;
@@ -368,9 +360,7 @@ function setCal(sMonth) {
 
 /* Clears/resets the calendar days before it is set with another month */
 function clearCal() {
-
     for (var i = 2, row; row = t1.rows[i]; i++) {
-
         var table = document.getElementById('t1');
         for (var i = 2, row; row = table.rows[i]; i++) {
 
@@ -393,9 +383,8 @@ function clearCal() {
 function setTotals() {
     var selected = document.getElementById('name-dropdown').value;
     calcTotals(selected);
-    editCalendar(selected);
+    //    editCalendar(selected);
 }
-
 
 /* Causes modal box to open when clicked on */
 function modalBox(number) {
@@ -433,6 +422,11 @@ function modalBox(number) {
             modal.style.display = "none";
         }
     }
+
+    var edit = document.getElementsByClassName("edit")[0];
+    edit.onclick = function () {
+        editCalendar();
+    }
 }
 /*------------------------ End of Modal Boxes Function -------------------------*/
 
@@ -450,7 +444,7 @@ function setMonth() {
 
 /* Allows use for name dropdowns for team leads and admin, as well as team dropdown for admin */
 (function () {
-    editCalendar();
+    //    editCalendar();
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             firebase.database().ref('users/' + user.displayName).on('value', snapshot => {
@@ -480,7 +474,6 @@ function setMonth() {
                                 }
                             }
                         })
-
                     }
                     if (i == 'Admin') {
                         document.getElementById('team-dropdown').classList.remove("hide");
@@ -549,18 +542,14 @@ function calcTotals(selected) {
         }
         var ppl = firebase.database().ref('users/' + user + '/TimeClock/HoursWorked').once('value');
         ppl.then(function (snapshot) {
-
             var person = (snapshot.val());
             var dates = Object.keys(person);
             var monthDays = [];
             var currentMonth = [];
-
             var count = 0;
             for (var i = 0; i < dates.length; i++) {
                 if (document.getElementById("month-dropdown").value == dates[i][0]) {
                     currentMonth[count] = dates[i];
-
-
                     var firstDash = currentMonth[count].indexOf("-");
                     var lastDash = currentMonth[count].lastIndexOf("-");
                     monthDays[count] = currentMonth[count].slice(firstDash + 1, lastDash);
@@ -570,11 +559,7 @@ function calcTotals(selected) {
                     count++;
                 }
             }
-
-            var extra2 = 0;
-
             var count = 0;
-
 
             // Code for row one
             var rowone = document.getElementById("rowone").cells;
@@ -586,7 +571,6 @@ function calcTotals(selected) {
                 if (rowone[x].innerHTML != "") {
                     if (rowone[x].innerHTML != monthDays[count]) {
                         continue;
-                        One
                     }
                     var add1 = 0;
                     var add2 = 0;
@@ -605,7 +589,6 @@ function calcTotals(selected) {
                         add3 = 0;
                     }
 
-
                     if (person[currentMonth[count]].In != undefined) {
                         var d = "";
                         d = person[currentMonth[count]].In.slice(0, 8);
@@ -623,9 +606,7 @@ function calcTotals(selected) {
                         dTotal = 0;
                     }
 
-
                     if (person[currentMonth[count]].Out != undefined) {
-
                         var c = "";
                         c = person[currentMonth[count]].Out.slice(0, 8);
                         c = c.split(":");
@@ -661,9 +642,6 @@ function calcTotals(selected) {
                             add4 = 0;
                         }
                         if (monthDays[count + 1] < stop) {
-
-
-
                             var b = "";
                             b = person[currentMonth[count + 1]].In.slice(0, 8);
                             b = b.split(":");
@@ -694,7 +672,6 @@ function calcTotals(selected) {
                                 aTotal = 0;
                                 bTotal = 0;
                             }
-
                             total1 = aTotal - bTotal;
                             count++;
                         }
@@ -717,7 +694,6 @@ function calcTotals(selected) {
             for (var x = 0; x < rowtwo.length - 1; x++) {
 
                 if (rowtwo[x].innerHTML != "") {
-
                     if (rowtwo[x].innerHTML != monthDays[count]) {
                         continue;
                     }
@@ -738,7 +714,6 @@ function calcTotals(selected) {
                         add3 = 0;
                     }
 
-
                     if (person[currentMonth[count]].In != undefined) {
                         var d = "";
                         d = person[currentMonth[count]].In.slice(0, 8);
@@ -756,9 +731,7 @@ function calcTotals(selected) {
                         dTotal = 0;
                     }
 
-
                     if (person[currentMonth[count]].Out != undefined) {
-
                         var c = "";
                         c = person[currentMonth[count]].Out.slice(0, 8);
                         c = c.split(":");
@@ -794,7 +767,6 @@ function calcTotals(selected) {
                             add4 = 0;
                         }
                         if (monthDays[count + 1] < stop2) {
-
                             var b = "";
                             b = person[currentMonth[count + 1]].In.slice(0, 8);
                             b = b.split(":");
@@ -825,21 +797,16 @@ function calcTotals(selected) {
                                 aTotal = 0;
                                 bTotal = 0;
                             }
-
                             total1 = aTotal - bTotal;
                             count++;
                         }
                     }
-
                     count++;
-
                     var grandTotal = total1 + total2;
                     weekTwo += grandTotal;
-
                 }
-
             }
-            weekTwo + extra2;
+            weekTwo;
             weekTwo /= 3600;
             weekTwo = weekTwo.toFixed(1);
             document.getElementById("weekTwo").innerHTML = weekTwo;
@@ -854,7 +821,6 @@ function calcTotals(selected) {
             for (var x = 0; x < rowthree.length - 1; x++) {
 
                 if (rowthree[x].innerHTML != "") {
-
                     if (rowthree[x].innerHTML != monthDays[count]) {
                         continue;
                     }
@@ -888,7 +854,6 @@ function calcTotals(selected) {
                     var dMinutes = d[1] * 60;
                     var dSeconds = d[2] * 1;
                     var dTotal = dHours + dMinutes + dSeconds + add1;
-
 
                     if (person[currentMonth[count]].Out != undefined) {
 
@@ -956,18 +921,14 @@ function calcTotals(selected) {
                                 aTotal = 0;
                                 bTotal = 0;
                             }
-
                             total1 = aTotal - bTotal;
                             count++;
                         }
-
                     }
-
                     count++;
                     var grandTotal = total1 + total2;
 
                     weekThree += grandTotal;
-
                 }
             }
             weekThree /= 3600;
@@ -981,12 +942,10 @@ function calcTotals(selected) {
             var stop4 = document.getElementById("rowfive").cells[0].id;
             for (var x = 0; x < rowfour.length - 1; x++) {
 
-
                 if (rowfour[x].innerHTML != "") {
                     if (rowfour[x].innerHTML != monthDays[count]) {
                         continue;
                     }
-
                     var total1 = 0;
                     var total2 = 0;
                     var add1 = 0;
@@ -1018,9 +977,7 @@ function calcTotals(selected) {
                     var dSeconds = d[2] * 1;
                     var dTotal = dHours + dMinutes + dSeconds + add1;
 
-
                     if (person[currentMonth[count]].Out != undefined) {
-
                         var c = "";
                         c = person[currentMonth[count]].Out.slice(0, 8);
                         c = c.split(":");
@@ -1085,19 +1042,15 @@ function calcTotals(selected) {
                                 aTotal = 0;
                                 bTotal = 0;
                             }
-
                             total1 = aTotal - bTotal;
                             count++;
                         }
-
                     }
-
                     count++;
                     var grandTotal = total1 + total2;
 
                     weekFour += grandTotal;
                 }
-
             }
             weekFour /= 3600;
             weekFour = weekFour.toFixed(1);
@@ -1130,7 +1083,6 @@ function calcTotals(selected) {
                         add3 = 0;
                     }
 
-
                     if (person[currentMonth[count]].In != undefined) {
                         var d = "";
                         d = person[currentMonth[count]].In.slice(0, 8);
@@ -1148,9 +1100,7 @@ function calcTotals(selected) {
                         dTotal = 0;
                     }
 
-
                     if (person[currentMonth[count]].Out != undefined) {
-
                         var c = "";
                         c = person[currentMonth[count]].Out.slice(0, 8);
                         c = c.split(":");
@@ -1186,9 +1136,6 @@ function calcTotals(selected) {
                             add4 = 0;
                         }
                         if (monthDays[count + 1] < stop5) {
-
-
-
                             var b = "";
                             b = person[currentMonth[count + 1]].In.slice(0, 8);
                             b = b.split(":");
@@ -1219,7 +1166,6 @@ function calcTotals(selected) {
                                 aTotal = 0;
                                 bTotal = 0;
                             }
-
                             total1 = aTotal - bTotal;
                             count++;
                         }
@@ -1228,7 +1174,6 @@ function calcTotals(selected) {
                     var grandTotal = total1 + total2;
                     weekFive += grandTotal;
                 }
-
             }
             weekFive /= 3600;
             weekFive = weekFive.toFixed(1);
@@ -1239,7 +1184,6 @@ function calcTotals(selected) {
             var rowsix = document.getElementById("rowsix").cells;
             var weekSix = 0;
             for (var x = 0; x < rowsix.length - 1; x++) {
-
                 if (rowsix[x].innerHTML != "") {
                     if (rowsix[x].innerHTML != monthDays[count]) {
                         continue;
@@ -1286,7 +1230,6 @@ function calcTotals(selected) {
                     var bSeconds = b[2] * 1;
                     var bTotal = bHours + bMinutes + bSeconds + add2;
 
-
                     if (person[currentMonth[count + 1]].Out != undefined) {
                         var a = "";
                         a = person[currentMonth[count + 1]].Out.slice(0, 8);
@@ -1318,9 +1261,7 @@ function calcTotals(selected) {
                     var dSeconds = d[2] * 1;
                     var dTotal = dHours + dMinutes + dSeconds + add1;
 
-
                     if (person[currentMonth[count]].Out != undefined) {
-
                         var c = "";
                         c = person[currentMonth[count]].Out.slice(0, 8);
                         c = c.split(":");
@@ -1337,21 +1278,17 @@ function calcTotals(selected) {
                         cTotal = 0;
                         dTotal = 0;
                     }
-
                     var total1 = aTotal - bTotal;
                     var total2 = cTotal - dTotal;
 
                     count += 2;
                     var grandTotal = total1 + total2;
                     weekSix += grandTotal;
-
                 }
-
             }
             weekSix /= 3600;
             weekSix = weekSix.toFixed(1);
             document.getElementById("weekSix").innerHTML = weekSix;
-
 
             monthlyTotal = weekOne * 1 + weekTwo * 1 + weekThree * 1 + weekFour * 1 + weekFive * 1 + weekSix * 1;
             monthlyTotal = monthlyTotal.toFixed(1);
@@ -1430,7 +1367,6 @@ function showSchedule(num, selected) {
             }
             // resets the loop
             count = 0;
-
         });
         // if there is an error, return
         ppl.catch(function (error) {
@@ -1444,84 +1380,27 @@ function showSchedule(num, selected) {
 
 
 function editCalendar(selected) {
-    //    editModal.style.display = "block";
+
+    console.log("hello");
     firebase.auth().onAuthStateChanged(function (user) {
         var selected = document.getElementById('name-dropdown').value;
         var user;
         if (selected != user.displayName && selected != "") {
             user = selected;
         } else {
-            user = firebase.auth().currentUser;
-            user = user.displayName;
+            user = firebase.auth().currentUser.displayName;
         }
-        var shot;
-        var list = [];
-        var data = [];
-        firebase.database().ref('users/' + user).on('value', snapshot => {
-            shot = snapshot.val();
-            //            console.log(shot);
-            var titles;
-            for (titles in shot) {
-                if (titles != 'TimeClock') {
-                    continue;
-                } else {
-                    list.push(titles);
-                    data.push(shot[titles]);
-                }
-            }
-        })
-        var editTable = document.getElementById('editTable');
-        var tbl = document.createElement('table');
-        tbl.style.width = '75%';
-        tbl.style.margin = "0 auto 1em auto";
-        tbl.setAttribute('border', '1');
 
-        var heading = document.createElement('caption');
-        var node = document.createTextNode(user);
-        heading.appendChild(node);
-        heading.style.fontSize = "1.5em";
-        heading.style.margin = "15px auto 20px auto";
-        tbl.appendChild(heading);
+        var x = document.createElement("INPUT");
+        x.setAttribute('type', 'text');
+        x.setAttribute('value', 'Hello There');
+        //        document.getElementById().appendChild(x);
 
-        var tbdy = document.createElement('tbody');
-        var z = 0;
-        for (var i = 0; i < list.length; i++) {
-            var tr = document.createElement('tr');
-            for (var j = 0; j < 2; j++) {
-                var td = document.createElement('td');
-                td.style.textAlign = 'center';
-                td.style.padding = "0";
-                td.style.textTransform = "capitalize";
-                var sTF = document.createElement('select');
-                sTF.setAttribute('onChange', "updateFirebase('" + user + "', this.value, '" + list[z] + "')");
-                sTF.style.margin = '0.5em';
-                var caps = data[z];
-                caps = String(caps);
-                caps = caps.charAt(0).toUpperCase() + caps.slice(1);
-                sTF.innerHTML = "<option value='' selected disabled hidden>" + caps + "</option>";
 
-                if (j == 0) {
-                    var t = document.createTextNode(list[z]);
-                    td.setAttribute('value', list[z]);
-                    td.appendChild(t);
-                    td.value
-                } else if (j == 1 && list[z] == 'Team') {
-                    sTF.innerHTML += "<select><option value='canvas'>Canvas</option><option value='tech'>Tech</option><option value='transcript'>Transcript</option></select>";
-                    td.appendChild(sTF);
-                } else if (j == 1 && list[z] == 'TeamLead') {
-                    sTF.innerHTML += "<select><option value='canvas'>Canvas</option><option value='tech'>Tech</option><option value='transcript'>Transcript</option><option value='false'>False</option></select>";
-                    td.appendChild(sTF);
-                } else if (j == 1) {
-                    sTF.innerHTML += "<select><option value='true'>True</option><option value='false'>False</option></select>";
-                    td.appendChild(sTF);
-                }
-                td.style.padding = '0.25em';
-                tr.appendChild(td);
-            }
-            z++;
-            tbdy.appendChild(tr);
-        }
-        tbl.appendChild(tbdy);
-        //        editTable.appendChild(tbl);
+
+        //        firebase.database().ref('users/' + user + '/TimeClock/HoursWorked').update();
+
+
+
     })
 }

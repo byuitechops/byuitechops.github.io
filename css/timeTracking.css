@@ -166,6 +166,15 @@ td#monthly {
 
 /* The Close Button */
 
+.edit {
+    font-size: 25px;
+    color: #aaa;
+    float: right;
+    font-weight: bold;
+    margin-right: 15px;
+    margin-top: 2px;
+}
+
 .close {
     color: #aaa;
     float: right;
@@ -174,11 +183,14 @@ td#monthly {
 }
 
 .close:hover,
-.close:focus {
+.close:focus,
+.edit:focus,
+.edit:hover {
     color: black;
     text-decoration: none;
     cursor: pointer;
 }
+
 
 /* ---------------------------------- End of Modal boxes ---------------------------------*/
 
