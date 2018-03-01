@@ -31,7 +31,6 @@ document.getElementById('submitSignUp').addEventListener('click', e => {
             }).catch(function (error) {
                 console.log(error);
             });
-            document.getElementById('myModal').style.display = "none";
             setTimeout(function () {
                 window.location.replace("home.html");
             }, 1400);
