@@ -1481,7 +1481,6 @@ function editCalendar(selected) {
     sComOut.innerHTML = "CommentOut: ";
     sComOut.appendChild(o);
     console.log(document.getElementById("secondShiftCommentOut").innerHTML.slice(39, 42));
-
 }
 
 function editFirebase() {
