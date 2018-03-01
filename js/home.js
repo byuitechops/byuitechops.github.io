@@ -8,6 +8,8 @@ const config = {
 };
 firebase.initializeApp(config);
 
+var c = 0;
+
 firebase.auth().onAuthStateChanged(firebaseUser => {
     if (firebaseUser) {
 
@@ -17,24 +19,27 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
             user = profile.displayName
         });
 
-        firebase.database().ref('users').child(user).on('value', snap => {
-            var titles;
-            var shot = snap.val();
-            for (titles in shot) {
-                if (titles == 'Admin') {
-                    //Load Admin Link
-                    var ul = document.getElementById('sidenav');
-                    var li = document.createElement('li');
-                    var a = document.createElement('a');
-                    a.setAttribute('href', 'admin.html');
-                    var t = document.createTextNode('Admin');
-                    a.appendChild(t);
-                    li.appendChild(a);
-                    var ref = ul.lastChild;
-                    ref.parentNode.insertBefore(li, ref.nextSibling);
+        if (c = 0) {
+            firebase.database().ref('users').child(user).on('value', snap => {
+                var titles;
+                var shot = snap.val();
+                for (titles in shot) {
+                    if (titles == 'Admin') {
+                        //Load Admin Link
+                        var ul = document.getElementById('sidenav');
+                        var li = document.createElement('li');
+                        var a = document.createElement('a');
+                        a.setAttribute('href', 'admin.html');
+                        var t = document.createTextNode('Admin');
+                        a.appendChild(t);
+                        li.appendChild(a);
+                        var ref = ul.lastChild;
+                        ref.parentNode.insertBefore(li, ref.nextSibling);
+                    }
                 }
-            }
-        });
+            });
+            c++;
+        }
 
         var blockallcode;
         var brightspacecode;
