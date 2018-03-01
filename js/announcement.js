@@ -1,11 +1,11 @@
     // Firebase
     const config = {
-        apiKey: "AIzaSyA_I75-CU5_GlNP1QSKvvH8nbYVkaAUgNA"
-        , authDomain: "techopsportal.firebaseapp.com"
-        , databaseURL: "https://techopsportal.firebaseio.com"
-        , projectId: "techopsportal"
-        , storageBucket: "techopsportal.appspot.com"
-        , messagingSenderId: "265124430634"
+        apiKey: "AIzaSyA_I75-CU5_GlNP1QSKvvH8nbYVkaAUgNA",
+        authDomain: "techopsportal.firebaseapp.com",
+        databaseURL: "https://techopsportal.firebaseio.com",
+        projectId: "techopsportal",
+        storageBucket: "techopsportal.appspot.com",
+        messagingSenderId: "265124430634"
     };
     firebase.initializeApp(config);
     firebase.auth().onAuthStateChanged(firebaseUser => {
@@ -21,15 +21,7 @@
                     for (titles in shot) {
                         if (titles == 'Admin') {
                             //Load Admin Link
-                            var ul = document.getElementById('sidenav');
-                            var li = document.createElement('li');
-                            var a = document.createElement('a');
-                            a.setAttribute('href', 'admin.html');
-                            var t = document.createTextNode('Admin');
-                            a.appendChild(t);
-                            li.appendChild(a);
-                            var ref = ul.lastChild;
-                            ref.parentNode.insertBefore(li, ref.nextSibling);
+                            document.getElementById('adminlink').classList.remove('hide');
                         }
                     }
                 });
@@ -41,12 +33,12 @@
 
             function sendAnnouncementToFirebase(title, message, image, text, link, date) {
                 var data = {
-                    "title": title
-                    , "message": message
-                    , "image": image
-                    , "text": text
-                    , "link": link
-                    , "date": date
+                    "title": title,
+                    "message": message,
+                    "image": image,
+                    "text": text,
+                    "link": link,
+                    "date": date
                 }
                 var key = db.push().key;
                 db.push(data);
@@ -61,8 +53,7 @@
                     var childData = snap.val()[keys[i]];
                     if (childData.urgency == true) {
                         var urgent = "<strong style='color: red' font-family: 'Impact'>URGENT</strong>";
-                    }
-                    else var urgent = "";
+                    } else var urgent = "";
                     if (childData != "null") {
                         html += "<hr><div class='item'>" + urgent + "<h2>" + childData.title + "</h2><p>" + childData.message + "</p><input class='deleteButton' type='button' onclick=\"deleteAnnouncement('" + keys[i] + "')\" value='Delete'></div>";
                         if (i == (keys.length - 1)) {
@@ -101,17 +92,17 @@
             var span = document.getElementsByClassName("close")[0];
             // When the user clicks on the button, open the modal 
             btn.onclick = function () {
-                    modal.style.display = "block";
-                }
-                // When the user clicks on <span> (x), close the modal
+                modal.style.display = "block";
+            }
+            // When the user clicks on <span> (x), close the modal
             span.onclick = function () {
-                    modal.style.display = "none";
-                    document.getElementById('title').value = "";
-                    document.getElementById('message').value = "";
-                    document.getElementById('urgency').value = "";
-                    document.getElementById('date').value = "";
-                }
-                // When the user clicks anywhere outside of the modal, close it
+                modal.style.display = "none";
+                document.getElementById('title').value = "";
+                document.getElementById('message').value = "";
+                document.getElementById('urgency').value = "";
+                document.getElementById('date').value = "";
+            }
+            // When the user clicks anywhere outside of the modal, close it
             window.onclick = function (event) {
                 if (event.target == modal) {
                     modal.style.display = "none";
@@ -121,8 +112,7 @@
                     document.getElementById('date').value = "";
                 }
             }
-        }
-        else {
+        } else {
             // User is signed out.
             window.location.replace("index.html");
             // ...
@@ -132,8 +122,7 @@
     function deleteAnnouncement(toDelete) {
         if (confirm('Are you sure you want to delete this announcement?')) {
             firebase.database().ref('announcements/' + toDelete).remove();
-        }
-        else {
+        } else {
             return;
         }
     }
@@ -149,8 +138,7 @@
         if (title == "") {
             if (confirm('Please include a title in your announcement.')) {
                 return;
-            }
-            else {
+            } else {
                 return;
             }
         }
@@ -159,10 +147,10 @@
         document.getElementById('urgency').value = "";
         document.getElementById('date').value = "";
         var data = {
-            "title": title
-            , "message": message
-            , "urgency": urgency
-            , "expirationDate": date
+            "title": title,
+            "message": message,
+            "urgency": urgency,
+            "expirationDate": date
         }
         db.update(data);
         modal.style.display = "none";

@@ -26,16 +26,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                 for (titles in shot) {
                     if (titles == 'Admin') {
                         //Load Admin Link
-                        var ul = document.getElementById('sidenav');
-                        var li = document.createElement('li');
-                        var a = document.createElement('a');
-                        a.setAttribute('href', 'admin.html');
-                        var t = document.createTextNode('Admin');
-                        a.appendChild(t);
-                        li.appendChild(a);
-                        var ref = ul.lastChild;
-                        ref.parentNode.insertBefore(li, ref.nextSibling);
-
+                        document.getElementById('adminlink').classList.remove('hide');
                         // Build drop down list
                         firebase.database().ref('users').on('value', snap => {
                             snap = snap.val();
@@ -71,8 +62,14 @@ function displayInfo(name) {
     data.on('value', snapshot => {
         var snap = snapshot.val();
 
-        document.getElementById('dName').innerHTML = user.displayName;
-        document.getElementById('dEmail').innerHTML = user.email;
+        document.getElementById('dName').innerHTML = name;
+
+        if (snap.email == "") {
+            document.getElementById('dEmail').innerHTML = "No Data";
+        } else {
+            document.getElementById('dEmail').innerHTML = snap.email;
+        }
+
         if (snap.phoneNum == "") {
             document.getElementById('dPhone').innerHTML = "No Data";
         } else {
@@ -84,13 +81,13 @@ function displayInfo(name) {
         } else {
             document.getElementById('dBirthday').innerHTML = snap.birthday;
         }
-        
+
         if (snap.graduation == "") {
             document.getElementById('dGraduation').innerHTML = "No Data";
         } else {
             document.getElementById('dGraduation').innerHTML = snap.graduation;
         }
-        
+
         if (snap.major == "") {
             document.getElementById('dMajor').innerHTML = "No Data";
         } else {
@@ -102,19 +99,19 @@ function displayInfo(name) {
         } else {
             document.getElementById('dTrack').innerHTML = snap.track;
         }
-        
+
         if (snap.position == "") {
             document.getElementById('dPosition').innerHTML = "No Data";
         } else {
             document.getElementById('dPosition').innerHTML = snap.position;
         }
-        
+
         if (snap.speed == "") {
             document.getElementById('dSpeed').innerHTML = "No Data";
         } else {
             document.getElementById('dSpeed').innerHTML = snap.speed;
         }
-       
+
         if (snap.strikes == "") {
             document.getElementById('dStrikes').innerHTML = "No Data";
         } else {

@@ -1,18 +1,28 @@
+h1 {
+    margin-left: 20%;
+}
+
+div.content {
+    margin-left: 16%;
+    margin-right: 0;
+}
+
 #frame {
     overflow-x: auto;
     margin: 0;
+    width: 1650px;
 }
 
 #scheduleFrame {
+    overflow-x: auto;
     height: 800px;
-    width: 100%;
-    margin: 0 2em;
+    width: 1650px;
     border: none;
     max-width: 100%;
 }
 
 #team-dropdown {
-    margin-left: 40%;
+    margin-left: 52.5%;
     margin-right: 40%;
     text-align: left;
     background-color: #0076c6;
@@ -24,4 +34,20 @@
     white-space: nowrap;
     width: 200px;
     height: 35px;
+}
+
+
+@media screen and (max-width: 1200px) {
+    div.content {
+        margin: auto;
+        overflow: auto;
+    }
+
+    h1 {
+        margin: auto;
+    }
+
+    #team-dropdown {
+        margin: auto;
+    }
 }
