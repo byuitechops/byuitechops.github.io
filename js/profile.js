@@ -57,7 +57,8 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
     }
 });
 
-function displayInfo(name) {
+function displayInfo(selected) {
+    name = selected;
     data = firebase.database().ref('users').child(name).child("info");
     data.on('value', snapshot => {
         var snap = snapshot.val();
