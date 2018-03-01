@@ -515,15 +515,7 @@ function setMonth() {
                         document.getElementById('team-dropdown').classList.remove("hide");
                         document.getElementById('name-dropdown').classList.remove("hide");
                         //Load Admin Link
-                        var ul = document.getElementById('sidenav');
-                        var li = document.createElement('li');
-                        var a = document.createElement('a');
-                        a.setAttribute('href', 'admin.html');
-                        var t = document.createTextNode('Admin');
-                        a.appendChild(t);
-                        li.appendChild(a);
-                        var ref = ul.lastChild;
-                        ref.parentNode.insertBefore(li, ref.nextSibling);
+                        document.getElementById('adminlink').classList.remove('hide');
                     }
                 }
             });

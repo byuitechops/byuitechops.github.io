@@ -11,26 +11,12 @@
     };
     firebase.initializeApp(config);
 
-    firebase.database().ref('users').once('value').then(function (snap) {
+    firebase.database().ref('users').once('value').then(function(snap) {
         var users = snap.val();
         for (key in users) {
             // Here is where you put the changes to the users
 
-            var info = {
-                "info": {
-                    "birthday": "",
-                    "graduation": "",
-                    "major": "",
-                    "phoneNum": "",
-                    "position": "",
-                    "sick": "",
-                    "speed": "",
-                    "strikes": "",
-                    "track": ""
-                }
-            }
-            console.log(info);
-              firebase.database().ref('users').child(key).update(info);
         }
     })
+
 </script>
