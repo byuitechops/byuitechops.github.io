@@ -425,7 +425,14 @@ function modalBox(number) {
 
     var edit = document.getElementsByClassName("edit")[0];
     edit.onclick = function () {
-        editCalendar();
+        //        editCalendar();
+        var x = document.createElement("INPUT");
+        x.setAttribute('type', 'text');
+        var zoe = document.getElementById('secondShift');
+        x.setAttribute('value', zoe.innerHTML);
+
+        zoe.innerHTML = "";
+        zoe.appendChild(x);
     }
 }
 /*------------------------ End of Modal Boxes Function -------------------------*/
@@ -1382,25 +1389,19 @@ function showSchedule(num, selected) {
 function editCalendar(selected) {
 
     console.log("hello");
-    firebase.auth().onAuthStateChanged(function (user) {
-        var selected = document.getElementById('name-dropdown').value;
-        var user;
-        if (selected != user.displayName && selected != "") {
-            user = selected;
-        } else {
-            user = firebase.auth().currentUser.displayName;
-        }
 
-        var x = document.createElement("INPUT");
-        x.setAttribute('type', 'text');
-        x.setAttribute('value', 'Hello There');
-        //        document.getElementById().appendChild(x);
+    var test = document.createElement("BUTTON");
+
+    var x = document.createElement("INPUT");
+    x.setAttribute('type', 'text');
+    x.setAttribute('value', 'Hello There');
+    //        document.getElementById().appendChild(x);
 
 
 
-        //        firebase.database().ref('users/' + user + '/TimeClock/HoursWorked').update();
+    //        firebase.database().ref('users/' + user + '/TimeClock/HoursWorked').update();
 
 
 
-    })
+
 }
