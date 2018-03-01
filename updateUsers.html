@@ -1,0 +1,22 @@
+<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyA_I75-CU5_GlNP1QSKvvH8nbYVkaAUgNA",
+        authDomain: "techopsportal.firebaseapp.com",
+        databaseURL: "https://techopsportal.firebaseio.com",
+        projectId: "techopsportal",
+        storageBucket: "techopsportal.appspot.com",
+        messagingSenderId: "265124430634"
+    };
+    firebase.initializeApp(config);
+
+    firebase.database().ref('users').once('value').then(function(snap) {
+        var users = snap.val();
+        for (key in users) {
+            // Here is where you put the changes to the users
+
+        }
+    })
+
+</script>

@@ -8,8 +8,6 @@ const config = {
 };
 firebase.initializeApp(config);
 
-var c = 0;
-
 firebase.auth().onAuthStateChanged(firebaseUser => {
     if (firebaseUser) {
 
@@ -19,27 +17,16 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
             user = profile.displayName
         });
 
-        if (c = 0) {
-            firebase.database().ref('users').child(user).on('value', snap => {
-                var titles;
-                var shot = snap.val();
-                for (titles in shot) {
-                    if (titles == 'Admin') {
-                        //Load Admin Link
-                        var ul = document.getElementById('sidenav');
-                        var li = document.createElement('li');
-                        var a = document.createElement('a');
-                        a.setAttribute('href', 'admin.html');
-                        var t = document.createTextNode('Admin');
-                        a.appendChild(t);
-                        li.appendChild(a);
-                        var ref = ul.lastChild;
-                        ref.parentNode.insertBefore(li, ref.nextSibling);
-                    }
+        firebase.database().ref('users').child(user).on('value', snap => {
+            var titles;
+            var shot = snap.val();
+            for (titles in shot) {
+                if (titles == 'Admin') {
+                    //Load Admin Link
+                    document.getElementById('adminlink').classList.remove('hide');
                 }
-            });
-            c++;
-        }
+            }
+        });
 
         var blockallcode;
         var brightspacecode;
@@ -52,42 +39,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
         var trellocode;
         var unblockallcode;
         var workdaycode;
-        var dataUpdateUn = {
-            "brightspace": true,
-            "trello": true,
-            "teamDrive": true,
-            "microsoft": true,
-            "workDay": true,
-            "canvas": true,
-            "microsoftTeams": true,
-            "equella": true,
-            "teamDynamix": true,
-            "employeeDirectory": true,
-            "proDev": true,
-            "pathway": true,
-            "screenSteps": true,
-            "firebaseConsole": true,
-            "canvasStyleGuide": true,
-            "totStyleGuide": true
-        };
-        var dataUpdateBlock = {
-            "brightspace": false,
-            "trello": false,
-            "teamDrive": false,
-            "microsoft": false,
-            "workDay": true,
-            "canvas": true,
-            "microsoftTeams": false,
-            "equella": false,
-            "teamDynamix": false,
-            "employeeDirectory": false,
-            "proDev": false,
-            "pathway": false,
-            "screenSteps": false,
-            "firebaseConsole": false,
-            "canvasStyleGuide": false,
-            "totStyleGuide": false
-        };
+
         var base = firebase.database().ref().child('acodes').on('value', snap => {
             var codes = (snap.val());
             var key0;
@@ -212,21 +164,6 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                 document.getElementById('txtCode').placeholder = "Wrong Code";
                 document.getElementById('txtCode').value = "";
             }
-            if (user == 'byuitech') {
-                if (code == unblockallcode) {
-                    checkFirebase(dataUpdateUn);
-                    document.getElementById('txtCode').value = "";
-                    document.getElementById('txtCode').placeholder = "Enter Code";
-                } else if (code == blockallcode) {
-                    checkFirebase(dataUpdateBlock);
-                    document.getElementById('txtCode').value = "";
-                    document.getElementById('txtCode').placeholder = "Enter Code";
-                } else {
-                    document.getElementById('txtCode').placeholder = "Wrong Code";
-                    document.getElementById('txtCode').value = "";
-                }
-            }
-
         });
 
         function loadUser() {
@@ -505,16 +442,6 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                     document.getElementById('comment').classList.remove('hide');
                 } else {
                     window.location.replace('index.html');
-                }
-            });
-        }
-
-        function checkFirebase(dataUpdate) {
-            var key2;
-            dbRefUsers.once('value').then(function (snap) {
-                var users = (snap.val());
-                for (key2 in users) {
-                    dbRefUsers.child(key2).update(dataUpdate);
                 }
             });
         }

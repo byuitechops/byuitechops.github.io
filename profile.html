@@ -5,7 +5,7 @@
     <title>Profile</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon.gif">
-    <!-- Css --->
+    <!-- Css -->
     <link type="text/css" rel="stylesheet" href="css/main.css">
     <link type="text/css" rel="stylesheet" href="css/profile.css">
     <!-- Script -->
@@ -24,13 +24,22 @@
                     <a href="announcements.html">Announcements</a>
                 </li>
                 <li>
+                    <a href="timeTracking.html">Time Tracking</a>
+                </li>
+                <li>
                     <a href="videoTimeCalculator.html">Time Calculator</a>
                 </li>
                 <li>
                     <a href="employeehandbook.html">Employee Handbook</a>
                 </li>
                 <li>
+                    <a href="profile.html">Profile</a>
+                </li>
+                <li>
                     <a href="schedule.html">Schedules</a>
+                </li>
+                <li id="adminlink" class="hide">
+                    <a href="admin.html">Admin</a>
                 </li>
             </ul>
         </div>
@@ -59,32 +68,44 @@
                         <tr>
                             <th>Phone</th>
                             <td id="dPhone"></td>
-                            <td><button onclick="updateInfo('phoneNum')">Edit</button></td>
+                            <td>
+                                <button onclick="updateInfo('phoneNum')">Edit</button>
+                            </td>
                         </tr>
                         <tr>
                             <th>Major</th>
                             <td id="dMajor"></td>
-                            <td><button onclick="updateInfo('major')">Edit</button></td>
+                            <td>
+                                <button onclick="updateInfo('major')">Edit</button>
+                            </td>
                         </tr>
                         <tr>
                             <th>Track</th>
                             <td id="dTrack"></td>
-                            <td><button onclick="updateInfo('track')">Edit</button></td>
+                            <td>
+                                <button onclick="updateInfo('track')">Edit</button>
+                            </td>
                         </tr>
                         <tr>
                             <th>Postion</th>
                             <td id="dPosition"></td>
-                            <td><button onclick="updateInfo('position')">Edit</button></td>
+                            <td>
+                                <button onclick="updateInfo('position')">Edit</button>
+                            </td>
                         </tr>
                         <tr>
                             <th>Graduation Date</th>
                             <td id="dGraduation"></td>
-                            <td><button onclick="updateInfo('graduation')">Edit</button></td>
+                            <td>
+                                <button onclick="updateInfo('graduation')">Edit</button>
+                            </td>
                         </tr>
                         <tr>
                             <th>Typing Speed</th>
                             <td id="dSpeed"></td>
-                            <td><button onclick="updateInfo('speed')">Edit</button></td>
+                            <td>
+                                <button onclick="updateInfo('speed')">Edit</button>
+                            </td>
                         </tr>
                         <tr>
                             <th>Strikes Remaining</th>

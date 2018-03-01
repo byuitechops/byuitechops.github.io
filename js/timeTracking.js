@@ -49,8 +49,10 @@ function showModal(num, selected) {
 
             // loops through each in/out and comment and sets it equal to the HTML to display
             for (var i = 0; i < monthDays.length; i++) {
+                console.log(num);
                 // gets the first instance of clock in/out
                 if (num == monthDays[i + 1]) {
+
                     // if there isn't an instance of this, it sets the text to 'N/A'
                     if (person[currentMonth[i + 1]].CommentIn == undefined) {
                         person[currentMonth[i + 1]].CommentIn = "N/A";
@@ -62,13 +64,16 @@ function showModal(num, selected) {
                         person[currentMonth[i + 1]].Out = "N/A";
                     }
                     // code for displaying info in modal boxes
-                    var txt = "Clocked in at: " + person[currentMonth[i + 1]].In + "<br />";
-                    txt += "CommentIn: " + person[currentMonth[i + 1]].CommentIn + "<br />";
-                    txt += "Clocked out at: " + person[currentMonth[i + 1]].Out + "<br />";
-                    txt += "CommentOut: " + person[currentMonth[i + 1]].CommentOut + "<br />";
-                    document.getElementById("modalText").innerHTML = txt;
+                    var txtIn = "Clocked in at: " + person[currentMonth[i + 1]].In;
+                    var txtComIn = "CommentIn: " + person[currentMonth[i + 1]].CommentIn;
+                    var txtOut = "Clocked out at: " + person[currentMonth[i + 1]].Out;
+                    var txtComOut = "CommentOut: " + person[currentMonth[i + 1]].CommentOut;
+                    document.getElementById("modalTextIn").innerHTML = txtIn;
+                    document.getElementById("modalTextOut").innerHTML = txtOut;
+                    document.getElementById("modalTextCommentIn").innerHTML = txtComIn;
+                    document.getElementById("modalTextCommentOut").innerHTML = txtComOut;
                     check = true;
-                } else if (num == monthDays[i]) {
+                } else if (num == monthDays[i]) {;
                     if (person[currentMonth[i]].CommentIn == undefined) {
                         person[currentMonth[i]].CommentIn = "N/A";
                     }
@@ -78,16 +83,25 @@ function showModal(num, selected) {
                     if (person[currentMonth[i]].Out == undefined) {
                         person[currentMonth[i]].Out = "N/A";
                     }
-                    var txt = "Clocked in at: " + person[currentMonth[i]].In + "<br />";
-                    txt += "CommentIn: " + person[currentMonth[i]].CommentIn + "<br />";
-                    txt += "Clocked out at: " + person[currentMonth[i]].Out + "<br />";
-                    txt += "CommentOut: " + person[currentMonth[i]].CommentOut + "<br />";
-                    document.getElementById("modalText").innerHTML = txt;
-                    document.getElementById("secondShift").innerHTML = "No time logged";
+                    var txtIn = "Clocked in at: " + person[currentMonth[i]].In;
+                    var txtComIn = "CommentIn: " + person[currentMonth[i]].CommentIn;
+                    var txtOut = "Clocked out at: " + person[currentMonth[i]].Out;
+                    var txtComOut = "CommentOut: " + person[currentMonth[i]].CommentOut;
+                    document.getElementById("modalTextIn").innerHTML = txtIn;
+                    document.getElementById("modalTextOut").innerHTML = txtOut;
+                    document.getElementById("modalTextCommentIn").innerHTML = txtComIn;
+                    document.getElementById("modalTextCommentOut").innerHTML = txtComOut;
+                    document.getElementById("secondShiftIn").innerHTML = "No time logged";
+                    document.getElementById("secondShiftOut").innerHTML = "";
+                    document.getElementById("secondShiftCommentIn").innerHTML = ""
+                    document.getElementById("secondShiftCommentOut").innerHTML = "";
                     check = true;
                     break;
                 } else {
-                    document.getElementById("secondShift").innerHTML = "No time logged";
+                    document.getElementById("secondShiftIn").innerHTML = "No time logged";
+                    document.getElementById("secondShiftOut").innerHTML = "";
+                    document.getElementById("secondShiftCommentIn").innerHTML = ""
+                    document.getElementById("secondShiftCommentOut").innerHTML = "";
                 }
                 // gets the second instance of clock in/out if there are two instances
                 if (num == monthDays[i]) {
@@ -100,18 +114,22 @@ function showModal(num, selected) {
                     if (person[currentMonth[i]].Out == undefined) {
                         person[currentMonth[i]].Out = "N/A";
                     }
-                    var txt = "Clocked in at: " + person[currentMonth[i]].In + "<br />";
-                    txt += "CommentIn: " + person[currentMonth[i]].CommentIn + "<br />";
-                    txt += "Clock out at: " + person[currentMonth[i]].Out + "<br />";
-                    txt += "CommentOut: " + person[currentMonth[i]].CommentOut + "<br />";
-                    document.getElementById("secondShift").innerHTML = txt;
+                    var txtIn = "Clocked in at: " + person[currentMonth[i]].In;
+                    var txtComIn = "CommentIn: " + person[currentMonth[i]].CommentIn;
+                    var txtOut = "Clocked out at: " + person[currentMonth[i]].Out;
+                    var txtComOut = "CommentOut: " + person[currentMonth[i]].CommentOut;
+                    document.getElementById("secondShiftIn").innerHTML = txtIn;
+                    document.getElementById("secondShiftOut").innerHTML = txtOut;
+                    document.getElementById("secondShiftCommentIn").innerHTML = txtComIn;
+                    document.getElementById("secondShiftCommentOut").innerHTML = txtComOut;
                     check = true;
                     break;
                 }
             }
             // if none of the above are true, just display 'No time logged'
             if (!check) {
-                document.getElementById("modalText").innerHTML = "No time logged";
+                console.log("hello i didnt make check turn true");
+                document.getElementById("modalTextIn").innerHTML = "No time logged";
             }
             // resets the loop
             count = 0;
@@ -399,6 +417,16 @@ function modalBox(number) {
     document.getElementById("breakText4").innerHTML = "";
     document.getElementById("breakText5").innerHTML = "";
 
+    document.getElementById("secondShiftIn").innerHTML = "No time logged";
+    document.getElementById("secondShiftOut").innerHTML = "";
+    document.getElementById("secondShiftCommentIn").innerHTML = ""
+    document.getElementById("secondShiftCommentOut").innerHTML = "";
+
+    document.getElementById("modalTextIn").innerHTML = "No time logged";
+    document.getElementById("modalTextOut").innerHTML = "";
+    document.getElementById("modalTextCommentIn").innerHTML = ""
+    document.getElementById("modalTextCommentOut").innerHTML = "";
+
     showModal(num, selected);
     showSchedule(num, selected);
 
@@ -425,14 +453,15 @@ function modalBox(number) {
 
     var edit = document.getElementsByClassName("edit")[0];
     edit.onclick = function () {
-        //        editCalendar();
-        var x = document.createElement("INPUT");
-        x.setAttribute('type', 'text');
-        var zoe = document.getElementById('secondShift');
-        x.setAttribute('value', zoe.innerHTML);
+        editCalendar();
+        document.getElementById('save').classList.remove("hide");
 
-        zoe.innerHTML = "";
-        zoe.appendChild(x);
+        var save = document.getElementById("save");
+        save.onclick = function () {
+            editFirebase();
+        }
+
+
     }
 }
 /*------------------------ End of Modal Boxes Function -------------------------*/
@@ -486,15 +515,7 @@ function setMonth() {
                         document.getElementById('team-dropdown').classList.remove("hide");
                         document.getElementById('name-dropdown').classList.remove("hide");
                         //Load Admin Link
-                        var ul = document.getElementById('sidenav');
-                        var li = document.createElement('li');
-                        var a = document.createElement('a');
-                        a.setAttribute('href', 'admin.html');
-                        var t = document.createTextNode('Admin');
-                        a.appendChild(t);
-                        li.appendChild(a);
-                        var ref = ul.lastChild;
-                        ref.parentNode.insertBefore(li, ref.nextSibling);
+                        document.getElementById('adminlink').classList.remove('hide');
                     }
                 }
             });
@@ -1388,20 +1409,87 @@ function showSchedule(num, selected) {
 
 function editCalendar(selected) {
 
-    console.log("hello");
-
-    var test = document.createElement("BUTTON");
-
     var x = document.createElement("INPUT");
     x.setAttribute('type', 'text');
-    x.setAttribute('value', 'Hello There');
-    //        document.getElementById().appendChild(x);
+    var mIn = document.getElementById('modalTextIn');
+    x.setAttribute('value', mIn.innerHTML.slice(15));
+    console.log(mIn.innerHTML);
+    mIn.innerHTML = "Clocked in at: ";
+
+    mIn.appendChild(x);
+
+    var w = document.createElement("INPUT");
+    w.setAttribute('type', 'text');
+    var mOut = document.getElementById('modalTextOut');
+    w.setAttribute('value', mOut.innerHTML.slice(16));
+    mOut.innerHTML = "Clocked out at: ";
+    mOut.appendChild(w);
+
+    var y = document.createElement("INPUT");
+    y.setAttribute('type', 'text');
+    var mComIn = document.getElementById('modalTextCommentIn');
+    y.setAttribute('value', mComIn.innerHTML.slice(11));
+    mComIn.innerHTML = "CommentIn: ";
+    mComIn.appendChild(y);
+
+    var z = document.createElement("INPUT");
+    z.setAttribute('type', 'text');
+    var mComOut = document.getElementById('modalTextCommentOut');
+    z.setAttribute('value', mComOut.innerHTML.slice(11));
+    mComOut.innerHTML = "CommentOut: ";
+    mComOut.appendChild(z);
 
 
 
-    //        firebase.database().ref('users/' + user + '/TimeClock/HoursWorked').update();
+    var l = document.createElement("INPUT");
+    l.setAttribute('type', 'text');
+    var sIn = document.getElementById('secondShiftIn');
+    l.setAttribute('value', sIn.innerHTML.slice(15));
+    sIn.innerHTML = "Clocked in at: ";
+    sIn.appendChild(l);
+    console.log(document.getElementById("secondShiftIn").innerHTML.slice(41, 52));
+    //     console.log(document.getElementById("secondShiftIn").getAttribute('value'));
 
+    var m = document.createElement("INPUT");
+    m.setAttribute('type', 'text');
+    var sOut = document.getElementById('secondShiftOut');
+    m.setAttribute('value', sOut.innerHTML.slice(16));
+    sOut.innerHTML = "Clocked out at: ";
+    sOut.appendChild(m);
+    console.log(document.getElementById("secondShiftOut").innerHTML.slice(42, 53));
 
+    var n = document.createElement("INPUT");
+    n.setAttribute('type', 'text');
+    var sComIn = document.getElementById('secondShiftCommentIn');
+    n.setAttribute('value', sComIn.innerHTML.slice(10));
+    sComIn.innerHTML = "CommentIn: ";
+    sComIn.appendChild(n);
+    console.log(document.getElementById("secondShiftCommentIn").innerHTML.slice(38, 41));
 
+    var o = document.createElement("INPUT");
+    o.setAttribute('type', 'text');
+    var sComOut = document.getElementById('secondShiftCommentOut');
+    o.setAttribute('value', sComOut.innerHTML.slice(11));
+    sComOut.innerHTML = "CommentOut: ";
+    sComOut.appendChild(o);
+    console.log(document.getElementById("secondShiftCommentOut").innerHTML.slice(39, 42));
 
+}
+
+function editFirebase() {
+    console.log("editFirebase");
+    var selected = document.getElementById('name-dropdown').value;
+    firebase.auth().onAuthStateChanged(function (user) {
+        var user;
+        if (selected != user.displayName && selected != "") {
+            user = selected;
+        } else {
+            user = firebase.auth().currentUser.displayName;
+        }
+        var db = firebase.database().ref('users/' + user + '/TimeClock/HoursWorked');
+        var hInS = document.getElementById("secondShiftIn").innerHTML.slice(41, 52);
+        //        db.update(hInS);
+
+        document.getElementById('save').classList.add("hide");
+    })
 }
