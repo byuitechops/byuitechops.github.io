@@ -49,7 +49,6 @@ function showModal(num, selected) {
 
             // loops through each in/out and comment and sets it equal to the HTML to display
             for (var i = 0; i < monthDays.length; i++) {
-                console.log(num);
                 // gets the first instance of clock in/out
                 if (num == monthDays[i + 1]) {
 
@@ -1391,7 +1390,6 @@ function showSchedule(num, selected) {
                     check = true;
                     break;
                 }
-
             }
             // if none of the above are true, just display 'No time scheduled'
             if (!check) {
@@ -1405,98 +1403,139 @@ function showSchedule(num, selected) {
             alert(error);
             return;
         });
-
     });
 }
 /*--------------------------- End of display schedule ----------------------------*/
-
+var l;
+var m;
+var n;
+var o;
+var w;
+var x;
+var y;
+var z;
 
 function editCalendar(selected) {
 
-    var x = document.createElement("INPUT");
-    x.setAttribute('type', 'text');
-    var mIn = document.getElementById('modalTextIn');
-    x.setAttribute('value', mIn.innerHTML.slice(15));
-    mIn.innerHTML = "Clocked in at: ";
-    mIn.appendChild(x);
-
-    var w = document.createElement("INPUT");
-    w.setAttribute('type', 'text');
-    var mOut = document.getElementById('modalTextOut');
-    w.setAttribute('value', mOut.innerHTML.slice(16));
-    mOut.innerHTML = "Clocked out at: ";
-    mOut.appendChild(w);
-
-    var y = document.createElement("INPUT");
-    y.setAttribute('type', 'text');
-    var mComIn = document.getElementById('modalTextCommentIn');
-    y.setAttribute('value', mComIn.innerHTML.slice(11));
-    mComIn.innerHTML = "CommentIn: ";
-    mComIn.appendChild(y);
-
-    var z = document.createElement("INPUT");
-    z.setAttribute('type', 'text');
-    var mComOut = document.getElementById('modalTextCommentOut');
-    z.setAttribute('value', mComOut.innerHTML.slice(11));
-    mComOut.innerHTML = "CommentOut: ";
-    mComOut.appendChild(z);
-
-    var l = document.createElement("INPUT");
-    l.setAttribute('type', 'text');
-    var sIn = document.getElementById('secondShiftIn');
-    l.setAttribute('value', sIn.innerHTML.slice(15));
-    sIn.innerHTML = "Clocked in at: ";
-    sIn.appendChild(l);
-
-    var m = document.createElement("INPUT");
-    m.setAttribute('type', 'text');
-    var sOut = document.getElementById('secondShiftOut');
-    m.setAttribute('value', sOut.innerHTML.slice(16));
-    sOut.innerHTML = "Clocked out at: ";
-    sOut.appendChild(m);
-
-    var n = document.createElement("INPUT");
-    n.setAttribute('type', 'text');
-    var sComIn = document.getElementById('secondShiftCommentIn');
-    n.setAttribute('value', sComIn.innerHTML.slice(10));
-    sComIn.innerHTML = "CommentIn: ";
-    sComIn.appendChild(n);
-
-    var o = document.createElement("INPUT");
-    o.setAttribute('type', 'text');
-    var sComOut = document.getElementById('secondShiftCommentOut');
-    o.setAttribute('value', sComOut.innerHTML.slice(11));
-    sComOut.innerHTML = "CommentOut: ";
-    sComOut.appendChild(o);
+    //    x = document.createElement("INPUT");
+    //    x.setAttribute('type', 'text');
+    //    var mIn = document.getElementById('modalTextIn');
+    //    x.setAttribute('value', mIn.innerHTML.slice(15));
+    //    //    x.setAttribute('pattern', "[0 - 1][0 - 9]\: [0 - 5][0 - 9]\: [0 - 5][0 - 9]\ s[a || p] m");
+    //    //    x.setAttribute('required', '');
+    //    mIn.innerHTML = "Clocked in at: ";
+    //    mIn.appendChild(x);
+    //
+    //    w = document.createElement("INPUT");
+    //    w.setAttribute('type', 'text');
+    //    var mOut = document.getElementById('modalTextOut');
+    //    w.setAttribute('value', mOut.innerHTML.slice(16));
+    //    //    w.setAttribute('pattern', "[0 - 1][0 - 9]\: [0 - 5][0 - 9]\: [0 - 5][0 - 9]\ s[a || p] m");
+    //    mOut.innerHTML = "Clocked out at: ";
+    //    mOut.appendChild(w);
+    //
+    //    y = document.createElement("INPUT");
+    //    y.setAttribute('type', 'text');
+    //    var mComIn = document.getElementById('modalTextCommentIn');
+    //    y.setAttribute('value', mComIn.innerHTML.slice(11));
+    //    mComIn.innerHTML = "CommentIn: ";
+    //    mComIn.appendChild(y);
+    //
+    //    z = document.createElement("INPUT");
+    //    z.setAttribute('type', 'text');
+    //    var mComOut = document.getElementById('modalTextCommentOut');
+    //    z.setAttribute('value', mComOut.innerHTML.slice(11));
+    //    mComOut.innerHTML = "CommentOut: ";
+    //    mComOut.appendChild(z);
+    //
+    //    l = document.createElement("INPUT");
+    //    l.setAttribute('type', 'text');
+    //    var sIn = document.getElementById('secondShiftIn');
+    //    l.setAttribute('value', sIn.innerHTML.slice(15));
+    //    //    l.setAttribute('pattern', "[0 - 1][0 - 9]\: [0 - 5][0 - 9]\: [0 - 5][0 - 9]\ s[a || p] m");
+    //    sIn.innerHTML = "Clocked in at: ";
+    //    sIn.appendChild(l);
+    //
+    //    m = document.createElement("INPUT");
+    //    m.setAttribute('type', 'text');
+    //    var sOut = document.getElementById('secondShiftOut');
+    //    m.setAttribute('value', sOut.innerHTML.slice(16));
+    //    //    m.setAttribute('pattern', "[0 - 1][0 - 9]\: [0 - 5][0 - 9]\: [0 - 5][0 - 9]\ s[a || p] m");
+    //    sOut.innerHTML = "Clocked out at: ";
+    //    sOut.appendChild(m);
+    //
+    //    n = document.createElement("INPUT");
+    //    n.setAttribute('type', 'text');
+    //    var sComIn = document.getElementById('secondShiftCommentIn');
+    //    n.setAttribute('value', sComIn.innerHTML.slice(10));
+    //    sComIn.innerHTML = "CommentIn: ";
+    //    sComIn.appendChild(n);
+    //
+    //    o = document.createElement("INPUT");
+    //    o.setAttribute('type', 'text');
+    //    var sComOut = document.getElementById('secondShiftCommentOut');
+    //    o.setAttribute('value', sComOut.innerHTML.slice(11));
+    //    sComOut.innerHTML = "CommentOut: ";
+    //    sComOut.appendChild(o);
 }
 
 function editFirebase() {
-    var thirdQuote = document.getElementById("secondShiftIn").innerHTML.indexOf("\"", 40);
-    var lastQuote = document.getElementById("secondShiftIn").innerHTML.lastIndexOf("\"");
-    var realDate = document.getElementById("secondShiftIn").innerHTML.slice(thirdQuote + 1, lastQuote);
-
-    var selected = document.getElementById('name-dropdown').value;
-    var num = selectedNumber.getAttribute("value");
-    num = ('0' + num).slice(-2);
-    var dateKey = month + "-" + num + "-" + year + " " + realDate;
-    firebase.auth().onAuthStateChanged(function (user) {
-        var user;
-        if (selected != user.displayName && selected != "") {
-            user = selected;
-        } else {
-            user = firebase.auth().currentUser.displayName;
-        }
-
-        var h = document.getElementsByTagName('INPUT')[0].getAttribute('value');
-        console.log(h);
-
-        var db = firebase.database().ref('users/' + user + '/TimeClock/HoursWorked/' + dateKey);
-        var hInS = document.getElementById("secondShiftIn").innerHTML.slice(41, 52);
-        console.log();
-        db.update({
-            "In": "04:03:32 pm"
-        });
-
-        document.getElementById('save').classList.add("hide");
-    })
+    //    var selected = document.getElementById('name-dropdown').value;
+    //    var num = selectedNumber.getAttribute("value");
+    //    num = ('0' + num).slice(-2);
+    //
+    //    var thirdQuoteSIn = document.getElementById("secondShiftIn").innerHTML.indexOf("\"", 40);
+    //    var lastQuoteSIn = document.getElementById("secondShiftIn").innerHTML.lastIndexOf("\"");
+    //    var realDateSIn = document.getElementById("secondShiftIn").innerHTML.slice(thirdQuoteSIn + 1, lastQuoteSIn);
+    //    var dateKeyS = month + "-" + num + "-" + year + " " + realDateSIn;
+    //
+    //    var thirdQuoteSOut = document.getElementById("secondShiftOut").innerHTML.indexOf("\"", 40);
+    //    var lastQuoteSOut = document.getElementById("secondShiftOut").innerHTML.lastIndexOf("\"");
+    //    var realDateSOut = document.getElementById("secondShiftOut").innerHTML.slice(thirdQuoteSOut + 1, lastQuoteSOut);
+    //
+    //    var thirdQuoteIn = document.getElementById("modalTextIn").innerHTML.indexOf("\"", 40);
+    //    var lastQuoteIn = document.getElementById("modalTextIn").innerHTML.lastIndexOf("\"");
+    //    var realDateIn = document.getElementById("modalTextIn").innerHTML.slice(thirdQuoteIn + 1, lastQuoteIn);
+    //    var dateKey = month + "-" + num + "-" + year + " " + realDateIn;
+    //
+    //    var thirdQuoteOut = document.getElementById("modalTextOut").innerHTML.indexOf("\"", 40);
+    //    var lastQuoteOut = document.getElementById("modalTextOut").innerHTML.lastIndexOf("\"");
+    //    var realDateOut = document.getElementById("modalTextOut").innerHTML.slice(thirdQuoteOut + 1, lastQuoteOut);
+    //
+    //    firebase.auth().onAuthStateChanged(function (user) {
+    //        var user;
+    //        if (selected != user.displayName && selected != "") {
+    //            user = selected;
+    //        } else {
+    //            user = firebase.auth().currentUser.displayName;
+    //        }
+    //
+    //        var dbS = firebase.database().ref('users/' + user + '/TimeClock/HoursWorked/' + dateKeyS);
+    //        var db = firebase.database().ref('users/' + user + '/TimeClock/HoursWorked/' + dateKey);
+    //
+    //        document.getElementById("secondShiftIn").innerHTML = "Clocked in at: " + l.value;
+    //        document.getElementById("secondShiftOut").innerHTML = "Clocked out at: " + m.value;
+    //        document.getElementById('secondShiftCommentIn').innerHTML = "CommentIn: " + n.value;
+    //        document.getElementById('secondShiftCommentOut').innerHTML = "CommentOut: " + o.value;
+    //        document.getElementById("modalTextIn").innerHTML = "Clocked in at: " + x.value;
+    //        document.getElementById("modalTextOut").innerHTML = "Clocked out at: " + w.value;
+    //        document.getElementById('modalTextCommentIn').innerHTML = "CommentIn: " + y.value;
+    //        document.getElementById('modalTextCommentOut').innerHTML = "CommentOut: " + z.value;
+    //
+    //        db.update({
+    //            "In": x.value,
+    //            "CommentIn": y.value,
+    //            "Out": w.value,
+    //            "CommentOut": z.value
+    //        });
+    //
+    //        dbS.update({
+    //            "In": l.value,
+    //            "CommentIn": n.value,
+    //            "Out": m.value,
+    //            "CommentOut": o.value
+    //        });
+    //
+    //        document.getElementById('save').classList.add("hide");
+    //    })
 }
