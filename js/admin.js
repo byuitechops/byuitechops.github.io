@@ -214,10 +214,10 @@ function editUser(user) {
                 td.appendChild(t);
                 td.value
             } else if (j == 1 && list[z] == 'Team') {
-                sTF.innerHTML += "<select><option value='canvas'>Canvas</option><option value='tech'>Tech</option><option value='transcript'>Transcript</option></select>";
+                sTF.innerHTML += "<select><option value='canvas 1'>Canvas 1</option><option value='canvas 3'>Canvas 3</option><option value='canvas 2'>Canvas 2</option></select>";
                 td.appendChild(sTF);
             } else if (j == 1 && list[z] == 'TeamLead') {
-                sTF.innerHTML += "<select><option value='canvas'>Canvas</option><option value='tech'>Tech</option><option value='transcript'>Transcript</option><option value='false'>False</option></select>";
+                sTF.innerHTML += "<select><option value='canvas 1'>Canvas 1</option><option value='canvas 3'>canvas 3</option><option value='canvas 2'>Canvas 2</option><option value='false'>False</option></select>";
                 td.appendChild(sTF);
             } else if (j == 1) {
                 sTF.innerHTML += "<select><option value='true'>True</option><option value='false'>False</option></select>";

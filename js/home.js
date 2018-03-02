@@ -188,18 +188,18 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                     if (titles == 'Admin') {
                         // Access to all
                     } else if (titles == 'Team') {
-                        if (snap[titles] == 'tech') {
+                        if (snap[titles] == 'canvas 3') {
                             // Access to Basic & Firebase & Trello
                             document.getElementById('pathway').classList.add('hide');
                             document.getElementById('canvasstyle').classList.add('hide');
                             document.getElementById('totstyle').classList.add('hide');
                             document.getElementById('screensteps').classList.add('hide');
-                        } else if (snap[titles] == 'canvas') {
+                        } else if (snap[titles] == 'canvas 1') {
                             // Access to Basic & Trello & Style Guides
                             document.getElementById('pathway').classList.add('hide');
                             document.getElementById('firebase').classList.add('hide');
                             document.getElementById('screensteps').classList.add('hide');
-                        } else if (snap[titles] == 'transcript') {
+                        } else if (snap[titles] == 'canvas 2') {
                             // Access to Basic & Pathway
                             document.getElementById('trello').classList.add('hide');
                             document.getElementById('screensteps').classList.add('hide');
@@ -421,10 +421,6 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                     submitCode.classList.remove('hide');
                     tsgpic.classList.add('locked');
                 }
-                if (user == 'byuitech') {
-                    txtCode.classList.remove('hide');
-                    submitCode.classList.remove('hide');
-                }
             });
         }
 
@@ -470,7 +466,9 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
             };
             dbRefUsers.child(user).child('TimeClock').update(checkdata);
             ref.child(date).update(data);
-            localStorage.setItem('timekey', date);
+            dbRefUsers.child(user).child('TimeClock').update({
+                timekey: date
+            });
             window.open('https://www.myworkday.com/byuhi/d/home.htmld#selectedWorklet=501%24162');
             window.open('https://teams.microsoft.com/start', '_blank');
             var cmessage = document.getElementById('comment').value;
@@ -502,7 +500,10 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
             var min = ('0' + d.getMinutes()).slice(-2);
             var sec = ('0' + d.getSeconds()).slice(-2);
             var time = hours + ':' + min + ':' + sec + " " + mer;
-            var date = localStorage.getItem('timekey');
+            var date;
+            dbRefUsers.child(user).child('TimeClock/timekey').once('value', snap => {
+                date = snap.val();
+            });
             var data = {
                 Out: time
             }
@@ -520,7 +521,6 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                 ref.child(date).update(comment);
                 document.getElementById('comment').innerHTML = "";
             };
-            localStorage.removeItem('timekey');
             document.getElementById('comment').value = "";
         });
 
@@ -532,7 +532,10 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                 if (snap.val()) {
                     checkOutBtn.classList.remove('hide');
                     checkInBtn.classList.add('hide');
-                    var timekey = localStorage.getItem('timekey');
+                    var timekey;
+                    dbRefUsers.child(user).child('TimeClock/timekey').once('value', snap => {
+                        timekey = snap.val();
+                    });
                     if (timekey != null) {
                         dbRefUsers.child(user).child('TimeClock').child('HoursWorked').child(timekey).child('In').on('value', snap => {
                             document.getElementById('showclocked').innerHTML = "Clocked In At: " + snap.val();
@@ -571,7 +574,9 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
             };
             dbRefUsers.child(user).child('TimeClock').update(breakdata);
             ref.child(date).update(data);
-            localStorage.setItem('breakkey', date);
+            dbRefUsers.child(user).child('TimeClock').update({
+                breakkey: date
+            });
             isBreak();
             alert('Remember to return from break');
             setTimeout(function () {
@@ -580,7 +585,10 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
         });
 
         document.getElementById('breakIn').addEventListener('click', e => {
-            var breakkey = localStorage.getItem('breakkey');
+            var breakkey;
+            dbRefUsers.child(user).child('TimeClock/breakkey').once('value', snap => {
+                breakkey = snap.val();
+            });
             var ref = dbRefUsers.child(user).child('TimeClock').child('Breaks');
             var d = new Date();
             var hours = d.getHours();
@@ -604,7 +612,6 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
             };
             dbRefUsers.child(user).child('TimeClock').update(breakdata);
             ref.child(breakkey).update(data);
-            localStorage.removeItem('breakkey');
             isBreak();
         });
 
@@ -614,7 +621,10 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
             var breaks;
             dbRefUsers.child(user).child('TimeClock').child('break').on('value', snap => {
                 if (snap.val()) {
-                    var breakkey = localStorage.getItem('breakkey');
+                    var breakkey;
+                    dbRefUsers.child(user).child('TimeClock/breakkey').once('value', snap => {
+                        breakkey = snap.val();
+                    });
                     if (breakkey != null) {
                         dbRefUsers.child(user).child('TimeClock').child('Breaks').child(breakkey).child('Out').on('value', snap => {
                             document.getElementById('showbreak').innerHTML = "Took Break At: " + snap.val();

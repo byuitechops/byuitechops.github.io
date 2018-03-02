@@ -29,11 +29,11 @@
                             break;
                         } else if (titles == 'Team') {
                             document.getElementById('scheduleFrame').classList.remove('hide');
-                            if (shot[titles] == 'tech') {
+                            if (shot[titles] == 'canvas 3') {
                                 document.getElementById('scheduleFrame').setAttribute('src', 'https://docs.google.com/spreadsheets/d/1mY6vvcCC7ptSYrlnoFrhwgWh4DMqGwQNdcgtjUz4f9M/edit?usp=sharing');
-                            } else if (shot[titles] == 'canvas') {
+                            } else if (shot[titles] == 'canvas 1') {
                                 document.getElementById('scheduleFrame').setAttribute('src', 'https://docs.google.com/spreadsheets/d/1ge7AlgKH_0nkvmbZ_BxWiP6WfAg2rynA1ccXMFei22k/edit?usp=sharing');
-                            } else if (shot[titles] == 'transcript') {
+                            } else if (shot[titles] == 'canvas 2') {
                                 document.getElementById('scheduleFrame').setAttribute('src', 'https://docs.google.com/spreadsheets/d/1BMVKAqfiPspOLZy4OFPHdccCWWJVtkHMrLoNobFCkTI/edit?usp=sharing');
                             }
                         }
@@ -51,14 +51,14 @@
 function showTeam(team) {
     var frame = document.getElementById('scheduleFrame');
     frame.setAttribute('src', '');
-    if (team == 'tech') {
-        console.log('Tech team')
+    if (team == 'canvas 3') {
+        console.log('Canvas 3 Team')
         frame.setAttribute('src', 'https://docs.google.com/spreadsheets/d/1mY6vvcCC7ptSYrlnoFrhwgWh4DMqGwQNdcgtjUz4f9M/edit?usp=sharing');
-    } else if (team == 'canvas') {
-        console.log('Canvas team')
+    } else if (team == 'canvas 1') {
+        console.log('Canvas 1 Team')
         frame.setAttribute('src', 'https://docs.google.com/spreadsheets/d/1ge7AlgKH_0nkvmbZ_BxWiP6WfAg2rynA1ccXMFei22k/edit?usp=sharing');
-    } else if (team == 'transcript') {
-        console.log('Trans team')
+    } else if (team == 'canvas 2') {
+        console.log('Canvas 2 Team')
         frame.setAttribute('src', 'https://docs.google.com/spreadsheets/d/1BMVKAqfiPspOLZy4OFPHdccCWWJVtkHMrLoNobFCkTI/edit?usp=sharing');
     }
 }
