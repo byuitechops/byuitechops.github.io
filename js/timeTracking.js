@@ -305,8 +305,11 @@ function getMonthName(month) {
     return ar[month]
 }
 
+var month;
+var year;
 /* Populates calendar with the days in the month */
 function setCal(sMonth) {
+    month = sMonth;
     // standard time attributes
     var selected = document.getElementById('name-dropdown').value;
     calcTotals(selected);
@@ -315,7 +318,7 @@ function setCal(sMonth) {
     var cMonth = now.getMonth();
     sMonth = Number(sMonth);
     sMonth -= 1;
-    var year = now.getYear();
+    year = now.getYear();
     if (year < 1000) {
         year += 1900
     }
@@ -403,10 +406,11 @@ function setTotals() {
     calcTotals(selected);
     //    editCalendar(selected);
 }
-
+var selectedNumber;
 /* Causes modal box to open when clicked on */
 function modalBox(number) {
     // Get the modal
+    selectedNumber = number;
     var num = number.getAttribute("value");
     var modal = document.getElementById('myModal');
     var selected = document.getElementById('name-dropdown').value;
@@ -1413,9 +1417,7 @@ function editCalendar(selected) {
     x.setAttribute('type', 'text');
     var mIn = document.getElementById('modalTextIn');
     x.setAttribute('value', mIn.innerHTML.slice(15));
-    console.log(mIn.innerHTML);
     mIn.innerHTML = "Clocked in at: ";
-
     mIn.appendChild(x);
 
     var w = document.createElement("INPUT");
@@ -1439,16 +1441,12 @@ function editCalendar(selected) {
     mComOut.innerHTML = "CommentOut: ";
     mComOut.appendChild(z);
 
-
-
     var l = document.createElement("INPUT");
     l.setAttribute('type', 'text');
     var sIn = document.getElementById('secondShiftIn');
     l.setAttribute('value', sIn.innerHTML.slice(15));
     sIn.innerHTML = "Clocked in at: ";
     sIn.appendChild(l);
-    console.log(document.getElementById("secondShiftIn").innerHTML.slice(41, 52));
-    //     console.log(document.getElementById("secondShiftIn").getAttribute('value'));
 
     var m = document.createElement("INPUT");
     m.setAttribute('type', 'text');
@@ -1456,7 +1454,6 @@ function editCalendar(selected) {
     m.setAttribute('value', sOut.innerHTML.slice(16));
     sOut.innerHTML = "Clocked out at: ";
     sOut.appendChild(m);
-    console.log(document.getElementById("secondShiftOut").innerHTML.slice(42, 53));
 
     var n = document.createElement("INPUT");
     n.setAttribute('type', 'text');
@@ -1464,7 +1461,6 @@ function editCalendar(selected) {
     n.setAttribute('value', sComIn.innerHTML.slice(10));
     sComIn.innerHTML = "CommentIn: ";
     sComIn.appendChild(n);
-    console.log(document.getElementById("secondShiftCommentIn").innerHTML.slice(38, 41));
 
     var o = document.createElement("INPUT");
     o.setAttribute('type', 'text');
@@ -1472,12 +1468,17 @@ function editCalendar(selected) {
     o.setAttribute('value', sComOut.innerHTML.slice(11));
     sComOut.innerHTML = "CommentOut: ";
     sComOut.appendChild(o);
-    console.log(document.getElementById("secondShiftCommentOut").innerHTML.slice(39, 42));
 }
 
 function editFirebase() {
-    console.log("editFirebase");
+    var thirdQuote = document.getElementById("secondShiftIn").innerHTML.indexOf("\"", 40);
+    var lastQuote = document.getElementById("secondShiftIn").innerHTML.lastIndexOf("\"");
+    var realDate = document.getElementById("secondShiftIn").innerHTML.slice(thirdQuote + 1, lastQuote);
+
     var selected = document.getElementById('name-dropdown').value;
+    var num = selectedNumber.getAttribute("value");
+    num = ('0' + num).slice(-2);
+    var dateKey = month + "-" + num + "-" + year + " " + realDate;
     firebase.auth().onAuthStateChanged(function (user) {
         var user;
         if (selected != user.displayName && selected != "") {
@@ -1485,9 +1486,16 @@ function editFirebase() {
         } else {
             user = firebase.auth().currentUser.displayName;
         }
-        var db = firebase.database().ref('users/' + user + '/TimeClock/HoursWorked');
+
+        var h = document.getElementsByTagName('INPUT')[0].getAttribute('value');
+        console.log(h);
+
+        var db = firebase.database().ref('users/' + user + '/TimeClock/HoursWorked/' + dateKey);
         var hInS = document.getElementById("secondShiftIn").innerHTML.slice(41, 52);
-        //        db.update(hInS);
+        console.log();
+        db.update({
+            "In": "04:03:32 pm"
+        });
 
         document.getElementById('save').classList.add("hide");
     })
