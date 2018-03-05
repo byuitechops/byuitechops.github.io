@@ -600,6 +600,11 @@ function calcTotals(selected) {
             var stop = document.getElementById("rowtwo").cells[0].id;
 
             for (var x = 0; x < rowone.length - 1; x++) {
+                
+                if(person[currentMonth[count]].Out == "") {
+                    person[currentMonth[count]].Out = 0;
+                }
+                
 
                 if (rowone[x].innerHTML != "") {
                     if (rowone[x].innerHTML != monthDays[count]) {
@@ -1535,7 +1540,7 @@ function editFirebase() {
             addOn = " " + x.value
         }
 
-        var dbS = firebase.database().ref('users/' + user + '/TimeClock/HoursWorked/' + dateKeyS);
+        var dbS = firebase.database().ref('users/' + user + '/TimeClock/HoursWorked/' + dateKeyS + addOn);
         //        console.log(dateKeyS);
         var db = firebase.database().ref('users/' + user + '/TimeClock/HoursWorked/' + dateKey + addOn);
 
@@ -1551,22 +1556,32 @@ function editFirebase() {
         if (deleteDb != undefined) {
             deleteDb.remove();
         }
-
-        db.update({
-            "In": x.value,
-            "CommentIn": y.value,
-            "Out": w.value,
-            "CommentOut": z.value
-        });
-
-        if (realDateSIn != "") {
-            dbS.update({
+        
+        var dataUpdate = {
                 "In": l.value,
                 "CommentIn": n.value,
                 "Out": m.value,
                 "CommentOut": o.value
-            });
+            };
+        
+        if (w.value.length == 0) {
+            console.log("hello");
+            dataUpdate = {
+                "In": l.value,
+                "CommentIn": n.value,
+                "CommentOut": o.value
+            }
         }
+        console.log(w.value);
+
+        db.update(dataUpdate);
+
+        if (realDateSIn != "") {
+            dbS.update();
+        }
+        calcTotals(selected);
+        var modal = document.getElementById('myModal');
         document.getElementById('save').classList.add("hide");
+        modal.style.display = "none";
     })
 }
