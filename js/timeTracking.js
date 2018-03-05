@@ -15,6 +15,8 @@ firebase.initializeApp(config);
 /*----------------------------- Display time logs ------------------------------*/
 
 /* Retrieves info from Firebase to display the current user's check ins and outs */
+var dates;
+
 function showModal(num, selected) {
     firebase.auth().onAuthStateChanged(function (user) {
         // if a name is selected and the selection isn't blank, show the data for the person selected
@@ -27,7 +29,7 @@ function showModal(num, selected) {
         var ppl = firebase.database().ref('users/' + user + '/TimeClock/HoursWorked').once('value');
         ppl.then(function (snapshot) {
             var person = (snapshot.val());
-            var dates = Object.keys(person);
+            dates = Object.keys(person);
             var monthDays = [];
             var currentMonth = [];
             var count = 0;
@@ -45,13 +47,14 @@ function showModal(num, selected) {
                     count++;
                 }
             }
+
+
             var check = false;
 
             // loops through each in/out and comment and sets it equal to the HTML to display
             for (var i = 0; i < monthDays.length; i++) {
                 // gets the first instance of clock in/out
                 if (num == monthDays[i + 1]) {
-
                     // if there isn't an instance of this, it sets the text to 'N/A'
                     if (person[currentMonth[i + 1]].CommentIn == undefined) {
                         person[currentMonth[i + 1]].CommentIn = "N/A";
@@ -127,7 +130,6 @@ function showModal(num, selected) {
             }
             // if none of the above are true, just display 'No time logged'
             if (!check) {
-                console.log("hello i didnt make check turn true");
                 document.getElementById("modalTextIn").innerHTML = "No time logged";
             }
             // resets the loop
@@ -598,6 +600,11 @@ function calcTotals(selected) {
             var stop = document.getElementById("rowtwo").cells[0].id;
 
             for (var x = 0; x < rowone.length - 1; x++) {
+                
+                if(person[currentMonth[count]].Out == "") {
+                    person[currentMonth[count]].Out = 0;
+                }
+                
 
                 if (rowone[x].innerHTML != "") {
                     if (rowone[x].innerHTML != monthDays[count]) {
@@ -973,6 +980,8 @@ function calcTotals(selected) {
             var stop4 = document.getElementById("rowfive").cells[0].id;
             for (var x = 0; x < rowfour.length - 1; x++) {
 
+                /* console.log(rowfour[x].innerHTML);
+                 console.log(monthDays[count]);*/
                 if (rowfour[x].innerHTML != "") {
                     if (rowfour[x].innerHTML != monthDays[count]) {
                         continue;
@@ -1028,21 +1037,21 @@ function calcTotals(selected) {
                     total2 = cTotal - dTotal;
 
                     if (person[currentMonth[count + 1]] != undefined) {
-                        var ic1 = person[currentMonth[count + 1]].In;
-                        var oc1 = person[currentMonth[count + 1]].Out;
-
-                        if (ic1 != undefined && ic1.search("pm") != -1) {
-                            add2 = 43200;
-                        } else {
-                            add2 = 0;
-                        }
-                        if (oc1 != undefined && oc1.search("pm") != -1) {
-                            add4 = 43200;
-                        } else {
-                            add4 = 0;
-                        }
-
                         if (monthDays[count + 1] < stop4) {
+                            var ic1 = person[currentMonth[count + 1]].In;
+                            var oc1 = person[currentMonth[count + 1]].Out;
+
+                            if (ic1 != undefined && ic1.search("pm") != -1) {
+                                add2 = 43200;
+                            } else {
+                                add2 = 0;
+                            }
+                            if (oc1 != undefined && oc1.search("pm") != -1) {
+                                add4 = 43200;
+                            } else {
+                                add4 = 0;
+                            }
+
                             var b = "";
                             b = person[currentMonth[count + 1]].In.slice(0, 8);
                             b = b.split(":");
@@ -1073,6 +1082,7 @@ function calcTotals(selected) {
                                 aTotal = 0;
                                 bTotal = 0;
                             }
+
                             total1 = aTotal - bTotal;
                             count++;
                         }
@@ -1090,7 +1100,10 @@ function calcTotals(selected) {
             // Code for row five
             var rowfive = document.getElementById("rowfive").cells;
             var weekFive = 0;
-            var stop5 = document.getElementById("rowsix").cells[0].id;
+            var stop5 = 32;
+            if (document.getElementById("rowsix").cells[0].id != "") {
+                stop5 = document.getElementById("rowsix").cells[0].id;
+            }
             for (var x = 0; x < rowfive.length - 1; x++) {
 
                 if (rowfive[x].innerHTML != "") {
@@ -1417,125 +1430,158 @@ var z;
 
 function editCalendar(selected) {
 
-    //    x = document.createElement("INPUT");
-    //    x.setAttribute('type', 'text');
-    //    var mIn = document.getElementById('modalTextIn');
-    //    x.setAttribute('value', mIn.innerHTML.slice(15));
-    //    //    x.setAttribute('pattern', "[0 - 1][0 - 9]\: [0 - 5][0 - 9]\: [0 - 5][0 - 9]\ s[a || p] m");
-    //    //    x.setAttribute('required', '');
-    //    mIn.innerHTML = "Clocked in at: ";
-    //    mIn.appendChild(x);
-    //
-    //    w = document.createElement("INPUT");
-    //    w.setAttribute('type', 'text');
-    //    var mOut = document.getElementById('modalTextOut');
-    //    w.setAttribute('value', mOut.innerHTML.slice(16));
-    //    //    w.setAttribute('pattern', "[0 - 1][0 - 9]\: [0 - 5][0 - 9]\: [0 - 5][0 - 9]\ s[a || p] m");
-    //    mOut.innerHTML = "Clocked out at: ";
-    //    mOut.appendChild(w);
-    //
-    //    y = document.createElement("INPUT");
-    //    y.setAttribute('type', 'text');
-    //    var mComIn = document.getElementById('modalTextCommentIn');
-    //    y.setAttribute('value', mComIn.innerHTML.slice(11));
-    //    mComIn.innerHTML = "CommentIn: ";
-    //    mComIn.appendChild(y);
-    //
-    //    z = document.createElement("INPUT");
-    //    z.setAttribute('type', 'text');
-    //    var mComOut = document.getElementById('modalTextCommentOut');
-    //    z.setAttribute('value', mComOut.innerHTML.slice(11));
-    //    mComOut.innerHTML = "CommentOut: ";
-    //    mComOut.appendChild(z);
-    //
-    //    l = document.createElement("INPUT");
-    //    l.setAttribute('type', 'text');
-    //    var sIn = document.getElementById('secondShiftIn');
-    //    l.setAttribute('value', sIn.innerHTML.slice(15));
-    //    //    l.setAttribute('pattern', "[0 - 1][0 - 9]\: [0 - 5][0 - 9]\: [0 - 5][0 - 9]\ s[a || p] m");
-    //    sIn.innerHTML = "Clocked in at: ";
-    //    sIn.appendChild(l);
-    //
-    //    m = document.createElement("INPUT");
-    //    m.setAttribute('type', 'text');
-    //    var sOut = document.getElementById('secondShiftOut');
-    //    m.setAttribute('value', sOut.innerHTML.slice(16));
-    //    //    m.setAttribute('pattern', "[0 - 1][0 - 9]\: [0 - 5][0 - 9]\: [0 - 5][0 - 9]\ s[a || p] m");
-    //    sOut.innerHTML = "Clocked out at: ";
-    //    sOut.appendChild(m);
-    //
-    //    n = document.createElement("INPUT");
-    //    n.setAttribute('type', 'text');
-    //    var sComIn = document.getElementById('secondShiftCommentIn');
-    //    n.setAttribute('value', sComIn.innerHTML.slice(10));
-    //    sComIn.innerHTML = "CommentIn: ";
-    //    sComIn.appendChild(n);
-    //
-    //    o = document.createElement("INPUT");
-    //    o.setAttribute('type', 'text');
-    //    var sComOut = document.getElementById('secondShiftCommentOut');
-    //    o.setAttribute('value', sComOut.innerHTML.slice(11));
-    //    sComOut.innerHTML = "CommentOut: ";
-    //    sComOut.appendChild(o);
+    x = document.createElement("INPUT");
+    x.setAttribute('type', 'text');
+    var mIn = document.getElementById('modalTextIn');
+    x.setAttribute('value', mIn.innerHTML.slice(15));
+    //    x.setAttribute('pattern', "[0 - 1][0 - 9]\: [0 - 5][0 - 9]\: [0 - 5][0 - 9]\ s[a || p] m");
+    //    x.setAttribute('required', '');
+    mIn.innerHTML = "Clocked in at: ";
+    mIn.appendChild(x);
+
+    w = document.createElement("INPUT");
+    w.setAttribute('type', 'text');
+    var mOut = document.getElementById('modalTextOut');
+    w.setAttribute('value', mOut.innerHTML.slice(16));
+    //    w.setAttribute('pattern', "[0 - 1][0 - 9]\: [0 - 5][0 - 9]\: [0 - 5][0 - 9]\ s[a || p] m");
+    mOut.innerHTML = "Clocked out at: ";
+    mOut.appendChild(w);
+
+    y = document.createElement("INPUT");
+    y.setAttribute('type', 'text');
+    var mComIn = document.getElementById('modalTextCommentIn');
+    y.setAttribute('value', mComIn.innerHTML.slice(11));
+    mComIn.innerHTML = "CommentIn: ";
+    mComIn.appendChild(y);
+
+    z = document.createElement("INPUT");
+    z.setAttribute('type', 'text');
+    var mComOut = document.getElementById('modalTextCommentOut');
+    z.setAttribute('value', mComOut.innerHTML.slice(11));
+    mComOut.innerHTML = "CommentOut: ";
+    mComOut.appendChild(z);
+
+    l = document.createElement("INPUT");
+    l.setAttribute('type', 'text');
+    var sIn = document.getElementById('secondShiftIn');
+    l.setAttribute('value', sIn.innerHTML.slice(15));
+    //    l.setAttribute('pattern', "[0 - 1][0 - 9]\: [0 - 5][0 - 9]\: [0 - 5][0 - 9]\ s[a || p] m");
+    sIn.innerHTML = "Clocked in at: ";
+    sIn.appendChild(l);
+
+    m = document.createElement("INPUT");
+    m.setAttribute('type', 'text');
+    var sOut = document.getElementById('secondShiftOut');
+    m.setAttribute('value', sOut.innerHTML.slice(16));
+    //    m.setAttribute('pattern', "[0 - 1][0 - 9]\: [0 - 5][0 - 9]\: [0 - 5][0 - 9]\ s[a || p] m");
+    sOut.innerHTML = "Clocked out at: ";
+    sOut.appendChild(m);
+
+    n = document.createElement("INPUT");
+    n.setAttribute('type', 'text');
+    var sComIn = document.getElementById('secondShiftCommentIn');
+    n.setAttribute('value', sComIn.innerHTML.slice(10));
+    sComIn.innerHTML = "CommentIn: ";
+    sComIn.appendChild(n);
+
+    o = document.createElement("INPUT");
+    o.setAttribute('type', 'text');
+    var sComOut = document.getElementById('secondShiftCommentOut');
+    o.setAttribute('value', sComOut.innerHTML.slice(11));
+    sComOut.innerHTML = "CommentOut: ";
+    sComOut.appendChild(o);
 }
 
 function editFirebase() {
-    //    var selected = document.getElementById('name-dropdown').value;
-    //    var num = selectedNumber.getAttribute("value");
-    //    num = ('0' + num).slice(-2);
-    //
-    //    var thirdQuoteSIn = document.getElementById("secondShiftIn").innerHTML.indexOf("\"", 40);
-    //    var lastQuoteSIn = document.getElementById("secondShiftIn").innerHTML.lastIndexOf("\"");
-    //    var realDateSIn = document.getElementById("secondShiftIn").innerHTML.slice(thirdQuoteSIn + 1, lastQuoteSIn);
-    //    var dateKeyS = month + "-" + num + "-" + year + " " + realDateSIn;
-    //
-    //    var thirdQuoteSOut = document.getElementById("secondShiftOut").innerHTML.indexOf("\"", 40);
-    //    var lastQuoteSOut = document.getElementById("secondShiftOut").innerHTML.lastIndexOf("\"");
-    //    var realDateSOut = document.getElementById("secondShiftOut").innerHTML.slice(thirdQuoteSOut + 1, lastQuoteSOut);
-    //
-    //    var thirdQuoteIn = document.getElementById("modalTextIn").innerHTML.indexOf("\"", 40);
-    //    var lastQuoteIn = document.getElementById("modalTextIn").innerHTML.lastIndexOf("\"");
-    //    var realDateIn = document.getElementById("modalTextIn").innerHTML.slice(thirdQuoteIn + 1, lastQuoteIn);
-    //    var dateKey = month + "-" + num + "-" + year + " " + realDateIn;
-    //
-    //    var thirdQuoteOut = document.getElementById("modalTextOut").innerHTML.indexOf("\"", 40);
-    //    var lastQuoteOut = document.getElementById("modalTextOut").innerHTML.lastIndexOf("\"");
-    //    var realDateOut = document.getElementById("modalTextOut").innerHTML.slice(thirdQuoteOut + 1, lastQuoteOut);
-    //
-    //    firebase.auth().onAuthStateChanged(function (user) {
-    //        var user;
-    //        if (selected != user.displayName && selected != "") {
-    //            user = selected;
-    //        } else {
-    //            user = firebase.auth().currentUser.displayName;
-    //        }
-    //
-    //        var dbS = firebase.database().ref('users/' + user + '/TimeClock/HoursWorked/' + dateKeyS);
-    //        var db = firebase.database().ref('users/' + user + '/TimeClock/HoursWorked/' + dateKey);
-    //
-    //        document.getElementById("secondShiftIn").innerHTML = "Clocked in at: " + l.value;
-    //        document.getElementById("secondShiftOut").innerHTML = "Clocked out at: " + m.value;
-    //        document.getElementById('secondShiftCommentIn').innerHTML = "CommentIn: " + n.value;
-    //        document.getElementById('secondShiftCommentOut').innerHTML = "CommentOut: " + o.value;
-    //        document.getElementById("modalTextIn").innerHTML = "Clocked in at: " + x.value;
-    //        document.getElementById("modalTextOut").innerHTML = "Clocked out at: " + w.value;
-    //        document.getElementById('modalTextCommentIn').innerHTML = "CommentIn: " + y.value;
-    //        document.getElementById('modalTextCommentOut').innerHTML = "CommentOut: " + z.value;
-    //
-    //        db.update({
-    //            "In": x.value,
-    //            "CommentIn": y.value,
-    //            "Out": w.value,
-    //            "CommentOut": z.value
-    //        });
-    //
-    //        dbS.update({
-    //            "In": l.value,
-    //            "CommentIn": n.value,
-    //            "Out": m.value,
-    //            "CommentOut": o.value
-    //        });
-    //
-    //        document.getElementById('save').classList.add("hide");
-    //    })
+    var selected = document.getElementById('name-dropdown').value;
+    var num = selectedNumber.getAttribute("value");
+    num = ('0' + num).slice(-2);
+
+    var thirdQuoteSIn = document.getElementById("secondShiftIn").innerHTML.indexOf("\"", 40);
+    var lastQuoteSIn = document.getElementById("secondShiftIn").innerHTML.lastIndexOf("\"");
+    var realDateSIn = document.getElementById("secondShiftIn").innerHTML.slice(thirdQuoteSIn + 1, lastQuoteSIn);
+    var dateKeyS = month + "-" + num + "-" + year + " " + realDateSIn;
+
+    var thirdQuoteSOut = document.getElementById("secondShiftOut").innerHTML.indexOf("\"", 40);
+    var lastQuoteSOut = document.getElementById("secondShiftOut").innerHTML.lastIndexOf("\"");
+    var realDateSOut = document.getElementById("secondShiftOut").innerHTML.slice(thirdQuoteSOut + 1, lastQuoteSOut);
+
+    var thirdQuoteIn = document.getElementById("modalTextIn").innerHTML.indexOf("\"", 40);
+    var lastQuoteIn = document.getElementById("modalTextIn").innerHTML.lastIndexOf("\"");
+    var realDateIn = document.getElementById("modalTextIn").innerHTML.slice(thirdQuoteIn + 1, lastQuoteIn);
+    var dateKey = month + "-" + num + "-" + year + " " + realDateIn;
+
+    var thirdQuoteOut = document.getElementById("modalTextOut").innerHTML.indexOf("\"", 40);
+    var lastQuoteOut = document.getElementById("modalTextOut").innerHTML.lastIndexOf("\"");
+    var realDateOut = document.getElementById("modalTextOut").innerHTML.slice(thirdQuoteOut + 1, lastQuoteOut);
+
+
+
+    firebase.auth().onAuthStateChanged(function (user) {
+        var user;
+        if (selected != user.displayName && selected != "") {
+            user = selected;
+        } else {
+            user = firebase.auth().currentUser.displayName;
+        }
+
+
+        var deleteDb;
+        for (var i = 0; i < dates.length; i++) {
+            if (dates[i].indexOf(month + "-" + num + "-" + year) != -1) {
+                deleteDb = firebase.database().ref('users/' + user + '/TimeClock/HoursWorked/' + dates[i]);
+            }
+
+        }
+
+        var addOn = "";
+
+        if (deleteDb == undefined) {
+            addOn = " " + x.value
+        }
+
+        var dbS = firebase.database().ref('users/' + user + '/TimeClock/HoursWorked/' + dateKeyS + addOn);
+        //        console.log(dateKeyS);
+        var db = firebase.database().ref('users/' + user + '/TimeClock/HoursWorked/' + dateKey + addOn);
+
+        document.getElementById("secondShiftIn").innerHTML = "Clocked in at: " + l.value;
+        document.getElementById("secondShiftOut").innerHTML = "Clocked out at: " + m.value;
+        document.getElementById('secondShiftCommentIn').innerHTML = "CommentIn: " + n.value;
+        document.getElementById('secondShiftCommentOut').innerHTML = "CommentOut: " + o.value;
+        document.getElementById("modalTextIn").innerHTML = "Clocked in at: " + x.value;
+        document.getElementById("modalTextOut").innerHTML = "Clocked out at: " + w.value;
+        document.getElementById('modalTextCommentIn').innerHTML = "CommentIn: " + y.value;
+        document.getElementById('modalTextCommentOut').innerHTML = "CommentOut: " + z.value;
+
+        if (deleteDb != undefined) {
+            deleteDb.remove();
+        }
+        
+        var dataUpdate = {
+                "In": l.value,
+                "CommentIn": n.value,
+                "Out": m.value,
+                "CommentOut": o.value
+            };
+        
+        if (w.value.length == 0) {
+            console.log("hello");
+            dataUpdate = {
+                "In": l.value,
+                "CommentIn": n.value,
+                "CommentOut": o.value
+            }
+        }
+        console.log(w.value);
+
+        db.update(dataUpdate);
+
+        if (realDateSIn != "") {
+            dbS.update();
+        }
+        calcTotals(selected);
+        var modal = document.getElementById('myModal');
+        document.getElementById('save').classList.add("hide");
+        modal.style.display = "none";
+    })
 }

@@ -141,6 +141,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                 var data = {
                     "brightspace": true,
                     "trello": true,
+                    "teamDynamix": true,
                     "teamDrive": true,
                     "microsoft": true,
                     "workDay": true,
@@ -169,6 +170,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
         function loadUser() {
             dbRefUsers.child(user).on('value', snap => {
                 snap = snap.val();
+                console.log(snap);
 
                 txtCode.classList.add('hide');
                 submitCode.classList.add('hide');
@@ -187,43 +189,31 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                 for (titles in snap) {
                     if (titles == 'Admin') {
                         // Access to all
-                    } else if (titles == 'Team') {
-                        if (snap[titles] == 'canvas 3') {
-                            // Access to Basic & Firebase & Trello
-                            document.getElementById('pathway').classList.add('hide');
-                            document.getElementById('canvasstyle').classList.add('hide');
-                            document.getElementById('totstyle').classList.add('hide');
-                            document.getElementById('screensteps').classList.add('hide');
-                        } else if (snap[titles] == 'canvas 1') {
-                            // Access to Basic & Trello & Style Guides
-                            document.getElementById('pathway').classList.add('hide');
-                            document.getElementById('firebase').classList.add('hide');
-                            document.getElementById('screensteps').classList.add('hide');
-                        } else if (snap[titles] == 'canvas 2') {
-                            // Access to Basic & Pathway
-                            document.getElementById('trello').classList.add('hide');
-                            document.getElementById('screensteps').classList.add('hide');
-                            document.getElementById('firebase').classList.add('hide');
-                            document.getElementById('canvasstyle').classList.add('hide');
-                            document.getElementById('totstyle').classList.add('hide');
-                        } else if (snap[titles] == 'default') {
-                            // Access to Basic
-                            document.getElementById('trello').classList.add('hide');
-                            document.getElementById('screensteps').classList.add('hide');
-                            document.getElementById('firebase').classList.add('hide');
-                            document.getElementById('canvasstyle').classList.add('hide');
-                            document.getElementById('totstyle').classList.add('hide');
-                            document.getElementById('pathway').classList.add('hide');
+                        if (snap[titles] == true) {
+                            document.getElementById('screensteps').classList.remove('hide');
+                            document.getElementById('firebase').classList.remove('hide');
+                            document.getElementById('teamdynamix').classList.remove('hide');
+                        }
+                        break;
+                    } else if (titles == 'TeamLead') {
+                        // Access to Basic & Teamdynamix
+                        //                        if (snap[titles] == true) {
+                        document.getElementById('teamdynamix').classList.remove('hide');
+                        //                        }
+                        break;
+                    } else if (titles == 'info') {
+                        var key;
+                        for (key in snap[titles]) {
+                            if (key == 'position') {
+                                if (snap[titles][key] == 'Screensteps') {
+                                    document.getElementById('screensteps').classList.remove('hide');
+                                }
+                                if (snap[titles][key] == 'Tech') {
+                                    document.getElementById('firebase').classList.remove('hide');
+                                }
+                            }
                         }
                     }
-                }
-
-                if (user == 'Brooklyn Cook') {
-                    document.getElementById('screensteps').classList.remove('hide');
-                }
-
-                if (user == 'Logan Jenkins') {
-                    document.getElementById('trello').classList.remove('hide');
                 }
 
                 if (snap.workDay == true) {
@@ -264,6 +254,19 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                     txtCode.classList.remove('hide');
                     submitCode.classList.remove('hide');
                     equpic.classList.add('locked');
+                }
+                if (snap.teamDynamix == true) {
+                    var icon = document.getElementById('tdyn');
+                    icon.setAttribute('href', "https://www.teamdynamix.com/");
+                    tdynpic.classList.remove('locked');
+                } else {
+                    var icon = document.getElementById('tdyn');
+                    icon.addEventListener('click', e => {
+                        window.alert('You are blocked for training purposes. Check your email for training link');
+                    });
+                    txtCode.classList.remove('hide');
+                    submitCode.classList.remove('hide');
+                    tdrpic.classList.add('locked');
                 }
                 if (snap.teamDrive == true) {
                     var icon = document.getElementById('tdr');
