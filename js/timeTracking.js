@@ -15,6 +15,8 @@ firebase.initializeApp(config);
 /*----------------------------- Display time logs ------------------------------*/
 
 /* Retrieves info from Firebase to display the current user's check ins and outs */
+var dates;
+
 function showModal(num, selected) {
     firebase.auth().onAuthStateChanged(function (user) {
         // if a name is selected and the selection isn't blank, show the data for the person selected
@@ -27,7 +29,7 @@ function showModal(num, selected) {
         var ppl = firebase.database().ref('users/' + user + '/TimeClock/HoursWorked').once('value');
         ppl.then(function (snapshot) {
             var person = (snapshot.val());
-            var dates = Object.keys(person);
+            dates = Object.keys(person);
             var monthDays = [];
             var currentMonth = [];
             var count = 0;
@@ -45,13 +47,14 @@ function showModal(num, selected) {
                     count++;
                 }
             }
+
+
             var check = false;
 
             // loops through each in/out and comment and sets it equal to the HTML to display
             for (var i = 0; i < monthDays.length; i++) {
                 // gets the first instance of clock in/out
                 if (num == monthDays[i + 1]) {
-
                     // if there isn't an instance of this, it sets the text to 'N/A'
                     if (person[currentMonth[i + 1]].CommentIn == undefined) {
                         person[currentMonth[i + 1]].CommentIn = "N/A";
@@ -127,7 +130,6 @@ function showModal(num, selected) {
             }
             // if none of the above are true, just display 'No time logged'
             if (!check) {
-                console.log("hello i didnt make check turn true");
                 document.getElementById("modalTextIn").innerHTML = "No time logged";
             }
             // resets the loop
@@ -973,6 +975,8 @@ function calcTotals(selected) {
             var stop4 = document.getElementById("rowfive").cells[0].id;
             for (var x = 0; x < rowfour.length - 1; x++) {
 
+                /* console.log(rowfour[x].innerHTML);
+                 console.log(monthDays[count]);*/
                 if (rowfour[x].innerHTML != "") {
                     if (rowfour[x].innerHTML != monthDays[count]) {
                         continue;
@@ -1028,21 +1032,21 @@ function calcTotals(selected) {
                     total2 = cTotal - dTotal;
 
                     if (person[currentMonth[count + 1]] != undefined) {
-                        var ic1 = person[currentMonth[count + 1]].In;
-                        var oc1 = person[currentMonth[count + 1]].Out;
-
-                        if (ic1 != undefined && ic1.search("pm") != -1) {
-                            add2 = 43200;
-                        } else {
-                            add2 = 0;
-                        }
-                        if (oc1 != undefined && oc1.search("pm") != -1) {
-                            add4 = 43200;
-                        } else {
-                            add4 = 0;
-                        }
-
                         if (monthDays[count + 1] < stop4) {
+                            var ic1 = person[currentMonth[count + 1]].In;
+                            var oc1 = person[currentMonth[count + 1]].Out;
+
+                            if (ic1 != undefined && ic1.search("pm") != -1) {
+                                add2 = 43200;
+                            } else {
+                                add2 = 0;
+                            }
+                            if (oc1 != undefined && oc1.search("pm") != -1) {
+                                add4 = 43200;
+                            } else {
+                                add4 = 0;
+                            }
+
                             var b = "";
                             b = person[currentMonth[count + 1]].In.slice(0, 8);
                             b = b.split(":");
@@ -1073,6 +1077,7 @@ function calcTotals(selected) {
                                 aTotal = 0;
                                 bTotal = 0;
                             }
+
                             total1 = aTotal - bTotal;
                             count++;
                         }
@@ -1090,7 +1095,10 @@ function calcTotals(selected) {
             // Code for row five
             var rowfive = document.getElementById("rowfive").cells;
             var weekFive = 0;
-            var stop5 = document.getElementById("rowsix").cells[0].id;
+            var stop5 = 32;
+            if (document.getElementById("rowsix").cells[0].id != "") {
+                stop5 = document.getElementById("rowsix").cells[0].id;
+            }
             for (var x = 0; x < rowfive.length - 1; x++) {
 
                 if (rowfive[x].innerHTML != "") {
@@ -1502,6 +1510,8 @@ function editFirebase() {
     var lastQuoteOut = document.getElementById("modalTextOut").innerHTML.lastIndexOf("\"");
     var realDateOut = document.getElementById("modalTextOut").innerHTML.slice(thirdQuoteOut + 1, lastQuoteOut);
 
+
+
     firebase.auth().onAuthStateChanged(function (user) {
         var user;
         if (selected != user.displayName && selected != "") {
@@ -1510,8 +1520,24 @@ function editFirebase() {
             user = firebase.auth().currentUser.displayName;
         }
 
+
+        var deleteDb;
+        for (var i = 0; i < dates.length; i++) {
+            if (dates[i].indexOf(month + "-" + num + "-" + year) != -1) {
+                deleteDb = firebase.database().ref('users/' + user + '/TimeClock/HoursWorked/' + dates[i]);
+            }
+
+        }
+
+        var addOn = "";
+
+        if (deleteDb == undefined) {
+            addOn = " " + x.value
+        }
+
         var dbS = firebase.database().ref('users/' + user + '/TimeClock/HoursWorked/' + dateKeyS);
-        var db = firebase.database().ref('users/' + user + '/TimeClock/HoursWorked/' + dateKey);
+        //        console.log(dateKeyS);
+        var db = firebase.database().ref('users/' + user + '/TimeClock/HoursWorked/' + dateKey + addOn);
 
         document.getElementById("secondShiftIn").innerHTML = "Clocked in at: " + l.value;
         document.getElementById("secondShiftOut").innerHTML = "Clocked out at: " + m.value;
@@ -1522,6 +1548,10 @@ function editFirebase() {
         document.getElementById('modalTextCommentIn').innerHTML = "CommentIn: " + y.value;
         document.getElementById('modalTextCommentOut').innerHTML = "CommentOut: " + z.value;
 
+        if (deleteDb != undefined) {
+            deleteDb.remove();
+        }
+
         db.update({
             "In": x.value,
             "CommentIn": y.value,
@@ -1529,13 +1559,14 @@ function editFirebase() {
             "CommentOut": z.value
         });
 
-        dbS.update({
-            "In": l.value,
-            "CommentIn": n.value,
-            "Out": m.value,
-            "CommentOut": o.value
-        });
-
+        if (realDateSIn != "") {
+            dbS.update({
+                "In": l.value,
+                "CommentIn": n.value,
+                "Out": m.value,
+                "CommentOut": o.value
+            });
+        }
         document.getElementById('save').classList.add("hide");
     })
 }
