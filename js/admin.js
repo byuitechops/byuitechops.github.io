@@ -269,6 +269,7 @@ function deleteUser(user) {
                 alert(error)
             });
     }
+    location.reload();
 }
 
 // Get the View modal
