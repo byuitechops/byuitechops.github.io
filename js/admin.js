@@ -23,22 +23,24 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                 var shot = snap.val();
                 for (titles in shot) {
                     if (titles == 'Admin') {
-                        //Load Page
-                        document.getElementById('view');
-                        // Start listing users from the beginning, 1000 at a time.
-                        firebase.database().ref('users').on('value', snap => {
-                            snap = snap.val();
-                            var users;
-                            var list = [];
-                            for (users in snap) {
-                                list.push(users);
-                            }
-                            if (c == 0) {
-                                tableCreate(list);
-                                c++;
-                            };
-                        });
-                        break;
+                        if (shot[titles] == true) {
+                            //Load Page
+                            document.getElementById('view');
+                            // Start listing users from the beginning, 1000 at a time.
+                            firebase.database().ref('users').on('value', snap => {
+                                snap = snap.val();
+                                var users;
+                                var list = [];
+                                for (users in snap) {
+                                    list.push(users);
+                                }
+                                if (c == 0) {
+                                    tableCreate(list);
+                                    c++;
+                                };
+                            });
+                            break;
+                        }
                     } else {
                         window.location.replace("home.html");
                     }

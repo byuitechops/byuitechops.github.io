@@ -25,28 +25,30 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                 var shot = snap.val();
                 for (titles in shot) {
                     if (titles == 'Admin') {
-                        //Load Admin Link
-                        document.getElementById('adminlink').classList.remove('hide');
-                        // Build drop down list
-                        firebase.database().ref('users').on('value', snap => {
-                            snap = snap.val();
-                            var namesList = [];
-                            var x;
-                            for (x in snap) {
-                                namesList.push(x);
-                            }
-                            var namesDiv = document.getElementById('names');
-                            var selectTag = "<select id='sNames' onchange='displayInfo(this.value)'>";
-                            for (y = 0; y < namesList.length; y++) {
-                                if (name == namesList[y]) {
-                                    selectTag += "<option value='" + namesList[y] + "' selected>" + namesList[y] + "</option>";
-                                } else {
-                                    selectTag += "<option value='" + namesList[y] + "'>" + namesList[y] + "</option>";
+                        if (shot[titles] == true) {
+                            //Load Admin Link
+                            document.getElementById('adminlink').classList.remove('hide');
+                            // Build drop down list
+                            firebase.database().ref('users').on('value', snap => {
+                                snap = snap.val();
+                                var namesList = [];
+                                var x;
+                                for (x in snap) {
+                                    namesList.push(x);
                                 }
-                            }
-                            selectTag += "</select>";
-                            namesDiv.innerHTML = selectTag;
-                        })
+                                var namesDiv = document.getElementById('names');
+                                var selectTag = "<select id='sNames' onchange='displayInfo(this.value)'>";
+                                for (y = 0; y < namesList.length; y++) {
+                                    if (name == namesList[y]) {
+                                        selectTag += "<option value='" + namesList[y] + "' selected>" + namesList[y] + "</option>";
+                                    } else {
+                                        selectTag += "<option value='" + namesList[y] + "'>" + namesList[y] + "</option>";
+                                    }
+                                }
+                                selectTag += "</select>";
+                                namesDiv.innerHTML = selectTag;
+                            })
+                        }
                     }
                 }
             });

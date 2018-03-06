@@ -18,8 +18,10 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                 var shot = snap.val();
                 for (titles in shot) {
                     if (titles == 'Admin') {
-                        //Load Admin Link
-                        document.getElementById('adminlink').classList.remove('hide');
+                        if (shot[titles] == true) {
+                            //Load Admin Link
+                            document.getElementById('adminlink').classList.remove('hide');
+                        }
                     }
                 }
             });

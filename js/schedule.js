@@ -23,10 +23,12 @@
                     var shot = snap.val();
                     for (titles in shot) {
                         if (titles == 'Admin') {
-                            document.getElementById('team-dropdown').classList.remove('hide');
-                            //Load Admin Link
-                            document.getElementById('adminlink').classList.remove('hide');
-                            break;
+                            if (shot[titles] == true) {
+                                document.getElementById('team-dropdown').classList.remove('hide');
+                                //Load Admin Link
+                                document.getElementById('adminlink').classList.remove('hide');
+                                break;
+                            }
                         } else if (titles == 'Team') {
                             document.getElementById('scheduleFrame').classList.remove('hide');
                             if (shot[titles] == 'canvas 3') {

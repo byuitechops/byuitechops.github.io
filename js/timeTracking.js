@@ -460,12 +460,6 @@ function modalBox(number) {
     edit.onclick = function () {
         editCalendar();
         document.getElementById('save').classList.remove("hide");
-        document.getElementById('delete').classList.remove("hide");
-
-        //        var deleteButton = document.getElementById("delete");
-        //        deleteButton.onclick = function () {
-        //            deleteShift();
-        //        }
 
         var save = document.getElementById("save");
         save.onclick = function () {
@@ -502,33 +496,37 @@ function setMonth() {
                 // iterates through each user to check for a TeamLead or Admin category
                 for (i in currentUser) {
                     if (i == 'TeamLead') {
-                        var team = currentUser[i];
-                        document.getElementById('name-dropdown').classList.remove("hide");
+                        if (currentUser[i] == true) {
+                            var team = currentUser[i];
+                            document.getElementById('name-dropdown').classList.remove("hide");
 
-                        firebase.database().ref('users').on('value', snapshot => {
-                            var list = snapshot.val();
-                            var user;
-                            for (user in list) {
-                                var userData = list[user];
-                                var j;
-                                for (j in userData) {
-                                    if (j == 'Team') {
-                                        if (userData[j] == team) {
-                                            var opt = document.createElement("option");
-                                            opt.value = user;
-                                            opt.innerHTML = user;
-                                            document.getElementById('name-dropdown').appendChild(opt);
+                            firebase.database().ref('users').on('value', snapshot => {
+                                var list = snapshot.val();
+                                var user;
+                                for (user in list) {
+                                    var userData = list[user];
+                                    var j;
+                                    for (j in userData) {
+                                        if (j == 'Team') {
+                                            if (userData[j] == team) {
+                                                var opt = document.createElement("option");
+                                                opt.value = user;
+                                                opt.innerHTML = user;
+                                                document.getElementById('name-dropdown').appendChild(opt);
+                                            }
                                         }
                                     }
                                 }
-                            }
-                        })
+                            })
+                        }
                     }
                     if (i == 'Admin') {
-                        document.getElementById('team-dropdown').classList.remove("hide");
-                        document.getElementById('name-dropdown').classList.remove("hide");
-                        //Load Admin Link
-                        document.getElementById('adminlink').classList.remove('hide');
+                        if (currentUser[i] == true) {
+                            document.getElementById('team-dropdown').classList.remove("hide");
+                            document.getElementById('name-dropdown').classList.remove("hide");
+                            //Load Admin Link
+                            document.getElementById('adminlink').classList.remove('hide');
+                        }
                     }
                 }
             });
@@ -987,9 +985,6 @@ function calcTotals(selected) {
             var weekFour = 0;
             var stop4 = document.getElementById("rowfive").cells[0].id;
             for (var x = 0; x < rowfour.length - 1; x++) {
-
-                /* console.log(rowfour[x].innerHTML);
-                 console.log(monthDays[count]);*/
                 if (rowfour[x].innerHTML != "") {
                     if (rowfour[x].innerHTML != monthDays[count]) {
                         continue;
@@ -1634,7 +1629,6 @@ function editFirebase() {
             if (dates[i].indexOf(month + "-" + num + "-" + year) != -1) {
                 deleteDb = firebase.database().ref('users/' + user + '/TimeClock/HoursWorked/' + dates[i]);
             }
-
         }
 
         var addOn = "";
@@ -1644,7 +1638,6 @@ function editFirebase() {
         }
 
         var dbS = firebase.database().ref('users/' + user + '/TimeClock/HoursWorked/' + dateKeyS + addOn);
-        //        console.log(dateKeyS);
         var db = firebase.database().ref('users/' + user + '/TimeClock/HoursWorked/' + dateKey + addOn);
 
         document.getElementById("secondShiftIn").innerHTML = "Clocked in at: " + l.value;
@@ -1656,66 +1649,44 @@ function editFirebase() {
         document.getElementById('modalTextCommentIn').innerHTML = "CommentIn: " + y.value;
         document.getElementById('modalTextCommentOut').innerHTML = "CommentOut: " + z.value;
 
-        console.log('users/' + user + '/TimeClock/HoursWorked/' + dates[i]);
-        
         if (deleteDb != undefined) {
             deleteDb.remove();
         }
 
-        //        var dataUpdate = {
-        //                "In": l.value,
-        //                "CommentIn": n.value,
-        //                "Out": m.value,
-        //                "CommentOut": o.value
-        //            };
-        //        var dataUpdate2;
-        //        if (w.value.length == 0) {
-        //             dataUpdate2 = {
-        //                "In": x.value,
-        //                "CommentIn": y.value,
-        //                "Out" : null,
-        //                "CommentOut": z.value
-        //            }
-        //            w.value = "";
-        //        }
-        //        
-        //        if (x.value.length == 0) {
-        //             dataUpdate2 = {
-        //                "In": null,
-        //                "CommentIn": y.value,
-        //                "Out" : w.value,
-        //                "CommentOut": z.value
-        //            }
-        //            x.value = "";
-        //        }
-        //
-        //        db.update(dataUpdate);
-        //        db.update(dataUpdate2);
-
         if (x.value != 0) {
-            db.update({
-                "In": x.value,
-                "CommentIn": y.value,
-                "Out": w.value,
-                "CommentOut": z.value
-            });
+            if (w.value != 0) {
+                db.update({
+                    "In": x.value,
+                    "CommentIn": y.value,
+                    "Out": w.value,
+                    "CommentOut": z.value
+                });
+            } else {
+                db.update({
+                    "In": x.value,
+                    "CommentIn": y.value,
+                    "Out": null,
+                    "CommentOut": z.value
+                });
+            }
         }
 
-
-        // if all fields were empty and are still empty, don't update
-        // if a field was empty but isn't now, update
-        // turn empty fields being updated into null so they're deleted from firebase
-
-        console.log(document.getElementById("secondShiftIn").innerHTML);
-        console.log(l.value);
-
         if (l.value != 0) {
-            dbS.update({
-                "In": l.value,
-                "CommentIn": n.value,
-                "Out": m.value,
-                "CommentOut": o.value
-            });
+            if (m.value != 0) {
+                dbS.update({
+                    "In": l.value,
+                    "CommentIn": n.value,
+                    "Out": m.value,
+                    "CommentOut": o.value
+                });
+            } else {
+                dbS.update({
+                    "In": l.value,
+                    "CommentIn": n.value,
+                    "Out": null,
+                    "CommentOut": o.value
+                });
+            }
         }
 
         calcTotals(selected);
@@ -1725,12 +1696,3 @@ function editFirebase() {
     })
 >>>>>>> updates
 }
-
-//function deleteShift() {
-//    if (deleteDb != undefined) {
-//            deleteDb.remove();
-//        }
-//    document.getElementById('delete').classList.add("hide");
-//    var modal = document.getElementById('myModal');
-//    modal.style.display = "none";
-//}
