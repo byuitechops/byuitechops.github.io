@@ -22,8 +22,10 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
             var shot = snap.val();
             for (titles in shot) {
                 if (titles == 'Admin') {
-                    //Load Admin Link
-                    document.getElementById('adminlink').classList.remove('hide');
+                    if (snap[titles] == true) {
+                        //Load Admin Link
+                        document.getElementById('adminlink').classList.remove('hide');
+                    }
                 }
             }
         });
@@ -170,7 +172,6 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
         function loadUser() {
             dbRefUsers.child(user).on('value', snap => {
                 snap = snap.val();
-                console.log(snap);
 
                 txtCode.classList.add('hide');
                 submitCode.classList.add('hide');
@@ -188,19 +189,21 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                 var titles;
                 for (titles in snap) {
                     if (titles == 'Admin') {
-                        // Access to all
                         if (snap[titles] == true) {
-                            document.getElementById('screensteps').classList.remove('hide');
-                            document.getElementById('firebase').classList.remove('hide');
-                            document.getElementById('teamdynamix').classList.remove('hide');
+                            // Access to all
+                            if (snap[titles] == true) {
+                                document.getElementById('screensteps').classList.remove('hide');
+                                document.getElementById('firebase').classList.remove('hide');
+                                document.getElementById('teamdynamix').classList.remove('hide');
+                            }
+                            break;
                         }
-                        break;
                     } else if (titles == 'TeamLead') {
                         // Access to Basic & Teamdynamix
                         if (snap[titles] == true) {
                             document.getElementById('teamdynamix').classList.remove('hide');
+                            break;
                         }
-                        break;
                     } else if (titles == 'info') {
                         var key;
                         for (key in snap[titles]) {
