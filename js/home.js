@@ -22,7 +22,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
             var shot = snap.val();
             for (titles in shot) {
                 if (titles == 'Admin') {
-                    if (snap[titles] == true) {
+                    if (shot[titles] == true) {
                         //Load Admin Link
                         document.getElementById('adminlink').classList.remove('hide');
                     }

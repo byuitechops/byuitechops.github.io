@@ -117,7 +117,6 @@ function viewUser(user) {
         var titles;
         for (titles in shot) {
             if (titles == 'TimeClock' || titles == "info") {
-
                 continue;
             } else {
                 list.push(titles);
