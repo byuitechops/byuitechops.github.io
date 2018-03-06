@@ -460,11 +460,19 @@ function modalBox(number) {
     edit.onclick = function () {
         editCalendar();
         document.getElementById('save').classList.remove("hide");
+        document.getElementById('delete').classList.remove("hide");
+
+        //        var deleteButton = document.getElementById("delete");
+        //        deleteButton.onclick = function () {
+        //            deleteShift();
+        //        }
 
         var save = document.getElementById("save");
         save.onclick = function () {
             editFirebase();
         }
+
+
 
 
     }
@@ -600,11 +608,11 @@ function calcTotals(selected) {
             var stop = document.getElementById("rowtwo").cells[0].id;
 
             for (var x = 0; x < rowone.length - 1; x++) {
-                
-                if(person[currentMonth[count]].Out == "") {
+
+                if (person[currentMonth[count]].Out == "") {
                     person[currentMonth[count]].Out = 0;
                 }
-                
+
 
                 if (rowone[x].innerHTML != "") {
                     if (rowone[x].innerHTML != monthDays[count]) {
@@ -1492,6 +1500,8 @@ function editCalendar(selected) {
     sComOut.appendChild(o);
 }
 
+var deleteDb;
+
 function editFirebase() {
     var selected = document.getElementById('name-dropdown').value;
     var num = selectedNumber.getAttribute("value");
@@ -1526,7 +1536,7 @@ function editFirebase() {
         }
 
 
-        var deleteDb;
+
         for (var i = 0; i < dates.length; i++) {
             if (dates[i].indexOf(month + "-" + num + "-" + year) != -1) {
                 deleteDb = firebase.database().ref('users/' + user + '/TimeClock/HoursWorked/' + dates[i]);
@@ -1553,35 +1563,80 @@ function editFirebase() {
         document.getElementById('modalTextCommentIn').innerHTML = "CommentIn: " + y.value;
         document.getElementById('modalTextCommentOut').innerHTML = "CommentOut: " + z.value;
 
+        console.log('users/' + user + '/TimeClock/HoursWorked/' + dates[i]);
+        
         if (deleteDb != undefined) {
             deleteDb.remove();
         }
-        
-        var dataUpdate = {
+
+        //        var dataUpdate = {
+        //                "In": l.value,
+        //                "CommentIn": n.value,
+        //                "Out": m.value,
+        //                "CommentOut": o.value
+        //            };
+        //        var dataUpdate2;
+        //        if (w.value.length == 0) {
+        //             dataUpdate2 = {
+        //                "In": x.value,
+        //                "CommentIn": y.value,
+        //                "Out" : null,
+        //                "CommentOut": z.value
+        //            }
+        //            w.value = "";
+        //        }
+        //        
+        //        if (x.value.length == 0) {
+        //             dataUpdate2 = {
+        //                "In": null,
+        //                "CommentIn": y.value,
+        //                "Out" : w.value,
+        //                "CommentOut": z.value
+        //            }
+        //            x.value = "";
+        //        }
+        //
+        //        db.update(dataUpdate);
+        //        db.update(dataUpdate2);
+
+        if (x.value != 0) {
+            db.update({
+                "In": x.value,
+                "CommentIn": y.value,
+                "Out": w.value,
+                "CommentOut": z.value
+            });
+        }
+
+
+        // if all fields were empty and are still empty, don't update
+        // if a field was empty but isn't now, update
+        // turn empty fields being updated into null so they're deleted from firebase
+
+        console.log(document.getElementById("secondShiftIn").innerHTML);
+        console.log(l.value);
+
+        if (l.value != 0) {
+            dbS.update({
                 "In": l.value,
                 "CommentIn": n.value,
                 "Out": m.value,
                 "CommentOut": o.value
-            };
-        
-        if (w.value.length == 0) {
-            console.log("hello");
-            dataUpdate = {
-                "In": l.value,
-                "CommentIn": n.value,
-                "CommentOut": o.value
-            }
+            });
         }
-        console.log(w.value);
 
-        db.update(dataUpdate);
-
-        if (realDateSIn != "") {
-            dbS.update();
-        }
         calcTotals(selected);
         var modal = document.getElementById('myModal');
         document.getElementById('save').classList.add("hide");
         modal.style.display = "none";
     })
 }
+
+//function deleteShift() {
+//    if (deleteDb != undefined) {
+//            deleteDb.remove();
+//        }
+//    document.getElementById('delete').classList.add("hide");
+//    var modal = document.getElementById('myModal');
+//    modal.style.display = "none";
+//}
