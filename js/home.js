@@ -211,6 +211,9 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                                 if (snap[titles][key] == 'Tech') {
                                     document.getElementById('firebase').classList.remove('hide');
                                 }
+                                if (snap[titles][key] == 'Trainer') {
+                                    document.getElementById('firebase').classList.remove('hide');
+                                }
                             }
                         }
                     }
