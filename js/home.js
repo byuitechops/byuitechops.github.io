@@ -197,9 +197,9 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                         break;
                     } else if (titles == 'TeamLead') {
                         // Access to Basic & Teamdynamix
-                        //                        if (snap[titles] == true) {
-                        document.getElementById('teamdynamix').classList.remove('hide');
-                        //                        }
+                        if (snap[titles] == true) {
+                            document.getElementById('teamdynamix').classList.remove('hide');
+                        }
                         break;
                     } else if (titles == 'info') {
                         var key;
