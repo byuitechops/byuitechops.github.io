@@ -166,7 +166,7 @@ td#monthly {
 
 /* The Close Button */
 
-.edit {
+#edit {
     font-size: 25px;
     color: #aaa;
     float: right;
@@ -192,8 +192,8 @@ td#monthly {
 
 .close:hover,
 .close:focus,
-.edit:focus,
-.edit:hover,
+#edit:focus,
+#edit:hover,
 #save:hover,
 #save:focus {
     color: black;
