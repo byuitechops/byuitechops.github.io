@@ -208,13 +208,14 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                         var key;
                         for (key in snap[titles]) {
                             if (key == 'position') {
-                                if (snap[titles][key] == 'Screensteps') {
+                                var position = snap[titles][key];
+                                if (position.indexOf("Screensteps")) {
                                     document.getElementById('screensteps').classList.remove('hide');
                                 }
-                                if (snap[titles][key] == 'Tech') {
+                                if (position.indexOf('Tech')) {
                                     document.getElementById('firebase').classList.remove('hide');
                                 }
-                                if (snap[titles][key] == 'Trainer') {
+                                if (position.indexOf('Trainer')) {
                                     document.getElementById('firebase').classList.remove('hide');
                                 }
                             }
