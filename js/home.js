@@ -191,31 +191,31 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                     if (titles == 'Admin') {
                         if (snap[titles] == true) {
                             // Access to all
-                            if (snap[titles] == true) {
-                                document.getElementById('screensteps').classList.remove('hide');
-                                document.getElementById('firebase').classList.remove('hide');
-                                document.getElementById('teamdynamix').classList.remove('hide');
-                            }
-                            break;
+                            document.getElementById('screensteps').classList.remove('hide');
+                            document.getElementById('firebase').classList.remove('hide');
+                            document.getElementById('teamdynamix').classList.remove('hide');
                         }
-                    } else if (titles == 'TeamLead') {
+                    }
+                    if (titles == 'TeamLead') {
                         // Access to Basic & Teamdynamix
                         if (snap[titles] == true) {
                             document.getElementById('teamdynamix').classList.remove('hide');
-                            break;
                         }
-                    } else if (titles == 'info') {
+                    }
+                    if (titles == 'info') {
                         var key;
                         for (key in snap[titles]) {
                             if (key == 'position') {
                                 var position = snap[titles][key];
-                                if (position.indexOf("Screensteps")) {
+                                console.log(position);
+                                console.log(position.indexOf("Tech"));
+                                if (position.indexOf("Screensteps") != -1) {
                                     document.getElementById('screensteps').classList.remove('hide');
                                 }
-                                if (position.indexOf('Tech')) {
+                                if (position.indexOf('Tech') != -1) {
                                     document.getElementById('firebase').classList.remove('hide');
                                 }
-                                if (position.indexOf('Trainer')) {
+                                if (position.indexOf('Trainer') != -1) {
                                     document.getElementById('firebase').classList.remove('hide');
                                 }
                             }
