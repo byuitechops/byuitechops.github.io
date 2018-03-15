@@ -30,6 +30,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
             }
         });
 
+        // Enter code to restore access
         var blockallcode;
         var brightspacecode;
         var canvascode;
@@ -168,6 +169,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                 document.getElementById('txtCode').value = "";
             }
         });
+        // End of code to allow access
 
         function loadUser() {
             dbRefUsers.child(user).on('value', snap => {
@@ -200,6 +202,19 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                         // Access to Basic & Teamdynamix
                         if (snap[titles] == true) {
                             document.getElementById('teamdynamix').classList.remove('hide');
+                            if (snap.teamDynamix == true) {
+                                var icon = document.getElementById('tdyn');
+                                icon.setAttribute('href', "https://www.teamdynamix.com/");
+                                tdynpic.classList.remove('locked');
+                            } else {
+                                var icon = document.getElementById('tdyn');
+                                icon.addEventListener('click', e => {
+                                    window.alert('You are blocked for training purposes. Check your email for training link');
+                                });
+                                txtCode.classList.remove('hide');
+                                submitCode.classList.remove('hide');
+                                tdrpic.classList.add('locked');
+                            }
                         }
                     }
                     if (titles == 'info') {
@@ -207,16 +222,37 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                         for (key in snap[titles]) {
                             if (key == 'position') {
                                 var position = snap[titles][key];
-                                console.log(position);
-                                console.log(position.indexOf("Tech"));
                                 if (position.indexOf("Screensteps") != -1) {
                                     document.getElementById('screensteps').classList.remove('hide');
+                                    if (snap.screenSteps == true) {
+                                        var icon = document.getElementById('ss');
+                                        icon.setAttribute('href', "https://byu-idaho.screenstepslive.com/admin/v2/sites/18626/manuals/70917/chapters/225697/articles");
+                                        sspic.classList.remove('locked');
+                                    } else {
+                                        var icon = document.getElementById('ss');
+                                        icon.addEventListener('click', e => {
+                                            window.alert('You are blocked for training purposes. Check your email for training link');
+                                        });
+                                        txtCode.classList.remove('hide');
+                                        submitCode.classList.remove('hide');
+                                        sspic.classList.add('locked');
+                                    }
                                 }
-                                if (position.indexOf('Tech') != -1) {
+                                if (position.indexOf('Tech') != -1 || position.indexOf('Trainer') != -1) {
                                     document.getElementById('firebase').classList.remove('hide');
-                                }
-                                if (position.indexOf('Trainer') != -1) {
-                                    document.getElementById('firebase').classList.remove('hide');
+                                    if (snap.firebaseConsole == true) {
+                                        var icon = document.getElementById('fb');
+                                        icon.setAttribute('href', "https://console.firebase.google.com/");
+                                        fbpic.classList.remove('locked');
+                                    } else {
+                                        var icon = document.getElementById('fb');
+                                        icon.addEventListener('click', e => {
+                                            window.alert('You are blocked for training purposes. Check your email for training link');
+                                        });
+                                        txtCode.classList.remove('hide');
+                                        submitCode.classList.remove('hide');
+                                        fbpic.classList.add('locked');
+                                    }
                                 }
                             }
                         }
@@ -261,19 +297,6 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                     txtCode.classList.remove('hide');
                     submitCode.classList.remove('hide');
                     equpic.classList.add('locked');
-                }
-                if (snap.teamDynamix == true) {
-                    var icon = document.getElementById('tdyn');
-                    icon.setAttribute('href', "https://www.teamdynamix.com/");
-                    tdynpic.classList.remove('locked');
-                } else {
-                    var icon = document.getElementById('tdyn');
-                    icon.addEventListener('click', e => {
-                        window.alert('You are blocked for training purposes. Check your email for training link');
-                    });
-                    txtCode.classList.remove('hide');
-                    submitCode.classList.remove('hide');
-                    tdrpic.classList.add('locked');
                 }
                 if (snap.teamDrive == true) {
                     var icon = document.getElementById('tdr');
@@ -378,32 +401,6 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                     txtCode.classList.remove('hide');
                     submitCode.classList.remove('hide');
                     pathpic.classList.add('locked');
-                }
-                if (snap.screenSteps == true) {
-                    var icon = document.getElementById('ss');
-                    icon.setAttribute('href', "https://byu-idaho.screenstepslive.com/admin/v2/sites/18626/manuals/70917/chapters/225697/articles");
-                    sspic.classList.remove('locked');
-                } else {
-                    var icon = document.getElementById('ss');
-                    icon.addEventListener('click', e => {
-                        window.alert('You are blocked for training purposes. Check your email for training link');
-                    });
-                    txtCode.classList.remove('hide');
-                    submitCode.classList.remove('hide');
-                    sspic.classList.add('locked');
-                }
-                if (snap.firebaseConsole == true) {
-                    var icon = document.getElementById('fb');
-                    icon.setAttribute('href', "https://console.firebase.google.com/");
-                    fbpic.classList.remove('locked');
-                } else {
-                    var icon = document.getElementById('fb');
-                    icon.addEventListener('click', e => {
-                        window.alert('You are blocked for training purposes. Check your email for training link');
-                    });
-                    txtCode.classList.remove('hide');
-                    submitCode.classList.remove('hide');
-                    fbpic.classList.add('locked');
                 }
                 if (snap.canvasStyleGuide == true) {
                     var icon = document.getElementById('csg');
