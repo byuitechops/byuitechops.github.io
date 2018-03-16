@@ -25,11 +25,12 @@
 
 .modal-content {
     background-color: #fefefe;
-    margin: 15% auto;
+    margin: 5% auto;
     /* 15% from the top and centered */
-    padding: 10px;
+    padding: 20px;
     border: 1px solid #888;
     width: 80%;
+    height: 75%;
     /* Could be more or less, depending on screen size */
     display: flex;
     justify-content: center;
@@ -37,11 +38,12 @@
 
 .big {
     font-size: 24px;
-    color: orange;
+    color: #f89901;
     font-weight: bold;
 }
 
-.modal-content div {
+.modal-content p {
     margin: 1%;
-    max-width: 45%;
+    max-width: 50%;
+    vertical-align: middle;
 }
