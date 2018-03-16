@@ -19,7 +19,7 @@ body {
 }
 
 .hide {
-    display: none;
+    display: none !important;
 }
 
 /* ------------------------------- End of General Styling --------------------------------*/
@@ -156,7 +156,7 @@ td#monthly {
 
 .modal-content {
     background-color: #fefefe;
-    margin: 15% 15% 0% 31%;
+    margin: 10% 15% 0% 31%;
     /* 15% from the top and centered */
     padding: 0 15px;
     border: 1px solid #888;
@@ -206,25 +206,34 @@ td#monthly {
 
 /* ------------------------------------ Dropdown Menus -----------------------------------*/
 
+.three-dropdowns 
+{
+    display: flex;
+    justify-content: center;
+    margin-left: 12.5%;
+}
+
 #team-dropdown,
 #name-dropdown,
-#month-dropdown {
+#month-dropdown
+ {
+    display: flex;
+    margin-right: 10px;
+    margin-left: 10px;
     position: relative;
-    left: 32.5%;
     text-align: left;
     background-color: #0076c6;
     color: white;
-    margin: 0.9em;
     border-radius: 1em;
     font-size: 19px;
-    margin-left: 50px;
-    margin-right: 50px;
     overflow: hidden;
     padding: 5px 10px;
     white-space: nowrap;
     width: 200px;
     height: 35px;
 }
+
+
 
 /* -------------------------------- End of Dropdown Menus --------------------------------*/
 
@@ -249,6 +258,13 @@ td#monthly {
         width: 100%;
         text-align: center;
     }
+    .three-dropdowns 
+    {
+        display: flex;
+        justify-content: center;
+        margin-left: 12.5%;
+    }
+
     #team-dropdown,
     #name-dropdown,
     #month-dropdown {
@@ -301,15 +317,20 @@ td#monthly {
         text-align: center;
         float: none;
     }
+    .three-dropdowns 
+    {
+        display: flex;
+        justify-content: center;
+        margin-right: 95px;
+    }
+
     /*  Dropdown menus  */
     #team-dropdown,
     #name-dropdown,
-    #month-dropdown {
-        left: 2%;
+    {
         text-align: left;
         background-color: #0076c6;
         color: white;
-        margin: 0.9em;
         border-radius: 1em;
         font-size: 19px;
         overflow: hidden;
