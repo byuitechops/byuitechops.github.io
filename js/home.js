@@ -488,6 +488,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
             };
             document.getElementById('comment').value = "";
             isCheckedIn();
+            document.getElementById('myModal').style.display = "block";
         });
 
         document.getElementById('checkOut').addEventListener('click', e => {
