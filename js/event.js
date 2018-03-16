@@ -57,14 +57,14 @@ function showEvent() {
                             }
                             var message = 'full year working here! Congratulations on your workiversary';
 
-                            var div = document.createElement('p');
+                            var div = document.createElement('div');
                             div.innerHTML = "Today marks <span class='big'>" + name + "'s " + yearDiff + oi + "</span> " + message;
                             document.getElementById('announce').appendChild(div);
                         }
                         if (event == 'birthday') {
                             var message = '! Happy birthday ' + name + "!";
 
-                            var div = document.createElement('p');
+                            var div = document.createElement('div');
                             div.innerHTML = "Today is <span class='big'>" + name + "'s </span> " + event + message;
                             document.getElementById('announce').appendChild(div);
                         }

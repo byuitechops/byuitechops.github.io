@@ -34,6 +34,7 @@
     /* Could be more or less, depending on screen size */
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .big {
@@ -42,8 +43,8 @@
     font-weight: bold;
 }
 
-.modal-content p {
+.modal-content div {
     margin: 1%;
     max-width: 50%;
-    vertical-align: middle;
+    padding: 20px;
 }
