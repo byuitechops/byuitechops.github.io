@@ -115,13 +115,13 @@ function displayInfo(selected) {
             document.getElementById('dSpeed').innerHTML = snap.speed;
         }
 
-        if (snap.strikes == "") {
+        if (snap.strikes == "" && snap.strikes != 0) {
             document.getElementById('dStrikes').innerHTML = "No Data";
         } else {
             document.getElementById('dStrikes').innerHTML = snap.strikes;
         }
 
-        if (snap.sick == "") {
+        if (snap.sick == "" && snap.sick != 0) {
             document.getElementById('dSick').innerHTML = "No Data";
         } else {
             document.getElementById('dSick').innerHTML = snap.sick;

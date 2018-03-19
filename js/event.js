@@ -1,5 +1,3 @@
-showEvent();
-
 // Get the modal
 var modal = document.getElementById('myModal');
 
@@ -7,12 +5,14 @@ var modal = document.getElementById('myModal');
 window.onclick = function (event) {
     if (event.target == modal) {
         modal.style.display = "none";
+        document.getElementsByClassName('content')[0].style.overflow = 'initial';
     }
 }
 
 function showEvent() {
     firebase.database().ref('dates').on('value', snap => {
         snap = snap.val();
+        document.getElementsByClassName('content')[0].style.overflow = 'hidden';
 
         var name;
         for (name in snap) {
