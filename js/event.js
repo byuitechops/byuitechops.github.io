@@ -6,6 +6,10 @@ window.onclick = function (event) {
     if (event.target == modal) {
         modal.style.display = "none";
         document.getElementsByClassName('content')[0].style.overflow = 'initial';
+        var elements = document.getElementsByClassName('deletethis');
+        while (elements.length > 0) {
+            elements[0].parentNode.removeChild(elements[0]);
+        }
     }
 }
 
@@ -58,6 +62,7 @@ function showEvent() {
                             var message = 'full year working here! Congratulations on your workiversary';
 
                             var div = document.createElement('div');
+                            div.classList.add('deletethis');
                             div.innerHTML = "Today marks <span class='big'>" + name + "'s " + yearDiff + oi + "</span> " + message;
                             document.getElementById('announce').appendChild(div);
                         }
