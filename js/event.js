@@ -62,15 +62,25 @@ function showEvent() {
                             var message = 'full year working here! Congratulations on your workiversary';
 
                             var div = document.createElement('div');
+                            var image = document.createElement('img');
+                            image.src = 'images/anniversary.png';
+                            image.style.display = 'block';
+                            image.style.margin = '10px auto';
                             div.classList.add('deletethis');
                             div.innerHTML = "Today marks <span class='big'>" + name + "'s " + yearDiff + oi + "</span> " + message;
+                            div.appendChild(image);
                             document.getElementById('announce').appendChild(div);
                         }
                         if (event == 'birthday') {
                             var message = '! Happy birthday ' + name + "!";
 
                             var div = document.createElement('div');
+                            var image = document.createElement('img');
+                            image.src = 'images/birthday.png';
+                            image.style.display = 'block';
+                            image.style.margin = '10px auto';
                             div.innerHTML = "Today is <span class='big'>" + name + "'s </span> " + event + message;
+                            div.appendChild(image);
                             document.getElementById('announce').appendChild(div);
                         }
                     }
