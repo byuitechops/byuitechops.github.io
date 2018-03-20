@@ -1,8 +1,6 @@
 .pyro > .before,
 .pyro > .after {
     position: absolute;
-    width: 0;
-    height: 0;
     border-radius: 1px 40px 1px;
 
     box-shadow: -120px -218.66667px blue,

@@ -194,8 +194,47 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                         if (snap[titles] == true) {
                             // Access to all
                             document.getElementById('screensteps').classList.remove('hide');
+                            if (snap.screenSteps == true) {
+                                var icon = document.getElementById('ss');
+                                icon.setAttribute('href', "https://byu-idaho.screenstepslive.com/admin/v2/sites/18626/manuals/70917/chapters/225697/articles");
+                                sspic.classList.remove('locked');
+                            } else {
+                                var icon = document.getElementById('ss');
+                                icon.addEventListener('click', e => {
+                                    window.alert('You are blocked for training purposes. Check your email for training link');
+                                });
+                                txtCode.classList.remove('hide');
+                                submitCode.classList.remove('hide');
+                                sspic.classList.add('locked');
+                            }
                             document.getElementById('firebase').classList.remove('hide');
+                            if (snap.firebaseConsole == true) {
+                                var icon = document.getElementById('fb');
+                                icon.setAttribute('href', "https://console.firebase.google.com/");
+                                fbpic.classList.remove('locked');
+                            } else {
+                                var icon = document.getElementById('fb');
+                                icon.addEventListener('click', e => {
+                                    window.alert('You are blocked for training purposes. Check your email for training link');
+                                });
+                                txtCode.classList.remove('hide');
+                                submitCode.classList.remove('hide');
+                                fbpic.classList.add('locked');
+                            }
                             document.getElementById('teamdynamix').classList.remove('hide');
+                            if (snap.teamDynamix == true) {
+                                var icon = document.getElementById('tdyn');
+                                icon.setAttribute('href', "https://www.teamdynamix.com/");
+                                tdynpic.classList.remove('locked');
+                            } else {
+                                var icon = document.getElementById('tdyn');
+                                icon.addEventListener('click', e => {
+                                    window.alert('You are blocked for training purposes. Check your email for training link');
+                                });
+                                txtCode.classList.remove('hide');
+                                submitCode.classList.remove('hide');
+                                tdrpic.classList.add('locked');
+                            }
                         }
                     }
                     if (titles == 'TeamLead') {
