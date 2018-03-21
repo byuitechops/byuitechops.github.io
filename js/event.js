@@ -83,8 +83,8 @@ function showEvent() {
                             div.appendChild(image);
                             document.getElementById('announce').appendChild(div);
                         }
+                        document.getElementById('myModal').style.display = "block";
                     }
-                    document.getElementById('myModal').style.display = "block";
                 }
             }
         }
