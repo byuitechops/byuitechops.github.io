@@ -1558,13 +1558,19 @@ function editFirebase() {
         }
 
         var addOn = "";
+        var addOn2 = "";
 
         // if a key doesn't exist, this provides a date for the new key
-        if (deleteDb == undefined) {
-            addOn = " " + x.value
+        if (deleteDb == undefined || dateKeyS.length < 10) {
+            addOn2 = " " + l.value
         }
+        
+        if (deleteDb == undefined || dateKey.length < 10) {
+            addOn = ' ' + x.value
+        }
+        // || dateKeyS.length < 15 || dateKey.length < 15
 
-        var dbS = firebase.database().ref('users/' + user + '/TimeClock/HoursWorked/' + dateKeyS + addOn);
+        var dbS = firebase.database().ref('users/' + user + '/TimeClock/HoursWorked/' + dateKeyS + addOn2);
         var db = firebase.database().ref('users/' + user + '/TimeClock/HoursWorked/' + dateKey + addOn);
 
         // sets the text of the modal box to the new values
@@ -1599,6 +1605,7 @@ function editFirebase() {
                     "CommentOut": z.value
                 });
             }
+            
         }
 
         // updates firebase with the new values entered by the user (second shift)
