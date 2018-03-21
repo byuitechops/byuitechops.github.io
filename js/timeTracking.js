@@ -1523,7 +1523,7 @@ function editFirebase() {
     var thirdQuoteSIn = document.getElementById("secondShiftIn").innerHTML.indexOf("\"", 40);
     var lastQuoteSIn = document.getElementById("secondShiftIn").innerHTML.lastIndexOf("\"");
     var realDateSIn = document.getElementById("secondShiftIn").innerHTML.slice(thirdQuoteSIn + 1, lastQuoteSIn);
-    var dateKeyS = month + "-" + num + "-" + year + " " + realDateSIn; // creates a key to access firebase
+    var dateKeyS = month + "-" + num + "-" + year + " "; // creates a key to access firebase
 
     // gets the date and time in proper format from the inner HTML that already exists from previous functions
     var thirdQuoteSOut = document.getElementById("secondShiftOut").innerHTML.indexOf("\"", 40);
@@ -1534,7 +1534,7 @@ function editFirebase() {
     var thirdQuoteIn = document.getElementById("modalTextIn").innerHTML.indexOf("\"", 40);
     var lastQuoteIn = document.getElementById("modalTextIn").innerHTML.lastIndexOf("\"");
     var realDateIn = document.getElementById("modalTextIn").innerHTML.slice(thirdQuoteIn + 1, lastQuoteIn);
-    var dateKey = month + "-" + num + "-" + year + " " + realDateIn; // creates a key to access firebase
+    var dateKey = month + "-" + num + "-" + year + " "; // creates a key to access firebase
 
     // gets the date and time in proper format from the inner HTML that already exists from previous functions
     var thirdQuoteOut = document.getElementById("modalTextOut").innerHTML.indexOf("\"", 40);
@@ -1551,24 +1551,24 @@ function editFirebase() {
         }
 
         for (var i = 0; i < times.length; i++) {
+
             // creates a key to delete to be replaced with a new key with updated info
             if (times[i].indexOf(month + "-" + num + "-" + year) != -1) {
+                console.log(times[i]);
                 deleteDb = firebase.database().ref('users/' + user + '/TimeClock/HoursWorked/' + times[i]);
+                // deletes existing key with old information to make room for new key
+                if (deleteDb != undefined) {
+                    deleteDb.remove();
+                }
             }
         }
 
+
+
         var addOn = "";
         var addOn2 = "";
-
-        // if a key doesn't exist, this provides a date for the new key
-        if (deleteDb == undefined || dateKeyS.length < 10) {
-            addOn2 = " " + l.value
-        }
-        
-        if (deleteDb == undefined || dateKey.length < 10) {
-            addOn = ' ' + x.value
-        }
-        // || dateKeyS.length < 15 || dateKey.length < 15
+        addOn2 = " " + l.value
+        addOn = ' ' + x.value
 
         var dbS = firebase.database().ref('users/' + user + '/TimeClock/HoursWorked/' + dateKeyS + addOn2);
         var db = firebase.database().ref('users/' + user + '/TimeClock/HoursWorked/' + dateKey + addOn);
@@ -1583,30 +1583,7 @@ function editFirebase() {
         document.getElementById('modalTextCommentIn').innerHTML = "CommentIn: " + y.value;
         document.getElementById('modalTextCommentOut').innerHTML = "CommentOut: " + z.value;
 
-        // deletes existing key with old information to make room for new key
-        if (deleteDb != undefined) {
-            deleteDb.remove();
-        }
 
-        // updates firebase with the new values entered by the user (first shift)
-        if (x.value != 0) {
-            if (w.value != 0) {
-                db.update({
-                    "In": x.value,
-                    "CommentIn": y.value,
-                    "Out": w.value,
-                    "CommentOut": z.value
-                });
-            } else {
-                db.update({
-                    "In": x.value,
-                    "CommentIn": y.value,
-                    "Out": null,
-                    "CommentOut": z.value
-                });
-            }
-            
-        }
 
         // updates firebase with the new values entered by the user (second shift)
         if (l.value != 0) {
@@ -1626,6 +1603,28 @@ function editFirebase() {
                 });
             }
         }
+
+
+        // updates firebase with the new values entered by the user (first shift)
+        if (x.value != 0) {
+            if (w.value != 0) {
+                db.update({
+                    "In": x.value,
+                    "CommentIn": y.value,
+                    "Out": w.value,
+                    "CommentOut": z.value
+                });
+            } else {
+                db.update({
+                    "In": x.value,
+                    "CommentIn": y.value,
+                    "Out": null,
+                    "CommentOut": z.value
+                });
+            }
+
+        }
+
 
         calcTotals(selected); // Refreshes totals chart when new info is updated
         var modal = document.getElementById('myModal');
