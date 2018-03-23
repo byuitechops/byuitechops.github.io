@@ -62,7 +62,8 @@ function setUser(user) {
         "monthlyTraining": true,
         "firebaseConsole": true,
         "canvasStyleGuide": true,
-        "totStyleGuide": true
+        "totStyleGuide": true,
+        "teamDynamix": false
     };
     try {
         firebase.database().ref('users/' + user).update(data);
