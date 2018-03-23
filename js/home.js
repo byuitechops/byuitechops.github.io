@@ -9,6 +9,7 @@ const config = {
 };
 firebase.initializeApp(config);
 
+
 firebase.auth().onAuthStateChanged(firebaseUser => {
     if (firebaseUser) {
         // If user is logged in
@@ -19,7 +20,6 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
             // Set user to Name of Current User
             user = profile.displayName
         });
-
         firebase.database().ref('users').child(user).on('value', snap => {
             // Loop through the user in the database
             var titles;
@@ -48,7 +48,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
         var unblockallcode;
         var workdaycode;
 
-        var base = firebase.database().ref().child('acodes').on('value', snap => {
+        firebase.database().ref().child('acodes').on('value', snap => {
             // Loop through the codes in firebase
             var codes = (snap.val());
             var key0;
@@ -494,7 +494,6 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
         function pageReload() {
             firebase.auth().onAuthStateChanged(firebaseUser => {
                 if (firebaseUser) {
-                    user = localStorage.getItem('user');
                     loadUser();
                     isBreak();
                     isCheckedIn();
@@ -704,6 +703,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
             });
         }
 
+        // Logout of firebase and website
         document.getElementById('btnLogout').addEventListener('click', e => {
             firebase.auth().signOut();
         })

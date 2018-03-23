@@ -33,6 +33,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
             }
         });
 
+
         // This function is run when the login button is clicked
         btnLogin.addEventListener('click', e => {
             // Get the values from email input and password input
@@ -45,28 +46,13 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
             const promise = auth.signInWithEmailAndPassword(email, pass);
             // If it worked
             promise.then(e => {
-                // Get current User
-//                var profile = firebase.auth().currentUser;
-//                profile.providerData.forEach(function (prof) {
-//                    if (prof.displayName == null) {
-//                        var getName = prompt('Enter your first and last name. Example: Zoe Miner');
-//                        if (getName != null) {
-//                            profile.updateProfile({
-//                                displayName: getName
-//                            });
-//                        };
-//                    };
-//                    user = prof.displayName;
-//                    console.log(user);
-//                    localStorage.setItem('user', user);
-                    // Go to the home page
-                    window.location.replace("home.html");
-                });
+                // Go to the home page
+                window.location.replace("home.html");
             });
             promise.catch(e => {
                 // If it didn't work alert the user
                 window.alert(e);
-//                document.getElementById('txtEmail').value = "";
+                //                document.getElementById('txtEmail').value = "";
                 document.getElementById('txtPassword').value = "";
             });
         });
@@ -90,5 +76,6 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                 alert(error);
             });
         });
+
     }
-})
+});

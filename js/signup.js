@@ -9,23 +9,25 @@ const config = {
 };
 firebase.initializeApp(config);
 
-
+// This function is run when user clicks submit
 document.getElementById('submitSignUp').addEventListener('click', e => {
+    // Get the values from the inputs
     var user = document.getElementById('signUpName').value;
     const email = document.getElementById('signUpEmail').value;
     const pass = document.getElementById('signUpPassword').value;
+    // Connect to firebase authentication
     const auth = firebase.auth();
 
-    user = String(user);
+    //    localStorage.setItem("user", user);
 
-    localStorage.setItem("user", user);
-
+    // Sign up in firebase with email and password
     const promise = auth.createUserWithEmailAndPassword(email, pass);
     promise.then(e => {
+        // If it worked call setUser function
         var itWorked = setUser(user);
         if (itWorked) {
+            // If it worked set current users name
             var profile = firebase.auth().currentUser;
-
             profile.updateProfile({
                 displayName: user
             }).catch(function (error) {
@@ -35,25 +37,29 @@ document.getElementById('submitSignUp').addEventListener('click', e => {
                 window.location.replace("home.html");
             }, 1400);
         } else {
+            // If it did not work alert user
             alert('Sorry Registration did not work, try again.');
+            // Reload page
             window.location.reload();
         }
 
     });
+    // If it did not work alert user
     promise.catch(e => alert(e.message));
 });
 
 function setUser(user) {
+    // Setup user into database with default permissions
     var data = {
         "Team": 'default',
         "TeamLead": false,
-        "brightspace": false,
-        "trello": false,
-        "teamDrive": false,
-        "microsoft": false,
+        "brightspace": true,
+        "trello": true,
+        "teamDrive": true,
+        "microsoft": true,
         "workDay": true,
         "canvas": true,
-        "microsoftTeams": false,
+        "microsoftTeams": true,
         "equella": true,
         "employeeDirectory": true,
         "proDev": true,
@@ -65,10 +71,26 @@ function setUser(user) {
         "totStyleGuide": true,
         "teamDynamix": false
     };
+    // Set up user with inputed info
+    var info = {
+        "birthday": document.getElementById('signUpBirthday').value,
+        "email": document.getElementById('signUpEmail').value,
+        "graduation": document.getElementById('signUpGraduation').value,
+        "major": document.getElementById('signUpMajor').value,
+        "phoneNumber": document.getElementById('signUpPhone').value,
+        "track": document.getElementById('signUpTrack').value
+    }
     try {
+        // Send ot firebase
         firebase.database().ref('users/' + user).update(data);
+        firebase.database().ref('users/' + user).child('info').update(info);
+        firebase.database().ref('data/' + user).update({
+            "birthday": document.getElementById('signUpBirthday').value
+        });
+        // If it worked return true
         return true;
     } catch (err) {
+        // If it did not work alert user
         alert(err);
     }
 }

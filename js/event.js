@@ -18,8 +18,6 @@ window.onclick = function (event) {
 function showEvent() {
     firebase.database().ref('dates').on('value', snap => {
         snap = snap.val();
-        // Make page not move
-        document.getElementsByClassName('content')[0].style.overflow = 'hidden';
 
         var name;
         for (name in snap) {
@@ -57,6 +55,8 @@ function showEvent() {
                     // If even day equals todays day continue
                     if (ed == td) {
                         // If the event is a workiversary continue
+                        // Make page not move
+                        document.getElementsByClassName('content')[0].style.overflow = 'hidden';
                         if (event == 'anniversary') {
                             // Get event year
                             var ey = eventDate.slice(6, 10);
