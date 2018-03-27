@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.gif">
+    <!-- Css -->
+    <link type="text/css" rel="stylesheet" href="css/main.css">
+    <link type="text/css" rel="stylesheet" href="css/inventory.css">
+    <!-- Script -->
+    <script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-2">
+            <ul class="sidenav" id="sidenav">
+                <li>
+                    <a href="home.html">Home</a>
+                </li>
+                <li>
+                    <a href="announcements.html">Announcements</a>
+                </li>
+                <li>
+                    <a href="timeTracking.html">Time Tracking</a>
+                </li>
+                <li>
+                    <a href="videoTimeCalculator.html">Time Calculator</a>
+                </li>
+                <li>
+                    <a href="employeehandbook.html">Employee Handbook</a>
+                </li>
+                <li>
+                    <a href="profile.html">Profile</a>
+                </li>
+                <li>
+                    <a href="schedule.html">Schedules</a>
+                </li>
+                <li>
+                    <a href="shoppingCart.html">Shopping Cart</a>
+                </li>
+                <li id="adminlink" class="hide">
+                    <a href="admin.html">Admin</a>
+                </li>
+                <li id="adminlink" class="hide">
+                    <a href="inventory.html" class="active">Inventory</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-10">
+            <div class="content">
+                <h1 style="text-align center">Inventory</h1>
+                <table id="inventory-table">
+                </table>
+                <form id="form">
+                </form>
+                <div id="warning"></div>
+                <!-- The Modal -->
+                <div id="myModal" class="modal">
+
+                    <!-- Modal content -->
+                    <div id="modal-content">
+                        <span id="close">&times;</span>
+                        <div class="modal-column-container">
+                            <h3>Edit Item Information</h3>
+                            <form>
+                                <label for="itemName">Item:
+                                <span id="name"></span></label>
+
+                                <label for="itemName">Price
+                                <input type="number" id="price" step="0.01" min="0" required>
+                                </label>
+
+                                <label for="itemName">Quantity
+                                <input type="number" id="quantity" min="0" required></label>
+
+                                <button onclick="editItem()">Edit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/inventory.js"></script>
+</body>
+
+</html>
