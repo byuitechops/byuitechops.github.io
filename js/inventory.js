@@ -28,9 +28,9 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                             document.getElementById('adminlink').classList.remove('hide');
                         }
                     }
-//                    else {
-//                        window.location.replace("home.html");
-//                    }
+                    else {
+                        window.location.replace("home.html");
+                    }
                 }
             });
         });
