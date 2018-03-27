@@ -641,10 +641,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                 breakkey: date
             });
             isBreak();
-            alert('Remember to return from break');
-            setTimeout(function () {
-                alert('Remember to return from break');
-            }, 900000);
+            showTime();
         });
 
         document.getElementById('breakIn').addEventListener('click', e => {
@@ -676,6 +673,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
             dbRefUsers.child(user).child('TimeClock').update(breakdata);
             ref.child(breakkey).update(data);
             isBreak();
+            clearTime();
         });
 
         function isBreak() {
@@ -688,17 +686,12 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                     dbRefUsers.child(user).child('TimeClock/breakkey').once('value', snap => {
                         breakkey = snap.val();
                     });
-                    if (breakkey != null) {
-                        dbRefUsers.child(user).child('TimeClock').child('Breaks').child(breakkey).child('Out').on('value', snap => {
-                            document.getElementById('showbreak').innerHTML = "Took Break At: " + snap.val();
-                        });
-                    };
+                    showTime();
                     breakOut.classList.add('hide');
                     breakIn.classList.remove('hide');
                 } else {
                     breakOut.classList.remove('hide');
                     breakIn.classList.add('hide');
-                    document.getElementById('showbreak').innerHTML = "";
                 }
             });
         }
