@@ -72,7 +72,7 @@ function showModal(num, selected) {
             for (var i = 0; i < monthDays.length; i++) {
                 // gets the first instance of clock in/out if there are two
                 if (num == monthDays[i + 1]) {
-                    // if there isn't an instance of this, it sets the text to 'N/A'
+                     //if there isn't an instance of this, it sets the text to 'N/A'
                     if (person[currentMonth[i + 1]].CommentIn == undefined) {
                         person[currentMonth[i + 1]].CommentIn = "N/A";
                     }
@@ -1519,27 +1519,27 @@ function editFirebase() {
     var num = selectedNumber.getAttribute("value");
     num = ('0' + num).slice(-2); // gets the day clicked on in a 2-digit format (e.g. 10, 02)
 
-    // gets the date and time in proper format from the inner HTML that already exists from previous functions
-    var thirdQuoteSIn = document.getElementById("secondShiftIn").innerHTML.indexOf("\"", 40);
-    var lastQuoteSIn = document.getElementById("secondShiftIn").innerHTML.lastIndexOf("\"");
-    var realDateSIn = document.getElementById("secondShiftIn").innerHTML.slice(thirdQuoteSIn + 1, lastQuoteSIn);
-    var dateKeyS = month + "-" + num + "-" + year + " "; // creates a key to access firebase
-
-    // gets the date and time in proper format from the inner HTML that already exists from previous functions
-    var thirdQuoteSOut = document.getElementById("secondShiftOut").innerHTML.indexOf("\"", 40);
-    var lastQuoteSOut = document.getElementById("secondShiftOut").innerHTML.lastIndexOf("\"");
-    var realDateSOut = document.getElementById("secondShiftOut").innerHTML.slice(thirdQuoteSOut + 1, lastQuoteSOut);
-
-    // gets the date and time in proper format from the inner HTML that already exists from previous functions
-    var thirdQuoteIn = document.getElementById("modalTextIn").innerHTML.indexOf("\"", 40);
-    var lastQuoteIn = document.getElementById("modalTextIn").innerHTML.lastIndexOf("\"");
-    var realDateIn = document.getElementById("modalTextIn").innerHTML.slice(thirdQuoteIn + 1, lastQuoteIn);
+//    // gets the date and time in proper format from the inner HTML that already exists from previous functions
+//    var thirdQuoteSIn = document.getElementById("secondShiftIn").innerHTML.indexOf("\"", 40);
+//    var lastQuoteSIn = document.getElementById("secondShiftIn").innerHTML.lastIndexOf("\"");
+//    var realDateSIn = document.getElementById("secondShiftIn").innerHTML.slice(thirdQuoteSIn + 1, lastQuoteSIn);
+   var dateKeyS = month + "-" + num + "-" + year + " "; // creates a key to access firebase
+//
+//    // gets the date and time in proper format from the inner HTML that already exists from previous functions
+//    var thirdQuoteSOut = document.getElementById("secondShiftOut").innerHTML.indexOf("\"", 40);
+//    var lastQuoteSOut = document.getElementById("secondShiftOut").innerHTML.lastIndexOf("\"");
+//    var realDateSOut = document.getElementById("secondShiftOut").innerHTML.slice(thirdQuoteSOut + 1, lastQuoteSOut);
+//
+//    // gets the date and time in proper format from the inner HTML that already exists from previous functions
+//    var thirdQuoteIn = document.getElementById("modalTextIn").innerHTML.indexOf("\"", 40);
+//    var lastQuoteIn = document.getElementById("modalTextIn").innerHTML.lastIndexOf("\"");
+//    var realDateIn = document.getElementById("modalTextIn").innerHTML.slice(thirdQuoteIn + 1, lastQuoteIn);
     var dateKey = month + "-" + num + "-" + year + " "; // creates a key to access firebase
-
-    // gets the date and time in proper format from the inner HTML that already exists from previous functions
-    var thirdQuoteOut = document.getElementById("modalTextOut").innerHTML.indexOf("\"", 40);
-    var lastQuoteOut = document.getElementById("modalTextOut").innerHTML.lastIndexOf("\"");
-    var realDateOut = document.getElementById("modalTextOut").innerHTML.slice(thirdQuoteOut + 1, lastQuoteOut);
+//
+//    // gets the date and time in proper format from the inner HTML that already exists from previous functions
+//    var thirdQuoteOut = document.getElementById("modalTextOut").innerHTML.indexOf("\"", 40);
+//    var lastQuoteOut = document.getElementById("modalTextOut").innerHTML.lastIndexOf("\"");
+//    var realDateOut = document.getElementById("modalTextOut").innerHTML.slice(thirdQuoteOut + 1, lastQuoteOut);
 
 
     firebase.auth().onAuthStateChanged(function (user) {
@@ -1623,6 +1623,26 @@ function editFirebase() {
                 });
             }
 
+        }
+        if(y.value == 0) {
+            db.update ({
+                "CommentIn": null
+            })
+        }
+        if (z.value == 0) {
+            db.update ({
+                "CommentOut" : null
+            })
+        }
+        if (n.value == 0) {
+            dbS.update ({
+                "CommentOut" : null
+            })
+        }
+        if (o.value == 0) {
+            dbS.update ({
+                "CommentOut" : null
+            })
         }
 
 
