@@ -11,17 +11,21 @@ firebase.initializeApp(config);
 
 
 firebase.auth().onAuthStateChanged(firebaseUser => {
+    // Check if user is logged in
     if (firebaseUser) {
-        // If logged in do this
         var name;
+        // Get current user
         var user = firebase.auth().currentUser;
         user.providerData.forEach(function (profile) {
+            // Get name of current user
             name = profile.displayName;
             firebase.database().ref('users').child(name).on('value', snap => {
+                // Loop through user
                 var titles;
                 var shot = snap.val();
                 for (titles in shot) {
                     if (titles == 'Admin') {
+                        // Check if admin
                         if (shot[titles] == true) {
                             //Load Admin Link
                             document.getElementById('adminlink').classList.remove('hide');
@@ -31,6 +35,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
             });
         });
     } else {
+        // Send page back to login page
         window.location.replace("index.html");
     }
 });

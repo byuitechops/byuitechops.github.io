@@ -1,3 +1,4 @@
+// Connect to Firebase
 const config = {
     apiKey: "AIzaSyA_I75-CU5_GlNP1QSKvvH8nbYVkaAUgNA",
     authDomain: "techopsportal.firebaseapp.com",
@@ -8,21 +9,25 @@ const config = {
 };
 firebase.initializeApp(config);
 
+
 firebase.auth().onAuthStateChanged(firebaseUser => {
     if (firebaseUser) {
-
+        // If user is logged in
+        // Set user to loggedinUser
         var loggedinUser = firebase.auth().currentUser;
         var user;
         loggedinUser.providerData.forEach(function (profile) {
+            // Set user to Name of Current User
             user = profile.displayName
         });
-
         firebase.database().ref('users').child(user).on('value', snap => {
+            // Loop through the user in the database
             var titles;
             var shot = snap.val();
             for (titles in shot) {
                 if (titles == 'Admin') {
                     if (shot[titles] == true) {
+                        // If the user is an admin
                         //Load Admin Link
                         document.getElementById('adminlink').classList.remove('hide');
                     }
@@ -43,11 +48,13 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
         var unblockallcode;
         var workdaycode;
 
-        var base = firebase.database().ref().child('acodes').on('value', snap => {
+        firebase.database().ref().child('acodes').on('value', snap => {
+            // Loop through the codes in firebase
             var codes = (snap.val());
             var key0;
             for (key0 in codes) {
                 var key1 = codes[key0];
+                // Set the variable to the code in firebase
                 if (key0 == 'blockall') {
                     blockallcode = key1;
                 }
@@ -83,7 +90,11 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 
 
         document.getElementById('submitCode').addEventListener('click', e => {
+            // When the user clicks the submit button
+            // Get the inputed text
             var code = txtCode.value;
+            // Check if the inputed text is equal to a code
+            // If it is true update firebase to be true and reload and reset input fields
             if (code == workdaycode) {
                 var data = {
                     workDay: true
@@ -174,13 +185,14 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
         function loadUser() {
             dbRefUsers.child(user).on('value', snap => {
                 snap = snap.val();
+                // Get database at user
 
+                // Hide code input and submit button
                 txtCode.classList.add('hide');
                 submitCode.classList.add('hide');
 
-                document.getElementById('month').classList.remove('hide');
-
                 document.getElementById('month').addEventListener('click', e => {
+                    // When user clicks on monthly training button update firebase to be true
                     var data = {
                         "monthlyTraining": true
                     }
@@ -190,15 +202,19 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 
                 var titles;
                 for (titles in snap) {
+                    // Loop through user
                     if (titles == 'Admin') {
                         if (snap[titles] == true) {
+                            // If Admin true
                             // Access to all
                             document.getElementById('screensteps').classList.remove('hide');
                             if (snap.screenSteps == true) {
+                                // If access is true set link for icon and remove grey out
                                 var icon = document.getElementById('ss');
                                 icon.setAttribute('href', "https://byu-idaho.screenstepslive.com/admin/v2/sites/18626/manuals/70917/chapters/225697/articles");
                                 sspic.classList.remove('locked');
                             } else {
+                                // If false show code input and submit button and grey out icon, when clicked on alert user that it is locked
                                 var icon = document.getElementById('ss');
                                 icon.addEventListener('click', e => {
                                     window.alert('You are blocked for training purposes. Check your email for training link');
@@ -238,8 +254,9 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                         }
                     }
                     if (titles == 'TeamLead') {
-                        // Access to Basic & Teamdynamix
                         if (snap[titles] == true) {
+                            // If Team Lead is true
+                            // Access to Basic & Teamdynamix
                             document.getElementById('teamdynamix').classList.remove('hide');
                             if (snap.teamDynamix == true) {
                                 var icon = document.getElementById('tdyn');
@@ -477,7 +494,6 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
         function pageReload() {
             firebase.auth().onAuthStateChanged(firebaseUser => {
                 if (firebaseUser) {
-                    user = localStorage.getItem('user');
                     loadUser();
                     isBreak();
                     isCheckedIn();
@@ -687,6 +703,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
             });
         }
 
+        // Logout of firebase and website
         document.getElementById('btnLogout').addEventListener('click', e => {
             firebase.auth().signOut();
         })
