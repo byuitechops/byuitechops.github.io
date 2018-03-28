@@ -8,7 +8,7 @@ function showTime() {
     if (localStorage.getItem('seconds') != null) {
         seconds = localStorage.getItem('seconds');
     }
-    if (localStorage.getItem('mintues') != null) {
+    if (localStorage.getItem('minutes') != null) {
         minutes = localStorage.getItem('minutes');
     }
     if (localStorage.getItem('hours') != null) {
@@ -24,9 +24,6 @@ function showTime() {
             hours++;
         }
     }
-    localStorage.setItem('seconds', seconds);
-    localStorage.setItem('minutes', minutes);
-    localStorage.setItem('hours', hours);
 
     breakP.innerHTML = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
 
@@ -35,6 +32,9 @@ function showTime() {
 
 function timer() {
     t = setTimeout(showTime, 1000);
+    localStorage.setItem('seconds', seconds);
+    localStorage.setItem('minutes', minutes);
+    localStorage.setItem('hours', hours);
 }
 
 function clearTime() {

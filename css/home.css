@@ -100,9 +100,7 @@ textarea {
 }
 
 .colorChange {
-    width: 100%;
-    height: 100%;
-    animation: pulse 8s infinite;
+    animation: pulse 7s infinite;
 }
 
 @keyframes pulse {
