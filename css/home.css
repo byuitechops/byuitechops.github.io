@@ -125,6 +125,24 @@ textarea {
     }
 }
 
+.alertRed {
+    animation: alertPulse 1s infinite;
+}
+
+@keyframes alertPulse {
+    0% {
+        background-color: red;
+    }
+
+    50% {
+        background-color: black;
+    }
+
+    100% {
+        background-color: red;
+    }
+}
+
 
 /* ------------------------------------- */
 
