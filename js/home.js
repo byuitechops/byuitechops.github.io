@@ -641,7 +641,6 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                 breakkey: date
             });
             isBreak();
-            showTime();
         });
 
         document.getElementById('breakIn').addEventListener('click', e => {
@@ -695,6 +694,12 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                 }
             });
         }
+
+        firebase.database().ref('users').child(user).child('TimeClock').child('break').on('value', snap => {
+            if (snap.val()) {
+                timer();
+            }
+        });
 
         // Logout of firebase and website
         document.getElementById('btnLogout').addEventListener('click', e => {
