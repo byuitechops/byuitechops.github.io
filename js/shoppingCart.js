@@ -170,6 +170,11 @@ function submitConfirmation() {
     var radios = document.getElementsByName('payment-method');
     var paymentMethod;
     var message;
+    var user = firebase.auth().currentUser.displayName;
+    var d = new Date().toLocaleString();
+    var d2 = d.replace(/\//g, "-");
+    var date = d2.replace(",", "");
+    
 
     // loop through radio buttons, if a button has been checked, set value of radio button to payment method
     for (var i = 0; i < radios.length; i++) {
@@ -202,6 +207,16 @@ function submitConfirmation() {
                 // display the updated item count to the user in the shopping cart table
                 var currentCount = document.getElementById("count" + i).innerHTML = updatedCount;
                 document.getElementById("input" + i).value = ''; // clear the input fields
+                
+                firebase.database().ref('/inventory/transactions/' + date + '/items/' + item).update({
+                    count: count
+                });
+                
+                firebase.database().ref('/inventory/transactions/'+ date).update({
+                    user: user,
+                    paymentTotal: purchaseTotal,
+                    paymentType: paymentMethod
+                });
             }
         }
         var user = firebase.auth().currentUser.displayName;
