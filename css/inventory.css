@@ -10,7 +10,7 @@ tr:nth-child(2n) {
     background: whitesmoke;
 }
 
-th,td {
+td {
     padding: 5px;
 }
 
@@ -19,9 +19,22 @@ th:nth-child(1), td:nth-child(1){
     padding: 5px 10px;
 }
 
-td:nth-child(4){
+td:nth-child(5){
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    height: 75px;
+    padding: 0 15px;
+}
+
+.image-container {
+    width: 75px;
+    height: 75px;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    border: none;
+    margin: 0 auto;
 }
 
 /* Input and buttons */
@@ -32,7 +45,16 @@ input {
 
     margin: 0;
 }
+input[type="file"]{
+    display: none;
+}
 
+.custom-file-upload {
+    border: 1px solid black;
+    padding: 5px 10px;
+    font-size: .7em;
+    cursor: pointer;
+}
 
 button{
     width: 70px;
