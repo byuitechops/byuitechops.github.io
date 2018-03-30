@@ -78,7 +78,7 @@ function createTable() {
                 cell4.innerHTML = count;
 
                 //insert image into cell2
-                if(image == ''){
+                if (image == '') {
                     image = "default-image.png";
                 }
                 var div = document.createElement("div");
@@ -87,11 +87,11 @@ function createTable() {
                 var storageRef = storage.ref();
                 var spaceRef = storageRef.child('images/' + image);
                 spaceRef.getDownloadURL().then(function (url) {
-                  div.style.backgroundImage = "url('"+url+"')";
+                    div.style.backgroundImage = "url('" + url + "')";
                 }).catch(function (error) {
-                    console.log("There was an error retreiving " + image +" from firebase");
-                });        
-                 cell2.appendChild(div);
+                    console.log("There was an error retreiving " + image + " from firebase");
+                });
+                cell2.appendChild(div);
 
                 //give each cell an id
                 cell1.id = "item" + id;
@@ -136,18 +136,20 @@ function createTable() {
             var input2 = document.createElement("input");
             var input3 = document.createElement("input");
             var input4 = document.createElement("input");
-        
+
             //give each input a new id
             input1.id = "input1";
             input2.id = "input2";
             input3.id = "input3";
             input4.id = "input4";
-        
+
             //set the type attribute on each input
             input1.setAttribute("type", "text");
             input2.setAttribute("type", "file");
             input3.setAttribute("type", "number");
             input4.setAttribute("type", "number");
+            input4.setAttribute("multiple", "false");
+            input4.setAttribute("accept", "image/*");
 
             //set the min range and step for input 2 and 3 to zero
             input3.step = 0.01;
@@ -160,6 +162,19 @@ function createTable() {
             input3.name = "price";
             input4.name = "quantity";
         
+        //set the name for each input
+            input1.placeholder = "Item Name";
+            input3.placeholder = "Price";
+            input4.placeholder = "# in stock";
+
+
+            //apend div to cell2
+            var div = document.createElement("div");
+            div.id = "image-preview";
+            div.className = "image-container";
+            cell2.appendChild(div);
+            div.style.display = "none";
+
             //apend label to cell2
             var label = document.createElement("label");
             label.innerHTML = "Choose a file";
@@ -172,7 +187,7 @@ function createTable() {
             label.appendChild(input2);
             cell3.appendChild(input3);
             cell4.appendChild(input4);
-        
+
 
             //append button to cell 4
             var addButton = cell5.appendChild(document.createElement("button"));
@@ -182,6 +197,8 @@ function createTable() {
             //add click eventListener to call createItem function
             addButton.addEventListener("click", createItem);
 
+            //add click eventListener to call createItem function
+            input2.addEventListener("change", displayImageFile);
         });
 }
 
@@ -265,22 +282,41 @@ function deleteItem(item) {
 
 //creates a new item and writes new item to firebase
 function createItem() {
-
+    document.getElementById("warning").innerHTML = '';
     //get the name, price, and quantity of new item from input values
     var item = document.getElementById("input1").value;
-    var price = parseFloat((document.getElementById("input2").value)).toFixed(2);
-    var quantity = document.getElementById("input3").value;
+    var price = parseFloat((document.getElementById("input3").value)).toFixed(2);
+    var quantity = document.getElementById("input4").value;
+    var fileinput = document.getElementById("input2");
+    var file = fileinput.files[0];
+    var filename = fileinput.files[0].name;
+
+    if (!filename){
+        filename = "default-image.png";
+    }
 
     //check that each input has a value, if none of the inputs are empty, write the new item to firebase
     if (item != '' && price != '' && quantity != '') {
-        newData = {
-            "count": quantity,
-            "price": price
-        }
-        updates = {};
-        updates['/inventory/items/' + item] = newData;
-        firebase.database().ref().update(updates);
-        createTable();
+        var storageRef = firebase.storage().ref();
+        var imagePathRef = storageRef.child('images/' + filename);
+
+        imagePathRef.put(file).then(function (snapshot) {
+            newData = {
+                "count": quantity,
+                "price": price,
+                "image": filename
+            }
+            updates = {};
+            updates['/inventory/items/' + item] = newData;
+            firebase.database().ref().update(updates);
+            document.getElementById("image-preview").style.display = "none";
+            document.getElementById("warning").innerHTML = item + " was successfully added";
+            createTable();
+        }).catch(function (error) {
+            document.getElementById("warning").innerHTML = "There was a problem adding " + item + "to the inventory";
+            console.error(error);
+        });
+
     } else if (item == '') { //if item input is empty display message to enter item name 
         document.getElementById("warning").innerHTML = "Please enter an item name";
     } else if (price == '') { //if item input is empty display message to enter price 
@@ -288,4 +324,20 @@ function createItem() {
     } else if (quantity == '') { //if item input is empty display message to enter quantity
         document.getElementById("warning").innerHTML = "Please enter the number of items in stock";
     }
+}
+
+function displayImageFile() {
+    var fileinput = document.getElementById("input2");
+    var file = fileinput.files[0];
+    var filename = fileinput.files[0].name;
+    var imagePreview = document.getElementById("image-preview");
+
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+        imagePreview.style.backgroundImage = "url('" + e.target.result + "')";
+        imagePreview.style.display = "block";
+    }
+    //declare the file loading
+    reader.readAsDataURL(file);
 }

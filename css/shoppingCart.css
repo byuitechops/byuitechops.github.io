@@ -10,21 +10,28 @@ tr:nth-child(2n) {
 }
 
 th {
-    width: 30%;
+    width: 10%;
     padding: 7px;
 }
 
 th:nth-child(1), td:nth-child(1){
     text-align: left;
-    padding: 5px;
-}
-
-th:nth-child(4), td:nth-child(4){
-    text-align: right; 
+    padding: 15px 0px 15px 25px;
+    width: 20%
 }
 
 td:nth-child(4) input {
     width: 45px;
+}
+
+.image-container {
+    width: 75px;
+    height: 75px;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    border: none;
+    margin: 10px auto;
 }
 
 /*The Shopping Cart Total container */
