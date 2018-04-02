@@ -161,8 +161,8 @@ function createTable() {
             input2.name = "image";
             input3.name = "price";
             input4.name = "quantity";
-        
-        //set the name for each input
+
+            //set the name for each input
             input1.placeholder = "Item Name";
             input3.placeholder = "Price";
             input4.placeholder = "# in stock";
@@ -234,31 +234,81 @@ function displayUpdateModal(item) {
         var itemData = snapshot.val(); //data for selected item
         var itemPrice = parseFloat(itemData.price).toFixed(2);
         var itemCount = itemData.count;
+        var itemImage = itemData.image;
+
+        //insert image into cell2
+        if (itemImage == '') {
+            itemImage = "default-image.png";
+        }
+        var storage = firebase.storage();
+        var storageRef = storage.ref();
+        var spaceRef = storageRef.child('images/' + itemImage);
+        spaceRef.getDownloadURL().then(function (url) {
+            document.getElementById("image").style.backgroundImage = "url('" + url + "')";
+        }).catch(function (error) {
+            console.log("There was an error retreiving " + itemImage + " from firebase");
+        });
 
         //display the current price and quantity of item to user in input fields
         document.getElementById("price").value = itemPrice;
         document.getElementById("quantity").value = itemCount;
+        document.getElementById("hiddenInput").value = itemImage;
     });
 }
 
 //edits and updates selected item in firebase
 function editItem() {
-
+    var storageRef = firebase.storage().ref();
     // get item, name, price, and quantity
     var item = document.getElementById("name").innerHTML;
     var price = parseFloat((document.getElementById("price").value)).toFixed(2);
     var quantity = document.getElementById("quantity").value;
+    var fileinput = document.getElementById("img");
+    var image = '';
+    var file;
+    if (fileinput.files[0]){
+        file = fileinput.files[0];
+        image = fileinput.files[0].name;
+    }
+
+    var originalImage = document.getElementById("hiddenInput").value;
 
     //check that input fields are not empty, if not update new data for item to firebase
     if (item != '' && price != '' && quantity != '') {
-        newData = {
-            "count": quantity,
-            "price": price
+        if (image === "" || image === originalImage) {
+            newData = {
+                "count": quantity,
+                "price": price,
+                "image": originalImage
+            }
+            updates = {};
+//            updates['/inventory/items/' + item] = newData;
+//            firebase.database().ref().update(updates);
+            createTable(); //call createTable to re-render updated table on the user interface
+        } else {
+            var deleteRef = storageRef.child('images/' + originalImage);
+
+            // Delete the original image file
+            deleteRef.delete().then(function () {
+                var imagePathRef = storageRef().ref('images/' + image)
+                imagePathRef.put(file).then(function (snapshot) {
+                    newData = {
+                        "count": quantity,
+                        "price": price,
+                        "image": image
+                    }
+                    updates = {};
+//                    updates['/inventory/items/' + item] = newData;
+//                    firebase.database().ref().update(updates);
+//                    document.getElementById("image-preview").style.display = "none";
+//                    document.getElementById("warning").innerHTML = item + " was successfully added";
+                    createTable(); //call createTable to re-render updated table on the user interfaces
+                });
+            }).catch(function (error) {
+                console.log("An error occurred in removing " + originalImage + " from firebase storage");
+            });
         }
-        updates = {};
-        updates['/inventory/items/' + item] = newData;
-        firebase.database().ref().update(updates);
-        createTable(); //call createTable to re-render updated table on the user interface
+
     }
 }
 
@@ -291,7 +341,7 @@ function createItem() {
     var file = fileinput.files[0];
     var filename = fileinput.files[0].name;
 
-    if (!filename){
+    if (!filename) {
         filename = "default-image.png";
     }
 
@@ -331,6 +381,22 @@ function displayImageFile() {
     var file = fileinput.files[0];
     var filename = fileinput.files[0].name;
     var imagePreview = document.getElementById("image-preview");
+
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+        imagePreview.style.backgroundImage = "url('" + e.target.result + "')";
+        imagePreview.style.display = "block";
+    }
+    //declare the file loading
+    reader.readAsDataURL(file);
+}
+
+function modalDisplayImageFile() {
+    var fileinput = document.getElementById("img");
+    var file = fileinput.files[0];
+    var filename = fileinput.files[0].name;
+    var imagePreview = document.getElementById("image");
 
     var reader = new FileReader();
 

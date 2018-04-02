@@ -118,6 +118,19 @@ button{
     align-items: center;
 }
 
+label.modal-file-upload {
+    border: 1px solid black;
+    padding: 5px 10px;
+    font-size: .7em;
+    cursor: pointer;
+    width: 39%;
+    margin: 0 5px 10px auto;
+}
+.modal-column-container .image-container {
+    width: 50%;
+    margin: 10px 0;
+}
+
 /* Modal Form */
 
 form {
