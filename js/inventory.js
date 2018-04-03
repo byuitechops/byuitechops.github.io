@@ -258,57 +258,81 @@ function displayUpdateModal(item) {
 
 //edits and updates selected item in firebase
 function editItem() {
-    var storageRef = firebase.storage().ref();
     // get item, name, price, and quantity
     var item = document.getElementById("name").innerHTML;
     var price = parseFloat((document.getElementById("price").value)).toFixed(2);
     var quantity = document.getElementById("quantity").value;
     var fileinput = document.getElementById("img");
-    var image = '';
-    var file;
-    if (fileinput.files[0]){
-        file = fileinput.files[0];
-        image = fileinput.files[0].name;
+    var file = fileinput.files[0];
+    var filename = fileinput.files[0].name;
+
+    if (!filename) {
+        filename = '';
     }
 
     var originalImage = document.getElementById("hiddenInput").value;
+    var newData;
 
     //check that input fields are not empty, if not update new data for item to firebase
     if (item != '' && price != '' && quantity != '') {
-        if (image === "" || image === originalImage) {
+        if (filename === '' || filename === originalImage) {
             newData = {
                 "count": quantity,
                 "price": price,
                 "image": originalImage
             }
             updates = {};
-//            updates['/inventory/items/' + item] = newData;
-//            firebase.database().ref().update(updates);
+            updates['/inventory/items/' + item] = newData;
+            firebase.database().ref().update(updates);
             createTable(); //call createTable to re-render updated table on the user interface
-        } else {
-            var deleteRef = storageRef.child('images/' + originalImage);
+        } else if (filename !== originalImage) {
+            if (originalImage === "default-image.png") {
+                var storageRef = firebase.storage().ref();
+                var imagePathRef = storageRef.child('images/' + filename);
 
-            // Delete the original image file
-            deleteRef.delete().then(function () {
-                var imagePathRef = storageRef().ref('images/' + image)
                 imagePathRef.put(file).then(function (snapshot) {
-                    newData = {
+                    imagePathRef.put(file).then(function (snapshot) {
+                    firebase.database().ref('/inventory/items/' + item).update({
                         "count": quantity,
                         "price": price,
-                        "image": image
-                    }
-                    updates = {};
-//                    updates['/inventory/items/' + item] = newData;
-//                    firebase.database().ref().update(updates);
-//                    document.getElementById("image-preview").style.display = "none";
-//                    document.getElementById("warning").innerHTML = item + " was successfully added";
-                    createTable(); //call createTable to re-render updated table on the user interfaces
+                        "image": filename
+                    });
+                }).catch(function (error) {
+                    console.error(error);
                 });
-            }).catch(function (error) {
-                console.log("An error occurred in removing " + originalImage + " from firebase storage");
-            });
-        }
+                });
+            } else {
+                //                var storageRef = firebase.storage().ref();
+                //                var deleteRef = storageRef.child('images/' + originalImage);
+                //
+                //                // Delete the original image file
+                //                deleteRef.delete().then(function () {
+                //                    var imagePathRef = storageRef.child('images/' + image);
+                //                    imagePathRef.put(file).then(function (snapshot) {
+                //                        newData = {
+                //                            "count": quantity,
+                //                            "price": price,
+                //                            "image": filename
+                //                        }
+                //                        updates = {};
+                //                        updates['/inventory/items/' + item] = newData;
+                //                        firebase.database().ref().update(updates);
+                //                        document.getElementById("image-preview").style.display = "none";
+                //                        document.getElementById("warning").innerHTML = item + " was successfully added";
+                //                        createTable(); //call createTable to re-render updated table on the user interfaces
+                //                    });
+                //                }).catch(function (error) {
+                //                    console.log("An error occurred in removing " + originalImage + " from firebase storage");
+                //                });
 
+            }
+        }
+    } else if (item == '') { //if item input is empty display message to enter item name 
+        document.getElementById("modal-warning").innerHTML = "Please enter an item name";
+    } else if (price == '') { //if item input is empty display message to enter price 
+        document.getElementById("modal-warning").innerHTML = "Please enter a price for the new item";
+    } else if (quantity == '') { //if item input is empty display message to enter quantity
+        document.getElementById("modal-warning").innerHTML = "Please enter the number of items in stock";
     }
 }
 
