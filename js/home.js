@@ -9,16 +9,15 @@ const config = {
 };
 firebase.initializeApp(config);
 
-
+var user;
 firebase.auth().onAuthStateChanged(firebaseUser => {
     if (firebaseUser) {
         // If user is logged in
         // Set user to loggedinUser
         var loggedinUser = firebase.auth().currentUser;
-        var user;
         loggedinUser.providerData.forEach(function (profile) {
             // Set user to Name of Current User
-            user = profile.displayName
+            user = profile.displayName;
         });
         firebase.database().ref('users').child(user).on('value', snap => {
             // Loop through the user in the database
