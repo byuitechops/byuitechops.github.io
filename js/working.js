@@ -11,7 +11,6 @@ firebase.auth().onAuthStateChanged(function (user) {
                 if (working == 'yes' || working == 'Yes') {
                     var answer = 'Yes';
                     var time = prompt('How many hours are you expecting to work?', '10, 20, 30, 40');
-                    time = time + ' hours';
                 } else if (working == 'no' || working == 'No') {
                     var answer = 'No';
                     var time = 'none';
