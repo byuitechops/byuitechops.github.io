@@ -62,42 +62,46 @@ function showEvent() {
                             var ey = eventDate.slice(6, 10);
                             // Get the difference between today's year and the event year
                             var yearDiff = ty - ey;
-                            // Change the difference to a string
-                            yearDiff = yearDiff.toString();
-                            // Get the last number of the difference
-                            var num = yearDiff.slice(-1);
-                            var oi;
-                            // Get the right ordianal indicator
-                            if (yearDiff == '11' || yearDiff == '12' || yearDiff == '13') {
-                                oi = 'th';
-                            } else if (num == '1') {
-                                oi = 'st';
-                            } else if (num == '2') {
-                                oi = 'nd';
-                            } else if (num == '3') {
-                                oi = 'rd'
+                            if (yearDiff == 0) {
+                                break;
                             } else {
-                                oi = 'th';
-                            }
-                            // Create the greeting message
-                            var message = 'full year working here! Congratulations on your workiversary';
+                                // Change the difference to a string
+                                yearDiff = yearDiff.toString();
+                                // Get the last number of the difference
+                                var num = yearDiff.slice(-1);
+                                var oi;
+                                // Get the right ordianal indicator
+                                if (yearDiff == '11' || yearDiff == '12' || yearDiff == '13') {
+                                    oi = 'th';
+                                } else if (num == '1') {
+                                    oi = 'st';
+                                } else if (num == '2') {
+                                    oi = 'nd';
+                                } else if (num == '3') {
+                                    oi = 'rd'
+                                } else {
+                                    oi = 'th';
+                                }
+                                // Create the greeting message
+                                var message = 'full year working here! Congratulations on your workiversary';
 
-                            // Create the div for the display
-                            var div = document.createElement('div');
-                            // Create the image
-                            var image = document.createElement('img');
-                            // Set which image to use & style it
-                            image.src = 'images/anniversary.png';
-                            image.style.display = 'block';
-                            image.style.margin = '10px auto';
-                            // Add class to div for easy cleanup
-                            div.classList.add('deletethis');
-                            // Fill the div with display
-                            div.innerHTML = "Today marks <span class='big'>" + name + "'s " + yearDiff + oi + "</span> " + message;
-                            // Add image to div
-                            div.appendChild(image);
-                            // Add div to page
-                            document.getElementById('announce').appendChild(div);
+                                // Create the div for the display
+                                var div = document.createElement('div');
+                                // Create the image
+                                var image = document.createElement('img');
+                                // Set which image to use & style it
+                                image.src = 'images/anniversary.png';
+                                image.style.display = 'block';
+                                image.style.margin = '10px auto';
+                                // Add class to div for easy cleanup
+                                div.classList.add('deletethis');
+                                // Fill the div with display
+                                div.innerHTML = "Today marks <span class='big'>" + name + "'s " + yearDiff + oi + "</span> " + message;
+                                // Add image to div
+                                div.appendChild(image);
+                                // Add div to page
+                                document.getElementById('announce').appendChild(div);
+                            }
                         }
                         // If event is a birthday continue
                         if (event == 'birthday') {

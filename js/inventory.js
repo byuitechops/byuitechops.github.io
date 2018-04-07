@@ -283,7 +283,7 @@ function editItem() {
             firebase.database().ref('inventory/items/' + item).update({
                 "count": quantity,
                 "price": price,
-                "image": fileName
+                "image": originalImg
             })
             modal.style.display = "none";
             createTable();
@@ -316,10 +316,15 @@ function editItem() {
             }).catch(function (error) {
                 console.log("An error occurred in updating " + item);
             });
-
+        
         }
+    } else if (item == '') { //if item input is empty display message to enter item name 
+        document.getElementById("modal-warning").innerHTML = "Please enter an item name";
+    } else if (price == '') { //if item input is empty display message to enter price 
+        document.getElementById("modal-warning").innerHTML = "Please enter a price for the new item";
+    } else if (quantity == '') { //if item input is empty display message to enter quantity
+        document.getElementById("modal-warning").innerHTML = "Please enter the number of items in stock";
     }
-
 }
 
 
