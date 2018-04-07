@@ -258,75 +258,96 @@ function displayUpdateModal(item) {
 
 //edits and updates selected item in firebase
 function editItem() {
-    var storageRef = firebase.storage().ref();
     // get item, name, price, and quantity
+    var modal = document.getElementById('myModal');
     var item = document.getElementById("name").innerHTML;
     var price = parseFloat((document.getElementById("price").value)).toFixed(2);
     var quantity = document.getElementById("quantity").value;
     var fileinput = document.getElementById("img");
-    var image = '';
+    var image;
     var file;
-    if (fileinput.files[0]){
+    var fileExtension;
+    var fileName;
+
+    if (fileinput.files[0]) {
         file = fileinput.files[0];
-        image = fileinput.files[0].name;
+        fileName = fileinput.files[0].name;
+        fileExtension = fileName.replace(/^.*\./, '');
+        image = true;
     }
 
-    var originalImage = document.getElementById("hiddenInput").value;
-
+    var originalImg = document.getElementById("hiddenInput").value;
     //check that input fields are not empty, if not update new data for item to firebase
     if (item != '' && price != '' && quantity != '') {
-        if (image === "" || image === originalImage) {
-            newData = {
+        if (!image) {
+            firebase.database().ref('inventory/items/' + item).update({
                 "count": quantity,
                 "price": price,
-                "image": originalImage
-            }
-            updates = {};
-//            updates['/inventory/items/' + item] = newData;
-//            firebase.database().ref().update(updates);
-            createTable(); //call createTable to re-render updated table on the user interface
-        } else {
-            var deleteRef = storageRef.child('images/' + originalImage);
-
-            // Delete the original image file
-            deleteRef.delete().then(function () {
-                var imagePathRef = storageRef().ref('images/' + image)
-                imagePathRef.put(file).then(function (snapshot) {
-                    newData = {
-                        "count": quantity,
-                        "price": price,
-                        "image": image
-                    }
-                    updates = {};
-//                    updates['/inventory/items/' + item] = newData;
-//                    firebase.database().ref().update(updates);
-//                    document.getElementById("image-preview").style.display = "none";
-//                    document.getElementById("warning").innerHTML = item + " was successfully added";
-                    createTable(); //call createTable to re-render updated table on the user interfaces
-                });
+                "image": fileName
+            })
+            modal.style.display = "none";
+            createTable();
+        } else if (image && originalImg === "default-image.png") {
+            var imagePathRef = firebase.storage().ref('images/' + fileName);
+            imagePathRef.put(file).then(function (snapshot) {
+                firebase.database().ref('inventory/items/' + item).update({
+                    "count": quantity,
+                    "price": price,
+                    "image": fileName
+                })
             }).catch(function (error) {
-                console.log("An error occurred in removing " + originalImage + " from firebase storage");
+                console.log("An error occurred in editing " + item);
             });
-        }
+            modal.style.display = "none";
+            createTable();
+        } else {
+            var deleteRef = firebase.storage().ref('images/' + originalImg);
+            var deleteTask = deleteRef.delete();
+            var imagePathRef = firebase.storage().ref('images/' + fileName);
+            imagePathRef.put(file).then(function (snapshot) {
+                firebase.database().ref('inventory/items/' + item).update({
+                    "count": quantity,
+                    "price": price,
+                    "image": fileName
+                })
 
+                modal.style.display = "none";
+                createTable();
+            }).catch(function (error) {
+                console.log("An error occurred in updating " + item);
+            });
+
+        }
     }
+
 }
+
+
 
 //deletes selected item
 function deleteItem(item) {
     //display confirmation pop-up box prompting user to confirm the deletion
-    var a = confirm("Are you sure you would like to delete" + item + "?");
+    var a = confirm("Are you sure you would like to delete " + item + "?");
 
     //if the user confirms the deletion, delete the selected item from firebase
     if (a) {
-        newData = {
+        var img;
+        firebase.database().ref('/inventory/items/' + item).once('value').then(function (snapshot) {
+            var itemData = snapshot.val();
+            img = itemData.image;
+            
+            var deleteRef = firebase.storage().ref('images/' + img);
+        var deleteTask = deleteRef.delete();
+        
+        firebase.database().ref('inventory/items/' + item).update({
             "count": null,
-            "price": null
-        }
-        updates = {};
-        updates['/inventory/items/' + item] = newData;
-        firebase.database().ref().update(updates);
+            "price": null,
+            "image": null
+        }) 
         createTable(); //call createTable to re-render updated table on the user interface 
+        });
+        
+        
     }
 }
 
@@ -339,34 +360,42 @@ function createItem() {
     var quantity = document.getElementById("input4").value;
     var fileinput = document.getElementById("input2");
     var file = fileinput.files[0];
-    var filename = fileinput.files[0].name;
 
-    if (!filename) {
+    if (file != undefined) {
+        filename = fileinput.files[0].name;
+    } else {
         filename = "default-image.png";
     }
 
     //check that each input has a value, if none of the inputs are empty, write the new item to firebase
     if (item != '' && price != '' && quantity != '') {
-        var storageRef = firebase.storage().ref();
-        var imagePathRef = storageRef.child('images/' + filename);
+        if (filename != "default-image.png") {
+            var storageRef = firebase.storage().ref();
+            var imagePathRef = storageRef.child('images/' + filename);
 
-        imagePathRef.put(file).then(function (snapshot) {
-            newData = {
+            imagePathRef.put(file).then(function (snapshot) {
+                firebase.database().ref('/inventory/items/' + item).update({
+                    "count": quantity,
+                    "price": price,
+                    "image": filename
+                })
+                document.getElementById("image-preview").style.display = "none";
+                document.getElementById("warning").innerHTML = item + " was successfully added";
+                createTable();
+            }).catch(function (error) {
+                document.getElementById("warning").innerHTML = "There was a problem adding " + item + " to the inventory";
+                console.error(error);
+            });
+        } else {
+            firebase.database().ref('/inventory/items/' + item).update({
                 "count": quantity,
                 "price": price,
                 "image": filename
-            }
-            updates = {};
-            updates['/inventory/items/' + item] = newData;
-            firebase.database().ref().update(updates);
+            })
             document.getElementById("image-preview").style.display = "none";
             document.getElementById("warning").innerHTML = item + " was successfully added";
             createTable();
-        }).catch(function (error) {
-            document.getElementById("warning").innerHTML = "There was a problem adding " + item + "to the inventory";
-            console.error(error);
-        });
-
+        }
     } else if (item == '') { //if item input is empty display message to enter item name 
         document.getElementById("warning").innerHTML = "Please enter an item name";
     } else if (price == '') { //if item input is empty display message to enter price 

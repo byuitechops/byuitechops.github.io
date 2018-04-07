@@ -1,6 +1,6 @@
 /* Inventory table */ 
 
-table {
+table, #warning {
     margin: 50px auto;
     text-align: center;
     border-spacing: 0;
@@ -144,7 +144,7 @@ label {
     margin: 5px;
 }
 
-form button {
+form .button {
     width: 50%;
 }
 
