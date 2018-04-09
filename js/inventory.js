@@ -286,7 +286,7 @@ function editItem() {
                 "image": originalImg
             })
             modal.style.display = "none";
-            createTable();
+            setTimeout(createTable(),1000);
         } else if (image && originalImg === "default-image.png") {
             var imagePathRef = firebase.storage().ref('images/' + fileName);
             imagePathRef.put(file).then(function (snapshot) {
@@ -299,7 +299,7 @@ function editItem() {
                 console.log("An error occurred in editing " + item);
             });
             modal.style.display = "none";
-            createTable();
+            setTimeout(createTable(),1000);
         } else {
             var deleteRef = firebase.storage().ref('images/' + originalImg);
             var deleteTask = deleteRef.delete();
@@ -312,11 +312,11 @@ function editItem() {
                 })
 
                 modal.style.display = "none";
-                createTable();
+                setTimeout(createTable(),1000);
             }).catch(function (error) {
                 console.log("An error occurred in updating " + item);
             });
-        
+
         }
     } else if (item == '') { //if item input is empty display message to enter item name 
         document.getElementById("modal-warning").innerHTML = "Please enter an item name";
@@ -325,6 +325,7 @@ function editItem() {
     } else if (quantity == '') { //if item input is empty display message to enter quantity
         document.getElementById("modal-warning").innerHTML = "Please enter the number of items in stock";
     }
+
 }
 
 
@@ -340,19 +341,19 @@ function deleteItem(item) {
         firebase.database().ref('/inventory/items/' + item).once('value').then(function (snapshot) {
             var itemData = snapshot.val();
             img = itemData.image;
-            
+
             var deleteRef = firebase.storage().ref('images/' + img);
-        var deleteTask = deleteRef.delete();
-        
-        firebase.database().ref('inventory/items/' + item).update({
-            "count": null,
-            "price": null,
-            "image": null
-        }) 
-        createTable(); //call createTable to re-render updated table on the user interface 
+            var deleteTask = deleteRef.delete();
+
+            firebase.database().ref('inventory/items/' + item).update({
+                "count": null,
+                "price": null,
+                "image": null
+            })
+            createTable(); //call createTable to re-render updated table on the user interface 
         });
-        
-        
+
+
     }
 }
 
