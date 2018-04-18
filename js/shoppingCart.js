@@ -47,38 +47,57 @@ function createTable() {
     query.once("value")
         .then(function (snapshot) {
             snapshot.forEach(function (childSnapshot) {
-                
+
                 var key = childSnapshot.key; // item name
                 var childData = childSnapshot.val(); // data for item
-                var count = childData.count; 
+                var count = childData.count;
                 var price = parseFloat(childData.price).toFixed(2);
-
+                var image = childData.image;
+                
                 // create row with four cells
                 var row = table.insertRow(-1);
                 var cell1 = row.insertCell(0);
                 var cell2 = row.insertCell(1);
                 var cell3 = row.insertCell(2);
                 var cell4 = row.insertCell(3);
+                var cell5 = row.insertCell(4);
 
                 // insert item name, price, and count into cells
                 cell1.innerHTML = key;
-                cell2.innerHTML = price;
-                cell3.innerHTML = count;
+                cell3.innerHTML = price;
+                cell4.innerHTML = count;
+                
+                //insert image into cell2
+                if (image == '') {
+                    image = "default-image.png";
+                }
+                var div = document.createElement("div");
+                div.className = "image-container";
+                var storage = firebase.storage();
+                var storageRef = storage.ref();
+                var spaceRef = storageRef.child('images/' + image);
+                spaceRef.getDownloadURL().then(function (url) {
+                    div.style.backgroundImage = "url('" + url + "')";
+                }).catch(function (error) {
+                    console.log("There was an error retreiving " + image + " from firebase");
+                });
+                cell2.appendChild(div);
 
                 // give each cell an id
                 cell1.id = "item" + id;
-                cell2.id = "price" + id;
-                cell3.id = "count" + id;
-                
+                cell2.id = "image" + id;
+                cell3.id = "price" + id;
+                cell4.id = "count" + id;
+
                 // create an input element and append to cell 4
-                var input = cell4.appendChild(document.createElement("input"));
+                var input = cell5.appendChild(document.createElement("input"));
                 input.setAttribute("type", "number");
                 input.setAttribute("max", count);
                 input.setAttribute("min", 0);
                 input.setAttribute("placeholder", 0);
                 input.setAttribute("id", "input" + id);
                 id += 1;
-                
+
                 // add click event listener to input to call calculateTotal function
                 input.addEventListener("input", calculateTotal);
             });
@@ -112,7 +131,7 @@ function confirmPurchase() {
         var count = document.getElementById("input" + i).value; // get quantity of item to be purchased
 
         if (count > 0) { // if quantity of item to be purchased is greater than 0 add to list of items to be purchased in modal
-            var price = document.getElementById("price" + i).innerHTML; 
+            var price = document.getElementById("price" + i).innerHTML;
             var itemTotal = count * price;
             total += itemTotal; // add price of item to total cost
             var item = document.getElementById("item" + i).innerHTML;
@@ -122,13 +141,13 @@ function confirmPurchase() {
         }
     }
 
-    document.getElementById("modal-cart-total").innerHTML = total.toFixed(2);    // display total cost of all items to modal
+    document.getElementById("modal-cart-total").innerHTML = total.toFixed(2); // display total cost of all items to modal
 
     if (total > 0) { //if the total cost of all items is greater than 0 display modal
 
-        document.getElementById("notification").innerHTML = '';     // remove any message being displayed below the shopping cart table
-      
-        var modal = document.getElementById('myModal');   // Get the modal
+        document.getElementById("notification").innerHTML = ''; // remove any message being displayed below the shopping cart table
+
+        var modal = document.getElementById('myModal'); // Get the modal
 
         var span = document.getElementById("close"); // Get the <span> element that closes the modal
 
@@ -155,7 +174,7 @@ function confirmPurchase() {
                 document.getElementById('payment-method-2').checked = false;
             }
         }
-    } else {  // if no items have been selected display warning message
+    } else { // if no items have been selected display warning message
         message = "You must choose an item before checking out!";
         var notification = document.getElementById("notification");
         notification.innerHTML = message;
@@ -170,7 +189,12 @@ function submitConfirmation() {
     var radios = document.getElementsByName('payment-method');
     var paymentMethod;
     var message;
-    
+    var user = firebase.auth().currentUser.displayName;
+    var d = new Date().toLocaleString();
+    var d2 = d.replace(/\//g, "-");
+    var date = d2.replace(",", "");
+
+
     // loop through radio buttons, if a button has been checked, set value of radio button to payment method
     for (var i = 0; i < radios.length; i++) {
         if (radios[i].checked) {
@@ -195,15 +219,27 @@ function submitConfirmation() {
                 var updatedCount = currentCount - count;
 
                 // Update firebase with an updated inventory count for item
-                firebase.database().ref('/inventory/items/'+ item).update({
+                firebase.database().ref('/inventory/items/' + item).update({
                     count: updatedCount
                 });
-                
+
                 // display the updated item count to the user in the shopping cart table
                 var currentCount = document.getElementById("count" + i).innerHTML = updatedCount;
                 document.getElementById("input" + i).value = ''; // clear the input fields
+
+                firebase.database().ref('/inventory/transactions/' + date + '/items/' + item).update({
+                    count: count
+                });
+
+                firebase.database().ref('/inventory/transactions/' + date).update({
+                    user: user,
+                    paymentTotal: purchaseTotal,
+                    paymentType: paymentMethod
+                });
             }
         }
+        var user = firebase.auth().currentUser.displayName;
+        var date = new Date();
 
         // get the running total for the selected payment method
         firebase.database().ref("inventory/paymentTotals/" + paymentMethod).once('value').then(function (snapshot) {
@@ -223,7 +259,7 @@ function submitConfirmation() {
             var notification = document.getElementById("notification");
             notification.innerHTML = message;
             notification.style.color = "#f89901";
-            
+
             //close the modal, clear item list, purchase total, warning message, and uncheck radio buttons
             var modal = document.getElementById('myModal');
             modal.style.display = "none";

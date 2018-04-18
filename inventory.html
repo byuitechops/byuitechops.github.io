@@ -68,15 +68,26 @@
                             <form>
                                 <label for="itemName">Item:
                                 <span id="name"></span></label>
+                                
+                                <label for="itemName">Image:
+                                <div id="image" class="image-container">
+                                </div>
+                                </label>
+                                
+                                <label for="img" class="modal-file-upload">New Image
+                                <input type="file" multiple="false" accept="image/*" id="img" onchange="modalDisplayImageFile()">
+                                        </label>
 
-                                <label for="itemName">Price
+                                <label for="itemName">Price:
                                 <input type="number" id="price" step="0.01" min="0" required>
                                 </label>
 
-                                <label for="itemName">Quantity
+                                <label for="itemName">Quantity:
                                 <input type="number" id="quantity" min="0" required></label>
 
-                                <button onclick="editItem()">Edit</button>
+                                <div class="button" onclick="editItem()">Edit</div>
+                                <input type="hidden" id="hiddenInput">
+                                <div id="modal-warning"></div>
                             </form>
                         </div>
                     </div>

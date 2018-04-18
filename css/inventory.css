@@ -1,6 +1,6 @@
 /* Inventory table */ 
 
-table {
+table, #warning {
     margin: 50px auto;
     text-align: center;
     border-spacing: 0;
@@ -10,18 +10,28 @@ tr:nth-child(2n) {
     background: whitesmoke;
 }
 
-th,td {
+td {
     padding: 5px;
 }
 
 th:nth-child(1), td:nth-child(1){
     text-align: left;
-    padding: 5px 10px;
+    padding: 0 15px;
 }
 
-td:nth-child(4){
-    display: flex;
-    justify-content: space-between;
+td:nth-child(5) span{
+    margin: 0 15px 0 0;
+
+}
+
+.image-container {
+    width: 75px;
+    height: 75px;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    border: none;
+    margin: 10px auto;
 }
 
 /* Input and buttons */
@@ -32,7 +42,16 @@ input {
 
     margin: 0;
 }
+input[type="file"]{
+    display: none;
+}
 
+.custom-file-upload {
+    border: 1px solid black;
+    padding: 5px 10px;
+    font-size: .7em;
+    cursor: pointer;
+}
 
 button{
     width: 70px;
@@ -99,6 +118,19 @@ button{
     align-items: center;
 }
 
+label.modal-file-upload {
+    border: 1px solid black;
+    padding: 5px 10px;
+    font-size: .7em;
+    cursor: pointer;
+    width: 39%;
+    margin: 0 5px 10px auto;
+}
+.modal-column-container .image-container {
+    width: 50%;
+    margin: 10px 0;
+}
+
 /* Modal Form */
 
 form {
@@ -112,8 +144,15 @@ label {
     margin: 5px;
 }
 
-form button {
+form .button {
     width: 50%;
+    background-color: #0076c6;
+    margin: 25px auto;
+    padding: 5px;
+    color: white;
+    text-align: center;
+    border-radius: 15px;
+    width: 75px;
 }
 
 /* The Close Button */
