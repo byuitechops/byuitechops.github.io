@@ -35,15 +35,12 @@
                         } else if (titles == 'Team') {
                             // Show iframe for schedule
                             document.getElementById('scheduleFrame').classList.remove('hide');
-                            if (shot[titles] == 'canvas 3') {
-                                // If canvas 3 set iframe to show canvas 3 schedule
-                                document.getElementById('scheduleFrame').setAttribute('src', 'https://docs.google.com/spreadsheets/d/1mY6vvcCC7ptSYrlnoFrhwgWh4DMqGwQNdcgtjUz4f9M/edit?usp=sharing');
-                            } else if (shot[titles] == 'canvas 1') {
+                            if (shot[titles] == 'canvas 1') {
                                 // If canvas 1 set iframe to show canvas 1 schedule
-                                document.getElementById('scheduleFrame').setAttribute('src', 'https://docs.google.com/spreadsheets/d/1ge7AlgKH_0nkvmbZ_BxWiP6WfAg2rynA1ccXMFei22k/edit?usp=sharing');
+                                document.getElementById('scheduleFrame').setAttribute('src', 'https://docs.google.com/spreadsheets/d/1PRVHD9-Fkhw1Ht-lJ58affqVQzR8VatV4VIOgxwKELI/edit?usp=sharing');
                             } else if (shot[titles] == 'canvas 2') {
                                 // If canvas 2 set iframe to show canvas 2 schedule
-                                document.getElementById('scheduleFrame').setAttribute('src', 'https://docs.google.com/spreadsheets/d/1BMVKAqfiPspOLZy4OFPHdccCWWJVtkHMrLoNobFCkTI/edit?usp=sharing');
+                                document.getElementById('scheduleFrame').setAttribute('src', 'https://docs.google.com/spreadsheets/d/1aP9uIegzVs3PvHl7mxrSkWGtNauwVFood-0-0jw2X6Y/edit?usp=sharing');
                             }
                         }
 
@@ -62,14 +59,11 @@
 function showTeam(team) {
     // Get the iframe for the schedule
     var frame = document.getElementById('scheduleFrame');
-    if (team == 'canvas 3') {
-        // If canvas 3 set iframe to show canvas 3 schedule
-        frame.setAttribute('src', 'https://docs.google.com/spreadsheets/d/1mY6vvcCC7ptSYrlnoFrhwgWh4DMqGwQNdcgtjUz4f9M/edit?usp=sharing');
-    } else if (team == 'canvas 1') {
+    if (team == 'canvas 1') {
         // If canvas 1 set iframe to show canvas 1 schedule
-        frame.setAttribute('src', 'https://docs.google.com/spreadsheets/d/1ge7AlgKH_0nkvmbZ_BxWiP6WfAg2rynA1ccXMFei22k/edit?usp=sharing');
+        frame.setAttribute('src', 'https://docs.google.com/spreadsheets/d/1PRVHD9-Fkhw1Ht-lJ58affqVQzR8VatV4VIOgxwKELI/edit?usp=sharing');
     } else if (team == 'canvas 2') {
         // If canvas 2 set iframe to show canvas 2 schedule
-        frame.setAttribute('src', 'https://docs.google.com/spreadsheets/d/1BMVKAqfiPspOLZy4OFPHdccCWWJVtkHMrLoNobFCkTI/edit?usp=sharing');
+        frame.setAttribute('src', 'https://docs.google.com/spreadsheets/d/1aP9uIegzVs3PvHl7mxrSkWGtNauwVFood-0-0jw2X6Y/edit?usp=sharing');
     }
 }
