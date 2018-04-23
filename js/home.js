@@ -46,6 +46,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
         var trellocode;
         var unblockallcode;
         var workdaycode;
+        var slackcode;
 
         firebase.database().ref().child('acodes').on('value', snap => {
             // Loop through the codes in firebase
@@ -83,6 +84,9 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                 }
                 if (key0 == 'workday') {
                     workdaycode = key1;
+                }
+                if (key0 == 'slack') {
+                    slackcode = key1;
                 }
             }
         });
@@ -150,6 +154,14 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                 loadUser();
                 document.getElementById('txtCode').value = "";
                 document.getElementById('txtCode').placeholder = "Enter Code";
+            } else if (code == slackcode) {
+                var data = {
+                    slack: true
+                }
+                dbRefUsers.child(user).update(data);
+                loadUser();
+                document.getElementById('txtCode').value = "";
+                document.getElementById('txtCode').placeholder = "Enter Code";
             } else if (code == trainingallcode) {
                 var data = {
                     "brightspace": true,
@@ -168,7 +180,8 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                     "screenSteps": true,
                     "firebaseConsole": true,
                     "canvasStyleGuide": true,
-                    "totStyleGuide": true
+                    "totStyleGuide": true,
+                    "slack": true
                 }
                 dbRefUsers.child(user).update(data);
                 loadUser();
@@ -206,6 +219,21 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                         if (snap[titles] == true) {
                             // If Admin true
                             // Access to all
+                            document.getElementById('slack').classList.remove('hide');
+                            if (snap.slack == true) {
+                                var icon = document.getElementById('slack');
+                                icon.setAttribute('href', "https://slack.com/");
+                                slackpic.classList.remove('locked');
+                            } else {
+                                var icon = document.getElementById('slack');
+                                icon.addEventListener('click', e => {
+                                    window.alert('You are blocked for training purposes. Check your email for training link');
+                                });
+                                txtCode.classList.remove('hide');
+                                submitCode.classList.remove('hide');
+                                slackpic.classList.add('locked');
+                            }
+
                             document.getElementById('screensteps').classList.remove('hide');
                             if (snap.screenSteps == true) {
                                 // If access is true set link for icon and remove grey out
