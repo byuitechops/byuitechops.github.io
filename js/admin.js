@@ -27,6 +27,8 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                 for (titles in shot) {
                     if (titles == 'Admin') {
                         if (shot[titles] == true) {
+                            //Load Admin Link
+                            document.getElementById('adminlink').classList.remove('hide');
                             // If admin Load Page
                             document.getElementById('view');
                             // Start listing users
@@ -246,7 +248,7 @@ function editUser(user) {
             td.style.textAlign = 'center';
             td.style.padding = "0";
             td.style.textTransform = "capitalize";
-            
+
             // Create dropdown
             var sTF = document.createElement('select');
             sTF.setAttribute('onChange', "updateFirebase('" + user + "', this.value, '" + list[z] + "')");
@@ -310,11 +312,11 @@ function updateFirebase(user, value, title) {
     // Send to firebase
     firebase.database().ref('users/' + user).update(info)
         .then(function () {
-        // If it worked tell the user
+            // If it worked tell the user
             alert('Firebase has been updated.')
         })
         .catch(function (error) {
-        // If it did not work show the user
+            // If it did not work show the user
             alert(error);
         });
     // Reload page
@@ -328,19 +330,19 @@ function deleteUser(user) {
         // If they said yes remove person
         return firebase.database().ref('users').child(user).remove()
             .then(function () {
-            // If removing the person worked remove person from dates
+                // If removing the person worked remove person from dates
                 return firebase.database().ref('dates').child(user).remove()
                     .then(function () {
-                    // If removing person from dates worked alert user
+                        // If removing person from dates worked alert user
                         alert(user + ' is deleted');
                     })
                     .catch(function (error) {
-                    // If removing persom from date did not work alert user
+                        // If removing persom from date did not work alert user
                         alert(error)
                     });
             })
             .catch(function (error) {
-            // If removing the person did not work alert user
+                // If removing the person did not work alert user
                 alert(error)
             });
     }

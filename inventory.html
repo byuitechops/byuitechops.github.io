@@ -41,12 +41,14 @@
                 <li>
                     <a href="shoppingCart.html">Shopping Cart</a>
                 </li>
-                <li id="adminlink" class="hide">
-                    <a href="admin.html">Admin</a>
-                </li>
-                <li id="adminlink" class="hide">
-                    <a href="inventory.html" class="active">Inventory</a>
-                </li>
+                <div id='adminlink' class="hide">
+                    <li>
+                        <a href="admin.html">Admin</a>
+                    </li>
+                    <li>
+                        <a href="inventory.html" class="active">Inventory</a>
+                    </li>
+                </div>
             </ul>
         </div>
         <div class="col-10">
@@ -68,12 +70,12 @@
                             <form>
                                 <label for="itemName">Item:
                                 <span id="name"></span></label>
-                                
+
                                 <label for="itemName">Image:
                                 <div id="image" class="image-container">
                                 </div>
                                 </label>
-                                
+
                                 <label for="img" class="modal-file-upload">New Image
                                 <input type="file" multiple="false" accept="image/*" id="img" onchange="modalDisplayImageFile()">
                                         </label>

@@ -35,7 +35,6 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
     }
 });
 
-
 // use inventory items stored in firebase to create rows in shopping cart table
 function createTable() {
 
@@ -50,10 +49,16 @@ function createTable() {
 
                 var key = childSnapshot.key; // item name
                 var childData = childSnapshot.val(); // data for item
+                firebase.database().ref('inventory/items/' + key + '/count').on('value', snap => {
+                    //                    localStorage.setItem('count', snap.val());
+                })
                 var count = childData.count;
+                //                var count = localStorage.getItem('count');
+                console.log(key);
+                console.log(count);
                 var price = parseFloat(childData.price).toFixed(2);
                 var image = childData.image;
-                
+
                 // create row with four cells
                 var row = table.insertRow(-1);
                 var cell1 = row.insertCell(0);
@@ -66,7 +71,7 @@ function createTable() {
                 cell1.innerHTML = key;
                 cell3.innerHTML = price;
                 cell4.innerHTML = count;
-                
+
                 //insert image into cell2
                 if (image == '') {
                     image = "default-image.png";

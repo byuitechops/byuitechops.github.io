@@ -26,11 +26,10 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                         if (shot[titles] == true) {
                             //Load Admin Link
                             document.getElementById('adminlink').classList.remove('hide');
+                        } else {
+                            window.location.replace("home.html");
                         }
                     }
-                    //                    else {
-                    //                        window.location.replace("home.html");
-                    //                    }
                 }
             });
         });
@@ -286,7 +285,7 @@ function editItem() {
                 "image": originalImg
             })
             modal.style.display = "none";
-            setTimeout(createTable(),1000);
+            setTimeout(createTable(), 1000);
         } else if (image && originalImg === "default-image.png") {
             var imagePathRef = firebase.storage().ref('images/' + fileName);
             imagePathRef.put(file).then(function (snapshot) {
@@ -299,7 +298,7 @@ function editItem() {
                 console.log("An error occurred in editing " + item);
             });
             modal.style.display = "none";
-            setTimeout(createTable(),1000);
+            setTimeout(createTable(), 1000);
         } else {
             var deleteRef = firebase.storage().ref('images/' + originalImg);
             var deleteTask = deleteRef.delete();
@@ -312,7 +311,7 @@ function editItem() {
                 })
 
                 modal.style.display = "none";
-                setTimeout(createTable(),1000);
+                setTimeout(createTable(), 1000);
             }).catch(function (error) {
                 console.log("An error occurred in updating " + item);
             });

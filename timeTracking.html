@@ -42,30 +42,32 @@
                 <li>
                     <a href="shoppingCart.html">Shopping Cart</a>
                 </li>
-                <li id="adminlink" class="hide">
-                    <a href="admin.html">Admin</a>
-                </li>
-                <li id="adminlink" class="hide">
-                    <a href="inventory.html">Inventory</a>
-                </li>
+                <div id='adminlink' class="hide">
+                    <li>
+                        <a href="admin.html">Admin</a>
+                    </li>
+                    <li>
+                        <a href="inventory.html">Inventory</a>
+                    </li>
+                </div>
             </ul>
             <!-- End of display and link to sidebar menu -->
         </div>
         <div class="col-10">
-            <div class="content">                
+            <div class="content">
                 <h1 style="text-align: center">Time Tracking</h1>
                 <div class="three-dropdowns">
-                <!-- Team name dropdown menu -->
-                <select id="team-dropdown" class="hide" onChange="selectTeam(this.value)">
+                    <!-- Team name dropdown menu -->
+                    <select id="team-dropdown" class="hide" onChange="selectTeam(this.value)">
                    <option value="" selected disabled hidden>TEAM</option>
                    <option value="canvas 1">Canvas 1</option>
                    <option value="canvas 2">Canvas 2</option>
                    <option value="canvas 3">Canvas 3</option>
                 </select>
-                <!-- End of team name dropdown menu -->
-                
-                <!-- Dropdown menu for each month of the year -->
-                <select id="month-dropdown" onChange="setCal(this.value)">
+                    <!-- End of team name dropdown menu -->
+
+                    <!-- Dropdown menu for each month of the year -->
+                    <select id="month-dropdown" onChange="setCal(this.value)">
                     <option value="" selected disabled hidden>MONTH</option>
                     <option value="1">January</option>
                     <option value="2">February</option>
@@ -80,15 +82,15 @@
                     <option value="11">November</option>
                     <option value="12">December</option>
                 </select>
-                <!-- End of dropdown menu for each month of the year -->
-                
+                    <!-- End of dropdown menu for each month of the year -->
 
-                <!--Dropdown populated with each team member through Javascript-->
-                <select id="name-dropdown" class="hide" onchange="setTotals()">
+
+                    <!--Dropdown populated with each team member through Javascript-->
+                    <select id="name-dropdown" class="hide" onchange="setTotals()">
                    <option value="" selected disabled hidden >NAME</option>
                 </select>
-                <!--End of dropdown populated with each team member through Javascript-->
-                    </div>
+                    <!--End of dropdown populated with each team member through Javascript-->
+                </div>
                 <br><br><br>
                 <!-- Calendar -->
                 <div>

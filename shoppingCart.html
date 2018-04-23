@@ -41,17 +41,20 @@
                 <li>
                     <a href="shoppingCart.html" class="active">Shopping Cart</a>
                 </li>
-                <li id="adminlink" class="hide">
-                    <a href="admin.html">Admin</a>
-                </li>
-                <li id="adminlink" class="hide">
-                    <a href="inventory.html">Inventory</a>
-                </li>
+                <div id='adminlink' class="hide">
+                    <li>
+                        <a href="admin.html">Admin</a>
+                    </li>
+                    <li>
+                        <a href="inventory.html">Inventory</a>
+                    </li>
+                </div>
             </ul>
         </div>
         <div class="col-10">
             <div class="content">
                 <h1 style="text-align center">Shopping Cart</h1>
+                <p>Sorry, there is a problem when two people are buying an item at the same time. So there cannot be more than one buying the same item at a time. Also remember to make sure the page is refreshed and showing the latest information.</p>
                 <table id="shopping-cart">
                     <tr>
                         <th>Item</th>
@@ -74,27 +77,27 @@
                     <div id="modal-content">
                         <span id="close">&times;</span>
                         <div class="modal-column-container">
-                        <h3>Confirm Purchase</h3>
+                            <h3>Confirm Purchase</h3>
                             <div class="modal-row-container">
                                 <p>Items:</p>
                                 <ul id="modal-cart-items">
-                            </ul>
+                                </ul>
                             </div>
                             <div class="modal-row-container">
                                 <span>Total:</span>
                                 <strong>$<span id="modal-cart-total"></span></strong>
                             </div>
-                    
+
                             <p>Choose Your Payment Method:</p>
                             <div>
-                            <input type="radio" id="payment-method-1" name="payment-method" value="cash">
-                            <label for="payment-method-1">Cash</label>
-                            <input type="radio" id="payment-method-2" name="payment-method" value="venmo">
-                            <label for="payment-method-2">Venmo</label>
+                                <input type="radio" id="payment-method-1" name="payment-method" value="cash">
+                                <label for="payment-method-1">Cash</label>
+                                <input type="radio" id="payment-method-2" name="payment-method" value="venmo">
+                                <label for="payment-method-2">Venmo</label>
                             </div>
-                        <button onClick="submitConfirmation()">Confirm</button>
-                        <div id="warning"></div>
-                            </div>
+                            <button onClick="submitConfirmation()">Confirm</button>
+                            <div id="warning"></div>
+                        </div>
                     </div>
                 </div>
             </div>
