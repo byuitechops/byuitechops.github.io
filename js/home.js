@@ -219,21 +219,6 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                         if (snap[titles] == true) {
                             // If Admin true
                             // Access to all
-                            document.getElementById('slack').classList.remove('hide');
-                            if (snap.slack == true) {
-                                var icon = document.getElementById('slack');
-                                icon.setAttribute('href', "https://slack.com/");
-                                slackpic.classList.remove('locked');
-                            } else {
-                                var icon = document.getElementById('slack');
-                                icon.addEventListener('click', e => {
-                                    window.alert('You are blocked for training purposes. Check your email for training link');
-                                });
-                                txtCode.classList.remove('hide');
-                                submitCode.classList.remove('hide');
-                                slackpic.classList.add('locked');
-                            }
-
                             document.getElementById('screensteps').classList.remove('hide');
                             if (snap.screenSteps == true) {
                                 // If access is true set link for icon and remove grey out
@@ -458,6 +443,19 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                     txtCode.classList.remove('hide');
                     submitCode.classList.remove('hide');
                     mteampic.classList.add('locked');
+                }
+                if (snap.slack == true) {
+                    var icon = document.getElementById('sk');
+                    icon.setAttribute('href', "https://slack.com/");
+                    slackpic.classList.remove('locked');
+                } else {
+                    var icon = document.getElementById('slack');
+                    icon.addEventListener('click', e => {
+                        window.alert('You are blocked for training purposes. Check your email for training link');
+                    });
+                    txtCode.classList.remove('hide');
+                    submitCode.classList.remove('hide');
+                    slackpic.classList.add('locked');
                 }
                 if (snap.proDev == true) {
                     var icon = document.getElementById('pd');
