@@ -9,8 +9,8 @@ div.content {
 
 #frame {
     overflow-x: auto;
-    margin: 0;
-    width: 1650px;
+    margin: 5px 5px 5px 100px;
+    width: 110%;
 }
 
 #scheduleFrame {
@@ -50,4 +50,15 @@ div.content {
     #team-dropdown {
         margin: auto;
     }
+    
+    #frame {
+        margin: 0;
+        width: 100%;
+        height: 78vh;
+    }
+    
+    #scheduleFrame {
+        height: 77vh;
+    }
+    
 }
