@@ -446,7 +446,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                 }
                 if (snap.slack == true) {
                     var icon = document.getElementById('sk');
-                    icon.setAttribute('href', "https://slack.com/");
+                    icon.setAttribute('href', "https://byuitechopsteam.slack.com/messages/GABFXPE8L/details/");
                     slackpic.classList.remove('locked');
                 } else {
                     var icon = document.getElementById('slack');
