@@ -431,22 +431,9 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                     submitCode.classList.remove('hide');
                     edpic.classList.add('locked');
                 }
-                if (snap.microsoftTeams == true) {
-                    var icon = document.getElementById('mteam');
-                    icon.setAttribute('href', "https://teams.microsoft.com/start");
-                    mteampic.classList.remove('locked');
-                } else {
-                    var icon = document.getElementById('mteam');
-                    icon.addEventListener('click', e => {
-                        window.alert('You are blocked for training purposes. Check your email for training link');
-                    });
-                    txtCode.classList.remove('hide');
-                    submitCode.classList.remove('hide');
-                    mteampic.classList.add('locked');
-                }
                 if (snap.slack == true) {
                     var icon = document.getElementById('sk');
-                    icon.setAttribute('href', "https://byuitechopsteam.slack.com/messages/GABFXPE8L/details/");
+                    icon.setAttribute('href', "https://byuitechops.slack.com/messages/GABFXPE8L/details/");
                     slackpic.classList.remove('locked');
                 } else {
                     var icon = document.getElementById('slack');
@@ -557,7 +544,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                 timekey: date
             });
             window.open('https://www.myworkday.com/byuhi/d/home.htmld#selectedWorklet=501%24162');
-            window.open('https://teams.microsoft.com/start', '_blank');
+            window.open('https://byuitechops.slack.com/messages/GABFXPE8L/details/', '_blank');
             var cmessage = document.getElementById('comment').value;
             var comment = {
                 CommentIn: cmessage
