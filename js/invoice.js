@@ -43,12 +43,11 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                                             for (key3 in snap[key][key2]) {
                                                 var key4;
                                                 for (key4 in snap[key][key2][key3]) {
-
                                                     div.insertAdjacentHTML('beforeend', "<p><span class='bold'>" + key3 + ": </span>" + snap[key][key2][key3][key4] + "</p>");
                                                 }
                                             }
                                         } else if (key2 == "paymentTotal") {
-                                            div.insertAdjacentHTML('beforeend', "<p><span class='bold'>Payment Total:</span> $" + snap[key][key2] + "</p>");
+                                            div.insertAdjacentHTML('beforeend', "<p><span class='bold'>Payment Total:</span> $" + snap[key][key2].toFixed(2) + "</p>");
                                         } else if (key2 == "paymentType") {
                                             div.insertAdjacentHTML('beforeend', "<p><span class='bold'>Payment Type:</span> " + snap[key][key2] + "</p>");
                                         } else if (key2 == "user") {
@@ -60,8 +59,15 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                             })
                             ref.child('paymentTotals').on('value', snap => {
                                 snap = snap.val();
-                                document.getElementById('cash').insertAdjacentHTML('beforeend', "<span class='bold'>Cash:</span> $" + snap.cash.total);
-                                document.getElementById('venmo').insertAdjacentHTML('beforeend', "<span class='bold'>Venmo:</span> $" + snap.venmo.total);
+                                document.getElementById('cash').insertAdjacentHTML('beforeend', "<p><span class='bold'>Cash:</span> $" + snap.cash.total.toFixed(2) + "</p>");
+                                document.getElementById('venmo').insertAdjacentHTML('beforeend', "<p><span class='bold'>Venmo:</span> $" + snap.venmo.total.toFixed(2) + "</p>");
+                            });
+                            ref.child('items').on('value', snap => {
+                                snap = snap.val();
+                                var key;
+                                for (key in snap) {
+                                    document.getElementById('items').insertAdjacentHTML('beforeend', "<p><span class='bold'>" + key + ":</span> " + snap[key].count + " $" + snap[key].price + "</p>")
+                                }
                             })
                         } else {
                             // Send page back to home page
