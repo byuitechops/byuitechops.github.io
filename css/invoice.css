@@ -1,0 +1,8 @@
+#trans div p {
+    /*    display: inline;*/
+    margin-left: 10px;
+}
+
+.bold {
+    font-weight: bold;
+}

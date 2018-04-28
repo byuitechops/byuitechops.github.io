@@ -29,6 +29,43 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                         if (shot[titles] == true) {
                             //Load Admin Link
                             document.getElementById('adminlink').classList.remove('hide');
+                            var ref = firebase.database().ref('inventory');
+                            ref.child('transactions').on('value', snap => {
+                                snap = snap.val();
+                                var key;
+                                for (key in snap) {
+                                    var div = document.createElement('div');
+                                    div.insertAdjacentHTML('beforeend', "<h3>" + key + "</h3>");
+                                    var key2;
+                                    for (key2 in snap[key]) {
+                                        if (key2 == "items") {
+                                            var key3;
+                                            for (key3 in snap[key][key2]) {
+                                                var key4;
+                                                for (key4 in snap[key][key2][key3]) {
+
+                                                    div.insertAdjacentHTML('beforeend', "<p><span class='bold'>" + key3 + ": </span>" + snap[key][key2][key3][key4] + "</p>");
+                                                }
+                                            }
+                                        } else if (key2 == "paymentTotal") {
+                                            div.insertAdjacentHTML('beforeend', "<p><span class='bold'>Payment Total:</span> $" + snap[key][key2] + "</p>");
+                                        } else if (key2 == "paymentType") {
+                                            div.insertAdjacentHTML('beforeend', "<p><span class='bold'>Payment Type:</span> " + snap[key][key2] + "</p>");
+                                        } else if (key2 == "user") {
+                                            div.insertAdjacentHTML('beforeend', "<p><span class='bold'>Buyer: </span>" + snap[key][key2] + "</p>");
+                                        }
+                                    }
+                                    document.getElementById('trans').insertAdjacentElement('afterbegin', div);
+                                }
+                            })
+                            ref.child('paymentTotals').on('value', snap => {
+                                snap = snap.val();
+                                document.getElementById('cash').insertAdjacentHTML('beforeend', "<span class='bold'>Cash:</span> $" + snap.cash.total);
+                                document.getElementById('venmo').insertAdjacentHTML('beforeend', "<span class='bold'>Venmo:</span> $" + snap.venmo.total);
+                            })
+                        } else {
+                            // Send page back to home page
+                            window.location.replace("home.html");
                         }
                     }
                 }
