@@ -441,3 +441,8 @@ function modalDisplayImageFile() {
     //declare the file loading
     reader.readAsDataURL(file);
 }
+
+function clearPartyNames() {
+    firebase.database().ref('inventory/party/customers').remove();
+    alert('The names have been cleared out.');
+}

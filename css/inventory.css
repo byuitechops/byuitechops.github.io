@@ -1,6 +1,11 @@
-/* Inventory table */ 
+* {
+    box-sizing: border-box;
+}
 
-table, #warning {
+/* Inventory table */
+
+table,
+#warning {
     margin: 50px auto;
     text-align: center;
     border-spacing: 0;
@@ -14,12 +19,13 @@ td {
     padding: 5px;
 }
 
-th:nth-child(1), td:nth-child(1){
+th:nth-child(1),
+td:nth-child(1) {
     text-align: left;
     padding: 0 15px;
 }
 
-td:nth-child(5) span{
+td:nth-child(5) span {
     margin: 0 15px 0 0;
 
 }
@@ -39,23 +45,33 @@ td:nth-child(5) span{
 input {
     text-align: center;
     height: 2em;
-
     margin: 0;
+    width: 10em;
 }
-input[type="file"]{
+
+input[type="file"] {
     display: none;
 }
 
 .custom-file-upload {
-    border: 1px solid black;
-    padding: 5px 10px;
-    font-size: .7em;
+    font-size: 14px;
+    padding: 0.35em;
+    display: inline-block;
+    border: 1px solid #ccc;
     cursor: pointer;
+    width: 10em;
+    color: grey;
+    margin: 0;
 }
 
-button{
+button {
     width: 70px;
     border-radius: 30px;
+}
+
+#partyButton {
+    width: 200px;
+    float: right;
 }
 
 /* The Modal (background) */
@@ -98,11 +114,11 @@ button{
     font-size: 20px;
 }
 
-.modal-column-container{
+.modal-column-container {
     display: flex;
     flex-flow: column;
     justify-content: space-around;
-    align-items:center;
+    align-items: center;
     text-align: left;
     width: 75%;
     margin: 0 auto;
@@ -126,6 +142,7 @@ label.modal-file-upload {
     width: 39%;
     margin: 0 5px 10px auto;
 }
+
 .modal-column-container .image-container {
     width: 50%;
     margin: 10px 0;
