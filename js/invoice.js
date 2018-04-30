@@ -59,8 +59,8 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                             })
                             ref.child('paymentTotals').on('value', snap => {
                                 snap = snap.val();
-                                document.getElementById('cash').insertAdjacentHTML('beforeend', "<p><span class='bold'>Cash:</span> $" + snap.cash.total.toFixed(2) + "</p>");
-                                document.getElementById('venmo').insertAdjacentHTML('beforeend', "<p><span class='bold'>Venmo:</span> $" + snap.venmo.total.toFixed(2) + "</p>");
+                                document.getElementById('cash').insertAdjacentHTML('beforeend', "<p><span class='bold'>Cash:</span> $" + snap.Cash.total.toFixed(2) + "</p>");
+                                document.getElementById('venmo').insertAdjacentHTML('beforeend', "<p><span class='bold'>Venmo:</span> $" + snap.Venmo.total.toFixed(2) + "</p>");
                             });
                             ref.child('items').on('value', snap => {
                                 snap = snap.val();
