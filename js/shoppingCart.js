@@ -67,6 +67,19 @@ function createTable() {
                 var cell4 = row.insertCell(3);
                 var cell5 = row.insertCell(4);
 
+                // If Party item has already been paid by user hide
+                if (key.includes('Party') == true) {
+                    firebase.database().ref('inventory/party/customers').on("value", snap => {
+                        snap = snap.val();
+                        var names;
+                        for (names in snap) {
+                            if (names === name) {
+                                row.classList.add('hide');
+                            }
+                        }
+                    })
+                }
+
                 // insert item name, price, and count into cells
                 cell1.innerHTML = key;
                 cell3.innerHTML = price;
@@ -97,7 +110,11 @@ function createTable() {
                 // create an input element and append to cell 4
                 var input = cell5.appendChild(document.createElement("input"));
                 input.setAttribute("type", "number");
-                input.setAttribute("max", count);
+                if (key.includes('Party')) {
+                    input.setAttribute("max", 1);
+                } else {
+                    input.setAttribute("max", count);
+                }
                 input.setAttribute("min", 0);
                 input.setAttribute("placeholder", 0);
                 input.setAttribute("id", "input" + id);
@@ -241,6 +258,12 @@ function submitConfirmation() {
                     paymentTotal: purchaseTotal,
                     paymentType: paymentMethod
                 });
+
+                if (item.includes('Party')) {
+                    var data = '{"' + user + '": "paid" }';
+                    data = JSON.parse(data);
+                    firebase.database().ref('inventory/party/customers').update(data);
+                }
             }
         }
         var user = firebase.auth().currentUser.displayName;
@@ -249,6 +272,7 @@ function submitConfirmation() {
         // get the running total for the selected payment method
         firebase.database().ref("inventory/paymentTotals/" + paymentMethod).once('value').then(function (snapshot) {
             var data = snapshot.val();
+            console.log(paymentMethod);
             var runningTotal;
             runningTotal = parseFloat(data.total);
             newRunningTotal = runningTotal + purchaseTotal; // add the purchase total to the current payment method total to get updated total
