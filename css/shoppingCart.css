@@ -1,8 +1,10 @@
 /* The Shopping cart table */
-table, #notification{
+
+table,
+#notification {
     margin: 50px auto;
     text-align: center;
-     border-spacing: 0;
+    border-spacing: 0;
 }
 
 tr:nth-child(2n) {
@@ -14,7 +16,8 @@ th {
     padding: 7px;
 }
 
-th:nth-child(1), td:nth-child(1){
+th:nth-child(1),
+td:nth-child(1) {
     text-align: left;
     padding: 15px 0px 15px 25px;
     width: 20%
@@ -37,25 +40,32 @@ td:nth-child(4) input {
 /*The Shopping Cart Total container */
 
 .shopping-cart-total {
-  width: 400px;
+    width: 400px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: auto;
-}  
+}
 
 /* Buttons and radio input */
 
-button{
-    width: 150px;
+button {
+    width: 200px;
 }
 
+#nameInputLabel {
+    margin-left: 10px;
+}
 
-input[type=radio]{
+#nameInput {
+    height: 1.75em;
+}
+
+input[type=radio] {
     width: 7px;
     height: 7px;
     padding: 7px;
-    margin: 0 0px  0 25px;
+    margin: 0 0px 0 25px;
 }
 
 /* The Modal (background) */
@@ -94,11 +104,11 @@ input[type=radio]{
     font-size: 20px;
 }
 
-.modal-column-container{
+.modal-column-container {
     display: flex;
     flex-flow: column;
     justify-content: space-around;
-    align-items:center;
+    align-items: center;
     text-align: left;
     width: 75%;
     margin: 0 auto;
@@ -116,6 +126,7 @@ input[type=radio]{
 ul {
     padding: 0;
 }
+
 li {
     list-style-type: none;
 }
@@ -148,4 +159,3 @@ li {
     margin: 25px auto;
 
 }
-

@@ -29,9 +29,12 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                 }
             });
         });
+        var nameInput = document.getElementById('nameInput');
+        nameInput.setAttribute('readonly', true);
+        nameInput.setAttribute('value', name);
         createTable();
     } else {
-        window.location.replace("index.html");
+        createTable();
     }
 });
 
@@ -54,8 +57,7 @@ function createTable() {
                 })
                 var count = childData.count;
                 //                var count = localStorage.getItem('count');
-                console.log(key);
-                console.log(count);
+
                 var price = parseFloat(childData.price).toFixed(2);
                 var image = childData.image;
 
@@ -78,6 +80,9 @@ function createTable() {
                             }
                         }
                     })
+                    if (firebase.auth().currentUser === null) {
+                        row.classList.add('hide');
+                    }
                 }
 
                 // insert item name, price, and count into cells
@@ -148,6 +153,13 @@ function confirmPurchase() {
     var rows = document.getElementById("shopping-cart").rows.length - 1;
     var total = 0;
 
+    if (document.getElementById('nameInput').value === null) {
+        message = "You must have enter a name!";
+        var notification = document.getElementById("notification");
+        notification.innerHTML = message;
+        notification.style.color = "red";
+    }
+
     // loops through each row in the shopping cart table
     for (var i = 1; i <= rows; i++) {
         var count = document.getElementById("input" + i).value; // get quantity of item to be purchased
@@ -211,7 +223,7 @@ function submitConfirmation() {
     var radios = document.getElementsByName('payment-method');
     var paymentMethod;
     var message;
-    var user = firebase.auth().currentUser.displayName;
+    var user = document.getElementById('nameInput').value;
     var d = new Date().toLocaleString();
     var d2 = d.replace(/\//g, "-");
     var date = d2.replace(",", "");
@@ -266,13 +278,12 @@ function submitConfirmation() {
                 }
             }
         }
-        var user = firebase.auth().currentUser.displayName;
+        var user = document.getElementById('nameInput').value;
         var date = new Date();
 
         // get the running total for the selected payment method
         firebase.database().ref("inventory/paymentTotals/" + paymentMethod).once('value').then(function (snapshot) {
             var data = snapshot.val();
-            console.log(paymentMethod);
             var runningTotal;
             runningTotal = parseFloat(data.total);
             newRunningTotal = runningTotal + purchaseTotal; // add the purchase total to the current payment method total to get updated total
@@ -288,6 +299,8 @@ function submitConfirmation() {
             var notification = document.getElementById("notification");
             notification.innerHTML = message;
             notification.style.color = "#f89901";
+
+            document.getElementById('nameInput').value = "";
 
             //close the modal, clear item list, purchase total, warning message, and uncheck radio buttons
             var modal = document.getElementById('myModal');
