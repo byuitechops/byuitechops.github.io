@@ -149,57 +149,40 @@ function calculateTotal() {
 // opens the confirm purchase modal 
 function confirmPurchase() {
 
-    var message;
-    var rows = document.getElementById("shopping-cart").rows.length - 1;
-    var total = 0;
+    if (document.getElementById('nameInput').value) {
+        var message;
+        var rows = document.getElementById("shopping-cart").rows.length - 1;
+        var total = 0;
 
-    if (document.getElementById('nameInput').value === "") {
-        message = "You must have enter a name!";
-        var notification = document.getElementById("notification");
-        notification.innerHTML = message;
-        notification.style.color = "red";
-    }
+        // loops through each row in the shopping cart table
+        for (var i = 1; i <= rows; i++) {
+            var count = document.getElementById("input" + i).value; // get quantity of item to be purchased
 
-    // loops through each row in the shopping cart table
-    for (var i = 1; i <= rows; i++) {
-        var count = document.getElementById("input" + i).value; // get quantity of item to be purchased
-
-        if (count > 0) { // if quantity of item to be purchased is greater than 0 add to list of items to be purchased in modal
-            var price = document.getElementById("price" + i).innerHTML;
-            var itemTotal = count * price;
-            total += itemTotal; // add price of item to total cost
-            var item = document.getElementById("item" + i).innerHTML;
-            var li = document.createElement("LI");
-            li.innerHTML = "(" + count + ") " + item;
-            document.getElementById("modal-cart-items").appendChild(li);
-        }
-    }
-
-    document.getElementById("modal-cart-total").innerHTML = total.toFixed(2); // display total cost of all items to modal
-
-    if (total > 0) { //if the total cost of all items is greater than 0 display modal
-
-        document.getElementById("notification").innerHTML = ''; // remove any message being displayed below the shopping cart table
-
-        var modal = document.getElementById('myModal'); // Get the modal
-
-        var span = document.getElementById("close"); // Get the <span> element that closes the modal
-
-        modal.style.display = "block"; // Open the modal 
-
-        // When the user clicks on <span> (x), close the modal, clear item list, purchase total, warning message, and uncheck radio buttons
-        span.onclick = function () {
-            modal.style.display = "none";
-            document.getElementById('modal-cart-items').innerHTML = '';
-            document.getElementById('modal-cart-total').innerHTML = '';
-            document.getElementById('warning').innerHTML = '';
-            document.getElementById('payment-method-1').checked = false;
-            document.getElementById('payment-method-2').checked = false;
+            if (count > 0) { // if quantity of item to be purchased is greater than 0 add to list of items to be purchased in modal
+                var price = document.getElementById("price" + i).innerHTML;
+                var itemTotal = count * price;
+                total += itemTotal; // add price of item to total cost
+                var item = document.getElementById("item" + i).innerHTML;
+                var li = document.createElement("LI");
+                li.innerHTML = "(" + count + ") " + item;
+                document.getElementById("modal-cart-items").appendChild(li);
+            }
         }
 
-        // When the user clicks anywhere outside of the modal, close it, clear item list, purchase total, warning message, and uncheck radio buttons
-        window.onclick = function (event) {
-            if (event.target == modal) {
+        document.getElementById("modal-cart-total").innerHTML = total.toFixed(2); // display total cost of all items to modal
+
+        if (total > 0) { //if the total cost of all items is greater than 0 display modal
+
+            document.getElementById("notification").innerHTML = ''; // remove any message being displayed below the shopping cart table
+
+            var modal = document.getElementById('myModal'); // Get the modal
+
+            var span = document.getElementById("close"); // Get the <span> element that closes the modal
+
+            modal.style.display = "block"; // Open the modal 
+
+            // When the user clicks on <span> (x), close the modal, clear item list, purchase total, warning message, and uncheck radio buttons
+            span.onclick = function () {
                 modal.style.display = "none";
                 document.getElementById('modal-cart-items').innerHTML = '';
                 document.getElementById('modal-cart-total').innerHTML = '';
@@ -207,14 +190,32 @@ function confirmPurchase() {
                 document.getElementById('payment-method-1').checked = false;
                 document.getElementById('payment-method-2').checked = false;
             }
+
+            // When the user clicks anywhere outside of the modal, close it, clear item list, purchase total, warning message, and uncheck radio buttons
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                    document.getElementById('modal-cart-items').innerHTML = '';
+                    document.getElementById('modal-cart-total').innerHTML = '';
+                    document.getElementById('warning').innerHTML = '';
+                    document.getElementById('payment-method-1').checked = false;
+                    document.getElementById('payment-method-2').checked = false;
+                }
+            }
+        } else { // if no items have been selected display warning message
+            message = "You must choose an item before checking out!";
+            var notification = document.getElementById("notification");
+            notification.innerHTML = message;
+            notification.style.color = "red";
+
         }
-    } else { // if no items have been selected display warning message
-        message = "You must choose an item before checking out!";
+    } else {
+        message = "You must enter a name!";
         var notification = document.getElementById("notification");
         notification.innerHTML = message;
         notification.style.color = "red";
-
     }
+
 
 }
 
@@ -300,7 +301,11 @@ function submitConfirmation() {
             notification.innerHTML = message;
             notification.style.color = "#f89901";
 
-            document.getElementById('nameInput').value = "";
+            if (firebase.auth().currentUser !== null) {
+                nameInput.setAttribute('value', name);
+            } else {
+                document.getElementById('nameInput').value = "";
+            }
 
             //close the modal, clear item list, purchase total, warning message, and uncheck radio buttons
             var modal = document.getElementById('myModal');
