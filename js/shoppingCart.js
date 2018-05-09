@@ -153,7 +153,7 @@ function confirmPurchase() {
     var rows = document.getElementById("shopping-cart").rows.length - 1;
     var total = 0;
 
-    if (document.getElementById('nameInput').value === null) {
+    if (document.getElementById('nameInput').value === "") {
         message = "You must have enter a name!";
         var notification = document.getElementById("notification");
         notification.innerHTML = message;
