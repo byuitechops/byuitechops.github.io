@@ -51,6 +51,7 @@ document.getElementById('submitSignUp').addEventListener('click', e => {
 function setUser(user) {
     // Setup user into database with default permissions
     var data = {
+        "Admin": false,
         "Team": 'default',
         "TeamLead": false,
         "brightspace": true,
@@ -59,7 +60,7 @@ function setUser(user) {
         "microsoft": true,
         "workDay": true,
         "canvas": true,
-        "microsoftTeams": true,
+        "slack": true,
         "equella": true,
         "employeeDirectory": true,
         "proDev": true,
@@ -84,7 +85,7 @@ function setUser(user) {
         // Send ot firebase
         firebase.database().ref('users/' + user).update(data);
         firebase.database().ref('users/' + user).child('info').update(info);
-        firebase.database().ref('data/' + user).update({
+        firebase.database().ref('dates/' + user).update({
             "birthday": document.getElementById('signUpBirthday').value
         });
         // If it worked return true
