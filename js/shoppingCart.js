@@ -225,10 +225,18 @@ function submitConfirmation() {
     var paymentMethod;
     var message;
     var user = document.getElementById('nameInput').value;
-    var d = new Date().toLocaleString();
-    var d2 = d.replace(/\//g, "-");
-    var date = d2.replace(",", "");
 
+    var newDate = new Date();
+    var month = ("0" + (newDate.getMonth() + 1)).slice(-2);
+    var day = ("0" + newDate.getDate()).slice(-2);
+    var year = ("0" + newDate.getFullYear()).slice(-4);
+
+    var hours = ("0" + newDate.getHours()).slice(-2);
+    var minutes = ("0" + newDate.getMinutes()).slice(-2);
+    var seconds = ("0" + newDate.getSeconds()).slice(-2);
+    var meridiem = hours >= 12 ? "PM" : "AM";
+
+    var date = month + "-" + day + "-" + year + " " + meridiem + " " + hours + ":" + minutes + ":" + seconds;
 
     // loop through radio buttons, if a button has been checked, set value of radio button to payment method
     for (var i = 0; i < radios.length; i++) {
@@ -280,7 +288,7 @@ function submitConfirmation() {
             }
         }
         var user = document.getElementById('nameInput').value;
-        var date = new Date();
+        //        var date = new Date();
 
         // get the running total for the selected payment method
         firebase.database().ref("inventory/paymentTotals/" + paymentMethod).once('value').then(function (snapshot) {
