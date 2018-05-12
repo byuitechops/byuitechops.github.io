@@ -126,6 +126,54 @@ function showEvent() {
                         // Make modal visible
                         document.getElementById('myModal').style.display = "block";
                     }
+                    if (Number(ed) - 1 == td) {
+                        // If event is a birthday continue
+                        if (event == 'birthday') {
+                            // Create greeting message
+                            var message = '! Happy Early birthday ' + name + "!";
+
+                            // Create the div for the display
+                            var div = document.createElement('div');
+                            // Create the image
+                            var image = document.createElement('img');
+                            // Set which image to use & style it
+                            image.src = 'images/birthday.png';
+                            image.style.display = 'block';
+                            image.style.margin = '10px auto';
+                            // Fill div with display
+                            div.innerHTML = "Tomorrow is <span class='big'>" + name + "'s </span> " + event + message;
+                            // Add image to display
+                            div.appendChild(image);
+                            // Add div to page
+                            document.getElementById('announce').appendChild(div);
+                        }
+                        // Make modal visible
+                        document.getElementById('myModal').style.display = "block";
+                    }
+                    if (Number(ed) + 1 == td) {
+                        // If event is a birthday continue
+                        if (event == 'birthday') {
+                            // Create greeting message
+                            var message = '! Happy late birthday ' + name + "!";
+
+                            // Create the div for the display
+                            var div = document.createElement('div');
+                            // Create the image
+                            var image = document.createElement('img');
+                            // Set which image to use & style it
+                            image.src = 'images/birthday.png';
+                            image.style.display = 'block';
+                            image.style.margin = '10px auto';
+                            // Fill div with display
+                            div.innerHTML = "Yesterday was <span class='big'>" + name + "'s </span> " + event + message;
+                            // Add image to display
+                            div.appendChild(image);
+                            // Add div to page
+                            document.getElementById('announce').appendChild(div);
+                        }
+                        // Make modal visible
+                        document.getElementById('myModal').style.display = "block";
+                    }
                 }
             }
         }
