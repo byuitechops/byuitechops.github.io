@@ -139,6 +139,7 @@ function calculateTotal() {
     for (var i = 1; i <= rows; i++) { // loop through each row
         var count = document.getElementById("input" + i).value; // get quantity of item wanted by user
         var price = document.getElementById("price" + i).innerHTML; // get price of item
+
         var itemTotal = count * price; // find total price of item  
         total += itemTotal; // add item total to over all total
     }
@@ -165,6 +166,7 @@ function confirmPurchase() {
                 var item = document.getElementById("item" + i).innerHTML;
                 firebase.database().ref('inventory/items/' + item + '/count').on('value', snap => {
                     var itemcount = snap.val();
+                    count = document.getElementById("input" + i).value;
                     if (count > itemcount) {
                         message = "You've been bought out. Refresh the page to see the new totals.";
                         var warning = document.getElementById("warning");
@@ -231,6 +233,8 @@ function confirmPurchase() {
 
 // confirms purchase and updates firebase with count of item and venmo/cash payment totals
 function submitConfirmation() {
+
+    var results;
     var radios = document.getElementsByName('payment-method');
     var paymentMethod;
     var message;
@@ -266,16 +270,14 @@ function submitConfirmation() {
         for (var i = 1; i <= rows; i++) {
             var item = document.getElementById("item" + i).innerHTML; // get item name
             var count = document.getElementById("input" + i).value; // get quantity of item to be purchased
+            var currentCount;
 
             if (count > 0) { // if quantity to be purchased is > 0, subtract the quantity of item from the number of items in stock currently
-                var currentCount;
-                var results;
 
-                firebase.database().ref('inventory/items/' + item + '/count').on('value', snap => {
+                firebase.database().ref('inventory/items/' + item + '/count').once('value', snap => {
                     currentCount = snap.val();
-
                     if (count > currentCount) {
-                        message = "You've been bought out. Refresh the page to see the new totals.";
+                        message = "You've been out bought. Refresh the page to see the new totals.";
                         var warning = document.getElementById("warning");
                         warning.innerHTML = message;
                         warning.style.textAlign = "center";
@@ -316,7 +318,6 @@ function submitConfirmation() {
             }
         }
         var user = document.getElementById('nameInput').value;
-        //        var date = new Date();
 
         // get the running total for the selected payment method
         firebase.database().ref("inventory/paymentTotals/" + paymentMethod).once('value').then(function (snapshot) {
