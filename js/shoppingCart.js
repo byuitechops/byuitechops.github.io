@@ -164,17 +164,6 @@ function confirmPurchase() {
                 var itemTotal = count * price;
                 total += itemTotal; // add price of item to total cost
                 var item = document.getElementById("item" + i).innerHTML;
-                firebase.database().ref('inventory/items/' + item + '/count').on('value', snap => {
-                    var itemcount = snap.val();
-                    count = document.getElementById("input" + i).value;
-                    if (count > itemcount) {
-                        message = "You've been bought out. Refresh the page to see the new totals.";
-                        var warning = document.getElementById("warning");
-                        warning.innerHTML = message;
-                        warning.style.textAlign = "center";
-                        warning.style.color = "red";
-                    }
-                })
                 var li = document.createElement("LI");
                 li.innerHTML = "(" + count + ") " + item;
                 document.getElementById("modal-cart-items").appendChild(li);
@@ -276,19 +265,8 @@ function submitConfirmation() {
 
                 firebase.database().ref('inventory/items/' + item + '/count').once('value', snap => {
                     currentCount = snap.val();
-                    if (count > currentCount) {
-                        message = "You've been out bought. Refresh the page to see the new totals.";
-                        var warning = document.getElementById("warning");
-                        warning.innerHTML = message;
-                        warning.style.textAlign = "center";
-                        warning.style.color = "red";
-                        results = false;
-                    }
                 })
 
-                if (results === false) {
-                    return;
-                }
                 var updatedCount = currentCount - count;
 
                 // Update firebase with an updated inventory count for item

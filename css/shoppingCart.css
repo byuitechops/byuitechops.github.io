@@ -37,6 +37,11 @@ td:nth-child(4) input {
     margin: 10px auto;
 }
 
+.notice {
+    text-align: center;
+    color: darkorange;
+}
+
 /*The Shopping Cart Total container */
 
 .shopping-cart-total {
