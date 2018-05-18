@@ -1,0 +1,47 @@
+div {
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%;
+}
+
+input {
+    width: 48%;
+    height: 4em;
+    font-size: 14px;
+}
+
+select,
+option {
+    margin: 6px;
+    width: 48%;
+    height: 4em;
+    font-size: 14px;
+}
+
+button {
+    width: 90%;
+    margin: 5px 5%;
+    height: 3em;
+    font-size: 14px;
+}
+
+@media screen and (max-width: 1460px) {
+    input {
+        width: 98%;
+    }
+
+    select,
+    option {
+        margin: 6px;
+        width: 98%;
+        height: 4em;
+        font-size: 14px;
+    }
+
+    button {
+        margin: 0.5em auto;
+        display: block;
+        width: 100%;
+    }
+}
