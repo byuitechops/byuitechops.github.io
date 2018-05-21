@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon.gif">
     <title>
-        Technical Operations Portal
+        BYU-I Review Team Portal
     </title>
     <!-- Script -->
     <script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
@@ -12,8 +12,6 @@
     <!-- Stylesheets -->
     <link type="text/css" rel="stylesheet" href="css/main.css">
     <link type="text/css" rel="stylesheet" href="css/home.css">
-    <!--    <link type="text/css" rel="stylesheet" href="css/event.css">-->
-    <!--    <link type="text/css" rel="stylesheet" href="css/fireworks.css">-->
 </head>
 
 <body>
@@ -25,34 +23,17 @@
                     <a class="active" href="home.html">Home</a>
                 </li>
                 <li>
-                    <a href="schedule.html">Schedules</a>
+                    <a href="timeCalc.html">Work Time Calc</a>
                 </li>
                 <li>
-                    <a href="shoppingCart.html">Shopping Cart</a>
-                </li>
-                <li>
-                    <a href="videoTimeCalculator.html">Time Calculator</a>
-                </li>
-                <li>
-                    <a href="timeTracking.html">Time Tracking</a>
+                    <a href="schedule.html">Schedule</a>
                 </li>
                 <li>
                     <a href="profile.html">Profile</a>
                 </li>
-                <li>
-                    <a href="employeehandbook.html">Employee Handbook</a>
+                <li class="hide" id='adminlink'>
+                    <a href="admin.html">Admin</a>
                 </li>
-                <div id='adminlink' class="hide">
-                    <li>
-                        <a href="admin.html">Admin</a>
-                    </li>
-                    <li>
-                        <a href="inventory.html">Inventory</a>
-                    </li>
-                    <li>
-                        <a href="invoice.html">Invoice</a>
-                    </li>
-                </div>
             </ul>
         </div>
         <div class="col-10">
@@ -67,6 +48,7 @@
                     <button id="checkIn">Check In</button>
                     <button id="checkOut" class="hide colorChange">Check Out</button>
                     <textarea id="comment" placeholder="Use this box to explain why you are late or why you are leaving early."></textarea>
+                    <p id="showclocked"></p>
                 </section>
 
 
@@ -75,99 +57,99 @@
                     <div class="flex-container">
                         <!-- ICON 1 -->
                         <div id="workday">
-                            <a id="wd" target="_blank" rel="noopener noreferrer"> <img alt="Workday" width="150" height="150" id="wdpic" class="icontab locked" src="images/WorkdayLogo.png" />
+                            <a id="wd" target="_blank" rel="noopener noreferrer" href="https://www.myworkday.com/byuhi/d/home.htmld"> <img alt="Workday" width="150" height="150" id="wdpic" class="icontab" src="images/WorkdayLogo.png" />
                         <p class="tab-header">Workday</p>
                     </a>
                         </div>
                         <!-- ICON 2 -->
                         <div id="workplace">
-                            <a id="wp" target="_blank" rel="noopener noreferrer"> <img alt="Workplace" width="150" height="150" id="wppic" class="icontab locked" src="images/WorkplaceLogo.png" />
+                            <a id="wp" target="_blank" rel="noopener noreferrer" href="https://byuidaho.facebook.com/"> <img alt="Workplace" width="150" height="150" id="wppic" class="icontab" src="images/WorkplaceLogo.png" />
                         <p class="tab-header">Workplace</p>
                     </a>
                         </div>
                         <!-- ICON 3 -->
-                        <div id="teamdynamix" class="hide">
-                            <a id="tdyn" target="_blank" rel="noopener noreferrer"> <img alt="Team Dynamix" width="150" height="150" id="tdynpic" class="icontab locked" src="images/TDLogo.png" /> </a>
+                        <div id="teamdynamix">
+                            <a id="tdyn" target="_blank" rel="noopener noreferrer" href="https://td.byui.edu/TDNext/Home/Desktop/Default.aspx"> <img alt="Team Dynamix" width="150" height="150" id="tdynpic" class="icontab" src="images/TDLogo.png" /> </a>
                             <p class="tab-header">Team Dynamix</p>
                         </div>
                         <!-- ICON 4 -->
-                        <div id="canvas">
-                            <a id="can" target="_blank" rel="noopener noreferrer"> <img alt="DTOM" width="150" height="150" id="canpic" class="icontab locked" src="images/canvas.png" /> </a>
-                            <p class="tab-header">Canvas</p>
+                        <div id="googledrive">
+                            <a id="tdr" target="_blank" rel="noopener noreferrer" href="https://drive.google.com/drive/team-drives"> <img alt="Google Team Drive" width="150" height="150" id="tdrpic" class="icontab" src="images/googledrivelogo.png" /> </a>
+                            <p class="tab-header">Google Team Drive</p>
                         </div>
                         <!-- ICON 5 -->
-                        <div id="brightspace">
-                            <a id="bs" target="_blank" rel="noopener noreferrer"> <img alt="Brightspace" width="150" height="150" id="bspic" class="icontab locked" src="images/BrightspaceLogo.png" /> </a>
-                            <p class="tab-header">Brightspace</p>
+                        <div id="canvas">
+                            <a id="can" target="_blank" rel="noopener noreferrer" href="https://byui.instructure.com/login/canvas"> <img alt="Canvas" width="150" height="150" id="canpic" class="icontab" src="images/canvas.png" /> </a>
+                            <p class="tab-header">Canvas</p>
                         </div>
                         <!-- ICON 6 -->
-                        <div id="pathway">
-                            <a id="path" target="_blank" rel="noopener noreferrer"> <img alt="Pathway" width="150" height="150" id="pathpic" class="icontab locked" src="images/pathway.png" /> </a>
-                            <p class="tab-header">Pathway</p>
+                        <div id="brightspace">
+                            <a id="bs" target="_blank" rel="noopener noreferrer" href="https://byui.brightspace.com/d2l/login?noredirect=true"> <img alt="Brightspace" width="150" height="150" id="bspic" class="icontab" src="images/BrightspaceLogo.png" /> </a>
+                            <p class="tab-header">Brightspace</p>
                         </div>
                         <!-- ICON 7 -->
-                        <div id="project">
-                            <a id="pus" target="_blank" rel="noopener noreferrer"> <img alt="Project Update Sheet" width="150" height="150" id="puspic" class="icontab locked" src="images/pus.png" /> </a>
-                            <p class="tab-header">Project Update Sheet</p>
+                        <div id="pathway">
+                            <a id="path" target="_blank" rel="noopener noreferrer" href="https://pathway.brightspace.com/d2l/login?noredirect=true"> <img alt="Pathway" width="150" height="150" id="pathpic" class="icontab" src="images/pathway.png" /> </a>
+                            <p class="tab-header">Pathway</p>
                         </div>
                         <!-- ICON 8 -->
-                        <div id="googledrive">
-                            <a id="tdr" target="_blank" rel="noopener noreferrer"> <img alt="Google Team Drive" width="150" height="150" id="tdrpic" class="icontab locked" src="images/googledrivelogo.png" /> </a>
-                            <p class="tab-header">Google Team Drive</p>
+                        <div id="project">
+                            <a id="pus" target="_blank" rel="noopener noreferrer" href="https://docs.google.com/spreadsheets/d/1ZSDyyp2M0pfKrwcwWlQvtAMoCsisveKIgiq4R3rCr5k/edit#gid=618249542"> <img alt="Project Update Sheet" width="150" height="150" id="puspic" class="icontab" src="images/pus.png" /> </a>
+                            <p class="tab-header">Project Update Sheet</p>
                         </div>
                         <!-- ICON 9 -->
                         <div id="onelook">
-                            <a id="onelook" target="_blank" rel="noopener noreferrer"> <img alt="OneLook" width="150" height="150" id="onelookpic" class="icontab locked" src="images/onelooklogo.png" /> </a>
+                            <a id="onelook" target="_blank" rel="noopener noreferrer" href="https://www.onelook.com/"> <img alt="OneLook" width="150" height="150" id="onelookpic" class="icontab" src="images/onelooklogo.png" /> </a>
                             <p class="tab-header">Onelook</p>
                         </div>
                         <!-- ICON 10 -->
                         <div id="transcriptlist">
-                            <a id="tl" target="_blank" rel="noopener noreferrer"> <img alt="Transcript List" width="150" height="150" id="tlpic" class="icontab locked" src="images/tl.png" /> </a>
+                            <a id="tl" target="_blank" rel="noopener noreferrer" href="https://docs.google.com/spreadsheets/d/1Y8AGKis--srgbik78FwvexUj_kLDw8OpWj5bz3qKHC4/edit#gid=1216970194"> <img alt="Transcript List" width="150" height="150" id="tlpic" class="icontab" src="images/tl.png" /> </a>
                             <p class="tab-header">Onelook</p>
                         </div>
                         <!-- ICON 11 -->
                         <div id="transcriptstyle">
-                            <a id="ts" target="_blank" rel="noopener noreferrer"> <img alt="Transcript Style Sheet" width="150" height="150" id="tspic" class="icontab locked" src="images/ts.png" /> </a>
+                            <a id="ts" target="_blank" rel="noopener noreferrer" href="https://docs.google.com/spreadsheets/d/1755CupoDLtrpePFnj_Dd_Y-FZEH8_6QMX4gAVDNh_AQ/edit#gid=1437701904"> <img alt="Transcript Style Sheet" width="150" height="150" id="tspic" class="icontab" src="images/ts.png" /> </a>
                             <p class="tab-header">Transcipt Style Sheet</p>
                         </div>
                         <!-- ICON 12 -->
-                        <div id="trello">
-                            <a id="trello" target="_blank" rel="noopener noreferrer"> <img alt="Trello" width="150" height="150" id="trellopic" class="icontab locked" src="images/trellologo.png" /> </a>
+                        <div id="trello" class="hide">
+                            <a id="trello" target="_blank" rel="noopener noreferrer" href="https://trello.com/login?returnUrl=%2F"> <img alt="Trello" width="150" height="150" id="trellopic" class="icontab" src="images/trellologo.png" /> </a>
                             <p class="tab-header">Trello</p>
                         </div>
                         <!-- ICON 13 -->
-                        <div id="improvement">
-                            <a id="improve" target="_blank" rel="noopener noreferrer"> <img alt="Improvement Queue" width="150" height="150" id="imrovepic" class="icontab locked" src="images/improve.png" /> </a>
+                        <div id="improvement" class="hide">
+                            <a id="improve" target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/0B3Q2QQ-jb6iqbjVwekNaMkFaSHc/view?usp=sharing"> <img alt="Improvement Queue" width="150" height="150" id="imrovepic" class="icontab" src="images/improve.png" /> </a>
                             <p class="tab-header">Improvement Queue</p>
                         </div>
                         <!-- ICON 14 -->
-                        <div id="reviewrequest">
-                            <a id="rr" target="_blank" rel="noopener noreferrer"> <img alt="Review Request" width="150" height="150" id="rrpic" class="icontab locked" src="images/rr.png" /> </a>
+                        <div id="reviewrequest" class="hide">
+                            <a id="rr" target="_blank" rel="noopener noreferrer" href="https://docs.google.com/spreadsheets/d/1AMCSKrN4n9mKPS-eJavLFFEpFfqlpq2DnvqFK4uLUmM/edit?usp=sharing"> <img alt="Review Request" width="150" height="150" id="rrpic" class="icontab" src="images/rr.png" /> </a>
                             <p class="tab-header">Review Request</p>
                         </div>
                         <!-- ICON 15 -->
-                        <div id="equella">
-                            <a id="equella" target="_blank" rel="noopener noreferrer"> <img alt="Equella" width="150" height="150" id="equellapic" class="icontab locked" src="images/EquellaLogo.png" /> </a>
+                        <div id="equella" class="hide">
+                            <a id="equella" target="_blank" rel="noopener noreferrer" href="https://content.byui.edu/home.do"> <img alt="Equella" width="150" height="150" id="equellapic" class="icontab" src="images/EquellaLogo.png" /> </a>
                             <p class="tab-header">Equella</p>
                         </div>
                         <!-- ICON 16 -->
-                        <div id="redevqueue">
-                            <a id="rd" target="_blank" rel="noopener noreferrer"> <img alt="Re-Dev Queue" width="150" height="150" id="rdpic" class="icontab locked" src="images/rd.png" /> </a>
+                        <div id="redevqueue" class="hide">
+                            <a id="rd" target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/0B3Q2QQ-jb6iqaGdfRUZ3OVRNVjg/view?usp=sharing"> <img alt="Re-Dev Queue" width="150" height="150" id="rdpic" class="icontab" src="images/rd.png" /> </a>
                             <p class="tab-header">Re-Dev Queue</p>
                         </div>
                         <!-- ICON 17 -->
-                        <div id="ataglance">
-                            <a id="aag" target="_blank" rel="noopener noreferrer"> <img alt="At-A-Glance" width="150" height="150" id="aagpic" class="icontab locked" src="images/aag.png" /> </a>
+                        <div id="ataglance" class="hide">
+                            <a id="aag" target="_blank" rel="noopener noreferrer" href="https://docs.google.com/spreadsheets/d/1uxJV2JudoKZKWH9hid8NRyagu-txx_4TDXEB6SFIPmE/edit?usp=sharing"> <img alt="At-A-Glance" width="150" height="150" id="aagpic" class="icontab" src="images/aag.png" /> </a>
                             <p class="tab-header">A-A-Glance</p>
                         </div>
                         <!-- ICON 18 -->
-                        <div id="itticket">
-                            <a id="itt" target="_blank" rel="noopener noreferrer"> <img alt="It Ticket" width="150" height="150" id="ittpic" class="icontab locked" src="images/itt.png" /> </a>
+                        <div id="itticket" class="hide">
+                            <a id="itt" target="_blank" rel="noopener noreferrer" href="https://td.byui.edu/TDClient/Requests/TicketRequests/NewForm?ID=195"> <img alt="It Ticket" width="150" height="150" id="ittpic" class="icontab" src="images/itt.png" /> </a>
                             <p class="tab-header">Submit IT Ticket</p>
                         </div>
                         <!-- ICON 19 -->
-                        <div id="pht">
-                            <a id="pht" target="_blank" rel="noopener noreferrer"> <img alt="Personal Hours Tracker" width="150" height="150" id="phtpic" class="icontab locked" src="images/pht.png" /> </a>
+                        <div id="pht" class="hide">
+                            <a id="pht" target="_blank" rel="noopener noreferrer" href="https://docs.google.com/spreadsheets/d/1ubV55CfFFYVpq_wFXG7srH8y2Az_09b8cM96XOhKnTE/edit#gid=1126787467"> <img alt="Personal Hours Tracker" width="150" height="150" id="phtpic" class="icontab" src="images/pht.png" /> </a>
                             <p class="tab-header">Personal Hours Tracker</p>
                         </div>
                     </div>
@@ -176,23 +158,11 @@
                     <button id="btnLogout">Logout</button>
                 </form>
 
-                <!-- The Modal -->
-                <!--                <div id="myModal" class="modal">-->
-                <!--    Modal content-->
-                <!--                    <div class="modal-content" id="announce">-->
-                <!--                        <div class="pyro">-->
-                <!--                            <div class="before"></div>-->
-                <!--                            <div class="after"></div>-->
-                <!--                        </div>-->
-                <!--                    </div>-->
-                <!--                </div>-->
-
             </div>
         </div>
     </div>
 
     <script src="js/home.js"></script>
-    <!--    <script src="js/event.js"></script>-->
 
 </body>
 

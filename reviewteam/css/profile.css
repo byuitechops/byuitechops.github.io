@@ -1,0 +1,107 @@
+table {
+    margin: 0 auto;
+    font-size: 22px;
+}
+
+th {
+    text-align: right;
+    padding: 0.25em;
+    width: 155px;
+}
+
+tr {
+    height: 2em;
+}
+
+tr :first-child + td {
+    padding: 0 0.5em;
+    width: 10em;
+}
+
+button {
+    height: 2.25em;
+    width: 5em;
+}
+
+/* The Modal (background) */
+
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+
+#modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%;
+    /* Could be more or less, depending on screen size */
+    text-align: center;
+    font-size: 20px;
+}
+
+/* The Close Button */
+
+#close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+#close:hover,
+#close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#modal-content select,
+#modal-content select option {
+    margin: 10px;
+    font-size: 18px;
+    height: 2em;
+    width: 8em;
+}
+
+#modal-content button {
+    width: 8em;
+    height: 3em;
+    display: block;
+    margin: 20px auto;
+}
+
+#sNames {
+    margin-left: 40%;
+    margin-right: 40%;
+    text-align: left;
+    background-color: #0076c6;
+    color: white;
+    border-radius: 1em;
+    font-size: 19px;
+    overflow: hidden;
+    padding: 5px 10px;
+    white-space: nowrap;
+    width: 200px;
+    height: 35px;
+}

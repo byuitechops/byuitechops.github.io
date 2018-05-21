@@ -716,7 +716,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
         // Logout of firebase and website
         document.getElementById('btnLogout').addEventListener('click', e => {
             firebase.auth().signOut();
-        })
+        });
 
 
     } else {

@@ -1,15 +1,4 @@
-.locked {
-    opacity: .1;
-}
-
 #showclocked {
-    text-align: left;
-    font-size: 1em;
-    width: 50%;
-    text-align: center;
-}
-
-#showbreak {
     text-align: left;
     font-size: 1em;
     width: 50%;
@@ -76,74 +65,6 @@ textarea {
 
 /* ---------------- End of Module Box ---------------- */
 
-/* ------ Timer Box ------ */
-
-#breakTimer {
-    display: none;
-    border-radius: 300px;
-    position: fixed;
-    right: 0;
-    top: 1%;
-    bottom: 0;
-    background-color: #0076c6;
-    width: 300px;
-    height: 300px;
-}
-
-#breakTimer p {
-    margin: 0;
-    text-align: center;
-    vertical-align: middle;
-    line-height: 300px;
-    color: white;
-    font-size: 60px;
-}
-
-.colorChange {
-    animation: pulse 7s infinite;
-}
-
-@keyframes pulse {
-    0% {
-        background-color: #0076c6;
-    }
-
-    25% {
-        background-color: yellowgreen;
-    }
-
-    50% {
-        background-color: #f89901;
-    }
-
-    75% {
-        background-color: yellowgreen;
-    }
-
-    100% {
-        background-color: #0076c6;
-    }
-}
-
-.alertRed {
-    animation: alertPulse 1s infinite;
-}
-
-@keyframes alertPulse {
-    0% {
-        background-color: red;
-    }
-
-    50% {
-        background-color: black;
-    }
-
-    100% {
-        background-color: red;
-    }
-}
-
-
 /* ------------------------------------- */
 
 input[type='text'] {
@@ -158,12 +79,6 @@ input[type='text'] {
     }
     button {
         font-size: 25px
-    }
-
-    #showbreak {
-        text-align: center;
-        font-size: 1.2em;
-        width: 100%;
     }
 
     textarea {

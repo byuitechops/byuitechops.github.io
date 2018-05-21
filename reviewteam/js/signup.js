@@ -1,11 +1,11 @@
-// Connect to firebase
-const config = {
-    apiKey: "AIzaSyA_I75-CU5_GlNP1QSKvvH8nbYVkaAUgNA",
-    authDomain: "techopsportal.firebaseapp.com",
-    databaseURL: "https://techopsportal.firebaseio.com",
-    projectId: "techopsportal",
-    storageBucket: "techopsportal.appspot.com",
-    messagingSenderId: "265124430634"
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyD4QPzcqjwXlZokv3IUuBUSQFF2VMg4xjQ",
+    authDomain: "review-team.firebaseapp.com",
+    databaseURL: "https://review-team.firebaseio.com",
+    projectId: "review-team",
+    storageBucket: "review-team.appspot.com",
+    messagingSenderId: "1021047023591"
 };
 firebase.initializeApp(config);
 
@@ -34,7 +34,7 @@ document.getElementById('submitSignUp').addEventListener('click', e => {
             });
             setTimeout(function () {
                 window.location.replace("home.html");
-            }, 1400);
+            }, 1500);
         } else {
             // If it did not work alert user
             alert('Sorry Registration did not work, try again.');
@@ -51,42 +51,21 @@ function setUser(user) {
     // Setup user into database with default permissions
     var data = {
         "Admin": false,
-        "Team": 'default',
-        "TeamLead": false,
-        "brightspace": true,
-        "trello": true,
-        "teamDrive": true,
-        "microsoft": true,
-        "workDay": true,
-        "canvas": true,
-        "slack": true,
-        "equella": true,
-        "employeeDirectory": true,
-        "proDev": true,
-        "pathway": true,
-        "screenSteps": true,
-        "monthlyTraining": true,
-        "firebaseConsole": true,
-        "canvasStyleGuide": true,
-        "totStyleGuide": true,
-        "teamDynamix": false
+        "Lead": false,
+        "Profile": {
+            "birthday": document.getElementById('signUpBirthday').value,
+            "phoneNumber": document.getElementById('signUpPhone').value,
+            "track": document.getElementById('signUpTrack').value,
+            "major": document.getElementById('signUpMajor').value,
+            "graduation": document.getElementById('signUpGraduation').value,
+            "lastDay": document.getElementById('signUpLastDay').value,
+            "personalHoursLeft": "N/A"
+        }
     };
     // Set up user with inputed info
-    var info = {
-        "birthday": document.getElementById('signUpBirthday').value,
-        "email": document.getElementById('signUpEmail').value,
-        "graduation": document.getElementById('signUpGraduation').value,
-        "major": document.getElementById('signUpMajor').value,
-        "phoneNumber": document.getElementById('signUpPhone').value,
-        "track": document.getElementById('signUpTrack').value
-    }
     try {
         // Send ot firebase
         firebase.database().ref('users/' + user).update(data);
-        firebase.database().ref('users/' + user).child('info').update(info);
-        firebase.database().ref('dates/' + user).update({
-            "birthday": document.getElementById('signUpBirthday').value
-        });
         // If it worked return true
         return true;
     } catch (err) {
