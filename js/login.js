@@ -33,7 +33,6 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
             }
         });
 
-
         // This function is run when the login button is clicked
         btnLogin.addEventListener('click', e => {
             // Get the values from email input and password input
