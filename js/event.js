@@ -146,9 +146,9 @@ function showEvent() {
                             div.appendChild(image);
                             // Add div to page
                             document.getElementById('announce').appendChild(div);
+                            // Make modal visible
+                            document.getElementById('myModal').style.display = "block";
                         }
-                        // Make modal visible
-                        document.getElementById('myModal').style.display = "block";
                     }
                     if (Number(ed) + 1 == td) {
                         // If event is a birthday continue
@@ -170,9 +170,9 @@ function showEvent() {
                             div.appendChild(image);
                             // Add div to page
                             document.getElementById('announce').appendChild(div);
+                            // Make modal visible
+                            document.getElementById('myModal').style.display = "block";
                         }
-                        // Make modal visible
-                        document.getElementById('myModal').style.display = "block";
                     }
                 }
             }
