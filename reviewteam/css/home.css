@@ -6,8 +6,14 @@
 }
 
 button {
-    width: 45%;
+    width: 40%;
 }
+
+#checkIn,
+#checkOut {
+    margin-left: 100px;
+}
+
 
 /* ---------------------- Icon box -------------------- */
 
@@ -15,6 +21,7 @@ button {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    margin-bottom: 40px;
 }
 
 .flex-container div {
