@@ -51,9 +51,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                         // If not admin change to home
                         window.location.replace("home.html");
                     }
-
                 }
-
             });
         });
     } else {
@@ -335,6 +333,8 @@ function deleteUser(user) {
                     .then(function () {
                         // If removing person from dates worked alert user
                         alert(user + ' is deleted');
+                        // Reload page
+                        location.reload();
                     })
                     .catch(function (error) {
                         // If removing persom from date did not work alert user
@@ -346,8 +346,6 @@ function deleteUser(user) {
                 alert(error)
             });
     }
-    // Reload page
-    location.reload();
 }
 
 // Get the View modal
