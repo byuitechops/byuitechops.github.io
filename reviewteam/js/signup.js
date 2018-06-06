@@ -18,6 +18,15 @@ document.getElementById('submitSignUp').addEventListener('click', e => {
     // Connect to firebase authentication
     const auth = firebase.auth();
 
+    if (document.getElementById('signUpBirthday').value == "" ||
+        document.getElementById('signUpPhone').value == "" ||
+        document.getElementById('signUpTrack').value == "" ||
+        document.getElementById('signUpMajor').value == "" ||
+        document.getElementById('signUpGraduation').value == "") {
+        document.getElementById('message').innerHTML = "All required values must be filled.";
+        return;
+    }
+
 
     // Sign up in firebase with email and password
     const promise = auth.createUserWithEmailAndPassword(email, pass);
