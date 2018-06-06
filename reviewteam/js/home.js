@@ -126,7 +126,6 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
             };
             document.getElementById('comment').value = "";
             isCheckedIn();
-            showEvent();
         });
 
         document.getElementById('checkOut').addEventListener('click', e => {

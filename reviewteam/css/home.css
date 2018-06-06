@@ -72,6 +72,35 @@ textarea {
 
 /* ---------------- End of Module Box ---------------- */
 
+/* ---------------- End of Module Box ---------------- */
+
+.colorChange {
+    animation: pulse 7s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        background-color: #0076c6;
+    }
+
+    25% {
+        background-color: yellowgreen;
+    }
+
+    50% {
+        background-color: #f89901;
+    }
+
+    75% {
+        background-color: yellowgreen;
+    }
+
+    100% {
+        background-color: #0076c6;
+    }
+}
+
+
 /* ------------------------------------- */
 
 input[type='text'] {

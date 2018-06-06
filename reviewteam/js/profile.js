@@ -99,16 +99,16 @@ function displayInfo(selected) {
             document.getElementById('dTrack').innerHTML = snap.track;
         }
 
-        if (snap.position == "") {
+        if (snap.lastDay == "") {
             document.getElementById('dLastDay').innerHTML = "No Data";
         } else {
             document.getElementById('dLastDay').innerHTML = snap.lastDay;
         }
 
-        if (snap.position == "") {
+        if (snap.personalHoursUsed == "") {
             document.getElementById('dPHours').innerHTML = "No Data";
         } else {
-            document.getElementById('dPHours').innerHTML = snap.personalHoursLeft;
+            document.getElementById('dPHours').innerHTML = snap.personalHoursUsed;
         }
     });
 
