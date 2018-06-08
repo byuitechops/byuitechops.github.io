@@ -41,7 +41,6 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                 if (firebaseUser) {
                     loadUser();
                     isCheckedIn();
-                    document.getElementById('comment').classList.remove('hide');
                 } else {
                     window.location.replace('index.html');
                 }
@@ -116,15 +115,6 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
             });
             window.open('https://www.myworkday.com/byuhi/d/home.htmld', '_blank');
             window.open('https://byuidaho.facebook.com/', '_blank');
-            var cmessage = document.getElementById('comment').value;
-            var comment = {
-                CommentIn: cmessage
-            };
-            if (cmessage != "") {
-                ref.child(date).update(comment);
-                document.getElementById('comment').innerHTML = "";
-            };
-            document.getElementById('comment').value = "";
             isCheckedIn();
         });
 
@@ -158,15 +148,6 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
             dbRefUsers.child(user).child('TimeClock').update(checkdata);
             isCheckedIn();
             ref.child(date).update(data);
-            var cmessage = document.getElementById('comment').value;
-            var comment = {
-                CommentOut: cmessage
-            };
-            if (cmessage != "") {
-                ref.child(date).update(comment);
-                document.getElementById('comment').innerHTML = "";
-            };
-            document.getElementById('comment').value = "";
         });
 
         function isCheckedIn() {

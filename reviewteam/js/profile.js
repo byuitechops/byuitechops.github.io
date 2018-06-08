@@ -141,7 +141,7 @@ function updateInfo(title) {
         }
     }
 
-    if (title == "phoneNum" || title == "major" || title == "position" || title == "speed") {
+    if (title == "phoneNum" || title == "major" || title == "lastDay") {
         var newItem = document.createElement('input');
         newItem.setAttribute('id', 'haha');
         newItem.setAttribute('type', 'text');
