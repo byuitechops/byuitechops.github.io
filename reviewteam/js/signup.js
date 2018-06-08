@@ -67,8 +67,7 @@ function setUser(user) {
             "track": document.getElementById('signUpTrack').value,
             "major": document.getElementById('signUpMajor').value,
             "graduation": document.getElementById('signUpGraduation').value,
-            "lastDay": document.getElementById('signUpLastDay').value,
-            "personalHoursUsed": "N/A"
+            "lastDay": document.getElementById('signUpLastDay').value
         }
     };
     // Set up user with inputed info

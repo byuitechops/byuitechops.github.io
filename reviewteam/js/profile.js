@@ -104,12 +104,6 @@ function displayInfo(selected) {
         } else {
             document.getElementById('dLastDay').innerHTML = snap.lastDay;
         }
-
-        if (snap.personalHoursUsed == "") {
-            document.getElementById('dPHours').innerHTML = "No Data";
-        } else {
-            document.getElementById('dPHours').innerHTML = snap.personalHoursUsed;
-        }
     });
 
 }
