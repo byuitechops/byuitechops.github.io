@@ -20,16 +20,6 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
             user = profile.displayName;
         });
 
-        if (user == "Justin") {
-            var name = prompt("Enter your name");
-            var profile = firebase.auth().currentUser;
-            profile.updateProfile({
-                displayName: name
-            }).catch(function (error) {
-                console.log(error);
-            });
-        }
-
         firebase.database().ref('users').child(user).on('value', snap => {
             // Loop through the user in the database
             var titles;
