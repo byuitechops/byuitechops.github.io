@@ -369,7 +369,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                 }
                 if (snap.teamDrive == true) {
                     var icon = document.getElementById('tdr');
-                    icon.setAttribute('href', "https://drive.google.com/drive/folders/0AKiJtEpGJEXOUk9PVA");
+                    icon.setAttribute('href', "https://drive.google.com/drive/team-drives");
                     tdrpic.classList.remove('locked');
                 } else {
                     var icon = document.getElementById('tdr');
