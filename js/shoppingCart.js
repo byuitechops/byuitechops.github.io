@@ -61,75 +61,74 @@ function createTable() {
                 var price = parseFloat(childData.price).toFixed(2);
                 var image = childData.image;
 
-                // create row with four cells
-                var row = table.insertRow(-1);
-                if (count <= 0) {
-                    row.classList.add('hide');
-                }
-                var cell1 = row.insertCell(0);
-                var cell2 = row.insertCell(1);
-                var cell3 = row.insertCell(2);
-                var cell4 = row.insertCell(3);
-                var cell5 = row.insertCell(4);
+                if (count > 0) {
+                    // create row with four cells
+                    var row = table.insertRow(-1);
+                    var cell1 = row.insertCell(0);
+                    var cell2 = row.insertCell(1);
+                    var cell3 = row.insertCell(2);
+                    var cell4 = row.insertCell(3);
+                    var cell5 = row.insertCell(4);
 
-                // If Party item has already been paid by user hide
-                if (key.includes('Party') == true) {
-                    firebase.database().ref('inventory/party/customers').on("value", snap => {
-                        snap = snap.val();
-                        var names;
-                        for (names in snap) {
-                            if (names === name) {
-                                row.classList.add('hide');
+                    // If Party item has already been paid by user hide
+                    if (key.includes('Party') == true) {
+                        firebase.database().ref('inventory/party/customers').on("value", snap => {
+                            snap = snap.val();
+                            var names;
+                            for (names in snap) {
+                                if (names === name) {
+                                    row.classList.add('hide');
+                                }
                             }
+                        })
+                        if (firebase.auth().currentUser === null) {
+                            row.classList.add('hide');
                         }
-                    })
-                    if (firebase.auth().currentUser === null) {
-                        row.classList.add('hide');
                     }
+
+                    // insert item name, price, and count into cells
+                    cell1.innerHTML = key;
+                    cell3.innerHTML = price;
+                    cell4.innerHTML = count;
+
+                    //insert image into cell2
+                    if (image == '') {
+                        image = "default-image.png";
+                    }
+                    var div = document.createElement("div");
+                    div.className = "image-container";
+                    var storage = firebase.storage();
+                    var storageRef = storage.ref();
+                    var spaceRef = storageRef.child('images/' + image);
+                    spaceRef.getDownloadURL().then(function (url) {
+                        div.style.backgroundImage = "url('" + url + "')";
+                    }).catch(function (error) {
+                        console.log("There was an error retreiving " + image + " from firebase");
+                    });
+                    cell2.appendChild(div);
+
+                    // give each cell an id
+                    cell1.id = "item" + id;
+                    cell2.id = "image" + id;
+                    cell3.id = "price" + id;
+                    cell4.id = "count" + id;
+
+                    // create an input element and append to cell 4
+                    var input = cell5.appendChild(document.createElement("input"));
+                    input.setAttribute("type", "number");
+                    if (key.includes('Party')) {
+                        input.setAttribute("max", 1);
+                    } else {
+                        input.setAttribute("max", count);
+                    }
+                    input.setAttribute("min", 0);
+                    input.setAttribute("placeholder", 0);
+                    input.setAttribute("id", "input" + id);
+                    id += 1;
+
+                    // add click event listener to input to call calculateTotal function
+                    input.addEventListener("input", calculateTotal);
                 }
-
-                // insert item name, price, and count into cells
-                cell1.innerHTML = key;
-                cell3.innerHTML = price;
-                cell4.innerHTML = count;
-
-                //insert image into cell2
-                if (image == '') {
-                    image = "default-image.png";
-                }
-                var div = document.createElement("div");
-                div.className = "image-container";
-                var storage = firebase.storage();
-                var storageRef = storage.ref();
-                var spaceRef = storageRef.child('images/' + image);
-                spaceRef.getDownloadURL().then(function (url) {
-                    div.style.backgroundImage = "url('" + url + "')";
-                }).catch(function (error) {
-                    console.log("There was an error retreiving " + image + " from firebase");
-                });
-                cell2.appendChild(div);
-
-                // give each cell an id
-                cell1.id = "item" + id;
-                cell2.id = "image" + id;
-                cell3.id = "price" + id;
-                cell4.id = "count" + id;
-
-                // create an input element and append to cell 4
-                var input = cell5.appendChild(document.createElement("input"));
-                input.setAttribute("type", "number");
-                if (key.includes('Party')) {
-                    input.setAttribute("max", 1);
-                } else {
-                    input.setAttribute("max", count);
-                }
-                input.setAttribute("min", 0);
-                input.setAttribute("placeholder", 0);
-                input.setAttribute("id", "input" + id);
-                id += 1;
-
-                // add click event listener to input to call calculateTotal function
-                input.addEventListener("input", calculateTotal);
             });
         });
 }
