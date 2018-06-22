@@ -63,6 +63,9 @@ function createTable() {
 
                 // create row with four cells
                 var row = table.insertRow(-1);
+                if (count <= 0) {
+                    row.classList.add('hide');
+                }
                 var cell1 = row.insertCell(0);
                 var cell2 = row.insertCell(1);
                 var cell3 = row.insertCell(2);
