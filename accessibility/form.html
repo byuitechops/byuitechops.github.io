@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Home | BYUI Accessability</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="assests/favicon.gif">
+    <link type="text/css" rel="stylesheet" href="css/main.css">
+    <link type="text/css" rel="stylesheet" href="css/form.css">
+    <!-- Script -->
+    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-auth.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+</head>
+
+<body>
+    <h1>BYUI Technical Accessability</h1>
+    <form>
+        <select>
+            <option disabled selected hidden>Request Type</option>
+            <option value="Transcript">Transcript</option>
+            <option value="AltText">Alt Text</option>
+        </select>
+        <label>Title:</label>
+        <input type="text">
+        <select>
+            <option disabled selected hidden>Priority</option>
+            <option value="1">ADA Emergency of Special Request</option>
+            <option value="2">Improvement Project for Live Course</option>
+            <option value="3">New/Re-Development Project</option>
+            <option value="4">Transcript Project</option>
+        </select>
+        <select>
+            <option disabled selected hidden>Course</option>
+        </select>
+        <label>Link to Page in Canvas:</label>
+        <input type="url">
+        <label>Week in Course:</label>
+        <input type="text">
+    </form>
+</body>
+<script src="js/form.js"></script>
+
+</html>
