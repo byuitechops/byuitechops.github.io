@@ -22,6 +22,8 @@ firebase.auth().onAuthStateChanged(function (user) {
     }
 });
 
+var message = document.getElementById('message');
+
 document.getElementById('requestType').addEventListener('change', function () {
     if (document.getElementById('requestType').value === "Transcript") {
         document.getElementById('videoInputs').classList.remove('hide');
@@ -40,34 +42,54 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
     var srcURL = document.getElementById('requestVideoURL').value;
     var videoLength = document.getElementById('requestLength').value;
 
-    if (requestType === "" || title === "" || priority === "" || course === "" || lmsURL === "" ||
+    console.log(requestType, title, priority, course, lmsURL, week, srcURL, videoLength);
+
+    if (requestType === "Request Type" || title === "" || priority === "Priority" || course === "Course" || lmsURL === "" ||
         week === "") {
-        document.getElementById('message').innerHTML = "You must fill in all inputs";
-        document.getElementById('message').style.color = "red";
+        message.innerHTML = "You must fill in all inputs";
+        message.style.color = "red";
+        resetMessage();
         return;
-    } else if (requestType === "Transcript" && srcURL === "" || videoLength === "") {
-        document.getElementById('message').innerHTML = "You must fill in all inputs";
-        document.getElementById('message').style.color = "red";
-        return;
+    } else if (requestType === "Transcript") {
+        if (srcURL === "" || videoLength === "") {
+            message.innerHTML = "You must fill in all inputs";
+            message.style.color = "pink";
+            resetMessage();
+            return;
+        }
     } else {
+        var user = firebase.auth().currentUser;
         // Add a new document in collection "accessibility"
         db.collection("accessibility").add({
                 title: title,
                 type: requestType,
-                docURL: "input stufff",
+                docURL: "input stuff",
                 priority: priority,
                 courseCode: course,
                 lmsURL: lmsURL,
                 week: week,
                 requestor: user.displayName,
-                requestDate: "input stuff",
+                requestDate: new Date(),
                 status: "Ready for Transcript"
             })
             .then(function (docRef) {
                 console.log("Document written with ID: ", docRef.id);
+                message.innerHTML = "Request has been made.";
+                message.style.color = "blue";
+                resetMessage();
             })
             .catch(function (error) {
                 console.error("Error adding document: ", error);
+                message.innerHTML = "There was an error making the request. Please try again.";
+                message.style.color = "red";
+                resetMessage();
             });
     }
 });
+
+function resetMessage() {
+    setTimeout(() => {
+        message.innerHTML = "";
+        message.style.color = "black";
+    }, 10000);
+}
