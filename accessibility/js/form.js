@@ -24,8 +24,50 @@ firebase.auth().onAuthStateChanged(function (user) {
 
 document.getElementById('requestType').addEventListener('change', function () {
     if (document.getElementById('requestType').value === "Transcript") {
-        document.getElementById('requestForm').classList.remove('hide');
+        document.getElementById('videoInputs').classList.remove('hide');
     } else {
         document.getElementById('videoInputs').classList.add('hide');
     }
 })
+
+document.getElementById('requestSubmit').addEventListener('click', function () {
+    var requestType = document.getElementById('requestType').value;
+    var title = document.getElementById('requestTitle').value;
+    var priority = document.getElementById('requestPiority').value;
+    var course = document.getElementById('requestCourse').value;
+    var lmsURL = document.getElementById('requestLMSURL').value;
+    var week = document.getElementById('requestWeek').value;
+    var srcURL = document.getElementById('requestVideoURL').value;
+    var videoLength = document.getElementById('requestLength').value;
+
+    if (requestType === "" || title === "" || priority === "" || course === "" || lmsURL === "" ||
+        week === "") {
+        document.getElementById('message').innerHTML = "You must fill in all inputs";
+        document.getElementById('message').style.color = "red";
+        return;
+    } else if (requestType === "Transcript" && srcURL === "" || videoLength === "") {
+        document.getElementById('message').innerHTML = "You must fill in all inputs";
+        document.getElementById('message').style.color = "red";
+        return;
+    } else {
+        // Add a new document in collection "accessibility"
+        db.collection("accessibility").add({
+                title: title,
+                type: requestType,
+                docURL: "input stufff",
+                priority: priority,
+                courseCode: course,
+                lmsURL: lmsURL,
+                week: week,
+                requestor: user.displayName,
+                requestDate: "input stuff",
+                status: "Ready for Transcript"
+            })
+            .then(function (docRef) {
+                console.log("Document written with ID: ", docRef.id);
+            })
+            .catch(function (error) {
+                console.error("Error adding document: ", error);
+            });
+    }
+});

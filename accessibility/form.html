@@ -17,37 +17,38 @@
 
 <body>
     <h1>BYUI Technical Accessability</h1>
-    <form id="requestForm">
+    <p id="message"></p>
+    <div id="requestForm">
         <select id="requestType">
             <option disabled selected hidden>Request Type</option>
             <option value="Transcript">Transcript</option>
             <option value="AltText">Alt Text</option>
         </select>
         <label>Title:</label>
-        <input type="text">
-        <select>
+        <input type="text" id="requestTitle">
+        <select id="requestPiority">
             <option disabled selected hidden>Priority</option>
             <option value="1">ADA Emergency of Special Request</option>
             <option value="2">Improvement Project for Live Course</option>
             <option value="3">New/Re-Development Project</option>
             <option value="4">Transcript Project</option>
         </select>
-        <select>
+        <select id="requestCourse">
             <option disabled selected hidden>Course</option>
         </select>
         <label>Link to Page in Canvas:</label>
-        <input type="url">
+        <input type="url" id="requestLMSURL">
         <label>Week in Course:</label>
-        <input type="text">
+        <input type="text" id="requestWeek">
         <div id="videoInputs" class="hide">
             <label>Video Source URL:</label>
-            <input type="url">
+            <input type="url" id="requestVideoURL">
             <label>Video Length(in seconds):</label>
-            <input type="number">
-            <a href="https://goo.gl/7XQuhn">Time Calculator</a>
+            <input type="number" id="requestLength">
+            <a href="https://goo.gl/7XQuhn" target="_blank">Time Calculator</a>
         </div>
         <input type="submit" id="requestSubmit">
-    </form>
+    </div>
 </body>
 <script src="js/form.js"></script>
 

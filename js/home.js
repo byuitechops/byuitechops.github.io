@@ -40,7 +40,6 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
         var brightspacecode;
         var canvascode;
         var microsoftcode;
-        var staffhubcode;
         var teamdrivecode;
         var teamscode;
         var trainingallcode;
@@ -373,6 +372,19 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                     tdrpic.classList.remove('locked');
                 } else {
                     var icon = document.getElementById('tdr');
+                    icon.addEventListener('click', e => {
+                        window.alert('You are blocked for training purposes. Check your email for training link');
+                    });
+                    txtCode.classList.remove('hide');
+                    submitCode.classList.remove('hide');
+                    tdrpic.classList.add('locked');
+                }                
+                if (snap.videoIndexing == true) {
+                    var icon = document.getElementById('vim');
+                    icon.setAttribute('href', "https://docs.google.com/spreadsheets/d/1Y8AGKis--srgbik78FwvexUj_kLDw8OpWj5bz3qKHC4/edit#gid=1128539009");
+                    vimpic.classList.remove('locked');
+                } else {
+                    var icon = document.getElementById('vim');
                     icon.addEventListener('click', e => {
                         window.alert('You are blocked for training purposes. Check your email for training link');
                     });
