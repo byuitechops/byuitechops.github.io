@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Home | BYUI Accessability</title>
+    <title>Form | BYUI Accessability</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/x-icon" href="assests/favicon.gif">
     <link type="text/css" rel="stylesheet" href="css/main.css">
@@ -17,8 +17,8 @@
 
 <body>
     <h1>BYUI Technical Accessability</h1>
-    <form>
-        <select>
+    <form id="requestForm">
+        <select id="requestType">
             <option disabled selected hidden>Request Type</option>
             <option value="Transcript">Transcript</option>
             <option value="AltText">Alt Text</option>
@@ -39,6 +39,14 @@
         <input type="url">
         <label>Week in Course:</label>
         <input type="text">
+        <div id="videoInputs" class="hide">
+            <label>Video Source URL:</label>
+            <input type="url">
+            <label>Video Length(in seconds):</label>
+            <input type="number">
+            <a href="https://goo.gl/7XQuhn">Time Calculator</a>
+        </div>
+        <input type="submit" id="requestSubmit">
     </form>
 </body>
 <script src="js/form.js"></script>
