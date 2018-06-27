@@ -42,8 +42,6 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
     var srcURL = document.getElementById('requestVideoURL').value;
     var videoLength = document.getElementById('requestLength').value;
 
-    console.log(requestType, title, priority, course, lmsURL, week, srcURL, videoLength);
-
     if (requestType === "Request Type" || title === "" || priority === "Priority" || course === "Course" || lmsURL === "" ||
         week === "") {
         message.innerHTML = "You must fill in all inputs";
@@ -53,7 +51,7 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
     } else if (requestType === "Transcript") {
         if (srcURL === "" || videoLength === "") {
             message.innerHTML = "You must fill in all inputs";
-            message.style.color = "pink";
+            message.style.color = "red";
             resetMessage();
             return;
         }
