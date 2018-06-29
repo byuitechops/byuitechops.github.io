@@ -54,34 +54,34 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
             message.style.color = "red";
             resetMessage();
             return;
+        } else {
+            var user = firebase.auth().currentUser;
+            // Add a new document in collection "accessibility"
+            db.collection("accessibility").add({
+                    title: title,
+                    type: requestType,
+                    docURL: "input stuff",
+                    priority: priority,
+                    courseCode: course,
+                    lmsURL: lmsURL,
+                    week: week,
+                    requestor: user.displayName,
+                    requestDate: new Date(),
+                    status: "Ready for Transcript"
+                })
+                .then(function (docRef) {
+                    console.log("Document written with ID: ", docRef.id);
+                    message.innerHTML = "Request has been made.";
+                    message.style.color = "blue";
+                    resetMessage();
+                })
+                .catch(function (error) {
+                    console.error("Error adding document: ", error);
+                    message.innerHTML = "There was an error making the request. Please try again.";
+                    message.style.color = "red";
+                    resetMessage();
+                });
         }
-    } else {
-        var user = firebase.auth().currentUser;
-        // Add a new document in collection "accessibility"
-        db.collection("accessibility").add({
-                title: title,
-                type: requestType,
-                docURL: "input stuff",
-                priority: priority,
-                courseCode: course,
-                lmsURL: lmsURL,
-                week: week,
-                requestor: user.displayName,
-                requestDate: new Date(),
-                status: "Ready for Transcript"
-            })
-            .then(function (docRef) {
-                console.log("Document written with ID: ", docRef.id);
-                message.innerHTML = "Request has been made.";
-                message.style.color = "blue";
-                resetMessage();
-            })
-            .catch(function (error) {
-                console.error("Error adding document: ", error);
-                message.innerHTML = "There was an error making the request. Please try again.";
-                message.style.color = "red";
-                resetMessage();
-            });
     }
 });
 
