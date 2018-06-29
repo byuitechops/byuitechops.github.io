@@ -1,8 +1,50 @@
-button a {
-    text-decoration: none;
-    color: black;
-}
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+body {
+  display: grid;
+  grid-template-columns: repeat(12, 8.33%);
+  grid-template-rows: repeat(26, 4.1%);
+  height: 90vh;
+  font-family: 'Open Sans', sans-serif; }
 
+h1 {
+  grid-column: 1 / span 12;
+  grid-row: 1 / span 2;
+  text-align: center; }
+
+nav {
+  grid-column: 1 / span 12;
+  grid-row: 3 / span 1; }
+  nav ul {
+    display: grid;
+    grid-template-columns: repeat(8, 12.5%);
+    padding: 0;
+    margin: 0; }
+    nav ul a {
+      text-decoration: none;
+      text-align: center;
+      color: #525252;
+      font-weight: bold;
+      background-color: #EBEBEB;
+      border: 1px solid #000000;
+      border-bottom-color: #FFFFFF;
+      border-radius: 20px 20px 0px 0px; }
+      nav ul a li {
+        list-style: none;
+        padding: 0.38em 0.25em; }
+      nav ul a.active {
+        background-color: #0076C6;
+        color: #FFFFFF; }
+      nav ul a:hover {
+        background-color: #F58300;
+        color: #FFFFFF; }
+
+main {
+  border: 1px solid #000000;
+  grid-column: 1 / span 12;
+  grid-row: 4 / span 23; }
+
+/*-- Classes --*/
 .hide {
-    display: none;
-}
+  display: none; }
+
+/*# sourceMappingURL=main.css.map */

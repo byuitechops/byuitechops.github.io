@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/x-icon" href="assests/favicon.gif">
     <link type="text/css" rel="stylesheet" href="css/main.css">
-    <link type="text/css" rel="stylesheet" href="css/home.css">
+    <!-- <link type="text/css" rel="stylesheet" href="css/home.css"> -->
     <!-- Script -->
     <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
@@ -16,9 +16,21 @@
 </head>
 
 <body>
-    <h1>BYUI Technical Accessability</h1>
-    <button><a href="form.html">Submit a Request</a></button>
-    <button id="btnLogout">Logout</button>
+
+    <head>
+        <h1>BYUI Technical Accessability</h1>
+        <nav>
+            <ul>
+                <a class="active" href="home.html"><li>Home</li></a>
+                <a href="form.html"><li>Request</li></a>
+                <a id="btnLogout"><li>Logout</li></a>
+            </ul>
+        </nav>
+    </head>
+    <main>
+        <p>Text</p>
+    </main>
 </body>
 <script src="js/home.js"></script>
+
 </html>
