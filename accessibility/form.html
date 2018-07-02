@@ -8,7 +8,7 @@
     <link type="text/css" rel="stylesheet" href="css/main.css">
     <link type="text/css" rel="stylesheet" href="css/form.css">
     <!-- Script -->
-    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
+    <!-- <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script> -->
     <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-auth.js"></script>
@@ -16,40 +16,55 @@
 </head>
 
 <body>
-    <h1>BYUI Technical Accessability</h1>
-    <p id="message"></p>
-    <div id="requestForm">
-        <select id="requestType">
-            <option disabled selected hidden>Request Type</option>
-            <option value="Transcript">Transcript</option>
-            <option value="Alt Text">Alt Text</option>
-        </select>
-        <select id="requestCourse">
-            <option disabled selected hidden>Course</option>
-            <option value="Test">Test</option>
-        </select>
-        <label>Title:</label>
-        <input type="text" id="requestTitle">
-        <select id="requestPiority">
-            <option disabled selected hidden>Priority</option>
-            <option value="1">ADA Emergency of Special Request</option>
-            <option value="2">Improvement Project for Live Course</option>
-            <option value="3">New/Re-Development Project</option>
-            <option value="4">Transcript Project</option>
-        </select>
-        <label>Link to Page in Canvas:</label>
-        <input type="url" id="requestLMSURL">
-        <label>Week in Course:</label>
-        <input type="text" id="requestWeek">
-        <div id="videoInputs" class="hide">
-            <label>Video Source URL:</label>
-            <input type="url" id="requestVideoURL">
-            <label>Video Length(in seconds):</label>
-            <input type="number" id="requestLength">
-            <a href="https://goo.gl/7XQuhn" target="_blank">Time Calculator</a>
+
+    <head>
+        <h1>BYUI Technical Accessability</h1>
+        <nav>
+            <ul>
+                <a href="home.html">
+                    <li>Home</li>
+                </a>
+                <a class="active" href="form.html">
+                    <li>Request</li>
+                </a>
+                <a id="btnLogout">
+                    <li>Logout</li>
+                </a>
+            </ul>
+        </nav>
+    </head>
+    <main>
+        <div id="requestForm">
+            <p id="message"></p>
+            <select id="requestType">
+                <option disabled selected hidden>Request Type</option>
+                <option value="Transcript">Transcript</option>
+                <option value="Alt Text">Alt Text</option>
+            </select>
+            <select id="requestCourse">
+                <option disabled selected hidden>Course</option>
+            </select>
+            <label id="requestTitleLabel">Title:</label>
+            <input type="text" id="requestTitle">
+            <select id="requestPriority">
+                <option disabled selected hidden>Priority</option>
+                <option value="1">ADA Emergency of Special Request</option>
+                <option value="2">Improvement Project for Live Course</option>
+                <option value="3">New/Re-Development Project</option>
+                <option value="4">Transcript Project</option>
+            </select>
+            <label id="requestLMSURLLabel">Link to Canvas Page:</label>
+            <input type="url" id="requestLMSURL">
+            <label id="requestWeekLabel">Week in Course:</label>
+            <input type="text" id="requestWeek">
+            <label id="requestVideoURLLabel" class="hide">Video Source URL:</label>
+            <input type="url" id="requestVideoURL" class="hide">
+            <label id="requestLengthLabel" class="hide">Video Length(secs):</label>
+            <input type="number" id="requestLength" class="hide">
+            <a href="https://goo.gl/7XQuhn" target="_blank" id="timeCalc" class="hide">Time Calculator</a>
+            <input type="submit" id="requestSubmit">
         </div>
-        <input type="submit" id="requestSubmit">
-    </div>
+    </main>
 </body>
 <script src="js/form.js"></script>
 

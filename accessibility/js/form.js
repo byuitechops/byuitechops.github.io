@@ -10,6 +10,11 @@ var config = {
 firebase.initializeApp(config);
 // Initialize Cloud Firestore through Firebase
 var db = firebase.firestore();
+const settings = { /* your settings... */
+    timestampsInSnapshots: true
+};
+db.settings(settings);
+
 
 // Check if Logged In
 firebase.auth().onAuthStateChanged(function (user) {
@@ -22,20 +27,30 @@ firebase.auth().onAuthStateChanged(function (user) {
     }
 });
 
+getCourses();
+
 var message = document.getElementById('message');
 
 document.getElementById('requestType').addEventListener('change', function () {
     if (document.getElementById('requestType').value === "Transcript") {
-        document.getElementById('videoInputs').classList.remove('hide');
+        document.getElementById('requestVideoURLLabel').classList.remove('hide');
+        document.getElementById('requestVideoURL').classList.remove('hide');
+        document.getElementById('requestLengthLabel').classList.remove('hide');
+        document.getElementById('requestLength').classList.remove('hide');
+        document.getElementById('timeCalc').classList.remove('hide');
     } else {
-        document.getElementById('videoInputs').classList.add('hide');
+        document.getElementById('requestVideoURLLabel').classList.add('hide');
+        document.getElementById('requestVideoURL').classList.add('hide');
+        document.getElementById('requestLengthLabel').classList.add('hide');
+        document.getElementById('requestLength').classList.add('hide');
+        document.getElementById('timeCalc').classList.add('hide');
     }
 })
 
 document.getElementById('requestSubmit').addEventListener('click', function () {
     var requestType = document.getElementById('requestType').value;
     var title = document.getElementById('requestTitle').value;
-    var priority = document.getElementById('requestPiority').value;
+    var priority = document.getElementById('requestPriority').value;
     var course = document.getElementById('requestCourse').value;
     var lmsURL = document.getElementById('requestLMSURL').value;
     var week = document.getElementById('requestWeek').value;
@@ -49,10 +64,10 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
         resetMessage();
         return;
     } else if (requestType === "Transcript" && (srcURL === "" || videoLength === "")) {
-            message.innerHTML = "You must fill in all inputs";
-            message.style.color = "red";
-            resetMessage();
-            return;
+        message.innerHTML = "You must fill in all inputs";
+        message.style.color = "red";
+        resetMessage();
+        return;
     } else {
         var user = firebase.auth().currentUser;
         // Add a new document in collection "accessibility"
@@ -73,6 +88,15 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
                 message.innerHTML = "Request has been made.";
                 message.style.color = "blue";
                 resetMessage();
+                document.getElementById('requestType').options[0].selected="selected";
+                document.getElementById('requestCourse').options[0].selected="selected";
+                document.getElementById('requestTitle').value = "";
+                document.getElementById('requestPriority').options[0].selected="selected";
+                document.getElementById('requestLMSURL').value = "";
+                document.getElementById('requestWeek').value = "";
+                document.getElementById('requestVideoURL').value = "";
+                document.getElementById('requestLength').value = "";
+                document.getElementById('videoInputs').classList.add('hide');
             })
             .catch(function (error) {
                 console.error("Error adding document: ", error);
@@ -89,4 +113,28 @@ function resetMessage() {
         message.innerHTML = "";
         message.style.color = "black";
     }, 10000);
+}
+
+function getCourses() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status === 200) {
+            var res = JSON.parse(this.responseText);
+            var id = res._id;
+            var newxhttp = new XMLHttpRequest();
+            newxhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status === 200) {
+                    var newres = JSON.parse(this.responseText);
+                    for (i = 0; i < newres.length; i++) {
+                        var course = newres[i]["__catalogCourseId"];
+                        document.getElementById('requestCourse').insertAdjacentHTML('beforeend', "<option value='" + course + "'>" + course + "</option>");
+                    }
+                }
+            };
+            newxhttp.open("GET", "https://byui.kuali.co/api/v1/catalog/courses/" + id, true);
+            newxhttp.send();
+        }
+    };
+    xhttp.open("GET", "https://byui.kuali.co/api/v1/catalog/public/catalogs/current", true);
+    xhttp.send();
 }

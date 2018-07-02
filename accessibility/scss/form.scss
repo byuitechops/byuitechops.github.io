@@ -1,0 +1,99 @@
+#requestForm {
+    display: grid;
+    grid-template-columns: repeat(10, 10%);
+    grid-template-rows: 1fr 1fr 1fr;
+}
+
+#message {
+    grid-column: 1 / span 11;
+    margin: 0;
+}
+
+#requestType {
+    grid-column: 1 / span 1;
+    grid-row: 3;
+}
+
+#requestCourse {
+    grid-column: 2 / span 1;
+    grid-row: 3;
+}
+
+#requestTitleLabel {
+    grid-column: 3 / span 1;
+    grid-row: 2;
+}
+
+#requestTitle {
+    grid-column: 3 / span 1;
+    grid-row: 3;
+}
+
+#requestPriority {
+    grid-column: 4 / span 1;
+    grid-row: 3;
+}
+
+#requestLMSURLLabel {
+    grid-column: 5 / span 1;
+    grid-row: 2;
+}
+
+#requestLMSURL {
+    grid-column: 5 / span 1;
+    grid-row: 3;
+}
+
+#requestWeekLabel {
+    grid-column: 6 / span 1;
+    grid-row: 2;
+}
+
+#requestWeek {
+    grid-column: 6 / span 1;
+    grid-row: 3;
+}
+
+#requestVideoURLLabel {
+    grid-column: 7 / span 1;
+    grid-row: 2;
+}
+
+#requestVideoURL {
+    grid-column: 7 / span 1;
+    grid-row: 3;
+}
+
+#requestLengthLabel {
+    grid-column: 8 / span 1;
+    grid-row: 2;
+}
+
+#requestLength {
+    grid-column: 8 / span 1;
+    grid-row: 3;
+}
+
+#timeCalc {
+    grid-column: 9 / span 1;
+    grid-row: 2;
+}
+
+#requestSubmit {
+    grid-column: 10;
+    grid-row: 3;
+}
+
+input {
+    width: 12em;
+    height: 1.5em;
+}
+
+select {
+    height: 1.99em;
+}
+
+label {
+    text-align: center;
+}
+
