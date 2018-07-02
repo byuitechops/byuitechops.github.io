@@ -61,7 +61,21 @@ main {
     padding: 1em;
 }
 
+input[type='submit'],
+button {
+    border-radius: 10px;
+    background-color: $color-blue;
+    border-color: $color-lightblue;
+    color: $color-white;
+    height: 2em;
+    font-size: 1rem;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
 /*-- Classes --*/
+
 .hide {
     display: none;
 }

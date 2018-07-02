@@ -44,6 +44,18 @@ main {
   grid-row: 4 / span 23;
   padding: 1em; }
 
+input[type='submit'],
+button {
+  border-radius: 10px;
+  background-color: #0076C6;
+  border-color: #8DD6F0;
+  color: #FFFFFF;
+  height: 2em;
+  font-size: 1rem; }
+  input[type='submit']:hover,
+  button:hover {
+    cursor: pointer; }
+
 /*-- Classes --*/
 .hide {
   display: none; }
