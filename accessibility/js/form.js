@@ -1,11 +1,11 @@
 // Initialize Firebase
 var config = {
-    apiKey: "AIzaSyA1wSzBn5dSx4LzQ03ucMFarhgwuaEy4J8",
-    authDomain: "byui-accessibility.firebaseapp.com",
-    databaseURL: "https://byui-accessibility.firebaseio.com",
-    projectId: "byui-accessibility",
-    storageBucket: "byui-accessibility.appspot.com",
-    messagingSenderId: "144898821357"
+    apiKey: "AIzaSyBWv05RlAPUpAts6LNXgG5-wsdhd9jXafg",
+    authDomain: "byui-accessability.firebaseapp.com",
+    databaseURL: "https://byui-accessability.firebaseio.com",
+    projectId: "byui-accessability",
+    storageBucket: "byui-accessability.appspot.com",
+    messagingSenderId: "275383619900"
 };
 firebase.initializeApp(config);
 // Initialize Cloud Firestore through Firebase
@@ -88,10 +88,10 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
                 message.innerHTML = "Request has been made.";
                 message.style.color = "blue";
                 resetMessage();
-                document.getElementById('requestType').options[0].selected="selected";
-                document.getElementById('requestCourse').options[0].selected="selected";
+                document.getElementById('requestType').options[0].selected = "selected";
+                document.getElementById('requestCourse').options[0].selected = "selected";
                 document.getElementById('requestTitle').value = "";
-                document.getElementById('requestPriority').options[0].selected="selected";
+                document.getElementById('requestPriority').options[0].selected = "selected";
                 document.getElementById('requestLMSURL').value = "";
                 document.getElementById('requestWeek').value = "";
                 document.getElementById('requestVideoURL').value = "";
