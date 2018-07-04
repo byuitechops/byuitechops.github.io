@@ -26,26 +26,46 @@ firebase.auth().onAuthStateChanged(function (user) {
     }
 });
 
-document.getElementById('btnLogin').addEventListener('click', function () {
+document.getElementById('btnLogin').addEventListener('click', function() {
+    logIn();
+});
+document.getElementById('txtPassword').addEventListener('keyup', function (event) {
+    // Cancel the default action, if needed
+    event.preventDefault();
+    // Number 13 is the "Enter" key on the keyboard
+    if (event.keyCode === 13) {
+        // Trigger the button element with a click
+        logIn();
+    }
+})
+
+function logIn() {
     var email = document.getElementById('txtEmail').value;
     var password = document.getElementById('txtPassword').value;
 
-    firebase.auth().signInWithEmailAndPassword(email, password)
-        .then(function () {
-            var user = firebase.auth().currentUser;
-            console.log(user);
-        })
-        .catch(function (error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            // ...
-            document.getElementById('message').innerHTML = errorMessage;
-            message.style.color = "red";
-            resetMessage();
-            document.getElementById('txtPassword').value = "";
-        });
-});
+    if (email == "" || password == "") {
+        document.getElementById('message').innerHTML = "All fields must be filled in.";
+        message.style.color = "red";
+        resetMessage();
+    } else {
+        firebase.auth().signInWithEmailAndPassword(email, password)
+            .then(function () {
+                var user = firebase.auth().currentUser;
+                console.log(user);
+            })
+            .catch(function (error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                // ...
+                document.getElementById('message').innerHTML = errorMessage;
+                message.style.color = "red";
+                resetMessage();
+                document.getElementById('txtPassword').value = "";
+            });
+
+    }
+}
 
 // This funciton is run when the reset password button is clicked
 document.getElementById('resetPassword').addEventListener('click', e => {
