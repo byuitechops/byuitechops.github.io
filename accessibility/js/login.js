@@ -40,7 +40,39 @@ document.getElementById('btnLogin').addEventListener('click', function () {
             var errorCode = error.code;
             var errorMessage = error.message;
             // ...
+            document.getElementById('message').innerHTML = errorMessage;
+            message.style.color = "red";
+            resetMessage();
+            document.getElementById('txtPassword').value = "";
         });
+});
+
+// This funciton is run when the reset password button is clicked
+document.getElementById('resetPassword').addEventListener('click', e => {
+    // Get email from user
+    var emailAddress = document.getElementById('txtEmail').value;
+    if (emailAddress == "") {
+        document.getElementById('message').innerHTML = "The email field must be filled in.";
+        message.style.color = "red";
+        resetMessage();
+    } else {
+        // Send reset password email
+        firebase.auth().sendPasswordResetEmail(emailAddress)
+            .then(function () {
+                // If Email is sent alert the user
+                document.getElementById('message').innerHTML = "An email has been sent. Please check your email.";
+                message.style.color = "blue";
+                resetMessage();
+            }).catch(function (error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                // ...
+                document.getElementById('message').innerHTML = errorMessage;
+                message.style.color = "red";
+                resetMessage();
+            });
+    }
 });
 
 // Get Data
@@ -49,3 +81,10 @@ document.getElementById('btnLogin').addEventListener('click', function () {
 //         console.log(`${doc.id} => ${doc.data()}`);
 //     });
 // });
+
+function resetMessage() {
+    setTimeout(() => {
+        message.innerHTML = "";
+        message.style.color = "black";
+    }, 10000);
+}

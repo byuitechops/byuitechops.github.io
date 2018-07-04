@@ -74,6 +74,11 @@ button {
     }
 }
 
+button a {
+    text-decoration: none;
+    color: $color-white;
+}
+
 /*-- Classes --*/
 
 .hide {

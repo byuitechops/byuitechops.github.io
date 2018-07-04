@@ -2,44 +2,50 @@
 <html>
 
 <head>
-        <title>Sign Up | BYUI Accessibility</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="shortcut icon" type="image/x-icon" href="assests/favicon.gif">
-        <link type="text/css" rel="stylesheet" href="css/main.css">
-        <link type="text/css" rel="stylesheet" href="css/signup.css">
-        <!-- Script -->
-        <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-firestore.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-auth.js"></script>
-        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+    <title>Sign Up | BYUI Accessibility</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="assests/favicon.gif">
+    <link type="text/css" rel="stylesheet" href="css/main.css">
+    <link type="text/css" rel="stylesheet" href="css/signup.css">
+    <!-- Script -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script> -->
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-auth.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
 </head>
 
 <body>
-    <h1 style="text-align: center">Sign Up</h1>
 
-    <div>
-        <input id="signUpName" type="text" placeholder="Firstname Lastname" required>
+    <head>
+        <h1 style="text-align: center">Sign Up</h1>
+    </head>
+    <main>
+        <p id="message"></p>
+        <div>
+            <input id="signUpName" type="text" placeholder="Firstname Lastname" required>
 
-        <input id="signUpEmail" type="email" placeholder="Email" required>
+            <input id="signUpEmail" type="email" placeholder="Email" required>
 
-        <input id="signUpPassword" type="password" placeholder="Password" required>
+            <input id="signUpPassword" type="password" placeholder="Password" required>
 
-        <select id="signUpRole">
-            <option disabled selected hidden>Select Who You Are</option>
-            <option value="Student">Student</option>
-            <option value="Teacher">Teacher</option>
-            <option value="Designer">Designer</option>
-            <option value="Copyedit">Copyedit</option>
-            <option value="Techops">Techops</option>
-        </select>
+            <select id="signUpRole">
+                <option disabled selected hidden>Select Who You Are</option>
+                <option value="Student">Student</option>
+                <option value="Teacher">Teacher</option>
+                <option value="Designer">Designer</option>
+                <option value="Copyedit">Copyedit</option>
+                <option value="Techops">Techops</option>
+            </select>
 
-        <button type="submit" id="submitSignUp">Submit</button>
-        
-        <button id="btnLogin"><a href="index.html">Go Back to Login</a></button>
-    </div>
+            <button type="submit" id="submitSignUp">Submit</button>
 
-    <script src="js/signup.js"></script>
+            <button id="btnLogin">
+                <a href="index.html">Go Back to Login</a>
+            </button>
+        </div>
+    </main>
 </body>
+<script src="js/signup.js"></script>
 
 </html>

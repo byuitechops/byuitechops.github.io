@@ -56,6 +56,10 @@ button {
   button:hover {
     cursor: pointer; }
 
+button a {
+  text-decoration: none;
+  color: #FFFFFF; }
+
 /*-- Classes --*/
 .hide {
   display: none; }
