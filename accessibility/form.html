@@ -13,6 +13,8 @@
     <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-auth.js"></script>
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="createDoc.js"></script>
 </head>
 
 <body>
@@ -62,6 +64,7 @@
             <label id="requestLengthLabel" class="hide">Video Length(secs):</label>
             <input type="number" id="requestLength" class="hide">
             <a href="https://goo.gl/7XQuhn" target="_blank" id="timeCalc" class="hide">Time Calculator</a>
+            <button onclick="authenticate().then(loadClient).then(execute)">Create Transcript Document</button>
             <input type="submit" id="requestSubmit">
         </div>
     </main>
