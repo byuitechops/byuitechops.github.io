@@ -43,14 +43,14 @@ function execute() {
             // Handle the results here (response.result has the parsed body).
             // var newId = response.body;
             console.log('Response', response);
-            console.log(typeof response);
+            console.log(response.body.id);
 
         },
         function (err) {
             console.error('Execute error', err);
-        })
+        });
 
-        .then(moveFile(newId));
+    //.then(moveFile(newId));
 }
 gapi.load('client:auth2', function () {
     gapi.auth2.init({
