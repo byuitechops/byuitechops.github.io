@@ -34,7 +34,7 @@ function execute() {
         'supportsTeamDrives': 'true',
         'visibility': 'DEFAULT',
         'resource': {},
-        'parents': ['0B3DpK7IUgwKBMHRlOEZNQ0gwbHM', '0B21Q7_4lZf3zUWZld2Jyb2pYaGc', '0By8umtmfjtmIbktWRGg4N0R1b1k']
+        'parents': ['0B3DpK7IUgwKBMHRlOEZNQ0gwbHM']
     })
         .then(function (response) {
             // Handle the results here (response.result has the parsed body).
