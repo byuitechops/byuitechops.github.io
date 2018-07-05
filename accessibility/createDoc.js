@@ -23,6 +23,9 @@ function loadClient() {
 // Make sure the client is loaded and sign-in is complete before calling this method.
 function execute() {
     var title = document.getElementById('requestTitle').value;
+    var parents = {
+
+    };
     return gapi.client.drive.files.copy({
         'fileId': '1B41vSP4ggurSr-FWFGfTXSmYTyD9cLUoBNYGCZ_t0v8',
         'title': title,
@@ -30,7 +33,8 @@ function execute() {
         'ocr': 'false',
         'supportsTeamDrives': 'true',
         'visibility': 'DEFAULT',
-        'resource': {}
+        'resource': {},
+        'parents': ['0By8umtmfjtmIbktWRGg4N0R1b1k']
     })
         .then(function (response) {
             // Handle the results here (response.result has the parsed body).
