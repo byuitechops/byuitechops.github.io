@@ -26,8 +26,6 @@ function execute() {
     var parents = {
 
     };
-    var newId;
-    var res;
     return gapi.client.drive.files.copy({
         'fileId': '1B41vSP4ggurSr-FWFGfTXSmYTyD9cLUoBNYGCZ_t0v8',
         'title': 'Transcript: ' + title,
@@ -43,34 +41,16 @@ function execute() {
 
         .then(function (response) {
             // Handle the results here (response.result has the parsed body).
+            // var newId = response.body;
             console.log('Response', response);
-            res = response;
-            console.log(res);
-            //             newId = response.body.slice(33, 77);
-            //             console.log("hey", newId);
 
         },
         function (err) {
             console.error('Execute error', err);
         });
-
-    //.then(moveFile(newId));
 }
 gapi.load('client:auth2', function () {
     gapi.auth2.init({
         client_id: '275383619900-a03vtbvhm40mlne3dc1mkhq235k62eds.apps.googleusercontent.com'
     });
 });
-
-function moveFile(fileId) {
-    console.log(fileId);
-    var body = {
-        'id': '0B3DpK7IUgwKBMHRlOEZNQ0gwbHM'
-    };
-    var request = gapi.client.drive.parents.insert({
-        'fileId': fileId,
-        'resource': body
-    });
-
-    request.execute(function (res) {});
-}
