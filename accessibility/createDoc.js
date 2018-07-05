@@ -38,18 +38,26 @@ function execute() {
         'visibility': 'DEFAULT',
 
     })
+
         .then(function (response) {
             // Handle the results here (response.result has the parsed body).
+            // var newId = response.body;
             console.log('Response', response);
-            console.log(response.body.id);
+            console.log(response.body);
 
         },
         function (err) {
             console.error('Execute error', err);
-        });
+        })
+
+        .then(moveFile(newId));
 }
 gapi.load('client:auth2', function () {
     gapi.auth2.init({
         client_id: '275383619900-a03vtbvhm40mlne3dc1mkhq235k62eds.apps.googleusercontent.com'
     });
 });
+
+function moveFile() {
+
+}
