@@ -29,12 +29,13 @@ function execute() {
     return gapi.client.drive.files.copy({
         'fileId': '1B41vSP4ggurSr-FWFGfTXSmYTyD9cLUoBNYGCZ_t0v8',
         'title': 'Transcript: ' + title,
-        'parents': ['0B3DpK7IUgwKBMHRlOEZNQ0gwbHM'],
         'convert': 'false',
         'ocr': 'false',
         'supportsTeamDrives': 'true',
         'visibility': 'DEFAULT',
-        'resource': {}
+        'resource': {
+            'id': '0B3DpK7IUgwKBMHRlOEZNQ0gwbHM'
+        }
     })
         .then(function (response) {
             // Handle the results here (response.result has the parsed body).
