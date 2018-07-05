@@ -22,7 +22,7 @@ function loadClient() {
 }
 // Make sure the client is loaded and sign-in is complete before calling this method.
 function execute() {
-    var title = document.getElementById('requestTitle');
+    var title = document.getElementById('requestTitle').value;
     return gapi.client.drive.files.copy({
         'fileId': '1B41vSP4ggurSr-FWFGfTXSmYTyD9cLUoBNYGCZ_t0v8',
         'title': title,
