@@ -43,7 +43,7 @@ function execute() {
             // Handle the results here (response.result has the parsed body).
             // var newId = response.body;
             console.log('Response', response);
-            console.log(response.body);
+            console.log(typeof response);
 
         },
         function (err) {
