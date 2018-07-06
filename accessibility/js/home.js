@@ -31,6 +31,13 @@ document.getElementById('btnLogout').addEventListener('click', function () {
     firebase.auth().signOut();
 });
 
+// Get Data
+db.collection("accessibility").get().then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+        console.log(`${doc.id} => ${doc.data()}`);
+    });
+});
+
 function resetMessage() {
     setTimeout(() => {
         message.innerHTML = "";

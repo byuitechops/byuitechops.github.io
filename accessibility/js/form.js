@@ -96,7 +96,11 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
                 document.getElementById('requestWeek').value = "";
                 document.getElementById('requestVideoURL').value = "";
                 document.getElementById('requestLength').value = "";
-                document.getElementById('videoInputs').classList.add('hide');
+                document.getElementById('requestVideoURLLabel').classList.add('hide');
+                document.getElementById('requestVideoURL').classList.add('hide');
+                document.getElementById('requestLengthLabel').classList.add('hide');
+                document.getElementById('requestLength').classList.add('hide');
+                document.getElementById('timeCalc').classList.add('hide');
             })
             .catch(function (error) {
                 console.error("Error adding document: ", error);
