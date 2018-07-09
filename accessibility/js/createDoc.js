@@ -42,8 +42,8 @@ function execute() {
         .then(function (response) {
             // Handle the results here (response.result has the parsed body).
             // var newId = response.body;
-            console.log('Response', response)
-                .then(console.log('hey emma'));
+            //console.log('Response', response);
+            console.log('hello emma');
 
         },
         function (err) {
