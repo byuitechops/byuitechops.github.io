@@ -29,7 +29,10 @@ function execute() {
         'fileId': '1B41vSP4ggurSr-FWFGfTXSmYTyD9cLUoBNYGCZ_t0v8',
         'title': 'Transcript: ' + title,
         'resource': {
-            'id': '0B3DpK7IUgwKBMHRlOEZNQ0gwbHM'
+            'parents': [{
+                'id': '0B3DpK7IUgwKBMHRlOEZNQ0gwbHM'
+            }]
+
         },
         'convert': 'false',
         'ocr': 'false',
@@ -40,15 +43,7 @@ function execute() {
 
         .then(function (response) {
             // Handle the results here (response.result has the parsed body).
-            //console.log('Response', response);
-            var request = gapi.client.drive.parents.insert({
-                'fileId': response.body.slice(33, 77),
-                'supportsTeamDrives': true,
-                'resource': {
-                    'id': '0BztuMIt3a96YSWxuR1AzM3Nxc2M'
-                }
-            });
-            request.execute(function (res) {});
+            console.log('Response', response);
 
         },
         function (err) {
