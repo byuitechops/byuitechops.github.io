@@ -1,3 +1,5 @@
+/* eslint no-console:0 */
+
 // Initialize Firebase
 var config = {
     apiKey: 'AIzaSyBWv05RlAPUpAts6LNXgG5-wsdhd9jXafg',
@@ -88,14 +90,14 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
                 message.innerHTML = 'Request has been made.';
                 message.style.color = 'blue';
                 resetMessage();
-                document.getElementById('requestType').options[0].selected = "selected";
-                document.getElementById('requestCourse').options[0].selected = "selected";
-                document.getElementById('requestTitle').value = "";
-                document.getElementById('requestPriority').options[0].selected = "selected";
-                document.getElementById('requestLMSURL').value = "";
-                document.getElementById('requestWeek').value = "";
-                document.getElementById('requestVideoURL').value = "";
-                document.getElementById('requestLength').value = "";
+                document.getElementById('requestType').options[0].selected = 'selected';
+                document.getElementById('requestCourse').options[0].selected = 'selected';
+                document.getElementById('requestTitle').value = '';
+                document.getElementById('requestPriority').options[0].selected = 'selected';
+                document.getElementById('requestLMSURL').value = '';
+                document.getElementById('requestWeek').value = '';
+                document.getElementById('requestVideoURL').value = '';
+                document.getElementById('requestLength').value = '';
                 document.getElementById('requestVideoURLLabel').classList.add('hide');
                 document.getElementById('requestVideoURL').classList.add('hide');
                 document.getElementById('requestLengthLabel').classList.add('hide');
@@ -130,7 +132,7 @@ function getCourses() {
                 if (this.readyState == 4 && this.status === 200) {
                     var newres = JSON.parse(this.responseText);
                     console.log(newres);
-                    for (i = 0; i < newres.length; i++) {
+                    for (var i = 0; i < newres.length; i++) {
                         var course = newres[i]['__catalogCourseId'];
                         document.getElementById('requestCourse').insertAdjacentHTML('beforeend', '<option value=\'' + course + '\'>' + course + '</option>');
                     }
