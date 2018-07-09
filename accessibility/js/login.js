@@ -95,13 +95,6 @@ document.getElementById('resetPassword').addEventListener('click', e => {
     }
 });
 
-// Get Data
-// db.collection("users").get().then((querySnapshot) => {
-//     querySnapshot.forEach((doc) => {
-//         console.log(`${doc.id} => ${doc.data()}`);
-//     });
-// });
-
 function resetMessage() {
     setTimeout(() => {
         message.innerHTML = "";
