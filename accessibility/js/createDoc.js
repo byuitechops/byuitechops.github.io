@@ -1,5 +1,7 @@
 /* eslint no-console:0 */
 
+var newFileId;
+
 function authenticate() {
     return gapi.auth2.getAuthInstance()
         .signIn({
@@ -43,9 +45,7 @@ function execute() {
 
         .then(function (response) {
             // Handle the results here (response.result has the parsed body).
-            console.log('Response', response);
-            var newFileId = response.body.slice(33, 77);
-            move(newFileId);
+            newFileId = response.body.slice(33, 77);
 
         },
         function (err) {
@@ -53,10 +53,10 @@ function execute() {
         });
 }
 
-function move(id) {
-    console.log('my id', id);
+function move() {
+    console.log(newFileId);
     return gapi.client.drive.files.update({
-        'fileId': id,
+        'fileId': newFileId,
         'addParents': '0B3DpK7IUgwKBdmh6bUxPYWZsQjQ',
         'removeParents': '0BztuMIt3a96YUUhjMWl3WElDUFk',
         'supportsTeamDrives': 'true',
