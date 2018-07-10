@@ -24,6 +24,13 @@ function loadClient() {
             console.error('Error loading GAPI client for API', err);
         });
 }
+
+
+function hello() {
+    console.log('hello');
+}
+
+
 // Make sure the client is loaded and sign-in is complete before calling this method.
 function execute() {
     var title = document.getElementById('requestTitle').value;
@@ -46,6 +53,7 @@ function execute() {
         .then(function (response) {
             // Handle the results here (response.result has the parsed body).
             newFileId = response.body.slice(33, 77);
+            hello();
 
         },
         function (err) {
