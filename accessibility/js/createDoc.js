@@ -27,12 +27,13 @@ function execute() {
     var title = document.getElementById('requestTitle').value;
     return gapi.client.drive.files.copy({
             "fileId": "1B41vSP4ggurSr-FWFGfTXSmYTyD9cLUoBNYGCZ_t0v8",
-            'title': 'Transcript: ' + title,
             "convert": "false",
             "ocr": "false",
             "supportsTeamDrives": "true",
             "resource": {
+                'title': 'Transcript: ' + title,
                 "parents": [{
+                    
                     "id": "0B3DpK7IUgwKBdmh6bUxPYWZsQjQ"
                 }]
             }
