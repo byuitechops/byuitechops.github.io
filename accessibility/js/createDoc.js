@@ -26,17 +26,17 @@ function loadClient() {
 function execute() {
     var title = document.getElementById('requestTitle').value;
     return gapi.client.drive.files.copy({
-            "fileId": "1B41vSP4ggurSr-FWFGfTXSmYTyD9cLUoBNYGCZ_t0v8",
-            "convert": "false",
-            "ocr": "false",
-            "supportsTeamDrives": "true",
-            "resource": {
+            'fileId': '1B41vSP4ggurSr-FWFGfTXSmYTyD9cLUoBNYGCZ_t0v8',
+            'convert': 'false',
+            'ocr': 'false',
+            'supportsTeamDrives': 'true',
+            'resource': {
                 'title': 'Transcript: ' + title,
-                "parents": [{
-                    "id": "0B3DpK7IUgwKBdmh6bUxPYWZsQjQ"
+                'parents': [{
+                    'id': '0B3DpK7IUgwKBdmh6bUxPYWZsQjQ'
                 }]
             }
-         
+
 
         })
 
@@ -44,7 +44,7 @@ function execute() {
                 // Handle the results here (response.result has the parsed body).
                 console.log('Response', response);
                 var newFileId = response.body.slice(33, 77);
-                // move(newFileId);
+                placeDocInCanvas(newFileId);
 
             },
             function (err) {
@@ -58,3 +58,9 @@ gapi.load('client:auth2', function () {
         client_id: '275383619900-a03vtbvhm40mlne3dc1mkhq235k62eds.apps.googleusercontent.com'
     });
 });
+
+
+placeDocInCanvas(id) {
+    var url = `https://docs.google.com/document/d/${id}`;
+    console.log(url);
+}
