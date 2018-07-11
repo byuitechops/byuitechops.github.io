@@ -36,8 +36,6 @@ function execute() {
                     'id': '0B3DpK7IUgwKBdmh6bUxPYWZsQjQ'
                 }]
             }
-
-
         })
 
         .then(function (response) {
@@ -60,7 +58,20 @@ gapi.load('client:auth2', function () {
 });
 
 
-placeDocInCanvas(id) {
+function placeDocInCanvas(id) {
     var url = `https://docs.google.com/document/d/${id}`;
     console.log(url);
+    var LmsUrl = 'https://byui.instructure.com/courses/10956/pages/my-page';
+
+    return new Promise((resolve, reject) => {
+        // var $ =
+
+        $.ajax({
+            dataType: "json",
+            url: LmsUrl,
+            success: resolve,
+            method: 'GET',
+            error: reject
+        });
+    });
 }
