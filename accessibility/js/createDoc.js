@@ -33,21 +33,10 @@ function execute() {
             "resource": {
                 'title': 'Transcript: ' + title,
                 "parents": [{
-                    
                     "id": "0B3DpK7IUgwKBdmh6bUxPYWZsQjQ"
                 }]
             }
-            // 'fileId': '1B41vSP4ggurSr-FWFGfTXSmYTyD9cLUoBNYGCZ_t0v8',
-            // 'title': 'Transcript: ' + title,
-            // 'resource': {
-            //     "parents": [{
-            //         "id": "0B3DpK7IUgwKBdmh6bUxPYWZsQjQ"
-            //     }]
-            // },
-            // 'convert': 'false',
-            // 'ocr': 'false',
-            // 'supportsTeamDrives': 'true',
-            // 'visibility': 'DEFAULT',
+         
 
         })
 
@@ -57,24 +46,6 @@ function execute() {
                 var newFileId = response.body.slice(33, 77);
                 // move(newFileId);
 
-            },
-            function (err) {
-                console.error('Execute error', err);
-            });
-}
-
-function move(id) {
-    console.log('my id', id);
-    return gapi.client.drive.files.update({
-            'fileId': id,
-            'addParents': '0B3DpK7IUgwKBdmh6bUxPYWZsQjQ',
-            'removeParents': '0BztuMIt3a96YUUhjMWl3WElDUFk',
-            'supportsTeamDrives': 'true',
-            'resource': {}
-        })
-        .then(function (response) {
-                // Handle the results here (response.result has the parsed body).
-                console.log('Response', response);
             },
             function (err) {
                 console.error('Execute error', err);
