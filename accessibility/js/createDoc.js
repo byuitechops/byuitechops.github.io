@@ -26,17 +26,26 @@ function loadClient() {
 function execute() {
     var title = document.getElementById('requestTitle').value;
     return gapi.client.drive.files.copy({
-            'fileId': '1B41vSP4ggurSr-FWFGfTXSmYTyD9cLUoBNYGCZ_t0v8',
-            'title': 'Transcript: ' + title,
-            'resource': {
+            "fileId": "1B41vSP4ggurSr-FWFGfTXSmYTyD9cLUoBNYGCZ_t0v8",
+            "convert": "false",
+            "ocr": "false",
+            "supportsTeamDrives": "true",
+            "resource": {
                 "parents": [{
                     "id": "0B3DpK7IUgwKBdmh6bUxPYWZsQjQ"
                 }]
-            },
-            'convert': 'false',
-            'ocr': 'false',
-            'supportsTeamDrives': 'true',
-            'visibility': 'DEFAULT',
+            }
+            // 'fileId': '1B41vSP4ggurSr-FWFGfTXSmYTyD9cLUoBNYGCZ_t0v8',
+            // 'title': 'Transcript: ' + title,
+            // 'resource': {
+            //     "parents": [{
+            //         "id": "0B3DpK7IUgwKBdmh6bUxPYWZsQjQ"
+            //     }]
+            // },
+            // 'convert': 'false',
+            // 'ocr': 'false',
+            // 'supportsTeamDrives': 'true',
+            // 'visibility': 'DEFAULT',
 
         })
 
