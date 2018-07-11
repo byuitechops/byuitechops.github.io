@@ -9,9 +9,19 @@
     margin: 0;
 }
 
+#requestTypeLabel {
+    grid-column: 1 / span 1;
+    grid-row: 2;
+}
+
 #requestType {
     grid-column: 1 / span 1;
     grid-row: 3;
+}
+
+#requestCourseLabel {
+    grid-column: 2 / span 1;
+    grid-row: 2;
 }
 
 #requestCourse {
@@ -27,6 +37,11 @@
 #requestTitle {
     grid-column: 3 / span 1;
     grid-row: 3;
+}
+
+#requestPriorityLabel {
+    grid-column: 4 / span 1;
+    grid-row: 2;
 }
 
 #requestPriority {
@@ -77,23 +92,155 @@
 #timeCalc {
     grid-column: 9 / span 1;
     grid-row: 2;
+    height: 1em;
+    margin-left: 10px;
 }
 
 #requestSubmit {
     grid-column: 10;
     grid-row: 3;
+    height: auto;
+    font-size: 1.5em;
 }
 
-input {
-    width: 98%;
-    height: 1.5em;
-}
-
+input,
 select {
-    height: 1.99em;
+    font-size: 16px;
 }
 
 label {
     text-align: center;
+    h3 {
+        margin: 5px 0;
+    }
 }
 
+/* Tooltip container */
+
+.tooltip {
+    position: relative;
+    width: 2em;
+}
+
+/* Tooltip text */
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    left: 105%;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 36%;
+    left: 0%;
+    margin-left: -10px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent black transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+/* The Modal (background) */
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 70%;
+    /* The Close Button */
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        &:hover,
+        &:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    }
+}
+
+form {
+    padding: 1em;
+    text-align: left;
+    button {
+        width: 25%;
+        margin: 0 38%;
+        font-size: 1.25em;
+    }
+    input {
+        width: 100%;
+        font-size: 14px;
+        margin: .5em;
+        padding: .5em;
+        height: 3em;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+    input[type=checkbox] {
+        -webkit-appearance: none;
+        background-color: #fafafa;
+        border: 1px solid #808080;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, .05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+        padding: 9px;
+        border-radius: 3px;
+        display: inline-block;
+        &:checked {
+            background-color: #0076c6;
+            border: 1px solid #adb8c0;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
+            color: #99a1a7;
+        }
+    }
+    table {
+        margin-right: auto;
+        margin-left: auto;
+    }
+}
+
+h2 {
+    text-align: center;
+}

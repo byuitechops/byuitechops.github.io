@@ -37,16 +37,27 @@
     <main>
         <div id="requestForm">
             <p id="message"></p>
+            <label id="requestTypeLabel">
+                <h3>Request Type</h3>
+            </label>
             <select id="requestType">
                 <option disabled selected hidden>Request Type</option>
                 <option value="Transcript">Transcript</option>
                 <option value="Alt Text">Alt Text</option>
             </select>
+            <label id="requestCourseLabel">
+                <h3>Course Code</h3>
+            </label>
             <select id="requestCourse">
                 <option disabled selected hidden>Course</option>
             </select>
-            <label id="requestTitleLabel">Title:</label>
+            <label id="requestTitleLabel">
+                <h3>Title</h3>
+            </label>
             <input type="text" id="requestTitle">
+            <label id="requestPriorityLabel">
+                <h3>Priority</h3>
+            </label>
             <select id="requestPriority">
                 <option disabled selected hidden>Priority</option>
                 <option value="1">ADA Emergency of Special Request</option>
@@ -54,17 +65,162 @@
                 <option value="3">New/Re-Development Project</option>
                 <option value="4">Transcript Project</option>
             </select>
-            <label id="requestLMSURLLabel">Link to Canvas Page:</label>
+            <label id="requestLMSURLLabel">
+                <h3>Canvas Page Link</h3>
+            </label>
             <input type="url" id="requestLMSURL">
-            <label id="requestWeekLabel">Week in Course:</label>
+            <label id="requestWeekLabel">
+                <h3>Week in Course</h3>
+            </label>
             <input type="text" id="requestWeek">
-            <label id="requestVideoURLLabel" class="hide">Video Source URL:</label>
+            <label id="requestVideoURLLabel" class="hide">
+                <h3>Video Source URL</h3>
+            </label>
             <input type="url" id="requestVideoURL" class="hide">
-            <label id="requestLengthLabel" class="hide">Video Length(secs):</label>
+            <label id="requestLengthLabel" class="hide">
+                <h3>Video Length(secs)</h3>
+            </label>
             <input type="number" id="requestLength" class="hide">
-            <a href="https://goo.gl/7XQuhn" target="_blank" id="timeCalc" class="hide">Time Calculator</a>
+            <div id="timeCalc" class="hide tooltip">
+                <img src="assests/calcIcon.png">
+                <span class="tooltiptext">Click on the icon to open calculator</span>
+            </div>
+
             <!-- <button onclick="authenticate().then(loadClient).then(execute)">Create Transcript Document</button> -->
             <input onclick="authenticate().then(loadClient).then(execute)" type="submit" id="requestSubmit">
+        </div>
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Time Calculator</h2>
+                <form>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th>Hours</th>
+                                <th>Minutes</th>
+                                <th>Seconds</th>
+                                <th>Total in seconds</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input onchange="calculateTotal()" id="hours0" type="number">
+                                </td>
+                                <td>
+                                    <input onchange="calculateTotal()" id="minutes0" type="number">
+                                </td>
+                                <td>
+                                    <input onchange="calculateTotal()" id="seconds0" type="number">
+                                </td>
+                                <td>
+                                    <input onchange="calculateTotal()" id="total0" type="text" readonly>
+                                </td>
+                                <td>
+                                    <input name="cb" type="checkbox" onclick="calculateCheckBoxTotal()">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input onchange="calculateTotal()" id="hours1" type="number">
+                                </td>
+                                <td>
+                                    <input onchange="calculateTotal()" id="minutes1" type="number">
+                                </td>
+                                <td>
+                                    <input onchange="calculateTotal()" id="seconds1" type="number">
+                                </td>
+                                <td>
+                                    <input onchange="calculateTotal()" id="total1" type="text" readonly>
+                                </td>
+                                <td>
+                                    <input name="cb" type="checkbox" onclick="calculateCheckBoxTotal()">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input onchange="calculateTotal()" id="hours2" type="number">
+                                </td>
+                                <td>
+                                    <input onchange="calculateTotal()" id="minutes2" type="number">
+                                </td>
+                                <td>
+                                    <input onchange="calculateTotal()" id="seconds2" type="number">
+                                </td>
+                                <td>
+                                    <input onchange="calculateTotal()" id="total2" type="text" readonly>
+                                </td>
+                                <td>
+                                    <input name="cb" type="checkbox" onclick="calculateCheckBoxTotal()">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input onchange="calculateTotal()" id="hours3" type="number">
+                                </td>
+                                <td>
+                                    <input onchange="calculateTotal()" id="minutes3" type="number">
+                                </td>
+                                <td>
+                                    <input onchange="calculateTotal()" id="seconds3" type="number">
+                                </td>
+                                <td>
+                                    <input onchange="calculateTotal()" id="total3" type="text" readonly>
+                                </td>
+                                <td>
+                                    <input name="cb" type="checkbox" onclick="calculateCheckBoxTotal()">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input onchange="calculateTotal()" id="hours4" type="number">
+                                </td>
+                                <td>
+                                    <input onchange="calculateTotal()" id="minutes4" type="number">
+                                </td>
+                                <td>
+                                    <input onchange="calculateTotal()" id="seconds4" type="number">
+                                </td>
+                                <td>
+                                    <input onchange="calculateTotal()" id="total4" type="text" readonly>
+                                </td>
+                                <td>
+                                    <input name="cb" type="checkbox" onclick="calculateCheckBoxTotal()">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <hr>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th>Total Hours</th>
+                                <th>Total Minutes</th>
+                                <th>Total Seconds</th>
+                                <th>Grand Total (seconds)</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input id="totalHours" type="text" onchange="calculateCheckBoxTotal()" readonly>
+                                </td>
+                                <td>
+                                    <input id="totalMinutes" type="text" onchange="calculateCheckBoxTotal()" readonly>
+                                </td>
+                                <td>
+                                    <input id="totalSeconds" type="text" onchange="calculateCheckBoxTotal()" readonly>
+                                </td>
+                                <td>
+                                    <input id="granTotal" type="text" onchange="calculateCheckBoxTotal()" readonly>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button class="submit" type="reset">Reset</button>
+                </form>
+            </div>
+
         </div>
     </main>
 </body>

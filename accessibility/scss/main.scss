@@ -7,6 +7,11 @@ $color-orange: #F58300;
 $color-lightgrey: #EBEBEB;
 $color-grey: #adadad;
 $color-darkgrey: #525252;
+
+html, body {
+    margin: 0;
+}
+
 body {
     display: grid;
     grid-template-columns: repeat(12, 8.33%);
@@ -18,12 +23,17 @@ body {
 h1 {
     grid-column: 1 / span 12;
     grid-row: 1 / span 2;
-    text-align: center;
+    color: $color-white;
+    background-color: $color-blue;
+    margin: 0;
+    padding: 10px;
 }
 
 nav {
     grid-column: 1 / span 12;
     grid-row: 3 / span 1;
+    // border-bottom: 1px solid $color-black;
+    font-size: 1.1em;
     ul {
         display: grid;
         grid-template-columns: repeat(8, 12.5%);
@@ -35,9 +45,6 @@ nav {
             color: $color-darkgrey;
             font-weight: bold;
             background-color: $color-lightgrey;
-            border: 1px solid $color-black;
-            border-bottom-color: $color-white;
-            border-radius: 20px 20px 0px 0px;
             li {
                 list-style: none;
                 padding: 0.38em 0.25em;
@@ -55,7 +62,6 @@ nav {
 }
 
 main {
-    border: 1px solid $color-black;
     grid-column: 1 / span 12;
     grid-row: 4 / span 23;
     padding: 1em;
