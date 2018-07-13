@@ -66,6 +66,7 @@ function executeGetChildren() {
 
 function executeGetFiles(items) {
     var element;
+    setTimeout(
     items.forEach(el => {
         element = el;
         console.log(element.id);
@@ -80,7 +81,7 @@ function executeGetFiles(items) {
                 function (err) {
                     console.error("Execute error2", err);
                 });
-    });
+    }), 1000);
 }
 
 
