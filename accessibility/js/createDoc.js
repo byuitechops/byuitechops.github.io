@@ -57,8 +57,8 @@ function executeGetChildren() {
     })
         .then(function(response) {
                 // Handle the results here (response.result has the parsed body).
-                console.log("Response", response['result']);
-                response['result'].forEach(element => {
+                console.log("Response", response['result']['items']);
+                response['result']['items'].forEach(element => {
                     console.log(element);
                 });
               },
