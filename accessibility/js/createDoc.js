@@ -59,7 +59,7 @@ function executeGetChildren() {
                 // Handle the results here (response.result has the parsed body).
                 console.log("Response", response['result']['items']);
                 response['result']['items'].forEach(element => {
-                    console.log(element);
+                    console.log(element.id);
                 });
               },
               function(err) { console.error("Execute error", err); });
