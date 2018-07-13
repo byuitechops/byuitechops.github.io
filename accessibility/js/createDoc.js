@@ -53,8 +53,21 @@ function execute() {
 }
 
 
+function executeGetChildren() {
+    return gapi.client.drive.children.list({
+      "folderId": "0AJzE0BZcnVJpUk9PVA"
+    })
+        .then(function(response) {
+                // Handle the results here (response.result has the parsed body).
+                console.log("Response", response);
+              },
+              function(err) { console.error("Execute error", err); });
+  }
+
+
 gapi.load('client:auth2', function () {
     gapi.auth2.init({
         client_id: '275383619900-a03vtbvhm40mlne3dc1mkhq235k62eds.apps.googleusercontent.com'
     });
 });
+
