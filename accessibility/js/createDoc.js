@@ -64,7 +64,7 @@ function executeGetChildren() {
                 });
             },
             function (err) {
-                console.error("Execute error", err);
+                console.error("Execute error1", err);
             });
 }
 
@@ -75,10 +75,10 @@ function executeGetFiles(element) {
         })
         .then(function (response) {
                 // Handle the results here (response.result has the parsed body).
-                console.log("Response", element, response['result']['title']);
+                console.log("Response", response['result']['title']);
             },
             function (err) {
-                console.error("Execute error", err);
+                console.error("Execute error2", err);
             });
 }
 
