@@ -60,6 +60,17 @@ function executeGetChildren() {
                 console.log("Response", response['result']['items']);
                 response['result']['items'].forEach(element => {
                     console.log(element.id);
+                    // function execute() {
+                        return gapi.client.drive.files.get({
+                          "fileId": element.id,
+                          "supportsTeamDrives": "true"
+                        })
+                            .then(function(response) {
+                                    // Handle the results here (response.result has the parsed body).
+                                    console.log("Response", response);
+                                  },
+                                  function(err) { console.error("Execute error", err); });
+                    //   }
                 });
               },
               function(err) { console.error("Execute error", err); });
