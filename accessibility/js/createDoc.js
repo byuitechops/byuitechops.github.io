@@ -69,18 +69,18 @@ function executeGetFiles(items) {
     items.forEach(el => {
         element = el;
         console.log(element.id);
+        return gapi.client.drive.files.get({
+                "fileId": element.id,
+                "supportsTeamDrives": "true"
+            })
+            .then(function (response) {
+                    // Handle the results here (response.result has the parsed body).
+                    console.log("Response", response['result']['title']);
+                },
+                function (err) {
+                    console.error("Execute error2", err);
+                });
     });
-    return gapi.client.drive.files.get({
-            "fileId": element.id,
-            "supportsTeamDrives": "true"
-        })
-        .then(function (response) {
-                // Handle the results here (response.result has the parsed body).
-                console.log("Response", response['result']['title']);
-            },
-            function (err) {
-                console.error("Execute error2", err);
-            });
 }
 
 
