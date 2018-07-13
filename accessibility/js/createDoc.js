@@ -76,7 +76,7 @@ function executeGetFiles(items) {
                 })
                 .then(function (response) {
                     // Handle the results here (response.result has the parsed body).
-                    console.log("Response", response['result']['title']);
+                    console.log("Response", response);
                 },
                 function (err) {
                     console.error("Execute error2", err);
