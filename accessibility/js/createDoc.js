@@ -69,9 +69,6 @@ gapi.load('client:auth2', function () {
     });
 });
 
-<<<<<<< HEAD
-=======
-
 function placeDocInCanvas(id) {
     var url = `https://docs.google.com/document/d/${id}`;
     console.log(url);
@@ -89,4 +86,3 @@ function placeDocInCanvas(id) {
         });
     });
 }
->>>>>>> 6a522323e5b6fc85ffcf858b31aad925de47a60f
