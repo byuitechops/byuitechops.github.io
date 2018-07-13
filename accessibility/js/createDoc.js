@@ -65,9 +65,7 @@ function executeGetChildren() {
 }
 
 function executeGetFiles(items) {
-    var element;
-    items.forEach(el => {
-        element = el;
+    items.forEach(element => {
         console.log(element.id);
         setTimeout(function () {
             return gapi.client.drive.files.get({
