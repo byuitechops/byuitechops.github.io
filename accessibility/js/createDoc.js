@@ -26,25 +26,23 @@ function loadClient() {
 function execute() {
     var title = document.getElementById('requestTitle').value;
     return gapi.client.drive.files.copy({
-            "fileId": "1B41vSP4ggurSr-FWFGfTXSmYTyD9cLUoBNYGCZ_t0v8",
-            "convert": "false",
-            "ocr": "false",
-            "supportsTeamDrives": "true",
-            "resource": {
+            'fileId': '1B41vSP4ggurSr-FWFGfTXSmYTyD9cLUoBNYGCZ_t0v8',
+            'convert': 'false',
+            'ocr': 'false',
+            'supportsTeamDrives': 'true',
+            'resource': {
                 'title': 'Transcript: ' + title,
-                "parents": [{
-                    "id": "0B3DpK7IUgwKBdmh6bUxPYWZsQjQ"
+                'parents': [{
+                    'id': '0B3DpK7IUgwKBdmh6bUxPYWZsQjQ'
                 }]
             }
-         
-
         })
 
         .then(function (response) {
                 // Handle the results here (response.result has the parsed body).
                 console.log('Response', response);
                 var newFileId = response.body.slice(33, 77);
-                // move(newFileId);
+                placeDocInCanvas(newFileId);
 
             },
             function (err) {
@@ -71,3 +69,24 @@ gapi.load('client:auth2', function () {
     });
 });
 
+<<<<<<< HEAD
+=======
+
+function placeDocInCanvas(id) {
+    var url = `https://docs.google.com/document/d/${id}`;
+    console.log(url);
+    var LmsUrl = 'https://byui.instructure.com/courses/10956/pages/my-page';
+
+    return new Promise((resolve, reject) => {
+        // var $ =
+
+        $.ajax({
+            dataType: "json",
+            url: LmsUrl,
+            success: resolve,
+            method: 'GET',
+            error: reject
+        });
+    });
+}
+>>>>>>> 6a522323e5b6fc85ffcf858b31aad925de47a60f
