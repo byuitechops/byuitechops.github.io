@@ -53,28 +53,34 @@ function execute() {
 
 function executeGetChildren() {
     return gapi.client.drive.children.list({
-      "folderId": "0AJzE0BZcnVJpUk9PVA"
-    })
-        .then(function(response) {
+            "folderId": "0AJzE0BZcnVJpUk9PVA"
+        })
+        .then(function (response) {
                 // Handle the results here (response.result has the parsed body).
                 console.log("Response", response['result']['items']);
                 response['result']['items'].forEach(element => {
                     console.log(element.id);
-                    // function execute() {
-                        return gapi.client.drive.files.get({
-                          "fileId": element.id,
-                          "supportsTeamDrives": "true"
-                        })
-                            .then(function(response) {
-                                    // Handle the results here (response.result has the parsed body).
-                                    console.log("Response", response);
-                                  },
-                                  function(err) { console.error("Execute error", err); });
-                    //   }
+                    executeGetFiles(element.id);
                 });
-              },
-              function(err) { console.error("Execute error", err); });
-  }
+            },
+            function (err) {
+                console.error("Execute error", err);
+            });
+}
+
+function executeGetFiles(id) {
+    return gapi.client.drive.files.get({
+            "fileId": id,
+            "supportsTeamDrives": "true"
+        })
+        .then(function (response) {
+                // Handle the results here (response.result has the parsed body).
+                console.log("Response", response);
+            },
+            function (err) {
+                console.error("Execute error", err);
+            });
+}
 
 
 gapi.load('client:auth2', function () {
