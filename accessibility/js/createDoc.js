@@ -57,16 +57,19 @@ function executeGetChildren() {
         .then(function (response) {
                 // Handle the results here (response.result has the parsed body).
                 console.log("Response", response['result']['items']);
-                response['result']['items'].forEach(element => {
-                    console.log(element.id);
-                });
+                setTimeout(executeGetFiles(response['result']['items']), 1000);
             },
             function (err) {
                 console.error("Execute error1", err);
             });
 }
 
-function executeGetFiles(element) {
+function executeGetFiles(items) {
+    var element;
+    items.forEach(el => {
+        element = el;
+        console.log(element.id);
+    });
     return gapi.client.drive.files.get({
             "fileId": element.id,
             "supportsTeamDrives": "true"
