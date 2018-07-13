@@ -43,7 +43,6 @@ function execute() {
                 console.log('Response', response);
                 var newFileId = response.body.slice(33, 77);
                 placeDocInCanvas(newFileId);
-
             },
             function (err) {
                 console.error('Execute error', err);
@@ -60,7 +59,7 @@ function executeGetChildren() {
                 console.log("Response", response['result']['items']);
                 response['result']['items'].forEach(element => {
                     console.log(element.id);
-                    executeGetFiles(element);
+                    setTimeout(executeGetFiles(element), 1000);
                 });
             },
             function (err) {
