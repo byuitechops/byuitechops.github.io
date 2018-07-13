@@ -59,7 +59,6 @@ function executeGetChildren() {
                 console.log("Response", response['result']['items']);
                 response['result']['items'].forEach(element => {
                     console.log(element.id);
-                    setTimeout(executeGetFiles(element), 3000);
                 });
             },
             function (err) {
