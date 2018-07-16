@@ -1,5 +1,3 @@
-/* eslint no-console:0 */
-
 // Initialize Firebase
 var config = {
     apiKey: 'AIzaSyBWv05RlAPUpAts6LNXgG5-wsdhd9jXafg',
