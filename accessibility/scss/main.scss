@@ -80,6 +80,19 @@ button {
     }
 }
 
+#btnLogout {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 6em;
+    background-color: $color-blue;
+    color: $color-white;
+    &:hover {
+        background-color: $color-orange;
+        cursor: pointer;
+    }
+}
+
 button a {
     text-decoration: none;
     color: $color-white;

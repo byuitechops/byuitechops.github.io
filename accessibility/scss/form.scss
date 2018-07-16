@@ -1,7 +1,8 @@
 #requestForm {
     display: grid;
-    grid-template-columns: repeat(10, 10%);
+    grid-template-columns: repeat(10, 9.2%);
     grid-template-rows: repeat(13, 1fr);
+    column-gap: 1em;
 }
 
 @for $i from 4 through 13 {
@@ -11,7 +12,6 @@
 #prevRequest {
     grid-column: 1 / span 10;
     text-align: left;
-    border-top: 1px solid black;
     padding-top: 0.25em;
     margin: 0.2em;
 }
@@ -118,10 +118,10 @@
 input,
 select {
     font-size: 16px;
+    border-radius: 10px;
 }
 
 label {
-    text-align: center;
     h3 {
         margin: 5px 0;
     }

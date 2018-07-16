@@ -59,6 +59,17 @@ button {
   button:hover {
     cursor: pointer; }
 
+#btnLogout {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 6em;
+  background-color: #0076C6;
+  color: #FFFFFF; }
+  #btnLogout:hover {
+    background-color: #F58300;
+    cursor: pointer; }
+
 button a {
   text-decoration: none;
   color: #FFFFFF; }

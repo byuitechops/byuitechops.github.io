@@ -57,7 +57,7 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
     var videoLength = document.getElementById('requestLength').value;
 
     if (requestType === 'Request Type' || title === '' || priority === 'Priority' || course === 'Course' || lmsURL === '' ||
-        week === '') {
+        week === 'Week') {
         message.innerHTML = 'You must fill in all inputs';
         message.style.color = 'red';
         resetMessage();
@@ -119,7 +119,7 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
                 document.getElementById('requestTitle').value = '';
                 document.getElementById('requestPriority').options[0].selected = 'selected';
                 document.getElementById('requestLMSURL').value = '';
-                document.getElementById('requestWeek').value = '';
+                document.getElementById('requestWeek').options[0].selected = 'selected';
                 document.getElementById('requestVideoURL').value = '';
                 document.getElementById('requestLength').value = '';
                 document.getElementById('requestVideoURLLabel').classList.add('hide');
