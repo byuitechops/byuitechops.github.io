@@ -17,7 +17,7 @@
     <script src="https://apis.google.com/js/api.js"></script>
 </head>
 
-<body onload="authenticate().then(loadClient).then(executeGetChildren)">
+<body>
 
     <head>
         <h1>BYUI Technical Accessibility</h1>
@@ -88,7 +88,33 @@
             </div>
 
             <!-- <button onclick="authenticate().then(loadClient).then(execute)">Create Transcript Document</button> -->
-            <input onclick="authenticate().then(loadClient).then(execute)" type="submit" id="requestSubmit">
+            <input type="submit" id="requestSubmit">
+
+            <h2 id="prevRequest" class="row-4">Previous Requests</h2>
+            <label class="row-5">
+                <h3>Request Type</h3>
+            </label>
+            <label class="row-5">
+                <h3>Course Code</h3>
+            </label>
+            <label class="row-5">
+                <h3>Title</h3>
+            </label>
+            <label class="row-5">
+                <h3>Priority</h3>
+            </label>
+            <label class="row-5">
+                <h3>Canvas Page Link</h3>
+            </label>
+            <label class="row-5">
+                <h3>Week in Course</h3>
+            </label>
+            <label class="row-5">
+                <h3>Video Source URL</h3>
+            </label>
+            <label class="row-5">
+                <h3>Video Length(secs)</h3>
+            </label>
         </div>
         <!-- The Modal -->
         <div id="myModal" class="modal">

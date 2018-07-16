@@ -82,13 +82,40 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
             week: week,
             requestor: user.displayName,
             requestDate: new Date(),
-            status: 'Ready for Transcript'
+            status: 'Ready for Transcript',
+            srcURL: srcURL,
+            videoLength: videoLength
         })
             .then(function (docRef) {
                 console.log('Document written with ID: ', docRef.id);
                 message.innerHTML = 'Request has been made.';
                 message.style.color = 'blue';
                 resetMessage();
+
+                var elems = document.getElementsByClassName('prev');
+
+                for (var i = 0; i < elems.length; i++) {
+                    elems[i].classList.replace('row-13', 'hide');
+                    elems[i].classList.replace('row-12', 'row-13');
+                    elems[i].classList.replace('row-11', 'row-12');
+                    elems[i].classList.replace('row-10', 'row-11');
+                    elems[i].classList.replace('row-9', 'row-10');
+                    elems[i].classList.replace('row-8', 'row-9');
+                    elems[i].classList.replace('row-7', 'row-8');
+                    elems[i].classList.replace('row-6', 'row-7');
+                }
+
+                // var prev = [requestType, course, title, priority, lmsURL, week, srcURL, videoLength];
+                var prev = [videoLength, srcURL, week, lmsURL, priority, title, course, requestType];
+
+                for (var i = 0; i < 8; i++) {
+                   var elem = document.createElement('input');
+                   elem.value = prev[i];
+                   elem.classList.add('row-6');
+                   elem.classList.add('prev');
+                   document.getElementById('prevRequest').insertAdjacentElement('afterend', elem);
+                }
+                
                 document.getElementById('requestType').options[0].selected = 'selected';
                 document.getElementById('requestCourse').options[0].selected = 'selected';
                 document.getElementById('requestTitle').value = '';

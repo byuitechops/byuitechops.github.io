@@ -1,7 +1,19 @@
 #requestForm {
     display: grid;
     grid-template-columns: repeat(10, 10%);
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: repeat(13, 1fr);
+}
+
+@for $i from 4 through 13 {
+    .row-#{$i} { grid-row: $i; height: 1.5em; border-top: none; border-left: none; border-right: none; text-align: center; }
+}
+
+#prevRequest {
+    grid-column: 1 / span 10;
+    text-align: left;
+    border-top: 1px solid black;
+    padding-top: 0.25em;
+    margin: 0.2em;
 }
 
 #message {
