@@ -20,6 +20,7 @@ db.settings(settings);
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
         // User is signed in.
+        getTheData(user);
     } else {
         // No user is signed in.
         window.location.assign('index.html');
@@ -31,16 +32,27 @@ document.getElementById('btnLogout').addEventListener('click', function () {
     firebase.auth().signOut();
 });
 
-// Get Data
-db.collection("accessibility").get().then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-        console.log(`${doc.id} => ${doc.data()}`);
-    });
-});
-
 function resetMessage() {
     setTimeout(() => {
         message.innerHTML = "";
         message.style.color = "black";
     }, 10000);
+}
+
+function getTheData(user) {
+    // Get Data
+    var data = db.collection("accessibility").where("transcriber", "==", user.displayName).orderBy('priority').get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                // console.log(`${doc.id} => ${doc.data().type}`);
+                if (doc.data().transcriber != null || doc.data().transcriber != undefined) {
+                    if (doc.data().type == "Transcript") {
+                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
+                    } else {
+                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span></span><button onclick="claimItem('${doc.id}')">Claim</button>`;
+                    }
+                    document.getElementById('text').insertAdjacentHTML('beforeend', text);
+                }
+            });
+        });
 }

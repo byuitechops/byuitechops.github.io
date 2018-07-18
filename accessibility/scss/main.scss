@@ -7,8 +7,8 @@ $color-orange: #F58300;
 $color-lightgrey: #EBEBEB;
 $color-grey: #adadad;
 $color-darkgrey: #525252;
-
-html, body {
+html,
+body {
     margin: 0;
 }
 
@@ -32,8 +32,7 @@ h1 {
 
 nav {
     grid-column: 1 / span 12;
-    grid-row: 3 / span 1;
-    // border-bottom: 1px solid $color-black;
+    grid-row: 3 / span 1; // border-bottom: 1px solid $color-black;
     font-size: 1.1em;
     ul {
         display: grid;
@@ -65,7 +64,12 @@ nav {
 main {
     grid-column: 1 / span 12;
     grid-row: 4 / span 23;
-    padding: 1em;
+    padding: 0 2em;
+}
+
+#message {
+    font-size: 1.25em;
+    padding-top: 12px;
 }
 
 input[type='submit'],
@@ -94,7 +98,7 @@ button {
         cursor: pointer;
     }
     li {
-    margin: 13px;
+        margin: 13px;
     }
 }
 

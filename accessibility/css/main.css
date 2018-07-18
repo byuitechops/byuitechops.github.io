@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans");
-html, body {
+html,
+body {
   margin: 0; }
 
 body {
@@ -46,7 +47,11 @@ nav {
 main {
   grid-column: 1 / span 12;
   grid-row: 4 / span 23;
-  padding: 1em; }
+  padding: 0 2em; }
+
+#message {
+  font-size: 1.25em;
+  padding-top: 12px; }
 
 input[type='submit'],
 button {
