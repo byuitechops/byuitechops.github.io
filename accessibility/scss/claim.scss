@@ -3,3 +3,8 @@
     grid-template-columns: repeat(6, 1fr);
     grid-row-gap: 1em;
 }
+
+h3 {
+    display: inline-block;
+    column-span: 1;
+}

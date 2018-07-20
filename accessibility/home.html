@@ -21,16 +21,43 @@
         <h1>BYUI Technical Accessibility</h1>
         <nav>
             <ul>
-                <a class="active" href="home.html"><li>Home</li></a>
-                <a href="form.html"><li>Request</li></a>
-                <a href="claim.html"><li>Claim</li></a>
-                <a id="btnLogout"><li>Logout</li></a>
+                <a class="active" href="home.html">
+                    <li>Home</li>
+                </a>
+                <a href="form.html">
+                    <li>Request</li>
+                </a>
+                <a href="claim.html">
+                    <li>Claim</li>
+                </a>
+                <a id="btnLogout">
+                    <li>Logout</li>
+                </a>
             </ul>
         </nav>
     </head>
     <main>
         <p id="message"></p>
-        <div id="text"></div>
+        <div id="text">
+            <h3>Course</h3>
+            <h3>Priority</h3>
+            <h3>Type</h3>
+            <h3>Title</h3>
+            <h3>Video Length</h3>
+            <h3></h3>
+        </div>
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content" id="modal-content">
+                <span class="close">&times;</span>
+                <h2>Doc URL Input</h2>
+                <p id="modal-message"></p>
+                <p>Retrieve the all access link from the google share tab on the document then place it in the input box.</p>
+                <input type="text" id="docUrlInput">
+            </div>
+        </div>
     </main>
 </body>
 <script src="js/home.js"></script>

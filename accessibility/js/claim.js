@@ -19,6 +19,13 @@ db.settings(settings);
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
         // User is signed in.
+        var userData = db.collection('users').where('name', "==", user.displayName).get()
+            .then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    var userData = doc.data();
+                    getData(userData);
+                })
+            })
     } else {
         // No user is signed in.
         window.location.assign('index.html');
@@ -34,25 +41,53 @@ function resetMessage() {
     }, 10000);
 }
 
-// Get Data
-db.collection("accessibility").orderBy('priority').get().then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-        // console.log(`${doc.id} => ${doc.data().title}`);
-        if (doc.data().transcriber == null || doc.data().transcriber == undefined) {
-            if (doc.data().type == "Transcript") {
-                var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
-            } else {
-                var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span></span><button onclick="claimItem('${doc.id}')">Claim</button>`;
-            }
-            document.getElementById('text').insertAdjacentHTML('beforeend', text);
-        }
-    });
+// Logout of firebase and website
+document.getElementById('btnLogout').addEventListener('click', function () {
+    firebase.auth().signOut();
 });
+
+// Get Data
+function getData(userData) {
+
+    if (userData.role == "Techops") {
+        db.collection("accessibility").where("status", "==", "Ready for Transcript").where("type", "==", "Transcript").orderBy('priority').get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                // console.log(`${doc.id} => ${doc.data().title}`);
+                if (doc.data().transcriber == null || doc.data().transcriber == undefined) {
+                    if (doc.data().type == "Transcript") {
+                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
+                    } else {
+                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span></span><button onclick="claimItem('${doc.id}')">Claim</button>`;
+                    }
+                    document.getElementById('text').insertAdjacentHTML('beforeend', text);
+                }
+            });
+        });
+    }
+
+    if (userData.role == "Copyedit") {
+        db.collection("accessibility").where("status", "==", "Ready for Transcript").where("type", "==", "Transcript").orderBy('priority').get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                // console.log(`${doc.id} => ${doc.data().title}`);
+                if (doc.data().transcriber == null || doc.data().transcriber == undefined) {
+                    if (doc.data().type == "Transcript") {
+                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
+                    } else {
+                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span></span><button onclick="claimItem('${doc.id}')">Claim</button>`;
+                    }
+                    document.getElementById('text').insertAdjacentHTML('beforeend', text);
+                }
+            });
+        });
+    }
+
+}
 
 function claimItem(docId) {
     var user = firebase.auth().currentUser;
     db.collection('accessibility').doc(docId).update({
-            transcriber: user.displayName
+            transcriber: user.displayName,
+            status: "Transcript in Progress"
         })
         .then(function () {
             window.location.replace('home.html');

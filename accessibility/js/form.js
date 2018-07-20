@@ -73,7 +73,6 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
         db.collection('accessibility').add({
             title: title,
             type: requestType,
-            docURL: 'input stuff',
             priority: priority,
             courseCode: course,
             lmsURL: lmsURL,
@@ -144,6 +143,11 @@ function resetMessage() {
         message.style.color = 'black';
     }, 10000);
 }
+
+// Logout of firebase and website
+document.getElementById('btnLogout').addEventListener('click', function () {
+    firebase.auth().signOut();
+});
 
 function getCourses() {
     var xhttp = new XMLHttpRequest();

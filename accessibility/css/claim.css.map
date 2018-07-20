@@ -1,6 +1,6 @@
 {
 "version": 3,
-"mappings": "AAAA,KAAM;EACF,OAAO,EAAE,IAAI;EACb,qBAAqB,EAAE,cAAc;EACrC,YAAY,EAAE,GAAG",
+"mappings": "AAAA,KAAM;EACF,OAAO,EAAE,IAAI;EACb,qBAAqB,EAAE,cAAc;EACrC,YAAY,EAAE,GAAG;;AAGrB,EAAG;EACC,OAAO,EAAE,YAAY;EACrB,WAAW,EAAE,CAAC",
 "sources": ["../scss/claim.scss"],
 "names": [],
 "file": "claim.css"
