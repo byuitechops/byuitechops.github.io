@@ -19,7 +19,7 @@ db.settings(settings);
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
         // User is signed in.
-        var userData = db.collection('users').where('name', "==", user.displayName).get()
+        db.collection('users').where('name', "==", user.displayName).get()
             .then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
                     var userData = doc.data();
@@ -48,19 +48,12 @@ document.getElementById('btnLogout').addEventListener('click', function () {
 
 // Get Data
 function getData(userData) {
-
     if (userData.role == "Techops") {
         db.collection("accessibility").where("status", "==", "Ready for Transcript").where("type", "==", "Transcript").orderBy('priority').get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 // console.log(`${doc.id} => ${doc.data().title}`);
-                if (doc.data().transcriber == null || doc.data().transcriber == undefined) {
-                    if (doc.data().type == "Transcript") {
-                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
-                    } else {
-                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span></span><button onclick="claimItem('${doc.id}')">Claim</button>`;
-                    }
-                    document.getElementById('text').insertAdjacentHTML('beforeend', text);
-                }
+                var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
+                document.getElementById('text').insertAdjacentHTML('beforeend', text);
             });
         });
     }
@@ -68,12 +61,8 @@ function getData(userData) {
     if (userData.role == "Copyedit") {
         db.collection("accessibility").where("status", "==", "Ready for Review").where("type", "==", "Transcript").orderBy('priority').get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
-                console.log(`${doc.id} => ${doc.data().title}`);
-                if (doc.data().type == "Transcript") {
-                    var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
-                } else {
-                    var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span></span><button onclick="claimItem('${doc.id}')">Claim</button>`;
-                }
+                // console.log(`${doc.id} => ${doc.data().title}`);
+                var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
                 document.getElementById('text').insertAdjacentHTML('beforeend', text);
             });
         });
@@ -81,11 +70,7 @@ function getData(userData) {
         db.collection("accessibility").where("status", "==", "Ready for Transcript").where("type", "==", "Alt Text").orderBy('priority').get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 // console.log(`${doc.id} => ${doc.data().title}`);
-                if (doc.data().type == "Transcript") {
-                    var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
-                } else {
-                    var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span></span><button onclick="claimItem('${doc.id}')">Claim</button>`;
-                }
+                var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span></span><button onclick="claimItem('${doc.id}')">Claim</button>`;
                 document.getElementById('text').insertAdjacentHTML('beforeend', text);
             });
         });
@@ -95,20 +80,74 @@ function getData(userData) {
 
 function claimItem(docId) {
     var user = firebase.auth().currentUser;
-    db.collection('accessibility').doc(docId).update({
-            transcriber: user.displayName,
-            status: "Transcript in Progress"
+    db.collection('users').where('name', "==", user.displayName).get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                var userData = doc.data();
+
+                if (userData.role == "Techops") {
+                    db.collection('accessibility').doc(docId).update({
+                            transcriber: user.displayName,
+                            status: "Transcript in Progress"
+                        })
+                        .then(function () {
+                            window.location.replace('home.html');
+                            // message.innerHTML = 'Request has been made.';
+                            // message.style.color = 'blue';
+                            // resetMessage();
+                        })
+                        .catch(function (error) {
+                            console.error('Error updating document: ', error);
+                            message.innerHTML = 'There was an error making the request. Please try again.';
+                            message.style.color = 'red';
+                            resetMessage();
+                        });
+                }
+
+                if (userData.role == "Copyedit") {
+                    db.collection('accessibility').doc(docId).get().then((doc) => {
+                        var type = doc.data().type;
+
+                        if (type == "Transcript") {
+                            db.collection('accessibility').doc(docId).update({
+                                    copyeditor: user.displayName,
+                                    status: "Review in Progress"
+                                })
+                                .then(function () {
+                                    window.location.replace('home.html');
+                                    // message.innerHTML = 'Request has been made.';
+                                    // message.style.color = 'blue';
+                                    // resetMessage();
+                                })
+                                .catch(function (error) {
+                                    console.error('Error updating document: ', error);
+                                    message.innerHTML = 'There was an error making the request. Please try again.';
+                                    message.style.color = 'red';
+                                    resetMessage();
+                                });
+                        }
+
+                        if (type == "Alt Text") {
+                            db.collection('accessibility').doc(docId).update({
+                                    copyeditor: user.displayName,
+                                    status: "Transcript in Progress"
+                                })
+                                .then(function () {
+                                    window.location.replace('home.html');
+                                    // message.innerHTML = 'Request has been made.';
+                                    // message.style.color = 'blue';
+                                    // resetMessage();
+                                })
+                                .catch(function (error) {
+                                    console.error('Error updating document: ', error);
+                                    message.innerHTML = 'There was an error making the request. Please try again.';
+                                    message.style.color = 'red';
+                                    resetMessage();
+                                });
+                        }
+                    })
+                }
+
+            })
         })
-        .then(function () {
-            window.location.replace('home.html');
-            // message.innerHTML = 'Request has been made.';
-            // message.style.color = 'blue';
-            // resetMessage();
-        })
-        .catch(function (error) {
-            console.error('Error updating document: ', error);
-            message.innerHTML = 'There was an error making the request. Please try again.';
-            message.style.color = 'red';
-            resetMessage();
-        });
 }

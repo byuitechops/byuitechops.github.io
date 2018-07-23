@@ -43,4 +43,18 @@
       text-decoration: none;
       cursor: pointer; }
 
-/*# sourceMappingURL=home.css.map */
+#modal-content p {
+  text-align: center;
+  font-size: 1.5em; }
+#modal-content #buttons {
+  display: flex;
+  justify-content: center; }
+  #modal-content #buttons button {
+    width: 5em;
+    height: 2em;
+    font-size: 2em;
+    margin: auto 2em; }
+  #modal-content #buttons #cancelButton {
+    background-color: darkgrey; }
+
+/*# sourceMappingURL=place.css.map */

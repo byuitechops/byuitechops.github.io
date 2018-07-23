@@ -20,7 +20,13 @@ db.settings(settings);
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
         // User is signed in.
-        getTheData(user);
+        db.collection('users').where('name', "==", user.displayName).get()
+            .then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    var userData = doc.data();
+                    getData(userData);
+                })
+            })
     } else {
         // No user is signed in.
         window.location.assign('index.html');
@@ -39,38 +45,99 @@ function resetMessage() {
     }, 10000);
 }
 
-function getTheData(user) {
+function getData(userData) {
     // Get Data
-    var data = db.collection("accessibility").where("transcriber", "==", user.displayName).where("status", "==", "Transcript in Progress").orderBy('priority').get()
-        .then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                // console.log(`${doc.id} => ${doc.data().type}`);
-                if (doc.data().transcriber != null || doc.data().transcriber != undefined) {
+    if (userData.role == "Techops") {
+        db.collection("accessibility").where("transcriber", "==", userData.name).where("status", "==", "Transcript in Progress").orderBy('priority').get()
+            .then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    // console.log(`${doc.id} => ${doc.data().type}`);
                     if (doc.data().docURL == undefined) {
-                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span><button onclick="updateDocUrl('${doc.id}')">Update Doc Link</button></span><button onclick="finishItem('${doc.id}')">Finish</button>`;
+                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span><button onclick="updateDocUrl('${doc.id}')">Update Doc Link</button></span><span><a href="${doc.data().srcURL}" target="_blank">Video URL</a></span><button onclick="finishItem('${doc.id}')">Finish</button>`;
                     } else {
-                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().docURL}</span><button onclick="finishItem('${doc.id}')">Finish</button>`;
+                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span><a href="${doc.data().docURL}" target="_blank">Doc Link</a></span><span><a href="${doc.data().srcURL}" target="_blank">Video URL</a></span><button onclick="finishItem('${doc.id}')">Finish</button>`;
                     }
                     document.getElementById('text').insertAdjacentHTML('beforeend', text);
-                }
+
+                });
             });
-        });
+    }
+
+    if (userData.role == "Copyedit") {
+        db.collection("accessibility").where("copyeditor", "==", userData.name).where("status", "==", "Review in Progress").orderBy('priority').get()
+            .then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    // console.log(`${doc.id} => ${doc.data().type}`);
+                    if (doc.data().docURL == undefined) {
+                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span><button onclick="updateDocUrl('${doc.id}')">Update Doc Link</button></span><span><a href="${doc.data().srcURL}" target="_blank">Video URL</a></span><button onclick="finishItem('${doc.id}')">Finish</button>`;
+                    } else {
+                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span><a href="${doc.data().docURL}" target="_blank">Doc Link</a></span><span><a href="${doc.data().srcURL}" target="_blank">Video URL</a></span><button onclick="finishItem('${doc.id}')">Finish</button>`;
+                    }
+                    document.getElementById('text').insertAdjacentHTML('beforeend', text);
+
+                });
+            });
+
+        db.collection("accessibility").where("copyeditor", "==", userData.name).where("status", "==", "Transcript in Progress").orderBy('priority').get()
+            .then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    // console.log(`${doc.id} => ${doc.data().type}`);
+                    if (doc.data().docURL == undefined) {
+                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span><button onclick="updateDocUrl('${doc.id}')">Update Doc Link</button></span><span><a href="${doc.data().lmsURL}" target="_blank">Canvas URL</a></span><button onclick="finishItem('${doc.id}')">Finish</button>`;
+                    } else {
+                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span><a href="${doc.data().docURL}">Doc Link</a></span><span><a href="${doc.data().lmsURL}" target="_blank">Canvas URL</a></span><button onclick="finishItem('${doc.id}')">Finish</button>`;
+                    }
+                    document.getElementById('text').insertAdjacentHTML('beforeend', text);
+
+                });
+            });
+    }
 }
 
 function finishItem(docId) {
     var user = firebase.auth().currentUser;
-    db.collection('accessibility').doc(docId).update({
-            status: "Ready for Review"
+    db.collection('users').where('name', "==", user.displayName).get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                var userData = doc.data();
+
+                if (userData.role == "Techops") {
+                    db.collection('accessibility').doc(docId).update({
+                            status: "Ready for Review"
+                        })
+                        .then(function () {
+                            window.location.replace('home.html');
+                            // message.innerHTML = 'Request has been made.';
+                            // message.style.color = 'blue';
+                            // resetMessage();
+                        })
+                        .catch(function (error) {
+                            console.error('Error updating document: ', error);
+                            message.innerHTML = 'There was an error making the request. Please try again.';
+                            message.style.color = 'red';
+                            resetMessage();
+                        });
+                }
+
+                if (userData.role == "Copyedit") {
+                    db.collection('accessibility').doc(docId).update({
+                            status: "Finished"
+                        })
+                        .then(function () {
+                            window.location.replace('home.html');
+                            // message.innerHTML = 'Request has been made.';
+                            // message.style.color = 'blue';
+                            // resetMessage();
+                        })
+                        .catch(function (error) {
+                            console.error('Error updating document: ', error);
+                            message.innerHTML = 'There was an error making the request. Please try again.';
+                            message.style.color = 'red';
+                            resetMessage();
+                        });
+                }
+            })
         })
-        .then(function () {
-            window.location.replace('home.html');
-        })
-        .catch(function (error) {
-            console.error('Error updating document: ', error);
-            message.innerHTML = 'There was an error making the request. Please try again.';
-            message.style.color = 'red';
-            resetMessage();
-        });
 }
 
 function updateDocUrl(docId) {
@@ -98,9 +165,9 @@ function updateDocToFB(docId) {
                 message.style.color = 'red';
                 resetMessage();
             });
-            modal.style.display = "none";
-            document.getElementById('updateButton').parentNode.removeChild(document.getElementById('updateButton'));
-            document.getElementById('modal-message').innerHTML = "";
+        modal.style.display = "none";
+        document.getElementById('updateButton').parentNode.removeChild(document.getElementById('updateButton'));
+        document.getElementById('modal-message').innerHTML = "";
     } else {
         document.getElementById('modal-message').innerHTML = "Please enter the url";
         document.getElementById('modal-message').style.color = "red";
