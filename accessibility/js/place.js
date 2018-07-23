@@ -52,7 +52,12 @@ function getData(userData) {
             querySnapshot.forEach((doc) => {
                 console.log(`${doc.id} => ${doc.data().type}`);
                 if (doc.data().placed == undefined) {
-                    var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span><a href="${doc.data().srcURL}" target="_blank">Video URL</a></span><span><a href="${doc.data().lmsURL}" target="_blank">Canvas URL</a></span><button onclick="placeCheck('${doc.id}')">Place</button>`;
+                    if (doc.data().type == "Transcript") {
+                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span><a href="${doc.data().srcURL}" target="_blank">Video URL</a></span><span><a href="${doc.data().lmsURL}" target="_blank">Canvas URL</a></span><span><a href="${doc.data().srcURL}" target="_blank">Video URL</a></span><button onclick="placeCheck('${doc.id}')">Place</button>`;
+                    }
+                    if (doc.data().type == "Alt Text") {
+                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span><a href="${doc.data().srcURL}" target="_blank">Video URL</a></span><span><a href="${doc.data().lmsURL}" target="_blank">Canvas URL</a></span><span></span><button onclick="placeCheck('${doc.id}')">Place</button>`;
+                    }
                     document.getElementById('text').insertAdjacentHTML('beforeend', text);
                 }
             });
