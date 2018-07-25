@@ -88,7 +88,8 @@ function claimItem(docId) {
                 if (userData.role == "Techops") {
                     db.collection('accessibility').doc(docId).update({
                             transcriber: user.displayName,
-                            status: "Transcript in Progress"
+                            status: "Transcript in Progress",
+                            transcriptClaimed: new Date()
                         })
                         .then(function () {
                             window.location.replace('home.html');
@@ -111,7 +112,8 @@ function claimItem(docId) {
                         if (type == "Transcript") {
                             db.collection('accessibility').doc(docId).update({
                                     copyeditor: user.displayName,
-                                    status: "Review in Progress"
+                                    status: "Review in Progress",
+                                    transcriptClaimed: new Date()
                                 })
                                 .then(function () {
                                     window.location.replace('home.html');
@@ -130,7 +132,8 @@ function claimItem(docId) {
                         if (type == "Alt Text") {
                             db.collection('accessibility').doc(docId).update({
                                     copyeditor: user.displayName,
-                                    status: "Transcript in Progress"
+                                    status: "Transcript in Progress",
+                                    copyeditClaimed: new Date()
                                 })
                                 .then(function () {
                                     window.location.replace('home.html');

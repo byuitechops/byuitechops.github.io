@@ -69,7 +69,8 @@ function setUser(user) {
         "firebaseConsole": true,
         "canvasStyleGuide": true,
         "totStyleGuide": true,
-        "teamDynamix": false
+        "teamDynamix": false,
+        "videoIndexing": true
     };
     // Set up user with inputed info
     var info = {

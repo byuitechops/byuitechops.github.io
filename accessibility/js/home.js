@@ -103,7 +103,8 @@ function finishItem(docId) {
 
                 if (userData.role == "Techops") {
                     db.collection('accessibility').doc(docId).update({
-                            status: "Ready for Review"
+                            status: "Ready for Review",
+                            transcriptFinished: new Date()
                         })
                         .then(function () {
                             window.location.replace('home.html');
@@ -121,7 +122,8 @@ function finishItem(docId) {
 
                 if (userData.role == "Copyedit") {
                     db.collection('accessibility').doc(docId).update({
-                            status: "Finished"
+                            status: "Finished",
+                            reviewFinished: new Date()
                         })
                         .then(function () {
                             window.location.replace('home.html');

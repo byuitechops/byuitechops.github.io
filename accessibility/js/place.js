@@ -50,13 +50,29 @@ function getData(userData) {
     db.collection("accessibility").orderBy('priority').get()
         .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
-                console.log(`${doc.id} => ${doc.data().type}`);
+                // console.log(`${doc.id} => ${doc.data().type}`);
                 if (doc.data().placed == undefined) {
                     if (doc.data().type == "Transcript") {
-                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span><a href="${doc.data().srcURL}" target="_blank">Video URL</a></span><span><a href="${doc.data().lmsURL}" target="_blank">Canvas URL</a></span><span><a href="${doc.data().srcURL}" target="_blank">Video URL</a></span><button onclick="placeCheck('${doc.id}')">Place</button>`;
+                        var text = `<span>${doc.data().courseCode}</span>
+                                    <span>${doc.data().priority}</span>
+                                    <span>${doc.data().type}</span>
+                                    <span>${doc.data().title}</span>
+                                    <span><a href="${doc.data().lmsURL}" target="_blank">Canvas URL</a></span>
+                                    <span><button onclick="displayEmbedCode('${doc.data().srcURL}')">Show Code</button></span>
+                                    <span><button onclick="displayLinkCode('${doc.data().srcURL}')">Show Code</button></span>
+                                    <span><a href="${doc.data().docURL}" target="_blank">Doc URL</a></span>
+                                    <button onclick="placeCheck('${doc.id}')">Place</button>`;
                     }
                     if (doc.data().type == "Alt Text") {
-                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span><a href="${doc.data().srcURL}" target="_blank">Video URL</a></span><span><a href="${doc.data().lmsURL}" target="_blank">Canvas URL</a></span><span></span><button onclick="placeCheck('${doc.id}')">Place</button>`;
+                        var text = `<span>${doc.data().courseCode}</span>
+                                    <span>${doc.data().priority}</span>
+                                    <span>${doc.data().type}</span>
+                                    <span>${doc.data().title}</span>
+                                    <span><a href="${doc.data().lmsURL}" target="_blank">Canvas URL</a></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span><a href="${doc.data().docURL}" target="_blank">Doc URL</a></span>
+                                    <button onclick="placeCheck('${doc.id}')">Place</button>`;
                     }
                     document.getElementById('text').insertAdjacentHTML('beforeend', text);
                 }
@@ -64,8 +80,28 @@ function getData(userData) {
         });
 }
 
+
+function displayEmbedCode(link) {
+    modal.style.display = "block";
+    document.getElementById('modal-heading').innerHTML = "Video Embed Code";
+    if (link.includes("youtube") || link.includes("youtu.be")) {
+
+    } else if (link.includes("video.byui.edu")) {
+
+    } else if (link.includes("vimeo")) {
+
+    } else {
+        var html = `<p id="intro">${link}</p>`;
+        document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);
+        var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div></p>`;
+        document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);
+    }
+}
+
+
 function placeCheck(docId) {
     modal.style.display = "block";
+    document.getElementById('modal-heading').innerHTML = "Place Check";
     db.collection('accessibility').doc(docId).get().then((doc) => {
         var html = `<p id="intro">Has "${doc.data().title}" been correctly placed in ${doc.data().courseCode}?</p>`;
         document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);
@@ -75,8 +111,11 @@ function placeCheck(docId) {
 }
 
 function updateDocToFB(docId) {
+    var user = firebase.auth().currentUser;
     db.collection('accessibility').doc(docId).update({
-            placed: true
+            placed: true,
+            placer: user.displayName,
+            placedDate: new Date()
         })
         .then(function () {
             window.location.reload();
@@ -100,20 +139,20 @@ var span = document.getElementsByClassName("close")[0];
 // When the user clicks on <span> (x), close the modal
 span.onclick = function () {
     modal.style.display = "none";
-    document.getElementById('buttons').parentNode.removeChild(document.getElementById('buttons'));
     document.getElementById('intro').parentNode.removeChild(document.getElementById('intro'));
+    document.getElementById('buttons').parentNode.removeChild(document.getElementById('buttons'));
 }
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {
     if (event.target == modal) {
         modal.style.display = "none";
-        document.getElementById('buttons').parentNode.removeChild(document.getElementById('buttons'));
         document.getElementById('intro').parentNode.removeChild(document.getElementById('intro'));
+        document.getElementById('buttons').parentNode.removeChild(document.getElementById('buttons'));
     }
 }
 
 function cancel() {
     modal.style.display = "none";
-    document.getElementById('buttons').parentNode.removeChild(document.getElementById('buttons'));
     document.getElementById('intro').parentNode.removeChild(document.getElementById('intro'));
+    document.getElementById('buttons').parentNode.removeChild(document.getElementById('buttons'));
 }

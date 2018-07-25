@@ -133,7 +133,6 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
                 message.style.color = 'red';
                 resetMessage();
             });
-
     }
 });
 
