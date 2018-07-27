@@ -126,6 +126,12 @@ function displayInfo(selected) {
         } else {
             document.getElementById('dSick').innerHTML = snap.sick;
         }
+
+        if (snap.personalDays == "" && snap.personalDays != 0) {
+            document.getElementById('dPD').innerHTML = "No Data";
+        } else {
+            document.getElementById('dPD').innerHTML = snap.personalDays;
+        }
     });
 
     teamBase = firebase.database().ref('users').child(name);
