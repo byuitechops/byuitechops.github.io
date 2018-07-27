@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyCBgYS5UNp722ApRKLoz9F-CuL9ADLOcII",
+      authDomain: "test-video-transcript-project.firebaseapp.com",
+      databaseURL: "https://test-video-transcript-project.firebaseio.com",
+      projectId: "test-video-transcript-project",
+      storageBucket: "test-video-transcript-project.appspot.com",
+      messagingSenderId: "795344201118"
+    };
+    firebase.initializeApp(config);
+
+    firebase.database().ref('/transcripts').once('value').then((snapshot) => {
+      var data = snapshot.val();
+      var title;
+      for (title in data) {
+      console.log(title);
+      console.log(data[title]['Course Code'])
+      }
+    })
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
