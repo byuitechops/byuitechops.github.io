@@ -68,6 +68,10 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
         resetMessage();
         return;
     } else {
+        if (srcURL.includes('vimeo')) {
+                var height = prompt(`Need the height to the width of 560px: <a href="${srcURL}" target="_blank">Video Link</a>`);
+                console.log(height);
+        }
         var user = firebase.auth().currentUser;
         // Add a new document in collection "accessibility"
         db.collection('accessibility').add({

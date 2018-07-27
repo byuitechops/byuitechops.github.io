@@ -82,30 +82,47 @@ function getData(userData) {
 
 
 function displayEmbedCode(link) {
+    console.log(link);
     modal.style.display = "block";
     document.getElementById('modal-heading').innerHTML = "Video Embed Code";
-    if (link.includes("youtube") || link.includes("youtu.be")) {
-        var html = `<p id="intro">Youtube</p>`;
-        document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);
+    if (link.includes("youtube")) {
+        var id = link.slice(link.indexOf("watch?v=") + 8, (link.indexOf("watch?v=") + 9) + 11);
+        console.log(id);
+        var html = `<iframe width="560" height="315px" src="https://www.youtube-nocookie.com/embed/${id}?rel=0&amp;showinfo=0" 
+        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+        document.getElementById('intro').innerText = html;
 
-        var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div></p>`;
+        var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div>`;
+        document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);
+    } else if (link.includes("youtu.be")) {
+        var id = link.slice(link.indexOf(".be/") + 4, (link.indexOf(".be/") + 4) + 11);
+        console.log(id);
+        var html = `<iframe width="560" height="315px" src="https://www.youtube-nocookie.com/embed/${id}?rel=0&amp;showinfo=0" 
+        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+        document.getElementById('intro').innerText = html;
+
+        var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div>`;
         document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);
     } else if (link.includes("video.byui.edu")) {
-        var html = `<p id="intro">Kaltura</p>`;
-        document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);
+        var html = `Kaltura`;
+        document.getElementById('intro').innerText = html;
 
-        var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div></p>`;
+        var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div>`;
         document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);
     } else if (link.includes("vimeo")) {
-        var html = `<p id="intro">Vimeo</p>`;
-        document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);
+        var id = link.slice(link.indexOf("vimeo.com/") + 10, (link.indexOf("vimeo.com/") + 10) + 9);
+        console.log(id);
+        var html = `<iframe src="https://player.vimeo.com/video/${id}?title=0&byline=0&portrait=0" width="560" height="315"
+                    frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>`;
+        document.getElementById('intro').innerHTML = html;
 
-        var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div></p>`;
+        var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div>`;
         document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);
     } else {
-        var html = `<p id="intro">${link}</p>`;
-        document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);
-        var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div></p>`;
+        var html = `${link}`;
+        document.getElementById('intro').innerText = html;
+
+        var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div>`;
         document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);
     }
 }
@@ -115,9 +132,10 @@ function placeCheck(docId) {
     modal.style.display = "block";
     document.getElementById('modal-heading').innerHTML = "Place Check";
     db.collection('accessibility').doc(docId).get().then((doc) => {
-        var html = `<p id="intro">Has "${doc.data().title}" been correctly placed in ${doc.data().courseCode}?</p>`;
-        document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);
-        var html = `<div id="buttons"><button id="placeButton" onclick="updateDocToFB('` + docId + `')">Yes</button><button id="cancelButton" onclick="cancel()">No</button></p>`;
+        var html = `Has "${doc.data().title}" been correctly placed in ${doc.data().courseCode}?`;
+        document.getElementById('intro').innerText = html;
+
+        var html = `<div id="buttons"><button id="placeButton" onclick="updateDocToFB('` + docId + `')">Yes</button><button id="cancelButton" onclick="cancel()">No</button>`;
         document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);
     })
 }
@@ -151,20 +169,20 @@ var span = document.getElementsByClassName("close")[0];
 // When the user clicks on <span> (x), close the modal
 span.onclick = function () {
     modal.style.display = "none";
-    document.getElementById('intro').parentNode.removeChild(document.getElementById('intro'));
+    document.getElementById('intro').innerHTML = "";
     document.getElementById('buttons').parentNode.removeChild(document.getElementById('buttons'));
 }
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {
     if (event.target == modal) {
         modal.style.display = "none";
-        document.getElementById('intro').parentNode.removeChild(document.getElementById('intro'));
+        document.getElementById('intro').innerHTML = "";
         document.getElementById('buttons').parentNode.removeChild(document.getElementById('buttons'));
     }
 }
 
 function cancel() {
     modal.style.display = "none";
-    document.getElementById('intro').parentNode.removeChild(document.getElementById('intro'));
+    document.getElementById('intro').innerHTML = "";
     document.getElementById('buttons').parentNode.removeChild(document.getElementById('buttons'));
 }
