@@ -85,11 +85,23 @@ function displayEmbedCode(link) {
     modal.style.display = "block";
     document.getElementById('modal-heading').innerHTML = "Video Embed Code";
     if (link.includes("youtube") || link.includes("youtu.be")) {
+        var html = `<p id="intro">Youtube</p>`;
+        document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);
 
+        var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div></p>`;
+        document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);
     } else if (link.includes("video.byui.edu")) {
+        var html = `<p id="intro">Kaltura</p>`;
+        document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);
 
+        var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div></p>`;
+        document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);
     } else if (link.includes("vimeo")) {
+        var html = `<p id="intro">Vimeo</p>`;
+        document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);
 
+        var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div></p>`;
+        document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);
     } else {
         var html = `<p id="intro">${link}</p>`;
         document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);

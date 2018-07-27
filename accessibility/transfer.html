@@ -10,21 +10,36 @@
   <script>
     // Initialize Firebase
     var config = {
-      apiKey: "AIzaSyCBgYS5UNp722ApRKLoz9F-CuL9ADLOcII",
-      authDomain: "test-video-transcript-project.firebaseapp.com",
-      databaseURL: "https://test-video-transcript-project.firebaseio.com",
-      projectId: "test-video-transcript-project",
-      storageBucket: "test-video-transcript-project.appspot.com",
-      messagingSenderId: "795344201118"
+      apiKey: "AIzaSyBpvW3KnML2CkbmwappZTPraMdrBEUFfFM",
+      authDomain: "video-transcript-project.firebaseapp.com",
+      databaseURL: "https://video-transcript-project.firebaseio.com",
+      projectId: "video-transcript-project",
+      storageBucket: "video-transcript-project.appspot.com",
+      messagingSenderId: "407067251264"
     };
     firebase.initializeApp(config);
 
     firebase.database().ref('/transcripts').once('value').then((snapshot) => {
       var data = snapshot.val();
+      console.log(data);
       var title;
       for (title in data) {
-      console.log(title);
-      console.log(data[title]['Course Code'])
+        console.log(data[title]);
+        console.log("Copyeditor: " + data[title]['Stage02']['Copyeditor']);
+        console.log("Course Code: " + data[title]['Course Code']);
+        console.log("Doc URL: " + data[title]['Stage 01']['Transcript URL (Google)']);
+        console.log("LMS URL: " + data[title]['Stage 01']['Video URL (LMS)']);
+        console.log("Placed: " + data[title]['Stage03']['Placed']);
+        console.log("Priority: " + data[title]['Stage 01']['Transcript Priority']);
+        console.log("Request Date: " + data[title]['Stage 01']['Timestamp']);
+        console.log("Requestor: " + data[title]['Stage 01']['Requestor Name']);
+        console.log("SRC URl: " + data[title]['Stage 01']['Video URL (SRC)']);
+        console.log("Status: " + data[title]['General Information']['Status']);
+        console.log("Title: " + title);
+        console.log("Transcriber: " + data[title]['Stage 01']['Transcriber']);
+        console.log("Type: Transcript");
+        console.log("Video Length: " + data[title]['Stage 01']['Video Length']);
+        console.log("Week: " + data[title]['Stage 01']['Lesson']);
       }
     })
   </script>

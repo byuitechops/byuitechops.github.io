@@ -394,7 +394,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                 }
                 if (snap.brightspace == true) {
                     var icon = document.getElementById('bs');
-                    icon.setAttribute('href', "https://byui.brightspace.com/d2l/login?noredirect=true");
+                    icon.setAttribute('href', "http://byui.brightspace.com/d2l/local");
                     bspic.classList.remove('locked');
                 } else {
                     var icon = document.getElementById('bs');
@@ -472,7 +472,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                 }
                 if (snap.pathway == true) {
                     var icon = document.getElementById('path');
-                    icon.setAttribute('href', "https://pathway.brightspace.com/d2l/login?noredirect=true");
+                    icon.setAttribute('href', "https://pathway.brightspace.com/d2l/local");
                     pathpic.classList.remove('locked');
                 } else {
                     var icon = document.getElementById('path');
