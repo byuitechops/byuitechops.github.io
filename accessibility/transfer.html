@@ -21,25 +21,25 @@
 
     firebase.database().ref('/transcripts').once('value').then((snapshot) => {
       var data = snapshot.val();
-      console.log(data);
+      // console.log(data);
       var title;
       for (title in data) {
-        console.log(data[title]);
-        console.log("Copyeditor: " + data[title]['Stage02']['Copyeditor']);
-        console.log("Course Code: " + data[title]['Course Code']);
-        console.log("Doc URL: " + data[title]['Stage 01']['Transcript URL (Google)']);
-        console.log("LMS URL: " + data[title]['Stage 01']['Video URL (LMS)']);
-        console.log("Placed: " + data[title]['Stage03']['Placed']);
-        console.log("Priority: " + data[title]['Stage 01']['Transcript Priority']);
-        console.log("Request Date: " + data[title]['Stage 01']['Timestamp']);
-        console.log("Requestor: " + data[title]['Stage 01']['Requestor Name']);
-        console.log("SRC URl: " + data[title]['Stage 01']['Video URL (SRC)']);
-        console.log("Status: " + data[title]['General Information']['Status']);
-        console.log("Title: " + title);
-        console.log("Transcriber: " + data[title]['Stage 01']['Transcriber']);
-        console.log("Type: Transcript");
-        console.log("Video Length: " + data[title]['Stage 01']['Video Length']);
-        console.log("Week: " + data[title]['Stage 01']['Lesson']);
+        // console.log(data[title]);
+        // console.log("copyeditor: " + data[title]['Stage02']['Copyeditor']);
+        // console.log("courseCode: " + data[title]['Course Code']);
+        // console.log("docURL: " + data[title]['Stage 01']['Transcript URL (Google)']);
+        // console.log("lmsURL: " + data[title]['Stage 01']['Video URL (LMS)']);
+        // console.log("placed: " + data[title]['Stage03']['Placed']);
+        // console.log("priority: " + data[title]['Stage 01']['Transcript Priority'].slice(0, 1));
+        // console.log("requestDate: " + data[title]['Stage 01']['Timestamp']);
+        // console.log("requestor: " + data[title]['Stage 01']['Requestor Name']);
+        // console.log("srcURl: " + data[title]['Stage 01']['Video URL (SRC)']);
+        console.log("status: " + data[title]['General Information']['Status']);
+        // console.log("title: " + title);
+        // console.log("transcriber: " + data[title]['Stage 01']['Transcriber']);
+        // console.log("type: Transcript");
+        // console.log("videoLength: " + data[title]['Stage 01']['Video Length']);
+        // console.log("week: " + data[title]['Stage 01']['Lesson']);
       }
     })
   </script>
