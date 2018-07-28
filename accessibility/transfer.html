@@ -25,21 +25,23 @@
       var title;
       for (title in data) {
         // console.log(data[title]);
-        // console.log("copyeditor: " + data[title]['Stage02']['Copyeditor']);
+        // console.log("copyeditor: " + data[title]['Stage02']['Copyeditor'].slice(data[title]['Stage02']['Copyeditor'].indexOf(',') + 2) + " " + data[title]['Stage02']['Copyeditor'].slice(0, data[title]['Stage02']['Copyeditor'].indexOf(',')));
         // console.log("courseCode: " + data[title]['Course Code']);
         // console.log("docURL: " + data[title]['Stage 01']['Transcript URL (Google)']);
         // console.log("lmsURL: " + data[title]['Stage 01']['Video URL (LMS)']);
         // console.log("placed: " + data[title]['Stage03']['Placed']);
         // console.log("priority: " + data[title]['Stage 01']['Transcript Priority'].slice(0, 1));
         // console.log("requestDate: " + data[title]['Stage 01']['Timestamp']);
-        // console.log("requestor: " + data[title]['Stage 01']['Requestor Name']);
+        // console.log("requestor: " + data[title]['Stage 01']['Requestor Name'].replace(', ', " "));
         // console.log("srcURl: " + data[title]['Stage 01']['Video URL (SRC)']);
-        console.log("status: " + data[title]['General Information']['Status']);
+        // console.log("status: " + data[title]['General Information']['Status']);
         // console.log("title: " + title);
         // console.log("transcriber: " + data[title]['Stage 01']['Transcriber']);
         // console.log("type: Transcript");
         // console.log("videoLength: " + data[title]['Stage 01']['Video Length']);
-        // console.log("week: " + data[title]['Stage 01']['Lesson']);
+        if (data[title]['Stage 01']['Lesson'].startsWith('Lesson')) {
+          console.log(data[title]['Stage 01']['Lesson'].slice(7));
+        };
       }
     })
   </script>
