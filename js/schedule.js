@@ -37,10 +37,10 @@
                             document.getElementById('scheduleFrame').classList.remove('hide');
                             if (shot[titles] == 'canvas 1') {
                                 // If canvas 1 set iframe to show canvas 1 schedule
-                                document.getElementById('scheduleFrame').setAttribute('src', 'https://docs.google.com/spreadsheets/d/1PRVHD9-Fkhw1Ht-lJ58affqVQzR8VatV4VIOgxwKELI/edit?usp=sharing');
+                                document.getElementById('scheduleFrame').setAttribute('src', 'https://docs.google.com/spreadsheets/d/1rExB8ZbCJ8saPrdu1HvIMLJuPq7KygITzdNGrWctYe4/edit?usp=sharing');
                             } else if (shot[titles] == 'canvas 2') {
                                 // If canvas 2 set iframe to show canvas 2 schedule
-                                document.getElementById('scheduleFrame').setAttribute('src', 'https://docs.google.com/spreadsheets/d/1aP9uIegzVs3PvHl7mxrSkWGtNauwVFood-0-0jw2X6Y/edit?usp=sharing');
+                                document.getElementById('scheduleFrame').setAttribute('src', 'https://docs.google.com/spreadsheets/d/1PxiGqAp7b8HwwwDNvHUQiLs961PAAcLChBmYfYywPO4/edit?usp=sharing');
                             }
                         }
 
