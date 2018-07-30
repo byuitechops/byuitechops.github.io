@@ -36,12 +36,16 @@ document.getElementById('requestType').addEventListener('change', function () {
         document.getElementById('requestVideoURL').classList.remove('hide');
         document.getElementById('requestLengthLabel').classList.remove('hide');
         document.getElementById('requestLength').classList.remove('hide');
+        document.getElementById('requestHeightLabel').classList.remove('hide');
+        document.getElementById('requestHeight').classList.remove('hide');
         document.getElementById('timeCalc').classList.remove('hide');
     } else {
         document.getElementById('requestVideoURLLabel').classList.add('hide');
         document.getElementById('requestVideoURL').classList.add('hide');
         document.getElementById('requestLengthLabel').classList.add('hide');
         document.getElementById('requestLength').classList.add('hide');
+        document.getElementById('requestHeightLabel').classList.add('hide');
+        document.getElementById('requestHeight').classList.add('hide');
         document.getElementById('timeCalc').classList.add('hide');
     }
 });
@@ -55,6 +59,7 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
     var week = document.getElementById('requestWeek').value;
     var srcURL = document.getElementById('requestVideoURL').value;
     var videoLength = document.getElementById('requestLength').value;
+    var videoHeight = document.getElementById('requestHeight').value;
 
     if (requestType === 'Request Type' || title === '' || priority === 'Priority' || course === 'Course' || lmsURL === '' ||
         week === 'Week') {
@@ -62,16 +67,12 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
         message.style.color = 'red';
         resetMessage();
         return;
-    } else if (requestType === 'Transcript' && (srcURL === '' || videoLength === '')) {
+    } else if (requestType === 'Transcript' && (srcURL === '' || videoLength === '' || videoHeight === '')) {
         message.innerHTML = 'You must fill in all inputs';
         message.style.color = 'red';
         resetMessage();
         return;
     } else {
-        if (srcURL.includes('vimeo')) {
-                var height = prompt(`Need the height to the width of 560px: <a href="${srcURL}" target="_blank">Video Link</a>`);
-                console.log(height);
-        }
         var user = firebase.auth().currentUser;
         // Add a new document in collection "accessibility"
         db.collection('accessibility').add({
@@ -85,7 +86,8 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
             requestDate: new Date(),
             status: 'Ready for Transcript',
             srcURL: srcURL,
-            videoLength: videoLength
+            videoLength: videoLength,
+            videoHeight: videoHeight
         })
             .then(function (docRef) {
                 console.log('Document written with ID: ', docRef.id);
@@ -107,9 +109,9 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
                 }
 
                 // var prev = [requestType, course, title, priority, lmsURL, week, srcURL, videoLength];
-                var prev = [videoLength, srcURL, week, lmsURL, priority, title, course, requestType];
+                var prev = [videoHeight, videoLength, srcURL, week, lmsURL, priority, title, course, requestType];
 
-                for (var i = 0; i < 8; i++) {
+                for (var i = 0; i < 9; i++) {
                    var elem = document.createElement('input');
                    elem.value = prev[i];
                    elem.classList.add('row-6');
@@ -125,10 +127,13 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
                 document.getElementById('requestWeek').options[0].selected = 'selected';
                 document.getElementById('requestVideoURL').value = '';
                 document.getElementById('requestLength').value = '';
+                document.getElementById('requestHeight').value = '';
                 document.getElementById('requestVideoURLLabel').classList.add('hide');
                 document.getElementById('requestVideoURL').classList.add('hide');
                 document.getElementById('requestLengthLabel').classList.add('hide');
                 document.getElementById('requestLength').classList.add('hide');
+                document.getElementById('requestHeightLabel').classList.add('hide');
+                document.getElementById('requestHeight').classList.add('hide');
                 document.getElementById('timeCalc').classList.add('hide');
             })
             .catch(function (error) {

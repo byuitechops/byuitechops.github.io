@@ -58,7 +58,7 @@ function getData(userData) {
                                     <span>${doc.data().type}</span>
                                     <span>${doc.data().title}</span>
                                     <span><a href="${doc.data().lmsURL}" target="_blank">Canvas URL</a></span>
-                                    <span><button onclick="displayEmbedCode('${doc.data().srcURL}')">Show Code</button></span>
+                                    <span><button onclick="displayEmbedCode('${doc.data().srcURL}', '${doc.data().videoHeight}')">Show Code</button></span>
                                     <span><button onclick="displayLinkCode('${doc.data().srcURL}')">Show Code</button></span>
                                     <span><a href="${doc.data().docURL}" target="_blank">Doc URL</a></span>
                                     <button onclick="placeCheck('${doc.id}')">Place</button>`;
@@ -81,14 +81,14 @@ function getData(userData) {
 }
 
 
-function displayEmbedCode(link) {
+function displayEmbedCode(link, height) {
     console.log(link);
     modal.style.display = "block";
     document.getElementById('modal-heading').innerHTML = "Video Embed Code";
     if (link.includes("youtube")) {
         var id = link.slice(link.indexOf("watch?v=") + 8, (link.indexOf("watch?v=") + 9) + 11);
         console.log(id);
-        var html = `<iframe width="560" height="315px" src="https://www.youtube-nocookie.com/embed/${id}?rel=0&amp;showinfo=0" 
+        var html = `<iframe width="560" height="${height}px" src="https://www.youtube-nocookie.com/embed/${id}?rel=0&amp;showinfo=0" 
         frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
         document.getElementById('intro').innerText = html;
 
@@ -97,14 +97,18 @@ function displayEmbedCode(link) {
     } else if (link.includes("youtu.be")) {
         var id = link.slice(link.indexOf(".be/") + 4, (link.indexOf(".be/") + 4) + 11);
         console.log(id);
-        var html = `<iframe width="560" height="315px" src="https://www.youtube-nocookie.com/embed/${id}?rel=0&amp;showinfo=0" 
+        var html = `<iframe width="560" height="${height}px" src="https://www.youtube-nocookie.com/embed/${id}?rel=0&amp;showinfo=0" 
         frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
         document.getElementById('intro').innerText = html;
 
         var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div>`;
         document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);
     } else if (link.includes("video.byui.edu")) {
-        var html = `Kaltura`;
+        var id = link.slice(link.indexOf("/0_") + 1, (link.indexOf("/0_") + 1) + 10);
+        console.log(id);
+        var html = `<iframe id="kaltura_player_1532969286"
+                    src="http://cdnapi.kaltura.com/p/1157612/sp/115761200/embedIframeJs/uiconf_id/33020032/partner_id/1157612?iframeembed=true&playerId=kaltura_player_1532969286&entry_id=${id}&flashvars[streamerType]=auto"
+                     width="560" height="${height}" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay; fullscreen; encrypted-media" frameborder="0"></iframe>`;
         document.getElementById('intro').innerText = html;
 
         var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div>`;
@@ -112,9 +116,9 @@ function displayEmbedCode(link) {
     } else if (link.includes("vimeo")) {
         var id = link.slice(link.indexOf("vimeo.com/") + 10, (link.indexOf("vimeo.com/") + 10) + 9);
         console.log(id);
-        var html = `<iframe src="https://player.vimeo.com/video/${id}?title=0&byline=0&portrait=0" width="560" height="315"
+        var html = `<iframe src="https://player.vimeo.com/video/${id}?title=0&byline=0&portrait=0" width="560" height="${height}px"
                     frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>`;
-        document.getElementById('intro').innerHTML = html;
+        document.getElementById('intro').innerText = html;
 
         var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div>`;
         document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);

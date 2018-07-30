@@ -22,26 +22,75 @@
     firebase.database().ref('/transcripts').once('value').then((snapshot) => {
       var data = snapshot.val();
       // console.log(data);
+
+      var copyeditor;
+      var courseCode;
+      var docURL;
+      var lmsURL;
+      var placed;
+      var priority;
+      var requestDate;
+      var requestor;
+      var srcURl;
+      var status;
+      var title;
+      var transcriber;
+      var type;
+      var week;
+
       var title;
       for (title in data) {
         // console.log(data[title]);
-        // console.log("copyeditor: " + data[title]['Stage02']['Copyeditor'].slice(data[title]['Stage02']['Copyeditor'].indexOf(',') + 2) + " " + data[title]['Stage02']['Copyeditor'].slice(0, data[title]['Stage02']['Copyeditor'].indexOf(',')));
-        // console.log("courseCode: " + data[title]['Course Code']);
-        // console.log("docURL: " + data[title]['Stage 01']['Transcript URL (Google)']);
-        // console.log("lmsURL: " + data[title]['Stage 01']['Video URL (LMS)']);
-        // console.log("placed: " + data[title]['Stage03']['Placed']);
-        // console.log("priority: " + data[title]['Stage 01']['Transcript Priority'].slice(0, 1));
-        // console.log("requestDate: " + data[title]['Stage 01']['Timestamp']);
-        // console.log("requestor: " + data[title]['Stage 01']['Requestor Name'].replace(', ', " "));
-        // console.log("srcURl: " + data[title]['Stage 01']['Video URL (SRC)']);
-        // console.log("status: " + data[title]['General Information']['Status']);
-        // console.log("title: " + title);
-        // console.log("transcriber: " + data[title]['Stage 01']['Transcriber']);
-        // console.log("type: Transcript");
-        // console.log("videoLength: " + data[title]['Stage 01']['Video Length']);
-        if (data[title]['Stage 01']['Lesson'].startsWith('Lesson')) {
-          console.log(data[title]['Stage 01']['Lesson'].slice(7));
-        };
+        copyeditor = data[title]['Stage02']['Copyeditor'].slice(data[title]['Stage02']['Copyeditor'].indexOf(',') +
+          2) + " " + data[title]['Stage02']['Copyeditor'].slice(0, data[title]['Stage02']['Copyeditor'].indexOf(
+          ','));
+        courseCode = data[title]['Course Code'];
+        docURL = data[title]['Stage 01']['Transcript URL (Google)'];
+        lmsURL = data[title]['Stage 01']['Video URL (LMS)'];
+        placed = false;
+        priority = data[title]['Stage 01']['Transcript Priority'].slice(0, 1);
+        requestDate = data[title]['Stage 01']['Timestamp'];
+        requestor = data[title]['Stage 01']['Requestor Name'].replace(', ', " ");
+        srcURl = data[title]['Stage 01']['Video URL (SRC)'];
+        if (data[title]['General Information']['Status'] == "Gathering Information" || data[title][
+            'General Information'
+          ]['Status'] == "Completed") {
+          status = "Finished";
+        }
+        if (data[title]['General Information']['Status'] == "Ready for Copyedit") {
+          status = "Ready for Review";
+        }
+        if (data[title]['General Information']['Status'] == "Return to Sage 01" || data[title][
+            'General Information'
+          ]['Status'] == "Needs Attention") {
+          status = "Transcript in Progress";
+        }
+        if (data[title]['General Information']['Status'] == "Under Review") {
+          status = "Review in Progress";
+        }
+        title = title;
+        transcriber = data[title]['Stage 01']['Transcriber'].slice(data[title]['Stage 01']['Transcriber'].indexOf(',') +
+          2) + " " + data[title]['Stage 01']['Transcriber'].slice(0, data[title]['Stage 01']['Transcriber'].indexOf(
+          ','));
+        type = "Transcript";
+        videoLength = data[title]['Stage 01']['Video Length'];
+        week = data[title]['Stage 01']['Lesson'];
+
+
+        // console.log(copyeditor);
+        // console.log(courseCode);
+        // console.log(docURL);
+        // console.log(lmsURL);
+        // console.log(placed);
+        // console.log(priority);
+        // console.log(requestDate);
+        // console.log(requestor);
+        // console.log(srcURl);
+        // console.log(status);
+        // console.log(title);
+        // console.log(transcriber);
+        // console.log(type);
+        // console.log(week);
       }
     })
   </script>

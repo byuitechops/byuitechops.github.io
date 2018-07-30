@@ -16,8 +16,7 @@ h1 {
   color: #FFFFFF;
   background-color: #0076C6;
   margin: 0;
-  padding: 10px;
-  width: 100%; }
+  padding: 10px; }
 
 nav {
   grid-column: 1 / span 12;

@@ -1,6 +1,6 @@
 #requestForm {
   display: grid;
-  grid-template-columns: repeat(10, 9.2%);
+  grid-template-columns: repeat(10, 9%);
   grid-template-rows: repeat(13, 1fr);
   column-gap: 1em; }
 
@@ -152,17 +152,26 @@
 
 #requestLengthLabel {
   grid-column: 8 / span 1;
-  grid-row: 2; }
+  grid-row: 2;
+  position: relative; }
 
 #requestLength {
   grid-column: 8 / span 1;
   grid-row: 3; }
 
 #timeCalc {
-  grid-column: 9 / span 1;
-  grid-row: 2;
   height: 1em;
-  margin-left: 10px; }
+  margin-left: 10px;
+  position: absolute;
+  right: 0; }
+
+#requestHeightLabel {
+  grid-column: 9 / span 1;
+  grid-row: 2; }
+
+#requestHeight {
+  grid-column: 9 / span 1;
+  grid-row: 3; }
 
 #requestSubmit {
   grid-column: 10;
@@ -180,8 +189,7 @@ label h3 {
 
 /* Tooltip container */
 .tooltip {
-  position: relative;
-  width: 2em; }
+  position: relative; }
 
 /* Tooltip text */
 .tooltip .tooltiptext {

@@ -102,13 +102,20 @@
             </label>
             <input type="url" id="requestVideoURL" class="hide">
             <label id="requestLengthLabel" class="hide">
+                <div id="timeCalc" class="hide tooltip">
+                    <img src="assests/calcIcon.png">
+                    <span class="tooltiptext">Click on the icon to open calculator</span>
+                </div>
                 <h3>Video Length(secs)</h3>
             </label>
             <input type="number" id="requestLength" class="hide">
-            <div id="timeCalc" class="hide tooltip">
-                <img src="assests/calcIcon.png">
-                <span class="tooltiptext">Click on the icon to open calculator</span>
+            <label id="requestHeightLabel" class="hide">
+                <div class="tooltip">
+                <span class="tooltiptext">If the video is from Kaltura it is probably 315px</span>
+                <h3>Video Height <span style="font-size: 16px">(by width 560px)</span></h3>
             </div>
+            </label>
+            <input type="number" id="requestHeight" class="hide">
 
             <!-- <button onclick="authenticate().then(loadClient).then(execute)">Create Transcript Document</button> -->
             <input type="submit" id="requestSubmit">
@@ -136,7 +143,10 @@
                 <h3>Video Source URL</h3>
             </label>
             <label class="row-5">
-                <h3>Video Length(secs)</h3>
+                <h3>Video Length (secs)</h3>
+            </label>
+            <label class="row-5">
+                <h3>Video Height (px)</h3>
             </label>
         </div>
         <!-- The Modal -->
