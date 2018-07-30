@@ -51,7 +51,7 @@ function getData(userData) {
         .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 // console.log(`${doc.id} => ${doc.data().type}`);
-                if (doc.data().placed == undefined) {
+                if (doc.data().placed == undefined && doc.data().docURL != undefined) {
                     if (doc.data().type == "Transcript") {
                         var text = `<span>${doc.data().courseCode}</span>
                                     <span>${doc.data().priority}</span>
