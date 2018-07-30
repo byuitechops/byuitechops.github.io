@@ -131,6 +131,50 @@ function displayEmbedCode(link, height) {
     }
 }
 
+function displayLinkCode(link) {
+    console.log(link);
+    modal.style.display = "block";
+    document.getElementById('modal-heading').innerHTML = "Video Embed Code";
+    if (link.includes("youtube")) {
+        var id = link.slice(link.indexOf("watch?v=") + 8, (link.indexOf("watch?v=") + 9) + 11);
+        console.log(id);
+        var html = `https://www.youtube-nocookie.com/embed/${id}?rel=0&amp;showinfo=0`;
+        document.getElementById('intro').innerText = html;
+
+        var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div>`;
+        document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);
+    } else if (link.includes("youtu.be")) {
+        var id = link.slice(link.indexOf(".be/") + 4, (link.indexOf(".be/") + 4) + 11);
+        console.log(id);
+        var html = `https://www.youtube-nocookie.com/embed/${id}?rel=0&amp;showinfo=0`;
+        document.getElementById('intro').innerText = html;
+
+        var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div>`;
+        document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);
+    } else if (link.includes("video.byui.edu")) {
+        var id = link.slice(link.indexOf("/0_") + 1, (link.indexOf("/0_") + 1) + 10);
+        console.log(id);
+        var html = `http://cdnapi.kaltura.com/p/1157612/sp/115761200/embedIframeJs/uiconf_id/33020032/partner_id/1157612?iframeembed=true&playerId=kaltura_player_1532969286&entry_id=${id}&flashvars[streamerType]=auto`;
+        document.getElementById('intro').innerText = html;
+
+        var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div>`;
+        document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);
+    } else if (link.includes("vimeo")) {
+        var id = link.slice(link.indexOf("vimeo.com/") + 10, (link.indexOf("vimeo.com/") + 10) + 9);
+        console.log(id);
+        var html = `https://player.vimeo.com/video/${id}?title=0&byline=0&portrait=0`;
+        document.getElementById('intro').innerText = html;
+
+        var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div>`;
+        document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);
+    } else {
+        var html = `${link}`;
+        document.getElementById('intro').innerText = html;
+
+        var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div>`;
+        document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);
+    }
+}
 
 function placeCheck(docId) {
     modal.style.display = "block";
