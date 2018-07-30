@@ -19,6 +19,12 @@
     };
     firebase.initializeApp(config);
 
+    var db = firebase.firestore();
+    const settings = { /* your settings... */
+      timestampsInSnapshots: true
+    };
+    db.settings(settings);
+
     firebase.database().ref('/transcripts').once('value').then((snapshot) => {
       var data = snapshot.val();
       // console.log(data);
@@ -69,28 +75,34 @@
           status = "Review in Progress";
         }
         title = title;
-        transcriber = data[title]['Stage 01']['Transcriber'].slice(data[title]['Stage 01']['Transcriber'].indexOf(',') +
+        transcriber = data[title]['Stage 01']['Transcriber'].slice(data[title]['Stage 01']['Transcriber'].indexOf(
+            ',') +
           2) + " " + data[title]['Stage 01']['Transcriber'].slice(0, data[title]['Stage 01']['Transcriber'].indexOf(
           ','));
         type = "Transcript";
         videoLength = data[title]['Stage 01']['Video Length'];
         week = data[title]['Stage 01']['Lesson'];
 
-
-        // console.log(copyeditor);
-        // console.log(courseCode);
-        // console.log(docURL);
-        // console.log(lmsURL);
-        // console.log(placed);
-        // console.log(priority);
-        // console.log(requestDate);
-        // console.log(requestor);
-        // console.log(srcURl);
-        // console.log(status);
-        // console.log(title);
-        // console.log(transcriber);
-        // console.log(type);
-        // console.log(week);
+        db.collection('accessibility').add({
+          copyeditor: copyeditor,
+          courseCode: courseCode,
+          docURL: docURL,
+          lmsURL: lmsURL,
+          placed: placed,
+          priority: priority,
+          requestDate: requestDate,
+          requestor: requestor,
+          srcURl: srcURl,
+          status: status,
+          title: title,
+          transcriber: transcriber,
+          type: type,
+          week: week
+        }).then(function (docRef) {
+          console.log('Complete');
+        }).catch(function (error) {
+          console.log(error);
+        });
       }
     })
   </script>
