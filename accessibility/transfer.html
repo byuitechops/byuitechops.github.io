@@ -66,14 +66,17 @@
         if (data[title]['General Information']['Status'] == "Ready for Copyedit") {
           status = "Ready for Review";
         }
-        if (data[title]['General Information']['Status'] == "Return to Sage 01" || data[title][
-            'General Information'
-          ]['Status'] == "Needs Attention") {
+        if (data[title]['General Information']['Status'] == "Return to Sage 01" || data[title]['General Information']['Status'] == "Needs Attention" 
+        || data[title]['General Information']['Status'] == "Creating Transcript") {
           status = "Transcript in Progress";
         }
         if (data[title]['General Information']['Status'] == "Under Review") {
           status = "Review in Progress";
         }
+        if (data[title]['General Information']['Status'] == "Not Started") {
+          status = "Ready for Transcript"
+        }
+
         title = title;
         transcriber = data[title]['Stage 01']['Transcriber'].slice(data[title]['Stage 01']['Transcriber'].indexOf(
             ',') +

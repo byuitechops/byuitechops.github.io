@@ -6,7 +6,14 @@
 }
 
 @for $i from 4 through 13 {
-    .row-#{$i} { grid-row: $i; height: 1.5em; border-top: none; border-left: none; border-right: none; text-align: center; }
+    .row-#{$i} {
+        grid-row: $i;
+        height: 1.5em;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        text-align: center;
+    }
 }
 
 #prevRequest {
@@ -107,18 +114,18 @@
     // grid-row: 2;
     height: 1em;
     margin-left: 10px;
-    position: absolute;
-    right: 0;
 }
 
 #requestHeightLabel {
     grid-column: 9 / span 1;
     grid-row: 2;
+    position: relative;
 }
 
 #requestHeight {
     grid-column: 9 / span 1;
     grid-row: 3;
+    position: relative;
 }
 
 #requestSubmit {
@@ -143,35 +150,36 @@ label {
 /* Tooltip container */
 
 .tooltip {
-    position: relative;
+    position: absolute;
+    right: 0;
 }
 
 /* Tooltip text */
 
 .tooltip .tooltiptext {
     visibility: hidden;
-    width: 120px;
+    width: 250px;
     background-color: black;
     color: #fff;
     text-align: center;
-    padding: 5px 0;
+    padding: 5px 5px;
     border-radius: 6px;
     /* Position the tooltip text - see examples below! */
     position: absolute;
     z-index: 1;
-    top: -5px;
-    left: 105%;
+    top: -80px;
+    left: -80px;
 }
 
 .tooltip .tooltiptext::after {
     content: "";
     position: absolute;
-    top: 36%;
-    left: 0%;
+    top: 100%;
+    left: 90px;
     margin-left: -10px;
     border-width: 5px;
     border-style: solid;
-    border-color: transparent black transparent transparent;
+    border-color: black transparent transparent transparent;
 }
 
 /* Show the tooltip text when you mouse over the tooltip container */
@@ -183,7 +191,8 @@ label {
 /* The Modal (background) */
 
 .modal {
-    display: none; /* Hidden by default */
+    display: none;
+    /* Hidden by default */
     position: fixed;
     /* Stay in place */
     z-index: 1;
