@@ -20,6 +20,15 @@ db.settings(settings);
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
         // User is signed in.
+        db.collection('users').where('name', "==", user.displayName).get()
+            .then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    var userData = doc.data();
+                    if (userData.role == "Copyedit") {
+                        document.getElementById('place').classList.add('hide');
+                    }
+                })
+            })
     } else {
         // No user is signed in.
         window.location.assign('index.html');

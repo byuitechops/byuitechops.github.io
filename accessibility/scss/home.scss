@@ -34,7 +34,7 @@
     /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
-    width: 70%;
+    width: 50%;
     /* The Close Button */
     .close {
         color: #aaa;
@@ -47,5 +47,14 @@
             text-decoration: none;
             cursor: pointer;
         }
+    }
+
+    input {
+        height: 2em;
+        width: 30%;
+    }
+
+    button {
+        width: 30%;
     }
 }

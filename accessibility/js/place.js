@@ -24,6 +24,9 @@ firebase.auth().onAuthStateChanged(function (user) {
             .then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
                     var userData = doc.data();
+                    if (userData.role == "Copyedit") {
+                        window.location.assign('form.html');
+                    }
                     getData(userData);
                 })
             })

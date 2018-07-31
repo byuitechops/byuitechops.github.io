@@ -204,18 +204,7 @@ label h3 {
   /* Position the tooltip text - see examples below! */
   position: absolute;
   z-index: 1;
-  top: -80px;
   left: -80px; }
-
-.tooltip .tooltiptext::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 90px;
-  margin-left: -10px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: black transparent transparent transparent; }
 
 /* Show the tooltip text when you mouse over the tooltip container */
 .tooltip:hover .tooltiptext {
