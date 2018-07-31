@@ -42,10 +42,31 @@ function getData(userData) {
     db.collection("accessibility").orderBy('title').get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             // console.log(`${doc.id} => ${doc.data().title}`);
-            var text = `<span>${doc.data().type}</span>
-                        <span>${doc.data().title}</span>
-                        <span>${doc.data().docURL}</span>
-                        <span>${doc.data().courseCode}</span>
+            var type = doc.data().type;
+            var title = doc.data().title;
+            var docURL = doc.data().docURL;
+            var courseCode = doc.data().courseCode;
+
+            if (type == undefined) {
+                type = "Empty"
+            }
+
+            if (title == undefined) {
+                title = "Empty";
+            }
+
+            if (docURL == undefined) {
+                docURL = "Empty";
+            }
+
+            if (courseCode == undefined) {
+                courseCode = "Empty";
+            }
+
+            var text = `<span>${type}</span>
+                        <span>${title}</span>
+                        <span>${docURL}</span>
+                        <span>${courseCode}</span>
                         <button onclick="viewItem('${doc.id}')">View</button>`;
             document.getElementById('text').insertAdjacentHTML('beforeend', text);
         });
@@ -59,13 +80,13 @@ var span = document.getElementsByClassName("close")[0];
 // When the user clicks on <span> (x), close the modal
 span.onclick = function () {
     modal.style.display = "none";
-    document.getElementById('updateButton').parentNode.removeChild(document.getElementById('updateButton'));
+    document.getElementById('docData').innerHTML = "";
 }
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {
     if (event.target == modal) {
         modal.style.display = "none";
-        document.getElementById('updateButton').parentNode.removeChild(document.getElementById('updateButton'));
+        document.getElementById('docData').innerHTML = "";
     }
 }
 
@@ -76,44 +97,151 @@ function viewItem(docId) {
         .then((doc) => {
             console.log(doc.data());
             var html;
+            var type = doc.data().type;
+            var title = doc.data().title;
+            var docURL = doc.data().docURL;
+            var courseCode = doc.data().courseCode;
+            var copyeditor = doc.data().copyeditor;
+            var lmsLink = doc.data().lmsLink;
+            var priority = doc.data().priority;
+            var requestor = doc.data().requestor;
+            var srcURL = doc.data().srcURL;
+            var status = doc.data().status;
+            var transcriber = doc.data().transcriber;
+            var videoHeight = doc.data().videoHeight;
+            var videoLength = doc.data().videoLength;
+            var week = doc.data().week;
+            var copyeditClaimed = doc.data().copyeditClaimed;
+            var copyeditFinished = doc.data().copyeditFinished;
+            var requestDate = doc.data().requestDate;
+            var transcriptClaimed = doc.data().transcriptClaimed;
+            var transcriptFinished = doc.data().transcriptFinished;
+            var reviewFinished = doc.data().reviewFinished;
+            var reviewClaimed = doc.data().videoLength;
+
+            if (doc.data().type == undefined) {
+                type = "Empty";
+            }
+            if (doc.data().title == undefined) {
+                title = "Empty";
+            }
+            if (doc.data().docURL == undefined) {
+                docURL = "Empty";
+            }
+            if (doc.data().courseCode == undefined) {
+                courseCode = "Empty";
+            }
+            if (doc.data().copyeditor == undefined) {
+                copyeditor = "Empty";
+            }
+            if (doc.data().lmsLink == undefined) {
+                lmsLink = "Empty";
+            }
+            if (doc.data().priority == undefined) {
+                priority = "Empty";
+            }
+            if (doc.data().requestor == undefined) {
+                requestor = "Empty";
+            }
+            if (doc.data().srcURL == undefined) {
+                srcURL = "Empty";
+            }
+            if (doc.data().status == undefined) {
+                status = "Empty";
+            }
+            if (doc.data().transcriber == undefined) {
+                transcriber = "Empty";
+            }
+            if (doc.data().videoHeight == undefined) {
+                videoHeight = "Empty";
+            }
+            if (doc.data().videoLength == undefined) {
+                videoLength = "Empty";
+            }
+            if (doc.data().week == undefined) {
+                week = "Empty";
+            }
+
+            if (doc.data().copyeditClaimed == undefined) {
+                copyeditClaimed = "Empty";
+            } else {
+                copyeditClaimed = copyeditClaimed.toDate();
+            }
+
+            if (doc.data().copyeditFinished == undefined) {
+                copyeditFinished = "Empty";
+            } else {
+                copyeditFinished = copyeditFinished.toDate();
+            }
+
+            if (doc.data().requestDate == undefined) {
+                requestDate = "Empty";
+            } else {
+                requestDate = requestDate.toDate();
+            }
+
+            if (doc.data().transcriptClaimed == undefined) {
+                transcriptClaimed = "Empty";
+            } else {
+                transcriptClaimed = transcriptClaimed.toDate();
+            }
+
+            if (doc.data().transcriptFinished == undefined) {
+                transcriptFinished = "Empty";
+            } else {
+                transcriptFinished = transcriptFinished.toDate();
+            }
+
+            if (doc.data().reviewFinished == undefined) {
+                reviewFinished = "Empty";
+            } else {
+                reviewFinished = reviewFinished.toDate();
+            }
+
+            if (doc.data().reviewClaimed == undefined) {
+                reviewClaimed = "Empty";
+            } else {
+                reviewClaimed = reviewClaimed.toDate();
+            }
+
             if (doc.data().type == "Transcript") {
-                html = `<p>Type: ${doc.data().type}</p>
-                        <p>Title: ${doc.data().title}</p>
-                        <p>Doc URl: ${doc.data().docURL}</p>
-                        <p>Course Code: ${doc.data().courseCode}</p>
-                        <p>Copyeditor: ${doc.data().copyeditor}</p>
-                        <p>Canvas URl: ${doc.data().lmsLink}</p>
-                        <p>Prority: ${doc.data().priority}</p>
-                        <p>Request Date: ${doc.data().requestDate.toDate()}</p>
-                        <p>Requestor: ${doc.data().requestor}</p>
-                        <p>Review Finished: ${doc.data().reviewFinished.toDate()}</p>
-                        <p>Source URL: ${doc.data().srcURL}</p>
-                        <p>Status: ${doc.data().status}</p>
-                        <p>Transcriber: ${doc.data().transcriber}</p>
-                        <p>Transcript Claimed: ${doc.data().transcriptClaimed}</p>
-                        <p>Transcript Finished: ${doc.data().transcriptFinished}</p>
-                        <p>Video Height: ${doc.data().videoHeight}</p>
-                        <p>Video Length: ${doc.data().videoLength}</p>
-                        <p>Review Claimed: ${doc.data().videoLength}</p>
-                        <p>Week: ${doc.data().week}</p>`;
+                html = `<p>Type: ${type} <button onclick="editItem(type)>Edit</button></p>
+                        <p>Title: ${title} <button onclick="editItem(type)>Edit</button></p>
+                        <p>Doc URl: ${docURL} <button onclick="editItem(type)>Edit</button></p>
+                        <p>Course Code: ${courseCode} <button onclick="editItem(type)>Edit</button></p>
+                        <p>Copyeditor: ${copyeditor} <button onclick="editItem(type)>Edit</button></p>
+                        <p>Canvas URl: ${lmsLink} <button onclick="editItem(type)>Edit</button></p>
+                        <p>Prority: ${priority} <button onclick="editItem(type)>Edit</button></p>
+                        <p>Request Date: ${requestDate} <button onclick="editItem(type)>Edit</button></p>
+                        <p>Requestor: ${requestor} <button onclick="editItem(type)>Edit</button></p>
+                        <p>Review Finished: ${reviewFinished} <button onclick="editItem(type)>Edit</button></p>
+                        <p>Source URL: ${srcURL} <button onclick="editItem(type)>Edit</button></p>
+                        <p>Status: ${status} <button onclick="editItem(type)>Edit</button></p>
+                        <p>Transcriber: ${transcriber} <button onclick="editItem(type)>Edit</button></p>
+                        <p>Transcript Claimed: ${transcriptClaimed} <button onclick="editItem(type)>Edit</button></p>
+                        <p>Transcript Finished: ${transcriptFinished} <button onclick="editItem(type)>Edit</button></p>
+                        <p>Video Height: ${videoHeight} <button onclick="editItem(type)>Edit</button></p>
+                        <p>Video Length: ${videoLength} <button onclick="editItem(type)>Edit</button></p>
+                        <p>Review Claimed: ${reviewClaimed} <button onclick="editItem(type)>Edit</button></p>
+                        <p>Week: ${week} <button onclick="editItem(type)>Edit</button></p>`;
             }
 
             if (doc.data().type == "Alt Text") {
-                html = `<p>Type: ${doc.data().type}</p>
-                <p>Title: ${doc.data().title}</p>
-                <p>Doc URl: ${doc.data().docURL}</p>
-                <p>Course Code: ${doc.data().courseCode}</p>
-                <p>Copyeditor: ${doc.data().copyeditor}</p>
-                <p>Canvas URL: ${doc.data().lmsLink}</p>
-                <p>Prority: ${doc.data().priority}</p>
-                <p>Request Date: ${doc.data().requestDate.toDate()}</p>
-                <p>Requestor: ${doc.data().requestor}</p>
-                <p>Status: ${doc.data().status}</p>
-                <p>Copyedit Claimed: ${doc.data().copyeditClaimed.toDate()}</p>
-                <p>Copyedit Finished: ${doc.data().copyeditFinished.toDate()}</p>
-                <p>Week: ${doc.data().week}</p>`;
+                html = `<p>Type: ${type} <button onclick="editItem(type)>Edit</button></p>
+                        <p>Title: ${title} <button onclick="editItem(type)>Edit</button></p>
+                        <p>Doc URl: ${docURL} <button onclick="editItem(type)>Edit</button></p>
+                        <p>Course Code: ${courseCode} <button onclick="editItem(type)>Edit</button></p>
+                        <p>Copyeditor: ${copyeditor} <button onclick="editItem(type)>Edit</button></p>
+                        <p>Canvas URL: ${lmsLink} <button onclick="editItem(type)>Edit</button></p>
+                        <p>Prority: ${priority} <button onclick="editItem(type)>Edit</button></p>
+                        <p>Request Date: ${requestDate} <button onclick="editItem(type)>Edit</button></p>
+                        <p>Requestor: ${requestor} <button onclick="editItem(type)>Edit</button></p>
+                        <p>Status: ${status} <button onclick="editItem(type)>Edit</button></p>
+                        <p>Copyedit Claimed: ${copyeditClaimed} <button onclick="editItem(type)>Edit</button></p>
+                        <p>Copyedit Finished: ${copyeditFinished} <button onclick="editItem(type)>Edit</button></p>
+                        <p>Week: ${week} <button onclick="editItem(type)>Edit</button></p>`;
             }
 
-            document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);
+            document.getElementById('docData').insertAdjacentHTML('beforeend', html);
         })
 }

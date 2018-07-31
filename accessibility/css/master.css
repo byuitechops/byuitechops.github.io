@@ -42,5 +42,11 @@
       color: black;
       text-decoration: none;
       cursor: pointer; }
+  .modal-content p {
+    position: relative; }
+    .modal-content p button {
+      position: absolute;
+      right: 0;
+      width: 5em; }
 
 /*# sourceMappingURL=master.css.map */

@@ -49,4 +49,13 @@
             cursor: pointer;
         }
     }
+
+    p {
+        position: relative;
+        button {
+            position: absolute;
+            right: 0;
+            width: 5em;
+        }
+    }
 }
