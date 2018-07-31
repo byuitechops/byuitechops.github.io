@@ -2,17 +2,19 @@
 <html>
 
 <head>
-    <title>Claim | BYUI Accessibility</title>
+    <title>Form | BYUI Accessibility</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/x-icon" href="assests/favicon.gif">
     <link type="text/css" rel="stylesheet" href="css/main.css">
-    <link type="text/css" rel="stylesheet" href="css/claim.css">
+    <link type="text/css" rel="stylesheet" href="css/master.css">
     <!-- Script -->
     <!-- <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script> -->
     <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-auth.js"></script>
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="https://apis.google.com/js/api.js"></script>
 </head>
 
 <body>
@@ -27,13 +29,13 @@
                 <a href="form.html">
                     <li>Request</li>
                 </a>
-                <a class="active" href="claim.html">
+                <a href="claim.html">
                     <li>Claim</li>
                 </a>
                 <a id="place" href="place.html">
                     <li>Place</li>
                 </a>
-                <a id="master" href="master.html">
+                <a class="active" id="master" href="master.html">
                     <li>Master</li>
                 </a>
                 <a id="btnLogout">
@@ -45,15 +47,24 @@
     <main>
         <p id="message"></p>
         <div id="text">
-            <h3>Course</h3>
-            <h3>Priority</h3>
             <h3>Type</h3>
             <h3>Title</h3>
-            <h3>Video Length</h3>
+            <h3>Doc Url</h3>
+            <h3>Course Code</h3>
             <h3></h3>
         </div>
     </main>
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content" id="modal-content">
+                <span class="close">&times;</span>
+                <h2>Document Data</h2>
+                <p id="modal-message"></p>
+            </div>
+        </div>
 </body>
-<script src="js/claim.js"></script>
+<script src="js/master.js"></script>
 
 </html>

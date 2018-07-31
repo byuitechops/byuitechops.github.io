@@ -26,6 +26,9 @@ firebase.auth().onAuthStateChanged(function (user) {
                     if (userData.role == "Copyedit") {
                         document.getElementById('place').classList.add('hide');
                     }
+                    if (userData.role != "Admin") {
+                        document.getElementById('master').classList.add('hide');
+                    }
                     getData(userData);
                 })
             })
@@ -116,7 +119,7 @@ function claimItem(docId) {
                             db.collection('accessibility').doc(docId).update({
                                     copyeditor: user.displayName,
                                     status: "Review in Progress",
-                                    transcriptClaimed: new Date()
+                                    reviewClaimed: new Date()
                                 })
                                 .then(function () {
                                     window.location.replace('home.html');

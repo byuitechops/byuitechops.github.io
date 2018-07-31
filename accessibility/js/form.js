@@ -27,6 +27,9 @@ firebase.auth().onAuthStateChanged(function (user) {
                     if (userData.role == "Copyedit") {
                         document.getElementById('place').classList.add('hide');
                     }
+                    if (userData.role != "Admin") {
+                        document.getElementById('master').classList.add('hide');
+                    }
                 })
             })
     } else {
@@ -83,21 +86,40 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
         return;
     } else {
         var user = firebase.auth().currentUser;
+
+        if (requestType == "Transcript") {
+            var docData = {
+                title: title,
+                type: requestType,
+                priority: priority,
+                courseCode: course,
+                lmsURL: lmsURL,
+                week: week,
+                requestor: user.displayName,
+                requestDate: new Date(),
+                status: 'Ready for Transcript',
+                srcURL: srcURL,
+                videoLength: videoLength,
+                videoHeight: videoHeight
+            }
+        }
+
+        if (requestType == "Alt Text") {
+            var docData = {
+                title: title,
+                type: requestType,
+                priority: priority,
+                courseCode: course,
+                lmsURL: lmsURL,
+                week: week,
+                requestor: user.displayName,
+                requestDate: new Date(),
+                status: 'Ready for Transcript'
+            }
+        }
+
         // Add a new document in collection "accessibility"
-        db.collection('accessibility').add({
-            title: title,
-            type: requestType,
-            priority: priority,
-            courseCode: course,
-            lmsURL: lmsURL,
-            week: week,
-            requestor: user.displayName,
-            requestDate: new Date(),
-            status: 'Ready for Transcript',
-            srcURL: srcURL,
-            videoLength: videoLength,
-            videoHeight: videoHeight
-        })
+        db.collection('accessibility').add(docData)
             .then(function (docRef) {
                 console.log('Document written with ID: ', docRef.id);
                 message.innerHTML = 'Request has been made.';

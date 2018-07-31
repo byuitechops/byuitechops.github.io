@@ -16,12 +16,17 @@ h1 {
   color: #FFFFFF;
   background-color: #0076C6;
   margin: 0;
-  padding: 10px; }
+  padding: 10px;
+  position: fixed;
+  width: 100%; }
 
 nav {
   grid-column: 1 / span 12;
   grid-row: 3 / span 1;
-  font-size: 1.1em; }
+  font-size: 1.1em;
+  width: 100%;
+  position: fixed;
+  top: 63px; }
   nav ul {
     display: grid;
     grid-template-columns: repeat(8, 12.5%);
@@ -66,10 +71,10 @@ button {
 
 #btnLogout {
   position: absolute;
-  top: 0;
+  top: -65px;
   right: 0;
   width: 6em;
-  height: 4em;
+  height: 3.7em;
   background-color: #0076C6;
   color: #FFFFFF; }
   #btnLogout:hover {

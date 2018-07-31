@@ -71,11 +71,16 @@
 #requestLMSURLLabel {
     grid-column: 5 / span 1;
     grid-row: 2;
+    position: relative;
+    span:nth-of-type(1) {
+        font-size: 1.5em;
+    }
 }
 
 #requestLMSURL {
     grid-column: 5 / span 1;
     grid-row: 3;
+    position: relative;
 }
 
 #requestWeekLabel {
@@ -120,6 +125,9 @@
     grid-column: 9 / span 1;
     grid-row: 2;
     position: relative;
+    span:nth-of-type(1) {
+        font-size: 1.5em;
+    }
 }
 
 #requestHeight {

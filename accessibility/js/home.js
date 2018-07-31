@@ -27,6 +27,9 @@ firebase.auth().onAuthStateChanged(function (user) {
                     if (userData.role == "Copyedit") {
                         document.getElementById('place').classList.add('hide');
                     }
+                    if (userData.role != "Admin") {
+                        document.getElementById('master').classList.add('hide');
+                    }
                     getData(userData);
                 })
             })
@@ -103,44 +106,67 @@ function finishItem(docId) {
         .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 var userData = doc.data();
+                db.collection('accessibility').doc(docId).get().then((doc) => {
+                    var type = doc.data().type;
 
-                if (userData.role == "Techops") {
-                    db.collection('accessibility').doc(docId).update({
-                            status: "Ready for Review",
-                            transcriptFinished: new Date()
-                        })
-                        .then(function () {
-                            window.location.replace('home.html');
-                            // message.innerHTML = 'Request has been made.';
-                            // message.style.color = 'blue';
-                            // resetMessage();
-                        })
-                        .catch(function (error) {
-                            console.error('Error updating document: ', error);
-                            message.innerHTML = 'There was an error making the request. Please try again.';
-                            message.style.color = 'red';
-                            resetMessage();
-                        });
-                }
+                    if (userData.role == "Techops") {
+                        db.collection('accessibility').doc(docId).update({
+                                status: "Ready for Review",
+                                transcriptFinished: new Date()
+                            })
+                            .then(function () {
+                                window.location.replace('home.html');
+                                // message.innerHTML = 'Request has been made.';
+                                // message.style.color = 'blue';
+                                // resetMessage();
+                            })
+                            .catch(function (error) {
+                                console.error('Error updating document: ', error);
+                                message.innerHTML = 'There was an error making the request. Please try again.';
+                                message.style.color = 'red';
+                                resetMessage();
+                            });
+                    }
 
-                if (userData.role == "Copyedit") {
-                    db.collection('accessibility').doc(docId).update({
-                            status: "Finished",
-                            reviewFinished: new Date()
-                        })
-                        .then(function () {
-                            window.location.replace('home.html');
-                            // message.innerHTML = 'Request has been made.';
-                            // message.style.color = 'blue';
-                            // resetMessage();
-                        })
-                        .catch(function (error) {
-                            console.error('Error updating document: ', error);
-                            message.innerHTML = 'There was an error making the request. Please try again.';
-                            message.style.color = 'red';
-                            resetMessage();
-                        });
-                }
+                    if (userData.role == "Copyedit") {
+                        if (type == "Transcript") {
+                            db.collection('accessibility').doc(docId).update({
+                                    status: "Finished",
+                                    reviewFinished: new Date()
+                                })
+                                .then(function () {
+                                    window.location.replace('home.html');
+                                    // message.innerHTML = 'Request has been made.';
+                                    // message.style.color = 'blue';
+                                    // resetMessage();
+                                })
+                                .catch(function (error) {
+                                    console.error('Error updating document: ', error);
+                                    message.innerHTML = 'There was an error making the request. Please try again.';
+                                    message.style.color = 'red';
+                                    resetMessage();
+                                });
+                        }
+                        if (type == "Alt Text") {
+                            db.collection('accessibility').doc(docId).update({
+                                    status: "Finished",
+                                    copyeditFinished: new Date()
+                                })
+                                .then(function () {
+                                    window.location.replace('home.html');
+                                    // message.innerHTML = 'Request has been made.';
+                                    // message.style.color = 'blue';
+                                    // resetMessage();
+                                })
+                                .catch(function (error) {
+                                    console.error('Error updating document: ', error);
+                                    message.innerHTML = 'There was an error making the request. Please try again.';
+                                    message.style.color = 'red';
+                                    resetMessage();
+                                });
+                        }
+                    }
+                })
             })
         })
 }

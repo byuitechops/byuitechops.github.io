@@ -35,6 +35,9 @@
                 <a id="place" href="place.html">
                     <li>Place</li>
                 </a>
+                <a id="master" href="master.html">
+                    <li>Master</li>
+                </a>
                 <a id="btnLogout">
                     <li>Logout</li>
                 </a>
@@ -73,7 +76,11 @@
                 <option value="4">(4) Transcript Project</option>
             </select>
             <label id="requestLMSURLLabel">
-                <h3>Canvas Page Link</h3>
+                <div class="tooltip">
+                    <span>&#x1f4a1;</span>
+                    <span class="tooltiptext">All links need to be absolute. (Starts with http)</span>
+                </div>
+                <h3>Canvas Link</h3>
             </label>
             <input type="url" id="requestLMSURL">
             <label id="requestWeekLabel">

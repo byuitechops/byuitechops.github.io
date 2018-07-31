@@ -1,13 +1,14 @@
 #text {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     grid-row-gap: 1em;
 }
 
 /* The Modal (background) */
 
 .modal {
-    display: none; /* Hidden by default */
+    display: none;
+    /* Hidden by default */
     position: fixed;
     /* Stay in place */
     z-index: 1;
@@ -47,15 +48,5 @@
             text-decoration: none;
             cursor: pointer;
         }
-    }
-
-    input {
-        height: 2em;
-        width: 30%;
-    }
-
-    button {
-        width: 30%;
-        height: 2.5em;
     }
 }

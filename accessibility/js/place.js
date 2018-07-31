@@ -25,7 +25,10 @@ firebase.auth().onAuthStateChanged(function (user) {
                 querySnapshot.forEach((doc) => {
                     var userData = doc.data();
                     if (userData.role == "Copyedit") {
-                        window.location.assign('form.html');
+                        window.location.assign('home.html');
+                    }                    
+                    if (userData.role != "Admin") {
+                        document.getElementById('master').classList.add('hide');
                     }
                     getData(userData);
                 })
