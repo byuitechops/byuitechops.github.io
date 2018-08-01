@@ -42,33 +42,22 @@ function getData(userData) {
     db.collection("accessibility").orderBy('title').get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             // console.log(`${doc.id} => ${doc.data().title}`);
-            var type = doc.data().type;
-            var title = doc.data().title;
-            var docURL = doc.data().docURL;
-            var courseCode = doc.data().courseCode;
 
-            if (type == undefined) {
-                type = "Empty"
+            var items = ["type", "title", "docURL", "courseCode"];
+
+            for (var i = 0; i < items.length; i++) {
+                var item;
+                if (doc.data()[items[i]] == undefined) {
+                    item = document.createElement('span');
+                    item.innerHTML = "Empty";
+                    item.style.color = "red";
+                } else {
+                    item = document.createElement('span');
+                    item.innerHTML = doc.data()[items[i]];
+                }
+                document.getElementById('text').insertAdjacentElement('beforeend', item);
             }
-
-            if (title == undefined) {
-                title = "Empty";
-            }
-
-            if (docURL == undefined) {
-                docURL = "Empty";
-            }
-
-            if (courseCode == undefined) {
-                courseCode = "Empty";
-            }
-
-            var text = `<span>${type}</span>
-                        <span>${title}</span>
-                        <span>${docURL}</span>
-                        <span>${courseCode}</span>
-                        <button onclick="viewItem('${doc.id}')">View</button>`;
-            document.getElementById('text').insertAdjacentHTML('beforeend', text);
+            document.getElementById('text').insertAdjacentHTML('beforeend', `<button onclick="viewItem('${doc.id}')">View</button>`);
         });
     });
 }
@@ -95,7 +84,55 @@ function viewItem(docId) {
 
     db.collection("accessibility").doc(docId).get()
         .then((doc) => {
-            console.log(doc.data());
+            // console.log(doc.data());
+
+            if (doc.data().type = "Transcript") {
+                var items = ["type", "title", "docURL", "courseCode", "copyeditor", "lmsLink", "priority",
+                             "requestor", "srcURL", "status", "transcriber", "videoHeight", "videoLength", 
+                             "week", "requestDate", "transcriptClaimed", "transcriptFinished", "reviewClaimed", "reviewFinished"];
+    
+                for (var i = 0; i < items.length; i++) {
+                    var p = document.createElement('p');
+                    var item = document.createElement('span');
+                    var title = items[i].charAt(0).toUpperCase() + items[i].slice(1);
+
+                    if (doc.data()[items[i]] == undefined) {
+                        item.innerHTML = ": Empty";
+                        item.style.color = "red";
+                    } else if (items[i] == "requestDate" || items[i] == "transcriptClaimed" || items[i] == "transcriptFinished"
+                    || items[i] == "reviewClaimed" || items[i] == "reviewFinished") {
+                        item.innerHTML = `: ${doc.data()[items[i]].toDate()}`;
+                    } else {
+                        item.innerHTML = `: ${doc.data()[items[i]]}`;
+                    }
+                    document.getElementById('docData').insertAdjacentElement('beforeend', p);
+                    p.insertAdjacentHTML('beforeend', `${title}`);
+                    p.insertAdjacentElement('beforeend', item);
+                    p.insertAdjacentHTML('beforeend', `<button onclick="editItem('${items[i]}')">Edit</button>`);
+                }
+            }
+
+            if (doc.data().type == "Alt Text") {
+                var items = ["type", "title", "docURL", "courseCode", "copyeditor", "lmsLink", "priority",
+                             "requestor", "status", "week", "requestDate", "copyeditClaimed", "copyeditFinished"];
+    
+                for (var i = 0; i < items.length; i++) {
+                    var item;
+                    if (doc.data()[items[i]] == undefined) {
+                        item = document.createElement('span');
+                        item.innerHTML = "Empty";
+                        item.style.color = "red";
+                    } else {
+                        item = document.createElement('span');
+                        item.innerHTML = doc.data()[items[i]];
+                    }
+                    // document.getElementById('text').insertAdjacentElement('beforeend', item);
+                }
+                // document.getElementById('text').insertAdjacentHTML('beforeend', `<button onclick="viewItem('${doc.id}')">View</button>`);
+            }
+
+
+
             var html;
             var type = doc.data().type;
             var title = doc.data().title;
@@ -242,6 +279,6 @@ function viewItem(docId) {
                         <p>Week: ${week} <button onclick="editItem(type)>Edit</button></p>`;
             }
 
-            document.getElementById('docData').insertAdjacentHTML('beforeend', html);
+            // document.getElementById('docData').insertAdjacentHTML('beforeend', html);
         })
 }
