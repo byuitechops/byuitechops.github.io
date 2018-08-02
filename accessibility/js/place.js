@@ -94,8 +94,7 @@ function displayEmbedCode(link, height) {
     if (link.includes("youtube")) {
         var id = link.slice(link.indexOf("watch?v=") + 8, (link.indexOf("watch?v=") + 9) + 11);
         console.log(id);
-        var html = `<iframe width="560" height="${height}px" src="https://www.youtube-nocookie.com/embed/${id}?rel=0&amp;showinfo=0" 
-        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+        var html = `<iframe width="560" height="${height}px" src="https://www.youtube-nocookie.com/embed/${id}?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
         document.getElementById('intro').innerText = html;
 
         var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div>`;
@@ -103,8 +102,7 @@ function displayEmbedCode(link, height) {
     } else if (link.includes("youtu.be")) {
         var id = link.slice(link.indexOf(".be/") + 4, (link.indexOf(".be/") + 4) + 11);
         console.log(id);
-        var html = `<iframe width="560" height="${height}px" src="https://www.youtube-nocookie.com/embed/${id}?rel=0&amp;showinfo=0" 
-        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+        var html = `<iframe width="560" height="${height}px" src="https://www.youtube-nocookie.com/embed/${id}?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
         document.getElementById('intro').innerText = html;
 
         var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div>`;
@@ -112,8 +110,7 @@ function displayEmbedCode(link, height) {
     } else if (link.includes("video.byui.edu")) {
         var id = link.slice(link.indexOf("/0_") + 1, (link.indexOf("/0_") + 1) + 10);
         console.log(id);
-        var html = `<iframe id="kaltura_player_1532969286"
-                    src="http://cdnapi.kaltura.com/p/1157612/sp/115761200/embedIframeJs/uiconf_id/33020032/partner_id/1157612?iframeembed=true&playerId=kaltura_player_1532969286&entry_id=${id}&flashvars[streamerType]=auto"
+        var html = `<iframe id="kaltura_player_1532969286" src="http://cdnapi.kaltura.com/p/1157612/sp/115761200/embedIframeJs/uiconf_id/33020032/partner_id/1157612?iframeembed=true&playerId=kaltura_player_1532969286&entry_id=${id}&flashvars[streamerType]=auto"
                      width="560" height="${height}" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay; fullscreen; encrypted-media" frameborder="0"></iframe>`;
         document.getElementById('intro').innerText = html;
 
@@ -122,8 +119,7 @@ function displayEmbedCode(link, height) {
     } else if (link.includes("vimeo")) {
         var id = link.slice(link.indexOf("vimeo.com/") + 10, (link.indexOf("vimeo.com/") + 10) + 9);
         console.log(id);
-        var html = `<iframe src="https://player.vimeo.com/video/${id}?title=0&byline=0&portrait=0" width="560" height="${height}px"
-                    frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>`;
+        var html = `<iframe src="https://player.vimeo.com/video/${id}?title=0&byline=0&portrait=0" width="560" height="${height}px" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>`;
         document.getElementById('intro').innerText = html;
 
         var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div>`;

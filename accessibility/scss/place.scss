@@ -52,10 +52,6 @@
 }
 
 #modal-content {
-    p {
-        text-align: center;
-        font-size: 1.5em;
-    }
     #buttons {
         display: flex;
         justify-content: center;
@@ -73,4 +69,12 @@
 
 #intro {
     word-wrap: break-word;
+    background: #2d2d2d;
+    padding: 1em;
+    margin: .5em 0;
+    overflow: auto;
+    color: #ccc;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    line-height: 1.5;
+    border-radius: 6px;
 }
