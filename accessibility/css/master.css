@@ -1,7 +1,8 @@
 #text {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-row-gap: 1em; }
+  grid-row-gap: 1em;
+  grid-column-gap: 1em; }
 
 /* The Modal (background) */
 .modal {
@@ -27,7 +28,7 @@
 /* Modal Content/Box */
 .modal-content {
   background-color: #fefefe;
-  margin: 5% auto;
+  margin: 2% auto;
   /* 15% from the top and centered */
   padding: 20px;
   border: 1px solid #888;

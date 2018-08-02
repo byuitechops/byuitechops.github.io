@@ -86,11 +86,12 @@ function viewItem(docId) {
         .then((doc) => {
             // console.log(doc.data());
 
-            if (doc.data().type = "Transcript") {
+            if (doc.data().type == "Transcript") {
                 var items = ["type", "title", "docURL", "courseCode", "copyeditor", "lmsLink", "priority",
-                             "requestor", "srcURL", "status", "transcriber", "videoHeight", "videoLength", 
-                             "week", "requestDate", "transcriptClaimed", "transcriptFinished", "reviewClaimed", "reviewFinished"];
-    
+                    "requestor", "srcURL", "status", "transcriber", "videoHeight", "videoLength",
+                    "week", "requestDate", "transcriptClaimed", "transcriptFinished", "reviewClaimed", "reviewFinished"
+                ];
+
                 for (var i = 0; i < items.length; i++) {
                     var p = document.createElement('p');
                     var item = document.createElement('span');
@@ -99,186 +100,81 @@ function viewItem(docId) {
                     if (doc.data()[items[i]] == undefined) {
                         item.innerHTML = ": Empty";
                         item.style.color = "red";
-                    } else if (items[i] == "requestDate" || items[i] == "transcriptClaimed" || items[i] == "transcriptFinished"
-                    || items[i] == "reviewClaimed" || items[i] == "reviewFinished") {
-                        item.innerHTML = `: ${doc.data()[items[i]].toDate()}`;
+                    } else if (items[i] == "requestDate" || items[i] == "transcriptClaimed" || items[i] == "transcriptFinished" ||
+                        items[i] == "reviewClaimed" || items[i] == "reviewFinished") {
+                        var date = doc.data()[items[i]].toDate().toString().slice(0, -34);
+                        item.innerHTML = `: ${date}`;
                     } else {
                         item.innerHTML = `: ${doc.data()[items[i]]}`;
                     }
                     document.getElementById('docData').insertAdjacentElement('beforeend', p);
                     p.insertAdjacentHTML('beforeend', `${title}`);
                     p.insertAdjacentElement('beforeend', item);
-                    p.insertAdjacentHTML('beforeend', `<button onclick="editItem('${items[i]}')">Edit</button>`);
+                    p.insertAdjacentHTML('beforeend', `<button onclick="editItem('${doc.id}', '${items[i]}')">Edit</button>`);
                 }
             }
 
             if (doc.data().type == "Alt Text") {
                 var items = ["type", "title", "docURL", "courseCode", "copyeditor", "lmsLink", "priority",
-                             "requestor", "status", "week", "requestDate", "copyeditClaimed", "copyeditFinished"];
-    
+                    "requestor", "status", "week", "requestDate", "copyeditClaimed", "copyeditFinished"
+                ];
+
                 for (var i = 0; i < items.length; i++) {
-                    var item;
+                    var p = document.createElement('p');
+                    var item = document.createElement('span');
+                    var title = items[i].charAt(0).toUpperCase() + items[i].slice(1);
+
                     if (doc.data()[items[i]] == undefined) {
-                        item = document.createElement('span');
-                        item.innerHTML = "Empty";
+                        item.innerHTML = ": Empty";
                         item.style.color = "red";
+                    } else if (items[i] == "requestDate" || items[i] == "copyeditClaimed" || items[i] == "copyeditFinished") {
+                        var date = doc.data()[items[i]].toDate().toString().slice(0, -34);
+                        item.innerHTML = `: ${date}`;
                     } else {
-                        item = document.createElement('span');
-                        item.innerHTML = doc.data()[items[i]];
+                        item.innerHTML = `: ${doc.data()[items[i]]}`;
                     }
-                    // document.getElementById('text').insertAdjacentElement('beforeend', item);
+                    document.getElementById('docData').insertAdjacentElement('beforeend', p);
+                    p.insertAdjacentHTML('beforeend', `${title}`);
+                    p.insertAdjacentElement('beforeend', item);
+                    p.insertAdjacentHTML('beforeend', `<button onclick="editItem('${doc.id}', '${items[i]}')">Edit</button>`);
                 }
-                // document.getElementById('text').insertAdjacentHTML('beforeend', `<button onclick="viewItem('${doc.id}')">View</button>`);
             }
-
-
-
-            var html;
-            var type = doc.data().type;
-            var title = doc.data().title;
-            var docURL = doc.data().docURL;
-            var courseCode = doc.data().courseCode;
-            var copyeditor = doc.data().copyeditor;
-            var lmsLink = doc.data().lmsLink;
-            var priority = doc.data().priority;
-            var requestor = doc.data().requestor;
-            var srcURL = doc.data().srcURL;
-            var status = doc.data().status;
-            var transcriber = doc.data().transcriber;
-            var videoHeight = doc.data().videoHeight;
-            var videoLength = doc.data().videoLength;
-            var week = doc.data().week;
-            var copyeditClaimed = doc.data().copyeditClaimed;
-            var copyeditFinished = doc.data().copyeditFinished;
-            var requestDate = doc.data().requestDate;
-            var transcriptClaimed = doc.data().transcriptClaimed;
-            var transcriptFinished = doc.data().transcriptFinished;
-            var reviewFinished = doc.data().reviewFinished;
-            var reviewClaimed = doc.data().videoLength;
-
-            if (doc.data().type == undefined) {
-                type = "Empty";
-            }
-            if (doc.data().title == undefined) {
-                title = "Empty";
-            }
-            if (doc.data().docURL == undefined) {
-                docURL = "Empty";
-            }
-            if (doc.data().courseCode == undefined) {
-                courseCode = "Empty";
-            }
-            if (doc.data().copyeditor == undefined) {
-                copyeditor = "Empty";
-            }
-            if (doc.data().lmsLink == undefined) {
-                lmsLink = "Empty";
-            }
-            if (doc.data().priority == undefined) {
-                priority = "Empty";
-            }
-            if (doc.data().requestor == undefined) {
-                requestor = "Empty";
-            }
-            if (doc.data().srcURL == undefined) {
-                srcURL = "Empty";
-            }
-            if (doc.data().status == undefined) {
-                status = "Empty";
-            }
-            if (doc.data().transcriber == undefined) {
-                transcriber = "Empty";
-            }
-            if (doc.data().videoHeight == undefined) {
-                videoHeight = "Empty";
-            }
-            if (doc.data().videoLength == undefined) {
-                videoLength = "Empty";
-            }
-            if (doc.data().week == undefined) {
-                week = "Empty";
-            }
-
-            if (doc.data().copyeditClaimed == undefined) {
-                copyeditClaimed = "Empty";
-            } else {
-                copyeditClaimed = copyeditClaimed.toDate();
-            }
-
-            if (doc.data().copyeditFinished == undefined) {
-                copyeditFinished = "Empty";
-            } else {
-                copyeditFinished = copyeditFinished.toDate();
-            }
-
-            if (doc.data().requestDate == undefined) {
-                requestDate = "Empty";
-            } else {
-                requestDate = requestDate.toDate();
-            }
-
-            if (doc.data().transcriptClaimed == undefined) {
-                transcriptClaimed = "Empty";
-            } else {
-                transcriptClaimed = transcriptClaimed.toDate();
-            }
-
-            if (doc.data().transcriptFinished == undefined) {
-                transcriptFinished = "Empty";
-            } else {
-                transcriptFinished = transcriptFinished.toDate();
-            }
-
-            if (doc.data().reviewFinished == undefined) {
-                reviewFinished = "Empty";
-            } else {
-                reviewFinished = reviewFinished.toDate();
-            }
-
-            if (doc.data().reviewClaimed == undefined) {
-                reviewClaimed = "Empty";
-            } else {
-                reviewClaimed = reviewClaimed.toDate();
-            }
-
-            if (doc.data().type == "Transcript") {
-                html = `<p>Type: ${type} <button onclick="editItem(type)>Edit</button></p>
-                        <p>Title: ${title} <button onclick="editItem(type)>Edit</button></p>
-                        <p>Doc URl: ${docURL} <button onclick="editItem(type)>Edit</button></p>
-                        <p>Course Code: ${courseCode} <button onclick="editItem(type)>Edit</button></p>
-                        <p>Copyeditor: ${copyeditor} <button onclick="editItem(type)>Edit</button></p>
-                        <p>Canvas URl: ${lmsLink} <button onclick="editItem(type)>Edit</button></p>
-                        <p>Prority: ${priority} <button onclick="editItem(type)>Edit</button></p>
-                        <p>Request Date: ${requestDate} <button onclick="editItem(type)>Edit</button></p>
-                        <p>Requestor: ${requestor} <button onclick="editItem(type)>Edit</button></p>
-                        <p>Review Finished: ${reviewFinished} <button onclick="editItem(type)>Edit</button></p>
-                        <p>Source URL: ${srcURL} <button onclick="editItem(type)>Edit</button></p>
-                        <p>Status: ${status} <button onclick="editItem(type)>Edit</button></p>
-                        <p>Transcriber: ${transcriber} <button onclick="editItem(type)>Edit</button></p>
-                        <p>Transcript Claimed: ${transcriptClaimed} <button onclick="editItem(type)>Edit</button></p>
-                        <p>Transcript Finished: ${transcriptFinished} <button onclick="editItem(type)>Edit</button></p>
-                        <p>Video Height: ${videoHeight} <button onclick="editItem(type)>Edit</button></p>
-                        <p>Video Length: ${videoLength} <button onclick="editItem(type)>Edit</button></p>
-                        <p>Review Claimed: ${reviewClaimed} <button onclick="editItem(type)>Edit</button></p>
-                        <p>Week: ${week} <button onclick="editItem(type)>Edit</button></p>`;
-            }
-
-            if (doc.data().type == "Alt Text") {
-                html = `<p>Type: ${type} <button onclick="editItem(type)>Edit</button></p>
-                        <p>Title: ${title} <button onclick="editItem(type)>Edit</button></p>
-                        <p>Doc URl: ${docURL} <button onclick="editItem(type)>Edit</button></p>
-                        <p>Course Code: ${courseCode} <button onclick="editItem(type)>Edit</button></p>
-                        <p>Copyeditor: ${copyeditor} <button onclick="editItem(type)>Edit</button></p>
-                        <p>Canvas URL: ${lmsLink} <button onclick="editItem(type)>Edit</button></p>
-                        <p>Prority: ${priority} <button onclick="editItem(type)>Edit</button></p>
-                        <p>Request Date: ${requestDate} <button onclick="editItem(type)>Edit</button></p>
-                        <p>Requestor: ${requestor} <button onclick="editItem(type)>Edit</button></p>
-                        <p>Status: ${status} <button onclick="editItem(type)>Edit</button></p>
-                        <p>Copyedit Claimed: ${copyeditClaimed} <button onclick="editItem(type)>Edit</button></p>
-                        <p>Copyedit Finished: ${copyeditFinished} <button onclick="editItem(type)>Edit</button></p>
-                        <p>Week: ${week} <button onclick="editItem(type)>Edit</button></p>`;
-            }
-
-            // document.getElementById('docData').insertAdjacentHTML('beforeend', html);
         })
+}
+
+var message = document.getElementById('message');
+
+function resetMessage() {
+    setTimeout(() => {
+        message.innerHTML = '';
+        message.style.color = 'black';
+    }, 10000);
+}
+
+function editItem(id, item) {
+    console.log(`ID: ${id}`);
+    console.log(`Item: ${item}`);
+    var newField = prompt(`What are you updating ${item} to?`);
+
+    if (newField != "") {
+        var json = JSON.parse(`{"${item}": "${newField}"}`);
+        db.collection('accessibility').doc(id).update(json)
+            .then(function () {
+                console.log("Document successfully updated!");
+                modal.style.display = "none";
+                document.getElementById('docData').innerHTML = "";
+                message.innerHTML = 'Document has been updated.';
+                message.style.color = 'blue';
+                resetMessage();
+            })
+            .catch(function (error) {
+                // The document probably doesn't exist.
+                console.error("Error updating document: ", error);
+                modal.style.display = "none";
+                document.getElementById('docData').innerHTML = "";
+                message.innerHTML = 'There was an error making the update. Please try again.';
+                message.style.color = 'red';
+                resetMessage();
+            });
+    }
 }

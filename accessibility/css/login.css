@@ -8,4 +8,8 @@ button {
   height: 2.5em;
   width: 18%; }
 
+a {
+  text-decoration: none;
+  color: white; }
+
 /*# sourceMappingURL=login.css.map */
