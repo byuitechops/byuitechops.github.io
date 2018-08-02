@@ -182,38 +182,18 @@ function editItem(id, item) {
 document.getElementById('search').addEventListener('click', () => {
     document.getElementById('searchcancel').classList.remove('hide');
 
-    var link = prompt('Search transcripts by video url');
-    // console.log(link);
-    var id;
-
-    if (link.includes("youtube")) {
-        id = link.slice(link.indexOf("watch?v=") + 8, (link.indexOf("watch?v=") + 9) + 10);
-        console.log(id);
-
-    } else if (link.includes("youtu.be")) {
-        id = link.slice(link.indexOf(".be/") + 4, (link.indexOf(".be/") + 4) + 11);
-        console.log(id);
-
-    } else if (link.includes("video.byui.edu")) {
-        id = link.slice(link.indexOf("/0_") + 1, (link.indexOf("/0_") + 1) + 10);
-        console.log(id);
-
-    } else if (link.includes("vimeo")) {
-        id = link.slice(link.indexOf("vimeo.com/") + 10, (link.indexOf("vimeo.com/") + 10) + 9);
-        console.log(id);
-
-    } else {
-        id = link;
-    }
+    var snip = prompt('Search transcripts by video url snippet');
 
     db.collection('accessibility').get()
         .then((querySnapshot) => {
             document.getElementById('text').innerHTML = "";
+            var match = false;
             querySnapshot.forEach((doc) => {
                 // console.log(`${doc.data().title} => ${doc.data().srcURL}`);
                 if (doc.data().type == "Transcript" && doc.data().srcURL != undefined) {
-                    if (doc.data().srcURL.includes(id)) {
+                    if (doc.data().srcURL.includes(snip)) {
                         console.log(doc.data().title);
+                        match = true;
                         var items = ["type", "title", "docURL", "courseCode"];
 
                         for (var i = 0; i < items.length; i++) {
