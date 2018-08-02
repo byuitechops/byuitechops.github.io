@@ -24,11 +24,11 @@ firebase.auth().onAuthStateChanged(function (user) {
             .then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
                     var userData = doc.data();
-                    if (userData.role == "Copyedit") {
-                        document.getElementById('place').classList.add('hide');
+                    if (userData.role != "Copyedit") {
+                        document.getElementById('place').classList.remove('hide');
                     }
-                    if (userData.role != "Admin") {
-                        document.getElementById('master').classList.add('hide');
+                    if (userData.role == "Admin") {
+                        document.getElementById('master').classList.remove('hide');
                     }
                     getData(userData);
                 })
