@@ -50,13 +50,33 @@
             cursor: pointer;
         }
     }
-
     p {
         position: relative;
         button {
             position: absolute;
             right: 0;
             width: 5em;
+        }
+    }
+}
+
+#search {
+    cursor: pointer;
+}
+
+li {
+    list-style: none;
+    #searchcancel {
+        position: relative;
+        right: 1em;
+        top: 6px;
+        font-size: 1.6em;
+        line-height: 0.75em;
+        font-weight: bold;
+        color: #BF0000;
+        cursor: pointer;
+        &:hover {
+            color: darkgrey;
         }
     }
 }

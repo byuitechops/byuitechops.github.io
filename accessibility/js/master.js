@@ -38,7 +38,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 });
 
 // Get Data
-function getData(userData) {
+function getData() {
     db.collection("accessibility").orderBy('title').get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             // console.log(`${doc.id} => ${doc.data().title}`);
@@ -178,3 +178,68 @@ function editItem(id, item) {
             });
     }
 }
+
+document.getElementById('search').addEventListener('click', () => {
+    document.getElementById('searchcancel').classList.remove('hide');
+
+    var link = prompt('Search transcripts by video url');
+    // console.log(link);
+    var id;
+
+    if (link.includes("youtube")) {
+        id = link.slice(link.indexOf("watch?v=") + 8, (link.indexOf("watch?v=") + 9) + 10);
+        console.log(id);
+
+    } else if (link.includes("youtu.be")) {
+        id = link.slice(link.indexOf(".be/") + 4, (link.indexOf(".be/") + 4) + 11);
+        console.log(id);
+
+    } else if (link.includes("video.byui.edu")) {
+        id = link.slice(link.indexOf("/0_") + 1, (link.indexOf("/0_") + 1) + 10);
+        console.log(id);
+
+    } else if (link.includes("vimeo")) {
+        id = link.slice(link.indexOf("vimeo.com/") + 10, (link.indexOf("vimeo.com/") + 10) + 9);
+        console.log(id);
+
+    } else {
+        id = link;
+    }
+
+    db.collection('accessibility').get()
+        .then((querySnapshot) => {
+            document.getElementById('text').innerHTML = "";
+            querySnapshot.forEach((doc) => {
+                // console.log(`${doc.data().title} => ${doc.data().srcURL}`);
+                if (doc.data().type == "Transcript" && doc.data().srcURL != undefined) {
+                    if (doc.data().srcURL.includes(id)) {
+                        console.log(doc.data().title);
+                        var items = ["type", "title", "docURL", "courseCode"];
+
+                        for (var i = 0; i < items.length; i++) {
+                            var item;
+                            if (doc.data()[items[i]] == undefined) {
+                                item = document.createElement('span');
+                                item.innerHTML = "Empty";
+                                item.style.color = "red";
+                            } else {
+                                item = document.createElement('span');
+                                item.innerHTML = doc.data()[items[i]];
+                            }
+                            document.getElementById('text').insertAdjacentElement('beforeend', item);
+                        }
+                        document.getElementById('text').insertAdjacentHTML('beforeend', `<button onclick="viewItem('${doc.id}')">View</button>`);
+                    }
+                }
+
+            })
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+})
+
+document.getElementById('searchcancel').addEventListener('click', () => {
+    document.getElementById('searchcancel').classList.add('hide');
+    getData();
+});

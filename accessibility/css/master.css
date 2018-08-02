@@ -50,4 +50,21 @@
       right: 0;
       width: 5em; }
 
+#search {
+  cursor: pointer; }
+
+li {
+  list-style: none; }
+  li #searchcancel {
+    position: relative;
+    right: 1em;
+    top: 6px;
+    font-size: 1.6em;
+    line-height: 0.75em;
+    font-weight: bold;
+    color: #BF0000;
+    cursor: pointer; }
+    li #searchcancel:hover {
+      color: darkgrey; }
+
 /*# sourceMappingURL=master.css.map */
