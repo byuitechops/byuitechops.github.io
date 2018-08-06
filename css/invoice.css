@@ -18,3 +18,7 @@ p:last-of-type {
 .content {
     margin-bottom: 50px;
 }
+
+button {
+    padding: 0 10px;
+}
