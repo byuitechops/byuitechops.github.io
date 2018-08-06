@@ -42,7 +42,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 
 // Get Data
 function getData() {
-    db.collection("accessibility").orderBy('title').get().then((querySnapshot) => {
+    db.collection("accessibility").orderBy('title').limit(300).get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             // console.log(`${doc.id} => ${doc.data().title}`);
 
