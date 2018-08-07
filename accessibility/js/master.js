@@ -31,7 +31,7 @@ firebase.auth().onAuthStateChanged(function (user) {
                         window.location.assign('home.html');
                         document.getElementById('master').classList.remove('hide');
                     }
-                    getData(userData);
+                    getData();
                 })
             })
     } else {
@@ -40,9 +40,16 @@ firebase.auth().onAuthStateChanged(function (user) {
     }
 });
 
+var startNumber = 10;
+db.collection("accessibility").orderBy('title').limit(10).get().then(function (documentSnapshots) {
+    // Get the last visible document
+    startNumber = documentSnapshots.docs[documentSnapshots.docs.length-1];
+    console.log("last", startNumber.data());
+});
 // Get Data
 function getData() {
-    db.collection("accessibility").orderBy('title').limit(300).get().then((querySnapshot) => {
+    
+    db.collection("accessibility").orderBy('title').startAfter(startNumber).limit(10).get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             // console.log(`${doc.id} => ${doc.data().title}`);
 
@@ -62,6 +69,7 @@ function getData() {
             }
             document.getElementById('text').insertAdjacentHTML('beforeend', `<button onclick="viewItem('${doc.id}')">View</button>`);
         });
+        startNumber = querySnapshot.docs[querySnapshot.docs.length-1];
     });
 }
 

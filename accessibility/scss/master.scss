@@ -64,19 +64,22 @@
     cursor: pointer;
 }
 
-li {
+#searchcancel {
+    position: relative;
+    left: 0.5em;
+    top: 1.5px;
+    font-size: 1.6em;
+    line-height: 0.75em;
+    font-weight: bold;
+    color: #BF0000;
+    cursor: pointer;
     list-style: none;
-    #searchcancel {
-        position: relative;
-        right: 1em;
-        top: 6px;
-        font-size: 1.6em;
-        line-height: 0.75em;
-        font-weight: bold;
-        color: #BF0000;
-        cursor: pointer;
-        &:hover {
-            color: darkgrey;
-        }
+    &:hover {
+        color: darkgrey;
     }
+}
+
+#load {
+    position: relative;
+    cursor: pointer;
 }
