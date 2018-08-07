@@ -181,7 +181,8 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                     "firebaseConsole": true,
                     "canvasStyleGuide": true,
                     "totStyleGuide": true,
-                    "slack": true
+                    "slack": true,
+                    "katana": true
                 }
                 dbRefUsers.child(user).update(data);
                 loadUser();
@@ -261,7 +262,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                                 });
                                 txtCode.classList.remove('hide');
                                 submitCode.classList.remove('hide');
-                                tdrpic.classList.add('locked');
+                                tdypic.classList.add('locked');
                             }
                         }
                     }
@@ -281,7 +282,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                                 });
                                 txtCode.classList.remove('hide');
                                 submitCode.classList.remove('hide');
-                                tdrpic.classList.add('locked');
+                                tdypic.classList.add('locked');
                             }
                         }
                     }
@@ -390,7 +391,20 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                     });
                     txtCode.classList.remove('hide');
                     submitCode.classList.remove('hide');
-                    tdrpic.classList.add('locked');
+                    vimpic.classList.add('locked');
+                }
+                if (snap.katana == true) {
+                    var icon = document.getElementById('kat');
+                    icon.setAttribute('href', "http://10.5.188.114:8000/");
+                    katpic.classList.remove('locked');
+                } else {
+                    var icon = document.getElementById('kat');
+                    icon.addEventListener('click', e => {
+                        window.alert('You are blocked for training purposes. Check your email for training link');
+                    });
+                    txtCode.classList.remove('hide');
+                    submitCode.classList.remove('hide');
+                    katpic.classList.add('locked');
                 }
                 if (snap.brightspace == true) {
                     var icon = document.getElementById('bs');

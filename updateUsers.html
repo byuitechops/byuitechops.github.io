@@ -15,7 +15,7 @@
         var users = snap.val();
         for (key in users) {
             // Here is where you put the changes to the users
-            var update = '{"videoIndexing" :true}';
+            var update = '{"katana" :true}';
             update = JSON.parse(update);
             firebase.database().ref('users/' + key).update(update);
         }
