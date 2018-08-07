@@ -55,7 +55,7 @@ document.getElementById('btnLogout').addEventListener('click', function () {
 // Get Data
 function getData(userData) {
     if (userData.role == "Techops") {
-        db.collection("accessibility").where("status", "==", "Ready for Transcript").where("type", "==", "Transcript").orderBy('priority').get().then((querySnapshot) => {
+        db.collection("accessibility").where("status", "==", "Ready for Transcript").where("type", "==", "Transcript").orderBy('priority').limit(20).get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 // console.log(`${doc.id} => ${doc.data().title}`);
                 var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
@@ -65,7 +65,7 @@ function getData(userData) {
     }
 
     if (userData.role == "Copyedit") {
-        db.collection("accessibility").where("status", "==", "Ready for Review").where("type", "==", "Transcript").orderBy('priority').get().then((querySnapshot) => {
+        db.collection("accessibility").where("status", "==", "Ready for Review").where("type", "==", "Transcript").orderBy('priority').limit(20).get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 // console.log(`${doc.id} => ${doc.data().title}`);
                 var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
@@ -73,7 +73,7 @@ function getData(userData) {
             });
         });
 
-        db.collection("accessibility").where("status", "==", "Ready for Transcript").where("type", "==", "Alt Text").orderBy('priority').get().then((querySnapshot) => {
+        db.collection("accessibility").where("status", "==", "Ready for Transcript").where("type", "==", "Alt Text").orderBy('priority').limit(20).get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 // console.log(`${doc.id} => ${doc.data().title}`);
                 var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span></span><button onclick="claimItem('${doc.id}')">Claim</button>`;
