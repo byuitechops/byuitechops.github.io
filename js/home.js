@@ -382,7 +382,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                 }                
                 if (snap.videoIndexing == true) {
                     var icon = document.getElementById('vim');
-                    icon.setAttribute('href', "https://docs.google.com/spreadsheets/d/1Y8AGKis--srgbik78FwvexUj_kLDw8OpWj5bz3qKHC4/edit#gid=1128539009");
+                    icon.setAttribute('href', "https://byuitechops.github.io/accessibility/");
                     vimpic.classList.remove('locked');
                 } else {
                     var icon = document.getElementById('vim');
