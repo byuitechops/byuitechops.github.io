@@ -53,7 +53,7 @@ function resetMessage() {
 
 function getData(userData) {
     // Get Data
-    db.collection("accessibility").orderBy('priority').get()
+    db.collection("accessibility").orderBy('priority').limit(20).get()
         .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 // console.log(`${doc.id} => ${doc.data().type}`);
