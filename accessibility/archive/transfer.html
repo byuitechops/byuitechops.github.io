@@ -26,12 +26,12 @@
     db.settings(settings);
 
     // Run Function
-    // checkData();
+    checkData();
 
     function loadJSON1(callback) {
       var xobj = new XMLHttpRequest();
       xobj.overrideMimeType("application/json");
-      xobj.open('GET', 'js/transcripts.json', true);
+      xobj.open('GET', 'transcripts.json', true);
       xobj.onreadystatechange = function () {
         if (xobj.readyState == 4 && xobj.status == "200") {
           callback(JSON.parse(xobj.responseText));
@@ -43,7 +43,7 @@
     function loadJSON2(callback) {
       var xobj = new XMLHttpRequest();
       xobj.overrideMimeType("application/json");
-      xobj.open('GET', 'js/transcripts2.json', true);
+      xobj.open('GET', 'transcripts2.json', true);
       xobj.onreadystatechange = function () {
         if (xobj.readyState == 4 && xobj.status == "200") {
           var jsonreturn = xobj.responseText.replace("}, {", ",")
@@ -54,6 +54,7 @@
     }
 
     function checkData() {
+      var newDocList = [];
       var json1;
       var json2;
       loadJSON1(function (json) {
@@ -86,6 +87,7 @@
           var week;
 
           var title;
+          var num = 0;
           for (title in data) {
             // console.log(data[title]);
             copyeditor = data[title]['Stage02']['Copyeditor'].slice(data[title]['Stage02']['Copyeditor'].indexOf(
@@ -134,7 +136,7 @@
 
             // console.log(data[title]);
 
-            db.collection('accessibility').add({
+           var newDoc = {
               copyeditor: copyeditor,
               courseCode: courseCode,
               docURL: docURL,
@@ -149,16 +151,34 @@
               transcriber: transcriber,
               type: type,
               week: week
-            }).then(function (docRef) {
-              console.log('Complete');
-            }).catch(function (error) {
-              console.log(error);
-            });
+            }
+            newDocList.push(newDoc);
+
+
+            // db.collection('accessibility').add({
+            //   copyeditor: copyeditor,
+            //   courseCode: courseCode,
+            //   docURL: docURL,
+            //   lmsURL: lmsURL,
+            //   placed: placed,
+            //   priority: priority,
+            //   requestDate: requestDate,
+            //   requestor: requestor,
+            //   srcURl: srcURl,
+            //   status: status,
+            //   title: title,
+            //   transcriber: transcriber,
+            //   type: type,
+            //   week: week
+            // }).then(function (docRef) {
+            //   console.log('Complete');
+            // }).catch(function (error) {
+            //   console.log(error);
+            // });
           }
+      document.write(JSON.stringify(newDocList));
         });
       });
-
-
     }
 
     function pullFromJSON() {
