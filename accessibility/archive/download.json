@@ -924,7 +924,7 @@
     "requestor": "hannah-lora P.",
     "srcURl": "http://byu-idaho.screenstepslive.com/s/14177/m/53232/l/527464-how-to-use-discussion-boards-video",
     "status": "Ready for Transcript",
-    "title": "Search I-Learn Instructor Help GuidesDiscussion Boards Discussion SettingsHow to Use Discussion Boards (Video) How to Use Discussion Boards (Video)",
+    "title": "How to Use Discussion Boards (Video)",
     "transcriber": " ",
     "type": "Transcript",
     "week": "General Lesson Notes"
@@ -1660,7 +1660,7 @@
     "srcURl": "https://www.lds.org/general-conference/1982/04/the-gospel-the-foundation-for-our-career?lang=eng",
     "status": "Finished",
     "title": "The Gospel - The Foundation for Our Career",
-    "transcriber": "adison Risser Madison Risse",
+    "transcriber": "Madison Risser",
     "type": "Transcript",
     "week": ""
 }, {
@@ -1753,22 +1753,6 @@
     "transcriber": "Emily Dolatowski",
     "type": "Transcript",
     "week": "Lesson 12"
-}, {
-    "courseCode": "ACCTG100",
-    "lmsURL": "https://www.google.com",
-    "priority": "4",
-    "requestDate": {
-        "seconds": 1533678222,
-        "nanoseconds": 574000000
-    },
-    "requestor": "Corey Moore",
-    "srcURL": "https://www.youtube.com",
-    "status": "Ready for Transcript",
-    "title": "Test",
-    "type": "Transcript",
-    "videoHeight": "315",
-    "videoLength": "60",
-    "week": "01"
 }, {
     "copyeditor": " ",
     "courseCode": "AGBUS 105",
@@ -2291,7 +2275,7 @@
     "srcURl": "https://video.byui.edu/media/Henry+B.+Eyring++%22The+Temple+and+the+College+on+the+Hill%22/0_vjcam511/14388952",
     "status": "Finished",
     "title": "The Temple and the College on the Hill",
-    "transcriber": "adison Risser Madison Risse",
+    "transcriber": "Madison Risser",
     "type": "Transcript",
     "week": ""
 }, {
@@ -3221,7 +3205,7 @@
     "srcURl": "http://stream.byui.edu/VideoPlayer/BYUIplayer.html?StartCue=0&EndCue=5596&VideoName=Art110_Charcoal&VideoType=lectures",
     "status": "Finished",
     "title": "Shading Steps with Charcoal",
-    "transcriber": "adison Risser Madison Risse",
+    "transcriber": "Madison Risser",
     "type": "Transcript",
     "week": ""
 }, {
@@ -3326,7 +3310,7 @@
     "srcURl": "https://cdnapisec.kaltura.com/html5/html5lib/v1.9.4/mwEmbedFrame.php/p/1157612/uiconf_id/16687322/entry_id/0_anrn2321?wid=_1157612&iframeembed=true&playerId=kaltura_player&entry_id=0_anrn2321&wid=0_x6ch5frd&flashvars[mediaProtocol]=rtmp&flashvars[streamerType]=rtmp&flashvars[streamerUrl]=rtmp://www.kaltura.com:1935&flashvars[rtmpFlavors]=1&",
     "status": "Finished",
     "title": "How to Find the Floor Radiating Point for a 1 Point Perspective Room",
-    "transcriber": "adison Risser Madison Risse",
+    "transcriber": "Madison Risser",
     "type": "Transcript",
     "week": ""
 }, {
@@ -7616,7 +7600,7 @@
     "srcURl": "https://www.youtube.com/watch?v=eJOiKuVeXA0",
     "status": "Finished",
     "title": "Angle Grinders (2 of 4) - Graphic Content!",
-    "transcriber": "adison Risser Madison Risse",
+    "transcriber": "Madison Risser",
     "type": "Transcript",
     "week": "Lesson 07"
 }, {
@@ -7631,7 +7615,7 @@
     "srcURl": "https://www.youtube.com/watch?v=ECljAo1q1RQ&feature=related",
     "status": "Finished",
     "title": "Planetary Gear Set",
-    "transcriber": "adison Risser Madison Risse",
+    "transcriber": "Madison Risser",
     "type": "Transcript",
     "week": "Lesson 07"
 }, {
@@ -7826,7 +7810,7 @@
     "srcURl": "https://www.youtube.com/watch?v=hwTvNzmywFk",
     "status": "Finished",
     "title": "Jeep® Freedom Drive I™ 4WD System Explained",
-    "transcriber": "adison Risser Madison Risse",
+    "transcriber": "Madison Risser",
     "type": "Transcript",
     "week": "Lesson 02"
 }, {
@@ -8066,7 +8050,7 @@
     "srcURl": "https://www.youtube.com/watch?v=Ip6VHIWfsd4",
     "status": "Finished",
     "title": "Differential Gear",
-    "transcriber": "adison Risser Madison Risse",
+    "transcriber": "Madison Risser",
     "type": "Transcript",
     "week": "Lesson 01"
 }, {
@@ -8096,7 +8080,7 @@
     "srcURl": "https://www.youtube.com/watch?v=Ouq67Fyt5K8",
     "status": "Finished",
     "title": "How to Measure Differential Backlash",
-    "transcriber": "adison Risser Madison Risse",
+    "transcriber": "Madison Risser",
     "type": "Transcript",
     "week": "Lesson 08"
 }, {
@@ -8111,7 +8095,7 @@
     "srcURl": "https://www.youtube.com/watch?v=6BaECAbapRg",
     "status": "Finished",
     "title": "How Clutches Work",
-    "transcriber": "adison Risser Madison Risse",
+    "transcriber": "Madison Risser",
     "type": "Transcript",
     "week": ""
 }, {
@@ -8156,7 +8140,7 @@
     "srcURl": "https://www.youtube.com/watch?v=BLjoWjCrDqg&feature=pyv&ad=3285746699&kw=fire+safety",
     "status": "Finished",
     "title": "How to Use a Portable Fire Extinguisher Training Video",
-    "transcriber": "adison Risser Madison Risse",
+    "transcriber": "Madison Risser",
     "type": "Transcript",
     "week": ""
 }, {
@@ -8726,7 +8710,7 @@
     "srcURl": "https://byui.brightspace.com/content/enforced/63710-Online.Reference.AUTO132/Course%20Files/Exhaust_system.mp4?_&d2lSessionVal=aC3wSZJBbEJE6wNlq2RaI4xFX",
     "status": "Finished",
     "title": "Exhaust System",
-    "transcriber": "adison Risser Madison Risse",
+    "transcriber": "Madison Risser",
     "type": "Transcript",
     "week": "Lesson 09"
 }, {
@@ -9071,7 +9055,7 @@
     "srcURl": "https://www.ted.com/talks/dan_cobley_what_physics_taught_me_about_marketing",
     "status": "Ready for Transcript",
     "title": "What Physics Taught me About Marketing",
-    "transcriber": "adison Risser Madison Risse",
+    "transcriber": "Madison Risser",
     "type": "Transcript",
     "week": ""
 }, {
@@ -9475,7 +9459,7 @@
     "requestor": "Ian Caloobanan",
     "srcURl": "https://www.kaltura.com/index.php/extwidget/preview/partner_id/1157612/uiconf_id/33020032/entry_id/0_w097j1b0/embed/iframe?&flashvars[streamerType]=auto",
     "status": "Ready for Transcript",
-    "title": "https://www.kaltura.com/index.php/extwidget/preview/partner_id/1157612/uiconf_id/33020032/entry_id/0_w097j1b0/embed/iframe?&flashvars[streamerType]=auto",
+    "title": "Accounting Industry Outlook",
     "transcriber": " ",
     "type": "Transcript",
     "week": "Wee 04"
@@ -12535,7 +12519,7 @@
     "requestor": "Shabandoje Welechele",
     "srcURl": "https://www.youtube.com/watch?v=Y4j25Pj4JyQ",
     "status": "Ready for Transcript",
-    "title": "Harvard Business School: \"Inside the Case Method\", Part 1 of 2 (Award WInning Film)",
+    "title": "Harvard Business School: Inside the Case Method, Part 1 of 2 (Award Winning Film)",
     "transcriber": " ",
     "type": "Transcript",
     "week": "Instructor Resources"
@@ -12655,7 +12639,7 @@
     "requestor": "Christina Plank",
     "srcURl": "https://www.youtube.com/watch?v=Y4j25Pj4JyQ",
     "status": "Ready for Transcript",
-    "title": "Harvard Business School \"Inside the Case Method\", Part 1 of 2 (Award WInning Film)",
+    "title": "Harvard Business School Inside the Case Method, Part 1 of 2 (Award Winning Film)",
     "transcriber": " ",
     "type": "Transcript",
     "week": "Lesson 08"
@@ -12790,7 +12774,7 @@
     "requestor": "Shabandoje Welechele",
     "srcURl": "https://www.youtube.com/watch?v=7wCdU2NiyEI",
     "status": "Ready for Transcript",
-    "title": "Americaâ€™s Best Lemonade Stand",
+    "title": "America's Best Lemonade Stand",
     "transcriber": " ",
     "type": "Transcript",
     "week": "Lesson 02"
@@ -28780,7 +28764,7 @@
     "requestor": "hannahlora powelson",
     "srcURl": "https://www.youtube.com/watch?time_continue=2&v=Dz9BzY21Zks",
     "status": "Ready for Transcript",
-    "title": "Rachel Andrew 49:09 Grid CSS Responsive Website Layout - \"Mobile First\" Design Traversy Media 81K views 21:20 CSS Grid: Moving From CSS Frameworks To CSS Grid (2018 and beyond) Coding Tech 38K views 9:02 Incredibly Easy Layouts with CSS Grid Layout Land 22K views 8:42 Provo Missionary Training Center Tour Mormon Newsroom Recommended for you 3:00 Grid by Example: the fr unit Rachel Andrew 26K views 4:18 Flexbox vs. CSS Grid â€” Which is Better? Layout Land 16K views 16:00 How to create a grid layout - CSS Grid Tutorial #1 Isaac Asante 158 views Grid Areas Explained (with Examples) - CSS Grid Tutorial #4 Isaac Asante 93 views Learn the basics of CSS Grid with this fun experiment ZURB 31K views No Sex Marriage â€“ Masturbation, Loneliness, Cheating and Shame | Maureen McGrath | TEDxStanleyPark TEDx Talks Recommended for you CSS Grid Layout - A [Quick] Overview Ady Ngom 411 views Layout with grid-auto-rows property - CSS Grid Tutorial #10 Isaac Asante 118 views Flexbox + Grid Together = Easy Gallery Layout Layout Land 8.2K views How to create website layouts using CSS grid SPIDER WEB TECH TECH 656 views INTO THE WEEDS OF CSS LAYOUT Coding Tech 7.9K views Grid by Example: Defining a Grid",
+    "title": "Grid by Example: Defining a Grid",
     "transcriber": " ",
     "type": "Transcript",
     "week": "W07"
@@ -31460,15 +31444,15 @@
     "type": "Transcript",
     "week": "Week 07"
 }, {
-    "copyeditor": "isual Communications Visual Communication",
+    "copyeditor": "Murphey, Megan",
     "courseCode": "COMM 130",
     "docURL": "https://docs.google.com/document/d/17yUf5PdDRFNb_i4pSBmoaZjf5ux1BUqoRDi6fEfNV-A/edit",
-    "lmsURL": "https://youtu.be/2snNE-Aze1o",
+    "lmsURL": "",
     "placed": false,
     "priority": "1",
     "requestDate": "5/11/2017",
     "requestor": "Shelleen Ockler",
-    "srcURl": "Murphey, Megan",
+    "srcURl": "https://youtu.be/2snNE-Aze1o",
     "status": "Ready for Transcript",
     "title": "InDesign Background Colors",
     "transcriber": "Sierra Gervasi",
@@ -36375,7 +36359,7 @@
     "requestor": "Logan Jenkins",
     "srcURl": "https://www.youtube.com/watch?v=miMRNYd8kHE",
     "status": "Ready for Transcript",
-    "title": "Alphabet 2018 Q1 Earnings Call Alphabet Investor Relations 2.5K watching LIVE NOW 10:08 LUCKIEST KILLS *EVER!* Overwatch Funny & Epic Moments 462 Dabacabb Recommended for you New HAVE YOU SEEN FLOODED TILTED TOWERS YET!? *NEW* Fortnite Funny Fails & WTF Moments Fortnite Majesty 681 watching LIVE NOW 6:49 BEST OVERWATCH COSPLAY SkyLocker - Gaming & More Recommended for you 10:13 WORLD'S *BEST* GENJI VS WIDOW DUEL! Overwatch Funny & Epic Moments 448 Dabacabb Recommended for you 10:04 SECRET JUNKRAT GLITCH! Overwatch Funny & Epic Moments 460 Dabacabb Recommended for you New SEXY SEXTUPLES! Overwatch Funny & Epic Moments 455 Dabacabb Recommended for you New Overwatch - Hacker Uses PVE Heroes in Competitive!! (gameplay) ohnickel Recommended for you New Analyzing Full-Wave Rectifiers K7RXF 25K views LIVE NASA BR / PLANETA TERRA VISTO DO ESPAÃ‡O (OFICIAL)â„¢ ASTRONOMY SPACE & UNIVERSE 201 watching LIVE NOW Transformers K7RXF 157 views Chillstep 24/7 Livestream | Chill, Ambient & Study Music ðŸŽ§ MixHound 1K watching LIVE NOW Conventional Current K7RXF 164 views Diode Models K7RXF 6.4K views Analyzing Half-Wave Rectifiers K7RXF 5.8K views CS 308 How to Make Your Resume More Effective",
+    "title": "CS 308 How to Make Your Resume More Effective",
     "transcriber": " ",
     "type": "Transcript",
     "week": "W03 Study: 3.1 RÃ©sumÃ©s"
@@ -37216,7 +37200,7 @@
     "srcURl": "https://www.youtube.com/watch?v=mpGzWjIFUrQ",
     "status": "Finished",
     "title": "Sensory Sensitivity and Hypersensitivity",
-    "transcriber": "adison Risser Madison Risse",
+    "transcriber": "Madison Risser",
     "type": "Transcript",
     "week": ""
 }, {
@@ -37276,7 +37260,7 @@
     "srcURl": "https://www.youtube.com/watch?v=caqArCtYjSU",
     "status": "Finished",
     "title": "ECSE intro",
-    "transcriber": "adison Risser Madison Risse",
+    "transcriber": "Madison Risser",
     "type": "Transcript",
     "week": "Lesson 8"
 }, {
@@ -37396,7 +37380,7 @@
     "srcURl": "https://youtu.be/FU3dGQWZzx8",
     "status": "Finished",
     "title": "The IEP Process Made Simple",
-    "transcriber": "adison Risser Madison Risse",
+    "transcriber": "Madison Risser",
     "type": "Transcript",
     "week": "Lesson 06"
 }, {
@@ -40110,7 +40094,7 @@
     "requestor": "Ian Caloobanan",
     "srcURl": "https://www.youtube.com/watch?v=kWTCQMSpNSY",
     "status": "Ready for Transcript",
-    "title": "2:32 Mad Sombra Chase - Overwatch x Teen Titans animation LZbros Recommended for you New 6:30 Globalization & HR: Certain Uncertainty studyofwork Recommended for you 5:53 Overwatch | Everything You NEED To Know for Season 10 Overwatch Central Recommended for you New 12:24 A Day in the Life of a Harvard Computer Science Student John Fish Recommended for you 4:40 Online Courses at BYU-Idaho Austin Shurtliff 922 views 3:45 Ylvis - The Fox (What Does The Fox Say?) [Official music video HD] TVNorge 748M views 9:38 Carol Dweck, \"Developing a Growth Mindset\" Stanford Alumni 617K views BYU-Idaho: Pathway Program BYU-Idaho 8.5K views Streamer Showdown #25 Overwatch Edition (feat. xQc, Calvin, Mendokusaii, ZP) ChanmanV Recommended for you New The Duck Song forrestfire101 Recommended for you TYPICAL PEOPLE OF BYUI Joshua Silva 3K views 2014: Ask An Upperclassman: Academics Stanford NSO 3.2K views Sara Bareilles - Brave SaraBareillesVEVO 77M views BYU Dating Jon Howe 3.2K views All Of Me - John Legend & Lindsey Stirling Lindsey Stirling 98M views Student Orientation",
+    "title": "Student Orientation",
     "transcriber": " ",
     "type": "Transcript",
     "week": "Week 01"
@@ -41599,22 +41583,7 @@
     "transcriber": "Albree Joy",
     "type": "Transcript",
     "week": "Lesson 01"
-}, {
-    "copyeditor": " ",
-    "courseCode": "FAML 100",
-    "docURL": "",
-    "lmsURL": "https://byui.instructure.com/courses/10845/pages/w01-page-study-the-family-a-proclamation-to-the-world?module_item_id=582266",
-    "placed": false,
-    "priority": "3",
-    "requestDate": "4/9/2018 14:23:08",
-    "requestor": "Test User",
-    "srcURl": "http://www.pewforum.org/2015/06/26/same-sex-mar",
-    "status": "Ready for Review",
-    "title": "Test Video 2",
-    "transcriber": "Zoe Miner",
-    "type": "Transcript",
-    "week": "Week 01"
-}, {
+},  {
     "copyeditor": " ",
     "courseCode": "FAML 100",
     "docURL": "https://docs.google.com/document/d/1aV05a6XX4jyHvMWgLXGW-Wh8XyWwl4wN-OIGJvwqQuc/edit?usp=sharing",
@@ -43534,22 +43503,7 @@
     "transcriber": "Ian Caloobanan",
     "type": "Transcript",
     "week": ""
-}, {
-    "copyeditor": "Courtney Dunaway",
-    "courseCode": "FAML 460",
-    "docURL": "https://docs.google.com/a/byui.edu/document/d/1CjbcmKPpd7HMPUD1M66iJ0q5_TYv5SpBrhmqk6W-P3Y/edit?usp=sharing",
-    "lmsURL": "https://byui.brightspace.com/d2l/le/content/16173/viewContent/231253/View",
-    "placed": false,
-    "priority": "2",
-    "requestDate": "3/27/2017",
-    "requestor": "Test User",
-    "srcURl": "https://www.youtube.com/watch?v=RIOiaNCBER8",
-    "status": "Finished",
-    "title": "Test Video",
-    "transcriber": "Zoe Miner",
-    "type": "Transcript",
-    "week": "Lesson 09"
-}, {
+},  {
     "copyeditor": "Josie Keim",
     "courseCode": "FAML 460",
     "docURL": "https://docs.google.com/a/byui.edu/document/d/1-dXYSsRFguLNbaL8xLuEL347yrJRF0DpIA5f3OCqXX8/edit?usp=sharing",
@@ -43710,7 +43664,7 @@
     "requestor": "Taylor Wanlass",
     "srcURl": "https://video.byui.edu/media/%22In+Memory+of+Our+God%2C+Religion%2C+Freedom%2C+Peace%2C+Wives+and+Children%22/0_c4b5dquw",
     "status": "Finished",
-    "title": "In Memory of Our God, Religion, Freedom, Peace, Wives and Children; National Geographic Makes History With New Gender Issue - MSNBC; Merck & Company; Aquabounty; Diet Coke: “Economy Class",
+    "title": "In Memory of Our God, Religion, Freedom, Peace, Wives and Children",
     "transcriber": "Amanda Soon",
     "type": "Transcript",
     "week": ""
@@ -43771,7 +43725,7 @@
     "srcURl": "https://www.youtube.com/watch?v=DJElx9BoI9g",
     "status": "Finished",
     "title": "Understand the Doctrine of Marriage",
-    "transcriber": "adison Risser Madison Risse",
+    "transcriber": "Madison Risser",
     "type": "Transcript",
     "week": "Lesson 02"
 }, {
@@ -44356,7 +44310,7 @@
     "srcURl": "https://www.kaltura.com/index.php/extwidget/preview/partner_id/1157612/uiconf_id/33020032/entry_id/0_lsszp2qd/embed/iframe?&flashvars[streamerType]=auto",
     "status": "Finished",
     "title": "FCS_207_Manual_Buttonhole",
-    "transcriber": "adison Risser Madison Risse",
+    "transcriber": "Madison Risser",
     "type": "Transcript",
     "week": ""
 }, {
@@ -45405,7 +45359,7 @@
     "requestor": "hannahlora powelson ",
     "srcURl": "https://www.youtube.com/watch?time_continue=1&v=aQIzNXDdPik",
     "status": "Ready for Transcript",
-    "title": "Sing Sing Sing ",
+    "title": "Sing Sing Sing",
     "transcriber": " ",
     "type": "Transcript",
     "week": "week 02"
@@ -45660,7 +45614,7 @@
     "requestor": "hannahlora powelson ",
     "srcURl": "https://www.youtube.com/watch?time_continue=2&v=r2S1I_ien6A",
     "status": "Ready for Transcript",
-    "title": "\"SING, SING, SING\" BY BENNY GOODMAN",
+    "title": "SING, SING, SING BY BENNY GOODMAN",
     "transcriber": " ",
     "type": "Transcript",
     "week": "week 08"
@@ -49845,7 +49799,7 @@
     "requestor": "Logan Jenkins",
     "srcURl": "https://www.youtube.com/watch?v=TTNgV0O_oTg",
     "status": "Ready for Transcript",
-    "title": "1:01 Dog of Wisdom Joe Recommended for you 11:01 How Cloud Computing Works ovp 286K views 3:12 What is The Cloud? A Basic Overview | Mashable Explains Mashable 41K views 4:52 Cloud Computing (in Plain English) clouddistribution 217K views 2:06 Cloud Computing Best Animation Fahai Media 173K views 4:52 What are the Business Benefits of Cloud Computing, IaaS, PaaS and SaaS? Macquarie Telecom Group 178K views 1:06 WOOF Markiplier Recommended for you What is \"The Cloud\" as Fast As Possible Techquickie 239K views Cloud Computing Services Models - IaaS PaaS SaaS Explained Ecourse Review 164K views Cloud Computing Explained GSA (General Services Administration) 89K views Introduction to Cloud Computing Eli the Computer Guy 1.1M views Cloud Computing Defined Wolters Kluwer 22K views How It Works: Cloud Security IBM Think Academy 89K views What is Cloud Computing? - Amazon Web Services Amazon Web Services 390K views Cloud Computing in 90 Seconds! | National Geographic National Geographic 64K views Cloud Computing - How it all works",
+    "title": "Cloud Computing - How it all works",
     "transcriber": " ",
     "type": "Transcript",
     "week": "Pages> create and upload a document to a cloud service"
@@ -50685,7 +50639,7 @@
     "requestor": "Tami Olson",
     "srcURl": "https://www.youtube.com/watch?time_continue=2&v=MdFkg1FiaUk",
     "status": "Ready for Transcript",
-    "title": "8:28 Real EnglishÂ® 24a Subtitled - \"What do you do for a living?\" Job - CC-Double Real EnglishÂ® 135K views 5:49 Real EnglishÂ® - 3 b - What's your name? Can you spell it? Where are you from? - 2011 Update. Real EnglishÂ® 395K views 83 Listening for beginner TOEIC CHANNELS 10:03 Skillopedia - 4 tips to host an effective conference call ( Telephone skills & Soft skills video) Skillopedia - Skills for the real world 49K views 41:02 Hannah - Teaching English as a Foreign Language, Beijing. Hannah Sophia Elliott Recommended for you 10:22 Lesson 1 - Speak English Clearly! The Imitation Technique mmmEnglish 4.9M views 5:50 Teaching Grammar with Board Races - TEFL ESL BridgeTEFL Recommended for you 17:45 The Power Learning Podcast - 1 - The Problem with Language Forums - Learn Advanced English Podcast EnglishAnyone 287K views 3:51 Real English 24a - What's your job? What do you do? For Intermediate students - With Subtitles Michael Marzio 62K views Beginner Levels - Learn English through Oxford English video Learn English with English7Levels Recommended for you The Pizza Game EZ PZ ESL English Learning Recommended for you 5 Minute English | 5 Tips to Improve English Fluency English Outside the Box 2.2K views Mass and weight clarification | Centripetal force and gravitation | Physics | Khan Academy Khan Academy Recommended for you Learning English â€“ Spoken English Pronunciation of the Most Common English Words Rachel's English 94K views Life in the UK Test E-learning screencast GarudaPublications 263 views ðŸ˜± 9 Grammar Mistakes Native English Speakers Make OLA English with Greg 2.6K views Learn English in 90 minutes - The Best of 2017 Learn English with EnglishClass101.com Recommended for you Let's Talk in English DVD3_1.asf admin53993 218K views Screencast demonstrating Real EnglishÂ® Mobile",
+    "title": "Screencast demonstrating Real English® Mobile",
     "transcriber": " ",
     "type": "Transcript",
     "week": "week 12"
@@ -52815,7 +52769,7 @@
     "requestor": "Madison Risser",
     "srcURl": "https://www.youtube.com/watch?v=9XOCSUwcfX0",
     "status": "Ready for Transcript",
-    "title": "Analysis of negotiation scenes \"The Dark Night\": Batman, by Matahari Kesadarn",
+    "title": "Analysis of negotiation scenes The Dark Night: Batman, by Matahari Kesadarn",
     "transcriber": " ",
     "type": "Transcript",
     "week": "Lesson 10"
@@ -52920,7 +52874,7 @@
     "requestor": "Madison Risser",
     "srcURl": "https://www.youtube.com/watch?v=9XOCSUwcfX0",
     "status": "Ready for Transcript",
-    "title": "Analysis of negotiation scenes \"The Dark Night\" Batman, by Matahari Kesadarn",
+    "title": "Analysis of negotiation scenes The Dark Night Batman, by Matahari Kesadarn",
     "transcriber": " ",
     "type": "Transcript",
     "week": "Lesson 10"
@@ -53386,7 +53340,7 @@
     "srcURl": "https://www.youtube.com/watch?v=KDUkA1_DNo4",
     "status": "Finished",
     "title": "Cause and Effect Diagram HD",
-    "transcriber": "adison Risser Madison Risse",
+    "transcriber": "Madison Risser",
     "type": "Transcript",
     "week": ""
 }, {
@@ -72987,7 +72941,7 @@
     "placed": false,
     "priority": "2",
     "requestDate": "5/8/2018 16:10:22",
-    "requestor": "https://byui.instructure.com/courses/11727/pages/w03-activitytype-preparation-and-quiz?module_item_id=703554",
+    "requestor": "",
     "srcURl": "https://www.eatright.org/food/nutrition/nutrition-facts-and-food-labels/understanding-the-new-nutrition-facts-label",
     "status": "Ready for Transcript",
     "title": "Understanding the New Nutrition Facts Label",
@@ -74326,7 +74280,7 @@
     "srcURl": "https://video.byui.edu/media/0_dnou360t",
     "status": "Finished",
     "title": "Online PH 105 Lesson 5 b",
-    "transcriber": "adison Risser Madison Risse",
+    "transcriber": "Madison Risser",
     "type": "Transcript",
     "week": ""
 }, {
@@ -74581,7 +74535,7 @@
     "srcURl": "https://video.byui.edu/media/0_2ne3g7tq",
     "status": "Ready for Transcript",
     "title": "Online PH 105 Lesson 8 a",
-    "transcriber": "adison Risser Madison Risse",
+    "transcriber": "Madison Risser",
     "type": "Transcript",
     "week": ""
 }, {
@@ -77790,7 +77744,7 @@
     "requestor": "Tami Olson",
     "srcURl": "https://www.youtube.com/watch?v=oQhbZvw7iF8",
     "status": "Ready for Transcript",
-    "title": "We Ask Kids How Trump is Doing Jimmy Kimmel Live Recommended for you Rewrite The Stars (from The Greatest Showman Soundtrack) [Official Audio] Atlantic Records Recommended for you aha moment defined myahamoment 9.6K views Twilight Bella finds out edward is a vampire with greek subs 011scofield Recommended for you One Of My Favorite Scene Of NEW MOON - Jane - \"Pain\" EnÃ¡gio AraÃºjo Recommended for you The Greatest Showman | \"From Now On\" with Hugh Jackman | 20th Century FOX 20th Century Fox Recommended for you The Greatest Showman | \"This Is Me\" with Keala Settle | 20th Century FOX 20th Century Fox Recommended for you TTSE3 Proposal mynameisLOVEYOU Recommended for you This Is Me (from The Greatest Showman Soundtrack) [Official Audio] Atlantic Records Recommended for you Oprah's Forgiveness Aha! Moment | Oprah's Life Class | Oprah Winfrey Network OWN 382K views Aha Moment Signpost Introduction ClassHoeven 4.9K views Brad Newman's customer aha moment rev11 4 16 myahamoment 14 views Preston Brown's customer aha moment myahamoment 90 views Pat Giovacchini's business aha Moment myahamoment 32 views Steven White's business aha moment myahamoment 78 views Cyndee, Pat, Kelli & Yvonne in Denver: 2015 Aha Moment Tour",
+    "title": "Cyndee, Pat, Kelli & Yvonne in Denver: 2015 Aha Moment Tour",
     "transcriber": " ",
     "type": "Transcript",
     "week": "Week 10"
@@ -79235,7 +79189,7 @@
     "requestor": "",
     "srcURl": "",
     "status": "Ready for Transcript",
-    "title": " Think Socially Identifying Opportunities for Value-Driving Social Media Marketing ",
+    "title": "Think Socially Identifying Opportunities for Value-Driving Social Media Marketing",
     "transcriber": " ",
     "type": "Transcript",
     "week": ""
@@ -83570,7 +83524,7 @@
     "requestor": "Ian Caloobanan",
     "srcURl": "http://byui.kanopystreaming.com.byui.idm.oclc.org/playlist/446096",
     "status": "Ready for Review",
-    "title": "Clip 1 –An Introduction to Differentiation, Clip 2–What is Differentiation, Clip 3–The teacher's perception of students and learning, Clip 4–Curriculum, Clip 5–An Example of How to Differentiate Curriculum for Students, Clip 6–Alignment of Learning Goals, Clip 7–Assessment before, during, and after learning, Clip 8–Attending to student readiness and willingness, Clip 9–Final Thoughts on Differentiation",
+    "title": "An Introduction to Differentiation",
     "transcriber": "Landon Howe",
     "type": "Transcript",
     "week": ""
@@ -85415,7 +85369,7 @@
     "requestor": "Connor Grimmer",
     "srcURl": "https://www.youtube.com/watch?v=lUlQKKbRZ9g",
     "status": "Ready for Transcript",
-    "title": "Diana Scarborough 5:06 Nuggets Filmbilder Recommended for you 7:58 Levels of Proficiency in a Foreign Language Steve Kaufmann - lingosteve 21K views 9:14 The Secret To Passing Any English Writing Proficiency Exam Priscilla Akpaita 43K views 17:05 How to learn any language easily | Matthew Youlden | TEDxClapham TEDx Talks 1.4M views 1:38 Spanish Speaking Intermediate 1 ACTFL 10K views 2:59 ACTFL Proficiency Levels Helena CastaÃ±Ã³n-Vargas 3K views 1:43 ACTFL Can-Do Statements Overview Thymai Dong 362 views FLT 808 - ACTFL OPI Stephanie Bennett 355 views My Language Books Rob Hofmann 3.5K views Are You Ready for the Oral Proficiency Exam? CrazyAboutEnglish 35K views Asking and Answering Questions in Spanish, Part 1: Overview of Spanish Oral Proficiency Interviews Professor Jason 166K views Singularity [Speaking Distinguished] ACTFL 10K views French Speaking Novice 1 ACTFL 5K views French Speaking Advanced 5 ACTFL 15K views Effective Lesson Planning & Design bethanynah 6.8K views Listâ€”Foods and Colors [Speaking Novice]",
+    "title": "List—Foods and Colors [Speaking Novice]",
     "transcriber": " ",
     "type": "Transcript",
     "week": "Week 06"
@@ -85460,7 +85414,7 @@
     "requestor": "Connor Grimmer",
     "srcURl": "https://www.youtube.com/watch?v=JGk9NKuT10s",
     "status": "Ready for Transcript",
-    "title": "17:05 How to learn any language easily | Matthew Youlden | TEDxClapham TEDx Talks 1.4M views 1:22 English girl speaking in French (B1/B2 level, 95% self-taught) Aurella 81K views 1:32 Follow Up For More Information [Speaking Advanced] ACTFL 5.8K views 17 ACTFL proficiency samples Diana Scarborough Create With Language-A Typical Day [Speaking Intermediate] ACTFL 19K views What are the differences between language proficiency levels? CanadianLinguist 17K views English Language Learner Interview Brooke Bouthillier 7.7K views Learn English Listening Skills - How to understand native English speakers Anglo-Link 10M views 7 body language tips to impress at your next job interview Cognitive Group Microsoft Talent Solutions 720K views LBCC - Memory Tricks LongBeachCityCollege 1M views How to Do a Presentation - 5 Steps to a Killer Opener Rule The Room 3.6M views IELTS Speaking test (Band 8.5 - 9.0) - Sample 1 Ã‚n Huá»³nh 2.8M views Cambridge English: Key for Schools, Sharissa and Jannis Cambridge English 1M views Tongue Exercises 1 (Pronunciation Practice) James Pritchard 443K views How to open and close presentations? - Presentation lesson from Mark Powell Cambridge University Press ELT 2M views Teen Speaks Over 20 Languages THNKR 7.1M views Moving from Intermediate to Advanced in a Second Language dychui 19K views How To Have Better Communication Skills Videojug 482K views Beginner Levels - Lesson 1: Nice To Meet You! English For You 6.2M views Communicate Minimally on Highly Predictable Topics [Speaking Novice]",
+    "title": "Communicate Minimally on Highly Predictable Topics [Speaking Novice]",
     "transcriber": " ",
     "type": "Transcript",
     "week": "Week 06"
@@ -87878,7 +87832,7 @@
     "title": "CONST380 - Lesson 5 - Submittals, Samples and Shop Drawings",
     "transcriber": " ",
     "type": "Transcript",
-    "week": "Lesson 05 > Submittals, Samples, and Shop Drawings Slideshow > \"Submittals, Samples, and Shop Drawings Slideshow\""
+    "week": "Lesson 05 > Submittals, Samples, and Shop Drawings Slideshow > Submittals, Samples, and Shop Drawings Slideshow"
 }, {
     "copyeditor": " ",
     "courseCode": "const 380",
@@ -88869,7 +88823,7 @@
     "requestor": "Ellen Panek",
     "srcURl": "https://players.brightcove.net/1699278547001/BJSGCb8Y_default/index.html?videoId=5727547306001",
     "status": "Ready for Transcript",
-    "title": "Forecast Next Weekâ€™s Statistics",
+    "title": "Forecast Next Week's Statistics",
     "transcriber": " ",
     "type": "Transcript",
     "week": "Week 07"
@@ -88980,21 +88934,6 @@
     "week": "Week 07"
 }, {
     "copyeditor": " ",
-    "courseCode": "sdfg",
-    "docURL": "",
-    "lmsURL": "https://docs.google.com/forms/d/e/1FAIpQLSdVrG_6Edu9CFgpV0rs5doJ8tzn_T_KNk-ezNBZWbudz8b4Cg/viewform",
-    "placed": false,
-    "priority": "4",
-    "requestDate": "",
-    "requestor": "qwerty",
-    "srcURl": "https://docs.google.com/forms/d/e/1FAIpQLSdVrG_6Edu9CFgpV0rs5doJ8tzn_T_KNk-ezNBZWbudz8b4Cg/viewform",
-    "status": "Ready for Transcript",
-    "title": "de wae",
-    "transcriber": " ",
-    "type": "Transcript",
-    "week": "lol"
-}, {
-    "copyeditor": " ",
     "courseCode": "soc 111",
     "docURL": "",
     "lmsURL": "https://byui.instructure.com/courses/11712/pages/w10-activitytype-video-discussion-instructions",
@@ -89008,19 +88947,4 @@
     "transcriber": " ",
     "type": "Transcript",
     "week": "Week 10"
-}, {
-    "copyeditor": " ",
-    "courseCode": "test101",
-    "docURL": "",
-    "lmsURL": "http://www.test.com",
-    "placed": false,
-    "priority": "1",
-    "requestDate": "",
-    "requestor": "Seth Farr",
-    "srcURl": "http://www.test.com",
-    "status": "Ready for Transcript",
-    "title": "test",
-    "transcriber": " ",
-    "type": "Transcript",
-    "week": "L9001"
 }]

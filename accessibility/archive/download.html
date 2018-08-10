@@ -26,11 +26,11 @@
         db.settings(settings);
 
         function downloadFromDB() {
-            db.collection("accessibility").orderBy('courseCode').orderBy('title').get().then((querySnapshot) => {
+            db.collection("accessibility").orderBy('srcURl').orderBy('title').limit(2).get().then((querySnapshot) => {
                 var array = [];
                 querySnapshot.forEach((doc) => {
                     array.push(doc.data());
-                    console.log("Complete");
+                    console.log(doc.data());
                 });
                 document.write(JSON.stringify(array));
             });
@@ -47,7 +47,7 @@
             };
             xobj.send(null);
         }
-        convertData();
+        // convertData();
 
         function convertData() {
             loadJSON1(function (array) {
@@ -56,32 +56,44 @@
                 for (var i = 0; i < array.length; i++) {
                     if (array[i]['copyeditor'] == undefined) {
                         array[i]['copyeditor'] = "";
+                    } else if (array[i]['copyeditor'].includes(',')) {
+                        array[i]['copyeditor'] = `"${array[i]['copyeditor']}"`;
                     }
 
                     if (array[i]['courseCode'] == undefined) {
                         array[i]['courseCode'] = "";
                     } else if (array[i]['courseCode'].includes(',')) {
-                        array[i]['courseCode'] = array[i]['courseCode'].replace(/,/g, '');
+                        array[i]['courseCode'] = `"${array[i]['courseCode']}"`;
                     }
 
                     if (array[i]['docURL'] == undefined) {
                         array[i]['docURL'] = "";
+                    } else if (array[i]['docURL'].includes(',')) {
+                        array[i]['docURL'] = `"${array[i]['docURL']}"`;
                     }
 
                     if (array[i]['lmsURL'] == undefined || array[i]['lmsURl'] == undefined) {
                         array[i]['lmsURL'] = "";
+                    } else if (array[i]['lmsURL'].includes(',')) {
+                        array[i]['lmsURL'] = `"${array[i]['lmsURL']}"`;
                     }
                     if (array[i]['placed'] == undefined) {
                         array[i]['placed'] = false;
                     }
                     if (array[i]['priority'] == undefined) {
                         array[i]['priority'] = "";
+                    } else if (array[i]['priority'].includes(',')) {
+                        array[i]['priority'] = `"${array[i]['priority']}"`;
                     }
                     if (array[i]['requestDate'] == undefined) {
                         array[i]['requestDate'] = "";
+                    } else if (typeof array[i]['requestDate'] == "object") {
+                        array[i]['requestDate'] = Date(array[i]['requestDate']['nanoseconds']);
                     }
                     if (array[i]['requestor'] == undefined) {
                         array[i]['requestor'] = "";
+                    } else if (array[i]['requestor'].includes(',')) {
+                        array[i]['requestor'] = `"${array[i]['requestor']}"`;
                     }
                     if (array[i]['srcURl'] == undefined) {
                         array[i]['srcURL'] = "";
@@ -89,31 +101,38 @@
                         array[i]['srcURL'] = array[i]['srcURl'];
                         delete array[i]['srcURl'];
                         if (array[i]['srcURL'].includes(',')) {
-                        array[i]['srcURL'] = array[i]['srcURL'].replace(/,/g, '\,');
+                        array[i]['srcURL'] = `"${array[i]['srcURL']}"`;
                         }
                     }
                     if (array[i]['status'] == undefined) {
                         array[i]['status'] = "";
+                    } else if (array[i]['status'].includes(',')) {
+                        array[i]['status'] = `"${array[i]['status']}"`;
                     }
                     if (array[i]['title'] == undefined) {
                         array[i]['title'] = "";
                     } else if (array[i]['title'].includes(',')) {
-                        array[i]['title'] = array[i]['title'].replace(/,/g, '');
+                        array[i]['title'] = `"${array[i]['title']}"`;
                     }
                     if (array[i]['transcriber'] == undefined) {
                         array[i]['transcriber'] = "";
+                    } else if (array[i]['transcriber'].includes(',')) {
+                        array[i]['transcriber'] = `"${array[i]['transcriber']}"`;
                     }
                     if (array[i]['type'] == undefined) {
                         array[i]['type'] = "";
+                    } else if (array[i]['type'].includes(',')) {
+                        array[i]['type'] = `"${array[i]['type']}"`;
                     }
                     if (array[i]['week'] == undefined) {
                         array[i]['week'] = "";
+                    }else if (array[i]['week'].includes(',')) {
+                        array[i]['week'] = `"${array[i]['week']}"`;
                     }
                     let row =
-                        `${array[i]['courseCode']}, ${array[i]['title']}, ${array[i]['priority']}, ${array[i]['status']}, ${array[i]['srcURL']}, ${array[i]['docURL']}, ${array[i]['lmsURL']}, ${array[i]['transcriber']}, ${array[i]['copyeditor']}, ${array[i]['placed']}, ${array[i]['type']}, ${array[i]['week']}, ${array[i]['requestor']}, ${array[i]['requestDate']}`;
+                        `${array[i]['courseCode']},${array[i]['title']},${array[i]['priority']},${array[i]['status']},${array[i]['srcURL']},${array[i]['docURL']},${array[i]['lmsURL']},${array[i]['transcriber']},${array[i]['copyeditor']},${array[i]['placed']},${array[i]['type']},${array[i]['week']},${array[i]['requestor']},${array[i]['requestDate']}`;
                     csvContent += row + "\r\n";
                 }
-                console.log(array[1249]);
                 var encodedUri = encodeURI(csvContent);
                 var link = document.createElement("a");
                 link.setAttribute("href", encodedUri);
