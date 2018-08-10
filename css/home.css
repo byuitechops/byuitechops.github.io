@@ -3,17 +3,17 @@
 }
 
 #showclocked {
-    text-align: left;
     font-size: 1em;
-    width: 50%;
     text-align: center;
+    display: inline-block;
+    margin: 0 55px 0 35px;
 }
 
 #showbreak {
-    text-align: left;
     font-size: 1em;
-    width: 50%;
     text-align: center;
+    display: inline-block;
+    margin: 0;
 }
 
 button {

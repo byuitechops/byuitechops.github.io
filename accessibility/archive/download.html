@@ -89,7 +89,7 @@
                         array[i]['srcURL'] = array[i]['srcURl'];
                         delete array[i]['srcURl'];
                         if (array[i]['srcURL'].includes(',')) {
-                            array[i]['srcURL'] = `"${array[i]['srcURL']}"`;
+                        array[i]['srcURL'] = array[i]['srcURL'].replace(/,/g, '\,');
                         }
                     }
                     if (array[i]['status'] == undefined) {

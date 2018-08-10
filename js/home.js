@@ -710,7 +710,6 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
             };
             dbRefUsers.child(user).child('TimeClock').update(breakdata);
             ref.child(breakkey).update(data);
-            document.getElementById('showbreak').innerHTML = time;
             isBreak();
             clearTime();
         });
@@ -720,17 +719,21 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
             var breakIn = document.getElementById('breakIn');
             var breaks;
             dbRefUsers.child(user).child('TimeClock').child('break').on('value', snap => {
+                var breakkey;
+                dbRefUsers.child(user).child('TimeClock/breakkey').once('value', snap => {
+                    breakkey = snap.val();
+                });
                 if (snap.val()) {
-                    var breakkey;
-                    dbRefUsers.child(user).child('TimeClock/breakkey').once('value', snap => {
-                        breakkey = snap.val();
-                    });
                     showTime();
                     breakOut.classList.add('hide');
                     breakIn.classList.remove('hide');
+                    document.getElementById('showbreak').innerHTML = ``;
                 } else {
                     breakOut.classList.remove('hide');
                     breakIn.classList.add('hide');
+                    dbRefUsers.child(user).child('TimeClock/Breaks').child(breakkey).child('Out').on('value', snap => {
+                        document.getElementById('showbreak').innerHTML = `Last Break Ended: ${snap.val()}`;
+                    })
                 }
             });
         }
