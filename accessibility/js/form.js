@@ -100,7 +100,8 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
                 status: 'Ready for Transcript',
                 srcURL: srcURL,
                 videoLength: videoLength,
-                videoHeight: videoHeight
+                videoHeight: videoHeight,
+                placed: false
             }
         }
 

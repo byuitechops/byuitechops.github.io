@@ -710,6 +710,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
             };
             dbRefUsers.child(user).child('TimeClock').update(breakdata);
             ref.child(breakkey).update(data);
+            document.getElementById('showbreak').innerHTML = time;
             isBreak();
             clearTime();
         });
