@@ -22,7 +22,7 @@
                     var titles;
                     var shot = snap.val();
                     for (titles in shot) {
-                        if (titles == 'Admin') {
+                        if (titles == 'Admin' || titles == 'TeamLead') {
                             // Check if admin
                             if (shot[titles] == true) {
                                 // Show dropdown for teams
