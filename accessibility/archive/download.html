@@ -47,12 +47,12 @@
             };
             xobj.send(null);
         }
-        // convertData();
+        convertData();
 
         function convertData() {
             loadJSON1(function (array) {
                 let csvContent =
-                    "data:text/csv;charset=utf-8, Course Code, Title, Priority, Status, SrcURL, DocURL, LmsURL, Transcriber, Copyeditor, Placed, Type, Week, Requestor, Request Date\n";
+                    "Course Code, Title, Priority, Status, SrcURL, DocURL, LmsURL, Transcriber, Copyeditor, Placed, Type, Week, Requestor, Request Date\n";
                 for (var i = 0; i < array.length; i++) {
                     if (array[i]['copyeditor'] == undefined) {
                         array[i]['copyeditor'] = "";
@@ -70,12 +70,6 @@
                         array[i]['docURL'] = "";
                     } else if (array[i]['docURL'].includes(',')) {
                         array[i]['docURL'] = `"${array[i]['docURL']}"`;
-                    }
-
-                    if (array[i]['lmsURL'] == undefined || array[i]['lmsURl'] == undefined) {
-                        array[i]['lmsURL'] = "";
-                    } else if (array[i]['lmsURL'].includes(',')) {
-                        array[i]['lmsURL'] = `"${array[i]['lmsURL']}"`;
                     }
                     if (array[i]['placed'] == undefined) {
                         array[i]['placed'] = false;
@@ -126,16 +120,19 @@
                     }
                     if (array[i]['week'] == undefined) {
                         array[i]['week'] = "";
-                    }else if (array[i]['week'].includes(',')) {
+                    } else if (array[i]['week'].includes(',')) {
                         array[i]['week'] = `"${array[i]['week']}"`;
                     }
                     let row =
                         `${array[i]['courseCode']},${array[i]['title']},${array[i]['priority']},${array[i]['status']},${array[i]['srcURL']},${array[i]['docURL']},${array[i]['lmsURL']},${array[i]['transcriber']},${array[i]['copyeditor']},${array[i]['placed']},${array[i]['type']},${array[i]['week']},${array[i]['requestor']},${array[i]['requestDate']}`;
                     csvContent += row + "\r\n";
                 }
-                var encodedUri = encodeURI(csvContent);
+                console.log(csvContent);
+                var blob = new Blob([csvContent], {type: 'text/csv;charset=utf-8'});
+                // var encodedUri = encodeURI(csvContent);
+                var url = URL.createObjectURL(blob);
                 var link = document.createElement("a");
-                link.setAttribute("href", encodedUri);
+                link.setAttribute("href", url);
                 link.setAttribute("download", "my_data.csv");
                 link.innerHTML = "Click Here to download";
                 document.body.appendChild(link); // Required for FF
