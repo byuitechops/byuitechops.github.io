@@ -731,7 +731,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                 } else {
                     breakOut.classList.remove('hide');
                     breakIn.classList.add('hide');
-                    dbRefUsers.child(user).child('TimeClock/Breaks').child(breakkey).child('Out').on('value', snap => {
+                    dbRefUsers.child(user).child('TimeClock/Breaks').child(breakkey).child('In').on('value', snap => {
                         document.getElementById('showbreak').innerHTML = `Last Break Ended: ${snap.val()}`;
                     })
                 }
