@@ -127,7 +127,7 @@
                         `${array[i]['courseCode']},${array[i]['title']},${array[i]['priority']},${array[i]['status']},${array[i]['srcURL']},${array[i]['docURL']},${array[i]['lmsURL']},${array[i]['transcriber']},${array[i]['copyeditor']},${array[i]['placed']},${array[i]['type']},${array[i]['week']},${array[i]['requestor']},${array[i]['requestDate']}`;
                     csvContent += row + "\r\n";
                 }
-                console.log(csvContent);
+                // console.log(csvContent);
                 var blob = new Blob([csvContent], {type: 'text/csv;charset=utf-8'});
                 // var encodedUri = encodeURI(csvContent);
                 var url = URL.createObjectURL(blob);
