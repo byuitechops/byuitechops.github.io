@@ -40,8 +40,8 @@ firebase.auth().onAuthStateChanged(function (user) {
     }
 });
 
-var startNumber = 10;
-db.collection("accessibility").orderBy('title').limit(10).get().then(function (documentSnapshots) {
+var startNumber = 20;
+db.collection("accessibility").orderBy('title').limit(20).get().then(function (documentSnapshots) {
     // Get the last visible document
     startNumber = documentSnapshots.docs[documentSnapshots.docs.length-1];
     console.log("last", startNumber.data());
