@@ -48,7 +48,7 @@ var startNumber = 1;
 // });
 // Get Data
 function getData() {
-    db.collection("accessibility").orderBy('title').startAfter(startNumber).limit(2).get().then((querySnapshot) => {
+    db.collection("accessibility").orderBy('title').startAfter(startNumber).limit(10).get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             // console.log(`${doc.id} => ${doc.data().title}`);
 
@@ -68,8 +68,7 @@ function getData() {
             }
             document.getElementById('text').insertAdjacentHTML('beforeend', `<button onclick="viewItem('${doc.id}')">View</button>`);
         });
-        startNumber = querySnapshot.docs[querySnapshot.docs.length-1];
-        console.log(startNumber);
+        startNumber = querySnapshot.docs[querySnapshot.docs.length - 1];
     });
 }
 
@@ -190,47 +189,45 @@ function editItem(id, item) {
     }
 }
 
-document.getElementById('search').addEventListener('click', () => {
+function search() {
     document.getElementById('searchcancel').classList.remove('hide');
 
-    var snip = prompt('Search transcripts by video url snippet');
+    var sVal = document.getElementById('searchValue').value;
+    var sType = document.getElementById('searchType').value;
+    console.log(`sval: ${sVal}, sType: ${sType}`);
 
-    db.collection('accessibility').get()
+    db.collection('accessibility').where(sType, "==", sVal).get()
         .then((querySnapshot) => {
             document.getElementById('text').innerHTML = "";
-            var match = false;
+
             querySnapshot.forEach((doc) => {
                 // console.log(`${doc.data().title} => ${doc.data().srcURL}`);
-                if (doc.data().type == "Transcript" && doc.data().srcURL != undefined) {
-                    if (doc.data().srcURL.includes(snip)) {
-                        console.log(doc.data().title);
-                        match = true;
-                        var items = ["type", "title", "docURL", "courseCode"];
 
-                        for (var i = 0; i < items.length; i++) {
-                            var item;
-                            if (doc.data()[items[i]] == undefined) {
-                                item = document.createElement('span');
-                                item.innerHTML = "Empty";
-                                item.style.color = "red";
-                            } else {
-                                item = document.createElement('span');
-                                item.innerHTML = doc.data()[items[i]];
-                            }
-                            document.getElementById('text').insertAdjacentElement('beforeend', item);
-                        }
-                        document.getElementById('text').insertAdjacentHTML('beforeend', `<button onclick="viewItem('${doc.id}')">View</button>`);
+                var items = ["type", "title", "docURL", "courseCode"];
+
+                for (var i = 0; i < items.length; i++) {
+                    var item;
+                    if (doc.data()[items[i]] == undefined) {
+                        item = document.createElement('span');
+                        item.innerHTML = "Empty";
+                        item.style.color = "red";
+                    } else {
+                        item = document.createElement('span');
+                        item.innerHTML = doc.data()[items[i]];
                     }
+                    document.getElementById('text').insertAdjacentElement('beforeend', item);
                 }
-
+                document.getElementById('text').insertAdjacentHTML('beforeend', `<button onclick="viewItem('${doc.id}')">View</button>`);
             })
         })
         .catch((error) => {
             console.log(error);
         })
-})
+}
 
 document.getElementById('searchcancel').addEventListener('click', () => {
     document.getElementById('searchcancel').classList.add('hide');
+    document.getElementById('text').innerHTML = "";
+    startNumber = 1;
     getData();
 });

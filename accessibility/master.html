@@ -38,9 +38,6 @@
                 <a class="active" id="master" href="master.html">
                     <li>Master</li>
                 </a>
-                <a id="search">
-                    <li>Search<span class="hide" id="searchcancel">x</span></li>
-                </a>
                 <a id="load" onclick="getData()">
                     <li>Load More</li>
                 </a>                
@@ -54,6 +51,17 @@
         </nav>
     </head>
     <main>
+        <div> 
+            <select id="searchType">
+                <option disabled hidden selected>Search by</option>
+                <option value="title">Title</option>
+                <option value="courseCode">Course Code</option>
+                <option value="srcURL">Source Url</option>
+            </select>
+            <input id="searchValue">
+            <button onclick="search()">Search</button>
+            <span class="hide" id="searchcancel">x</span>
+        </div>
         <p id="message"></p>
         <div id="text">
             <h3>Type</h3>
