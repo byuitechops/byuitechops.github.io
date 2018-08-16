@@ -40,15 +40,15 @@ firebase.auth().onAuthStateChanged(function (user) {
     }
 });
 
-var startNumber;
-db.collection("accessibility").orderBy('title').limit(1).get().then(function (documentSnapshots) {
-    // Get the last visible document
-    startNumber = documentSnapshots.docs[documentSnapshots.docs.length-1];
-    // console.log("last", startNumber.data());
-});
+var startNumber = 1;
+// db.collection("accessibility").orderBy('title').limit(1).get().then(function (documentSnapshots) {
+//     // Get the last visible document
+//     startNumber = documentSnapshots.docs[documentSnapshots.docs.length-1];
+//     console.log("last", startNumber);
+// });
 // Get Data
 function getData() {
-    db.collection("accessibility").orderBy('title').startAfter(startNumber).limit(20).get().then((querySnapshot) => {
+    db.collection("accessibility").orderBy('title').startAfter(startNumber).limit(2).get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             // console.log(`${doc.id} => ${doc.data().title}`);
 
@@ -69,6 +69,7 @@ function getData() {
             document.getElementById('text').insertAdjacentHTML('beforeend', `<button onclick="viewItem('${doc.id}')">View</button>`);
         });
         startNumber = querySnapshot.docs[querySnapshot.docs.length-1];
+        console.log(startNumber);
     });
 }
 
