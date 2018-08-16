@@ -26,7 +26,7 @@ firebase.auth().onAuthStateChanged(function (user) {
                     if (userData.role != "Copyedit") {
                         document.getElementById('place').classList.remove('hide');
                     }
-                    if (userData.role == "Admin") {
+                    if (userData.role == "Admin" || userData.role == "Techops") {
                         document.getElementById('master').classList.remove('hide');
                     }
                     getData(userData);
