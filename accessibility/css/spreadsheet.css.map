@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,MAAO;EACH,KAAK,EAAE,IAAI;EACX,MAAM,EAAE,IAAI",
+"sources": ["../scss/spreadsheet.scss"],
+"names": [],
+"file": "spreadsheet.css"
+}
