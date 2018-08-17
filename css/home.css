@@ -20,6 +20,10 @@ button {
     width: 45%;
 }
 
+#btnLogout {
+    margin: 10px 30%;
+}
+
 /* ---------------------- Icon box -------------------- */
 
 .flex-container {

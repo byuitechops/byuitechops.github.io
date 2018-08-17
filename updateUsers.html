@@ -11,14 +11,15 @@
     };
     firebase.initializeApp(config);
 
-    firebase.database().ref('users').once('value').then(function(snap) {
+    firebase.database().ref('users').once('value').then(function (snap) {
         var users = snap.val();
         for (key in users) {
             // Here is where you put the changes to the users
-            var update = '{"katana" :true}';
+            console.log(key);
+            var update =
+                '{"katana": null, "microsoft": null, "monthlyTraining": null, "pathway": null, "proDev": null, "screenSteps": null, "slack": null, "teamDrive": null, "teamDynamix": null, "totStyleGuide": null, "trello": null, "videoIndexing": null, "workDay": null, "brightspace": null, "canvas": null, "canvasStyleGuide": null, "employeeDirectory": null, "equella": null, "firebaseConsole": null}';
             update = JSON.parse(update);
             firebase.database().ref('users/' + key).update(update);
         }
     })
-
 </script>
