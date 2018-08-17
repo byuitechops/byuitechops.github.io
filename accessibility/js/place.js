@@ -54,7 +54,6 @@ function resetMessage() {
 var startNumber = 1;
 
 function getData(userData) {
-    console.log('Calling');
     // Get Data
     db.collection("accessibility").where('placed', '==', false).orderBy('priority').startAfter(startNumber).limit(10).get()
         .then((querySnapshot) => {
@@ -84,8 +83,12 @@ function getData(userData) {
                 }
                 document.getElementById('text').insertAdjacentHTML('beforeend', text);
             });
-            startNumber = querySnapshot.docs[querySnapshot.docs.length - 1];
-        });
+            if (querySnapshot.docs[querySnapshot.docs.length - 1] == undefined) {
+                document.getElementById('load').classList.add('hide');
+            } else {
+                startNumber = querySnapshot.docs[querySnapshot.docs.length - 1];
+            }
+        })
 }
 
 

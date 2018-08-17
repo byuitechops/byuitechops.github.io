@@ -69,7 +69,11 @@ function getData() {
             }
             document.getElementById('text').insertAdjacentHTML('beforeend', `<button onclick="viewItem('${doc.id}')">View</button>`);
         });
-        startNumber = querySnapshot.docs[querySnapshot.docs.length - 1];
+        if (querySnapshot.docs[querySnapshot.docs.length - 1] == undefined) {
+            document.getElementById('load').classList.add('hide');
+        } else {
+            startNumber = querySnapshot.docs[querySnapshot.docs.length - 1];
+        }
     });
 }
 

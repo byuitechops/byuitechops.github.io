@@ -1,7 +1,8 @@
 #text {
   display: grid;
   grid-template-columns: 10% 10% 15% 10% 25% 15% 15%;
-  grid-row-gap: 1em; }
+  grid-row-gap: 1em;
+  margin-bottom: 2em; }
 
 h3 {
   display: inline-block;
