@@ -60,23 +60,25 @@
     }
 }
 
-#search {
-    cursor: pointer;
-}
-
 #searchcancel {
-    position: relative;
-    left: 0.5em;
-    top: 1.5px;
     font-size: 1.6em;
-    line-height: 0.75em;
     font-weight: bold;
     color: #BF0000;
     cursor: pointer;
-    list-style: none;
+    position: relative;
+    top: 7px;
     &:hover {
         color: darkgrey;
     }
+}
+
+#searchValue {
+    font-size: .9em;
+    margin: 0 5px;
+}
+
+#searchType {
+    font-size: 1em;
 }
 
 #load {

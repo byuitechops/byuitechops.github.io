@@ -55,17 +55,10 @@
   font-weight: bold;
   color: #BF0000;
   cursor: pointer;
-  position: relative;
-  top: 7px; }
+  border: 1px solid darkgrey;
+  padding: 0 5px; }
   #searchcancel:hover {
     color: darkgrey; }
-
-#searchValue {
-  font-size: .9em;
-  margin: 0 5px; }
-
-#searchType {
-  font-size: 1em; }
 
 #load {
   position: relative;

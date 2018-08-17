@@ -5,6 +5,7 @@
     <title>Form | BYUI Accessibility</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/x-icon" href="assests/favicon.gif">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="css/main.css">
     <link type="text/css" rel="stylesheet" href="css/master.css">
     <!-- Script -->
@@ -40,7 +41,7 @@
                 </a>
                 <a id="load" onclick="getData()">
                     <li>Load More</li>
-                </a>                
+                </a>
                 <a href="spreadsheet.html">
                     <li>Tracking</li>
                 </a>
@@ -51,7 +52,7 @@
         </nav>
     </head>
     <main>
-        <div> 
+        <div>
             <select id="searchType">
                 <option disabled hidden selected>Search by</option>
                 <option value="title">Title</option>
@@ -60,7 +61,7 @@
             </select>
             <input id="searchValue">
             <button onclick="search()">Search</button>
-            <span class="hide" id="searchcancel">x</span>
+            <i id="searchcancel" class="material-icons hide">clear</i>
         </div>
         <p id="message"></p>
         <div id="text">

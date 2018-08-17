@@ -194,7 +194,7 @@ function search() {
 
     var sVal = document.getElementById('searchValue').value;
     var sType = document.getElementById('searchType').value;
-    console.log(`sval: ${sVal}, sType: ${sType}`);
+    // console.log(`sval: ${sVal}, sType: ${sType}`);
 
     db.collection('accessibility').where(sType, "==", sVal).get()
         .then((querySnapshot) => {
@@ -228,6 +228,8 @@ function search() {
 document.getElementById('searchcancel').addEventListener('click', () => {
     document.getElementById('searchcancel').classList.add('hide');
     document.getElementById('text').innerHTML = "";
+    document.getElementById('searchValue').value = "";
+    document.getElementById('searchType').options[0].selected = true;
     startNumber = 1;
     getData();
 });
