@@ -88,6 +88,7 @@ function getData(userData) {
 
 
 function displayEmbedCode(link, height, seconds, title) {
+    document.getElementById('intro').classList.add('intro');
     var time = secondsToHms(seconds);
     // console.log(link);
     modal.style.display = "block";
@@ -140,6 +141,7 @@ function displayEmbedCode(link, height, seconds, title) {
 }
 
 function displayLinkCode(link, seconds, title) {
+    document.getElementById('intro').classList.add('intro');
     var time = secondsToHms(seconds);
     // console.log(link);
     modal.style.display = "block";
@@ -241,6 +243,7 @@ var span = document.getElementsByClassName("close")[0];
 // When the user clicks on <span> (x), close the modal
 span.onclick = function () {
     modal.style.display = "none";
+    document.getElementById('intro').classList.remove('intro');
     document.getElementById('intro').innerHTML = "";
     document.getElementById('buttons').parentNode.removeChild(document.getElementById('buttons'));
 }
@@ -248,6 +251,7 @@ span.onclick = function () {
 window.onclick = function (event) {
     if (event.target == modal) {
         modal.style.display = "none";
+        document.getElementById('intro').classList.remove('intro');
         document.getElementById('intro').innerHTML = "";
         document.getElementById('buttons').parentNode.removeChild(document.getElementById('buttons'));
     }
@@ -255,6 +259,7 @@ window.onclick = function (event) {
 
 function cancel() {
     modal.style.display = "none";
+    document.getElementById('intro').classList.remove('intro');
     document.getElementById('intro').innerHTML = "";
     document.getElementById('buttons').parentNode.removeChild(document.getElementById('buttons'));
 }
