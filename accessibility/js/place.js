@@ -89,12 +89,12 @@ function getData(userData) {
 
 function displayEmbedCode(link, height, seconds, title) {
     var time = secondsToHms(seconds);
-    console.log(link);
+    // console.log(link);
     modal.style.display = "block";
     document.getElementById('modal-heading').innerHTML = "Video Embed Code";
     if (link.includes("youtube")) {
         var id = link.slice(link.indexOf("watch?v=") + 8, (link.indexOf("watch?v=") + 9) + 11);
-        console.log(id);
+        // console.log(id);
         var html = `<iframe width="560" height="${height}px" src="https://www.youtube-nocookie.com/embed/${id}?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                     (${time} mins, ${title} Transcript)`;
         document.getElementById('intro').innerText = html;
@@ -103,7 +103,7 @@ function displayEmbedCode(link, height, seconds, title) {
         document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);
     } else if (link.includes("youtu.be")) {
         var id = link.slice(link.indexOf(".be/") + 4, (link.indexOf(".be/") + 4) + 11);
-        console.log(id);
+        // console.log(id);
         var html = `<iframe width="560" height="${height}px" src="https://www.youtube-nocookie.com/embed/${id}?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                     (${time} mins, ${title} Transcript)`;
         document.getElementById('intro').innerText = html;
@@ -112,7 +112,7 @@ function displayEmbedCode(link, height, seconds, title) {
         document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);
     } else if (link.includes("video.byui.edu")) {
         var id = link.slice(link.indexOf("/0_") + 1, (link.indexOf("/0_") + 1) + 10);
-        console.log(id);
+        // console.log(id);
         var html = `<iframe id="kaltura_player_1532969286" src="http://cdnapi.kaltura.com/p/1157612/sp/115761200/embedIframeJs/uiconf_id/33020032/partner_id/1157612?iframeembed=true&playerId=kaltura_player_1532969286&entry_id=${id}&flashvars[streamerType]=auto"
                      width="560" height="${height}" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay; fullscreen; encrypted-media" frameborder="0"></iframe>
                      (${time} mins, ${title} Transcript)`;
@@ -122,7 +122,7 @@ function displayEmbedCode(link, height, seconds, title) {
         document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);
     } else if (link.includes("vimeo")) {
         var id = link.slice(link.indexOf("vimeo.com/") + 10, (link.indexOf("vimeo.com/") + 10) + 9);
-        console.log(id);
+        // console.log(id);
         var html = `<iframe src="https://player.vimeo.com/video/${id}?title=0&byline=0&portrait=0" width="560" height="${height}px" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
         (${time} mins, ${title} Transcript)`;
         document.getElementById('intro').innerText = html;
@@ -130,7 +130,7 @@ function displayEmbedCode(link, height, seconds, title) {
         var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div>`;
         document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);
     } else {
-        var html = `${link} 
+        var html = `<iframe width="560" height="315" src="${link}" frameborder="0" allowfullscreen></iframe><br> 
         (${time} mins, ${title} Transcript)`;
         document.getElementById('intro').innerText = html;
 
@@ -140,12 +140,13 @@ function displayEmbedCode(link, height, seconds, title) {
 }
 
 function displayLinkCode(link, seconds, title) {
-    console.log(link);
+    var time = secondsToHms(seconds);
+    // console.log(link);
     modal.style.display = "block";
     document.getElementById('modal-heading').innerHTML = "Video Embed Code";
     if (link.includes("youtube")) {
         var id = link.slice(link.indexOf("watch?v=") + 8, (link.indexOf("watch?v=") + 9) + 11);
-        console.log(id);
+        // console.log(id);
         var html = `<a href="https://www.youtube-nocookie.com/embed/${id}?rel=0&amp;showinfo=0" target="_blank">${title}</a>
                     (${time} mins, ${title} Transcript)`;
         document.getElementById('intro').innerText = html;
@@ -154,7 +155,7 @@ function displayLinkCode(link, seconds, title) {
         document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);
     } else if (link.includes("youtu.be")) {
         var id = link.slice(link.indexOf(".be/") + 4, (link.indexOf(".be/") + 4) + 11);
-        console.log(id);
+        // console.log(id);
         var html = `<a href="https://www.youtube-nocookie.com/embed/${id}?rel=0&amp;showinfo=0 target="_blank">${title}</a>
         (${time} mins, ${title} Transcript)`;
         document.getElementById('intro').innerText = html;
@@ -163,7 +164,7 @@ function displayLinkCode(link, seconds, title) {
         document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);
     } else if (link.includes("video.byui.edu")) {
         var id = link.slice(link.indexOf("/0_") + 1, (link.indexOf("/0_") + 1) + 10);
-        console.log(id);
+        // console.log(id);
         var html = `<a href="http://cdnapi.kaltura.com/p/1157612/sp/115761200/embedIframeJs/uiconf_id/33020032/partner_id/1157612?iframeembed=true&playerId=kaltura_player_1532969286&entry_id=${id}&flashvars[streamerType]=auto target="_blank">${title}</a>
         (${time} mins, ${title} Transcript)`;
         document.getElementById('intro').innerText = html;
@@ -172,7 +173,7 @@ function displayLinkCode(link, seconds, title) {
         document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);
     } else if (link.includes("vimeo")) {
         var id = link.slice(link.indexOf("vimeo.com/") + 10, (link.indexOf("vimeo.com/") + 10) + 9);
-        console.log(id);
+        // console.log(id);
         var html = `<a href="https://player.vimeo.com/video/${id}?title=0&byline=0&portrait=0 target="_blank">${title}</a>
         (${time} mins, ${title} Transcript)`;
         document.getElementById('intro').innerText = html;
@@ -180,7 +181,8 @@ function displayLinkCode(link, seconds, title) {
         var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div>`;
         document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);
     } else {
-        var html = `${link}`;
+        var html = `<a href='${link}'>${title}</a>
+        (${time} mins, ${title} Transcript)`;
         document.getElementById('intro').innerText = html;
 
         var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div>`;
