@@ -168,7 +168,7 @@
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <h2>Time Calculator</h2>
-                <form>
+                <div id="form">
                     <table>
                         <tbody>
                             <tr>
@@ -190,107 +190,11 @@
                                 <td>
                                     <input onchange="calculateTotal()" id="total0" type="text" readonly>
                                 </td>
-                                <td>
-                                    <input name="cb" type="checkbox" onclick="calculateCheckBoxTotal()">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input onchange="calculateTotal()" id="hours1" type="number">
-                                </td>
-                                <td>
-                                    <input onchange="calculateTotal()" id="minutes1" type="number">
-                                </td>
-                                <td>
-                                    <input onchange="calculateTotal()" id="seconds1" type="number">
-                                </td>
-                                <td>
-                                    <input onchange="calculateTotal()" id="total1" type="text" readonly>
-                                </td>
-                                <td>
-                                    <input name="cb" type="checkbox" onclick="calculateCheckBoxTotal()">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input onchange="calculateTotal()" id="hours2" type="number">
-                                </td>
-                                <td>
-                                    <input onchange="calculateTotal()" id="minutes2" type="number">
-                                </td>
-                                <td>
-                                    <input onchange="calculateTotal()" id="seconds2" type="number">
-                                </td>
-                                <td>
-                                    <input onchange="calculateTotal()" id="total2" type="text" readonly>
-                                </td>
-                                <td>
-                                    <input name="cb" type="checkbox" onclick="calculateCheckBoxTotal()">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input onchange="calculateTotal()" id="hours3" type="number">
-                                </td>
-                                <td>
-                                    <input onchange="calculateTotal()" id="minutes3" type="number">
-                                </td>
-                                <td>
-                                    <input onchange="calculateTotal()" id="seconds3" type="number">
-                                </td>
-                                <td>
-                                    <input onchange="calculateTotal()" id="total3" type="text" readonly>
-                                </td>
-                                <td>
-                                    <input name="cb" type="checkbox" onclick="calculateCheckBoxTotal()">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input onchange="calculateTotal()" id="hours4" type="number">
-                                </td>
-                                <td>
-                                    <input onchange="calculateTotal()" id="minutes4" type="number">
-                                </td>
-                                <td>
-                                    <input onchange="calculateTotal()" id="seconds4" type="number">
-                                </td>
-                                <td>
-                                    <input onchange="calculateTotal()" id="total4" type="text" readonly>
-                                </td>
-                                <td>
-                                    <input name="cb" type="checkbox" onclick="calculateCheckBoxTotal()">
-                                </td>
                             </tr>
                         </tbody>
                     </table>
-                    <hr>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <th>Total Hours</th>
-                                <th>Total Minutes</th>
-                                <th>Total Seconds</th>
-                                <th>Grand Total (seconds)</th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input id="totalHours" type="text" onchange="calculateCheckBoxTotal()" readonly>
-                                </td>
-                                <td>
-                                    <input id="totalMinutes" type="text" onchange="calculateCheckBoxTotal()" readonly>
-                                </td>
-                                <td>
-                                    <input id="totalSeconds" type="text" onchange="calculateCheckBoxTotal()" readonly>
-                                </td>
-                                <td>
-                                    <input id="granTotal" type="text" onchange="calculateCheckBoxTotal()" readonly>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <button class="submit" type="reset">Reset</button>
-                </form>
+                    <button onclick="calculateSubmit()">Submit</button>
+                </div>
             </div>
 
         </div>
