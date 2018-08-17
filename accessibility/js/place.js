@@ -59,6 +59,12 @@ function getData(userData) {
         .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 // console.log(`${doc.id} => ${doc.data().type}`);
+                var docURL;
+                if (doc.data().docURL != undefined) {
+                    docURL = `<a href="${doc.data().docURL}" target="_blank">Doc URL</a>`;
+                } else {
+                    docURL = "Empty";
+                }
                 if (doc.data().type == "Transcript") {
                     var text = `<span>${doc.data().courseCode}</span>
                                     <span>${doc.data().priority}</span>
@@ -67,7 +73,7 @@ function getData(userData) {
                                     <span><a href="${doc.data().lmsURL}" target="_blank">Canvas URL</a></span>
                                     <span><button onclick="displayEmbedCode('${doc.data().srcURL}', '${doc.data().videoHeight}', '${doc.data().videoLength}', '${doc.data().title}')">Show Code</button></span>
                                     <span><button onclick="displayLinkCode('${doc.data().srcURL}', '${doc.data().videoLength}', '${doc.data().title}')">Show Code</button></span>
-                                    <span><a href="${doc.data().docURL}" target="_blank">Doc URL</a></span>
+                                    <span>${docURL}</span>
                                     <button onclick="placeCheck('${doc.id}')">Place</button>`;
                 }
                 if (doc.data().type == "Alt Text") {
@@ -78,7 +84,7 @@ function getData(userData) {
                                     <span><a href="${doc.data().lmsURL}" target="_blank">Canvas URL</a></span>
                                     <span></span>
                                     <span></span>
-                                    <span><a href="${doc.data().docURL}" target="_blank">Doc URL</a></span>
+                                    <span>${docURL}</span>
                                     <button onclick="placeCheck('${doc.id}')">Place</button>`;
                 }
                 document.getElementById('text').insertAdjacentHTML('beforeend', text);
