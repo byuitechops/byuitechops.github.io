@@ -46,6 +46,7 @@ var startNumber = 1;
 //     startNumber = documentSnapshots.docs[documentSnapshots.docs.length-1];
 //     console.log("last", startNumber);
 // });
+
 // Get Data
 function getData() {
     db.collection("accessibility").orderBy('title').startAfter(startNumber).limit(10).get().then((querySnapshot) => {

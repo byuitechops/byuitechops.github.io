@@ -68,7 +68,8 @@
   font-size: 1em; }
 
 #load {
-  position: relative;
-  cursor: pointer; }
+  cursor: pointer;
+  width: 20%;
+  margin: 20px 35%; }
 
 /*# sourceMappingURL=master.css.map */

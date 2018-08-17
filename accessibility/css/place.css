@@ -70,4 +70,9 @@
     line-height: 1.5;
     border-radius: 6px; }
 
+#load {
+  cursor: pointer;
+  width: 20%;
+  margin: 20px 35%; }
+
 /*# sourceMappingURL=place.css.map */

@@ -15,6 +15,7 @@ const settings = { /* your settings... */
 };
 db.settings(settings);
 
+
 // Check if Logged In
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
@@ -52,62 +53,85 @@ document.getElementById('btnLogout').addEventListener('click', function () {
     firebase.auth().signOut();
 });
 
+var startTech = 1;
+var startCopyReview = 1;
+var startCopyWrite = 1;
+
+var startAdminTech = 1;
+var startAdminCopyReview = 1;
+var startAdminCopyWrite = 1;
 // Get Data
-function getData(userData) {
-    if (userData.role == "Techops") {
-        db.collection("accessibility").where("status", "==", "Ready for Transcript").where("type", "==", "Transcript").orderBy('priority').limit(20).get().then((querySnapshot) => {
+function getData() {
+    db.collection('users').where('name', "==", firebase.auth().currentUser.displayName).get()
+        .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
-                // console.log(`${doc.id} => ${doc.data().title}`);
-                var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
-                document.getElementById('text').insertAdjacentHTML('beforeend', text);
-            });
-        });
-    }
+                var userData = doc.data();
+                if (userData.role == "Techops") {
+                    db.collection("accessibility").where("status", "==", "Ready for Transcript").where("type", "==", "Transcript").orderBy('priority').startAfter(startTech).limit(20).get().then((querySnapshot) => {
+                        querySnapshot.forEach((doc) => {
+                            // console.log(`${doc.id} => ${doc.data().title}`);
+                            var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
+                            document.getElementById('text').insertAdjacentHTML('beforeend', text);
+                        });
+                        startTech = querySnapshot.docs[querySnapshot.docs.length - 1];
+                    });
+                }
 
-    if (userData.role == "Copyedit") {
-        db.collection("accessibility").where("status", "==", "Ready for Review").where("type", "==", "Transcript").orderBy('priority').limit(20).get().then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                // console.log(`${doc.id} => ${doc.data().title}`);
-                var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
-                document.getElementById('text').insertAdjacentHTML('beforeend', text);
-            });
-        });
+                if (userData.role == "Copyedit") {
+                    db.collection("accessibility").where("status", "==", "Ready for Review").where("type", "==", "Transcript").orderBy('priority').startAfter(startCopyReview).limit(20).get().then((querySnapshot) => {
+                        querySnapshot.forEach((doc) => {
+                            // console.log(`${doc.id} => ${doc.data().title}`);
+                            var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
+                            document.getElementById('text').insertAdjacentHTML('beforeend', text);
+                        });
+                        startCopyReview = querySnapshot.docs[querySnapshot.docs.length - 1];
+                    });
 
-        db.collection("accessibility").where("status", "==", "Ready for Transcript").where("type", "==", "Alt Text").orderBy('priority').limit(20).get().then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                // console.log(`${doc.id} => ${doc.data().title}`);
-                var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span></span><button onclick="claimItem('${doc.id}')">Claim</button>`;
-                document.getElementById('text').insertAdjacentHTML('beforeend', text);
-            });
-        });
-    }
+                    db.collection("accessibility").where("status", "==", "Ready for Transcript").where("type", "==", "Alt Text").orderBy('priority').startAfter(startCopyWrite).limit(20).get().then((querySnapshot) => {
+                        querySnapshot.forEach((doc) => {
+                            // console.log(`${doc.id} => ${doc.data().title}`);
+                            var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span></span><button onclick="claimItem('${doc.id}')">Claim</button>`;
+                            document.getElementById('text').insertAdjacentHTML('beforeend', text);
+                        });
+                        if (querySnapshot.docs[querySnapshot.docs.length - 1] != undefined) {
+                            startCopyWrite = querySnapshot.docs[querySnapshot.docs.length - 1];
+                        }
+                    });
+                }
 
-    if (userData.role == "Admin") {
-        db.collection("accessibility").where("status", "==", "Ready for Transcript").where("type", "==", "Transcript").orderBy('priority').limit(10).get().then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                // console.log(`${doc.id} => ${doc.data().title}`);
-                var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
-                document.getElementById('text').insertAdjacentHTML('beforeend', text);
-            });
-        });
+                if (userData.role == "Admin") {
+                    db.collection("accessibility").where("status", "==", "Ready for Transcript").where("type", "==", "Transcript").orderBy('priority').startAfter(startTech).limit(10).get().then((querySnapshot) => {
+                        querySnapshot.forEach((doc) => {
+                            // console.log(`${doc.id} => ${doc.data().title}`);
+                            var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
+                            document.getElementById('text').insertAdjacentHTML('beforeend', text);
+                        });
+                        startTech = querySnapshot.docs[querySnapshot.docs.length - 1];
+                    });
 
-        db.collection("accessibility").where("status", "==", "Ready for Review").where("type", "==", "Transcript").orderBy('priority').limit(10).get().then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                // console.log(`${doc.id} => ${doc.data().title}`);
-                var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
-                document.getElementById('text').insertAdjacentHTML('beforeend', text);
-            });
-        });
+                    db.collection("accessibility").where("status", "==", "Ready for Review").where("type", "==", "Transcript").orderBy('priority').startAfter(startCopyReview).limit(10).get().then((querySnapshot) => {
+                        querySnapshot.forEach((doc) => {
+                            // console.log(`${doc.id} => ${doc.data().title}`);
+                            var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
+                            document.getElementById('text').insertAdjacentHTML('beforeend', text);
+                        });
+                        startCopyReview = querySnapshot.docs[querySnapshot.docs.length - 1];
+                    });
 
-        db.collection("accessibility").where("status", "==", "Ready for Transcript").where("type", "==", "Alt Text").orderBy('priority').limit(10).get().then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                // console.log(`${doc.id} => ${doc.data().title}`);
-                var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span></span><button onclick="claimItem('${doc.id}')">Claim</button>`;
-                document.getElementById('text').insertAdjacentHTML('beforeend', text);
-            });
-        });
-    }
+                    db.collection("accessibility").where("status", "==", "Ready for Transcript").where("type", "==", "Alt Text").orderBy('priority').startAfter(startCopyWrite).limit(10).get().then((querySnapshot) => {
+                        querySnapshot.forEach((doc) => {
+                            // console.log(`${doc.id} => ${doc.data().title}`);
+                            var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span></span><button onclick="claimItem('${doc.id}')">Claim</button>`;
+                            document.getElementById('text').insertAdjacentHTML('beforeend', text);
+                        });
+                        if (querySnapshot.docs[querySnapshot.docs.length - 1] != undefined) {
+                            startCopyWrite = querySnapshot.docs[querySnapshot.docs.length - 1];
+                        }
+                    });
+                }
 
+            })
+        });
 }
 
 function claimItem(docId) {

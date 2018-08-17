@@ -17,4 +17,9 @@ span:nth-of-type(6n) {
 span:nth-of-type(6n + 2) {
   text-align: center; }
 
+#load {
+  cursor: pointer;
+  width: 20%;
+  margin: 20px 35%; }
+
 /*# sourceMappingURL=claim.css.map */
