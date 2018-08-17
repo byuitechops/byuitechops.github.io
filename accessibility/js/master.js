@@ -125,11 +125,12 @@ function viewItem(docId) {
                     document.getElementById('docData').insertAdjacentElement('beforeend', p);
                     p.insertAdjacentHTML('beforeend', `${title}`);
                     p.insertAdjacentElement('beforeend', item);
-                    p.insertAdjacentHTML('beforeend', `<button onclick="editItem('${doc.id}', '${items[i]}')">Edit</button>`);
+                    p.insertAdjacentHTML('beforeend', `<button onclick="editItem('${doc.id}', '${items[i]}', '${doc.data()[items[i]]}')">Edit</button>`);
                 }
             }
 
             if (doc.data().type == "Alt Text") {
+                console.log("Calling");
                 var items = ["type", "title", "docURL", "courseCode", "copyeditor", "lmsLink", "priority",
                     "requestor", "status", "week", "requestDate", "copyeditClaimed", "copyeditFinished"
                 ];
@@ -151,7 +152,7 @@ function viewItem(docId) {
                     document.getElementById('docData').insertAdjacentElement('beforeend', p);
                     p.insertAdjacentHTML('beforeend', `${title}`);
                     p.insertAdjacentElement('beforeend', item);
-                    p.insertAdjacentHTML('beforeend', `<button onclick="editItem('${doc.id}', '${items[i]}')">Edit</button>`);
+                    p.insertAdjacentHTML('beforeend', `<button onclick="editItem('${doc.id}', '${items[i]}', '${doc.data()[items[i]]}')">Edit</button>`);
                 }
             }
         })
@@ -166,10 +167,31 @@ function resetMessage() {
     }, 10000);
 }
 
-function editItem(id, item) {
-    console.log(`ID: ${id}`);
-    console.log(`Item: ${item}`);
-    var newField = prompt(`What are you updating ${item} to?`);
+// Get the modal
+var editModal = document.getElementById('editModal');
+// Get the <span> element that closes the modal
+var editSpan = document.getElementsByClassName("close")[1];
+// When the user clicks on <span> (x), close the modal
+editSpan.onclick = function () {
+    editModal.style.display = "none";
+}
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+    if (event.target == editModal) {
+        editModal.style.display = "none";
+    }
+}
+
+function editItem(id, item, value) {
+    editModal.style.display = "block";
+    document.getElementById('newValue').value = value;
+    document.getElementById('editComplete').setAttribute('onclick', `editComplete('${id}', '${item}')`);
+}
+
+function editComplete(id, item) {
+    // console.log(`ID: ${id}`);
+    // console.log(`Item: ${item}`);
+    var newField = document.getElementById('newValue').value;
 
     if (newField != "") {
         var json = JSON.parse(`{"${item}": "${newField}"}`);
@@ -177,6 +199,7 @@ function editItem(id, item) {
             .then(function () {
                 console.log("Document successfully updated!");
                 modal.style.display = "none";
+                editModal.style.display = "none";
                 document.getElementById('docData').innerHTML = "";
                 message.innerHTML = 'Document has been updated.';
                 message.style.color = 'blue';
@@ -186,11 +209,14 @@ function editItem(id, item) {
                 // The document probably doesn't exist.
                 console.error("Error updating document: ", error);
                 modal.style.display = "none";
+                editModal.style.display = "none";
                 document.getElementById('docData').innerHTML = "";
                 message.innerHTML = 'There was an error making the update. Please try again.';
                 message.style.color = 'red';
                 resetMessage();
             });
+    } else {
+        editModal.style.display = "none";
     }
 }
 
