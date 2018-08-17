@@ -188,7 +188,8 @@
 input,
 select {
   font-size: 16px;
-  border-radius: 10px; }
+  border-radius: 10px;
+  border-color: red; }
 
 label h3 {
   margin: 5px 0; }

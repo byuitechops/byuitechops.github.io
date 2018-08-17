@@ -252,6 +252,42 @@ document.getElementById('timeCalc').addEventListener('click', function () {
     modal.style.display = "block";
 });
 
+document.getElementById('requestType').addEventListener('change', () => {
+    document.getElementById('requestType').style.borderColor = "rgb(169, 169, 169)";
+})
+
+document.getElementById('requestCourse').addEventListener('change', () => {
+    document.getElementById('requestCourse').style.borderColor = "rgb(169, 169, 169)";
+})
+
+document.getElementById('requestTitle').addEventListener('change', () => {
+    document.getElementById('requestTitle').style.borderColor = "rgb(169, 169, 169)";
+})
+
+document.getElementById('requestPriority').addEventListener('change', () => {
+    document.getElementById('requestPriority').style.borderColor = "rgb(169, 169, 169)";
+})
+
+document.getElementById('requestLMSURL').addEventListener('change', () => {
+    document.getElementById('requestLMSURL').style.borderColor = "rgb(169, 169, 169)";
+})
+
+document.getElementById('requestWeek').addEventListener('change', () => {
+    document.getElementById('requestWeek').style.borderColor = "rgb(169, 169, 169)";
+})
+
+document.getElementById('requestVideoURL').addEventListener('change', () => {
+    document.getElementById('requestVideoURL').style.borderColor = "rgb(169, 169, 169)";
+})
+
+document.getElementById('requestLength').addEventListener('change', () => {
+    document.getElementById('requestLength').style.borderColor = "rgb(169, 169, 169)";
+})
+
+document.getElementById('requestHeight').addEventListener('change', () => {
+    document.getElementById('requestHeight').style.borderColor = "rgb(169, 169, 169)";
+})
+
 function calculateTotal() {
     var hours = 0;
     var minutes = 0;
@@ -302,5 +338,6 @@ function calculateTotal() {
 function calculateSubmit() {
     var total = document.getElementById('total0').value;
     document.getElementById('requestLength').value = total;
+    document.getElementById('requestLength').style.borderColor = "rgb(169, 169, 169)";
     modal.style.display = "none";
 }
