@@ -195,7 +195,7 @@ function displayLinkCode(link, seconds, title) {
     } else if (link.includes("video.byui.edu")) {
         var id = link.slice(link.indexOf("/0_") + 1, (link.indexOf("/0_") + 1) + 10);
         // console.log(id);
-        var html = `<p><a href="http://cdnapi.kaltura.com/p/1157612/sp/115761200/embedIframeJs/uiconf_id/33020032/partner_id/1157612?iframeembed=true&playerId=kaltura_player_1532969286&entry_id=${id}&flashvars[streamerType]=auto target="_blank">${title}</a>
+        var html = `<p><a href="https://cdnapisec.kaltura.com/p/1157612/sp/115761200/embedIframeJs/uiconf_id/33020032/partner_id/1157612?iframeembed=true&playerId=kaltura_player_1534785808&entry_id=${id}&flashvars[streamerType]=auto" target="_blank">${title}</a>
         (${time} mins, <a href="#" target="_blank">${title} Transcript</a>)</p>`;
         document.getElementById('intro').innerText = html;
 
