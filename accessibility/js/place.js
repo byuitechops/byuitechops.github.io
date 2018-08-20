@@ -95,6 +95,12 @@ function getData(userData) {
                 }
                 document.getElementById('text').insertAdjacentHTML('beforeend', text);
             });
+            if (querySnapshot.size == 0) {
+                message.innerHTML = 'No documents found with that criteria';
+                message.style.color = 'red';
+                resetMessage();
+            }
+
             if (querySnapshot.docs[querySnapshot.docs.length - 1] == undefined) {
                 document.getElementById('load').classList.add('hide');
             } else {
@@ -356,6 +362,12 @@ function search() {
                 document.getElementById('load').classList.add('hide');
             } else {
                 startNumber = querySnapshot.docs[querySnapshot.docs.length - 1];
+            }
+
+            if (querySnapshot.size == 0) {
+                message.innerHTML = 'No documents found with that criteria';
+                message.style.color = 'red';
+                resetMessage();
             }
         })
         .catch((error) => {

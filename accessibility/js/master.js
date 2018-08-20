@@ -164,6 +164,11 @@ function viewItem(docId) {
                         }
                     })
             })
+            if (querySnapshot.size == 0) {
+                message.innerHTML = 'No documents found with that criteria';
+                message.style.color = 'red';
+                resetMessage();
+            }
         })
 }
 
@@ -259,6 +264,11 @@ function search() {
                 }
                 document.getElementById('text').insertAdjacentHTML('beforeend', `<button onclick="viewItem('${doc.id}')">View</button>`);
             })
+            if (querySnapshot.size == 0) {
+                message.innerHTML = 'No documents found with that criteria';
+                message.style.color = 'red';
+                resetMessage();
+            }
         })
         .catch((error) => {
             console.log(error);
