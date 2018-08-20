@@ -52,25 +52,7 @@ function setUser(user) {
     var data = {
         "Admin": false,
         "Team": 'default',
-        "TeamLead": false,
-        "brightspace": true,
-        "trello": true,
-        "teamDrive": true,
-        "microsoft": true,
-        "workDay": true,
-        "canvas": true,
-        "slack": true,
-        "equella": true,
-        "employeeDirectory": true,
-        "proDev": true,
-        "pathway": true,
-        "screenSteps": true,
-        "monthlyTraining": true,
-        "firebaseConsole": true,
-        "canvasStyleGuide": true,
-        "totStyleGuide": true,
-        "teamDynamix": false,
-        "videoIndexing": true
+        "TeamLead": false
     };
     // Set up user with inputed info
     var info = {

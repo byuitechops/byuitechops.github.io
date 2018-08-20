@@ -65,14 +65,18 @@ function getData(userData) {
                 } else {
                     docURL = "Empty";
                 }
+
+                var escapedTitle = doc.data().title.replace(/"/gi, '&quot;');
+                escapedTitle = escapedTitle.replace(/'/gi, '&#39;');
+
                 if (doc.data().type == "Transcript") {
                     var text = `<span>${doc.data().courseCode}</span>
                                     <span>${doc.data().priority}</span>
                                     <span>${doc.data().type}</span>
                                     <span>${doc.data().title}</span>
                                     <span><a href="${doc.data().lmsURL}" target="_blank">Canvas URL</a></span>
-                                    <span><button onclick="displayEmbedCode('${doc.data().srcURL}', '${doc.data().videoHeight}', '${doc.data().videoLength}', '${doc.data().title}')">Show Code</button></span>
-                                    <span><button onclick="displayLinkCode('${doc.data().srcURL}', '${doc.data().videoLength}', '${doc.data().title}')">Show Code</button></span>
+                                    <span><button onclick="displayEmbedCode('${doc.data().srcURL}', '${doc.data().videoHeight}', '${doc.data().videoLength}', '${escapedTitle}')">Show Code</button></span>
+                                    <span><button onclick="displayLinkCode('${doc.data().srcURL}', '${doc.data().videoLength}', '${escapedTitle}')">Show Code</button></span>
                                     <span>${docURL}</span>
                                     <button onclick="placeCheck('${doc.id}')">Place</button>`;
                 }
