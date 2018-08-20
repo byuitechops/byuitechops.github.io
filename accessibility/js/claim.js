@@ -27,7 +27,7 @@ firebase.auth().onAuthStateChanged(function (user) {
                     if (userData.role != "Copyedit") {
                         document.getElementById('place').classList.remove('hide');
                     }
-                    if (userData.role == "Admin" || userData.role == "Techops") {
+                    if (userData.role == "Admin" || userData.role == "Techops" || userData.role == "Lead") {
                         document.getElementById('master').classList.remove('hide');
                     }
                     getData(userData);
@@ -66,7 +66,7 @@ function getData() {
         .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 var userData = doc.data();
-                if (userData.role == "Techops") {
+                if (userData.role == "Techops" || userData.role == "Lead") {
                     if (!startTech) {
                         document.getElementById('load').classList.add('hide');
                     } else {
@@ -261,7 +261,7 @@ function search() {
         .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 var userData = doc.data();
-                if (userData.role == "Techops") {
+                if (userData.role == "Techops" || userData.role == "Lead") {
                     if (!startTech) {
                         document.getElementById('load').classList.add('hide');
                     } else {
