@@ -5,6 +5,7 @@
     <title>Place | BYUI Accessibility</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/x-icon" href="assests/favicon.gif">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="css/main.css">
     <link type="text/css" rel="stylesheet" href="css/place.css">
     <!-- Script -->
@@ -46,6 +47,17 @@
         </nav>
     </head>
     <main>
+        <div>
+            <select id="searchType">
+                <option disabled hidden selected>Search by</option>
+                <option value="title">Title</option>
+                <option value="courseCode">Course Code</option>
+                <option value="srcURL">Source Url</option>
+            </select>
+            <input id="searchValue">
+            <button onclick="search()">Search</button>
+            <i id="searchcancel" class="material-icons hide">clear</i>
+        </div>
         <p id="message"></p>
         <div id="text">
             <h3>Course</h3>
@@ -73,4 +85,5 @@
     </main>
 </body>
 <script src="js/place.js"></script>
+
 </html>

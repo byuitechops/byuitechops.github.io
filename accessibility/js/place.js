@@ -303,3 +303,70 @@ function cancel() {
     document.getElementById('intro').innerHTML = "";
     document.getElementById('buttons').parentNode.removeChild(document.getElementById('buttons'));
 }
+
+function search() {
+    document.getElementById('searchcancel').classList.remove('hide');
+
+    var sVal = document.getElementById('searchValue').value;
+    var sType = document.getElementById('searchType').value;
+    // console.log(`sval: ${sVal}, sType: ${sType}`);
+
+    db.collection('accessibility').where(sType, "==", sVal).where("placed", "==", false).get()
+        .then((querySnapshot) => {
+            document.getElementById('text').innerHTML = "";
+
+            querySnapshot.forEach((doc) => {
+                // console.log(`${doc.data().title} => ${doc.data().srcURL}`);
+                var docURL;
+                if (doc.data().docURL != undefined) {
+                    docURL = `<a href="${doc.data().docURL}" target="_blank">Doc URL</a>`;
+                } else {
+                    docURL = "Empty";
+                }
+
+                var escapedTitle = doc.data().title.replace(/"/gi, '&quot;');
+                escapedTitle = escapedTitle.replace(/'/gi, '&#39;');
+
+                if (doc.data().type == "Transcript") {
+                    var text = `<span>${doc.data().courseCode}</span>
+                                    <span>${doc.data().priority}</span>
+                                    <span>${doc.data().type}</span>
+                                    <span>${doc.data().title}</span>
+                                    <span><a href="${doc.data().lmsURL}" target="_blank">Canvas URL</a></span>
+                                    <span><button onclick="displayEmbedCode('${doc.data().srcURL}', '${doc.data().videoHeight}', '${doc.data().videoLength}', '${escapedTitle}')">Show Code</button></span>
+                                    <span><button onclick="displayLinkCode('${doc.data().srcURL}', '${doc.data().videoLength}', '${escapedTitle}')">Show Code</button></span>
+                                    <span>${docURL}</span>
+                                    <button onclick="placeCheck('${doc.id}')">Place</button>`;
+                }
+                if (doc.data().type == "Alt Text") {
+                    var text = `<span>${doc.data().courseCode}</span>
+                                    <span>${doc.data().priority}</span>
+                                    <span>${doc.data().type}</span>
+                                    <span>${doc.data().title}</span>
+                                    <span><a href="${doc.data().lmsURL}" target="_blank">Canvas URL</a></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span>${docURL}</span>
+                                    <button onclick="placeCheck('${doc.id}')">Place</button>`;
+                }
+                document.getElementById('text').insertAdjacentHTML('beforeend', text);
+            });
+            if (querySnapshot.docs[querySnapshot.docs.length - 1] == undefined) {
+                document.getElementById('load').classList.add('hide');
+            } else {
+                startNumber = querySnapshot.docs[querySnapshot.docs.length - 1];
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+}
+
+document.getElementById('searchcancel').addEventListener('click', () => {
+    document.getElementById('searchcancel').classList.add('hide');
+    document.getElementById('text').innerHTML = "";
+    document.getElementById('searchValue').value = "";
+    document.getElementById('searchType').options[0].selected = true;
+    startNumber = 1;
+    getData();
+});

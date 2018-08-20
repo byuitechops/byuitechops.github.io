@@ -29,3 +29,24 @@ span:nth-of-type(6n + 2) {
     width: 20%;
     margin: 20px 35%;
 }
+
+#searchcancel {
+    font-size: 1.6em;
+    font-weight: bold;
+    color: #BF0000;
+    cursor: pointer;
+    position: relative;
+    top: 7px;
+    &:hover {
+        color: darkgrey;
+    }
+}
+
+#searchValue {
+    font-size: .9em;
+    margin: 0 5px;
+}
+
+#searchType {
+    font-size: 1em;
+}
