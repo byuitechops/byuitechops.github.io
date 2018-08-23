@@ -205,7 +205,7 @@ function claimItem(docId) {
             querySnapshot.forEach((doc) => {
                 var userData = doc.data();
 
-                if (userData.role == "Techops") {
+                if (userData.role == "Techops" || userData.role == "Lead" || userData.role == "Admin") {
                     db.collection('accessibility').doc(docId).update({
                             transcriber: user.displayName,
                             status: "Transcript in Progress",
