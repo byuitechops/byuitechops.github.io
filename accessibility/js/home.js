@@ -53,7 +53,7 @@ function resetMessage() {
 
 function getData(userData) {
     // Get Data
-    if (userData.role == "Techops") {
+    if (userData.role == "Techops" || userData.role == "Lead" || userData.role == "Admin") {
         db.collection("accessibility").where("transcriber", "==", userData.name).where("status", "==", "Transcript in Progress").orderBy('priority').get()
             .then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
