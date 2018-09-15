@@ -68,8 +68,9 @@ function getData(userData) {
                     docURL = "Empty";
                 }
 
-                var escapedTitle = doc.data().title.replace(/"/gi, '&quot;');
-                escapedTitle = escapedTitle.replace(/'/gi, '&#39;');
+                var escapedTitle = doc.data().title.replace(/"/gi, '\\&quot;');
+                escapedTitle = escapedTitle.replace(/'/gi, '\\&#39;');
+                console.log(escapedTitle);
 
                 if (doc.data().type == "Transcript") {
                     var text = `<span>${doc.data().courseCode}</span>
