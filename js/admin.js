@@ -264,7 +264,7 @@ function editUser(user) {
                 td.value
             } else if (j == 1 && list[z] == 'Team') {
                 // If column 2 and item is Team add dropdown & options of team
-                sTF.innerHTML += "<select><option value='canvas 1'>Canvas 1</option><option value='canvas 3'>Canvas 3</option><option value='canvas 2'>Canvas 2</option></select>";
+                sTF.innerHTML += "<select><option value='canvas 1'>Canvas 1</option><option value='canvas 2'>Canvas 2</option></select>";
                 td.appendChild(sTF);
             } else if (j == 1) {
                 // If column 2 add dropdown & options of true or false
