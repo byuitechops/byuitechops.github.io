@@ -109,7 +109,7 @@ function finishItem(docId) {
                 db.collection('accessibility').doc(docId).get().then((doc) => {
                     var type = doc.data().type;
 
-                    if (userData.role == "Techops") {
+                    if (userData.role == "Techops" || userData.role == "Lead" || userData.role == "Admin") {
                         db.collection('accessibility').doc(docId).update({
                                 status: "Ready for Review",
                                 transcriptFinished: new Date()
