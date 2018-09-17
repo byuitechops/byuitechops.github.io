@@ -162,6 +162,10 @@ function viewItem(docId) {
                                 }
                             }
                         }
+
+                        if (userData.role != "Techops") {
+                            document.getElementById('deleteButton').insertAdjacentHTML('afterbegin', `<button onclick="deleteDoc('${doc.id}')">Delete</button>`);
+                        }
                     })
             })
             if (querySnapshot.size == 0) {
@@ -232,6 +236,19 @@ function editComplete(id, item) {
     } else {
         editModal.style.display = "none";
     }
+}
+
+function deleteDoc(docId) {
+    var r = confirm("Are you sure you want to delete this document");
+    if (r == true) {
+        db.collection("accessibility").doc(docId).delete().then(function() {
+            console.log("Document successfully deleted!");
+        }).catch(function(error) {
+            console.error("Error removing document: ", error);
+        });
+    } else {
+        // Delete Cancelled
+    }    
 }
 
 function search() {
