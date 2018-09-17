@@ -88,14 +88,14 @@ span.onclick = function () {
     document.getElementById('deleteButton').innerHTML = "";
 }
 // When the user clicks anywhere outside of the modal, close it
-window.onclick = function (event) {
+window.addEventListener("click", function(event) {
     console.log('Calling');
     if (event.target == modal) {
         modal.style.display = "none";
         document.getElementById('docData').innerHTML = "";        
         document.getElementById('deleteButton').innerHTML = "";
     }
-}
+})
 
 function viewItem(docId) {
     modal.style.display = "block";
