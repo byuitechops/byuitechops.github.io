@@ -201,6 +201,28 @@ document.getElementById('requestVideoURL').addEventListener('keyup', () => {
             if (count > 0) {
                 message.innerHTML = `A request for this video has been found`;
                 message.style.color = 'red';
+                document.getElementById('requestSubmit').setAttribute('disabled', true);
+                resetMessage();
+            }
+        })
+        .catch(function (error) {
+            console.log("Error getting documents: ", error);
+        });
+});
+
+document.getElementById('requestTitle').addEventListener('keyup', () => {
+    var title = document.getElementById('requestTitle').value;
+    var count = 0;
+    db.collection("accessibility").where("title", "==", title)
+        .get()
+        .then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+                count++;
+            });
+            if (count > 0) {
+                message.innerHTML = `A request for this video has been found`;
+                message.style.color = 'red';
+                document.getElementById('requestSubmit').setAttribute('disabled', true);
                 resetMessage();
             }
         })
