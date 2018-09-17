@@ -243,8 +243,9 @@ function deleteDoc(docId) {
     if (r == true) {
         db.collection("accessibility").doc(docId).delete().then(function() {
             console.log("Document successfully deleted!");
+            search();
         }).catch(function(error) {
-            console.error("Error removing document: ", error);
+            alert("Error removing document: ", error);
         });
     } else {
         // Delete Cancelled
