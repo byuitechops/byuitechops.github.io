@@ -53,7 +53,7 @@ function getData() {
         querySnapshot.forEach((doc) => {
             // console.log(`${doc.id} => ${doc.data().title}`);
 
-            var items = ["type", "title", "docURL", "courseCode"];
+            var items = ["type", "status", "title", "docURL", "courseCode"];
 
             for (var i = 0; i < items.length; i++) {
                 var item;
@@ -244,11 +244,12 @@ function search() {
     db.collection('accessibility').where(sType, "==", sVal).get()
         .then((querySnapshot) => {
             document.getElementById('text').innerHTML = "";
+            document.getElementById('text').insertAdjacentHTML('beforeend', '<h3>Type</h3><h3>Status</h3><h3>Title</h3><h3>Doc Url</h3><h3>Course Code</h3><h3></h3>');
 
             querySnapshot.forEach((doc) => {
                 // console.log(`${doc.data().title} => ${doc.data().srcURL}`);
 
-                var items = ["type", "title", "docURL", "courseCode"];
+                var items = ["type", "status", "title", "docURL", "courseCode"];
 
                 for (var i = 0; i < items.length; i++) {
                     var item;
@@ -278,6 +279,7 @@ function search() {
 document.getElementById('searchcancel').addEventListener('click', () => {
     document.getElementById('searchcancel').classList.add('hide');
     document.getElementById('text').innerHTML = "";
+    document.getElementById('text').insertAdjacentHTML('beforeend', '<h3>Type</h3><h3>Status</h3><h3>Title</h3><h3>Doc Url</h3><h3>Course Code</h3><h3></h3>');
     document.getElementById('searchValue').value = "";
     document.getElementById('searchType').options[0].selected = true;
     startNumber = 1;

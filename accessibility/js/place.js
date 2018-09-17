@@ -270,7 +270,7 @@ function updateDocToFB(docId) {
             placedDate: new Date()
         })
         .then(function () {
-            window.location.reload();
+            // window.location.reload();
         })
         .catch(function (error) {
             console.error('Error updating document: ', error);
