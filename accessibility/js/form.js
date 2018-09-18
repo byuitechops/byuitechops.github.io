@@ -203,6 +203,8 @@ document.getElementById('requestVideoURL').addEventListener('keyup', () => {
                 message.style.color = 'red';
                 document.getElementById('requestSubmit').setAttribute('disabled', true);
                 resetMessage();
+            } else {
+                document.getElementById('requestSubmit').removeAttribute('disabled');
             }
         })
         .catch(function (error) {
@@ -224,6 +226,8 @@ document.getElementById('requestTitle').addEventListener('keyup', () => {
                 message.style.color = 'red';
                 document.getElementById('requestSubmit').setAttribute('disabled', true);
                 resetMessage();
+            } else {
+                document.getElementById('requestSubmit').removeAttribute('disabled');
             }
         })
         .catch(function (error) {
