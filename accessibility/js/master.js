@@ -258,6 +258,7 @@ function deleteDoc(docId) {
 
 function search() {
     document.getElementById('searchcancel').classList.remove('hide');
+    document.getElementById('load').classList.add('hide');
 
     var sVal = document.getElementById('searchValue').value;
     var sType = document.getElementById('searchType').value;
@@ -269,7 +270,7 @@ function search() {
             document.getElementById('text').insertAdjacentHTML('beforeend', '<h3>Type</h3><h3>Status</h3><h3>Title</h3><h3>Doc Url</h3><h3>Course Code</h3><h3></h3>');
 
             querySnapshot.forEach((doc) => {
-                // console.log(`${doc.data().title} => ${doc.data().srcURL}`);
+                console.log(`${doc.data().title} => ${doc.data().srcURL}`);
 
                 var items = ["type", "status", "title", "docURL", "courseCode"];
 
@@ -304,6 +305,7 @@ document.getElementById('searchcancel').addEventListener('click', () => {
     document.getElementById('text').insertAdjacentHTML('beforeend', '<h3>Type</h3><h3>Status</h3><h3>Title</h3><h3>Doc Url</h3><h3>Course Code</h3><h3></h3>');
     document.getElementById('searchValue').value = "";
     document.getElementById('searchType').options[0].selected = true;
+    document.getElementById('load').classList.remove('hide');
     startNumber = 1;
     getData();
 });
