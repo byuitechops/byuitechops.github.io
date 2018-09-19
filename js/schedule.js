@@ -22,7 +22,7 @@
                     var titles;
                     var shot = snap.val();
                     for (titles in shot) {
-                        if (titles == 'Admin' || titles == 'TeamLead') {
+                        if (titles == 'Admin') {
                             // Check if admin
                             if (shot[titles] == true) {
                                 // Show dropdown for teams
@@ -31,6 +31,11 @@
                                 document.getElementById('adminlink').classList.remove('hide');
                                 // Exit loop
                                 break;
+                            }
+                        } else if (titles == 'TeamLead') {
+                            if (shot[titles] == true) {
+                                // Show dropdown for teams
+                                document.getElementById('team-dropdown').classList.remove('hide');
                             }
                         } else if (titles == 'Team') {
                             // Show iframe for schedule
