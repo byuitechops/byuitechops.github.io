@@ -11,15 +11,59 @@
     };
     firebase.initializeApp(config);
 
+    // firebase.database().ref('users').once('value').then(function (snap) {
+    //     var users = snap.val();
+    //     for (key in users) {
+    //         // Here is where you put the changes to the users
+    //         console.log(key);
+    //         var update =
+    //             '{"katana": null, "microsoft": null, "monthlyTraining": null, "pathway": null, "proDev": null, "screenSteps": null, "slack": null, "teamDrive": null, "teamDynamix": null, "totStyleGuide": null, "trello": null, "videoIndexing": null, "workDay": null, "brightspace": null, "canvas": null, "canvasStyleGuide": null, "employeeDirectory": null, "equella": null, "firebaseConsole": null}';
+    //         update = JSON.parse(update);
+    //         firebase.database().ref('users/' + key).update(update);
+    //     }
+    // })
+
     firebase.database().ref('users').once('value').then(function (snap) {
-        var users = snap.val();
-        for (key in users) {
-            // Here is where you put the changes to the users
-            console.log(key);
-            var update =
-                '{"katana": null, "microsoft": null, "monthlyTraining": null, "pathway": null, "proDev": null, "screenSteps": null, "slack": null, "teamDrive": null, "teamDynamix": null, "totStyleGuide": null, "trello": null, "videoIndexing": null, "workDay": null, "brightspace": null, "canvas": null, "canvasStyleGuide": null, "employeeDirectory": null, "equella": null, "firebaseConsole": null}';
-            update = JSON.parse(update);
-            firebase.database().ref('users/' + key).update(update);
+        snap = snap.val();
+        console.log(snap["Zoe Miner"]);
+        for (var name in snap) {
+            var json = "{"
+            json += `"name": "${name}"`;
+            for (var title in snap[name]) {
+                if (title == "Admin") {
+                    json += `, "admin": ${snap[name][title]}`;
+                }
+                if (title == "Team") {
+                    json += `, "team": "${snap[name][title]}"`;
+                }
+                if (title == "TeamLead") {
+                    json += `, "teamLead": ${snap[name][title]}`;
+                }
+                if (title == "info") {
+                    if (snap[name][title][phoneNumber] != undefined) {
+                        snap[name][title][phoneNumber] = null;
+                    }
+                    json += `, "info": ${JSON.stringify(snap[name][title])}`;
+                }
+            }
+            json += "}"
+            // console.log(json);
+            // console.log(JSON.parse(json));
         }
     })
 </script>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>

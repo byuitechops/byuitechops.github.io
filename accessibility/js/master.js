@@ -110,7 +110,7 @@ function viewItem(docId) {
                         if (doc.data().type == "Transcript") {
                             var items = ["type", "title", "docURL", "courseCode", "copyeditor", "lmsLink", "priority",
                                 "requestor", "srcURL", "status", "transcriber", "videoHeight", "videoLength",
-                                "week", "requestDate", "transcriptClaimed", "transcriptFinished", "reviewClaimed", "reviewFinished"
+                                "week", "requestDate", "transcriptClaimed", "transcriptFinished", "reviewClaimed", "reviewFinished", "placed"
                             ];
 
                             for (var i = 0; i < items.length; i++) {
@@ -140,7 +140,7 @@ function viewItem(docId) {
                         if (doc.data().type == "Alt Text") {
                             console.log("Calling");
                             var items = ["type", "title", "docURL", "courseCode", "copyeditor", "lmsLink", "priority",
-                                "requestor", "status", "week", "requestDate", "copyeditClaimed", "copyeditFinished"
+                                "requestor", "status", "week", "requestDate", "copyeditClaimed", "copyeditFinished", "placed"
                             ];
 
                             for (var i = 0; i < items.length; i++) {
