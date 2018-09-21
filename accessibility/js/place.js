@@ -280,7 +280,7 @@ function updateDocToFB(docId) {
         });
     modal.style.display = "none";
     document.getElementById('buttons').parentNode.removeChild(document.getElementById('buttons'));
-    document.getElementById('intro').parentNode.removeChild(document.getElementById('intro'));
+    document.getElementById('intro').innerHTML = "";
     document.getElementById('modal-message').innerHTML = "";
 }
 

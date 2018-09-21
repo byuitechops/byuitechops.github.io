@@ -1,4 +1,5 @@
 <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
 <script>
     // Initialize Firebase
     var config = {
@@ -10,6 +11,13 @@
         messagingSenderId: "265124430634"
     };
     firebase.initializeApp(config);
+    // Initialize Cloud Firestore through Firebase
+    var db = firebase.firestore();
+
+    // Disable deprecated features
+    db.settings({
+        timestampsInSnapshots: true
+    });
 
     // firebase.database().ref('users').once('value').then(function (snap) {
     //     var users = snap.val();
@@ -25,7 +33,7 @@
 
     firebase.database().ref('users').once('value').then(function (snap) {
         snap = snap.val();
-        console.log(snap["Zoe Miner"]);
+        // console.log(snap["Zoe Miner"]);
         for (var name in snap) {
             var json = "{"
             json += `"name": "${name}"`;
@@ -40,15 +48,33 @@
                     json += `, "teamLead": ${snap[name][title]}`;
                 }
                 if (title == "info") {
-                    if (snap[name][title][phoneNumber] != undefined) {
-                        snap[name][title][phoneNumber] = null;
+                    if (snap[name][title]["phoneNumber"] != undefined) {
+                        delete snap[name][title]["phoneNumber"];
+                    }
+                    if (snap[name][title]["phoneNum"] == undefined) {
+                        snap[name][title]["phoneNum"] = null;
                     }
                     json += `, "info": ${JSON.stringify(snap[name][title])}`;
                 }
             }
+
+            json += `, "time": {`;
+            json += `"break": ${snap[name]["TimeClock"]["break"]}`;
+            json += `, "breakKey": "${snap[name]["TimeClock"]["breakkey"]}"`;
+            json += `, "check": "${snap[name]["TimeClock"]["check"]}"`;
+            json += `, "checkKey": "${snap[name]["TimeClock"]["timekey"]}"`;
             json += "}"
-            // console.log(json);
-            // console.log(JSON.parse(json));
+            json += "}"
+            console.log(json);
+            console.log(JSON.parse(json));
+            json = JSON.parse(json);
+            // db.collection("users").add(json)
+            //     .then(function (docRef) {
+            //         console.log("Document written with ID: ", docRef.id);
+            //     })
+            //     .catch(function (error) {
+            //         console.error("Error adding document: ", error);
+            //     });
         }
     })
 </script>
