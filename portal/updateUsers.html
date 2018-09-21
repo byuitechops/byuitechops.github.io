@@ -33,7 +33,7 @@
 
     firebase.database().ref('users').once('value').then(function (snap) {
         snap = snap.val();
-        // console.log(snap["Zoe Miner"]);
+        // console.log(snap);
         for (var name in snap) {
             var json = "{"
             json += `"name": "${name}"`;
@@ -65,12 +65,21 @@
             json += `, "checkKey": "${snap[name]["TimeClock"]["timekey"]}"`;
             json += "}"
             json += "}"
-            console.log(json);
-            console.log(JSON.parse(json));
+            // console.log(json);
+            // console.log(JSON.parse(json));
             json = JSON.parse(json);
-            // db.collection("users").add(json)
+
+            var json2 = "{";
+            var breaks = snap[name]["TimeClock"]["Breaks"];
+            for (var time in breaks) {
+                console.log(new Date(time));
+            }
+            json2 += "}";
+
+            // db.collection("usersTest").add(json)
             //     .then(function (docRef) {
             //         console.log("Document written with ID: ", docRef.id);
+            //         db.collection('users').doc(docRef.id).collection('breaks').doc(date).set(json2)
             //     })
             //     .catch(function (error) {
             //         console.error("Error adding document: ", error);
