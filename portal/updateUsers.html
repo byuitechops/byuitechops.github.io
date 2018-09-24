@@ -66,16 +66,47 @@
             json += "}"
             json += "}"
             // console.log(json);
-            // console.log(JSON.parse(json));
+            console.log(JSON.parse(json));
             json = JSON.parse(json);
 
             var json2 = "{";
             var breaks = snap[name]["TimeClock"]["Breaks"];
+            // console.log("Breaks");
+            json2 += "breaks: {";
             for (var time in breaks) {
+                var newDate = new Date(time);
+                console.log('1970-01-01T' + breaks[time]["In"].slice(0, -2) + 'Z');
+                var inTime = new Date('1970-01-01 ' + breaks[time]["In"]);
+                console.log(inTime);
+                json2 += ("0" + newDate.getMonth()).slice(-2) + "/" + ("0" + newDate.getDate()).slice(-2) + "/" + newDate.getFullYear() + " " + ("0" + newDate.getHours()).slice(-2) + ":" + ("0" + newDate.getMinutes()).slice(-2) + ":" + ("0" + newDate.getSeconds()).slice(-2);
+                json2 += ": {";
+                json2 += "in:";
+                json2 += ("0" + inTime.getHours()).slice(-2) + ":" + ("0" + inTime.getMinutes()).slice(-2) + ":" + ("0" + inTime.getSeconds()).slice(-2);
+                json2 += "}";
+            }            
+            json2 += "}";
+            var hours = snap[name]["TimeClock"]["HoursWorked"];
+            // console.log("Hours Worked");
+            json2 += "hoursWorked: {";
+            for (var time in hours) {
                 var newDate = new Date(time)
-                console.log();
+                // console.log(newDate);
+                json2 += ("0" + newDate.getMonth()).slice(-2) + "/" + ("0" + newDate.getDate()).slice(-2) + "/" + newDate.getFullYear() + " " + ("0" + newDate.getHours()).slice(-2) + ":" + ("0" + newDate.getMinutes()).slice(-2) + ":" + ("0" + newDate.getSeconds()).slice(-2);
             }
             json2 += "}";
+            var scheduled = snap[name]["TimeClock"]["ScheduledTime"];
+            // console.log("Scheduled Time");
+            json2 += "scheduledTime: {";
+            for (var time in scheduled) {
+                var newDate = new Date(time)
+                // console.log(newDate);
+                json2 += ("0" + newDate.getMonth()).slice(-2) + "/" + ("0" + newDate.getDate()).slice(-2) + "/" + newDate.getFullYear() + " " + ("0" + newDate.getHours()).slice(-2) + ":" + ("0" + newDate.getMinutes()).slice(-2) + ":" + ("0" + newDate.getSeconds()).slice(-2);
+            }
+            json2 += "}";
+            json2 += "}";
+
+            console.log(json2);
+            console.log(JSON.parse(json2));
 
             // db.collection("usersTest").add(json)
             //     .then(function (docRef) {
