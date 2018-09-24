@@ -75,7 +75,6 @@
             json2 += "breaks: {";
             for (var time in breaks) {
                 var newDate = new Date(time);
-                console.log('1970-01-01T' + breaks[time]["In"].slice(0, -2) + 'Z');
                 var inTime = new Date('1970-01-01 ' + breaks[time]["In"]);
                 console.log(inTime);
                 json2 += ("0" + newDate.getMonth()).slice(-2) + "/" + ("0" + newDate.getDate()).slice(-2) + "/" + newDate.getFullYear() + " " + ("0" + newDate.getHours()).slice(-2) + ":" + ("0" + newDate.getMinutes()).slice(-2) + ":" + ("0" + newDate.getSeconds()).slice(-2);
