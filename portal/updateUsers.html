@@ -69,52 +69,41 @@
             console.log(JSON.parse(json));
             json = JSON.parse(json);
 
-            var json2 = "{";
-            var breaks = snap[name]["TimeClock"]["Breaks"];
-            // console.log("Breaks");
-            json2 += "breaks: {";
-            for (var time in breaks) {
-                var newDate = new Date(time);
-                var inTime = new Date('1970-01-01 ' + breaks[time]["In"]);
-                console.log(inTime);
-                json2 += ("0" + newDate.getMonth()).slice(-2) + "/" + ("0" + newDate.getDate()).slice(-2) + "/" + newDate.getFullYear() + " " + ("0" + newDate.getHours()).slice(-2) + ":" + ("0" + newDate.getMinutes()).slice(-2) + ":" + ("0" + newDate.getSeconds()).slice(-2);
-                json2 += ": {";
-                json2 += "in:";
-                json2 += ("0" + inTime.getHours()).slice(-2) + ":" + ("0" + inTime.getMinutes()).slice(-2) + ":" + ("0" + inTime.getSeconds()).slice(-2);
-                json2 += "}";
-            }            
-            json2 += "}";
-            var hours = snap[name]["TimeClock"]["HoursWorked"];
-            // console.log("Hours Worked");
-            json2 += "hoursWorked: {";
-            for (var time in hours) {
-                var newDate = new Date(time)
-                // console.log(newDate);
-                json2 += ("0" + newDate.getMonth()).slice(-2) + "/" + ("0" + newDate.getDate()).slice(-2) + "/" + newDate.getFullYear() + " " + ("0" + newDate.getHours()).slice(-2) + ":" + ("0" + newDate.getMinutes()).slice(-2) + ":" + ("0" + newDate.getSeconds()).slice(-2);
-            }
-            json2 += "}";
-            var scheduled = snap[name]["TimeClock"]["ScheduledTime"];
-            // console.log("Scheduled Time");
-            json2 += "scheduledTime: {";
-            for (var time in scheduled) {
-                var newDate = new Date(time)
-                // console.log(newDate);
-                json2 += ("0" + newDate.getMonth()).slice(-2) + "/" + ("0" + newDate.getDate()).slice(-2) + "/" + newDate.getFullYear() + " " + ("0" + newDate.getHours()).slice(-2) + ":" + ("0" + newDate.getMinutes()).slice(-2) + ":" + ("0" + newDate.getSeconds()).slice(-2);
-            }
-            json2 += "}";
-            json2 += "}";
+            if (name !== "Katelyn Hull" && name !== "Sophia Beyer") {
+                var breaks = snap[name]["TimeClock"]["Breaks"];
+                // console.log("Breaks");
+                var bjson = '{';
+                for (var time in breaks) {
+                    var newDate = new Date(time);
+                    var inTime = new Date('1970-01-01 ' + breaks[time]["In"]);
+                    var outTime = new Date('1970-01-01 ' + breaks[time]["Out"]);
+                    bjson += ('"' + ("0" + newDate.getMonth()).slice(-2) + "/" + ("0" + newDate.getDate()).slice(
+                            -2) + "/" + newDate.getFullYear() + " " + ("0" + newDate.getHours()).slice(-2) +
+                        ":" + ("0" + newDate.getMinutes()).slice(-2) + ":" + ("0" + newDate.getSeconds()).slice(
+                            -2) + '": ');
+                    bjson += " {";
+                    bjson += '"in": ';
+                    bjson += ('"' + ("0" + inTime.getHours()).slice(-2) + ":" + ("0" + inTime.getMinutes()).slice(
+                        -2) + ":" + ("0" + inTime.getSeconds()).slice(-2) + '", ');
+                    bjson += '"out": ';
+                    bjson += ('"' + ("0" + outTime.getHours()).slice(-2) + ":" + ("0" + outTime.getMinutes()).slice(
+                        -2) + ":" + ("0" + outTime.getSeconds()).slice(-2) + '"');
+                    bjson += "}, ";
+                }
+                bjson = bjson.slice(0, -2) + " }";
 
-            console.log(json2);
-            console.log(JSON.parse(json2));
+                // console.log(bjson);
+                console.log(JSON.parse(bjson));
 
-            // db.collection("usersTest").add(json)
-            //     .then(function (docRef) {
-            //         console.log("Document written with ID: ", docRef.id);
-            //         db.collection('users').doc(docRef.id).collection('breaks').doc(date).set(json2)
-            //     })
-            //     .catch(function (error) {
-            //         console.error("Error adding document: ", error);
-            //     });
+                // db.collection("usersTest").add(json)
+                //     .then(function (docRef) {
+                //         console.log("Document written with ID: ", docRef.id);
+                //         db.collection('users').doc(docRef.id).collection('breaks').doc(date).set(bjson)
+                //     })
+                //     .catch(function (error) {
+                //         console.error("Error adding document: ", error);
+                //     });
+            }
         }
     })
 </script>
