@@ -1,0 +1,52 @@
+#text {
+    display: grid;
+    grid-template-columns: 10% 10% 15% 10% 25% 15% 15%;
+    grid-row-gap: 1em;
+    margin-bottom: 2em;
+}
+
+h3 {
+    display: inline-block;
+    column-span: 1;
+    &:nth-of-type(6) {
+        text-align: center;
+    }
+    &:nth-of-type(2) {
+        text-align: center;
+    }
+}
+
+span:nth-of-type(6n) {
+    text-align: center;
+}
+
+span:nth-of-type(6n + 2) {
+    text-align: center;
+}
+
+#load {
+    cursor: pointer;
+    width: 20%;
+    margin: 20px 35%;
+}
+
+#searchcancel {
+    font-size: 1.6em;
+    font-weight: bold;
+    color: #BF0000;
+    cursor: pointer;
+    position: relative;
+    top: 7px;
+    &:hover {
+        color: darkgrey;
+    }
+}
+
+#searchValue {
+    font-size: .9em;
+    margin: 0 5px;
+}
+
+#searchType {
+    font-size: 1em;
+}

@@ -1,0 +1,124 @@
+<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyA_I75-CU5_GlNP1QSKvvH8nbYVkaAUgNA",
+        authDomain: "techopsportal.firebaseapp.com",
+        databaseURL: "https://techopsportal.firebaseio.com",
+        projectId: "techopsportal",
+        storageBucket: "techopsportal.appspot.com",
+        messagingSenderId: "265124430634"
+    };
+    firebase.initializeApp(config);
+    // Initialize Cloud Firestore through Firebase
+    var db = firebase.firestore();
+
+    // Disable deprecated features
+    db.settings({
+        timestampsInSnapshots: true
+    });
+
+    // firebase.database().ref('users').once('value').then(function (snap) {
+    //     var users = snap.val();
+    //     for (key in users) {
+    //         // Here is where you put the changes to the users
+    //         console.log(key);
+    //         var update =
+    //             '{"katana": null, "microsoft": null, "monthlyTraining": null, "pathway": null, "proDev": null, "screenSteps": null, "slack": null, "teamDrive": null, "teamDynamix": null, "totStyleGuide": null, "trello": null, "videoIndexing": null, "workDay": null, "brightspace": null, "canvas": null, "canvasStyleGuide": null, "employeeDirectory": null, "equella": null, "firebaseConsole": null}';
+    //         update = JSON.parse(update);
+    //         firebase.database().ref('users/' + key).update(update);
+    //     }
+    // })
+
+    firebase.database().ref('users').once('value').then(function (snap) {
+        snap = snap.val();
+        // console.log(snap);
+        for (var name in snap) {
+            var json = "{"
+            json += `"name": "${name}"`;
+            for (var title in snap[name]) {
+                if (title == "Admin") {
+                    json += `, "admin": ${snap[name][title]}`;
+                }
+                if (title == "Team") {
+                    json += `, "team": "${snap[name][title]}"`;
+                }
+                if (title == "TeamLead") {
+                    json += `, "teamLead": ${snap[name][title]}`;
+                }
+                if (title == "info") {
+                    if (snap[name][title]["phoneNumber"] != undefined) {
+                        delete snap[name][title]["phoneNumber"];
+                    }
+                    if (snap[name][title]["phoneNum"] == undefined) {
+                        snap[name][title]["phoneNum"] = null;
+                    }
+                    json += `, "info": ${JSON.stringify(snap[name][title])}`;
+                }
+            }
+
+            json += `, "time": {`;
+            json += `"break": ${snap[name]["TimeClock"]["break"]}`;
+            json += `, "breakKey": "${snap[name]["TimeClock"]["breakkey"]}"`;
+            json += `, "check": "${snap[name]["TimeClock"]["check"]}"`;
+            json += `, "checkKey": "${snap[name]["TimeClock"]["timekey"]}"`;
+            json += "}"
+            json += "}"
+            // console.log(json);
+            console.log(JSON.parse(json));
+            json = JSON.parse(json);
+
+            if (name !== "Katelyn Hull" && name !== "Sophia Beyer") {
+                var breaks = snap[name]["TimeClock"]["Breaks"];
+                // console.log("Breaks");
+                var bjson = '{';
+                for (var time in breaks) {
+                    var newDate = new Date(time);
+                    var inTime = new Date('1970-01-01 ' + breaks[time]["In"]);
+                    var outTime = new Date('1970-01-01 ' + breaks[time]["Out"]);
+                    bjson += ('"' + ("0" + newDate.getMonth()).slice(-2) + "/" + ("0" + newDate.getDate()).slice(
+                            -2) + "/" + newDate.getFullYear() + " " + ("0" + newDate.getHours()).slice(-2) +
+                        ":" + ("0" + newDate.getMinutes()).slice(-2) + ":" + ("0" + newDate.getSeconds()).slice(
+                            -2) + '": ');
+                    bjson += " {";
+                    bjson += '"in": ';
+                    bjson += ('"' + ("0" + inTime.getHours()).slice(-2) + ":" + ("0" + inTime.getMinutes()).slice(
+                        -2) + ":" + ("0" + inTime.getSeconds()).slice(-2) + '", ');
+                    bjson += '"out": ';
+                    bjson += ('"' + ("0" + outTime.getHours()).slice(-2) + ":" + ("0" + outTime.getMinutes()).slice(
+                        -2) + ":" + ("0" + outTime.getSeconds()).slice(-2) + '"');
+                    bjson += "}, ";
+                }
+                bjson = bjson.slice(0, -2) + " }";
+
+                // console.log(bjson);
+                console.log(JSON.parse(bjson));
+
+                // db.collection("usersTest").add(json)
+                //     .then(function (docRef) {
+                //         console.log("Document written with ID: ", docRef.id);
+                //         db.collection('users').doc(docRef.id).collection('breaks').doc(date).set(bjson)
+                //     })
+                //     .catch(function (error) {
+                //         console.error("Error adding document: ", error);
+                //     });
+            }
+        }
+    })
+</script>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>

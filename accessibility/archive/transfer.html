@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyBWv05RlAPUpAts6LNXgG5-wsdhd9jXafg",
+      authDomain: "byui-accessability.firebaseapp.com",
+      databaseURL: "https://byui-accessability.firebaseio.com",
+      projectId: "byui-accessability",
+      storageBucket: "byui-accessability.appspot.com",
+      messagingSenderId: "275383619900"
+    };
+    firebase.initializeApp(config);
+
+    var db = firebase.firestore();
+    const settings = { /* your settings... */
+      timestampsInSnapshots: true
+    };
+    db.settings(settings);
+
+    // Run Function
+    checkData();
+
+    function loadJSON1(callback) {
+      var xobj = new XMLHttpRequest();
+      xobj.overrideMimeType("application/json");
+      xobj.open('GET', 'transcripts.json', true);
+      xobj.onreadystatechange = function () {
+        if (xobj.readyState == 4 && xobj.status == "200") {
+          callback(JSON.parse(xobj.responseText));
+        }
+      };
+      xobj.send(null);
+    }
+
+    function loadJSON2(callback) {
+      var xobj = new XMLHttpRequest();
+      xobj.overrideMimeType("application/json");
+      xobj.open('GET', 'transcripts2.json', true);
+      xobj.onreadystatechange = function () {
+        if (xobj.readyState == 4 && xobj.status == "200") {
+          var jsonreturn = xobj.responseText.replace("}, {", ",")
+          callback(JSON.parse(jsonreturn));
+        }
+      };
+      xobj.send(null);
+    }
+
+    function checkData() {
+      var newDocList = [];
+      var json1;
+      var json2;
+      loadJSON1(function (json) {
+        json1 = json;
+        loadJSON2(function (json) {
+          json2 = json;
+
+          for (i in json2) {
+            for (j in json1) {
+              if (j == i) {
+                delete json2[i];
+              }
+            }
+          }
+          var data = Object.assign(json1, json2);
+
+          var copyeditor;
+          var courseCode;
+          var docURL;
+          var lmsURL;
+          var placed;
+          var priority;
+          var requestDate;
+          var requestor;
+          var srcURL;
+          var status;
+          var title;
+          var transcriber;
+          var type;
+          var week;
+
+          var title;
+          var num = 0;
+          for (title in data) {
+            // console.log(data[title]);
+            copyeditor = data[title]['Stage02']['Copyeditor'].slice(data[title]['Stage02']['Copyeditor'].indexOf(
+                ',') +
+              2) + " " + data[title]['Stage02']['Copyeditor'].slice(0, data[title]['Stage02']['Copyeditor'].indexOf(
+              ','));
+            courseCode = data[title]['Course Code'];
+            docURL = data[title]['Stage 01']['Transcript URL (Google)'];
+            lmsURL = data[title]['Stage 01']['Video URL (LMS)'];
+            placed = false;
+            priority = data[title]['Stage 01']['Transcript Priority'].slice(0, 1);
+            requestDate = data[title]['Stage 01']['Timestamp'];
+            requestor = data[title]['Stage 01']['Requestor Name'].replace(', ', " ");
+            srcURl = data[title]['Stage 01']['Video URL (SRC)'];
+            if (data[title]['General Information']['Status'] == "Gathering Information" || data[title][
+                'General Information'
+              ]['Status'] == "Completed") {
+              status = "Finished";
+            }
+            if (data[title]['General Information']['Status'] == "Ready for Copyedit") {
+              status = "Ready for Review";
+            }
+            if (data[title]['General Information']['Status'] == "Return to Sage 01" || data[title][
+                'General Information'
+              ]['Status'] == "Needs Attention" ||
+              data[title]['General Information']['Status'] == "Creating Transcript") {
+              status = "Transcript in Progress";
+            }
+            if (data[title]['General Information']['Status'] == "Under Review") {
+              status = "Review in Progress";
+            }
+            if (data[title]['General Information']['Status'] == "Not Started") {
+              status = "Ready for Transcript"
+            }
+
+            title = title;
+            transcriber = data[title]['Stage 01']['Transcriber'].slice(data[title]['Stage 01']['Transcriber'].indexOf(
+                ',') +
+              2) + " " + data[title]['Stage 01']['Transcriber'].slice(0, data[title]['Stage 01'][
+              'Transcriber'
+            ].indexOf(
+              ','));
+            type = "Transcript";
+            videoLength = data[title]['Stage 01']['Video Length'];
+            week = data[title]['Stage 01']['Lesson'];
+
+            // console.log(data[title]);
+
+           var newDoc = {
+              copyeditor: copyeditor,
+              courseCode: courseCode,
+              docURL: docURL,
+              lmsURL: lmsURL,
+              placed: placed,
+              priority: priority,
+              requestDate: requestDate,
+              requestor: requestor,
+              srcURl: srcURl,
+              status: status,
+              title: title,
+              transcriber: transcriber,
+              type: type,
+              week: week
+            }
+            newDocList.push(newDoc);
+
+
+            // db.collection('accessibility').add({
+            //   copyeditor: copyeditor,
+            //   courseCode: courseCode,
+            //   docURL: docURL,
+            //   lmsURL: lmsURL,
+            //   placed: placed,
+            //   priority: priority,
+            //   requestDate: requestDate,
+            //   requestor: requestor,
+            //   srcURl: srcURl,
+            //   status: status,
+            //   title: title,
+            //   transcriber: transcriber,
+            //   type: type,
+            //   week: week
+            // }).then(function (docRef) {
+            //   console.log('Complete');
+            // }).catch(function (error) {
+            //   console.log(error);
+            // });
+          }
+      document.write(JSON.stringify(newDocList));
+        });
+      });
+    }
+
+    function pullFromJSON() {
+      var json;
+      var promise = new Promise(() => {
+        json = checkData();
+      });
+      promise.then(console.log(json));
+      // var copyeditor;
+      // var courseCode;
+      // var docURL;
+      // var lmsURL;
+      // var placed;
+      // var priority;
+      // var requestDate;
+      // var requestor;
+      // var srcURl;
+      // var status;
+      // var title;
+      // var transcriber;
+      // var type;
+      // var week;
+
+      // var title;
+      // for (title in data) {
+      //   // console.log(data[title]);
+      //   copyeditor = data[title]['Stage02']['Copyeditor'].slice(data[title]['Stage02']['Copyeditor'].indexOf(',') +
+      //     2) + " " + data[title]['Stage02']['Copyeditor'].slice(0, data[title]['Stage02']['Copyeditor'].indexOf(
+      //     ','));
+      //   courseCode = data[title]['Course Code'];
+      //   docURL = data[title]['Stage 01']['Transcript URL (Google)'];
+      //   lmsURL = data[title]['Stage 01']['Video URL (LMS)'];
+      //   placed = false;
+      //   priority = data[title]['Stage 01']['Transcript Priority'].slice(0, 1);
+      //   requestDate = data[title]['Stage 01']['Timestamp'];
+      //   requestor = data[title]['Stage 01']['Requestor Name'].replace(', ', " ");
+      //   srcURl = data[title]['Stage 01']['Video URL (SRC)'];
+      //   if (data[title]['General Information']['Status'] == "Gathering Information" || data[title][
+      //       'General Information'
+      //     ]['Status'] == "Completed") {
+      //     status = "Finished";
+      //   }
+      //   if (data[title]['General Information']['Status'] == "Ready for Copyedit") {
+      //     status = "Ready for Review";
+      //   }
+      //   if (data[title]['General Information']['Status'] == "Return to Sage 01" || data[title][
+      //       'General Information'
+      //     ]['Status'] == "Needs Attention" ||
+      //     data[title]['General Information']['Status'] == "Creating Transcript") {
+      //     status = "Transcript in Progress";
+      //   }
+      //   if (data[title]['General Information']['Status'] == "Under Review") {
+      //     status = "Review in Progress";
+      //   }
+      //   if (data[title]['General Information']['Status'] == "Not Started") {
+      //     status = "Ready for Transcript"
+      //   }
+
+      //   title = title;
+      //   transcriber = data[title]['Stage 01']['Transcriber'].slice(data[title]['Stage 01']['Transcriber'].indexOf(
+      //       ',') +
+      //     2) + " " + data[title]['Stage 01']['Transcriber'].slice(0, data[title]['Stage 01']['Transcriber'].indexOf(
+      //     ','));
+      //   type = "Transcript";
+      //   videoLength = data[title]['Stage 01']['Video Length'];
+      //   week = data[title]['Stage 01']['Lesson'];
+
+      //   console.log(data[title]);
+
+      //   // db.collection('accessibility').add({
+      //   //   copyeditor: copyeditor,
+      //   //   courseCode: courseCode,
+      //   //   docURL: docURL,
+      //   //   lmsURL: lmsURL,
+      //   //   placed: placed,
+      //   //   priority: priority,
+      //   //   requestDate: requestDate,
+      //   //   requestor: requestor,
+      //   //   srcURl: srcURl,
+      //   //   status: status,
+      //   //   title: title,
+      //   //   transcriber: transcriber,
+      //   //   type: type,
+      //   //   week: week
+      //   // }).then(function (docRef) {
+      //   //   console.log('Complete');
+      //   // }).catch(function (error) {
+      //   //   console.log(error);
+      //   // });
+      // }
+    }
+
+    function pullFromDB() {
+      firebase.database().ref('/transcripts').once('value').then((snapshot) => {
+        var data = snapshot.val();
+        // console.log(data);
+
+        var copyeditor;
+        var courseCode;
+        var docURL;
+        var lmsURL;
+        var placed;
+        var priority;
+        var requestDate;
+        var requestor;
+        var srcURl;
+        var status;
+        var title;
+        var transcriber;
+        var type;
+        var week;
+
+        var title;
+        for (title in data) {
+          // console.log(data[title]);
+          copyeditor = data[title]['Stage02']['Copyeditor'].slice(data[title]['Stage02']['Copyeditor'].indexOf(',') +
+            2) + " " + data[title]['Stage02']['Copyeditor'].slice(0, data[title]['Stage02']['Copyeditor'].indexOf(
+            ','));
+          courseCode = data[title]['Course Code'];
+          docURL = data[title]['Stage 01']['Transcript URL (Google)'];
+          lmsURL = data[title]['Stage 01']['Video URL (LMS)'];
+          placed = false;
+          priority = data[title]['Stage 01']['Transcript Priority'].slice(0, 1);
+          requestDate = data[title]['Stage 01']['Timestamp'];
+          requestor = data[title]['Stage 01']['Requestor Name'].replace(', ', " ");
+          srcURl = data[title]['Stage 01']['Video URL (SRC)'];
+          if (data[title]['General Information']['Status'] == "Gathering Information" || data[title][
+              'General Information'
+            ]['Status'] == "Completed") {
+            status = "Finished";
+          }
+          if (data[title]['General Information']['Status'] == "Ready for Copyedit") {
+            status = "Ready for Review";
+          }
+          if (data[title]['General Information']['Status'] == "Return to Sage 01" || data[title][
+              'General Information'
+            ]['Status'] == "Needs Attention" ||
+            data[title]['General Information']['Status'] == "Creating Transcript") {
+            status = "Transcript in Progress";
+          }
+          if (data[title]['General Information']['Status'] == "Under Review") {
+            status = "Review in Progress";
+          }
+          if (data[title]['General Information']['Status'] == "Not Started") {
+            status = "Ready for Transcript"
+          }
+
+          title = title;
+          transcriber = data[title]['Stage 01']['Transcriber'].slice(data[title]['Stage 01']['Transcriber'].indexOf(
+              ',') +
+            2) + " " + data[title]['Stage 01']['Transcriber'].slice(0, data[title]['Stage 01']['Transcriber'].indexOf(
+            ','));
+          type = "Transcript";
+          videoLength = data[title]['Stage 01']['Video Length'];
+          week = data[title]['Stage 01']['Lesson'];
+
+          db.collection('accessibility').add({
+            copyeditor: copyeditor,
+            courseCode: courseCode,
+            docURL: docURL,
+            lmsURL: lmsURL,
+            placed: placed,
+            priority: priority,
+            requestDate: requestDate,
+            requestor: requestor,
+            srcURl: srcURl,
+            status: status,
+            title: title,
+            transcriber: transcriber,
+            type: type,
+            week: week
+          }).then(function (docRef) {
+            console.log('Complete');
+          }).catch(function (error) {
+            console.log(error);
+          });
+        }
+      })
+    }
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

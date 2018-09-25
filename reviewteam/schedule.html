@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Work Time Calculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.gif">
+    <link type="text/css" rel="stylesheet" href="css/main.css">
+    <link type="text/css" rel="stylesheet" href="css/schedule.css">
+    <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-2">
+            <ul class="sidenav" id="sidenav">
+                <li>
+                    <a href="home.html">Home</a>
+                </li>
+                <li>
+                    <a href="timeCalc.html">Work Time Calc</a>
+                </li>
+                <li>
+                    <a class="active" href="schedule.html">Schedule</a>
+                </li>
+                <li>
+                    <a href="profile.html">Profile</a>
+                </li>
+                <li class="hide" id='adminlink'>
+                    <a href="admin.html">Admin</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-10">
+            <div class="content">
+                <h1>Schedule</h1>
+                <div id='frame'>
+                    <iframe id='scheduleFrame' src="https://docs.google.com/document/d/1ppZ9b_YB0-4Y7SEXxjzbklohLVWnoPMzLojuH-srMts/edit?usp=sharing"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

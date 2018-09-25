@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Claim | BYUI Accessibility</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="assests/favicon.gif">
+    <link type="text/css" rel="stylesheet" href="css/main.css">
+    <link type="text/css" rel="stylesheet" href="css/spreadsheet.css">
+    <!-- Script -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script> -->
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-auth.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+</head>
+
+<body>
+
+    <head>
+        <h1>BYUI Technical Accessibility</h1>
+        <nav>
+            <ul>
+                <a href="home.html">
+                    <li>Home</li>
+                </a>
+                <a href="form.html">
+                    <li>Request</li>
+                </a>
+                <a href="claim.html">
+                    <li>Claim</li>
+                </a>
+                <a class="hide" id="place" href="place.html">
+                    <li>Place</li>
+                </a>
+                <a class="hide" id="master" href="master.html">
+                    <li>Master</li>
+                </a>
+                <a class="active" href="spreadsheet.html">
+                    <li>Tracking</li>
+                </a>
+                <a id="btnLogout">
+                    <li>Logout</li>
+                </a>
+            </ul>
+        </nav>
+    </head>
+    <main>
+        <iframe src="https://docs.google.com/spreadsheets/d/1068SVZEfcaHjC6Boaui1WfYgUdpMeE8ZcmOQxlPa_Ys/edit#gid=0"></iframe>
+    </main>
+</body>
+<script src="js/spreadsheet.js"></script>
+
+</html>
