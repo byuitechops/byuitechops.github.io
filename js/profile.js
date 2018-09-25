@@ -84,13 +84,13 @@ function displayInfo(name) {
         } else {
             document.getElementById('dBirthday').innerHTML = snap.birthday;
         }
-        
+
         if (snap.graduation == "") {
             document.getElementById('dGraduation').innerHTML = "No Data";
         } else {
             document.getElementById('dGraduation').innerHTML = snap.graduation;
         }
-        
+
         if (snap.major == "") {
             document.getElementById('dMajor').innerHTML = "No Data";
         } else {
@@ -102,19 +102,19 @@ function displayInfo(name) {
         } else {
             document.getElementById('dTrack').innerHTML = snap.track;
         }
-        
+
         if (snap.position == "") {
             document.getElementById('dPosition').innerHTML = "No Data";
         } else {
             document.getElementById('dPosition').innerHTML = snap.position;
         }
-        
+
         if (snap.speed == "") {
             document.getElementById('dSpeed').innerHTML = "No Data";
         } else {
             document.getElementById('dSpeed').innerHTML = snap.speed;
         }
-       
+
         if (snap.strikes == "") {
             document.getElementById('dStrikes').innerHTML = "No Data";
         } else {
