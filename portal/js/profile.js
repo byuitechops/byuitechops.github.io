@@ -115,11 +115,7 @@ function displayInfo(selected) {
             document.getElementById('dSpeed').innerHTML = snap.speed;
         }
 
-<<<<<<< HEAD:js/profile.js
-        if (snap.strikes == "") {
-=======
         if (snap.strikes == "" && snap.strikes != 0) {
->>>>>>> 6a0d6ad6d2801de9b355d9cc4352fd365f2f959a:portal/js/profile.js
             document.getElementById('dStrikes').innerHTML = "No Data";
         } else {
             document.getElementById('dStrikes').innerHTML = snap.strikes;
