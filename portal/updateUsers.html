@@ -69,41 +69,103 @@
             console.log(JSON.parse(json));
             json = JSON.parse(json);
 
+            // Breaks
             if (name !== "Katelyn Hull" && name !== "Sophia Beyer") {
                 var breaks = snap[name]["TimeClock"]["Breaks"];
-                // console.log("Breaks");
+                console.log("Breaks");
                 var bjson = '{';
                 for (var time in breaks) {
                     var newDate = new Date(time);
                     var inTime = new Date('1970-01-01 ' + breaks[time]["In"]);
                     var outTime = new Date('1970-01-01 ' + breaks[time]["Out"]);
-                    bjson += ('"' + ("0" + newDate.getMonth()).slice(-2) + "/" + ("0" + newDate.getDate()).slice(
-                            -2) + "/" + newDate.getFullYear() + " " + ("0" + newDate.getHours()).slice(-2) +
-                        ":" + ("0" + newDate.getMinutes()).slice(-2) + ":" + ("0" + newDate.getSeconds()).slice(
-                            -2) + '": ');
+                    bjson += ('"' + ("0" + (1 + newDate.getMonth())).slice(-2) + "/" + ("0" + newDate.getDate())
+                        .slice(-2) + "/" + newDate.getFullYear() + " " + ("0" + newDate.getHours()).slice(-
+                            2) +
+                        ":" + ("0" + newDate.getMinutes()).slice(-2) + ":" + ("0" + newDate.getSeconds()).slice(-
+                            2) + '": ');
                     bjson += " {";
                     bjson += '"in": ';
-                    bjson += ('"' + ("0" + inTime.getHours()).slice(-2) + ":" + ("0" + inTime.getMinutes()).slice(
-                        -2) + ":" + ("0" + inTime.getSeconds()).slice(-2) + '", ');
+                    bjson += ('"' + ("0" + inTime.getHours()).slice(-2) + ":" + ("0" + inTime.getMinutes()).slice(-
+                        2) + ":" + ("0" + inTime.getSeconds()).slice(-2) + '", ');
                     bjson += '"out": ';
-                    bjson += ('"' + ("0" + outTime.getHours()).slice(-2) + ":" + ("0" + outTime.getMinutes()).slice(
-                        -2) + ":" + ("0" + outTime.getSeconds()).slice(-2) + '"');
+                    bjson += ('"' + ("0" + outTime.getHours()).slice(-2) + ":" + ("0" + outTime.getMinutes()).slice(-
+                        2) + ":" + ("0" + outTime.getSeconds()).slice(-2) + '"');
                     bjson += "}, ";
                 }
                 bjson = bjson.slice(0, -2) + " }";
 
                 // console.log(bjson);
                 console.log(JSON.parse(bjson));
-
-                // db.collection("usersTest").add(json)
-                //     .then(function (docRef) {
-                //         console.log("Document written with ID: ", docRef.id);
-                //         db.collection('users').doc(docRef.id).collection('breaks').doc(date).set(bjson)
-                //     })
-                //     .catch(function (error) {
-                //         console.error("Error adding document: ", error);
-                //     });
             }
+
+            // Hours Worked
+            if (name !== "Katelyn Hull" && name !== "Sophia Beyer") {
+                var hours = snap[name]["TimeClock"]["HoursWorked"];
+                console.log("Hours Worked");
+                var hjson = '{';
+                for (var time in hours) {
+                    var newDate = new Date(time);
+                    var inTime = new Date('1970-01-01 ' + hours[time]["In"]);
+                    var outTime = new Date('1970-01-01 ' + hours[time]["Out"]);
+                    hjson += ('"' + ("0" + (1 + newDate.getMonth())).slice(-2) + "/" + ("0" + newDate.getDate())
+                        .slice(-2) + "/" + newDate.getFullYear() + " " + ("0" + newDate.getHours()).slice(-
+                            2) +
+                        ":" + ("0" + newDate.getMinutes()).slice(-2) + ":" + ("0" + newDate.getSeconds()).slice(-
+                            2) + '": ');
+                    hjson += " {";
+                    hjson += '"in": ';
+                    hjson += ('"' + ("0" + inTime.getHours()).slice(-2) + ":" + ("0" + inTime.getMinutes()).slice(-
+                        2) + ":" + ("0" + inTime.getSeconds()).slice(-2) + '", ');
+                    hjson += '"out": ';
+                    hjson += ('"' + ("0" + outTime.getHours()).slice(-2) + ":" + ("0" + outTime.getMinutes()).slice(-
+                        2) + ":" + ("0" + outTime.getSeconds()).slice(-2) + '"');
+                    hjson += "}, ";
+                }
+                hjson = hjson.slice(0, -2) + " }";
+
+                // console.log(hjson);
+                console.log(JSON.parse(hjson));
+            }
+
+            // Scheduled Time
+            if (name !== "Katelyn Hull" && name !== "Sophia Beyer") {
+                var schedule = snap[name]["TimeClock"]["ScheduledTime"];
+                console.log("Scheduled Time");
+                    console.log(snap[name]['TimeClock']);
+                var sjson = '{';
+                for (var time in schedule) {
+                    var newDate = new Date(time);
+                    var inTime = new Date('1970-01-01 ' + schedule[time]["Start"]);
+                    var outTime = new Date('1970-01-01 ' + schedule[time]["End"]);
+                    sjson += ('"' + ("0" + (1 + newDate.getMonth())).slice(-2) + "/" + ("0" + newDate.getDate())
+                        .slice(-2) + "/" + newDate.getFullYear() + " " + ("0" + newDate.getHours()).slice(-
+                            2) +
+                        ":" + ("0" + newDate.getMinutes()).slice(-2) + ":" + ("0" + newDate.getSeconds()).slice(-
+                            2) + '": ');
+                    sjson += " {";
+                    sjson += '"in": ';
+                    sjson += ('"' + ("0" + inTime.getHours()).slice(-2) + ":" + ("0" + inTime.getMinutes()).slice(-
+                        2) + ":" + ("0" + inTime.getSeconds()).slice(-2) + '", ');
+                    sjson += '"out": ';
+                    sjson += ('"' + ("0" + outTime.getHours()).slice(-2) + ":" + ("0" + outTime.getMinutes()).slice(-
+                        2) + ":" + ("0" + outTime.getSeconds()).slice(-2) + '"');
+                    sjson += "}, ";
+                }
+                sjson = sjson.slice(0, -2) + " }";
+
+                console.log(sjson);
+                console.log(JSON.parse(sjson));
+            }
+
+            // db.collection("usersTest").add(json)
+            //     .then(function (docRef) {
+            //         console.log("Document written with ID: ", docRef.id);
+            //         db.collection('users').doc(docRef.id).collection('breaks').doc(date).set(bjson);
+            //         db.collection('users').doc(docRef.id).collection('breaks').doc(date).set(hjson)
+            //     })
+            //     .catch(function (error) {
+            //         console.error("Error adding document: ", error);
+            //     });
         }
     })
 </script>
