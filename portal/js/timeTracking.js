@@ -189,8 +189,8 @@ function showModal(num, selected) {
                     if (person[currentMonth[i]].Out == undefined) {
                         person[currentMonth[i]].Out = "N/A";
                     }
-                    var txt = "Break Out: " + person[currentMonth[i]].Out;
-                    txt += "<br />Break In:  " + person[currentMonth[i]].In + "<br />";
+                    var txt = "Start Break: " + person[currentMonth[i]].Out;
+                    txt += "<br />End Break:  " + person[currentMonth[i]].In + "<br />";
                     document.getElementById("breakText1").innerHTML = txt;
                     check = true;
                 } else {
@@ -203,8 +203,8 @@ function showModal(num, selected) {
                     if (person[currentMonth[i + 1]].Out == undefined) {
                         person[currentMonth[i + 1]].Out = "N/A";
                     }
-                    var txt = "Break Out: " + person[currentMonth[i + 1]].Out;
-                    txt += "<br />Break In: " + person[currentMonth[i + 1]].In + "<br />";
+                    var txt = "Start Break: " + person[currentMonth[i + 1]].Out;
+                    txt += "<br />End Break: " + person[currentMonth[i + 1]].In + "<br />";
                     document.getElementById("breakText2").innerHTML = txt;
                     check = true;
                 } else {
@@ -218,8 +218,8 @@ function showModal(num, selected) {
                     if (person[currentMonth[i + 2]].Out == undefined) {
                         person[currentMonth[i + 2]].Out = "N/A";
                     }
-                    var txt = "Break Out: " + person[currentMonth[i + 2]].Out;
-                    txt += "<br />Break In:  " + person[currentMonth[i + 2]].In + "<br />";
+                    var txt = "Start Break: " + person[currentMonth[i + 2]].Out;
+                    txt += "<br />End Break:  " + person[currentMonth[i + 2]].In + "<br />";
                     document.getElementById("breakText3").innerHTML = txt;
                     check = true;
                 } else {
@@ -233,8 +233,8 @@ function showModal(num, selected) {
                     if (person[currentMonth[i + 3]].Out == undefined) {
                         person[currentMonth[i + 3]].Out = "N/A";
                     }
-                    var txt = "Break Out: " + person[currentMonth[i + 3]].Out;
-                    txt += "<br />Break In:  " + person[currentMonth[i + 3]].In + "<br />";
+                    var txt = "Start Break: " + person[currentMonth[i + 3]].Out;
+                    txt += "<br />End Break:  " + person[currentMonth[i + 3]].In + "<br />";
                     document.getElementById("breakText4").innerHTML = txt;
                     check = true;
                 } else {
@@ -248,8 +248,8 @@ function showModal(num, selected) {
                     if (person[currentMonth[i + 4]].Out == undefined) {
                         person[currentMonth[i + 4]].Out = "N/A";
                     }
-                    var txt = "Break Out: " + person[currentMonth[i + 4]].Out;
-                    txt += "<br />Break In:  " + person[currentMonth[i + 4]].In + "<br />";
+                    var txt = "Start Break: " + person[currentMonth[i + 4]].Out;
+                    txt += "<br />End Break:  " + person[currentMonth[i + 4]].In + "<br />";
                     document.getElementById("breakText5").innerHTML = txt;
                     check = true;
                 } else {
