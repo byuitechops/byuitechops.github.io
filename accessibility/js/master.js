@@ -299,6 +299,14 @@ function search() {
         })
 }
 
+document.getElementById('searchValue').addEventListener("keyup", function() {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+    search();
+}});
+   
+
+
 document.getElementById('searchcancel').addEventListener('click', () => {
     document.getElementById('searchcancel').classList.add('hide');
     document.getElementById('text').innerHTML = "";
