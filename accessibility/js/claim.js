@@ -335,6 +335,25 @@ function search() {
                                 startTech = false;
                             }
                         });
+
+                        db.collection("accessibility").where("status", "==", "Ready for Transcript").where("type", "==", "Slide").orderBy('priority').startAfter(startTech).limit(20).get().then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+                                // console.log(`${doc.id} => ${doc.data().title}`);
+                                var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span></span><button onclick="claimItem('${doc.id}')">Claim</button>`;
+                                document.getElementById('text').insertAdjacentHTML('beforeend', text);
+                            });
+                            if (querySnapshot.size == 0) {
+                                message.innerHTML = 'No documents found with that criteria';
+                                message.style.color = 'red';
+                                resetMessage();
+                            }
+
+                            if (querySnapshot.docs[querySnapshot.docs.length - 1] != undefined) {
+                                startTech = querySnapshot.docs[querySnapshot.docs.length - 1];
+                            } else {
+                                startTech = false;
+                            }
+                        });
                     }
                 }
 
