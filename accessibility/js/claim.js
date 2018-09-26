@@ -67,7 +67,7 @@ function getData() {
             querySnapshot.forEach((doc) => {
                 var userData = doc.data();
                 if (userData.role == "Techops" || userData.role == "Lead") {
-                
+
                     if (!startTech) {
                         document.getElementById('load').classList.add('hide');
                     } else {
@@ -158,7 +158,7 @@ function getData() {
                 if (userData.role == "Admin") {
                     if (!startAdminTech && !startAdminCopyReview && !startAdminCopyWrite) {
                         document.getElementById('load').classList.add('hide');
-                    } else {                  
+                    } else {
                         db.collection("accessibility").where("status", "==", "Ready for Transcript").where("type", "==", "Transcript").orderBy('priority').startAfter(startTech).limit(10).get().then((querySnapshot) => {
                             querySnapshot.forEach((doc) => {
                                 // console.log(`${doc.id} => ${doc.data().title}`);
@@ -322,55 +322,58 @@ function search() {
     // console.log(`sval: ${sVal}, sType: ${sType}`);
     document.getElementById('text').innerHTML = "";
     startNumber = 1;
+    startSlideNumber = 1;
     startCopyReview = 1;
     startCopyWrite = 1;
     startAdminNumber = 1;
     startAdminCopyReview = 1;
     startAdminCopyWrite = 1;
+    startAdminSlideNumber = 1;
+    var adminQuery = 0;
+    var copyQuery = 0;
+    var techQuery = 0;
 
     db.collection('users').where('name', "==", firebase.auth().currentUser.displayName).get()
         .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 var userData = doc.data();
                 if (userData.role == "Techops" || userData.role == "Lead") {
-                    if (!startTech) {
+                    if (!startNumber) {
                         document.getElementById('load').classList.add('hide');
                     } else {
-                        db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Transcript").where("type", "==", "Transcript").orderBy('priority').startAfter(startTech).limit(20).get().then((querySnapshot) => {
+                        db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Transcript").where("type", "==", "Transcript").orderBy('priority').startAfter(startNumber).limit(20).get().then((querySnapshot) => {
                             querySnapshot.forEach((doc) => {
-                                // console.log(`${doc.id} => ${doc.data().title}`);
+                                console.log(`${doc.id} => ${doc.data().title}`);
                                 var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
                                 document.getElementById('text').insertAdjacentHTML('beforeend', text);
                             });
-                            if (querySnapshot.size == 0) {
-                                message.innerHTML = 'No documents found with that criteria';
-                                message.style.color = 'red';
-                                resetMessage();
-                            }
+                            techQuery += querySnapshot.size;
 
                             if (querySnapshot.docs[querySnapshot.docs.length - 1] != undefined) {
-                                startTech = querySnapshot.docs[querySnapshot.docs.length - 1];
+                                startNumber = querySnapshot.docs[querySnapshot.docs.length - 1];
                             } else {
-                                startTech = false;
+                                startNumber = false;
                             }
                         });
 
-                        db.collection("accessibility").where("status", "==", "Ready for Transcript").where("type", "==", "Slide").orderBy('priority').startAfter(startTech).limit(20).get().then((querySnapshot) => {
+                        db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Transcript").where("type", "==", "Slide").orderBy('priority').startAfter(startSlideNumber).limit(20).get().then((querySnapshot) => {
                             querySnapshot.forEach((doc) => {
                                 // console.log(`${doc.id} => ${doc.data().title}`);
                                 var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span></span><button onclick="claimItem('${doc.id}')">Claim</button>`;
                                 document.getElementById('text').insertAdjacentHTML('beforeend', text);
                             });
-                            if (querySnapshot.size == 0) {
-                                message.innerHTML = 'No documents found with that criteria';
-                                message.style.color = 'red';
-                                resetMessage();
-                            }
+                            techQuery += querySnapshot.size;
 
                             if (querySnapshot.docs[querySnapshot.docs.length - 1] != undefined) {
-                                startTech = querySnapshot.docs[querySnapshot.docs.length - 1];
+                                startSlideNumber = querySnapshot.docs[querySnapshot.docs.length - 1];
                             } else {
-                                startTech = false;
+                                startSlideNumber = false;
+                            }
+
+                            if (techQuery == 0) {
+                                message.innerHTML = 'No documents were found with that criteria';
+                                message.style.color = 'red';
+                                resetMessage();
                             }
                         });
                     }
@@ -386,11 +389,7 @@ function search() {
                                 var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
                                 document.getElementById('text').insertAdjacentHTML('beforeend', text);
                             });
-                            if (querySnapshot.size == 0) {
-                                message.innerHTML = 'No documents that are Ready for Review were found with that criteria';
-                                message.style.color = 'red';
-                                resetMessage();
-                            }
+                            copyQuery += querySnapshot.size;
 
                             if (querySnapshot.docs[querySnapshot.docs.length - 1] != undefined) {
                                 startCopyReview = querySnapshot.docs[querySnapshot.docs.length - 1];
@@ -406,52 +405,50 @@ function search() {
                                 var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span></span><button onclick="claimItem('${doc.id}')">Claim</button>`;
                                 document.getElementById('text').insertAdjacentHTML('beforeend', text);
                             });
-                            if (querySnapshot.size == 0) {
-                                message.innerHTML = 'No documents that are Ready for Alt Text were found with that criteria';
-                                message.style.color = 'red';
-                                resetMessage();
-                            }
+                            copyQuery += querySnapshot.size;
 
                             if (querySnapshot.docs[querySnapshot.docs.length - 1] != undefined) {
                                 startCopyWrite = querySnapshot.docs[querySnapshot.docs.length - 1];
                             } else {
                                 startCopyWrite = false;
                             }
+
+                            if (copyQuery == 0) {
+                                message.innerHTML = 'No documents were found with that criteria';
+                                message.style.color = 'red';
+                                resetMessage();
+                            }
                         });
                     }
                 }
 
                 if (userData.role == "Admin") {
-                    if (!startAdminTech && !startAdminCopyReview && !startAdminCopyWrite) {
+                    if (!startAdminNumber && !startAdminCopyReview && !startAdminCopyWrite) {
                         document.getElementById('load').classList.add('hide');
                     } else {
-                        db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Transcript").where("type", "==", "Transcript").orderBy('priority').startAfter(startTech).limit(10).get().then((querySnapshot) => {
+                        db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Transcript").where("type", "==", "Transcript").orderBy('priority').startAfter(startAdminNumber).limit(10).get().then((querySnapshot) => {
                             querySnapshot.forEach((doc) => {
                                 // console.log(`${doc.id} => ${doc.data().title}`);
                                 var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
                                 document.getElementById('text').insertAdjacentHTML('beforeend', text);
                             });
-                            if (querySnapshot.size == 0) {
-                                message.innerHTML = 'No documents that are Ready for Transcript were found with that criteria';
-                                message.style.color = 'red';
-                                resetMessage();
-                            }
+                            adminQuery += querySnapshot.size;
 
                             if (querySnapshot.docs[querySnapshot.docs.length - 1] != undefined) {
-                                startAdminTech = querySnapshot.docs[querySnapshot.docs.length - 1];
+                                startAdminNumber = querySnapshot.docs[querySnapshot.docs.length - 1];
                             } else {
-                                startAdminTech = false;
+                                startAdminNumber = false;
                             }
                         });
 
-                        db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Review").where("type", "==", "Transcript").orderBy('priority').startAfter(startCopyReview).limit(10).get().then((querySnapshot) => {
+                        db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Review").where("type", "==", "Transcript").orderBy('priority').startAfter(startAdminCopyReview).limit(10).get().then((querySnapshot) => {
                             querySnapshot.forEach((doc) => {
                                 // console.log(`${doc.id} => ${doc.data().title}`);
                                 var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
                                 document.getElementById('text').insertAdjacentHTML('beforeend', text);
                             });
                             if (querySnapshot.size == 0) {
-                                message.innerHTML = 'No documents that are Ready for Review were found with that criteria';
+                                // message.innerHTML = 'No documents that are Ready for Review were found with that criteria';
                                 message.style.color = 'red';
                                 resetMessage();
                             }
@@ -463,17 +460,13 @@ function search() {
                             }
                         });
 
-                        db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Transcript").where("type", "==", "Alt Text").orderBy('priority').startAfter(startCopyWrite).limit(10).get().then((querySnapshot) => {
+                        db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Transcript").where("type", "==", "Alt Text").orderBy('priority').startAfter(startAdminCopyWrite).limit(10).get().then((querySnapshot) => {
                             querySnapshot.forEach((doc) => {
                                 // console.log(`${doc.id} => ${doc.data().title}`);
                                 var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span></span><button onclick="claimItem('${doc.id}')">Claim</button>`;
                                 document.getElementById('text').insertAdjacentHTML('beforeend', text);
                             });
-                            if (querySnapshot.size == 0) {
-                                message.innerHTML = 'No documents that are Ready for Alt Text were found with that criteria';
-                                message.style.color = 'red';
-                                resetMessage();
-                            }
+                            adminQuery += querySnapshot.size;
 
                             if (querySnapshot.docs[querySnapshot.docs.length - 1] != undefined) {
                                 startAdminCopyWrite = querySnapshot.docs[querySnapshot.docs.length - 1];
@@ -482,22 +475,24 @@ function search() {
                             }
                         });
 
-                        db.collection("accessibility").where("status", "==", "Ready for Transcript").where("type", "==", "Slide").orderBy('priority').startAfter(startTech).limit(20).get().then((querySnapshot) => {
+                        db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Transcript").where("type", "==", "Slide").orderBy('priority').startAfter(startAdminSlideNumber).limit(20).get().then((querySnapshot) => {
                             querySnapshot.forEach((doc) => {
                                 // console.log(`${doc.id} => ${doc.data().title}`);
                                 var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span></span><button onclick="claimItem('${doc.id}')">Claim</button>`;
                                 document.getElementById('text').insertAdjacentHTML('beforeend', text);
                             });
-                            if (querySnapshot.size == 0) {
-                                message.innerHTML = 'No documents found with that criteria';
-                                message.style.color = 'red';
-                                resetMessage();
-                            }
+                            adminQuery += querySnapshot.size;
 
                             if (querySnapshot.docs[querySnapshot.docs.length - 1] != undefined) {
-                                startTech = querySnapshot.docs[querySnapshot.docs.length - 1];
+                                startAdminSlideNumber = querySnapshot.docs[querySnapshot.docs.length - 1];
                             } else {
-                                startTech = false;
+                                startAdminSlideNumber = false;
+                            }
+
+                            if (adminQuery == 0) {
+                                message.innerHTML = 'No documents were found with that criteria';
+                                message.style.color = 'red';
+                                resetMessage();
                             }
                         });
                     }
@@ -505,11 +500,12 @@ function search() {
             })
         });
 }
-document.getElementById('searchValue').addEventListener("keyup", function() {
+document.getElementById('searchValue').addEventListener("keyup", function () {
     event.preventDefault();
     if (event.keyCode === 13) {
-    search();
-}});
+        search();
+    }
+});
 
 document.getElementById('searchcancel').addEventListener('click', () => {
     document.getElementById('searchcancel').classList.add('hide');
