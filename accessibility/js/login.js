@@ -95,6 +95,7 @@ document.getElementById('resetPassword').addEventListener('click', e => {
     }
 });
 
+
 function resetMessage() {
     setTimeout(() => {
         message.innerHTML = "";

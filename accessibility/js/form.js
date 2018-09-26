@@ -86,7 +86,7 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
         return;
     } else {
         var user = firebase.auth().currentUser;
-
+       
         if (requestType == "Transcript") {
             var docData = {
                 title: title,
@@ -115,7 +115,23 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
                 week: week,
                 requestor: user.displayName,
                 requestDate: new Date(),
-                status: 'Ready for Transcript'
+                status: 'Ready for Transcript',
+                placed: false
+            }
+        }
+
+        if (requestType == "Slide") {
+            var docData = {
+                title: title,
+                type: requestType,
+                priority: priority,
+                courseCode: course,
+                lmsURL: lmsURL,
+                week: week,
+                requestor: user.displayName,
+                requestDate: new Date(),
+                status: 'Ready for Transcript',
+                placed: false
             }
         }
 
