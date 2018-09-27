@@ -316,19 +316,12 @@ function claimItem(docId) {
 
 function search() {
     document.getElementById('searchcancel').classList.remove('hide');
+    document.getElementById('load').classList.add('hide');
 
     var sVal = document.getElementById('searchValue').value;
     var sType = document.getElementById('searchType').value;
     // console.log(`sval: ${sVal}, sType: ${sType}`);
     document.getElementById('text').innerHTML = "";
-    startNumber = 1;
-    startSlideNumber = 1;
-    startCopyReview = 1;
-    startCopyWrite = 1;
-    startAdminNumber = 1;
-    startAdminCopyReview = 1;
-    startAdminCopyWrite = 1;
-    startAdminSlideNumber = 1;
     var adminQuery = 0;
     var copyQuery = 0;
     var techQuery = 0;
@@ -338,164 +331,109 @@ function search() {
             querySnapshot.forEach((doc) => {
                 var userData = doc.data();
                 if (userData.role == "Techops" || userData.role == "Lead") {
-                    if (!startNumber) {
-                        document.getElementById('load').classList.add('hide');
-                    } else {
-                        db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Transcript").where("type", "==", "Transcript").orderBy('priority').startAfter(startNumber).limit(20).get().then((querySnapshot) => {
-                            querySnapshot.forEach((doc) => {
-                                console.log(`${doc.id} => ${doc.data().title}`);
-                                var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
-                                document.getElementById('text').insertAdjacentHTML('beforeend', text);
-                            });
-                            techQuery += querySnapshot.size;
-
-                            if (querySnapshot.docs[querySnapshot.docs.length - 1] != undefined) {
-                                startNumber = querySnapshot.docs[querySnapshot.docs.length - 1];
-                            } else {
-                                startNumber = false;
-                            }
+                    db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Transcript").where("type", "==", "Transcript").orderBy('priority').get().then((querySnapshot) => {
+                        querySnapshot.forEach((doc) => {
+                            console.log(`${doc.id} => ${doc.data().title}`);
+                            var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
+                            document.getElementById('text').insertAdjacentHTML('beforeend', text);
                         });
+                        techQuery += querySnapshot.size;
+                    });
 
-                        db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Transcript").where("type", "==", "Slide").orderBy('priority').startAfter(startSlideNumber).limit(20).get().then((querySnapshot) => {
-                            querySnapshot.forEach((doc) => {
-                                // console.log(`${doc.id} => ${doc.data().title}`);
-                                var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span></span><button onclick="claimItem('${doc.id}')">Claim</button>`;
-                                document.getElementById('text').insertAdjacentHTML('beforeend', text);
-                            });
-                            techQuery += querySnapshot.size;
-
-                            if (querySnapshot.docs[querySnapshot.docs.length - 1] != undefined) {
-                                startSlideNumber = querySnapshot.docs[querySnapshot.docs.length - 1];
-                            } else {
-                                startSlideNumber = false;
-                            }
-
-                            if (techQuery == 0) {
-                                message.innerHTML = 'No documents were found with that criteria';
-                                message.style.color = 'red';
-                                resetMessage();
-                            }
+                    db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Transcript").where("type", "==", "Slide").orderBy('priority').get().then((querySnapshot) => {
+                        querySnapshot.forEach((doc) => {
+                            // console.log(`${doc.id} => ${doc.data().title}`);
+                            var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span></span><button onclick="claimItem('${doc.id}')">Claim</button>`;
+                            document.getElementById('text').insertAdjacentHTML('beforeend', text);
                         });
-                    }
+                        techQuery += querySnapshot.size;
+
+                        if (techQuery == 0) {
+                            message.innerHTML = 'No documents were found with that criteria';
+                            message.style.color = 'red';
+                            resetMessage();
+                        }
+                    });
                 }
 
                 if (userData.role == "Copyedit") {
-                    if (!startCopyReview && !startCopyWrite) {
-                        document.getElementById('load').classList.add('hide');
-                    } else {
-                        db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Review").where("type", "==", "Transcript").orderBy('priority').startAfter(startCopyReview).limit(20).get().then((querySnapshot) => {
-                            querySnapshot.forEach((doc) => {
-                                // console.log(`${doc.id} => ${doc.data().title}`);
-                                var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
-                                document.getElementById('text').insertAdjacentHTML('beforeend', text);
-                            });
-                            copyQuery += querySnapshot.size;
-
-                            if (querySnapshot.docs[querySnapshot.docs.length - 1] != undefined) {
-                                startCopyReview = querySnapshot.docs[querySnapshot.docs.length - 1];
-                            } else {
-                                startCopyReview = false;
-                            }
+                    db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Review").where("type", "==", "Transcript").orderBy('priority').get().then((querySnapshot) => {
+                        querySnapshot.forEach((doc) => {
+                            // console.log(`${doc.id} => ${doc.data().title}`);
+                            var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
+                            document.getElementById('text').insertAdjacentHTML('beforeend', text);
                         });
+                        copyQuery += querySnapshot.size;
+                    });
 
-
-                        db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Transcript").where("type", "==", "Alt Text").orderBy('priority').startAfter(startCopyWrite).limit(20).get().then((querySnapshot) => {
-                            querySnapshot.forEach((doc) => {
-                                // console.log(`${doc.id} => ${doc.data().title}`);
-                                var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span></span><button onclick="claimItem('${doc.id}')">Claim</button>`;
-                                document.getElementById('text').insertAdjacentHTML('beforeend', text);
-                            });
-                            copyQuery += querySnapshot.size;
-
-                            if (querySnapshot.docs[querySnapshot.docs.length - 1] != undefined) {
-                                startCopyWrite = querySnapshot.docs[querySnapshot.docs.length - 1];
-                            } else {
-                                startCopyWrite = false;
-                            }
-
-                            if (copyQuery == 0) {
-                                message.innerHTML = 'No documents were found with that criteria';
-                                message.style.color = 'red';
-                                resetMessage();
-                            }
+                    db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Review").where("type", "==", "Slide").orderBy('priority').get().then((querySnapshot) => {
+                        querySnapshot.forEach((doc) => {
+                            // console.log(`${doc.id} => ${doc.data().title}`);
+                            var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span></span><button onclick="claimItem('${doc.id}')">Claim</button>`;
+                            document.getElementById('text').insertAdjacentHTML('beforeend', text);
                         });
-                    }
+                        copyQuery += querySnapshot.size;
+                    });
+
+
+                    db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Transcript").where("type", "==", "Alt Text").orderBy('priority').get().then((querySnapshot) => {
+                        querySnapshot.forEach((doc) => {
+                            // console.log(`${doc.id} => ${doc.data().title}`);
+                            var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span></span><button onclick="claimItem('${doc.id}')">Claim</button>`;
+                            document.getElementById('text').insertAdjacentHTML('beforeend', text);
+                        });
+                        copyQuery += querySnapshot.size;
+
+                        if (copyQuery == 0) {
+                            message.innerHTML = 'No documents were found with that criteria';
+                            message.style.color = 'red';
+                            resetMessage();
+                        }
+                    });
                 }
 
                 if (userData.role == "Admin") {
-                    if (!startAdminNumber && !startAdminCopyReview && !startAdminCopyWrite) {
-                        document.getElementById('load').classList.add('hide');
-                    } else {
-                        db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Transcript").where("type", "==", "Transcript").orderBy('priority').startAfter(startAdminNumber).limit(10).get().then((querySnapshot) => {
-                            querySnapshot.forEach((doc) => {
-                                // console.log(`${doc.id} => ${doc.data().title}`);
-                                var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
-                                document.getElementById('text').insertAdjacentHTML('beforeend', text);
-                            });
-                            adminQuery += querySnapshot.size;
-
-                            if (querySnapshot.docs[querySnapshot.docs.length - 1] != undefined) {
-                                startAdminNumber = querySnapshot.docs[querySnapshot.docs.length - 1];
-                            } else {
-                                startAdminNumber = false;
-                            }
+                    db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Transcript").where("type", "==", "Transcript").orderBy('priority').get().then((querySnapshot) => {
+                        querySnapshot.forEach((doc) => {
+                            // console.log(`${doc.id} => ${doc.data().title}`);
+                            var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
+                            document.getElementById('text').insertAdjacentHTML('beforeend', text);
                         });
+                        adminQuery += querySnapshot.size;
+                    });
 
-                        db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Review").where("type", "==", "Transcript").orderBy('priority').startAfter(startAdminCopyReview).limit(10).get().then((querySnapshot) => {
-                            querySnapshot.forEach((doc) => {
-                                // console.log(`${doc.id} => ${doc.data().title}`);
-                                var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
-                                document.getElementById('text').insertAdjacentHTML('beforeend', text);
-                            });
-                            if (querySnapshot.size == 0) {
-                                // message.innerHTML = 'No documents that are Ready for Review were found with that criteria';
-                                message.style.color = 'red';
-                                resetMessage();
-                            }
-
-                            if (querySnapshot.docs[querySnapshot.docs.length - 1] != undefined) {
-                                startAdminCopyReview = querySnapshot.docs[querySnapshot.docs.length - 1];
-                            } else {
-                                startAdminCopyReview = false;
-                            }
+                    db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Review").where("type", "==", "Transcript").orderBy('priority').get().then((querySnapshot) => {
+                        querySnapshot.forEach((doc) => {
+                            // console.log(`${doc.id} => ${doc.data().title}`);
+                            var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
+                            document.getElementById('text').insertAdjacentHTML('beforeend', text);
                         });
+                        adminQuery += querySnapshot.size;
+                    });
 
-                        db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Transcript").where("type", "==", "Alt Text").orderBy('priority').startAfter(startAdminCopyWrite).limit(10).get().then((querySnapshot) => {
-                            querySnapshot.forEach((doc) => {
-                                // console.log(`${doc.id} => ${doc.data().title}`);
-                                var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span></span><button onclick="claimItem('${doc.id}')">Claim</button>`;
-                                document.getElementById('text').insertAdjacentHTML('beforeend', text);
-                            });
-                            adminQuery += querySnapshot.size;
-
-                            if (querySnapshot.docs[querySnapshot.docs.length - 1] != undefined) {
-                                startAdminCopyWrite = querySnapshot.docs[querySnapshot.docs.length - 1];
-                            } else {
-                                startAdminCopyWrite = false;
-                            }
+                    db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Transcript").where("type", "==", "Alt Text").orderBy('priority').get().then((querySnapshot) => {
+                        querySnapshot.forEach((doc) => {
+                            // console.log(`${doc.id} => ${doc.data().title}`);
+                            var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span></span><button onclick="claimItem('${doc.id}')">Claim</button>`;
+                            document.getElementById('text').insertAdjacentHTML('beforeend', text);
                         });
+                        adminQuery += querySnapshot.size;
+                    });
 
-                        db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Transcript").where("type", "==", "Slide").orderBy('priority').startAfter(startAdminSlideNumber).limit(20).get().then((querySnapshot) => {
-                            querySnapshot.forEach((doc) => {
-                                // console.log(`${doc.id} => ${doc.data().title}`);
-                                var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span></span><button onclick="claimItem('${doc.id}')">Claim</button>`;
-                                document.getElementById('text').insertAdjacentHTML('beforeend', text);
-                            });
-                            adminQuery += querySnapshot.size;
-
-                            if (querySnapshot.docs[querySnapshot.docs.length - 1] != undefined) {
-                                startAdminSlideNumber = querySnapshot.docs[querySnapshot.docs.length - 1];
-                            } else {
-                                startAdminSlideNumber = false;
-                            }
-
-                            if (adminQuery == 0) {
-                                message.innerHTML = 'No documents were found with that criteria';
-                                message.style.color = 'red';
-                                resetMessage();
-                            }
+                    db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Transcript").where("type", "==", "Slide").orderBy('priority').get().then((querySnapshot) => {
+                        querySnapshot.forEach((doc) => {
+                            // console.log(`${doc.id} => ${doc.data().title}`);
+                            var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span></span><button onclick="claimItem('${doc.id}')">Claim</button>`;
+                            document.getElementById('text').insertAdjacentHTML('beforeend', text);
                         });
-                    }
+                        adminQuery += querySnapshot.size;
+
+                        if (adminQuery == 0) {
+                            message.innerHTML = 'No documents were found with that criteria';
+                            message.style.color = 'red';
+                            resetMessage();
+                        }
+                    });
                 }
             })
         });
