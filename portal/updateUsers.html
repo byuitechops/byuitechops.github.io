@@ -31,156 +31,154 @@
     //     }
     // })
 
-    firebase.database().ref('users').once('value').then(function (snap) {
-        snap = snap.val();
-        // console.log(snap);
-        for (var name in snap) {
-            var json = "{"
-            json += `"name": "${name}"`;
-            for (var title in snap[name]) {
-                if (title == "Admin") {
-                    json += `, "admin": ${snap[name][title]}`;
-                }
-                if (title == "Team") {
-                    json += `, "team": "${snap[name][title]}"`;
-                }
-                if (title == "TeamLead") {
-                    json += `, "teamLead": ${snap[name][title]}`;
-                }
-                if (title == "info") {
-                    if (snap[name][title]["phoneNumber"] != undefined) {
-                        delete snap[name][title]["phoneNumber"];
-                    }
-                    if (snap[name][title]["phoneNum"] == undefined) {
-                        snap[name][title]["phoneNum"] = null;
-                    }
-                    json += `, "info": ${JSON.stringify(snap[name][title])}`;
-                }
-            }
+    var users = [];
 
-            json += `, "time": {`;
-            json += `"break": ${snap[name]["TimeClock"]["break"]}`;
-            json += `, "breakKey": "${snap[name]["TimeClock"]["breakkey"]}"`;
-            json += `, "check": "${snap[name]["TimeClock"]["check"]}"`;
-            json += `, "checkKey": "${snap[name]["TimeClock"]["timekey"]}"`;
-            json += "}"
-            json += "}"
-            // console.log(json);
-            console.log(JSON.parse(json));
-            json = JSON.parse(json);
-
-            db.collection("usersTest").add(json)
-                .then(function (docRef) {
+    function pushUsers() {
+        firebase.database().ref('users').once('value').then(function (snap) {
+            snap = snap.val();
+            // console.log(snap);
+            for (var name in snap) {
+                users.push(name);
+                var json = "{"
+                json += `"name": "${name}"`;
+                for (var title in snap[name]) {
+                    if (title == "Admin") {
+                        json += `, "admin": ${snap[name][title]}`;
+                    }
+                    if (title == "Team") {
+                        json += `, "team": "${snap[name][title]}"`;
+                    }
+                    if (title == "TeamLead") {
+                        json += `, "teamLead": ${snap[name][title]}`;
+                    }
+                    if (title == "info") {
+                        if (snap[name][title]["phoneNumber"] != undefined) {
+                            delete snap[name][title]["phoneNumber"];
+                        }
+                        if (snap[name][title]["phoneNum"] == undefined) {
+                            snap[name][title]["phoneNum"] = null;
+                        }
+                        json += `, "info": ${JSON.stringify(snap[name][title])}`;
+                    }
+                }
+                json += `, "time": {`;
+                json += `"break": ${snap[name]["TimeClock"]["break"]}`;
+                json +=
+                    `, "breakKey": "${snap[name]["TimeClock"]["breakkey"]}"`;
+                json +=
+                    `, "check": "${snap[name]["TimeClock"]["check"]}"`;
+                json +=
+                    `, "checkKey": "${snap[name]["TimeClock"]["timekey"]}"`;
+                json += "}"
+                json += "}"
+                json = JSON.parse(json);
+                console.log(json);
+                db.collection("usersTest").add(json).then(function (docRef) {
                     console.log("Document written with ID: ", docRef.id);
-
-                    // Breaks
-                    if (name !== "Corey Moore") {
-                        var breaks = snap[name]["TimeClock"]["Breaks"];
-                        console.log("Breaks");
-                        for (var time in breaks) {
-                            var bjson = '{';
-                            var newDate = new Date(time);
-                            var inTime = new Date('1970-01-01 ' + breaks[time]["In"]);
-                            var outTime = new Date('1970-01-01 ' + breaks[time]["Out"]);
-                            var date = (newDate.getFullYear() + "-" + ("0" + (1 + newDate.getMonth())).slice(-
-                                    2) + "-" + ("0" + newDate.getDate())
-                                .slice(-2) + " " + ("0" + newDate.getHours())
-                                .slice(-2) + ":" + ("0" + newDate.getMinutes()).slice(-2) + ":" + ("0" +
-                                    newDate.getSeconds())
-                                .slice(-2));
-                            bjson += '"in": ';
-                            bjson += ('"' + ("0" + inTime.getHours()).slice(-2) + ":" + ("0" + inTime.getMinutes())
-                                .slice(-2) + ":" + ("0" + inTime.getSeconds()).slice(-2) + '", ');
-                            bjson += '"out": ';
-                            bjson += ('"' + ("0" + outTime.getHours()).slice(-2) + ":" + ("0" + outTime.getMinutes())
-                                .slice(-2) + ":" + ("0" + outTime.getSeconds()).slice(-2) + '"');
-                            bjson = bjson + '}';
-
-                            // console.log(bjson);
-                            // console.log(JSON.parse(bjson));
-
-                            bjson = JSON.parse(bjson);
-
-                            db.collection('usersTest').doc(docRef.id).collection('breaks').doc(date).set(bjson);
-                        }
-                    }
-
-                    // Hours Worked
-                    if (name !== "Corey Moore") {
-                        var hours = snap[name]["TimeClock"]["HoursWorked"];
-                        console.log("Hours Worked");
-                        for (var time in hours) {
-                            var hjson = '{';
-                            var newDate = new Date(time);
-                            var inTime = new Date('1970-01-01 ' + hours[time]["In"]);
-                            var outTime = new Date('1970-01-01 ' + hours[time]["Out"]);
-                            var date = (newDate.getFullYear() + "-" + ("0" + (1 + newDate.getMonth())).slice(-
-                                    2) + "-" + ("0" + newDate.getDate())
-                                .slice(-2) + " " + ("0" + newDate.getHours())
-                                .slice(-2) + ":" + ("0" + newDate.getMinutes()).slice(-2) + ":" + ("0" +
-                                    newDate.getSeconds())
-                                .slice(-2));
-                            hjson += '"in": ';
-                            hjson += ('"' + ("0" + inTime.getHours()).slice(-2) + ":" + ("0" + inTime.getMinutes())
-                                .slice(-
-                                    2) + ":" + ("0" + inTime.getSeconds()).slice(-2) + '", ');
-                            hjson += '"out": ';
-                            hjson += ('"' + ("0" + outTime.getHours()).slice(-2) + ":" + ("0" + outTime.getMinutes())
-                                .slice(-
-                                    2) + ":" + ("0" + outTime.getSeconds()).slice(-2) + '"');
-                            hjson += "}";
-
-                            // console.log(hjson);
-                            // console.log(JSON.parse(hjson));
-
-                            hjson = JSON.parse(hjson);
-
-                            db.collection('usersTest').doc(docRef.id).collection('hoursWorked').doc(date).set(hjson)
-                        }
-                    }
-
-                    // Scheduled Time
-                    if (name !== "Katelyn Hull" && name !== "Sophia Beyer" && name !== "Adrian Whetten" &&
-                        name !== "Alexis Mahrt" && name !== "Corey Moore" && name !== "Daniel Hixson" &&
-                        name !== "Gavin Rummler" && name !== "Jessica Heiner" && name !== "Julie Baker" &&
-                        name !== "Lucas Wargha" && name !== "Marissa Zepeda" && name !== "Sean Carlson") {
-                        var schedule = snap[name]["TimeClock"]["ScheduledTime"];
-                        console.log("Scheduled Time");
-                        for (var time in schedule) {
-                            var sjson = '{';
-                            var newDate = new Date(time);
-                            var inTime = new Date('1970-01-01 ' + schedule[time]["Start"]);
-                            var outTime = new Date('1970-01-01 ' + schedule[time]["End"]);
-                            var date = (newDate.getFullYear() + "-" + ("0" + (1 + newDate.getMonth())).slice(-
-                                    2) + "-" + ("0" + newDate.getDate())
-                                .slice(-2) + " " + ("0" + newDate.getHours())
-                                .slice(-2) + ":" + ("0" + newDate.getMinutes()).slice(-2) + ":" + ("0" +
-                                    newDate.getSeconds())
-                                .slice(-2));
-                            sjson += '"in": ';
-                            sjson += ('"' + ("0" + inTime.getHours()).slice(-2) + ":" + ("0" + inTime.getMinutes())
-                                .slice(-
-                                    2) + ":" + ("0" + inTime.getSeconds()).slice(-2) + '", ');
-                            sjson += '"out": ';
-                            sjson += ('"' + ("0" + outTime.getHours()).slice(-2) + ":" + ("0" + outTime.getMinutes())
-                                .slice(-
-                                    2) + ":" + ("0" + outTime.getSeconds()).slice(-2) + '"');
-                            sjson += "}";
-
-                            // console.log(sjson);
-                            // console.log(JSON.parse(sjson));
-
-                            sjson = JSON.parse(sjson);
-
-                            db.collection('usersTest').doc(docRef.id).collection('scheduledTime').doc(date).set(sjson)
-                            console.log(docRef);
-                        }
-                    }
                 }).catch(function (error) {
-                    console.error("Error adding document: ", error);
+                    console.error("Error adding document:", error);
                 });
+            }
+        });
+    }
+
+    function subCollections() {
+        // Scheduled Time
+        var schedule = snap[name]["TimeClock"]["ScheduledTime"];
+        console.log("Scheduled Time");
+        for (var time in schedule) {
+            var sjson = '{';
+            var newDate = new Date(time);
+            var inTime = new Date('1970-01-01 ' + schedule[time]["Start"]);
+            var outTime = new Date('1970-01-01 ' + schedule[time]["End"]);
+            var date = (newDate.getFullYear() + "-" + ("0" + (1 + newDate.getMonth())).slice(-2) +
+                "-" + ("0" + newDate.getDate()).slice(-2) + " " + ("0" + newDate.getHours()).slice(-2) + ":" + ("0" +
+                    newDate.getMinutes()).slice(-2) +
+                ":" + ("0" + newDate.getSeconds()).slice(-2));
+            sjson += '"in": ';
+            sjson += ('"' + ("0" + inTime.getHours()).slice(-2) +
+                ":" + ("0" + inTime.getMinutes()).slice(-2) + ":" + ("0" + inTime.getSeconds()).slice(-2) + '", ');
+            sjson += '"out": ';
+            sjson += ('"' + ("0" + outTime.getHours()).slice(-2) + ":" + ("0" + outTime.getMinutes()).slice(-2) + ":" +
+                (
+                    "0" + outTime.getSeconds()).slice(-2) +
+                '"');
+            sjson += "}";
+            // console.log(sjson); 
+            // console.log(JSON.parse(sjson)); 
+            sjson = JSON.parse(sjson);
+            console.log(docRef.id);
+            // db.collection('usersTest').doc(docRef.id).collection('scheduledTime').doc(date).set(sjson);
         }
-    });
+
+        // Hours Worked 
+        var hours = snap[name]["TimeClock"]["HoursWorked"];
+        console.log("Hours Worked");
+        for (var time in hours) {
+            var hjson = '{';
+            var newDate = new Date(time);
+            var inTime = new Date('1970-01-01 ' + hours[time]["In"]);
+            var outTime =
+                new Date('1970-01-01 ' + hours[time]["Out"]);
+            var date = (newDate.getFullYear() + "-" + ("0" + (1 + newDate.getMonth())).slice(-
+                    2) + "-" + ("0" + newDate.getDate()).slice(-2) + " " + ("0" + newDate.getHours()).slice(-2) +
+                ":" +
+                ("0" + newDate.getMinutes()).slice(-2) +
+                ":" + ("0" + newDate.getSeconds()).slice(-2));
+            hjson += '"in": ';
+            hjson += ('"' + ("0" + inTime.getHours()).slice(-2) +
+                ":" + ("0" + inTime.getMinutes()).slice(-2) + ":" + ("0" + inTime.getSeconds()).slice(-2) + '", ');
+            hjson += '"out":';
+            hjson += ('"' + ("0" + outTime.getHours()).slice(-2) + ": " + ("0" + outTime.getMinutes()).slice(-2) + ": " +
+                ("0" + outTime.getSeconds()).slice(-2) + '"');
+            hjson += "}";
+            // console.log(hjson); 
+            // console.log(JSON.parse(hjson)); 
+            hjson = JSON.parse(hjson);
+            console.log(docRef.id);
+            // db.collection('usersTest').doc(docRef.id).collection('hoursWorked').doc(date).set(hjson)
+        }
+
+        // Breaks 
+        var breaks = snap[name]["TimeClock"]["Breaks"];
+        console.log("Breaks");
+        for (var time in breaks) {
+            var bjson = '{';
+            var newDate = new Date(time);
+            var inTime = new Date('1970-01-01 ' + breaks[time]["In"]);
+            var outTime = new Date('1970-01-01' + breaks[time]["Out"]);
+            var date = (newDate.getFullYear() + "-" + ("0" + (1 + newDate.getMonth())).slice(-2) + "-" + ("0" + newDate
+                    .getDate())
+                .slice(-2) + " " + ("0" + newDate.getHours()).slice(-2) + ":" + ("0" + newDate.getMinutes()).slice(-
+                    2) +
+                ":" + ("0" + newDate.getSeconds()).slice(-2));
+            bjson += '"in": ';
+            bjson += ('"' + ("0" + inTime.getHours()).slice(-2) +
+                ":" + ("0" + inTime.getMinutes()).slice(-2) + ":" + ("0" + inTime.getSeconds()).slice(-2) + '", ');
+            bjson += '"out": ';
+            bjson += ('"' + ("0" + outTime.getHours()).slice(-2) + ":" + ("0" + outTime.getMinutes()).slice(-2) + ":" +
+                (
+                    "0" + outTime.getSeconds()).slice(-2) + '"');
+            bjson = bjson + '}';
+            // console.log(bjson); 
+            // console.log(JSON.parse(bjson));
+            bjson = JSON.parse(bjson);
+            console.log(docRef.id);
+            // db.collection('usersTest').doc(docRef.id).collection('breaks').doc(date).set(bjson);
+        }
+    }
+
+    function getId(name) {
+        var collectionReference = db.collection('usersTest');
+        var query = collectionReference.where('name', '==', name);
+        query.get().then(function (querySnapshot) {
+            if (querySnapshot.empty) {
+                console.log('no documents found');
+            } else {
+                console.log(querySnapshot.docs[0].id);
+            }
+        });
+    }
 </script>
 <!DOCTYPE html>
 <html lang="en">
