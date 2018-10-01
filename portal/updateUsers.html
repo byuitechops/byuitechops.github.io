@@ -85,93 +85,98 @@
         });
     }
 
-    function subCollections() {
+    function loopUsers() {
         for (var i = 0; i < users.length; i++) {
-            var name = users[i];
-            var docId = getId(name);
+            var docId = getId(users[i]);
+            setTimeout(()=> {
+            subCollections(users[i], docId);
+            }, 2000);
+        }
+    }
+
+    function subCollections(name, docId) {
+        console.log(docId);
+
+        // Scheduled Time
+        var schedule = realSnap[name]["TimeClock"]["ScheduledTime"];
+        console.log("Scheduled Time");
+        console.log(schedule);
+        for (var time in schedule) {
+            var sjson = '{';
+            var newDate = new Date(time);
+            var inTime = new Date('1970-01-01 ' + schedule[time]["Start"]);
+            var outTime = new Date('1970-01-01 ' + schedule[time]["End"]);
+            var date = (newDate.getFullYear() + "-" + ("0" + (1 + newDate.getMonth())).slice(-2) + "-" +
+                ("0" + newDate.getDate()).slice(-2) + " " + ("0" + newDate.getHours()).slice(-2) +
+                ":" + ("0" + newDate.getMinutes()).slice(-2) + ":" + ("0" + newDate.getSeconds()).slice(
+                    -2));
+            sjson += '"in": ';
+            sjson += ('"' + ("0" + inTime.getHours()).slice(-2) +
+                ":" + ("0" + inTime.getMinutes()).slice(-2) + ":" + ("0" + inTime.getSeconds()).slice(
+                    -2) + '", ');
+            sjson += '"out": ';
+            sjson += ('"' + ("0" + outTime.getHours()).slice(-2) + ":" + ("0" + outTime.getMinutes()).slice(
+                    -2) +
+                ":" + ("0" + outTime.getSeconds()).slice(-2) + '"');
+            sjson += "}";
+            // console.log(sjson); 
+            // console.log(JSON.parse(sjson)); 
+            sjson = JSON.parse(sjson);
             console.log(docId);
+            db.collection('usersTest').doc(docId).collection('scheduledTime').doc(date).set(sjson);
+        }
 
-            // Scheduled Time
-            var schedule = realSnap[name]["TimeClock"]["ScheduledTime"];
-            console.log("Scheduled Time");
-            console.log(schedule);
-            for (var time in schedule) {
-                var sjson = '{';
-                var newDate = new Date(time);
-                var inTime = new Date('1970-01-01 ' + schedule[time]["Start"]);
-                var outTime = new Date('1970-01-01 ' + schedule[time]["End"]);
-                var date = (newDate.getFullYear() + "-" + ("0" + (1 + newDate.getMonth())).slice(-2) + "-" +
-                    ("0" + newDate.getDate()).slice(-2) + " " + ("0" + newDate.getHours()).slice(-2) +
-                    ":" + ("0" + newDate.getMinutes()).slice(-2) + ":" + ("0" + newDate.getSeconds()).slice(
-                        -2));
-                sjson += '"in": ';
-                sjson += ('"' + ("0" + inTime.getHours()).slice(-2) +
-                    ":" + ("0" + inTime.getMinutes()).slice(-2) + ":" + ("0" + inTime.getSeconds()).slice(
-                        -2) + '", ');
-                sjson += '"out": ';
-                sjson += ('"' + ("0" + outTime.getHours()).slice(-2) + ":" + ("0" + outTime.getMinutes()).slice(
-                        -2) +
-                    ":" + ("0" + outTime.getSeconds()).slice(-2) + '"');
-                sjson += "}";
-                // console.log(sjson); 
-                // console.log(JSON.parse(sjson)); 
-                sjson = JSON.parse(sjson);
-                console.log(docId);
-                db.collection('usersTest').doc(docId).collection('scheduledTime').doc(date).set(sjson);
-            }
+        // Hours Worked 
+        var hours = realSnap[name]["TimeClock"]["HoursWorked"];
+        console.log("Hours Worked");
+        for (var time in hours) {
+            var hjson = '{';
+            var newDate = new Date(time);
+            var inTime = new Date('1970-01-01 ' + hours[time]["In"]);
+            var outTime =
+                new Date('1970-01-01 ' + hours[time]["Out"]);
+            var date = (newDate.getFullYear() + "-" + ("0" + (1 + newDate.getMonth())).slice(-2) + "-" +
+                ("0" + newDate.getDate()).slice(-2) + " " + ("0" + newDate.getHours()).slice(-2) +
+                ":" + ("0" + newDate.getMinutes()).slice(-2) + ":" + ("0" + newDate.getSeconds()).slice(
+                    -2));
+            hjson += '"in": ';
+            hjson += ('"' + ("0" + inTime.getHours()).slice(-2) + ":" + ("0" + inTime.getMinutes()).slice(
+                -2) + ":" + ("0" + inTime.getSeconds()).slice(-2) + '", ');
+            hjson += '"out":';
+            hjson += ('"' + ("0" + outTime.getHours()).slice(-2) + ": " + ("0" + outTime.getMinutes()).slice(
+                -2) + ": " + ("0" + outTime.getSeconds()).slice(-2) + '"');
+            hjson += "}";
+            // console.log(hjson); 
+            // console.log(JSON.parse(hjson)); 
+            hjson = JSON.parse(hjson);
+            console.log(docId);
+            db.collection('usersTest').doc(docId).collection('hoursWorked').doc(date).set(hjson)
+        }
 
-            // Hours Worked 
-            var hours = realSnap[name]["TimeClock"]["HoursWorked"];
-            console.log("Hours Worked");
-            for (var time in hours) {
-                var hjson = '{';
-                var newDate = new Date(time);
-                var inTime = new Date('1970-01-01 ' + hours[time]["In"]);
-                var outTime =
-                    new Date('1970-01-01 ' + hours[time]["Out"]);
-                var date = (newDate.getFullYear() + "-" + ("0" + (1 + newDate.getMonth())).slice(-2) + "-" +
-                    ("0" + newDate.getDate()).slice(-2) + " " + ("0" + newDate.getHours()).slice(-2) +
-                    ":" + ("0" + newDate.getMinutes()).slice(-2) + ":" + ("0" + newDate.getSeconds()).slice(
-                        -2));
-                hjson += '"in": ';
-                hjson += ('"' + ("0" + inTime.getHours()).slice(-2) + ":" + ("0" + inTime.getMinutes()).slice(
-                    -2) + ":" + ("0" + inTime.getSeconds()).slice(-2) + '", ');
-                hjson += '"out":';
-                hjson += ('"' + ("0" + outTime.getHours()).slice(-2) + ": " + ("0" + outTime.getMinutes()).slice(
-                    -2) + ": " + ("0" + outTime.getSeconds()).slice(-2) + '"');
-                hjson += "}";
-                // console.log(hjson); 
-                // console.log(JSON.parse(hjson)); 
-                hjson = JSON.parse(hjson);
-                console.log(docId);
-                db.collection('usersTest').doc(docId).collection('hoursWorked').doc(date).set(hjson)
-            }
-
-            // Breaks 
-            var breaks = realSnap[name]["TimeClock"]["Breaks"];
-            console.log("Breaks");
-            for (var time in breaks) {
-                var bjson = '{';
-                var newDate = new Date(time);
-                var inTime = new Date('1970-01-01 ' + breaks[time]["In"]);
-                var outTime = new Date('1970-01-01' + breaks[time]["Out"]);
-                var date = (newDate.getFullYear() + "-" + ("0" + (1 + newDate.getMonth())).slice(-2) + "-" +
-                    ("0" + newDate.getDate()).slice(-2) + " " + ("0" + newDate.getHours()).slice(-2) +
-                    ":" + ("0" + newDate.getMinutes()).slice(-2) + ":" + ("0" + newDate.getSeconds()).slice(
-                        -2));
-                bjson += '"in": ';
-                bjson += ('"' + ("0" + inTime.getHours()).slice(-2) + ":" + ("0" + inTime.getMinutes()).slice(
-                    -2) + ":" + ("0" + inTime.getSeconds()).slice(-2) + '", ');
-                bjson += '"out": ';
-                bjson += ('"' + ("0" + outTime.getHours()).slice(-2) + ":" + ("0" + outTime.getMinutes()).slice(
-                    -2) + ":" + ("0" + outTime.getSeconds()).slice(-2) + '"');
-                bjson = bjson + '}';
-                // console.log(bjson); 
-                // console.log(JSON.parse(bjson));
-                bjson = JSON.parse(bjson);
-                console.log(docId);
-                db.collection('usersTest').doc(docId).collection('breaks').doc(date).set(bjson);
-            }
+        // Breaks 
+        var breaks = realSnap[name]["TimeClock"]["Breaks"];
+        console.log("Breaks");
+        for (var time in breaks) {
+            var bjson = '{';
+            var newDate = new Date(time);
+            var inTime = new Date('1970-01-01 ' + breaks[time]["In"]);
+            var outTime = new Date('1970-01-01' + breaks[time]["Out"]);
+            var date = (newDate.getFullYear() + "-" + ("0" + (1 + newDate.getMonth())).slice(-2) + "-" +
+                ("0" + newDate.getDate()).slice(-2) + " " + ("0" + newDate.getHours()).slice(-2) +
+                ":" + ("0" + newDate.getMinutes()).slice(-2) + ":" + ("0" + newDate.getSeconds()).slice(
+                    -2));
+            bjson += '"in": ';
+            bjson += ('"' + ("0" + inTime.getHours()).slice(-2) + ":" + ("0" + inTime.getMinutes()).slice(
+                -2) + ":" + ("0" + inTime.getSeconds()).slice(-2) + '", ');
+            bjson += '"out": ';
+            bjson += ('"' + ("0" + outTime.getHours()).slice(-2) + ":" + ("0" + outTime.getMinutes()).slice(
+                -2) + ":" + ("0" + outTime.getSeconds()).slice(-2) + '"');
+            bjson = bjson + '}';
+            // console.log(bjson); 
+            // console.log(JSON.parse(bjson));
+            bjson = JSON.parse(bjson);
+            console.log(docId);
+            db.collection('usersTest').doc(docId).collection('breaks').doc(date).set(bjson);
         }
     }
 
