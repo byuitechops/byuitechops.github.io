@@ -32,9 +32,11 @@
     // })
 
     var users = [];
+    var realSnap = "";
 
     function pushUsers() {
         firebase.database().ref('users').once('value').then(function (snap) {
+            realSnap = snap.val();
             snap = snap.val();
             // console.log(snap);
             for (var name in snap) {
@@ -71,6 +73,7 @@
                     `, "checkKey": "${snap[name]["TimeClock"]["timekey"]}"`;
                 json += "}"
                 json += "}"
+                console.log(json);
                 json = JSON.parse(json);
                 console.log(json);
                 db.collection("usersTest").add(json).then(function (docRef) {
@@ -86,6 +89,7 @@
         // Scheduled Time
         var schedule = snap[name]["TimeClock"]["ScheduledTime"];
         console.log("Scheduled Time");
+        console.log(schedule);
         for (var time in schedule) {
             var sjson = '{';
             var newDate = new Date(time);
