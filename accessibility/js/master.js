@@ -137,7 +137,66 @@ function viewItem(docId) {
                             }
                         }
 
+                        if (doc.data().type == "Audio") {
+                            var items = ["type", "title", "docURL", "courseCode", "copyeditor", "lmsLink", "priority",
+                                "requestor", "status", "transcriber", "videoLength",
+                                "week", "requestDate", "transcriptClaimed", "transcriptFinished", "reviewClaimed", "reviewFinished", "placed"
+                            ];
+
+                            for (var i = 0; i < items.length; i++) {
+                                var p = document.createElement('p');
+                                var item = document.createElement('span');
+                                var title = items[i].charAt(0).toUpperCase() + items[i].slice(1);
+
+                                if (doc.data()[items[i]] == undefined) {
+                                    item.innerHTML = ": Empty";
+                                    item.style.color = "red";
+                                } else if (items[i] == "requestDate" || items[i] == "transcriptClaimed" || items[i] == "transcriptFinished" ||
+                                    items[i] == "reviewClaimed" || items[i] == "reviewFinished") {
+                                    var date = doc.data()[items[i]].toDate().toString().slice(0, -34);
+                                    item.innerHTML = `: ${date}`;
+                                } else {
+                                    item.innerHTML = `: ${doc.data()[items[i]]}`;
+                                }
+                                document.getElementById('docData').insertAdjacentElement('beforeend', p);
+                                p.insertAdjacentHTML('beforeend', `${title}`);
+                                p.insertAdjacentElement('beforeend', item);
+                                if (userData.role != "Techops") {
+                                    p.insertAdjacentHTML('beforeend', `<button onclick="editItem('${doc.id}', '${items[i]}', '${doc.data()[items[i]]}')">Edit</button>`);
+                                }
+                            }
+                        }
+
                         if (doc.data().type == "Alt Text") {
+                            console.log("Calling");
+                            var items = ["type", "title", "docURL", "courseCode", "copyeditor", "lmsLink", "priority",
+                                "requestor", "status", "week", "requestDate", "copyeditClaimed", "copyeditFinished", "placed"
+                            ];
+
+                            for (var i = 0; i < items.length; i++) {
+                                var p = document.createElement('p');
+                                var item = document.createElement('span');
+                                var title = items[i].charAt(0).toUpperCase() + items[i].slice(1);
+
+                                if (doc.data()[items[i]] == undefined) {
+                                    item.innerHTML = ": Empty";
+                                    item.style.color = "red";
+                                } else if (items[i] == "requestDate" || items[i] == "copyeditClaimed" || items[i] == "copyeditFinished") {
+                                    var date = doc.data()[items[i]].toDate().toString().slice(0, -34);
+                                    item.innerHTML = `: ${date}`;
+                                } else {
+                                    item.innerHTML = `: ${doc.data()[items[i]]}`;
+                                }
+                                document.getElementById('docData').insertAdjacentElement('beforeend', p);
+                                p.insertAdjacentHTML('beforeend', `${title}`);
+                                p.insertAdjacentElement('beforeend', item);
+                                if (userData.role != "Techops") {
+                                    p.insertAdjacentHTML('beforeend', `<button onclick="editItem('${doc.id}', '${items[i]}', '${doc.data()[items[i]]}')">Edit</button>`);
+                                }
+                            }
+                        }
+
+                        if (doc.data().type == "Slide") {
                             console.log("Calling");
                             var items = ["type", "title", "docURL", "courseCode", "copyeditor", "lmsLink", "priority",
                                 "requestor", "status", "week", "requestDate", "copyeditClaimed", "copyeditFinished", "placed"

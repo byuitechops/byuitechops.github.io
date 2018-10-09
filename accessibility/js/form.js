@@ -51,6 +51,14 @@ document.getElementById('requestType').addEventListener('change', function () {
         document.getElementById('requestHeightLabel').classList.remove('hide');
         document.getElementById('requestHeight').classList.remove('hide');
         document.getElementById('timeCalc').classList.remove('hide');
+    } else if (document.getElementById('requestType').value === 'Audio') {
+        document.getElementById('requestVideoURLLabel').classList.add('hide');
+        document.getElementById('requestVideoURL').classList.add('hide');
+        document.getElementById('requestLengthLabel').classList.remove('hide');
+        document.getElementById('requestLength').classList.remove('hide');
+        document.getElementById('requestHeightLabel').classList.add('hide');
+        document.getElementById('requestHeight').classList.add('hide');
+        document.getElementById('timeCalc').classList.remove('hide');
     } else {
         document.getElementById('requestVideoURLLabel').classList.add('hide');
         document.getElementById('requestVideoURL').classList.add('hide');
@@ -84,6 +92,11 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
         message.style.color = 'red';
         resetMessage();
         return;
+    } else if (requestType === 'Audio' && videoLength === '') {
+        message.innerHTML = 'You must fill in all inputs';
+        message.style.color = 'red';
+        resetMessage();
+        return;
     } else {
         var user = firebase.auth().currentUser;
        
@@ -101,6 +114,22 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
                 srcURL: srcURL,
                 videoLength: videoLength,
                 videoHeight: videoHeight,
+                placed: false
+            }
+        }
+
+        if (requestType == "Audio") {
+            var docData = {
+                title: title,
+                type: requestType,
+                priority: priority,
+                courseCode: course,
+                lmsURL: lmsURL,
+                week: week,
+                requestor: user.displayName,
+                requestDate: new Date(),
+                status: 'Ready for Transcript',
+                videoLength: videoLength,
                 placed: false
             }
         }

@@ -83,7 +83,29 @@ function getData(userData) {
                                     <span>${docURL}</span>
                                     <button onclick="placeCheck('${doc.id}')">Place</button>`;
                 }
+                if (doc.data().type == "Audio") {
+                    var text = `<span>${doc.data().courseCode}</span>
+                                    <span>${doc.data().priority}</span>
+                                    <span>${doc.data().type}</span>
+                                    <span>${doc.data().title}</span>
+                                    <span><a href="${doc.data().lmsURL}" target="_blank">Canvas URL</a></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span>${docURL}</span>
+                                    <button onclick="placeCheck('${doc.id}')">Place</button>`;
+                }
                 if (doc.data().type == "Alt Text") {
+                    var text = `<span>${doc.data().courseCode}</span>
+                                    <span>${doc.data().priority}</span>
+                                    <span>${doc.data().type}</span>
+                                    <span>${doc.data().title}</span>
+                                    <span><a href="${doc.data().lmsURL}" target="_blank">Canvas URL</a></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span>${docURL}</span>
+                                    <button onclick="placeCheck('${doc.id}')">Place</button>`;
+                }
+                if (doc.data().type == "Slide") {
                     var text = `<span>${doc.data().courseCode}</span>
                                     <span>${doc.data().priority}</span>
                                     <span>${doc.data().type}</span>
@@ -346,7 +368,28 @@ function search() {
                                     <span>${docURL}</span>
                                     <button onclick="placeCheck('${doc.id}')">Place</button>`;
                 }
+                if (doc.data().type == "Audio") {
+                    var text = `<span>${doc.data().courseCode}</span>
+                                    <span>${doc.data().priority}</span>
+                                    <span>${doc.data().type}</span>
+                                    <span>${doc.data().title}</span>
+                                    <span><a href="${doc.data().lmsURL}" target="_blank">Canvas URL</a></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span>${docURL}</span>
+                                    <button onclick="placeCheck('${doc.id}')">Place</button>`;
+                }
                 if (doc.data().type == "Alt Text") {
+                    var text = `<span>${doc.data().courseCode}</span>
+                                    <span>${doc.data().priority}</span>
+                                    <span>${doc.data().type}</span>
+                                    <span>${doc.data().title}</span>
+                                    <span><a href="${doc.data().lmsURL}" target="_blank">Canvas URL</a></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span>${docURL}</span>
+                                    <button onclick="placeCheck('${doc.id}')">Place</button>`;
+                }if (doc.data().type == "Slide") {
                     var text = `<span>${doc.data().courseCode}</span>
                                     <span>${doc.data().priority}</span>
                                     <span>${doc.data().type}</span>
