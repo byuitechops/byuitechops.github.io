@@ -31,7 +31,6 @@ firebase.auth().onAuthStateChanged(function (user) {
                         window.location.assign('home.html');
                         document.getElementById('master').classList.remove('hide');
                     }
-                    getData();
                 })
             })
     } else {
@@ -39,43 +38,6 @@ firebase.auth().onAuthStateChanged(function (user) {
         window.location.assign('home.html');
     }
 });
-
-var startNumber = 1;
-// db.collection("accessibility").orderBy('title').limit(1).get().then(function (documentSnapshots) {
-//     // Get the last visible document
-//     startNumber = documentSnapshots.docs[documentSnapshots.docs.length-1];
-//     console.log("last", startNumber);
-// });
-
-// Get Data
-function getData() {
-    db.collection("accessibility").orderBy('title').startAfter(startNumber).limit(10).get().then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            // console.log(`${doc.id} => ${doc.data().title}`);
-
-            var items = ["type", "status", "title", "docURL", "courseCode"];
-
-            for (var i = 0; i < items.length; i++) {
-                var item;
-                if (doc.data()[items[i]] == undefined) {
-                    item = document.createElement('span');
-                    item.innerHTML = "Empty";
-                    item.style.color = "red";
-                } else {
-                    item = document.createElement('span');
-                    item.innerHTML = doc.data()[items[i]];
-                }
-                document.getElementById('text').insertAdjacentElement('beforeend', item);
-            }
-            document.getElementById('text').insertAdjacentHTML('beforeend', `<button onclick="viewItem('${doc.id}')">View</button>`);
-        });
-        if (querySnapshot.docs[querySnapshot.docs.length - 1] == undefined) {
-            document.getElementById('load').classList.add('hide');
-        } else {
-            startNumber = querySnapshot.docs[querySnapshot.docs.length - 1];
-        }
-    });
-}
 
 // Get the modal
 var modal = document.getElementById('myModal');
@@ -317,7 +279,6 @@ function deleteDoc(docId) {
 
 function search() {
     document.getElementById('searchcancel').classList.remove('hide');
-    document.getElementById('load').classList.add('hide');
 
     var sVal = document.getElementById('searchValue').value;
     var sType = document.getElementById('searchType').value;
@@ -372,7 +333,4 @@ document.getElementById('searchcancel').addEventListener('click', () => {
     document.getElementById('text').insertAdjacentHTML('beforeend', '<h3>Type</h3><h3>Status</h3><h3>Title</h3><h3>Doc Url</h3><h3>Course Code</h3><h3></h3>');
     document.getElementById('searchValue').value = "";
     document.getElementById('searchType').options[0].selected = true;
-    document.getElementById('load').classList.remove('hide');
-    startNumber = 1;
-    getData();
 });

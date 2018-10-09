@@ -32,7 +32,6 @@ firebase.auth().onAuthStateChanged(function (user) {
                     if (userData.role == "Admin" || userData.role == "Techops" || userData.role == "Lead") {
                         document.getElementById('master').classList.remove('hide');
                     }
-                    getData(userData);
                 })
             })
     } else {
@@ -52,86 +51,6 @@ function resetMessage() {
         message.style.color = "black";
     }, 10000);
 }
-
-var startNumber = 1;
-
-function getData(userData) {
-    // Get Data
-    db.collection("accessibility").where('placed', '==', false).orderBy('priority').startAfter(startNumber).limit(10).get()
-        .then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                // console.log(`${doc.id} => ${doc.data().type}`);
-                var docURL;
-                if (doc.data().docURL != undefined) {
-                    docURL = `<a href="${doc.data().docURL}" target="_blank">Doc URL</a>`;
-                } else {
-                    docURL = "Empty";
-                }
-
-                var escapedTitle = doc.data().title.replace(/"/gi, '\\&quot;');
-                escapedTitle = escapedTitle.replace(/'/gi, '\\&#39;');
-                console.log(escapedTitle);
-
-                if (doc.data().type == "Transcript") {
-                    var text = `<span>${doc.data().courseCode}</span>
-                                    <span>${doc.data().priority}</span>
-                                    <span>${doc.data().type}</span>
-                                    <span>${doc.data().title}</span>
-                                    <span><a href="${doc.data().lmsURL}" target="_blank">Canvas URL</a></span>
-                                    <span><button onclick="displayEmbedCode('${doc.data().srcURL}', '${doc.data().videoHeight}', '${doc.data().videoLength}', '${escapedTitle}')">Show Code</button></span>
-                                    <span><button onclick="displayLinkCode('${doc.data().srcURL}', '${doc.data().videoLength}', '${escapedTitle}')">Show Code</button></span>
-                                    <span>${docURL}</span>
-                                    <button onclick="placeCheck('${doc.id}')">Place</button>`;
-                }
-                if (doc.data().type == "Audio") {
-                    var text = `<span>${doc.data().courseCode}</span>
-                                    <span>${doc.data().priority}</span>
-                                    <span>${doc.data().type}</span>
-                                    <span>${doc.data().title}</span>
-                                    <span><a href="${doc.data().lmsURL}" target="_blank">Canvas URL</a></span>
-                                    <span></span>
-                                    <span></span>
-                                    <span>${docURL}</span>
-                                    <button onclick="placeCheck('${doc.id}')">Place</button>`;
-                }
-                if (doc.data().type == "Alt Text") {
-                    var text = `<span>${doc.data().courseCode}</span>
-                                    <span>${doc.data().priority}</span>
-                                    <span>${doc.data().type}</span>
-                                    <span>${doc.data().title}</span>
-                                    <span><a href="${doc.data().lmsURL}" target="_blank">Canvas URL</a></span>
-                                    <span></span>
-                                    <span></span>
-                                    <span>${docURL}</span>
-                                    <button onclick="placeCheck('${doc.id}')">Place</button>`;
-                }
-                if (doc.data().type == "Slide") {
-                    var text = `<span>${doc.data().courseCode}</span>
-                                    <span>${doc.data().priority}</span>
-                                    <span>${doc.data().type}</span>
-                                    <span>${doc.data().title}</span>
-                                    <span><a href="${doc.data().lmsURL}" target="_blank">Canvas URL</a></span>
-                                    <span></span>
-                                    <span></span>
-                                    <span>${docURL}</span>
-                                    <button onclick="placeCheck('${doc.id}')">Place</button>`;
-                }
-                document.getElementById('text').insertAdjacentHTML('beforeend', text);
-            });
-            if (querySnapshot.size == 0) {
-                message.innerHTML = 'No documents found with that criteria';
-                message.style.color = 'red';
-                resetMessage();
-            }
-
-            if (querySnapshot.docs[querySnapshot.docs.length - 1] == undefined) {
-                document.getElementById('load').classList.add('hide');
-            } else {
-                startNumber = querySnapshot.docs[querySnapshot.docs.length - 1];
-            }
-        })
-}
-
 
 function displayEmbedCode(link, height, seconds, title) {
     document.getElementById('intro').classList.add('intro');
@@ -402,12 +321,6 @@ function search() {
                 }
                 document.getElementById('text').insertAdjacentHTML('beforeend', text);
             });
-            if (querySnapshot.docs[querySnapshot.docs.length - 1] == undefined) {
-                document.getElementById('load').classList.add('hide');
-            } else {
-                startNumber = querySnapshot.docs[querySnapshot.docs.length - 1];
-            }
-
             if (querySnapshot.size == 0) {
                 message.innerHTML = 'No documents found with that criteria';
                 message.style.color = 'red';
@@ -430,6 +343,4 @@ document.getElementById('searchcancel').addEventListener('click', () => {
     document.getElementById('text').innerHTML = "";
     document.getElementById('searchValue').value = "";
     document.getElementById('searchType').options[0].selected = true;
-    startNumber = 1;
-    getData();
 });
