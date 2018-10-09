@@ -90,6 +90,25 @@ function getData() {
                             }
                         });
 
+                        db.collection("accessibility").where("status", "==", "Ready for Transcript").where("type", "==", "Audio").orderBy('priority').startAfter(startTech).limit(20).get().then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+                                // console.log(`${doc.id} => ${doc.data().title}`);
+                                var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
+                                document.getElementById('text').insertAdjacentHTML('beforeend', text);
+                            });
+                            if (querySnapshot.size == 0) {
+                                message.innerHTML = 'No documents found with that criteria';
+                                message.style.color = 'red';
+                                resetMessage();
+                            }
+
+                            if (querySnapshot.docs[querySnapshot.docs.length - 1] != undefined) {
+                                startTech = querySnapshot.docs[querySnapshot.docs.length - 1];
+                            } else {
+                                startTech = false;
+                            }
+                        });
+
                         db.collection("accessibility").where("status", "==", "Ready for Transcript").where("type", "==", "Slide").orderBy('priority').startAfter(startTech).limit(20).get().then((querySnapshot) => {
                             querySnapshot.forEach((doc) => {
                                 // console.log(`${doc.id} => ${doc.data().title}`);
@@ -177,7 +196,43 @@ function getData() {
                             }
                         });
 
+                        db.collection("accessibility").where("status", "==", "Ready for Transcript").where("type", "==", "Audio").orderBy('priority').startAfter(startTech).limit(10).get().then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+                                // console.log(`${doc.id} => ${doc.data().title}`);
+                                var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
+                                document.getElementById('text').insertAdjacentHTML('beforeend', text);
+                            });
+                            if (querySnapshot.size == 0) {
+                                message.innerHTML = 'No documents that are Ready for Transcript were found with that criteria';
+                                message.style.color = 'red';
+                                resetMessage();
+                            }
+                            if (querySnapshot.docs[querySnapshot.docs.length - 1] != undefined) {
+                                startAdminTech = querySnapshot.docs[querySnapshot.docs.length - 1];
+                            } else {
+                                startAdminTech = false;
+                            }
+                        });
+
                         db.collection("accessibility").where("status", "==", "Ready for Review").where("type", "==", "Transcript").orderBy('priority').startAfter(startCopyReview).limit(10).get().then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+                                // console.log(`${doc.id} => ${doc.data().title}`);
+                                var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
+                                document.getElementById('text').insertAdjacentHTML('beforeend', text);
+                            });
+                            if (querySnapshot.size == 0) {
+                                message.innerHTML = 'No documents that are Ready for Review were found with that criteria';
+                                message.style.color = 'red';
+                                resetMessage();
+                            }
+                            if (querySnapshot.docs[querySnapshot.docs.length - 1] != undefined) {
+                                startAdminCopyReview = querySnapshot.docs[querySnapshot.docs.length - 1];
+                            } else {
+                                startAdminCopyReview = false;
+                            }
+                        });
+
+                        db.collection("accessibility").where("status", "==", "Ready for Review").where("type", "==", "Audio").orderBy('priority').startAfter(startCopyReview).limit(10).get().then((querySnapshot) => {
                             querySnapshot.forEach((doc) => {
                                 // console.log(`${doc.id} => ${doc.data().title}`);
                                 var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
@@ -268,7 +323,7 @@ function claimItem(docId) {
                     db.collection('accessibility').doc(docId).get().then((doc) => {
                         var type = doc.data().type;
 
-                        if (type == "Transcript") {
+                        if (type == "Transcript" || type == "Slide" || type == "Audio") {
                             db.collection('accessibility').doc(docId).update({
                                     copyeditor: user.displayName,
                                     status: "Review in Progress",
@@ -340,6 +395,15 @@ function search() {
                         techQuery += querySnapshot.size;
                     });
 
+                    db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Transcript").where("type", "==", "Audio").orderBy('priority').get().then((querySnapshot) => {
+                        querySnapshot.forEach((doc) => {
+                            console.log(`${doc.id} => ${doc.data().title}`);
+                            var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
+                            document.getElementById('text').insertAdjacentHTML('beforeend', text);
+                        });
+                        techQuery += querySnapshot.size;
+                    });
+
                     db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Transcript").where("type", "==", "Slide").orderBy('priority').get().then((querySnapshot) => {
                         querySnapshot.forEach((doc) => {
                             // console.log(`${doc.id} => ${doc.data().title}`);
@@ -358,6 +422,15 @@ function search() {
 
                 if (userData.role == "Copyedit") {
                     db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Review").where("type", "==", "Transcript").orderBy('priority').get().then((querySnapshot) => {
+                        querySnapshot.forEach((doc) => {
+                            // console.log(`${doc.id} => ${doc.data().title}`);
+                            var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
+                            document.getElementById('text').insertAdjacentHTML('beforeend', text);
+                        });
+                        copyQuery += querySnapshot.size;
+                    });
+
+                    db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Review").where("type", "==", "Audio").orderBy('priority').get().then((querySnapshot) => {
                         querySnapshot.forEach((doc) => {
                             // console.log(`${doc.id} => ${doc.data().title}`);
                             var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
@@ -402,7 +475,25 @@ function search() {
                         adminQuery += querySnapshot.size;
                     });
 
+                    db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Transcript").where("type", "==", "Audio").orderBy('priority').get().then((querySnapshot) => {
+                        querySnapshot.forEach((doc) => {
+                            // console.log(`${doc.id} => ${doc.data().title}`);
+                            var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
+                            document.getElementById('text').insertAdjacentHTML('beforeend', text);
+                        });
+                        adminQuery += querySnapshot.size;
+                    });
+
                     db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Review").where("type", "==", "Transcript").orderBy('priority').get().then((querySnapshot) => {
+                        querySnapshot.forEach((doc) => {
+                            // console.log(`${doc.id} => ${doc.data().title}`);
+                            var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
+                            document.getElementById('text').insertAdjacentHTML('beforeend', text);
+                        });
+                        adminQuery += querySnapshot.size;
+                    });
+
+                    db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Review").where("type", "==", "Audio").orderBy('priority').get().then((querySnapshot) => {
                         querySnapshot.forEach((doc) => {
                             // console.log(`${doc.id} => ${doc.data().title}`);
                             var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
