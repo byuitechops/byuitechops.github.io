@@ -5,7 +5,7 @@ body {
 
 body {
   display: grid;
-  grid-template-areas: "a a a a a a a a a a a a" "b b b b b b b b b b b b" "c c c c c c c c c c c c" "c c c c c c c c c c c c" "c c c c c c c c c c c c" "c c c c c c c c c c c c" "c c c c c c c c c c c c" "c c c c c c c c c c c c" "c c c c c c c c c c c c";
+  grid-template-areas: "a a a a a a a a a a a a" "b b b b b b b b b b b b" "b b b b b b b b b b b b" "c c c c c c c c c c c c" "c c c c c c c c c c c c" "c c c c c c c c c c c c" "c c c c c c c c c c c c" "c c c c c c c c c c c c" "c c c c c c c c c c c c" "c c c c c c c c c c c c";
   height: 90vh;
   font-family: 'Open Sans', sans-serif; }
 
