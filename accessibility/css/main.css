@@ -5,7 +5,9 @@ body {
 
 body {
   display: grid;
-  grid-template-areas: "a a a a a a a a a a a a" "b b b b b b b b b b b b" "b b b b b b b b b b b b" "c c c c c c c c c c c c" "c c c c c c c c c c c c" "c c c c c c c c c c c c" "c c c c c c c c c c c c" "c c c c c c c c c c c c" "c c c c c c c c c c c c" "c c c c c c c c c c c c";
+  grid-template-columns: repeat(12, 8.33%);
+  grid-template-rows: repeat(26, 4.1%);
+  grid-template-areas: "a a a a a a a a a a a a" "a a a a a a a a a a a a" "a a a a a a a a a a a a" "b b b b b b b b b b b b" "b b b b b b b b b b b b" "c c c c c c c c c c c c" "c c c c c c c c c c c c" "c c c c c c c c c c c c" "c c c c c c c c c c c c" "c c c c c c c c c c c c" "c c c c c c c c c c c c";
   height: 90vh;
   font-family: 'Open Sans', sans-serif; }
 
@@ -17,7 +19,6 @@ h1 {
   background-color: #0076C6;
   margin: 0;
   padding: 10px;
-  position: fixed;
   width: 100%; }
 
 nav {
@@ -26,7 +27,6 @@ nav {
   grid-area: b;
   font-size: 1.1em;
   width: 100%;
-  position: fixed;
   top: 63px; }
   nav ul {
     display: grid;

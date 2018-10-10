@@ -7,6 +7,7 @@ $color-orange: #F58300;
 $color-lightgrey: #EBEBEB;
 $color-grey: #adadad;
 $color-darkgrey: #525252;
+
 html,
 body {
     margin: 0;
@@ -14,9 +15,11 @@ body {
 
 body {
     display: grid;
-    // grid-template-columns: repeat(12, 8.33%);
-    // grid-template-rows: repeat(26, 4.1%);
-    grid-template-areas: 
+    grid-template-columns: repeat(12, 8.33%);
+    grid-template-rows: repeat(26, 4.1%);
+    grid-template-areas:
+        "a a a a a a a a a a a a"
+        "a a a a a a a a a a a a"
         "a a a a a a a a a a a a"
         "b b b b b b b b b b b b"
         "b b b b b b b b b b b b"
@@ -25,8 +28,7 @@ body {
         "c c c c c c c c c c c c"
         "c c c c c c c c c c c c"
         "c c c c c c c c c c c c"
-        "c c c c c c c c c c c c"
-        "c c c c c c c c c c c c"; 
+        "c c c c c c c c c c c c";
     height: 90vh;
     font-family: 'Open Sans', sans-serif;
 }
@@ -39,8 +41,8 @@ h1 {
     background-color: $color-blue;
     margin: 0;
     padding: 10px;
-     position: fixed;
-     width: 100%;
+    //  position: fixed;
+    width: 100%;
 }
 
 nav {
@@ -49,27 +51,32 @@ nav {
     grid-area: b;
     font-size: 1.1em;
     width: 100%;
-    position: fixed;
+    // position: fixed;
     top: 63px;
+
     ul {
         display: grid;
         grid-template-columns: repeat(8, 12.5%);
         padding: 0;
         margin: 0;
+
         a {
             text-decoration: none;
             text-align: center;
             color: $color-darkgrey;
             font-weight: bold;
             background-color: $color-lightgrey;
+
             li {
                 list-style: none;
                 padding: 0.38em 0.25em;
             }
+
             &.active {
                 background-color: $color-blue;
                 color: $color-white;
             }
+
             &:hover {
                 background-color: $color-orange;
                 color: $color-white;
@@ -98,6 +105,7 @@ button {
     color: $color-white;
     height: 2em;
     font-size: 1rem;
+
     &:hover {
         cursor: pointer;
     }
@@ -111,10 +119,12 @@ button {
     height: 3.7em;
     background-color: $color-blue;
     color: $color-white;
+
     &:hover {
         background-color: $color-orange;
         cursor: pointer;
     }
+
     li {
         margin: 13px;
     }
