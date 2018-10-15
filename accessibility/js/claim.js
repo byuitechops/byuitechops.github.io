@@ -145,7 +145,7 @@ function search() {
             querySnapshot.forEach((doc) => {
                 var userData = doc.data();
                 if (userData.role == "Techops" || userData.role == "Lead") {
-                    db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Transcript").where("type", "==", "Transcript").orderBy('priority').get().then((querySnapshot) => {
+                    db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Transcript").where("type", "==", "Transcript").get().then((querySnapshot) => {
                         querySnapshot.forEach((doc) => {
                             console.log(`${doc.id} => ${doc.data().title}`);
                             var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
@@ -154,7 +154,7 @@ function search() {
                         techQuery += querySnapshot.size;
                     });
 
-                    db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Transcript").where("type", "==", "Audio").orderBy('priority').get().then((querySnapshot) => {
+                    db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Transcript").where("type", "==", "Audio").get().then((querySnapshot) => {
                         querySnapshot.forEach((doc) => {
                             console.log(`${doc.id} => ${doc.data().title}`);
                             var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
@@ -163,7 +163,7 @@ function search() {
                         techQuery += querySnapshot.size;
                     });
 
-                    db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Transcript").where("type", "==", "Slide").orderBy('priority').get().then((querySnapshot) => {
+                    db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Transcript").where("type", "==", "Slide").get().then((querySnapshot) => {
                         querySnapshot.forEach((doc) => {
                             // console.log(`${doc.id} => ${doc.data().title}`);
                             var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span></span><button onclick="claimItem('${doc.id}')">Claim</button>`;
@@ -180,7 +180,7 @@ function search() {
                 }
 
                 if (userData.role == "Copyedit") {
-                    db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Review").where("type", "==", "Transcript").orderBy('priority').get().then((querySnapshot) => {
+                    db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Review").where("type", "==", "Transcript").get().then((querySnapshot) => {
                         querySnapshot.forEach((doc) => {
                             // console.log(`${doc.id} => ${doc.data().title}`);
                             var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
@@ -189,7 +189,7 @@ function search() {
                         copyQuery += querySnapshot.size;
                     });
 
-                    db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Review").where("type", "==", "Audio").orderBy('priority').get().then((querySnapshot) => {
+                    db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Review").where("type", "==", "Audio").get().then((querySnapshot) => {
                         querySnapshot.forEach((doc) => {
                             // console.log(`${doc.id} => ${doc.data().title}`);
                             var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
@@ -198,7 +198,7 @@ function search() {
                         copyQuery += querySnapshot.size;
                     });
 
-                    db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Review").where("type", "==", "Slide").orderBy('priority').get().then((querySnapshot) => {
+                    db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Review").where("type", "==", "Slide").get().then((querySnapshot) => {
                         querySnapshot.forEach((doc) => {
                             // console.log(`${doc.id} => ${doc.data().title}`);
                             var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span></span><button onclick="claimItem('${doc.id}')">Claim</button>`;
@@ -208,7 +208,7 @@ function search() {
                     });
 
 
-                    db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Transcript").where("type", "==", "Alt Text").orderBy('priority').get().then((querySnapshot) => {
+                    db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Transcript").where("type", "==", "Alt Text").get().then((querySnapshot) => {
                         querySnapshot.forEach((doc) => {
                             // console.log(`${doc.id} => ${doc.data().title}`);
                             var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span></span><button onclick="claimItem('${doc.id}')">Claim</button>`;
@@ -225,7 +225,7 @@ function search() {
                 }
 
                 if (userData.role == "Admin") {
-                    db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Transcript").where("type", "==", "Transcript").orderBy('priority').get().then((querySnapshot) => {
+                    db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Transcript").where("type", "==", "Transcript").get().then((querySnapshot) => {
                         querySnapshot.forEach((doc) => {
                             // console.log(`${doc.id} => ${doc.data().title}`);
                             var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
@@ -234,7 +234,7 @@ function search() {
                         adminQuery += querySnapshot.size;
                     });
 
-                    db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Transcript").where("type", "==", "Audio").orderBy('priority').get().then((querySnapshot) => {
+                    db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Transcript").where("type", "==", "Audio").get().then((querySnapshot) => {
                         querySnapshot.forEach((doc) => {
                             // console.log(`${doc.id} => ${doc.data().title}`);
                             var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
@@ -243,7 +243,7 @@ function search() {
                         adminQuery += querySnapshot.size;
                     });
 
-                    db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Review").where("type", "==", "Transcript").orderBy('priority').get().then((querySnapshot) => {
+                    db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Review").where("type", "==", "Transcript").get().then((querySnapshot) => {
                         querySnapshot.forEach((doc) => {
                             // console.log(`${doc.id} => ${doc.data().title}`);
                             var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
@@ -252,7 +252,7 @@ function search() {
                         adminQuery += querySnapshot.size;
                     });
 
-                    db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Review").where("type", "==", "Audio").orderBy('priority').get().then((querySnapshot) => {
+                    db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Review").where("type", "==", "Audio").get().then((querySnapshot) => {
                         querySnapshot.forEach((doc) => {
                             // console.log(`${doc.id} => ${doc.data().title}`);
                             var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span>${doc.data().videoLength}</span><button onclick="claimItem('${doc.id}')">Claim</button>`;
@@ -261,7 +261,7 @@ function search() {
                         adminQuery += querySnapshot.size;
                     });
 
-                    db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Transcript").where("type", "==", "Alt Text").orderBy('priority').get().then((querySnapshot) => {
+                    db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Transcript").where("type", "==", "Alt Text").get().then((querySnapshot) => {
                         querySnapshot.forEach((doc) => {
                             // console.log(`${doc.id} => ${doc.data().title}`);
                             var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span></span><button onclick="claimItem('${doc.id}')">Claim</button>`;
@@ -270,7 +270,7 @@ function search() {
                         adminQuery += querySnapshot.size;
                     });
 
-                    db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Transcript").where("type", "==", "Slide").orderBy('priority').get().then((querySnapshot) => {
+                    db.collection("accessibility").where(sType, "==", sVal).where("status", "==", "Ready for Transcript").where("type", "==", "Slide").get().then((querySnapshot) => {
                         querySnapshot.forEach((doc) => {
                             // console.log(`${doc.id} => ${doc.data().title}`);
                             var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().status}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span></span><button onclick="claimItem('${doc.id}')">Claim</button>`;
