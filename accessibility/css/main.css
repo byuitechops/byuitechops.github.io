@@ -73,17 +73,10 @@ button {
 
 #btnLogout {
   position: absolute;
-  top: -65px;
   right: 0;
-  width: 6em;
-  height: 3.7em;
-  background-color: #0076C6;
-  color: #FFFFFF; }
-  #btnLogout:hover {
-    background-color: #F58300;
-    cursor: pointer; }
+  width: 12%; }
   #btnLogout li {
-    margin: 13px; }
+    cursor: pointer; }
 
 button a {
   text-decoration: none;

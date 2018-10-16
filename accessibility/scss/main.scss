@@ -113,20 +113,11 @@ button {
 
 #btnLogout {
     position: absolute;
-    top: -65px;
     right: 0;
-    width: 6em;
-    height: 3.7em;
-    background-color: $color-blue;
-    color: $color-white;
-
-    &:hover {
-        background-color: $color-orange;
-        cursor: pointer;
-    }
+    width: 12%;
 
     li {
-        margin: 13px;
+        cursor: pointer;
     }
 }
 
