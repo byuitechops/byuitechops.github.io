@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: 'Open Sans', sans-serif; }
+
+body {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-areas: "a b b b b b b b b b" "a b b b b b b b b b" "a b b b b b b b b b" "a b b b b b b b b b" "a b b b b b b b b b";
+  height: 100vh;
+  width: 100vw; }
+
+header {
+  grid-area: a;
+  background-color: lightblue; }
+
+main {
+  grid-area: b; }
+  main section {
+    margin: 3% 2%;
+    width: 94%;
+    height: 42%; }
+    main section#welcome {
+      background-color: lightslategray; }
+    main section#links {
+      display: flex;
+      justify-content: space-between; }
+      main section#links div {
+        background-color: lightslategray;
+        width: 32%;
+        height: 100%; }
+
+/*# sourceMappingURL=home.css.map */

@@ -1,0 +1,50 @@
+// Colors
+$main: lightblue;
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+}
+
+body {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-areas: 
+        "a b b b b b b b b b"
+        "a b b b b b b b b b"
+        "a b b b b b b b b b"
+        "a b b b b b b b b b"
+        "a b b b b b b b b b";
+        height: 100vh;
+        width: 100vw;
+}
+
+header {
+    grid-area: a;
+    background-color: $main;
+}
+
+main {
+    grid-area: b;
+    section {
+        margin: 3% 2%;
+        width: 94%;
+        height: 42%;
+        &#welcome {
+            background-color: lightslategray;
+        }
+        &#links {
+            display: flex;
+            justify-content: space-between;
+            div {
+                background-color: lightslategray;
+                width: 32%;
+                height: 100%;
+            }
+        }
+    }
+}
