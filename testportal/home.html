@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Partials -->
+    <link rel="import" href="partials/_header.html">
+    <!-- -->
     <!-- CSS -->
     <link rel="stylesheet" href="css/home.css">
     <!-- -->
@@ -13,21 +16,25 @@
 
 <body>
     <header>
-        <img>
-        <nav>
-            <ul>
-                <li></li>
-            </ul>
-        </nav>
+        <script>
+            var link = document.querySelector('link[rel="import"]');
+
+            // Clone the <template> in the import.
+            var template = link.import.querySelector('template');
+            var clone = document.importNode(template.content, true);
+
+            document.querySelector('header').appendChild(clone);
+        </script>
     </header>
     <main>
         <section id="welcome"></section>
         <section id="links">
-            <div></div>
+            <div><img src="assests/arrow.png" alt="Arrow"></div>
             <div></div>
             <div></div>
         </section>
     </main>
 </body>
-
+<!-- Script -->
+<!-- -->
 </html>

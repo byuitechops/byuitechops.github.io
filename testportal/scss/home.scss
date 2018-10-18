@@ -1,1 +1,35 @@
 @import "partials/main";
+
+main {
+    section {
+        &#welcome {
+            margin: 2%;
+            height: 54%;
+            background-color: lightslategray;
+        }
+
+        &#links {
+            height: 34%;
+            margin: 2%;
+            display: flex;
+            justify-content: space-between;
+
+            div {
+                background-color: lightslategray;
+                width: 32%;
+                height: 100%;
+                img {
+                    transform: scaleX(-1);
+                    width: 4em;
+                    height: 4em;
+                    background-color: $main;
+                    padding: 1em;
+                    border-radius: 50%;
+                    position: relative;
+                    left: 80%;
+                    top: 40%;
+                }
+            }
+        }
+    }
+}

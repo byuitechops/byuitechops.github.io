@@ -15,22 +15,44 @@ body {
 
 header {
   grid-area: a;
-  background-color: lightblue; }
+  background-color: lightblue;
+  padding: 2em; }
+  header img {
+    display: block;
+    margin: 0 auto;
+    text-align: center; }
+  header nav ul a {
+    text-decoration: none; }
+    header nav ul a li {
+      list-style: none;
+      margin: 2em 0;
+      text-transform: uppercase; }
 
 main {
   grid-area: b; }
-  main section {
-    margin: 2%;
-    width: 96%;
-    height: 44%; }
-    main section#welcome {
-      background-color: lightslategray; }
-    main section#links {
-      display: flex;
-      justify-content: space-between; }
-      main section#links div {
-        background-color: lightslategray;
-        width: 32%;
-        height: 100%; }
+
+main section#welcome {
+  margin: 2%;
+  height: 54%;
+  background-color: lightslategray; }
+main section#links {
+  height: 34%;
+  margin: 2%;
+  display: flex;
+  justify-content: space-between; }
+  main section#links div {
+    background-color: lightslategray;
+    width: 32%;
+    height: 100%; }
+    main section#links div img {
+      transform: scaleX(-1);
+      width: 4em;
+      height: 4em;
+      background-color: lightblue;
+      padding: 1em;
+      border-radius: 50%;
+      position: relative;
+      left: 80%;
+      top: 40%; }
 
 /*# sourceMappingURL=home.css.map */
