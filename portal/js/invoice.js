@@ -89,8 +89,12 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 
 function edit(item) {
     var newTotal = prompt("What is the new total");
-    newTotal = Number(newTotal);
-    var ref = firebase.database().ref('inventory');
-    ref.child('paymentTotals').child(item).update({'total': newTotal});
-    window.location.reload();
+    if (newTotal == null) {
+        return;
+    } else {
+        newTotal = Number(newTotal);
+        var ref = firebase.database().ref('inventory');
+        ref.child('paymentTotals').child(item).update({'total': newTotal});
+        window.location.reload();
+    }
 }

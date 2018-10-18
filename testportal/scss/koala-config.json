@@ -1,0 +1,12 @@
+{
+	"mappings": [{
+		"src": "./",
+		"dest": "../css"
+	}],
+
+	"ignores": [],
+
+	"options": {},
+
+	"includePaths": []
+}
