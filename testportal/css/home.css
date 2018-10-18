@@ -43,16 +43,19 @@ main section#links {
   main section#links div {
     background-color: lightslategray;
     width: 32%;
-    height: 100%; }
-    main section#links div img {
-      transform: scaleX(-1);
-      width: 4em;
-      height: 4em;
-      background-color: lightblue;
-      padding: 1em;
-      border-radius: 50%;
-      position: relative;
-      left: 80%;
-      top: 40%; }
+    height: 100%;
+    position: relative;
+    padding: 1em;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between; }
+    main section#links div p {
+      display: flex;
+      flex-flow: column nowrap; }
+      main section#links div p span:nth-of-type(1) {
+        font-size: 300%; }
+      main section#links div p span:nth-of-type(2) {
+        font-size: 1.5em; }
 
 /*# sourceMappingURL=home.css.map */
