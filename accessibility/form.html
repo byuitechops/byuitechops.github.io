@@ -109,6 +109,7 @@
                 <option value="14">14</option>
                 <option value="Other">Other</option>
             </select>
+            
             <label id="requestVideoURLLabel" class="hide">
                 <h3>Video Source URL</h3>
             </label>
@@ -126,12 +127,14 @@
                     <span>&#x1f4a1;</span>
                     <span class="tooltiptext">Set width to 560px then get height. If the video is from Kaltura it is probably 315px</span>
                 </div>
-                <h3>Video Height
-                </h3>
+                <h3>Video Height</h3>
             </label>
             <input type="number" id="requestHeight" class="hide">
-
-            <!-- <button onclick="authenticate().then(loadClient).then(execute)">Create Transcript Document</button> -->
+                
+            <label id="requestCommentsLabel">
+                    <h3>Comments</h3>
+                </label>
+                <input type="text" id="requestComments">
             <input type="submit" id="requestSubmit">
 
             <h2 id="prevRequest" class="row-4">Previous Requests</h2>
@@ -150,6 +153,7 @@
             <label class="row-5">
                 <h3>Canvas Page Link</h3>
             </label>
+            
             <label class="row-5">
                 <h3>Week in Course</h3>
             </label>

@@ -1,6 +1,6 @@
 #requestForm {
     display: grid;
-    grid-template-columns: repeat(10, 9%);
+    grid-template-columns: repeat(11, 1fr);
     grid-template-rows: repeat(13, 1fr);
     column-gap: 1em;
 }
@@ -137,7 +137,7 @@
 }
 
 #requestSubmit {
-    grid-column: 10;
+    grid-column: 11;
     grid-row: 3;
     height: auto;
     font-size: 1.5em;

@@ -80,6 +80,7 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
     var srcURL = document.getElementById('requestVideoURL').value;
     var videoLength = document.getElementById('requestLength').value;
     var videoHeight = document.getElementById('requestHeight').value;
+    var comments = document.getElementById('requestComments').value;
 
     if (requestType === 'Request Type' || title === '' || priority === 'Priority' || course === 'Course' || lmsURL === '' ||
         week === 'Week') {
@@ -114,7 +115,8 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
                 srcURL: srcURL,
                 videoLength: videoLength,
                 videoHeight: videoHeight,
-                placed: false
+                placed: false,
+                 notes: comments
             }
         }
 
@@ -130,7 +132,8 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
                 requestDate: new Date(),
                 status: 'Ready for Transcript',
                 videoLength: videoLength,
-                placed: false
+                placed: false,
+                notes: comments
             }
         }
 
@@ -145,7 +148,8 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
                 requestor: user.displayName,
                 requestDate: new Date(),
                 status: 'Ready for Transcript',
-                placed: false
+                placed: false,
+                notes: comments
             }
         }
 
@@ -160,7 +164,8 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
                 requestor: user.displayName,
                 requestDate: new Date(),
                 status: 'Ready for Transcript',
-                placed: false
+                placed: false,
+                notes: comments
             }
         }
 
@@ -212,6 +217,7 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
                 document.getElementById('requestHeightLabel').classList.add('hide');
                 document.getElementById('requestHeight').classList.add('hide');
                 document.getElementById('timeCalc').classList.add('hide');
+                
             })
             .catch(function (error) {
                 console.error('Error adding document: ', error);
