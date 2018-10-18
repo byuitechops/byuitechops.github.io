@@ -59,9 +59,9 @@ function getData(userData) {
                 querySnapshot.forEach((doc) => {
                     // console.log(`${doc.id} => ${doc.data().type}`);
                     if (doc.data().docURL == undefined) {
-                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span><button onclick="updateDocUrl('${doc.id}')">Update Doc Link</button></span><span><a href="${doc.data().srcURL}" target="_blank">Video URL</a></span><button onclick="finishItem('${doc.id}')">Finish</button>`;
+                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span><button onclick="updateDocUrl('${doc.id}')">Update Doc Link</button></span><span><a href="${doc.data().lmsURL}" target="_blank">Canvas Link</a></span><span><a href="${doc.data().srcURL}" target="_blank">Video URL</a></span><button onclick="finishItem('${doc.id}')">Finish</button>`;
                     } else {
-                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span><a href="${doc.data().docURL}" target="_blank">Doc Link</a></span><span><a href="${doc.data().srcURL}" target="_blank">Video URL</a></span><button onclick="finishItem('${doc.id}')">Finish</button>`;
+                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span><a href="${doc.data().docURL}" target="_blank">Doc Link</a></span><span><a href="${doc.data().lmsURL}" target="_blank">Canvas Link</a></span><span><a href="${doc.data().srcURL}" target="_blank">Video URL</a></span><button onclick="finishItem('${doc.id}')">Finish</button>`;
                     }
                     document.getElementById('text').insertAdjacentHTML('beforeend', text);
 
@@ -75,9 +75,9 @@ function getData(userData) {
                 querySnapshot.forEach((doc) => {
                     // console.log(`${doc.id} => ${doc.data().type}`);
                     if (doc.data().docURL == undefined) {
-                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span><button onclick="updateDocUrl('${doc.id}')">Update Doc Link</button></span><span><a href="${doc.data().srcURL}" target="_blank">Video URL</a></span><button onclick="finishItem('${doc.id}')">Finish</button>`;
+                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span><button onclick="updateDocUrl('${doc.id}')">Update Doc Link</button></span><span><a href="${doc.data().lmsURL}" target="_blank">Canvas Link</a></span><span><a href="${doc.data().srcURL}" target="_blank">Video URL</a></span><button onclick="finishItem('${doc.id}')">Finish</button>`;
                     } else {
-                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span><a href="${doc.data().docURL}" target="_blank">Doc Link</a></span><span><a href="${doc.data().srcURL}" target="_blank">Video URL</a></span><button onclick="finishItem('${doc.id}')">Finish</button>`;
+                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span><a href="${doc.data().docURL}" target="_blank">Doc Link</a></span><span><a href="${doc.data().lmsURL}" target="_blank">Canvas Link</a></span><span><a href="${doc.data().srcURL}" target="_blank">Video URL</a></span><button onclick="finishItem('${doc.id}')">Finish</button>`;
                     }
                     document.getElementById('text').insertAdjacentHTML('beforeend', text);
 
@@ -89,9 +89,9 @@ function getData(userData) {
                 querySnapshot.forEach((doc) => {
                     // console.log(`${doc.id} => ${doc.data().type}`);
                     if (doc.data().docURL == undefined) {
-                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span><button onclick="updateDocUrl('${doc.id}')">Update Doc Link</button></span><span><a href="${doc.data().lmsURL}" target="_blank">Canvas URL</a></span><button onclick="finishItem('${doc.id}')">Finish</button>`;
+                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span><button onclick="updateDocUrl('${doc.id}')">Update Doc Link</button></span><span><a href="${doc.data().lmsURL}" target="_blank">Canvas Link</a></span><button onclick="finishItem('${doc.id}')">Finish</button>`;
                     } else {
-                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span><a href="${doc.data().docURL}">Doc Link</a></span><span><a href="${doc.data().lmsURL}" target="_blank">Canvas URL</a></span><button onclick="finishItem('${doc.id}')">Finish</button>`;
+                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span><a href="${doc.data().docURL}">Doc Link</a></span><span><a href="${doc.data().lmsURL}" target="_blank">Canvas Link</a></span><button onclick="finishItem('${doc.id}')">Finish</button>`;
                     }
                     document.getElementById('text').insertAdjacentHTML('beforeend', text);
 
@@ -179,9 +179,11 @@ function updateDocUrl(docId) {
 
 function updateDocToFB(docId) {
     var url = document.getElementById('docUrlInput').value;
-    if (url != "") {
+    var url2 = document.getElementById('docUrlInput2').value;
+    if (url != "" && url2 != "") {
         db.collection('accessibility').doc(docId).update({
-                docURL: url
+                docURL: url,
+                pubURL: url2           
             })
             .then(function () {
                 window.location.replace('home.html');
@@ -200,7 +202,7 @@ function updateDocToFB(docId) {
         document.getElementById('updateButton').parentNode.removeChild(document.getElementById('updateButton'));
         document.getElementById('modal-message').innerHTML = "";
     } else {
-        document.getElementById('modal-message').innerHTML = "Please enter the url";
+        document.getElementById('modal-message').innerHTML = "Please enter both url's";
         document.getElementById('modal-message').style.color = "red";
     }
 }
