@@ -59,9 +59,9 @@ function getData(userData) {
                 querySnapshot.forEach((doc) => {
                     // console.log(`${doc.id} => ${doc.data().type}`);
                     if (doc.data().docURL == undefined) {
-                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span><button onclick="updateDocUrl('${doc.id}')">Update Doc Link</button></span><span><a href="${doc.data().srcURL}" target="_blank">Video URL</a></span><button onclick="finishItem('${doc.id}')">Finish</button>`;
+                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span><button onclick="updateDocUrl('${doc.id}')">Update Doc Link</button></span><span><a href="${doc.data().srcURL}" target="_blank">Video URL</a></span><button onclick="finishItem('${doc.id}')">Finish</button><button onclick="reportProblem('${doc.id}')">Report Problem</button>`;
                     } else {
-                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span><a href="${doc.data().docURL}" target="_blank">Doc Link</a></span><span><a href="${doc.data().srcURL}" target="_blank">Video URL</a></span><button onclick="finishItem('${doc.id}')">Finish</button>`;
+                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span><a href="${doc.data().docURL}" target="_blank">Doc Link</a></span><span><a href="${doc.data().srcURL}" target="_blank">Video URL</a></span><button onclick="finishItem('${doc.id}')">Finish</button><button onclick="reportProblem('${doc.id}')">Report Problem</button>`;
                     }
                     document.getElementById('text').insertAdjacentHTML('beforeend', text);
 
@@ -75,9 +75,9 @@ function getData(userData) {
                 querySnapshot.forEach((doc) => {
                     // console.log(`${doc.id} => ${doc.data().type}`);
                     if (doc.data().docURL == undefined) {
-                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span><button onclick="updateDocUrl('${doc.id}')">Update Doc Link</button></span><span><a href="${doc.data().srcURL}" target="_blank">Video URL</a></span><button onclick="finishItem('${doc.id}')">Finish</button>`;
+                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span><button onclick="updateDocUrl('${doc.id}')">Update Doc Link</button></span><span><a href="${doc.data().srcURL}" target="_blank">Video URL</a></span><button onclick="finishItem('${doc.id}')">Finish</button><button onclick="reportProblem('${doc.id}')">Report Problem</button>`;
                     } else {
-                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span><a href="${doc.data().docURL}" target="_blank">Doc Link</a></span><span><a href="${doc.data().srcURL}" target="_blank">Video URL</a></span><button onclick="finishItem('${doc.id}')">Finish</button>`;
+                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span><a href="${doc.data().docURL}" target="_blank">Doc Link</a></span><span><a href="${doc.data().srcURL}" target="_blank">Video URL</a></span><button onclick="finishItem('${doc.id}')">Finish</button><button onclick="reportProblem('${doc.id}')">Report Problem</button>`;
                     }
                     document.getElementById('text').insertAdjacentHTML('beforeend', text);
 
@@ -89,15 +89,40 @@ function getData(userData) {
                 querySnapshot.forEach((doc) => {
                     // console.log(`${doc.id} => ${doc.data().type}`);
                     if (doc.data().docURL == undefined) {
-                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span><button onclick="updateDocUrl('${doc.id}')">Update Doc Link</button></span><span><a href="${doc.data().lmsURL}" target="_blank">Canvas URL</a></span><button onclick="finishItem('${doc.id}')">Finish</button>`;
+                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span><button onclick="updateDocUrl('${doc.id}')">Update Doc Link</button></span><span><a href="${doc.data().lmsURL}" target="_blank">Canvas URL</a></span><button onclick="finishItem('${doc.id}')">Finish</button><button onclick="reportProblem('${doc.id}')">Report Problem</button>`;
                     } else {
-                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span><a href="${doc.data().docURL}">Doc Link</a></span><span><a href="${doc.data().lmsURL}" target="_blank">Canvas URL</a></span><button onclick="finishItem('${doc.id}')">Finish</button>`;
+                        var text = `<span>${doc.data().courseCode}</span><span>${doc.data().priority}</span><span>${doc.data().type}</span><span>${doc.data().title}</span><span><a href="${doc.data().docURL}">Doc Link</a></span><span><a href="${doc.data().lmsURL}" target="_blank">Canvas URL</a></span><button onclick="finishItem('${doc.id}')">Finish</button><button onclick="reportProblem('${doc.id}')">Report Problem</button>`;
                     }
                     document.getElementById('text').insertAdjacentHTML('beforeend', text);
 
                 });
             });
     }
+}
+
+// Get the modal
+var errorModal = document.getElementById('errorModal');
+// Get the <span> element that closes the modal
+var errorSpan = document.getElementsByClassName("close")[1];
+// When the user clicks on <span> (x), close the modal
+errorSpan.onclick = function () {
+    errorModal.style.display = "none";
+}
+
+function reportProblem(docId) {
+    document.getElementById('errorModal').style.display = "initial";
+    var btn = document.getElementById('submitReport');
+    btn.setAttribute('onclick', `submitReport('${docId}')`);
+}
+
+function submitReport(docId) {
+    var note = document.getElementById('problem').value;
+    db.collection('accessibility').doc(docId).update({
+        status: "Error",
+        errorNote: note
+    }).then(() => {
+        window.location.reload();
+    })
 }
 
 function finishItem(docId) {
@@ -219,5 +244,9 @@ window.onclick = function (event) {
     if (event.target == modal) {
         modal.style.display = "none";
         document.getElementById('updateButton').parentNode.removeChild(document.getElementById('updateButton'));
+    }
+
+    if (event.target == errorModal) {
+        errorModal.style.display = "none";
     }
 }
