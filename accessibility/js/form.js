@@ -217,7 +217,6 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
                 document.getElementById('requestHeightLabel').classList.add('hide');
                 document.getElementById('requestHeight').classList.add('hide');
                 document.getElementById('timeCalc').classList.add('hide');
-                
             })
             .catch(function (error) {
                 console.error('Error adding document: ', error);

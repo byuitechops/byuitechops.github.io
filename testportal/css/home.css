@@ -3,9 +3,10 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  font-family: 'Open Sans', sans-serif; }
+  font-family: 'Open Sans', sans-serif;
+  color: white; }
 
-body {
+  body {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(4, 1fr);
@@ -15,8 +16,9 @@ body {
 
 header {
   grid-area: a;
-  background-color: lightblue;
+  background-color: #2699fb;
   padding: 2em; }
+  
   header img {
     display: block;
     margin: 0 auto;
@@ -29,19 +31,25 @@ header {
       text-transform: uppercase; }
 
 main {
-  grid-area: b; }
+  grid-area: b;
+ }
 
+span{
+  color: #2699fb;
+}
 main section#welcome {
   margin: 2%;
   height: 54%;
-  background-color: lightslategray; }
+  background-color: #f1f8fe; 
+}
 main section#links {
   height: 34%;
   margin: 2%;
   display: flex;
-  justify-content: space-between; }
+  justify-content: space-between;
+}
   main section#links div {
-    background-color: lightslategray;
+    background-color: #f1f8fe;
     width: 32%;
     height: 100%;
     position: relative;
