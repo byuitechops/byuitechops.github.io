@@ -32,31 +32,35 @@ header {
 main {
   grid-area: b; }
 
-main section#welcome {
-  margin: 2%;
-  height: 45%;
-  background-color: #f1f8fe; }
-main section#links {
-  margin: 2%;
-  height: 45%;
-  display: flex;
-  justify-content: space-between; }
-  main section#links div {
-    background-color: #f1f8fe;
-    width: 32%;
-    height: 100%;
-    position: relative;
-    padding: 1em;
+main {
+  display: grid;
+  grid-template-rows: 55% 40%;
+  grid-row-gap: 4%; }
+  main section#welcome {
+    margin: 4%;
+    margin-bottom: 0;
+    background-color: #f1f8fe; }
+  main section#links {
+    margin: 4%;
+    margin-top: 0;
     display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
-    justify-content: center; }
-    main section#links div span {
-      color: #2699fb;
-      display: block; }
-      main section#links div span:nth-of-type(1) {
-        font-size: 300%; }
-      main section#links div span:nth-of-type(2) {
-        font-size: 1.5em; }
+    justify-content: space-between; }
+    main section#links div {
+      background-color: #f1f8fe;
+      width: 32%;
+      height: 100%;
+      position: relative;
+      padding: 1em;
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: center;
+      justify-content: center; }
+      main section#links div span {
+        color: #2699fb;
+        display: block; }
+        main section#links div span:nth-of-type(1) {
+          font-size: 300%; }
+        main section#links div span:nth-of-type(2) {
+          font-size: 1.5em; }
 
 /*# sourceMappingURL=home.css.map */

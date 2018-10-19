@@ -1,16 +1,19 @@
 @import "partials/main";
 
 main {
+    display: grid;
+    grid-template-rows: 55% 40%;
+    grid-row-gap: 4%;
     section {
         &#welcome {
-            margin: 2%;
-            height: 45%;
+            margin: 4%;
+            margin-bottom: 0;
             background-color: $secondary;
         }
 
         &#links {
-            margin: 2%;
-            height: 45%;
+            margin: 4%;
+            margin-top: 0;
             display: flex;
             justify-content: space-between;
 

@@ -1,0 +1,66 @@
+@import "partials/main";
+
+main {
+    display: grid;
+    grid-template-rows: 20% 80%;
+
+    h1 {
+        color: $primary;
+        font-size: 3em;
+        margin: 2em;
+    }
+
+    section {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        grid-gap: 0.5em;
+        margin: 5em;
+        margin-bottom: 10em;
+
+        div {
+            background-color: $third;
+            color: $accent1;
+            width: 100%;
+            height: 100%;
+
+            p {
+                font-weight: bold;
+            }
+
+            a {
+                margin: 1em 0;
+                display: block;
+                text-decoration: none;
+                color: $primary;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+
+            &:nth-of-type(1),
+            &:nth-of-type(2),
+            &:nth-of-type(3),
+            &:nth-of-type(4),
+            &:nth-of-type(5),
+            &:nth-of-type(7),
+            &:nth-of-type(8),
+            &:nth-of-type(9),
+            &:nth-of-type(10),
+            &:nth-of-type(11) {
+                font-size: 2em;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+            }
+
+            &:nth-of-type(6),
+            &:nth-of-type(12) {
+                background-color: $background;
+                color: $primary;
+            }
+        }
+    }
+}
