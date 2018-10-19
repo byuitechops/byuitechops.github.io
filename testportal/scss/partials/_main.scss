@@ -1,5 +1,7 @@
 // Colors
-$main: lightblue;
+$primary: #2699fb;
+$secondary: #f1f8fe;
+$accent1: #ffffff;
 
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
@@ -26,7 +28,7 @@ body {
 
 header {
     grid-area: a;
-    background-color: $main;
+    background-color: $primary;
     padding: 2em;
 
     img {
@@ -38,6 +40,7 @@ header {
     nav {
         ul {
             a {
+                color: $accent1;
                 text-decoration: none;
                 li {
                     list-style: none;
