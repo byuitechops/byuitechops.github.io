@@ -1,7 +1,7 @@
 #requestForm {
   display: grid;
-  grid-template-columns: repeat(11, 8%);
-  grid-template-rows: repeat(14, 1fr);
+  grid-template-columns: repeat(11, 1fr);
+  grid-template-rows: repeat(13, 1fr);
   column-gap: 1em; }
 
 .row-4 {
@@ -184,17 +184,6 @@
   grid-row: 3;
   height: auto;
   font-size: 1.5em; }
-
-  #requestCommentsLabel {
-    grid-column: 10;
-    grid-row: 2;
-    position: relative; }
-
-  #requestComments {
-    grid-column: 10;
-    grid-row: 3;
-    height: auto;
-    font-size: 1.5em; }
 
 input,
 select {
