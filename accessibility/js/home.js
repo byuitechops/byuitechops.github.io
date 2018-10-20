@@ -198,7 +198,7 @@ function finishItem(docId) {
 
 function updateDocUrl(docId) {
     modal.style.display = "block";
-    var html = `<button id="updateButton" onclick="updateDocToFB('` + docId + `')">Update</button>`;
+    var html = `<button id="updateButton" onclick="updateDocToFB('${docId}')">Update</button>`;
     document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);
 }
 

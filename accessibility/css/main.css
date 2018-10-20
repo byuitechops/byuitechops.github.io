@@ -12,14 +12,11 @@ body {
   font-family: 'Open Sans', sans-serif; }
 
 h1 {
-  grid-column: 1 / span 12;
-  grid-row: 1 / span 2;
   grid-area: a;
   color: #FFFFFF;
   background-color: #0076C6;
   margin: 0;
-  padding: 10px;
-  width: 100%; }
+  padding: 10px; }
 
 nav {
   grid-column: 1 / span 12;
@@ -74,7 +71,7 @@ button {
 #btnLogout {
   position: absolute;
   right: 0;
-  width: 12%; }
+  width: 13%; }
   #btnLogout li {
     cursor: pointer; }
 

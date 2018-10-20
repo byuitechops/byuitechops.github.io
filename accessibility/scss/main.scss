@@ -34,15 +34,12 @@ body {
 }
 
 h1 {
-    grid-column: 1 / span 12;
-    grid-row: 1 / span 2;
     grid-area: a;
     color: $color-white;
     background-color: $color-blue;
     margin: 0;
     padding: 10px;
     //  position: fixed;
-    width: 100%;
 }
 
 nav {
@@ -114,7 +111,7 @@ button {
 #btnLogout {
     position: absolute;
     right: 0;
-    width: 12%;
+    width: 13%;
 
     li {
         cursor: pointer;
