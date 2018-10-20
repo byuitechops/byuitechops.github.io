@@ -46,15 +46,15 @@ var span = document.getElementsByClassName("close")[0];
 // When the user clicks on <span> (x), close the modal
 span.onclick = function () {
     modal.style.display = "none";
-    document.getElementById('docData').innerHTML = "";  
+    document.getElementById('docData').innerHTML = "";
     document.getElementById('deleteButton').innerHTML = "";
 }
 // When the user clicks anywhere outside of the modal, close it
-window.addEventListener("click", function(event) {
+window.addEventListener("click", function (event) {
     console.log('Calling');
     if (event.target == modal) {
         modal.style.display = "none";
-        document.getElementById('docData').innerHTML = "";        
+        document.getElementById('docData').innerHTML = "";
         document.getElementById('deleteButton').innerHTML = "";
     }
 })
@@ -300,6 +300,13 @@ function search() {
                         item = document.createElement('span');
                         item.innerHTML = "Empty";
                         item.style.color = "red";
+                    } else if (items[i] == "docURL") {
+                        item = document.createElement('span');
+                        item2 = document.createElement('a');
+                        item2.setAttribute('target', "_blank");
+                        item2.setAttribute('href', doc.data()[items[i]])
+                        item2.innerHTML = "Doc URL";
+                        item.insertAdjacentElement("afterbegin", item2);
                     } else {
                         item = document.createElement('span');
                         item.innerHTML = doc.data()[items[i]];
@@ -319,12 +326,13 @@ function search() {
         })
 }
 
-document.getElementById('searchValue').addEventListener("keyup", function() {
+document.getElementById('searchValue').addEventListener("keyup", function () {
     event.preventDefault();
     if (event.keyCode === 13) {
-    search();
-}});
-   
+        search();
+    }
+});
+
 
 
 document.getElementById('searchcancel').addEventListener('click', () => {
