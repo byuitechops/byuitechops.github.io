@@ -1,0 +1,87 @@
+@import "partials/main.scss";
+
+main {
+    display: grid;
+    grid-template-rows: 20% 80%;
+    grid-template-columns: 29% 71%;
+
+    section:nth-of-type(1) {
+        border: 2px solid pink;
+        padding: 2em;
+        grid-column: 1 /span 2;
+        font-size: 2.7em;
+        color: $accent2;
+        font-weight: bold;
+    }
+
+    section:nth-of-type(2) {
+        border: 2px solid green;
+        margin: 3em;
+        span {
+            display: block;
+            margin-bottom: 20px;
+        }
+        span#checkTime{
+            padding-left: 8rem;
+        }
+        button {
+            background-color: $primary;
+            width: 92%;
+            height: 3.5em;
+            border-radius: 5px;
+            color: $accent1;
+            border: none;
+            margin-left: 1rem;
+
+            &#checkInBtn,
+            &#checkOutBtn {
+                width: 43%;
+                // margin-right: 4.5rem;
+            }
+        }
+
+        div#countdownContainer {
+            display: flex;
+
+            div {
+                border-radius: 3px;
+                background-color: $primary;
+                color: $accent1;
+                margin: 1rem;
+                padding: 2rem;
+                padding-bottom: 0.5rem;
+                font-size: 1.5rem;
+                text-align: center;
+
+                span {
+                    border-radius: 5px;
+                    font-size: 4rem;
+                    padding: 1rem;
+                    text-align: center;
+                    color: $accent2;
+                    background-color: $accent1;
+                }
+            }
+        }
+    }
+    section:nth-of-type(3) {
+        display:flex;
+        flex-flow: column nowrap;
+        border: 2px solid purple;
+        padding:4.0rem;
+        span{
+            background-color: $TimeBackgrounds;
+            padding-bottom: 4rem;
+            width: 60%;
+            height: 20%;
+            border-bottom: 1;
+            border-radius: 25px;
+            // text-align: left;
+            justify-content: center;
+        }
+        a {
+            font-size: 2rem;
+            color: $accent1;
+        }
+    }
+}

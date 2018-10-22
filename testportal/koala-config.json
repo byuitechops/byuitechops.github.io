@@ -1,7 +1,7 @@
 {
 	"mappings": [{
-		"src": "./",
-		"dest": "../css"
+		"src": "./scss",
+		"dest": "./css"
 	}],
 
 	"ignores": [],

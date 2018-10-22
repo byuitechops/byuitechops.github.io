@@ -1,9 +1,12 @@
 // Colors
-$primary: #2699fb;
+$primary: #0076c6;
 $secondary: #f1f8fe;
 $third: #7fc4fd;
 $accent1: #ffffff;
+$accent2: #727272;
 $background: #ffffff;
+$TimeBackgrounds: #5592d7;
+
 
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
@@ -37,9 +40,11 @@ header {
         display: block;
         margin: 0 auto;
         text-align: center;
+        width: 100%;
     }
 
     nav {
+        margin-top: 7em;
         ul {
             a {
                 color: $accent1;
@@ -56,4 +61,9 @@ header {
 
 main {
     grid-area: b;
+}
+
+// Classes
+.hide {
+    display: none;
 }

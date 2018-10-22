@@ -15,28 +15,34 @@ body {
 
 header {
   grid-area: a;
-  background-color: #2699fb;
+  background-color: #0076c6;
   padding: 2em; }
   header img {
     display: block;
     margin: 0 auto;
-    text-align: center; }
-  header nav ul a {
-    color: #ffffff;
-    text-decoration: none; }
-    header nav ul a li {
-      list-style: none;
-      margin: 2em 0;
-      text-transform: uppercase; }
+    text-align: center;
+    width: 100%; }
+  header nav {
+    margin-top: 7em; }
+    header nav ul a {
+      color: #ffffff;
+      text-decoration: none; }
+      header nav ul a li {
+        list-style: none;
+        margin: 2em 0;
+        text-transform: uppercase; }
 
 main {
   grid-area: b; }
+
+.hide {
+  display: none; }
 
 main {
   display: grid;
   grid-template-rows: 20% 80%; }
   main h1 {
-    color: #2699fb;
+    color: #0076c6;
     font-size: 3em;
     margin: 2em; }
   main section {
@@ -57,7 +63,7 @@ main {
         margin: 1em 0;
         display: block;
         text-decoration: none;
-        color: #2699fb; }
+        color: #0076c6; }
         main section div a:hover {
           text-decoration: underline; }
       main section div:nth-of-type(1), main section div:nth-of-type(2), main section div:nth-of-type(3), main section div:nth-of-type(4), main section div:nth-of-type(5), main section div:nth-of-type(7), main section div:nth-of-type(8), main section div:nth-of-type(9), main section div:nth-of-type(10), main section div:nth-of-type(11) {
@@ -68,6 +74,6 @@ main {
         text-align: center; }
       main section div:nth-of-type(6), main section div:nth-of-type(12) {
         background-color: #ffffff;
-        color: #2699fb; }
+        color: #0076c6; }
 
 /*# sourceMappingURL=applications.css.map */
