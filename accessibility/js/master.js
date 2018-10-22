@@ -71,7 +71,7 @@ function viewItem(docId) {
 
                         if (doc.data().type == "Transcript") {
                             var items = ["type", "title", "docURL", "courseCode", "copyeditor", "lmsLink", "priority",
-                                "requestor", "srcURL", "status", "transcriber", "videoHeight", "videoLength",
+                                "requestor", "srcURL", "status", "errorNote", "transcriber", "videoHeight", "videoLength",
                                 "week", "requestDate", "transcriptClaimed", "transcriptFinished", "reviewClaimed", "reviewFinished", "placed"
                             ];
 
