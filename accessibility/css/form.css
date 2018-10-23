@@ -1,6 +1,6 @@
 #requestForm {
   display: grid;
-  grid-template-columns: repeat(11, 1fr);
+  grid-template-columns: repeat(11, 8.3%);
   grid-template-rows: repeat(13, 1fr);
   column-gap: 1em; }
 
@@ -161,6 +161,15 @@
 
 #requestLength {
   grid-column: 8 / span 1;
+  grid-row: 3; }
+
+#requestCommentsLabel {
+  grid-column: 10 / span 1;
+  grid-row: 2;
+  position: relative; }
+
+#requestComments {
+  grid-column: 10 / span 1;
   grid-row: 3; }
 
 #timeCalc {
