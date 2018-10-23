@@ -51,7 +51,6 @@ span.onclick = function () {
 }
 // When the user clicks anywhere outside of the modal, close it
 window.addEventListener("click", function (event) {
-    console.log('Calling');
     if (event.target == modal) {
         modal.style.display = "none";
         document.getElementById('docData').innerHTML = "";
@@ -130,7 +129,7 @@ function viewItem(docId) {
                         }
 
                         if (doc.data().type == "Alt Text") {
-                            console.log("Calling");
+                            // console.log("Calling");
                             var items = ["type", "title", "docURL", "courseCode", "copyeditor", "lmsLink", "priority",
                                 "requestor", "status", "week", "requestDate", "copyeditClaimed", "copyeditFinished", "placed"
                             ];
@@ -159,7 +158,7 @@ function viewItem(docId) {
                         }
 
                         if (doc.data().type == "Slide") {
-                            console.log("Calling");
+                            // console.log("Calling");
                             var items = ["type", "title", "docURL", "courseCode", "copyeditor", "lmsLink", "priority",
                                 "requestor", "status", "week", "requestDate", "copyeditClaimed", "copyeditFinished", "placed"
                             ];
@@ -290,7 +289,7 @@ function search() {
             document.getElementById('text').insertAdjacentHTML('beforeend', '<h3>Type</h3><h3>Status</h3><h3>Title</h3><h3>Doc Url</h3><h3>Course Code</h3><h3></h3>');
 
             querySnapshot.forEach((doc) => {
-                console.log(`${doc.data().title} => ${doc.data().srcURL}`);
+                // console.log(`${doc.data().title} => ${doc.data().srcURL}`);
 
                 var items = ["type", "status", "title", "docURL", "courseCode"];
 
