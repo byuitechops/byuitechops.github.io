@@ -43,10 +43,10 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
   }
 });
 
-var link = document.querySelector('link[rel="import"]');
+// var link = document.querySelector('link[rel="import"]');
 
-// Clone the <template> in the import.
-var template = link.import.querySelector('template');
-var clone = document.importNode(template.content, true);
+// // Clone the <template> in the import.
+// var template = link.import.querySelector('template');
+// var clone = document.importNode(template.content, true);
 
-document.querySelector('header').appendChild(clone);
+// document.querySelector('header').appendChild(clone);
