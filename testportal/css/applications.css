@@ -40,18 +40,16 @@ main {
 
 main {
   display: grid;
-  grid-template-rows: 20% 80%; }
+  grid-template-rows: 20% 80%;
+  margin: 5em; }
   main h1 {
     color: #0076c6;
-    font-size: 3em;
-    margin: 2em; }
+    font-size: 3em; }
   main section {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(2, 40%);
-    grid-gap: 0.5em;
-    margin: 5em;
-    margin-bottom: 10em; }
+    grid-gap: 0.5em; }
     main section div {
       background-color: #7fc4fd;
       color: #ffffff;
