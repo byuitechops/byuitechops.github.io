@@ -59,12 +59,13 @@ main {
       padding-left: 8rem; }
     main section:nth-of-type(2) button {
       background-color: #0076c6;
-      width: 92%;
+      width: 87%;
       height: 3.5em;
       border-radius: 5px;
+      font-weight: bold;
       color: #ffffff;
       border: none;
-      margin-left: 1rem; }
+      margin-left: 0.3rem; }
       main section:nth-of-type(2) button#checkInBtn, main section:nth-of-type(2) button#checkOutBtn {
         width: 43%; }
     main section:nth-of-type(2) div#countdownContainer {
@@ -73,7 +74,7 @@ main {
         border-radius: 3px;
         background-color: #0076c6;
         color: #ffffff;
-        margin: 1rem;
+        margin: 0.3rem;
         padding: 2rem;
         padding-bottom: 0.5rem;
         font-size: 1.5rem;
@@ -100,6 +101,8 @@ main {
       justify-content: center; }
     main section:nth-of-type(3) a {
       font-size: 2rem;
-      color: #ffffff; }
+      color: #ffffff;
+      
+    }
 
 /*# sourceMappingURL=time.css.map */
