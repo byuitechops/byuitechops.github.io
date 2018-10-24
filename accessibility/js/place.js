@@ -52,9 +52,15 @@ function resetMessage() {
     }, 10000);
 }
 
-function displayEmbedCode(link, height, seconds, title) {
+function displayEmbedCode(link, height, seconds, title, pubLink) {
     document.getElementById('intro').classList.add('intro');
     var time = secondsToHms(seconds);
+    var setlink;
+    if (pubLink == "undefined") {
+        setlink = "#";
+    } else {
+        setlink = pubLink;
+    }
     // console.log(link);
     modal.style.display = "block";
     document.getElementById('modal-heading').innerHTML = "Video Embed Code";
@@ -62,7 +68,7 @@ function displayEmbedCode(link, height, seconds, title) {
         var id = link.slice(link.indexOf("watch?v=") + 8, (link.indexOf("watch?v=") + 9) + 11);
         // console.log(id);
         var html = `<p><iframe width="560" height="${height}px" src="https://www.youtube-nocookie.com/embed/${id}?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe><br>
-                    (${time} mins, <a href="#" target="_blank">${title} Transcript</a>)</p>`;
+                    (${time} mins, <a href="${setlink}" target="_blank">${title} Transcript</a>)</p>`;
         document.getElementById('intro').innerText = html;
 
         var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div>`;
@@ -71,7 +77,7 @@ function displayEmbedCode(link, height, seconds, title) {
         var id = link.slice(link.indexOf(".be/") + 4, (link.indexOf(".be/") + 4) + 11);
         // console.log(id);
         var html = `<p><iframe width="560" height="${height}px" src="https://www.youtube-nocookie.com/embed/${id}?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe><br>
-                    (${time} mins, <a href="#" target="_blank">${title} Transcript</a>)</p>`;
+                    (${time} mins, <a href="${setlink}" target="_blank">${title} Transcript</a>)</p>`;
         document.getElementById('intro').innerText = html;
 
         var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div>`;
@@ -80,7 +86,7 @@ function displayEmbedCode(link, height, seconds, title) {
         var id = link.slice(link.indexOf("/0_") + 1, (link.indexOf("/0_") + 1) + 10);
         // console.log(id);
         var html = `<p><iframe id="kaltura_player_1534785808" src="https://cdnapisec.kaltura.com/p/1157612/sp/115761200/embedIframeJs/uiconf_id/33020032/partner_id/1157612?iframeembed=true&playerId=kaltura_player_1534785808&entry_id=${id}&flashvars[streamerType]=auto" width="560" height="${height}" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay; fullscreen; encrypted-media" frameborder="0"></iframe><br>
-                     (${time} mins, <a href="#" target="_blank">${title} Transcript</a>)</p>`;
+                     (${time} mins, <a href="${setlink}" target="_blank">${title} Transcript</a>)</p>`;
         document.getElementById('intro').innerText = html;
 
         var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div>`;
@@ -89,7 +95,7 @@ function displayEmbedCode(link, height, seconds, title) {
         var id = link.slice(link.indexOf("vimeo.com/") + 10, (link.indexOf("vimeo.com/") + 10) + 9);
         // console.log(id);
         var html = `<p><iframe src="https://player.vimeo.com/video/${id}?title=0&byline=0&portrait=0" width="560" height="${height}px" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe><br>
-        (${time} mins, <a href="#" target="_blank">${title} Transcript</a>)</p>`;
+        (${time} mins, <a href="${setlink}" target="_blank">${title} Transcript</a>)</p>`;
         document.getElementById('intro').innerText = html;
 
         var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div>`;
@@ -98,7 +104,7 @@ function displayEmbedCode(link, height, seconds, title) {
         var id = link.slice(link.indexOf("loid=") + 5, (link.indexOf("loid=") + 5) + 5);
         // console.log(id);
         var html = `<p><iframe allow='encrypted-media' height='${height}' frameborder='0' width='560' style='border: 1px solid #ddd;'  src='https://byui.idm.oclc.org/login?url=https://fod-infobase-com.byui.idm.oclc.org/OnDemandEmbed.aspx?token=42704&wID=104034&loid=${id}&plt=FOD&w=560&h=360' allowfullscreen >&nbsp;</iframe><br>
-                     (${time} mins, <a href="#" target="_blank">${title} Transcript</a>)</p>`;
+                     (${time} mins, <a href="${setlink}" target="_blank">${title} Transcript</a>)</p>`;
         document.getElementById('intro').innerText = html;
 
         var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div>`;
@@ -108,7 +114,7 @@ function displayEmbedCode(link, height, seconds, title) {
         document.getElementById('intro').style.fontSize = '1.25em';
         var html = `<p><a href='${link}' target="_blank">Go to this link and get the embed code to place</a><br>
         Copy the rest of this and place it in with the embed in a single p tag<br>
-        (${time} mins, <a href="#" target="_blank">${title} Transcript</a>)</p>`;
+        (${time} mins, <a href="${setlink}" target="_blank">${title} Transcript</a>)</p>`;
         document.getElementById('intro').innerHTML = html;
 
         var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div>`;
@@ -116,9 +122,15 @@ function displayEmbedCode(link, height, seconds, title) {
     }
 }
 
-function displayLinkCode(link, seconds, title) {
+function displayLinkCode(link, seconds, title, pubLink) {
     document.getElementById('intro').classList.add('intro');
     var time = secondsToHms(seconds);
+    var setlink;
+    if (pubLink == "undefined") {
+        setlink = "#";
+    } else {
+        setlink = pubLink;
+    }
     // console.log(link);
     modal.style.display = "block";
     document.getElementById('modal-heading').innerHTML = "Video Embed Code";
@@ -126,7 +138,7 @@ function displayLinkCode(link, seconds, title) {
         var id = link.slice(link.indexOf("watch?v=") + 8, (link.indexOf("watch?v=") + 9) + 11);
         // console.log(id);
         var html = `<p><a href="https://www.youtube-nocookie.com/embed/${id}?rel=0&amp;showinfo=0" target="_blank">${title}</a>
-                    (${time} mins, <a href="#" target="_blank">${title} Transcript</a></p>`;
+                    (${time} mins, <a href="${setlink}" target="_blank">${title} Transcript</a></p>`;
         document.getElementById('intro').innerText = html;
 
         var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div>`;
@@ -135,7 +147,7 @@ function displayLinkCode(link, seconds, title) {
         var id = link.slice(link.indexOf(".be/") + 4, (link.indexOf(".be/") + 4) + 11);
         // console.log(id);
         var html = `<p><a href="https://www.youtube-nocookie.com/embed/${id}?rel=0&amp;showinfo=0 target="_blank">${title}</a>
-        (${time} mins, <a href="#" target="_blank">${title} Transcript</a>)</p>`;
+        (${time} mins, <a href="${setlink}" target="_blank">${title} Transcript</a>)</p>`;
         document.getElementById('intro').innerText = html;
 
         var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div>`;
@@ -144,7 +156,7 @@ function displayLinkCode(link, seconds, title) {
         var id = link.slice(link.indexOf("/0_") + 1, (link.indexOf("/0_") + 1) + 10);
         // console.log(id);
         var html = `<p><a href="https://cdnapisec.kaltura.com/p/1157612/sp/115761200/embedIframeJs/uiconf_id/33020032/partner_id/1157612?iframeembed=true&playerId=kaltura_player_1534785808&entry_id=${id}&flashvars[streamerType]=auto" target="_blank">${title}</a>
-        (${time} mins, <a href="#" target="_blank">${title} Transcript</a>)</p>`;
+        (${time} mins, <a href="${setlink}" target="_blank">${title} Transcript</a>)</p>`;
         document.getElementById('intro').innerText = html;
 
         var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div>`;
@@ -153,7 +165,7 @@ function displayLinkCode(link, seconds, title) {
         var id = link.slice(link.indexOf("vimeo.com/") + 10, (link.indexOf("vimeo.com/") + 10) + 9);
         // console.log(id);
         var html = `<p><a href="https://player.vimeo.com/video/${id}?title=0&byline=0&portrait=0 target="_blank">${title}</a>
-        (${time} mins, <a href="#" target="_blank">${title} Transcript</a>)</p>`;
+        (${time} mins, <a href="${setlink}" target="_blank">${title} Transcript</a>)</p>`;
         document.getElementById('intro').innerText = html;
 
         var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div>`;
@@ -162,14 +174,14 @@ function displayLinkCode(link, seconds, title) {
         var id = link.slice(link.indexOf("loid=") + 5, (link.indexOf("loid=") + 5) + 5);
         // console.log(id);
         var html = `<p><a href='https://byui.idm.oclc.org/login?url=https://fod-infobase-com.byui.idm.oclc.org/OnDemandEmbed.aspx?token=42704&wID=104034&loid=${id}&plt=FOD&w=560&h=360' target="_blank">${title}</a>
-                     (${time} mins, <a href="#" target="_blank">${title} Transcript</a>)</p>`;
+                     (${time} mins, <a href="${setlink}" target="_blank">${title} Transcript</a>)</p>`;
         document.getElementById('intro').innerText = html;
 
         var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div>`;
         document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);
     } else {
         var html = `<p><a href='${link}' target="_blank">${title}</a>
-        (${time} mins, <a href="#" target="_blank">${title} Transcript</a>)</p>`;
+        (${time} mins, <a href="${setlink}" target="_blank">${title} Transcript</a>)</p>`;
         document.getElementById('intro').innerText = html;
 
         var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div>`;
@@ -282,8 +294,8 @@ function search() {
                                     <span>${doc.data().type}</span>
                                     <span>${doc.data().title}</span>
                                     <span><a href="${doc.data().lmsURL}" target="_blank">Canvas URL</a></span>
-                                    <span><button onclick="displayEmbedCode('${doc.data().srcURL}', '${doc.data().videoHeight}', '${doc.data().videoLength}', '${escapedTitle}')">Show Code</button></span>
-                                    <span><button onclick="displayLinkCode('${doc.data().srcURL}', '${doc.data().videoLength}', '${escapedTitle}')">Show Code</button></span>
+                                    <span><button onclick="displayEmbedCode('${doc.data().srcURL}', '${doc.data().videoHeight}', '${doc.data().videoLength}', '${escapedTitle}', '${doc.data().pubURL}')">Show Code</button></span>
+                                    <span><button onclick="displayLinkCode('${doc.data().srcURL}', '${doc.data().videoLength}', '${escapedTitle}', '${doc.data().pubURL}')">Show Code</button></span>
                                     <span>${docURL}</span>
                                     <button onclick="placeCheck('${doc.id}')">Place</button>`;
                 }
