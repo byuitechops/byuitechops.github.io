@@ -16,27 +16,29 @@ main {
 
     section:nth-of-type(2) {
         border: 2px solid green;
-        margin: 3em;
+        margin:3em;
         span {
             display: block;
             margin-bottom: 20px;
         }
         span#checkTime{
-            padding-left: 8rem;
+            padding-left: 6rem;
         }
         button {
             background-color: $primary;
-            width: 92%;
+            width: 87%;
             height: 3.5em;
             border-radius: 5px;
             color: $accent1;
             border: none;
-            margin-left: 1rem;
+            margin-left: 0.3rem;
+            margin-top: 0.5rem;
+            font-weight: bold;
+            
 
             &#checkInBtn,
             &#checkOutBtn {
                 width: 43%;
-                // margin-right: 4.5rem;
             }
         }
 
@@ -47,7 +49,7 @@ main {
                 border-radius: 3px;
                 background-color: $primary;
                 color: $accent1;
-                margin: 1rem;
+                margin: 0.3rem;
                 padding: 2rem;
                 padding-bottom: 0.5rem;
                 font-size: 1.5rem;
@@ -69,6 +71,7 @@ main {
         flex-flow: column nowrap;
         border: 2px solid purple;
         padding:4.0rem;
+        
         span{
             background-color: $TimeBackgrounds;
             padding-bottom: 4rem;
@@ -78,10 +81,14 @@ main {
             border-radius: 25px;
             // text-align: left;
             justify-content: center;
+            position: relative;
+            text-align: center;
         }
         a {
+            
             font-size: 2rem;
             color: $accent1;
+            
         }
     }
 }
