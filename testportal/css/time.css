@@ -11,7 +11,7 @@ body {
   grid-template-rows: repeat(4, 1fr);
   grid-template-areas: "a b b b b b b b b b" "a b b b b b b b b b" "a b b b b b b b b b" "a b b b b b b b b b" "a b b b b b b b b b";
   height: 100vh;
-  width: 100vw; }
+  width: 100%; }
 
 header {
   grid-area: a;
@@ -33,7 +33,16 @@ header {
         text-transform: uppercase; }
 
 main {
-  grid-area: b; }
+  display: grid;
+  grid-area: b;
+  grid-template-rows: 20% 80%; }
+  main h1 {
+    padding: 2em;
+    grid-column: 1 /span 2;
+    font-size: 2.7em;
+    color: #727272;
+    font-weight: bold;
+    padding-left: 2.1em; }
 
 .hide {
   display: none; }
@@ -41,69 +50,75 @@ main {
 main {
   display: grid;
   grid-template-rows: 20% 80%;
-  grid-template-columns: 29% 71%; }
+  grid-template-columns: 35% 65%; }
   main section:nth-of-type(1) {
-    border: 2px solid pink;
-    padding: 2em;
-    grid-column: 1 /span 2;
-    font-size: 2.7em;
-    color: #727272;
-    font-weight: bold; }
-  main section:nth-of-type(2) {
-    border: 2px solid green;
-    margin: 3em; }
-    main section:nth-of-type(2) span {
-      display: block;
+    margin: 3em;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    padding: 0 2.5em; }
+    main section:nth-of-type(1) span {
       margin-bottom: 20px; }
-    main section:nth-of-type(2) span#checkTime {
-      padding-left: 6rem; }
-    main section:nth-of-type(2) button {
+    main section:nth-of-type(1) .button {
+      width: 99%; }
+      main section:nth-of-type(1) .button div {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between; }
+      main section:nth-of-type(1) .button #calculator {
+        width: 30px;
+        height: 30px; }
+    main section:nth-of-type(1) button {
       background-color: #0076c6;
-      width: 87%;
-      height: 3.5em;
+      width: 100%;
+      padding: 1em;
+      height: 4em;
       border-radius: 5px;
       color: #ffffff;
       border: none;
-      margin-left: 0.3rem;
-      margin-top: 0.5rem;
-      font-weight: bold; }
-      main section:nth-of-type(2) button#checkInBtn, main section:nth-of-type(2) button#checkOutBtn {
-        width: 43%; }
-    main section:nth-of-type(2) div#countdownContainer {
+      margin: 2.5em 0 1em;
+      font-weight: bold;
+      letter-spacing: 0.15em; }
+      main section:nth-of-type(1) button#checkInBtn, main section:nth-of-type(1) button#checkOutBtn {
+        margin-top: 0;
+        width: 48%;
+        height: 5em; }
+    main section:nth-of-type(1) div#countdownContainer {
       display: flex; }
-      main section:nth-of-type(2) div#countdownContainer div {
-        border-radius: 3px;
+      main section:nth-of-type(1) div#countdownContainer div {
+        border-radius: 5%;
         background-color: #0076c6;
         color: #ffffff;
-        margin: 0.3rem;
-        padding: 2rem;
-        padding-bottom: 0.5rem;
-        font-size: 1.5rem;
+        margin: 0.4rem;
+        padding: 3rem 1.75rem 1rem;
         text-align: center; }
-        main section:nth-of-type(2) div#countdownContainer div span {
-          border-radius: 5px;
-          font-size: 4rem;
+        main section:nth-of-type(1) div#countdownContainer div p {
+          margin-top: 1em;
+          font-size: 1.5rem; }
+        main section:nth-of-type(1) div#countdownContainer div span {
+          border-radius: 5%;
+          font-size: 6.25rem;
+          height: 1rem;
           padding: 1rem;
           text-align: center;
           color: #727272;
           background-color: #ffffff; }
-  main section:nth-of-type(3) {
+  main section:nth-of-type(2) {
     display: flex;
     flex-flow: column nowrap;
-    border: 2px solid purple;
-    padding: 4.0rem; }
-    main section:nth-of-type(3) span {
+    padding: 0 8rem 4rem 0rem;
+    margin: 3em 0; }
+    main section:nth-of-type(2) a {
       background-color: #5592d7;
-      padding-bottom: 4rem;
-      width: 60%;
-      height: 20%;
+      padding: 3rem;
+      height: 25.5%;
       border-bottom: 1;
       border-radius: 25px;
       justify-content: center;
       position: relative;
-      text-align: center; }
-    main section:nth-of-type(3) a {
-      font-size: 2rem;
-      color: #ffffff; }
+      font-size: 2.5rem;
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: bold; }
 
 /*# sourceMappingURL=time.css.map */
