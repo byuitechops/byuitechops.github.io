@@ -70,54 +70,69 @@ main {
     margin: 2.5em 0 1em;
     font-weight: bold;
     letter-spacing: 0.15em; }
-  main section:nth-of-type(1) {
-    margin-left: 3em;
+  main section#content {
+    grid-column: 1 / span 2;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: 10em;
-    grid-gap: 2em; }
-    main section:nth-of-type(1) div {
+    grid-template-columns: 65% 35%;
+    grid-gap: 3em; }
+    main section#content section#left {
+      margin-left: 3em;
+      margin-bottom: 3em;
+      grid-column: 1;
       display: grid;
-      grid-template-columns: repeat(2, 50%);
-      grid-template-rows: repeat(3, 33%); }
-      main section:nth-of-type(1) div img {
-        grid-column: 1;
-        grid-row: 1 / span 3;
-        height: 100%;
-        display: block;
-        margin: 0 auto; }
-      main section:nth-of-type(1) div p {
-        grid-column: 2;
-        grid-row: 1; }
-      main section:nth-of-type(1) div span {
-        grid-column: 2;
-        grid-row: 2; }
-      main section:nth-of-type(1) div button {
-        grid-column: 2;
-        grid-row: 3;
-        margin: 0;
-        width: 100%; }
-  main section:nth-of-type(2) div {
-    box-shadow: 1px 1px 50px -15px #727272;
-    text-align: center;
-    position: sticky;
-    top: 10%;
-    color: #0076c6; }
-    main section:nth-of-type(2) div p {
-      font-size: 1em; }
-    main section:nth-of-type(2) div span {
-      font-size: 2em;
-      font-weight: bold; }
-    main section:nth-of-type(2) div div {
-      box-shadow: none;
-      display: flex;
-      flex-flow: column nowrap;
-      align-items: center;
-      width: 75%; }
-      main section:nth-of-type(2) div div p {
-        display: flex;
-        justify-content: space-between; }
-        main section:nth-of-type(2) div div p span {
+      grid-template-columns: repeat(2, 1fr);
+      grid-auto-rows: 10em;
+      grid-gap: 2em; }
+      main section#content section#left div {
+        display: grid;
+        grid-template-columns: repeat(2, 50%);
+        grid-template-rows: repeat(3, 33%); }
+        main section#content section#left div img {
+          grid-column: 1;
+          grid-row: 1 / span 3;
+          height: 100%;
+          display: block;
+          margin: 0 auto; }
+        main section#content section#left div p {
+          grid-column: 2;
+          grid-row: 1; }
+        main section#content section#left div span {
+          grid-column: 2;
+          grid-row: 2; }
+        main section#content section#left div button {
+          grid-column: 2;
+          grid-row: 3;
+          margin: 0;
+          width: 100%; }
+    main section#content section#right {
+      grid-column: 2; }
+      main section#content section#right div {
+        box-shadow: 1px 1px 50px -15px #727272;
+        text-align: center;
+        position: sticky;
+        top: 10%;
+        color: #0076c6;
+        padding: 1em; }
+        main section#content section#right div p {
           font-size: 1em; }
+        main section#content section#right div span {
+          display: block;
+          font-size: 2em;
+          font-weight: bold;
+          margin: 1em 0; }
+        main section#content section#right div div {
+          position: relative;
+          box-shadow: none;
+          display: flex;
+          flex-flow: column nowrap;
+          width: 80%;
+          margin: 0 auto; }
+          main section#content section#right div div p {
+            display: flex;
+            justify-content: space-between; }
+          main section#content section#right div div span {
+            font-size: 1em; }
+        main section#content section#right div button {
+          width: 100%; }
 
 /*# sourceMappingURL=store.css.map */

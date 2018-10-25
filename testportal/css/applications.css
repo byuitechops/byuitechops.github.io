@@ -49,12 +49,9 @@ main {
 
 main {
   display: grid;
-  grid-template-rows: 20% 80%;
-  margin: 5em; }
-  main h1 {
-    color: #0076c6;
-    font-size: 3em; }
+  grid-template-rows: 20% 80%; }
   main section {
+    margin: 5em;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(2, 40%);

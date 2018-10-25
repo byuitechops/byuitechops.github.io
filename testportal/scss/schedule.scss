@@ -1,3 +1,10 @@
+@import "partials/main.scss";
+
+main {
+    section {
+        grid-column: 1 /span 2;
+    }
+}
 /* Style the tab */
 .tab {
     overflow: hidden;
