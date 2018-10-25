@@ -4,6 +4,14 @@ const $white = "#FFFFFF";
 const $orange = "#F58300";
 const $green = " #82C242";
 const $red = "#E42226";
+// Colors
+const $primary = "#0076c6";
+const $secondary = "#f1f8fe";
+const $third = "#7fc4fd";
+const $accent1 = "#ffffff";
+const $accent2 = "#727272";
+const $background = "#ffffff";
+const $TimeBackgrounds = "#5592d7";
 
 // Initialize Firebase
 var config = {
@@ -35,6 +43,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
     if (window.location.href.includes("index.html") || window.location.href.includes("signup.html") || window.location.pathname == "/") {
       window.location.replace("home.html");
     }
+    //if user isn't logged in, sends back to sign in page
   } else {
     userName = null;
     if (!window.location.href.includes("index.html") && !window.location.href.includes("signup.html")) {
@@ -42,11 +51,3 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
     }
   }
 });
-
-// var link = document.querySelector('link[rel="import"]');
-
-// // Clone the <template> in the import.
-// var template = link.import.querySelector('template');
-// var clone = document.importNode(template.content, true);
-
-// document.querySelector('header').appendChild(clone);

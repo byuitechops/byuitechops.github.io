@@ -1,59 +1,107 @@
+function getUserData() {
+  if (userName != null) {
+    db.collection('users').where("name", "==", userName)
+      .get()
+      .then(function (querySnapshot) {
+        if (querySnapshot.empty) {
+          console.log("No User with the name: " + userName);
+        } else {
+          querySnapshot.forEach(function (doc) {
+            console.log(doc.id, " => ", doc.data());
+            data = doc.data();
+            userId = doc.id;
+            loadUser();
+          });
+        }
+      })
+      .catch(function (error) {
+        console.log("Error getting documents: ", error);
+      });
+  } else {
+    window.setTimeout("getUserData()", 100);
+  }
+}
+getUserData();
+
+
 function loadUser() {
   if (data.time.break) {
     // On break
     document.getElementById('breakTime').innerText = "";
     document.getElementById('breakBtn').innerText = "Return from Break";
-    document.getElementById('breakBtn').style.backgroundColor = $red;
-    document.getElementById('breakBtn').style.borderColor = $red;
+    document.getElementById('breakBtn').style.backgroundColor = $accent2;
+    document.getElementById('breakBtn').style.borderColor = $accent2;
   } else {
     // Off break
-    document.getElementById('breakBtn').innerText = "Take a Break";
+    document.getElementById('breakBtn').innerText = "Start Break";
     document.getElementById('breakTime').innerText = `Last break finished at: ${data.time.breakKey.slice(-5)}`;
-    document.getElementById('breakBtn').style.backgroundColor = $green;
-    document.getElementById('breakBtn').style.borderColor = $green;
+    document.getElementById('breakBtn').style.backgroundColor = $primary;
+    document.getElementById('breakBtn').style.borderColor = $primary;
   }
 
   if (data.time.check) {
     // Checked In
     document.getElementById('checkTime').innerText = `Check in time: ${data.time.checkKey.slice(-5)}`;
-    document.getElementById('checkBtn').innerText = "Check Out";
-    document.getElementById('checkBtn').style.backgroundColor = $red;
-    document.getElementById('checkBtn').style.borderColor = $red;
+    document.getElementById('checkInBtn').style.backgroundColor = $accent2;
+    document.getElementById('checkInBtn').style.borderColor = $accent2;
+    document.getElementById('checkOutBtn').style.backgroundColor = $primary;
+    document.getElementById('checkOutBtn').style.borderColor = $primary;
     // Checkout Reminder
     setInterval(() => {
       alertify.error('Reminder to check out using the portal and workday.');
     }, 3600000);
   } else {     
     // Checked Out
-    document.getElementById('checkTime').innerText = "";
-    document.getElementById('checkBtn').innerText = "Check In";
-    document.getElementById('checkBtn').style.backgroundColor = $green;
-    document.getElementById('checkBtn').style.borderColor = $green;
+    document.getElementById('checkTime').innerText = `Check out time: ${data.time.checkKey.slice(-5)}`;
+    document.getElementById('checkInBtn').style.backgroundColor = $primary;
+    document.getElementById('checkInBtn').style.borderColor = $primary;
+    document.getElementById('checkOutBtn').style.backgroundColor = $accent2;
+    document.getElementById('checkOutBtn').style.borderColor = $accent2;
   }
 }
 
+//sequence of events as the user checks in
 document.getElementById('checkInBtn').addEventListener('click', () => {
   loadUser();
   var setDate = editDate(new Date());
-  if (data.time.check) {
+  //verify if the user is actually logged out
+  if (!data.time.check) {
+    //if the user is logged out, update firebase so now it is logged in
     db.collection('users').doc(userId).update({
-      "time.check": false
-    });
-    db.collection('users').doc(userId).collection('hoursWorked').doc(data.time.checkKey).update({
-      "end": setDate.slice(-5)
-    })
-  } else {
-    db.collection('users').doc(userId).update({
-      "time.check": true,
-      "time.checkKey": setDate
+      "time.check": true
     });
     db.collection('users').doc(userId).collection('hoursWorked').doc(setDate).set({
       "start": setDate.slice(-5)
     })
+  } else {
+    alert("You are already logged in");
   }
   getUserData();
 })
 
+//sequence of events when the user clocks out
+document.getElementById('checkOutBtn').addEventListener('click', () => {
+  var setDate = editDate(new Date());
+  //verifies if the user is actually logged in
+  if (data.time.check) {
+    //if the user is then logging out, updates that on firebase and updates the end time on hours worked
+   
+    db.collection('users').doc(userId).update({
+      "time.checkKey": setDate, 
+      "time.check": false
+    });
+    db.collection('users').doc(userId).collection('hoursWorked').doc(data.time.checkKey).update({
+      "end": data.time.checkKey.slice(-5)
+    })
+    loadUser();
+    //alerts the user 
+  } else {
+    alert("You are already logged out");
+  }
+  getUserData();
+})
+
+ //if user starts or end break, call necessary events
 document.getElementById('breakBtn').addEventListener('click', () => {
   var setDate = editDate(new Date());
   // End break
@@ -62,7 +110,6 @@ document.getElementById('breakBtn').addEventListener('click', () => {
       "time.break": false,
       "time.breakKey": setDate
     });
-    document.getElementById('visible').style.display = "none";
     db.collection('users').doc(userId).collection('breaks').doc(data.time.breakKey).update({
       "end": setDate.slice(-5)
     })
@@ -71,22 +118,13 @@ document.getElementById('breakBtn').addEventListener('click', () => {
     db.collection('users').doc(userId).update({
       "time.break": true
     });
-    document.getElementById('visible').style.display = "initial";
     db.collection('users').doc(userId).collection('breaks').doc(setDate).set({
       "start": setDate.slice(-5)
     });
+    //runs this variable every second
     timer = setInterval(countdown, 1000);
   }
   getUserData();
-})
-// When break finishes update break key to time
-
-document.getElementById('messageBtn').addEventListener('click', () => {
-  var message = document.getElementById('message').value;
-  db.collection('users').doc(userId).collection('hoursWorked').doc(data.time.checkKey).update({
-    "comment": message
-  })
-  document.getElementById('message').value = "Message sent";
 })
 
 function editDate(date) {
@@ -106,6 +144,7 @@ if (localStorage.getItem('minutes') != null) {
   var minutes = 15;
   var seconds = 01;
 }
+
 var timer;
 //countdown timer
 function countdown() {
@@ -135,4 +174,22 @@ function countdown() {
 
   document.getElementById("minutes").textContent = minutes;
   document.getElementById("seconds").textContent = seconds;
+}
+document.getElementById("minutes").textContent = minutes;
+document.getElementById("seconds").textContent = seconds;
+
+//calculator
+var modal = document.getElementById('myModal');
+var calculator = document.getElementById("calculator");
+var span = document.getElementsByClassName("close")[0];
+calculator.addEventListener('click', () =>{
+  modal.style.display = "block";
+});
+span.onclick = function() {
+  modal.style.display = "none";
+}
+window.onclick = function(event) {
+  if (event.target == modal) {
+      modal.style.display = "none";
+  }
 }
