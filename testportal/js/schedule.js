@@ -95,20 +95,54 @@ for (var i = 1; i <= teamNumber; i++) {
 }
 
 function buildWeek(week) {
-    for (var k = 1; k <= 1; k++) {
+    for (var k = 0; k < days.length; k++) {
         var tbl = document.createElement('table');
         tbl.style.width = '100%';
         tbl.setAttribute('border', '1');
+        var header = tbl.createTHead();
+        header.colSpan = stationsNumber;
+        var row = header.insertRow(0);
+        var cell = row.insertCell(0);
+        cell.colSpan = stationsNumber;
+        cell.style.textAlign = "center";
+        cell.innerHTML = `<b>${days[k]}</b>`;
         var tbdy = document.createElement('tbody');
-        for (var i = 0; i < 3; i++) {
+        for (var i = 7; i < 22; i += 0.5) {
+            var mer;
+            var hour;
+            var min;
+            if (i >= 12) {
+                if (!Number.isInteger(i)) {
+                    hour = i - 12;
+                    mer = "pm";
+                    min = "30";
+                } else {
+                    hour = i.toString().slice(0,-2) - 12;
+                    mer = "pm";
+                    min = "00";
+                }
+            } else {
+                if (!Number.isInteger(i)) {
+                    hour = i.toString().slice(0, -2)
+                    mer = "am";
+                    min = "30";
+                } else {
+                    hour = i
+                    mer = "am";
+                    min = "00";
+                }
+            }
             var tr = document.createElement('tr');
-            for (var j = 0; j < 2; j++) {
-                if (i == 2 && j == 1) {
-                    break
+            for (var j = 1; j <= stationsNumber; j++) {
+                if (j == 1) {
+                    var td = document.createElement('td');
+                    td.appendChild(document.createTextNode(`${hour}:${min} ${mer}`));
+                    // i == 1 && j == 1 ? td.setAttribute('rowSpan', '2') : null;
+                    tr.appendChild(td)
                 } else {
                     var td = document.createElement('td');
                     td.appendChild(document.createTextNode('\u0020'))
-                    i == 1 && j == 1 ? td.setAttribute('rowSpan', '2') : null;
+                    // i == 1 && j == 1 ? td.setAttribute('rowSpan', '2') : null;
                     tr.appendChild(td)
                 }
             }
