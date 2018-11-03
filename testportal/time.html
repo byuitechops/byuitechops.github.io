@@ -72,14 +72,13 @@
             <!-- Modal content -->
             <div class="modal-content">
                 <span class="close">&times;</span>
-                Total Hours Per Week: <input type="text" name="fname"><br>
-                Time Currently Worked: <input type="text" name="lname"><br>
-                Time Left: <input type="text" name="fname"><br>
-                Clock-In Time: <input type="text" name="fname"><br>
-                Clock-Out Time: <input type="text" name="lname"><br>
-                <button type="submit" value="Submit">Yey </button>
+                Total Hours This Week: <input type="number" id="totalHours"><br>
+                Time Currently Worked:<input type="number" id="hoursWorked"><br>
+                Clock-In Time: <input type="time" id="clockInTime"><br>
+                Clock-Out Time: <span id="clockOutTime"></span><br>
+                Time Left: <span id="timeLeft"></span><br>
+                <button type="submit" value="Submit" id="submitBtn">Calculate</button>
             </div>
-
         </div>
     </main>
 </body>

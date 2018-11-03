@@ -193,3 +193,26 @@ window.onclick = function(event) {
       modal.style.display = "none";
   }
 }
+//calculates clock-out time and time left according to user's inputs
+
+document.getElementById("submitBtn").addEventListener('click',() =>{
+  var hoursWorked = document.getElementById("hoursWorked").value;
+  var totalHours = document.getElementById("totalHours").value;
+  var clockInTime = document.getElementById("clockInTime").value; 
+  var hoursLeft = (totalHours - hoursWorked).toFixed(2);
+  document.getElementById('timeLeft').innerText = hoursLeft;
+
+  var orgHour = Number(clockInTime.slice(0,2));
+  var orgMin = Number(clockInTime.slice(-2));
+
+  var diffHour = Number(hoursLeft.toString().split(".")[0]);
+  var diffMin = (Number("." + hoursLeft.toString().split(".")[1])*60);
+  
+  var ansHour = orgHour + diffHour;
+  var mer = ansHour > 12 ? "PM" : "AM";
+  ansHour = ansHour > 12 ? ansHour - 12 : ansHour;
+  var ansMin = ("0" + (orgMin + diffMin)).slice(-2);
+  
+
+  document.getElementById('clockOutTime').innerText = `${ansHour}:${ansMin} ${mer}`;
+})
