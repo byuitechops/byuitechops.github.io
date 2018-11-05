@@ -60,22 +60,38 @@ main {
     margin-top: 0;
     display: flex;
     justify-content: space-between; }
-    main section#links div {
-      background-color: #f1f8fe;
-      width: 32%;
-      height: 100%;
-      position: relative;
-      padding: 1em;
-      display: flex;
-      flex-flow: column nowrap;
-      align-items: center;
-      justify-content: center; }
-      main section#links div span {
-        color: #0076c6;
-        display: block; }
-        main section#links div span:nth-of-type(1) {
-          font-size: 300%; }
-        main section#links div span:nth-of-type(2) {
-          font-size: 1.5em; }
+    main section#links a {
+      width: 30%; }
+      main section#links a div {
+        background-color: #f1f8fe;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        justify-content: center; }
+        main section#links a div img {
+          width: 100%;
+          height: 100%;
+          z-index: 0; }
+        main section#links a div div {
+          position: absolute;
+          padding: 1em;
+          width: 100%;
+          height: 100%;
+          background-color: #0076c6;
+          opacity: .7; }
+          main section#links a div div:hover {
+            opacity: 0.5; }
+        main section#links a div p {
+          position: absolute; }
+          main section#links a div p span {
+            color: #ffffff;
+            display: block; }
+            main section#links a div p span:nth-of-type(1) {
+              font-size: 300%; }
+            main section#links a div p span:nth-of-type(2) {
+              font-size: 1.5em; }
 
 /*# sourceMappingURL=home.css.map */

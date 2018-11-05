@@ -108,7 +108,11 @@ main {
             text-decoration: none;
             font-weight: bold;
         }
+        a:hover{
+            opacity:0.75;
+        }
     }
+
     #calculator:hover{
         opacity:0.75;
     }

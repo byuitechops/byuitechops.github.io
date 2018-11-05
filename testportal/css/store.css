@@ -73,7 +73,7 @@ main {
   main section#content {
     grid-column: 1 / span 2;
     display: grid;
-    grid-template-columns: 65% 35%;
+    grid-template-columns: 70% 30%;
     grid-gap: 3em; }
     main section#content section#left {
       margin-left: 3em;
@@ -93,17 +93,30 @@ main {
           height: 100%;
           display: block;
           margin: 0 auto; }
-        main section#content section#left div p {
-          grid-column: 2;
-          grid-row: 1; }
-        main section#content section#left div span {
-          grid-column: 2;
-          grid-row: 2; }
-        main section#content section#left div button {
-          grid-column: 2;
-          grid-row: 3;
-          margin: 0;
-          width: 100%; }
+        main section#content section#left div div {
+          display: flex;
+          flex-flow: column nowrap;
+          justify-content: space-between;
+          align-items: center;
+          padding: 1em;
+          background-color: #f1f8fe;
+          width: 100%;
+          height: 100%;
+          grid-row: 1 / span 3;
+          grid-column: 2; }
+          main section#content section#left div div p {
+            grid-row: 1;
+            font-weight: bold; }
+          main section#content section#left div div span {
+            grid-row: 2; }
+          main section#content section#left div div button {
+            grid-row: 3;
+            margin: 0;
+            width: 70%;
+            height: 25%;
+            font-size: 0.60rem; }
+          main section#content section#left div div button:hover {
+            opacity: 0.75; }
     main section#content section#right {
       grid-column: 2; }
       main section#content section#right div {

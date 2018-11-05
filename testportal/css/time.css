@@ -124,6 +124,8 @@ main {
       color: #ffffff;
       text-decoration: none;
       font-weight: bold; }
+    main section:nth-of-type(2) a:hover {
+      opacity: 0.75; }
   main #calculator:hover {
     opacity: 0.75; }
   main .modal {
