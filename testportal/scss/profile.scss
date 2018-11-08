@@ -1,0 +1,172 @@
+@import "partials/main";
+
+main {
+    display: grid;
+    grid-template-rows: 15% 85%;
+    grid-template-columns: 25% 70%;
+    grid-column-gap: 5%;
+
+    section:nth-of-type(1) {
+        position: relative;
+        background-image: url("../assets/logo3.png");
+        background-repeat: no-repeat;
+        background-position: 90% 55%;
+        background-size: 50%;
+        grid-column: 1 /span 2;
+        grid-row: 1;
+
+        #opacity {
+            background-color: $primary;
+            opacity: .8;
+            padding: 1em;
+            width: 100%;
+            height: 100%;
+
+        }
+
+        h2 {
+            color: $accent1;
+            position: absolute;
+            top: 1%;
+            left: 10%;
+            font-size: 50px;
+            margin-top: 50px;
+            margin-left: 100px;
+        }
+
+        p {
+            color: $accent1;
+            position: absolute;
+            top: 1%;
+            right: 10%;
+            font-size: 25px;
+            margin-top: 60px;
+        }
+
+        #clock {
+            position: absolute;
+            top: 35%;
+            width: 3.5em;
+            height: auto;
+            right: 4.0em;
+        }
+
+        .tooltip .tooltiptext {
+            // visibility: hidden;
+            width: 120px;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+
+            /* Position the tooltip */
+            position: absolute;
+            top: 100%;
+            right: 4.0em;
+            z-index: 1;
+        }
+
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: black transparent transparent transparent;
+        }        
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+        }
+
+        #profilePic {
+            position: absolute;
+            top: 35%;
+            width: 9.5em;
+            height: auto;
+            left: 2.0em;
+            background: white;
+            border-radius: 50%;
+        }
+    }
+
+    section:nth-of-type(2) {
+        grid-column: 1 /span 1;
+        grid-row: 2;
+        height: 100%;
+
+        div {
+            background-color: $backgroundLight;
+            height: 15em;
+            padding-top: 70px;
+            padding-left: .5em;
+            padding-bottom: 0;
+        }
+
+        button {
+            width: 100%;
+            border: none;
+
+            img {
+                height: 6%;
+            }
+        }
+
+        #info {
+            padding: 0 0.5em;
+            height: 0;
+            transition: height 1s;
+            overflow: hidden;
+        }
+
+        #aboutMe {
+            padding: 0.5em;
+            height: 64%;
+            transition: height 1s, overflow 1s;
+            overflow: auto;
+        }
+
+        h3 {
+            color: $primary;
+            font-size: 27px;
+            margin-bottom: 5px;
+        }
+
+        p {
+            margin-bottom: 5px;
+        }
+    }
+
+    section:nth-of-type(3) {
+        grid-column: 2 /span 1;
+        grid-row: 2;
+
+        div {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            background-color: $backgroundLight;
+            height: 12em;
+            margin-top: 60px;
+            padding-top: 16px;
+            padding-left: 2em;
+            margin-bottom: 2.5em;
+            width: 90%;
+
+            h3 {
+                grid-column: 1/span 3;
+                color: $primary;
+                font-size: 27px;
+                margin-bottom: 5px;
+                align-content: right;
+                color: black;
+            }
+
+            p {
+                color: $primary;
+            }
+        }
+    }
+}

@@ -32,22 +32,22 @@
 
             <div id="countdownContainer">
                 <div>
-                    <span id="minutes">15</span>
+                    <span id="minutes"></span>
                     <p>Minutes</p>
                 </div>
                 <div>
-                    <span id="seconds">00</span>
+                    <span id="seconds"></span>
                     <p>Seconds</p>
                 </div>
             </div>
             <div class="button">
                 <button id="breakBtn">Start Break</button>
-                <span id="breakTime"></span>
+                <span id="breakTime">Last Break finish at:</span>
             </div>
             <div class="button">
                 <div>
                     <span id="checkTime">Clocked in at: 00:00 am</span>
-                    <img id="calculator" src="./assests/calculator.png">
+                    <img id="calculator" src="./assets/calculator.png">
                 </div>
                 <div>
                     <button id="checkInBtn">Clock In</button>
@@ -66,6 +66,20 @@
             <a href="#">Maintenance Schedule</a><br>
             <a href="#">Time Tracking</a><br>
         </section>
+
+        <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                Total Hours This Week: <input type="number" id="totalHours"><br>
+                Time Currently Worked:<input type="number" id="hoursWorked"><br>
+                Clock-In Time: <input type="time" id="clockInTime"><br>
+                Clock-Out Time: <span id="clockOutTime"></span><br>
+                Time Left: <span id="timeLeft"></span><br>
+                <button type="submit" value="Submit" id="submitBtn">Calculate</button>
+            </div>
+        </div>
     </main>
 </body>
 <!-- Script -->

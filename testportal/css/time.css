@@ -50,7 +50,9 @@ main {
 main {
   display: grid;
   grid-template-rows: 20% 80%;
-  grid-template-columns: 35% 65%; }
+  grid-template-columns: 35% 65%;
+  /* Modal Content */
+  /* The Close Button */ }
   main section:nth-of-type(1) {
     margin: 3em;
     display: flex;
@@ -83,6 +85,8 @@ main {
         margin-top: 0;
         width: 48%;
         height: 5em; }
+      main section:nth-of-type(1) button:hover {
+        opacity: 0.75; }
     main section:nth-of-type(1) div#countdownContainer {
       display: flex; }
       main section:nth-of-type(1) div#countdownContainer div {
@@ -120,5 +124,81 @@ main {
       color: #ffffff;
       text-decoration: none;
       font-weight: bold; }
+    main section:nth-of-type(2) a:hover {
+      opacity: 0.75; }
+  main #calculator:hover {
+    opacity: 0.75; }
+  main .modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 200px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: black;
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+    font-size: 1.5em; }
+    main .modal input {
+      text-align: center;
+      position: relative;
+      margin: 0.7em;
+      font-size: 0.8em; }
+    main .modal span {
+      margin: 2em; }
+      main .modal span.close {
+        margin: 0; }
+    main .modal button {
+      background-color: #0076c6;
+      width: 100%;
+      padding: 1em;
+      height: 4em;
+      border-radius: 5px;
+      color: #ffffff;
+      border: none;
+      margin: 2.5em 0 1em;
+      font-weight: bold;
+      letter-spacing: 0.15em; }
+      main .modal button:hover {
+        opacity: 0.75; }
+  main .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%;
+    height: 52%; }
+  main .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold; }
+  main .close:hover,
+  main .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer; }
+  main table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%; }
+  main td,
+  main th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px; }
+  main tr:nth-child(even) {
+    background-color: #dddddd; }
 
 /*# sourceMappingURL=time.css.map */

@@ -31,7 +31,7 @@ main {
     section#content {
         grid-column: 1 / span 2;
         display: grid;
-        grid-template-columns: 65% 35%;
+        grid-template-columns: 70% 30%;
         grid-gap: 3em;
 
         section#left {
@@ -56,27 +56,47 @@ main {
                     margin: 0 auto;
                 }
 
-                p {
-                    grid-column: 2;
-                    grid-row: 1;
-                }
-
-                span {
-                    grid-column: 2;
-                    grid-row: 2;
-                }
-
-                button {
-                    grid-column: 2;
-                    grid-row: 3;
-                    margin: 0;
+                div {
+                    display: flex;
+                    flex-flow: column nowrap;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 1em;
+                    background-color: $secondary;
                     width: 100%;
+                    height: 100%;
+                    grid-row: 1 / span 3;
+                    grid-column: 2;
+                    p {
+                        // grid-column: 2;
+                        grid-row: 1;
+                        font-weight: bold;
+                    }
+
+                    span {
+                        // grid-column: 2;
+                        grid-row: 2;
+                    }
+
+                    button {
+                        // grid-column: 2;
+                        grid-row: 3;
+                        margin: 0;
+                        width: 70%;
+                        height: 25%;
+                        font-size: 0.60rem;
+                    }
+
+                    button:hover {
+                        opacity: 0.75
+                    }
                 }
             }
         }
 
         section#right {
             grid-column: 2;
+
             div {
                 box-shadow: 1px 1px 50px -15px $accent2;
                 text-align: center;

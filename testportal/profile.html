@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" type="image/x-icon" href="assests/byui_favicon.gif">
+    <!-- Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
+    <!-- -->
+    <!-- Partials -->
+    <script type="module">
+        import {addHeader} from './partials/header.js';
+        addHeader();
+    </script>
+    <!-- -->
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/profile.css">
+    <!-- -->
+    <title>Profile | BYU-I Techops Portal</title>
+</head>
+
+<body>
+    <header>
+    </header>
+    <main>
+        <section> 
+            <!-- <img src="assets/logo3.png"> -->
+            <div id="opacity">
+            </div>
+            <h2>General Information</h2>
+            <img id="profilePic"src="assets/minerZoe.jpg">
+            
+            <div class="tooltip"><img id="clock"src="assets/clockWhite.png">
+                <span class="tooltiptext">Tooltip text</span>
+              </div>
+            <p>Sign Out</p>
+            <span id="time"></span>
+        </section>
+        <section>
+            <div>
+               <h3>Name Surname</h3>
+               <p>Title: </p>
+               <p>Canvas: </p>
+               <p>T: 801.....: </p>
+               <p>Email: </p>
+            </div>
+            <div id="info">
+                <h4>Info</h4>
+                <p>Major: </p>
+                <p>Track: </p>
+                <p>Graduation: </p>
+                <p>Type Speed: </p>
+
+            </div>
+            <button onclick="toggleView()"><img id="arrowImg" src="assets/arrow.png"></button>
+            <div id="aboutMe">
+                <h4>About Me</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at maximus dui. Curabitur vitae consequat est, nec facilisis ipsum. Maecenas malesuada velit et venenatis dignissim. Fusce volutpat nunc sed nunc dignissim, quis convallis lorem facilisis. Vivamus consectetur leo eu elementum lobortis. Phasellus massa nibh, scelerisque maximus ornare at, faucibus ut dolor. Nunc id neque ante. Phasellus sed purus quis mi scelerisque convallis. Sed dapibus rutrum viverra. Aliquam erat volutpat.</p>
+            </div>
+        </section>
+        <section>
+            <div>
+                <h3>HR</h3>
+                <p>Request Time Off</p>
+                <p>Request Time Off</p>
+                <p>Request Time Off</p>
+                <p>Request Time Off</p>
+                <p>Request Time Off</p>
+                <p>Request Time Off</p>
+                <p>Request Time Off</p>
+                <p>Request Time Off</p>
+                <p>Request Time Off</p>
+
+            </div>
+    
+            <div>
+                <h3>Settings</h3>
+                <p>Request Time Off</p>
+                <p>Request Time Off</p>
+                <p>Request Time Off</p>
+                <p>Request Time Off</p>
+                <p>Request Time Off</p>
+                <p>Request Time Off</p>
+                <p>Request Time Off</p>
+                <p>Request Time Off</p>
+                <p>Request Time Off</p>
+            </div>
+        </section>
+    </main>
+</body>
+<!-- Script -->
+<script src="js/profile.js"></script>
+<!-- -->
+
+</html>
