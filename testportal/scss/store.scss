@@ -67,6 +67,7 @@ main {
                     height: 100%;
                     grid-row: 1 / span 3;
                     grid-column: 2;
+
                     p {
                         // grid-column: 2;
                         grid-row: 1;
@@ -141,5 +142,164 @@ main {
                 }
             }
         }
+
+
     }
+}
+
+#checkoutModal {
+    div {
+        div {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            span {
+                font-size: 0.75em;
+                margin: 0.25em 1em;
+            }
+
+            span:nth-of-type(2n) {
+                text-align: right;
+            }
+        }
+
+        p {
+            color: $primary;
+            font-weight: bold;
+            display: inline;
+            font-size: 2em;
+            margin-right: 2.75em;
+        }
+
+        /* The container */
+        .container {
+            margin-right: 1em;
+            display: inline;
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            font-size: 22px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* Hide the browser's default radio button */
+        .container input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        /* Create a custom radio button */
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 25px;
+            width: 25px;
+            background-color: #eee;
+            border-radius: 50%;
+        }
+
+        /* On mouse-over, add a grey background color */
+        .container:hover input~.checkmark {
+            background-color: #ccc;
+        }
+
+        /* When the radio button is checked, add a blue background */
+        .container input:checked~.checkmark {
+            background-color: #2196F3;
+        }
+
+        /* Create the indicator (the dot/circle - hidden when not checked) */
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        /* Show the indicator (dot/circle) when checked */
+        .container input:checked~.checkmark:after {
+            display: block;
+        }
+
+        /* Style the indicator (dot/circle) */
+        .container .checkmark:after {
+            top: 9px;
+            left: 9px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: white;
+        }
+    }
+}
+
+
+
+#confirmModal {
+    display: block;
+    div {
+        height: 75%;
+        svg {
+            width: 200px;
+            height: 200px;
+            stroke-width: 2;
+            stroke: $primary;
+        }
+    }
+}
+
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 50px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+    font-size: 1.5em;
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    height: auto;
+    // display:flex;
+    // flex-flow: column nowrap;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
 }
