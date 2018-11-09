@@ -1,3 +1,22 @@
+Date.prototype.addDays = function (days) {
+    var date = new Date(this.valueOf());
+    date.setDate(date.getDate() + days);
+    return date;
+}
+
+Date.prototype.formatMMDDYYYY = function(){
+    return (this.getMonth() + 1) + 
+    "/" +  this.getDate() +
+    "/" +  this.getFullYear();
+}
+
+function getMonday(d) {
+    d = new Date(d);
+    var day = d.getDay(),
+        diff = d.getDate() - day + (day == 0 ? -6 : 1); // adjust when day is sunday
+    return new Date(d.setDate(diff));
+}
+
 function openWeek(evt, week, team) {
     // Declare all variables
     var i, tabcontent, tablinks;
@@ -51,8 +70,14 @@ function openTeam(evt, team) {
 // Get the element with id="defaultOpen" and click on it
 // document.getElementById("defaultOpen").click();
 
+const startDate = new Date("09/14/2018");
+const endDate = new Date("12/19/2018");
+const timeDiff = Math.abs(endDate - startDate);
+var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+var diffWeeks = Math.ceil(timeDiff / (1000 * 3600 * 24 * 7));
+
 const teamNumber = 2;
-const weekNumber = 14;
+const weekNumber = diffWeeks;
 const stationsNumber = 12;
 const stationsArray = ["Station 01", "Station 02", "Station 03", "Station 04", "Station 05", "Station 06", "Station 07", "Station 08", "Station 09", "Station 10", "Station 11", "Station 12"];
 const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -96,12 +121,26 @@ for (var i = 1; i <= teamNumber; i++) {
 }
 
 function buildWeek(week) {
-    for (var k = 0; k < days.length; k++) {
+    var k = 0;
+    var end = days.length;
+    var addDaysNum = 0;
+    var startOfWeek = getMonday(startDate).addDays((week.slice(11)-1) * 7);
+    if (/Week1$/.test(week)) {
+        startOfWeek = startDate;
+        k = startDate.getDay() - 1;
+    }
+    if (/Week14$/.test(week)) {
+        end = endDate.getDay();
+    }
+    for (;; k++, addDaysNum++) {
+        if (k >= end) {
+            break;
+        }
         var tbl = document.createElement('table');
         for (var colNum = 0; colNum <= stationsArray.length; colNum++) {
-           var col = document.createElement('col');
-           col.width = 100/(stationsArray.length + 1) + "%";
-           tbl.insertAdjacentElement("beforeend", col);
+            var col = document.createElement('col');
+            col.width = 100 / (stationsArray.length + 1) + "%";
+            tbl.insertAdjacentElement("beforeend", col);
         }
         tbl.style.width = '100%';
         tbl.setAttribute('border', '1');
@@ -111,7 +150,8 @@ function buildWeek(week) {
         var cell = row.insertCell(0);
         cell.colSpan = stationsArray.length + 1;
         cell.style.textAlign = "center";
-        cell.innerHTML = `<b>${days[k]}</b>`;
+        cell.innerHTML = `<b>${days[k]} ${startOfWeek.addDays(addDaysNum).formatMMDDYYYY()}</b>`;
+
         var tbdy = document.createElement('tbody');
         stationHead = tbdy.insertRow(0);
         for (c = 0; c <= stationsArray.length; c++) {
@@ -119,7 +159,7 @@ function buildWeek(week) {
             if (c == 0) {
                 station.innerHTML = "Time";
             } else {
-                station.innerHTML = stationsArray[c-1];
+                station.innerHTML = stationsArray[c - 1];
             }
         }
         for (var i = 7; i < 22; i += 0.5) {
@@ -164,14 +204,20 @@ function buildWeek(week) {
                 } else {
                     var td = document.createElement('td');
                     var drop = document.createElement('select');
+
+                    var option = document.createElement('option');
+                    option.text = "Select";
+                    option.value = "Select";
+                    drop.appendChild(option);
+
                     var optionsArray = ["Zoe", "Taylor", "Jared", "Tammy"];
                     for (opt = 0; opt < optionsArray.length; opt++) {
                         var option = document.createElement('option');
                         option.text = optionsArray[opt];
+                        option.value = optionsArray[opt];
                         drop.appendChild(option);
                     }
                     td.appendChild(drop)
-                    // i == 1 && j == 1 ? td.setAttribute('rowSpan', '2') : null;
                     tr.appendChild(td)
                 }
             }
