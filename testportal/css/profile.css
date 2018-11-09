@@ -87,29 +87,75 @@ main {
       width: 3.5em;
       height: auto;
       right: 4.0em; }
-    main section:nth-of-type(1) .tooltip .tooltiptext {
-      width: 120px;
-      background-color: black;
+    main section:nth-of-type(1) #toolTipBox {
+      visibility: hidden;
+      width: 450px;
+      height: 12em;
+      background-color: #0076c6;
       color: #fff;
       text-align: center;
       border-radius: 6px;
       padding: 5px 0;
       /* Position the tooltip */
       position: absolute;
-      top: 100%;
+      top: 110%;
       right: 4.0em;
       z-index: 1; }
-    main section:nth-of-type(1) .tooltip .tooltiptext::after {
-      content: "";
+      main section:nth-of-type(1) #toolTipBox p {
+        position: absolute;
+        top: -50px;
+        left: 1.5em; }
+      main section:nth-of-type(1) #toolTipBox #box {
+        background-color: white;
+        height: 50%;
+        width: 70%;
+        margin: auto;
+        margin-top: 3em;
+        border-radius: 6spx; }
+      main section:nth-of-type(1) #toolTipBox #redeemTime {
+        font-size: 65px;
+        color: black;
+        top: -5px;
+        left: 50px; }
+      main section:nth-of-type(1) #toolTipBox #redeem {
+        border: none;
+        height: 2.3em;
+        width: 7em;
+        font-size: 15px;
+        margin: auto;
+        margin-top: 0.3em;
+        background-color: #7fc4fd;
+        color: white;
+        border-radius: 6px; }
+    main section:nth-of-type(1) #toolTipBox::after {
+      content: " ";
       position: absolute;
-      top: 100%;
-      left: 50%;
+      bottom: 100%;
+      /* At the top of the tooltip */
+      left: 90%;
       margin-left: -5px;
-      border-width: 5px;
+      border-width: 10px;
       border-style: solid;
-      border-color: black transparent transparent transparent; }
-    main section:nth-of-type(1) .tooltip:hover .tooltiptext {
-      visibility: visible; }
+      border-color: transparent transparent #0076c6 transparent; }
+    main section:nth-of-type(1) #usingRedeem {
+      visibility: hidden;
+      width: 60em;
+      height: 25em;
+      background-color: #0076c6;
+      opacity: 0.95;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px 0;
+      /* Position the tooltip */
+      position: absolute;
+      top: 200%;
+      right: 15.0em;
+      z-index: 1; }
+      main section:nth-of-type(1) #usingRedeem h2 {
+        margin: auto;
+        margin-left: 4em;
+        font-size: 40px; }
     main section:nth-of-type(1) #profilePic {
       position: absolute;
       top: 35%;
@@ -117,17 +163,23 @@ main {
       height: auto;
       left: 2.0em;
       background: white;
-      border-radius: 50%; }
+      border-radius: 50%;
+      z-index: 1; }
   main section:nth-of-type(2) {
     grid-column: 1 /span 1;
     grid-row: 2;
     height: 100%; }
     main section:nth-of-type(2) div {
+      position: relative;
       background-color: #f7f7f7;
       height: 15em;
       padding-top: 70px;
       padding-left: .5em;
       padding-bottom: 0; }
+      main section:nth-of-type(2) div img {
+        position: absolute;
+        right: 1em;
+        top: 5.5em; }
     main section:nth-of-type(2) button {
       width: 100%;
       border: none; }

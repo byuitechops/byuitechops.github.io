@@ -51,10 +51,11 @@ main {
             right: 4.0em;
         }
 
-        .tooltip .tooltiptext {
-            // visibility: hidden;
-            width: 120px;
-            background-color: black;
+        #toolTipBox {
+            visibility: hidden;
+            width: 450px;
+            height: 12em;
+            background-color: $primary;
             color: #fff;
             text-align: center;
             border-radius: 6px;
@@ -62,24 +63,73 @@ main {
 
             /* Position the tooltip */
             position: absolute;
-            top: 100%;
+            top: 110%;
             right: 4.0em;
             z-index: 1;
+            
+            p{
+                position: absolute;
+                top:-50px;
+                left: 1.5em;
+            }
+            #box{
+                background-color: white;
+                height: 50%;
+                width: 70%;
+                margin: auto;
+                margin-top: 3em;
+                border-radius: 6spx;
+            }
+            #redeemTime{
+                font-size: 65px;
+                color: black;
+                top:-5px;
+                left: 50px;
+            }
+            #redeem{
+                border: none;
+                height: 2.3em;
+                width: 7em;
+                font-size: 15px;
+                margin:auto;
+                margin-top: 0.3em;
+                background-color: $third;
+                color: white;
+                border-radius: 6px;
+            }
         }
 
-        .tooltip .tooltiptext::after {
-            content: "";
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-left: -5px;
-            border-width: 5px;
-            border-style: solid;
-            border-color: black transparent transparent transparent;
+        #toolTipBox::after {
+            content: " ";
+    position: absolute;
+    bottom: 100%;  /* At the top of the tooltip */
+    left: 90%;
+    margin-left: -5px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent $primary transparent;
         }        
+        #usingRedeem{
+            visibility: hidden;
+            width: 60em;
+            height: 25em;
+            background-color: $primary;
+            opacity: 0.95;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
 
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
+            /* Position the tooltip */
+            position: absolute;
+            top: 200%;
+            right: 15.0em;
+            z-index: 1;
+h2{
+    margin:auto;
+    margin-left: 4em;
+    font-size: 40px
+}
         }
 
         #profilePic {
@@ -90,6 +140,7 @@ main {
             left: 2.0em;
             background: white;
             border-radius: 50%;
+            z-index: 1;
         }
     }
 
@@ -99,11 +150,18 @@ main {
         height: 100%;
 
         div {
+            position: relative;
             background-color: $backgroundLight;
             height: 15em;
             padding-top: 70px;
             padding-left: .5em;
             padding-bottom: 0;
+
+            img{
+                position: absolute;
+                right: 1em;
+                top: 5.5em;
+            }
         }
 
         button {

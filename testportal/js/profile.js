@@ -1,3 +1,5 @@
+// dropdown toggleView funcionality 
+
 function toggleView() {
     var info = document.getElementById('info');
     var aboutMe = document.getElementById('aboutMe');
@@ -15,3 +17,34 @@ function toggleView() {
         img.style.transform = "rotate(180deg)";
     }
 }
+
+//tool tip on click
+
+var toolTip = document.getElementById("clock");
+var toolTipBox = document.getElementById("toolTipBox");
+toolTip.addEventListener("click", ()=>{
+
+    if (toolTipBox.style.visibility == "hidden"){
+        toolTipBox.style.visibility = "visible";
+    }
+    
+    else {
+        toolTipBox.style.visibility = "hidden";
+    }
+   
+})
+
+//showing up the redeem tool
+var redeemBtn = document.getElementById("redeem");
+var redeemTool = document.getElementById("usingRedeem");
+redeemBtn.addEventListener("click", ()=> {
+    
+    if (redeemTool.style.visibility == "hidden")
+    {
+        redeemTool.style.visibility ="visible";
+        toolTipBox.style.visibility = "hidden";
+    }
+    else {
+            redeemTool.style.visibility ="hidden";
+    }
+})
