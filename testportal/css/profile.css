@@ -138,7 +138,7 @@ main {
       border-style: solid;
       border-color: transparent transparent #0076c6 transparent; }
     main section:nth-of-type(1) #usingRedeem {
-      visibility: visible;
+      visibility: hidden;
       width: 60em;
       height: 22em;
       background-color: #0076c6;
