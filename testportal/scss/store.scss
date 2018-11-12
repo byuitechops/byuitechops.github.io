@@ -242,13 +242,28 @@ main {
 
 #confirmModal {
     display: block;
+
     div {
         height: 75%;
-        svg {
-            width: 200px;
-            height: 200px;
-            stroke-width: 2;
-            stroke: $primary;
+
+        h3 {
+            text-align: center;
+            font-size: 2em;
+            font-weight: bold;
+            color: $primary;
+        }
+
+        p {
+            text-align: center;
+            font-size: 2em;
+            font-weight: bold;
+            color: $primary;
+        }
+
+        img {
+            display: block;
+            margin: 0 auto;
+            height: 75%;
         }
     }
 }

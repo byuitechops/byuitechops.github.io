@@ -217,11 +217,20 @@ main {
   display: block; }
   #confirmModal div {
     height: 75%; }
-    #confirmModal div svg {
-      width: 200px;
-      height: 200px;
-      stroke-width: 2;
-      stroke: #0076c6; }
+    #confirmModal div h3 {
+      text-align: center;
+      font-size: 2em;
+      font-weight: bold;
+      color: #0076c6; }
+    #confirmModal div p {
+      text-align: center;
+      font-size: 2em;
+      font-weight: bold;
+      color: #0076c6; }
+    #confirmModal div img {
+      display: block;
+      margin: 0 auto;
+      height: 75%; }
 
 .modal {
   display: none;
