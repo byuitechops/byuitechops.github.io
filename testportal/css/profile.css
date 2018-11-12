@@ -138,11 +138,11 @@ main {
       border-style: solid;
       border-color: transparent transparent #0076c6 transparent; }
     main section:nth-of-type(1) #usingRedeem {
-      visibility: hidden;
+      visibility: visible;
       width: 60em;
-      height: 25em;
+      height: 22em;
       background-color: #0076c6;
-      opacity: 0.95;
+      opacity: 0.98;
       color: #fff;
       text-align: center;
       border-radius: 6px;
@@ -154,8 +154,55 @@ main {
       z-index: 1; }
       main section:nth-of-type(1) #usingRedeem h2 {
         margin: auto;
+        margin-top: .5em;
         margin-left: 4em;
         font-size: 40px; }
+      main section:nth-of-type(1) #usingRedeem p {
+        margin-top: 3em;
+        margin-right: 18em;
+        font-size: 30px; }
+      main section:nth-of-type(1) #usingRedeem h1 {
+        margin-top: 1em;
+        margin-right: 18em;
+        margin-left: .5em;
+        font-size: 45px;
+        color: white; }
+      main section:nth-of-type(1) #usingRedeem #howMuch {
+        display: absolute;
+        padding-top: .8em;
+        top: .2em;
+        right: -17em;
+        margin-left: 5em;
+        font-size: 25px;
+        color: white; }
+      main section:nth-of-type(1) #usingRedeem div {
+        background-color: #f7f7f7;
+        height: 4em;
+        margin: auto;
+        margin-top: -9.5em;
+        margin-right: 5em;
+        padding-left: 2em;
+        margin-bottom: 2.5em;
+        border-radius: 2%;
+        width: 40%; }
+      main section:nth-of-type(1) #usingRedeem #timeDesired {
+        color: black;
+        position: relative;
+        margin-top: -4.2em;
+        margin-left: 12em; }
+      main section:nth-of-type(1) #usingRedeem button {
+        display: absolute;
+        border: none;
+        height: 4em;
+        width: 10em;
+        top: -3em;
+        margin-right: 2em;
+        background-color: #7fc4fd;
+        font-size: 16px;
+        margin-top: -12em;
+        margin-right: 3em;
+        border-radius: 5%;
+        color: white; }
     main section:nth-of-type(1) #profilePic {
       position: absolute;
       top: 35%;
@@ -174,8 +221,8 @@ main {
       background-color: #f7f7f7;
       height: 15em;
       padding-top: 70px;
-      padding-left: .5em;
-      padding-bottom: 0; }
+      padding-bottom: 0;
+      padding-left: 1em; }
       main section:nth-of-type(2) div img {
         position: absolute;
         right: 1em;
@@ -186,12 +233,13 @@ main {
       main section:nth-of-type(2) button img {
         height: 6%; }
     main section:nth-of-type(2) #info {
-      padding: 0 0.5em;
+      padding: 0 1.0em;
       height: 0;
       transition: height 1s;
       overflow: hidden; }
     main section:nth-of-type(2) #aboutMe {
       padding: 0.5em;
+      padding-left: 1em;
       height: 64%;
       transition: height 1s, overflow 1s;
       overflow: auto; }
