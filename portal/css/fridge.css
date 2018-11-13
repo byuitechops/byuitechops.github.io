@@ -11,6 +11,7 @@ div.content {
     overflow-x: auto;
     margin: 5px 5px 5px 100px;
     width: 110%;
+    background:url("../images/loading.gif") center center no-repeat;
 }
 
 #scheduleFrame {
