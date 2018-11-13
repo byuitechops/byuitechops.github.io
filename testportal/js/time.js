@@ -50,7 +50,7 @@ function loadUser() {
     setInterval(() => {
       alertify.error('Reminder to check out using the portal and workday.');
     }, 3600000);
-  } else {     
+  } else {
     // Checked Out
     document.getElementById('checkTime').innerText = `Check out time: ${data.time.checkKey.slice(-5)}`;
     document.getElementById('checkInBtn').style.backgroundColor = $primary;
@@ -85,9 +85,9 @@ document.getElementById('checkOutBtn').addEventListener('click', () => {
   //verifies if the user is actually logged in
   if (data.time.check) {
     //if the user is then logging out, updates that on firebase and updates the end time on hours worked
-   
+
     db.collection('users').doc(userId).update({
-      "time.checkKey": setDate, 
+      "time.checkKey": setDate,
       "time.check": false
     });
     db.collection('users').doc(userId).collection('hoursWorked').doc(data.time.checkKey).update({
@@ -101,7 +101,7 @@ document.getElementById('checkOutBtn').addEventListener('click', () => {
   getUserData();
 })
 
- //if user starts or end break, call necessary events
+//if user starts or end break, call necessary events
 document.getElementById('breakBtn').addEventListener('click', () => {
   var setDate = editDate(new Date());
   // End break
@@ -137,14 +137,25 @@ function editDate(date) {
   return setDate;
 }
 
-if (localStorage.getItem('minutes') != null) {
-  var minutes = localStorage.getItem("minutes");
-  var seconds = localStorage.getItem("seconds");
-} else {
-  var minutes = 15;
-  var seconds = 01;
+// if (localStorage.getItem('minutes') != null) {
+//   var minutes = localStorage.getItem("minutes");
+//   var seconds = localStorage.getItem("seconds");
+// } else {
+//   var minutes = 15;
+//   var seconds = 00;
+// }
+var minutes = 15;
+var seconds = 00;
+if (minutes < 10) {
+  minutes = "0" + Number(minutes);
+}
+if (seconds < 10) {
+  seconds = "0" + seconds;
 }
 
+function setBreak(minutes, seconds) {
+  
+}
 var timer;
 //countdown timer
 function countdown() {
@@ -165,8 +176,16 @@ function countdown() {
     localStorage.removeItem('seconds');
   }
 
+  if (minutes == 0 && seconds <= 0) {
+    minutes = 15;
+    seconds = 00;
+    document.getElementById("minutes").style.color = "red";
+    document.getElementById("seconds").style.color = "red";
+    // clearInterval(timer);
+  }
+  
   if (minutes < 10) {
-    minutes = "0" + minutes;
+    minutes = "0" + Number(minutes);
   }
   if (seconds < 10) {
     seconds = "0" + seconds;
@@ -182,37 +201,37 @@ document.getElementById("seconds").textContent = seconds;
 var modal = document.getElementById('myModal');
 var calculator = document.getElementById("calculator");
 var span = document.getElementsByClassName("close")[0];
-calculator.addEventListener('click', () =>{
+calculator.addEventListener('click', () => {
   modal.style.display = "block";
 });
-span.onclick = function() {
+span.onclick = function () {
   modal.style.display = "none";
 }
-window.onclick = function(event) {
+window.onclick = function (event) {
   if (event.target == modal) {
-      modal.style.display = "none";
+    modal.style.display = "none";
   }
 }
 //calculates clock-out time and time left according to user's inputs
 
-document.getElementById("submitBtn").addEventListener('click',() =>{
+document.getElementById("submitBtn").addEventListener('click', () => {
   var hoursWorked = document.getElementById("hoursWorked").value;
   var totalHours = document.getElementById("totalHours").value;
-  var clockInTime = document.getElementById("clockInTime").value; 
+  var clockInTime = document.getElementById("clockInTime").value;
   var hoursLeft = (totalHours - hoursWorked).toFixed(2);
   document.getElementById('timeLeft').innerText = hoursLeft;
 
-  var orgHour = Number(clockInTime.slice(0,2));
+  var orgHour = Number(clockInTime.slice(0, 2));
   var orgMin = Number(clockInTime.slice(-2));
 
   var diffHour = Number(hoursLeft.toString().split(".")[0]);
-  var diffMin = (Number("." + hoursLeft.toString().split(".")[1])*60);
-  
+  var diffMin = (Number("." + hoursLeft.toString().split(".")[1]) * 60);
+
   var ansHour = orgHour + diffHour;
   var mer = ansHour > 12 ? "PM" : "AM";
   ansHour = ansHour > 12 ? ansHour - 12 : ansHour;
   var ansMin = ("0" + (orgMin + diffMin)).slice(-2);
-  
+
 
   document.getElementById('clockOutTime').innerText = `${ansHour}:${ansMin} ${mer}`;
 })

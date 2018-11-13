@@ -48,3 +48,9 @@ redeemBtn.addEventListener("click", ()=> {
             redeemTool.style.visibility ="hidden";
     }
 })
+
+//when the user presses the "cancel" button, goes back to the screen
+var cancelBtn = document.getElementById("cancel");
+cancelBtn.addEventListener('click', ()=> {
+    redeemTool.style.visibility ="hidden";
+})

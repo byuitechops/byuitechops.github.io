@@ -9,17 +9,6 @@ main {
     }
     section {
         grid-column: 1 /span 2;
-        select {
-            display: block;
-            position: absolute;
-            right: 1.85em;
-            top: 7%;
-            font-size: 1.25em;
-            padding: 0 0.5em;
-            color: $accent1;
-            background-color: $primary;
-            border: 0;
-        }
         a {
             color: $accent1;
             background-color: $primary;
