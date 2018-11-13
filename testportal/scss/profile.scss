@@ -100,6 +100,7 @@ main {
                 background-color: $third;
                 color: white;
                 border-radius: 6px;
+                cursor: pointer;
             }
         }
 
@@ -129,7 +130,7 @@ main {
             /* Position the tooltip */
             position: absolute;
             top: 200%;
-            right: 15.0em;
+            right: 25%;
             z-index: 1;
 
             h2 {
@@ -197,6 +198,57 @@ main {
                 margin-right: 3em;
                 border-radius: 5%;
                 color: white;
+                cursor: pointer;
+            }
+        }
+
+        #confirmRedeem {
+            position: absolute;
+            width: 60em;
+            height: 22em;
+            background-color: $primary;
+            opacity: 0.98;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            top: 200%;
+            right: 25%;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            grid-template-rows: 1fr 1fr 1fr;
+            img {
+                width: 100%;
+                grid-row: 1 /span 3;
+                display: block;
+                margin: 0 auto;
+            }
+            h2 {
+                grid-row: 1;
+                position: initial;
+                margin: 0;
+            }
+            p {
+                grid-row: 2;
+                position: initial;
+                margin: 0;
+                font-size: 4em;
+            }
+            button {
+                margin: 1em auto;
+                grid-row: 3;
+                border: none;
+                height: 4em;
+                width: 10em;
+                border-radius: 5%;
+                color: white;
+                cursor: pointer;
+                background-color: $third;
+                font-size: 16px;
+                &:hover {
+                    opacity: 0.8;                    
+                }
             }
         }
 

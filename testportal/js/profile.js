@@ -22,34 +22,44 @@ function toggleView() {
 
 var toolTip = document.getElementById("clock");
 var toolTipBox = document.getElementById("toolTipBox");
-toolTip.addEventListener("click", ()=>{
+toolTip.addEventListener("click", () => {
 
-    if (toolTipBox.style.visibility == "hidden"){
+    if (toolTipBox.style.visibility == "hidden") {
         toolTipBox.style.visibility = "visible";
-    }
-    else {
+    } else {
         toolTipBox.style.visibility = "hidden";
     }
-   
+
 })
 
 //showing up the redeem tool
 var redeemBtn = document.getElementById("redeem");
 var redeemTool = document.getElementById("usingRedeem");
-redeemBtn.addEventListener("click", ()=> {
-    
-    if (redeemTool.style.visibility == "hidden")
-    {
-        redeemTool.style.visibility ="visible";
+redeemBtn.addEventListener("click", () => {
+
+    if (redeemTool.style.visibility == "hidden") {
+        redeemTool.style.visibility = "visible";
         toolTipBox.style.visibility = "hidden";
-    }
-    else {
-            redeemTool.style.visibility ="hidden";
+    } else {
+        redeemTool.style.visibility = "hidden";
     }
 })
 
 //when the user presses the "cancel" button, goes back to the screen
 var cancelBtn = document.getElementById("cancel");
-cancelBtn.addEventListener('click', ()=> {
-    redeemTool.style.visibility ="hidden";
+cancelBtn.addEventListener('click', () => {
+    redeemTool.style.visibility = "hidden";
+})
+
+// when the user clicks the "redeem" button, it shows the confirm
+var redeemConfirmBtn = document.getElementById("redeembtn");
+redeemConfirmBtn.addEventListener('click', () => {
+    redeemTool.style.visibility = "hidden";
+    document.getElementById("confirmRedeem").style.visibility = "visible";
+})
+
+// When the use clicks ok close confirm
+var okBtn = document.getElementById("close");
+okBtn.addEventListener('click', () => {
+    document.getElementById("confirmRedeem").style.visibility = "hidden";
 })
