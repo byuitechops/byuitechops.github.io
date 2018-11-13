@@ -7,7 +7,7 @@ function toggleView() {
     // If info is shown
     if (info.style.height == "20%") {
         info.style.height = "0%";
-        aboutMe.style.height = "65%";
+        aboutMe.style.height = "64%";
         aboutMe.style.overflow = "auto";
         img.style.transform = "rotate(0deg)";
     } else {
@@ -27,7 +27,6 @@ toolTip.addEventListener("click", ()=>{
     if (toolTipBox.style.visibility == "hidden"){
         toolTipBox.style.visibility = "visible";
     }
-    
     else {
         toolTipBox.style.visibility = "hidden";
     }

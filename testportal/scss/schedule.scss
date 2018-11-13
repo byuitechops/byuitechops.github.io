@@ -33,9 +33,13 @@ main {
                 width: 1.75em;
             }
         }
+        .container {
+            background:url("../assets/loading.gif") center center no-repeat;
+            height: 99%;
+        }
         iframe {
             width: 100%;
-            height: 99%;
+            height: 100%;
         }
     }
 }

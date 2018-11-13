@@ -86,7 +86,8 @@ main {
       top: 35%;
       width: 3.5em;
       height: auto;
-      right: 4.0em; }
+      right: 4.0em;
+      cursor: pointer; }
     main section:nth-of-type(1) #toolTipBox {
       visibility: hidden;
       width: 450px;
