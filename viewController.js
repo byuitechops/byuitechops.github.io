@@ -11,16 +11,17 @@ function createCards() {
         let cardTemplate = `<div class="card blue-grey darken-1">
                             <div class="card-content white-text">
                                 <span class="card-title">${repository.name}</span>
-                                <p>I am a very simple card. I am good at containing small bits of information.
-                                I am convenient because I require little markup to use effectively.</p>
+                                <p>${repository.description}</p>
+                                <ul>
+                                    <li>Language: ${repository.language}</li>
+                                    <li>Last Update: ${repository.updated_at}</li>
+                                    <li>Open Issues: ${repository.open_issues_count}</li>
+                                </ul>
                             </div>
                             <div class="card-action">
-                                <a href="#">This is a link</a>
-                                <a href="#">This is a link</a>
+                                <a href="${repository.html_url}">Repository Link</a>
                             </div>
                         </div>`;
-
-
         if (i === 0) {
             templateStr += '<div class="row">';
         } else if (i % 4 === 0) {
