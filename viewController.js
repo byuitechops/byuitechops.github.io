@@ -7,5 +7,3 @@ modal.fetchRepositories(0, () => {
     console.log('completed');
     console.log(modal.repositories);
 });
-// let modal = new Modal();
-// console.log(modal.repositories);

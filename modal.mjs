@@ -10,7 +10,6 @@ export class Modal {
                 let data = JSON.parse(this.responseText);
                 if (data.length > 0) {
                     this.repositories.concat(data);
-                    this.fetchRepositories(page++, callback);
                 } else {
                     callback();
                 }
