@@ -11,7 +11,6 @@ export class Modal {
             if (this.readyState == 4 && this.status == 200) {
                 let data = JSON.parse(this.responseText);
                 if (data.length > 0) {
-                    console.log(that.repositories);
                     that.repositories = that.repositories.concat(data);
                     that.fetchRepositories(page, callback);
                 } else {
@@ -22,7 +21,6 @@ export class Modal {
                 callback(`There was an error getting the list of repositories. Error Code: ${this.status}`);
             }
         };
-        console.log(page);
         xhttp.send();
     }
 }
