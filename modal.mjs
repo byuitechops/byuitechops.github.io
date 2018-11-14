@@ -9,6 +9,7 @@ export class Modal {
             if (this.readyState == 4 && this.status == 200) {
                 let data = JSON.parse(this.responseText);
                 this.repositories.concat(data);
+                console.log(this.repositories);
                 callback();
             }
         };
