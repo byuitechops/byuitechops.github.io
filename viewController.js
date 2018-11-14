@@ -26,7 +26,7 @@ function createCards() {
             templateStr += '</div><div class="row">';
         }
         templateStr += `<div class="col s12 m4 l3">${cardTemplate}</div>`;
-        cardContainer.innerHTML += cardTemplate;
+        cardContainer.innerHTML += templateStr;
     });
 }
 
