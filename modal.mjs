@@ -11,7 +11,7 @@ export class Modal {
                 let data = JSON.parse(this.responseText);
                 that.repositories.push(data);
                 callback();
-            } else {
+            } else if (this.status != 200 && this.status != 0) {
                 callback(`There was an error getting the list of repositories. Error Code: ${this.status}`);
             }
         };
