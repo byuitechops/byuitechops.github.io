@@ -61,7 +61,7 @@ db.collection("store").doc("inventory").collection("items").get().then(function 
 function addToCart(item, price) {
   var count = document.getElementById(`${item.replace(/ /g, '')}count`).innerText.replace(/Count: /g, "");
   document.getElementById(`${item.replace(/ /g, '')}count`).innerText = `Count: ${--count}`;
-  if (document.getElementById(`${item.replace(/ /g, '')}count`).innerText.replace(/Count: /g, "") <= 0) {  
+  if (document.getElementById(`${item.replace(/ /g, '')}count`).innerText.replace(/Count: /g, "") <= 0) {
     document.getElementById(`${item.replace(/ /g, '')}btn`).disabled = true;
     document.getElementById(`${item.replace(/ /g, '')}btn`).style.backgroundColor = "grey";
     document.getElementById(`${item.replace(/ /g, '')}btn`).style.opacity = "1";
