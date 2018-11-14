@@ -366,10 +366,10 @@ main {
             border-radius: 6px;
             padding: 5px 0;
             
-            /* Position the tooltip */
             position: absolute;
-            top: 20%;
-            right: 10%;
+            top: 17%;
+            // right: 10%;
+            left: 33%;
             z-index: 1;
             h2 {
                 margin-top: .5em;
@@ -387,10 +387,27 @@ main {
                 margin-top: -2em;
                 left: 21em;
             }
-            button{
+            #submitInfoChanges{
                 position: absolute;
                 margin-top: -10em;
-                left: 40em;
+                left: 45em;
+                background-color: white;
+                border: none;
+                height: 4em;
+                width: 10em;
+                border-radius: 5%;
+                color: white;
+                cursor: pointer;
+                background-color: $third;
+                font-size: 16px;
+                &:hover {
+                    opacity: 0.8;                    
+                }
+            }
+            #cancelInfoChanges{
+                position: absolute;
+                margin-top: -10em;
+                left: 33em;
                 background-color: white;
                 border: none;
                 height: 4em;

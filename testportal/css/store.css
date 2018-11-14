@@ -69,7 +69,8 @@ main {
     border: none;
     margin: 2.5em 0 1em;
     font-weight: bold;
-    letter-spacing: 0.15em; }
+    letter-spacing: 0.15em;
+    cursor: pointer; }
   main section#content {
     grid-column: 1 / span 2;
     display: grid;
@@ -114,7 +115,8 @@ main {
             margin: 0;
             width: 70%;
             height: 25%;
-            font-size: 0.60rem; }
+            font-size: 0.60rem;
+            cursor: pointer; }
           main section#content section#left div div button:hover {
             opacity: 0.75; }
     main section#content section#right {
@@ -143,10 +145,24 @@ main {
           main section#content section#right div div p {
             display: flex;
             justify-content: space-between; }
+            main section#content section#right div div p span:last-child {
+              position: relative;
+              left: 3em; }
+              main section#content section#right div div p span:last-child span {
+                margin: 0 1em;
+                display: inline;
+                left: 0;
+                cursor: pointer; }
+          main section#content section#right div div p:first-of-type {
+            display: flex;
+            justify-content: space-between; }
+            main section#content section#right div div p:first-of-type span {
+              left: 0; }
           main section#content section#right div div span {
             font-size: 1em; }
         main section#content section#right div button {
-          width: 100%; }
+          width: 100%;
+          cursor: pointer; }
 
 #checkoutModal div {
   /* The container */
