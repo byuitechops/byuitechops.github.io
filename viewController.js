@@ -6,7 +6,6 @@ let modal = new Modal();
 let cardContainer = document.getElementById('repositories');
 
 function createCards() {
-    let templateStr = '';
     let cardTemplate = `<div class="card blue-grey darken-1">
                             <div class="card-content white-text">
                                 <span class="card-title">Card Title</span>
@@ -20,6 +19,7 @@ function createCards() {
                         </div>`;
 
     modal.repositories.forEach((repository, i) => {
+        let templateStr = '';
         if (i === 0) {
             templateStr += '<div class="row">';
         } else if (i % 4 === 0) {
