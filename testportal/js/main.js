@@ -43,6 +43,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
     if (window.location.href.includes("index.html") || window.location.href.includes("signup.html") || window.location.pathname == "/") {
       window.location.replace("home.html");
     }
+    getUser();
     //if user isn't logged in, sends back to sign in page
   } else {
     userName = null;
@@ -51,3 +52,10 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
     }
   }
 });
+
+function getUser() {
+  db.collection("users").where("name", "==", userName)
+  .onSnapshot(function(querySnapshot) {
+    userId = querySnapshot.docs[0].id;
+  })
+}

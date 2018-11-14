@@ -26,6 +26,7 @@ main {
         margin: 2.5em 0 1em;
         font-weight: bold;
         letter-spacing: 0.15em;
+        cursor: pointer;
     }
 
     section#content {
@@ -86,6 +87,7 @@ main {
                         width: 70%;
                         height: 25%;
                         font-size: 0.60rem;
+                        cursor: pointer;
                     }
 
                     button:hover {
@@ -128,6 +130,25 @@ main {
                     p {
                         display: flex;
                         justify-content: space-between;
+
+                        span:last-child {
+                            position: relative;
+                            left: 3em;
+                            span {
+                                margin: 0 1em;
+                                display: inline;
+                                left: 0;
+                                cursor: pointer;
+                            }
+                        }
+                    }
+
+                    p:first-of-type {
+                        display: flex;
+                        justify-content: space-between;
+                        span {
+                            left: 0;
+                        }
                     }
 
                     // margin: 1em 0;
@@ -139,6 +160,7 @@ main {
 
                 button {
                     width: 100%;
+                    cursor: pointer;
                 }
             }
         }

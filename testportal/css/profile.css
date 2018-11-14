@@ -332,10 +332,9 @@ main {
       text-align: center;
       border-radius: 6px;
       padding: 5px 0;
-      /* Position the tooltip */
       position: absolute;
-      top: 20%;
-      right: 10%;
+      top: 17%;
+      left: 33%;
       z-index: 1; }
       main section:nth-of-type(3) #editInfo h2 {
         margin-top: .5em;
@@ -349,10 +348,10 @@ main {
         position: absolute;
         margin-top: -2em;
         left: 21em; }
-      main section:nth-of-type(3) #editInfo button {
+      main section:nth-of-type(3) #editInfo #submitInfoChanges {
         position: absolute;
         margin-top: -10em;
-        left: 40em;
+        left: 45em;
         background-color: white;
         border: none;
         height: 4em;
@@ -362,7 +361,22 @@ main {
         cursor: pointer;
         background-color: #7fc4fd;
         font-size: 16px; }
-        main section:nth-of-type(3) #editInfo button:hover {
+        main section:nth-of-type(3) #editInfo #submitInfoChanges:hover {
+          opacity: 0.8; }
+      main section:nth-of-type(3) #editInfo #cancelInfoChanges {
+        position: absolute;
+        margin-top: -10em;
+        left: 33em;
+        background-color: white;
+        border: none;
+        height: 4em;
+        width: 10em;
+        border-radius: 5%;
+        color: white;
+        cursor: pointer;
+        background-color: #7fc4fd;
+        font-size: 16px; }
+        main section:nth-of-type(3) #editInfo #cancelInfoChanges:hover {
           opacity: 0.8; }
 
 /*# sourceMappingURL=profile.css.map */

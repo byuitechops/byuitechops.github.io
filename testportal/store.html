@@ -9,6 +9,7 @@
     <!-- Scripts -->
     <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-storage.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
     <!-- -->
     <!-- Partials -->
@@ -31,155 +32,16 @@
         <section id="content">
 
             <section id="left">
-                <div>
-                    <img src="skins/image_1.png" alt="">
-                    <div>
-                        <p>Mtn Dew</p>
-                        <span>$0.50</span>
-                        <button>Add to Cart</button>
-                    </div>
-                </div>
-
-
-                <div>
-                    <img src="skins/image_1.png" alt="">
-                    <div>
-                        <p>Mtn Dew</p>
-                        <span>$0.50</span>
-                        <button>Add to Cart</button>
-                    </div>
-                </div>
-
-
-                <div>
-                    <img src="skins/image_1.png" alt="">
-                    <div>
-                        <p>Mtn Dew</p>
-                        <span>$0.50</span>
-                        <button>Add to Cart</button>
-                    </div>
-                </div>
-
-
-                <div>
-                    <img src="skins/image_1.png" alt="">
-                    <div>
-                        <p>Mtn Dew</p>
-                        <span>$0.50</span>
-                        <button>Add to Cart</button>
-                    </div>
-                </div>
-
-
-                <div>
-                    <img src="skins/image_1.png" alt="">
-                    <div>
-                        <p>Mtn Dew</p>
-                        <span>$0.50</span>
-                        <button>Add to Cart</button>
-                    </div>
-                </div>
-
-                <div>
-                    <img src="skins/image_1.png" alt="">
-                    <div>
-                        <p>Mtn Dew</p>
-                        <span>$0.50</span>
-                        <button>Add to Cart</button>
-                    </div>
-                </div>
-
-                <div>
-                    <img src="skins/image_1.png" alt="">
-                    <div>
-                        <p>Mtn Dew</p>
-                        <span>$0.50</span>
-                        <button>Add to Cart</button>
-                    </div>
-                </div>
-
-                <div>
-                    <img src="skins/image_1.png" alt="">
-                    <div>
-                        <p>Mtn Dew</p>
-                        <span>$0.50</span>
-                        <button>Add to Cart</button>
-                    </div>
-                </div>
-
-                <div>
-                    <img src="skins/image_1.png" alt="">
-                    <div>
-                        <p>Mtn Dew</p>
-                        <span>$0.50</span>
-                        <button>Add to Cart</button>
-                    </div>
-                </div>
-
-                <div>
-                    <img src="skins/image_1.png" alt="">
-                    <div>
-                        <p>Mtn Dew</p>
-                        <span>$0.50</span>
-                        <button>Add to Cart</button>
-                    </div>
-                </div>
-
-                <div>
-                    <img src="skins/image_1.png" alt="">
-                    <div>
-                        <p>Mtn Dew</p>
-                        <span>$0.50</span>
-                        <button>Add to Cart</button>
-                    </div>
-                </div>
-
-                <div>
-                    <img src="skins/image_1.png" alt="">
-                    <div>
-                        <p>Mtn Dew</p>
-                        <span>$0.50</span>
-                        <button>Add to Cart</button>
-                    </div>
-                </div>
-
-                <div>
-                    <img src="skins/image_1.png" alt="">
-                    <div>
-                        <p>Mtn Dew</p>
-                        <span>$0.50</span>
-                        <button>Add to Cart</button>
-                    </div>
-                </div>
+                
             </section>
             <section id="right">
                 <div>
                     <p>Name's Cart</p>
                     <span>$00.00</span>
-                    <div>
+                    <div id="cart">
                         <p>
                             <span>Item</span>
-                            <span>Qty</span>
-                        </p>
-                        <p>
-                            <span>Mtn Dew</span>
-                            <span>$0.50</span>
-                        </p>
-                        <p>
-                            <span>Mtn Dew</span>
-                            <span>$0.50</span>
-                        </p>
-                        <p>
-                            <span>Mtn Dew</span>
-                            <span>$0.50</span>
-                        </p>
-                        <p>
-                            <span>Mtn Dew</span>
-                            <span>$0.50</span>
-                        </p>
-                        <p>
-                            <span>Mtn Dew</span>
-                            <span>$0.50</span>
+                            <span>Price</span>
                         </p>
                     </div>
                     <button id="checkoutBtn">Check Out</button>
