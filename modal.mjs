@@ -3,7 +3,7 @@ export class Modal {
         this.repositories = [];
     }
 
-    fetchRepositories(page = 0) {
+    fetchRepositories(page = 0, callback) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
@@ -12,7 +12,7 @@ export class Modal {
                     this.repositories.concat(JSON.parse(this.responseText));
                     this.fetchRepositories(page++);
                 } else {
-                    console.log(this.fetchRepositories);
+                    callback();
                 }
             }
         };
