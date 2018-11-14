@@ -1,6 +1,6 @@
 import {
     Modal
-} from '/modal.js';
+} from '/modal.mjs';
 
 // let modal = new Modal();
 // console.log(modal.repositories);
