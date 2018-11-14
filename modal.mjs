@@ -8,11 +8,8 @@ export class Modal {
         xhttp.onreadystatechange = () => {
             if (this.readyState == 4 && this.status == 200) {
                 let data = JSON.parse(this.responseText);
-                if (data.length > 0) {
-                    this.repositories.concat(data);
-                } else {
-                    callback();
-                }
+                this.repositories.concat(data);
+                callback();
             }
         };
         xhttp.open('GET', `https://api.github.com/orgs/byuitechops/repos?page=${page}`, true);
