@@ -5,15 +5,16 @@ export class Modal {
 
     fetchRepositories(page = 0, callback) {
         var xhttp = new XMLHttpRequest();
+        let that = this;
         xhttp.onreadystatechange = () => {
             if (this.readyState == 4 && this.status == 200) {
                 let data = JSON.parse(this.responseText);
-                this.repositories.concat(data);
-                console.log(this.repositories);
+                that.repositories.concat(data);
+                console.log(that.repositories);
                 callback();
             }
         };
-        xhttp.open('GET', `https://api.github.com/orgs/byuitechops/repos?page=${page}`, true);
+        xhttp.open('GET', `https://api.github.com/orgs/byuitechops/repos?page=${page}&per_page=100`, true);
         xhttp.send();
     }
 }
