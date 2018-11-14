@@ -3,14 +3,19 @@ export class Modal {
         this.repositories = [];
     }
 
-    fetchRepositories(page = 0, callback) {
+    async fetchRepositories(page = 0, callback) {
         var xhttp = new XMLHttpRequest();
         let that = this;
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 let data = JSON.parse(this.responseText);
-                that.repositories.push(data);
-                callback();
+                if (data.length > 0) {
+                    that.repositories = that.repositories.concat(data);
+                    that.repositories = that.fetchRepositories(page++, callback);
+                } else {
+                    console.log('Completed Concatination of Pagination');
+                    callback();
+                }
             } else if (this.status != 200 && this.status != 0) {
                 callback(`There was an error getting the list of repositories. Error Code: ${this.status}`);
             }
