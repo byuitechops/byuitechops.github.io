@@ -1,4 +1,4 @@
-class Modal {
+export class Modal {
     Modal() {
         this.repositories = [];
         this.fetchRepositories();
@@ -20,4 +20,4 @@ class Modal {
     }
 }
 
-module.exports = Modal;
+// module.exports = Modal;
