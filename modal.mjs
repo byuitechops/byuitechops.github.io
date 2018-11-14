@@ -8,8 +8,10 @@ export class Modal {
         let that = this;
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                console.log(data);
+
                 let data = JSON.parse(this.responseText);
+
+
                 that.repositories.push(data);
                 console.log(that.repositories);
                 callback();
