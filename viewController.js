@@ -3,7 +3,7 @@ import {
 } from '/modal.mjs';
 
 let modal = new Modal();
-modal.fetchRepositories(0, repositories => {
+modal.fetchRepositories(0, () => {
     console.log(modal.repositories);
 });
 // let modal = new Modal();

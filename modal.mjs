@@ -5,7 +5,7 @@ export class Modal {
 
     fetchRepositories(page = 0, callback) {
         var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
+        xhttp.onreadystatechange = () => {
             if (this.readyState == 4 && this.status == 200) {
                 let data = JSON.parse(this.responseText);
                 if (data.length > 0) {
