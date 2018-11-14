@@ -63,17 +63,15 @@
             <span id="time"></span>
         </section>
         <section>
-
             <div>
-                <img src="assets/edit.png">
-                <h3>Lucas Wargha</h3>
+                <img id="editContact" src="assets/edit.png">
+                <h3 id="editName">Lucas Wargha</h3>
                 <p>Title: Steak </p>
                 <p>Canvas: Team 1 </p>
                 <p>T: 801-928-3255 </p>
                 <p>Email: war18001@byui.edu </p>
             </div>
             <div id="info">
-                <img src="assets/edit.png">
                 <h4>Info</h4>
                 <p>Major: Software Engineering </p>
                 <p>Track: Spring/Fall </p>
@@ -93,6 +91,7 @@
             </div>
         </section>
         <section>
+          
             <div>
                 <h3>HR</h3>
                 <!-- <p>Request Time Off</p> -->
@@ -114,6 +113,26 @@
                 <p>Report a Bug</p> -->
                 <p>Viewing Mode</p>
             </div>
+            <div  id="editInfo">
+                    <h2>Edit your Information</h2>
+                    <p>Phone Number: </p>
+                    <input id = "phoneInfo" type="tel" placeholder="####-###-####">
+                    <p>E-mail: </p>
+                    <input type="email" placeholder="@byui.edu">
+                    <p>Major: </p>
+                    <input type="text" placeholder="Course of Study">
+                    <p>Track: </p>
+                    <input type="text" list="tracks"  placeholder="Season/Season">
+                    <datalist id ="tracks">
+                                    <option value="Winter/Spring">
+                                    <option value="Spring/Fall">
+                                    <option value="Fall/Winter">
+                                   <option value="Year Round (Overwrite)"></option>
+                    </datalist>
+                    <p >Graduation Date: </p>
+                    <input type="text" placeholder="Year and Semester">  
+                    <button id = "submitInfoChanges">Submit</button>  
+                </div>
         </section>
     </main>
 </body>

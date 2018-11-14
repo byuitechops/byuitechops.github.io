@@ -101,6 +101,9 @@ main {
                 color: white;
                 border-radius: 6px;
                 cursor: pointer;
+                &:hover{
+                    opacity: 0.80;
+                }
             }
         }
 
@@ -199,6 +202,9 @@ main {
                 border-radius: 5%;
                 color: white;
                 cursor: pointer;
+            &:hover{
+                opacity: 0.80;
+            }
             }
         }
 
@@ -348,5 +354,58 @@ main {
                 color: $primary;
             }
         }
+        #editInfo{
+            display: inline;
+            visibility: visible;
+            width: 60em;
+            height: 20em;
+            background-color: $primary;
+            opacity: 0.98;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            
+            /* Position the tooltip */
+            position: absolute;
+            top: 20%;
+            right: 10%;
+            z-index: 1;
+            h2 {
+                margin-top: .5em;
+                font-size: 30px
+            }
+
+            p {
+                color: white;
+                margin-top: .1em;
+                margin-left: -22em;
+                font-size: 30px
+            }
+            input{
+                position: absolute;
+                margin-top: -2em;
+                left: 21em;
+            }
+            button{
+                position: absolute;
+                margin-top: -10em;
+                left: 40em;
+                background-color: white;
+                border: none;
+                height: 4em;
+                width: 10em;
+                border-radius: 5%;
+                color: white;
+                cursor: pointer;
+                background-color: $third;
+                font-size: 16px;
+                &:hover {
+                    opacity: 0.8;                    
+                }
+            }
+        }
     }
 }
+
+        

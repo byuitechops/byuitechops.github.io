@@ -63,3 +63,43 @@ var okBtn = document.getElementById("close");
 okBtn.addEventListener('click', () => {
     document.getElementById("confirmRedeem").style.visibility = "hidden";
 })
+
+
+//allow the user to edit his/her information
+var editBtn = document.getElementById("editContact");
+var editDiv = document.getElementById("editInfo");
+editBtn.addEventListener("click", ()=>{
+    editDiv.style.visibility = "visible";
+})
+
+//sends to firebase info changes made by the user
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyA_I75-CU5_GlNP1QSKvvH8nbYVkaAUgNA",
+    authDomain: "techopsportal.firebaseapp.com",
+    databaseURL: "https://techopsportal.firebaseio.com",
+    projectId: "techopsportal",
+    storageBucket: "techopsportal.appspot.com",
+    messagingSenderId: "265124430634"
+};
+firebase.initializeApp(config);
+var db = firebase.firestore();
+
+// Disable deprecated features
+db.settings({
+    timestampsInSnapshots: true
+});
+
+var submitChanges = document.getElementById("submitInfoChanges");
+submitChanges.addEventListener("click", () =>{
+    var docData = {
+        "test" : document.getElementById("phoneInfo").value
+    }
+
+        db.collection('users').doc().set(docData).then(function() {
+            console.log("Written");
+        })
+
+    editDiv.style.visibility = "hidden";
+})
+   
