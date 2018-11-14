@@ -9,8 +9,8 @@ export class Modal {
             if (this.readyState == 4 && this.status == 200) {
                 let data = JSON.parse(this.responseText);
                 if (data.length > 0) {
-                    this.repositories.concat(JSON.parse(this.responseText));
-                    this.fetchRepositories(page++);
+                    this.repositories.concat(data);
+                    this.fetchRepositories(page++, callback);
                 } else {
                     callback();
                 }

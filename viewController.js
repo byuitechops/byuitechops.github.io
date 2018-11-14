@@ -4,6 +4,7 @@ import {
 
 let modal = new Modal();
 modal.fetchRepositories(0, () => {
+    console.log('completed');
     console.log(modal.repositories);
 });
 // let modal = new Modal();
