@@ -3,15 +3,16 @@ export class Modal {
         this.repositories = [];
     }
 
-    async fetchRepositories(page = 0, callback) {
+    fetchRepositories(page = 0, callback) {
         var xhttp = new XMLHttpRequest();
         let that = this;
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 let data = JSON.parse(this.responseText);
                 if (data.length > 0) {
+                    console.log(that.repositories);
                     that.repositories = that.repositories.concat(data);
-                    that.repositories = that.fetchRepositories(page++, callback);
+                    that.fetchRepositories(page++, callback);
                 } else {
                     console.log('Completed Concatination of Pagination');
                     callback();
