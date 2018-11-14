@@ -7,13 +7,15 @@ div.content {
     margin-right: 0;
 }
 
-/* #frame {
-    overflow-x: auto;
+#frame {
+    /* overflow-x: auto;
     margin: 5px 5px 5px 100px;
-    width: 110%;
+    width: 110%; */    
+    margin-left: 12vw;
+    background:url("../images/loading.gif") center center no-repeat;
 }
 
-#scheduleFrame {
+/* #scheduleFrame {
     overflow-x: auto;
     height: 800px;
     width: 1650px;
@@ -24,7 +26,7 @@ div.content {
 iframe {
     width: 60vw;
     height: 85vh;
-    margin-left: 12vw;
+    /* margin-left: 12vw; */
 }
 
 

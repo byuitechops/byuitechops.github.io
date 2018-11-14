@@ -7,7 +7,7 @@ function toggleView() {
     // If info is shown
     if (info.style.height == "20%") {
         info.style.height = "0%";
-        aboutMe.style.height = "65%";
+        aboutMe.style.height = "64%";
         aboutMe.style.overflow = "auto";
         img.style.transform = "rotate(0deg)";
     } else {
@@ -22,35 +22,84 @@ function toggleView() {
 
 var toolTip = document.getElementById("clock");
 var toolTipBox = document.getElementById("toolTipBox");
-toolTip.addEventListener("click", ()=>{
+toolTip.addEventListener("click", () => {
 
-    if (toolTipBox.style.visibility == "hidden"){
+    if (toolTipBox.style.visibility == "hidden") {
         toolTipBox.style.visibility = "visible";
-    }
-    
-    else {
+    } else {
         toolTipBox.style.visibility = "hidden";
     }
-   
+
 })
 
 //showing up the redeem tool
 var redeemBtn = document.getElementById("redeem");
 var redeemTool = document.getElementById("usingRedeem");
-redeemBtn.addEventListener("click", ()=> {
-    
-    if (redeemTool.style.visibility == "hidden")
-    {
-        redeemTool.style.visibility ="visible";
+redeemBtn.addEventListener("click", () => {
+
+    if (redeemTool.style.visibility == "hidden") {
+        redeemTool.style.visibility = "visible";
         toolTipBox.style.visibility = "hidden";
-    }
-    else {
-            redeemTool.style.visibility ="hidden";
+    } else {
+        redeemTool.style.visibility = "hidden";
     }
 })
 
 //when the user presses the "cancel" button, goes back to the screen
 var cancelBtn = document.getElementById("cancel");
-cancelBtn.addEventListener('click', ()=> {
-    redeemTool.style.visibility ="hidden";
+cancelBtn.addEventListener('click', () => {
+    redeemTool.style.visibility = "hidden";
 })
+
+// when the user clicks the "redeem" button, it shows the confirm
+var redeemConfirmBtn = document.getElementById("redeembtn");
+redeemConfirmBtn.addEventListener('click', () => {
+    redeemTool.style.visibility = "hidden";
+    document.getElementById("confirmRedeem").style.visibility = "visible";
+})
+
+// When the use clicks ok close confirm
+var okBtn = document.getElementById("close");
+okBtn.addEventListener('click', () => {
+    document.getElementById("confirmRedeem").style.visibility = "hidden";
+})
+
+
+//allow the user to edit his/her information
+var editBtn = document.getElementById("editContact");
+var editDiv = document.getElementById("editInfo");
+editBtn.addEventListener("click", ()=>{
+    editDiv.style.visibility = "visible";
+})
+
+//sends to firebase info changes made by the user
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyA_I75-CU5_GlNP1QSKvvH8nbYVkaAUgNA",
+    authDomain: "techopsportal.firebaseapp.com",
+    databaseURL: "https://techopsportal.firebaseio.com",
+    projectId: "techopsportal",
+    storageBucket: "techopsportal.appspot.com",
+    messagingSenderId: "265124430634"
+};
+firebase.initializeApp(config);
+var db = firebase.firestore();
+
+// Disable deprecated features
+db.settings({
+    timestampsInSnapshots: true
+});
+
+var submitChanges = document.getElementById("submitInfoChanges");
+submitChanges.addEventListener("click", () =>{
+    var docData = {
+        "test" : document.getElementById("phoneInfo").value
+    }
+
+        db.collection('users').doc().set(docData).then(function() {
+            console.log("Written");
+        })
+
+    editDiv.style.visibility = "hidden";
+})
+   

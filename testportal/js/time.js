@@ -137,15 +137,15 @@ function editDate(date) {
   return setDate;
 }
 
-// if (localStorage.getItem('minutes') != null) {
-//   var minutes = localStorage.getItem("minutes");
-//   var seconds = localStorage.getItem("seconds");
-// } else {
-//   var minutes = 15;
-//   var seconds = 00;
-// }
-var minutes = 15;
-var seconds = 00;
+if (localStorage.getItem('minutes') != null) {
+  var minutes = localStorage.getItem("minutes");
+  var seconds = localStorage.getItem("seconds");
+} else {
+  var minutes = 15;
+  var seconds = 00;
+}
+// var minutes = 15;
+// var seconds = 00;
 if (minutes < 10) {
   minutes = "0" + Number(minutes);
 }
@@ -163,7 +163,6 @@ function countdown() {
     localStorage.setItem('minutes', minutes);
     localStorage.setItem('seconds', seconds);
     clearInterval(timer);
-    window.location.reload();
   }
   if (seconds == 0) {
     minutes -= 1;

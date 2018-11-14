@@ -27,18 +27,21 @@
     <header>
     </header>
     <main>
-        <section> 
+        <section>
             <!-- <img src="assets/logo3.png"> -->
             <div id="opacity">
             </div>
             <h2>General Information</h2>
-            <img id="profilePic"src="assets/lucas.jpg">
-            
-            <div class="tooltip"><img id="clock"src="assets/clockWhite.png">
-                <span class="toolTipBox" id="toolTipBox"><p>Accumulated Time</p>
-                    <div id="box"></div><p id="redeemTime">##:##</p><button id="redeem">REDEEM</button></span>
-              </div>
-              <div id ="usingRedeem">
+            <img id="profilePic" src="assets/lucas.jpg">
+
+            <div class="tooltip"><img id="clock" src="assets/clockWhite.png">
+                <span style="visibility: hidden;" class="toolTipBox" id="toolTipBox">
+                    <p>Accumulated Time</p>
+                    <div id="box"></div>
+                    <p id="redeemTime">##:##</p><button id="redeem">REDEEM</button>
+                </span>
+            </div>
+            <div style="visibility: hidden;" id="usingRedeem">
                 <h2>Redeem Confirmation</h2>
                 <p>Accumulated Time</p>
                 <h1>00:00</h1>
@@ -47,23 +50,28 @@
                 <h1 id="timeDesired">00:00</h1>
                 <button id="cancel">Cancel</button>
                 <button id="redeembtn">Redeem</button>
-              </div>
-              
+            </div>
+
+            <div style="visibility: hidden;" id="confirmRedeem">
+                <img src="assets/check-01.png">
+                <h2>Redeemed Hours</h2>
+                <p>00:00</p>
+                <button id="close">Ok</button>
+            </div>
+
             <p>Sign Out</p>
             <span id="time"></span>
         </section>
         <section>
-            
             <div>
-                    <img src="assets/edit.png">
-               <h3>Lucas Wargha</h3>
-               <p>Title: Steak </p>
-               <p>Canvas: Team 1 </p>
-               <p>T: 801-928-3255 </p>
-               <p>Email: war18001@byui.edu </p>
+                <img id="editContact" src="assets/edit.png">
+                <h3 id="editName">Lucas Wargha</h3>
+                <p>Title: Steak </p>
+                <p>Canvas: Team 1 </p>
+                <p>T: 801-928-3255 </p>
+                <p>Email: war18001@byui.edu </p>
             </div>
             <div id="info">
-                    <img src="assets/edit.png">
                 <h4>Info</h4>
                 <p>Major: Software Engineering </p>
                 <p>Track: Spring/Fall </p>
@@ -74,30 +82,57 @@
             <button onclick="toggleView()"><img id="arrowImg" src="assets/arrow.png"></button>
             <div id="aboutMe">
                 <h4>About Me</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at maximus dui. Curabitur vitae consequat est, nec facilisis ipsum. Maecenas malesuada velit et venenatis dignissim. Fusce volutpat nunc sed nunc dignissim, quis convallis lorem facilisis. Vivamus consectetur leo eu elementum lobortis. Phasellus massa nibh, scelerisque maximus ornare at, faucibus ut dolor. Nunc id neque ante. Phasellus sed purus quis mi scelerisque convallis. Sed dapibus rutrum viverra. Aliquam erat volutpat.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at maximus dui. Curabitur vitae
+                    consequat est, nec facilisis ipsum. Maecenas malesuada velit et venenatis dignissim. Fusce volutpat
+                    nunc sed nunc dignissim, quis convallis lorem facilisis. Vivamus consectetur leo eu elementum
+                    lobortis. Phasellus massa nibh, scelerisque maximus ornare at, faucibus ut dolor. Nunc id neque
+                    ante. Phasellus sed purus quis mi scelerisque convallis. Sed dapibus rutrum viverra. Aliquam erat
+                    volutpat.</p>
             </div>
         </section>
         <section>
+          
             <div>
                 <h3>HR</h3>
                 <!-- <p>Request Time Off</p> -->
                 <!-- <p>Mandatory Meetings</p> -->
-                <p>Work Policies</p>
+                <a href="https://docs.google.com/document/d/1BHM-fW4LRBSb73uvN8jLHU9_v9Q91R5aHdBM0Srj1SA/edit?usp=sharing">Work
+                    Policies</a>
                 <!-- <p>Party Planning Comitee</p> -->
-                <p>Screen-steps / Training</p>
+                <a href="http://byu-idaho.screenstepslive.com/s/18626/m/70207">Screen-steps / Training</a>
                 <!-- <p>Tech-Ops Help</p> -->
-                <p>Employee Handbook</p>
+                <a href="https://docs.google.com/document/d/1G_bc5LFy2V5TrO4riSLdPtsH2JvYIlvtGRxi1JYUjlk/edit?usp=sharing">Employee
+                    Handbook</a>
                 <!-- <p>Steak(carne, mucha carne)</p> -->
                 <!-- <p>File a Complaint</p> -->
-
             </div>
-    
+
             <div>
                 <h3>Settings</h3>
                 <!-- <p>Notifications</p>
                 <p>Report a Bug</p> -->
                 <p>Viewing Mode</p>
             </div>
+            <div  id="editInfo">
+                    <h2>Edit your Information</h2>
+                    <p>Phone Number: </p>
+                    <input id = "phoneInfo" type="tel" placeholder="####-###-####">
+                    <p>E-mail: </p>
+                    <input type="email" placeholder="@byui.edu">
+                    <p>Major: </p>
+                    <input type="text" placeholder="Course of Study">
+                    <p>Track: </p>
+                    <input type="text" list="tracks"  placeholder="Season/Season">
+                    <datalist id ="tracks">
+                                    <option value="Winter/Spring">
+                                    <option value="Spring/Fall">
+                                    <option value="Fall/Winter">
+                                   <option value="Year Round (Overwrite)"></option>
+                    </datalist>
+                    <p >Graduation Date: </p>
+                    <input type="text" placeholder="Year and Semester">  
+                    <button id = "submitInfoChanges">Submit</button>  
+                </div>
         </section>
     </main>
 </body>

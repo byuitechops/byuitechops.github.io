@@ -42,9 +42,8 @@ signupBtn.addEventListener('click', () => {
         "track": document.getElementById('signUpTrack').value
     }
 
-
     try {
-        // Send ot firebase
+        // Send to firebase
         var docData = {
             admin: false,
             name: document.getElementById('signUpName').value,

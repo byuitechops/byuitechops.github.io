@@ -86,7 +86,8 @@ main {
       top: 35%;
       width: 3.5em;
       height: auto;
-      right: 4.0em; }
+      right: 4.0em;
+      cursor: pointer; }
     main section:nth-of-type(1) #toolTipBox {
       visibility: hidden;
       width: 450px;
@@ -126,7 +127,10 @@ main {
         margin-top: 0.3em;
         background-color: #7fc4fd;
         color: white;
-        border-radius: 6px; }
+        border-radius: 6px;
+        cursor: pointer; }
+        main section:nth-of-type(1) #toolTipBox #redeem:hover {
+          opacity: 0.80; }
     main section:nth-of-type(1) #toolTipBox::after {
       content: " ";
       position: absolute;
@@ -150,7 +154,7 @@ main {
       /* Position the tooltip */
       position: absolute;
       top: 200%;
-      right: 15.0em;
+      right: 25%;
       z-index: 1; }
       main section:nth-of-type(1) #usingRedeem h2 {
         margin: auto;
@@ -202,7 +206,53 @@ main {
         margin-top: -12em;
         margin-right: 3em;
         border-radius: 5%;
-        color: white; }
+        color: white;
+        cursor: pointer; }
+        main section:nth-of-type(1) #usingRedeem button:hover {
+          opacity: 0.80; }
+    main section:nth-of-type(1) #confirmRedeem {
+      position: absolute;
+      width: 60em;
+      height: 22em;
+      background-color: #0076c6;
+      opacity: 0.98;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px 0;
+      top: 200%;
+      right: 25%;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      grid-template-rows: 1fr 1fr 1fr; }
+      main section:nth-of-type(1) #confirmRedeem img {
+        width: 100%;
+        grid-row: 1 /span 3;
+        display: block;
+        margin: 0 auto; }
+      main section:nth-of-type(1) #confirmRedeem h2 {
+        grid-row: 1;
+        position: initial;
+        margin: 0; }
+      main section:nth-of-type(1) #confirmRedeem p {
+        grid-row: 2;
+        position: initial;
+        margin: 0;
+        font-size: 4em; }
+      main section:nth-of-type(1) #confirmRedeem button {
+        margin: 1em auto;
+        grid-row: 3;
+        border: none;
+        height: 4em;
+        width: 10em;
+        border-radius: 5%;
+        color: white;
+        cursor: pointer;
+        background-color: #7fc4fd;
+        font-size: 16px; }
+        main section:nth-of-type(1) #confirmRedeem button:hover {
+          opacity: 0.8; }
     main section:nth-of-type(1) #profilePic {
       position: absolute;
       top: 35%;
@@ -271,5 +321,48 @@ main {
         color: black; }
       main section:nth-of-type(3) div p {
         color: #0076c6; }
+    main section:nth-of-type(3) #editInfo {
+      display: inline;
+      visibility: visible;
+      width: 60em;
+      height: 20em;
+      background-color: #0076c6;
+      opacity: 0.98;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px 0;
+      /* Position the tooltip */
+      position: absolute;
+      top: 20%;
+      right: 10%;
+      z-index: 1; }
+      main section:nth-of-type(3) #editInfo h2 {
+        margin-top: .5em;
+        font-size: 30px; }
+      main section:nth-of-type(3) #editInfo p {
+        color: white;
+        margin-top: .1em;
+        margin-left: -22em;
+        font-size: 30px; }
+      main section:nth-of-type(3) #editInfo input {
+        position: absolute;
+        margin-top: -2em;
+        left: 21em; }
+      main section:nth-of-type(3) #editInfo button {
+        position: absolute;
+        margin-top: -10em;
+        left: 40em;
+        background-color: white;
+        border: none;
+        height: 4em;
+        width: 10em;
+        border-radius: 5%;
+        color: white;
+        cursor: pointer;
+        background-color: #7fc4fd;
+        font-size: 16px; }
+        main section:nth-of-type(3) #editInfo button:hover {
+          opacity: 0.8; }
 
 /*# sourceMappingURL=profile.css.map */
