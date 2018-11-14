@@ -1,7 +1,6 @@
 export class Modal {
     Modal() {
         this.repositories = [];
-        this.fetchRepositories();
     }
 
     fetchRepositories(page = 0) {
