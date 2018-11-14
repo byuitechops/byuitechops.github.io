@@ -3,7 +3,7 @@ export class Modal {
         this.repositories = [];
     }
 
-    fetchRepositories(page = 0, callback) {
+    fetchRepositories(page, callback) {
         var xhttp = new XMLHttpRequest();
         let that = this;
         xhttp.onreadystatechange = function () {
@@ -21,6 +21,7 @@ export class Modal {
                 callback(`There was an error getting the list of repositories. Error Code: ${this.status}`);
             }
         };
+        console.log(page);
         xhttp.open('GET', `https://api.github.com/orgs/byuitechops/repos?page=${page}&per_page=100`, true);
         xhttp.send();
     }
