@@ -12,6 +12,8 @@ export class Modal {
                 if (data.length > 0) {
                     this.repositories.concat(JSON.parse(this.responseText));
                     this.fetchRepositories(page++);
+                } else {
+                    console.log(this.fetchRepositories);
                 }
             }
         };
