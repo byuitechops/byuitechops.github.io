@@ -7,9 +7,10 @@ let cardContainer = document.getElementById('repositories');
 
 function createCards() {
     let templateStr = '';
-    let cardTemplate = `<div class="card blue-grey darken-1">
+    modal.repositories.forEach((repository, i) => {
+        let cardTemplate = `<div class="card blue-grey darken-1">
                             <div class="card-content white-text">
-                                <span class="card-title">Card Title</span>
+                                <span class="card-title">${repository.name}</span>
                                 <p>I am a very simple card. I am good at containing small bits of information.
                                 I am convenient because I require little markup to use effectively.</p>
                             </div>
@@ -19,7 +20,7 @@ function createCards() {
                             </div>
                         </div>`;
 
-    modal.repositories.forEach((repository, i) => {
+
         if (i === 0) {
             templateStr += '<div class="row">';
         } else if (i % 4 === 0) {
