@@ -1,5 +1,5 @@
 export class Modal {
-    Modal() {
+    constructor() {
         this.repositories = [];
     }
 
@@ -20,5 +20,3 @@ export class Modal {
         xhttp.send();
     }
 }
-
-// module.exports = Modal;
