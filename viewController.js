@@ -4,6 +4,7 @@ import {
 
 let modal = new Modal();
 let cardContainer = document.getElementById('repositories');
+let spinner = document.getElementById('loader');
 
 function createCards() {
     let templateStr = '';
@@ -32,6 +33,7 @@ function createCards() {
             templateStr += `<div class="col s12 m4 l3">${cardTemplate}</div>`;
         }
     });
+    spinner.style.display = 'none';
     cardContainer.innerHTML += templateStr;
 }
 
