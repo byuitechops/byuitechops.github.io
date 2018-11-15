@@ -30,10 +30,21 @@ export class Modal {
                     that.fetchRepositories(page, callback);
                 } else {
                     console.log('Completed Concatenation of Pagination');
+                    localStorage.setItem('techopsRepos', JSON.stringify(that.repositories));
                     callback();
                 }
             } else if (this.status != 200 && this.status != 0) {
-                callback(`There was an error getting the list of repositories. Error Code: ${this.status}`);
+                try {
+                    that.repositories = localStorage.getItem('techopsRepos');
+                    if (!that.repositories) {
+                        throw 'Localstorage is missing';
+                    }
+                } catch (err) {
+                    console.error(err);
+                    callback(`There was an error getting the list of repositories. Error Code: ${this.status}`);
+                    return;
+                }
+                callback();
             }
         };
         xhttp.send();
