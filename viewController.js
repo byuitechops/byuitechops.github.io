@@ -13,15 +13,15 @@ function setupView() {
 }
 
 function createFilters() {
-    var elems = document.querySelectorAll('select');
-    var instances = M.FormSelect.init(elems);
     let filters = ['Creation Date', 'Last Updated', 'Language', 'Name', 'Open Issues'];
-    let templateStr = '<select class="right-align">';
+    let templateStr = '<select>';
     filters.forEach(filter => {
         templateStr += `<option value="${filter.toLowerCase()}">${filter}</option>`;
     });
     templateStr += '</select><label>Filters</label>';
     filterContainer.innerHTML = templateStr;
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems);
 }
 
 function createCards(repositories = [], count = 8) {
