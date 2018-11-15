@@ -37,7 +37,8 @@ function createCards(repositories = [], count = 8) {
         }
     });
     spinner.style.display = 'none';
-    cardContainer.innerHTML = templateStr;
+
+    cardContainer.innerHTML = templateStr.replace(/null/gi, 'N/A');
 }
 
 document.getElementById('searchBar').addEventListener('keyup', event => {
