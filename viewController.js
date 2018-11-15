@@ -8,7 +8,9 @@ let cardContainer = document.getElementById('repositories');
 function createCards() {
     let templateStr = '';
     modal.repositories.forEach((repository, i) => {
-        let cardTemplate = `<div class="card blue-grey darken-1">
+        if (i < 8) {
+
+            let cardTemplate = `<div class="card blue-grey darken-1">
                             <div class="card-content white-text">
                                 <span class="card-title">${repository.name}</span>
                                 <p>${repository.description}</p>
@@ -22,12 +24,13 @@ function createCards() {
                                 <a href="${repository.html_url}">Repository Link</a>
                             </div>
                         </div>`;
-        if (i === 0) {
-            templateStr += '<div class="row">';
-        } else if (i % 4 === 0) {
-            templateStr += '</div><div class="row">';
+            if (i === 0) {
+                templateStr += '<div class="row">';
+            } else if (i % 4 === 0) {
+                templateStr += '</div><div class="row">';
+            }
+            templateStr += `<div class="col s12 m4 l3">${cardTemplate}</div>`;
         }
-        templateStr += `<div class="col s12 m4 l3">${cardTemplate}</div>`;
     });
     cardContainer.innerHTML += templateStr;
 }
