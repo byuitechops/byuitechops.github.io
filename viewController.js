@@ -37,6 +37,10 @@ function createCards() {
     cardContainer.innerHTML += templateStr;
 }
 
+document.getElementById('searchBar').addEventListener('change', event => {
+    console.log(event);
+});
+
 // Start Here
 modal.fetchRepositories(1, (err) => {
     if (err) {

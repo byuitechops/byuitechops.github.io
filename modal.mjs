@@ -14,6 +14,10 @@ export class Modal {
         });
     }
 
+    searchRepositories(query) {
+        return this.repositories.filter(repository => repository.name.includes(query));
+    }
+
     fetchRepositories(page, callback) {
         var xhttp = new XMLHttpRequest();
         let that = this;
