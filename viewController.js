@@ -4,7 +4,30 @@ import {
 
 let modal = new Modal();
 let cardContainer = document.getElementById('repositories');
+let filterContainer = document.getElementById('filters');
 let spinner = document.getElementById('loader');
+let searchBar = document.getElementById('searchBar');
+let filteredRepos = [];
+
+function setupView() {
+    createFilters();
+    createCards();
+}
+
+function createFilters() {
+    let filters = ['Creation Date', 'Last Updated', 'Language', 'Name', 'Open Issues'];
+    let templateStr = '';
+    filters.forEach(filter => {
+        if (filter === 'Last Updated') {
+            templateStr += `<option selected="selected" value="${filter.toLowerCase()}">${filter}</option>`;
+        } else {
+            templateStr += `<option value="${filter.toLowerCase()}">${filter}</option>`;
+        }
+    });
+    filterContainer.innerHTML = templateStr;
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems);
+}
 
 function createCards(repositories = [], count = 8) {
     let templateStr = '';
@@ -20,7 +43,7 @@ function createCards(repositories = [], count = 8) {
                                 <ul>
                                     <li>Date Created: ${repository.created_at}</li>
                                     <li>Language: ${repository.language}</li>
-                                    <li>Last Update: ${repository.updated_at}</li>
+                                    <li>Last Updated: ${repository.updated_at}</li>
                                     <li>Open Issues: ${repository.open_issues_count}</li>
                                 </ul>
                             </div>
@@ -41,12 +64,23 @@ function createCards(repositories = [], count = 8) {
     cardContainer.innerHTML = templateStr.replace(/null/gi, 'N/A');
 }
 
-document.getElementById('searchBar').addEventListener('keyup', event => {
+searchBar.addEventListener('keyup', event => {
     if (event.srcElement.value.length > 2) {
         spinner.style.display = 'block';
-        let filteredRepos = modal.findRepositories(event.srcElement.value);
+        filteredRepos = modal.findRepositories(event.srcElement.value);
         createCards(filteredRepos, filteredRepos.length);
     } else if (event.srcElement.value.length === 0) {
+        filteredRepos = [];
+        createCards();
+    }
+});
+
+filterContainer.addEventListener('change', event => {
+    modal.sortRepositories(event.srcElement.value);
+    if (filteredRepos.length > 0) {
+        filteredRepos = modal.findRepositories(searchBar.value);
+        createCards(filteredRepos, filteredRepos.length);
+    } else {
         createCards();
     }
 });
@@ -59,5 +93,5 @@ modal.fetchRepositories(1, (err) => {
     }
     console.log('Repositories successfully retrieved.');
     modal.sortRepositories();
-    createCards();
+    setupView();
 });
