@@ -37,7 +37,7 @@ function createCards() {
     cardContainer.innerHTML += templateStr;
 }
 
-document.getElementById('searchBar').addEventListener('change', event => {
+document.getElementById('searchBar').addEventListener('keyup', event => {
     console.log(event);
 });
 
