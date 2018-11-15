@@ -43,11 +43,14 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
     if (window.location.href.includes("index.html") || window.location.href.includes("signup.html") || window.location.pathname == "/") {
       window.location.replace("home.html");
     }
+    if (window.location.href.includes("store.html")) {
+      document.getElementById('name').innerText = `${userName}'s Cart`;
+    }
     getUser();
     //if user isn't logged in, sends back to sign in page
   } else {
     userName = null;
-    if (!window.location.href.includes("index.html") && !window.location.href.includes("signup.html")) {
+    if (!window.location.href.includes("index.html") && !window.location.href.includes("signup.html") && !window.location.href.includes("store.html")) {
       window.location.replace('index.html');
     }
   }

@@ -8,16 +8,23 @@ checkBtn.addEventListener('click', () => {
   var cart = document.getElementById('cart');
   for (var i = 1; i < cart.childElementCount; i++) {
     itemsDiv.insertAdjacentElement("beforeend", cart.children[i].children[0].cloneNode(true));
-    itemsDiv.insertAdjacentHTML("beforeend", `<span>${cart.children[i].children[1].childNodes[0].textContent}</span>`);
-
+    itemsDiv.insertAdjacentHTML("beforeend", `<span>${cart.children[i].children[1].childNodes[0].textContent.trim()}</span>`);
+  }
+  document.getElementById('total').innerText = `Total: ${document.getElementById('cartTotal').innerText}`;
+  if (document.getElementById('total').innerText.slice(8) <= 0) {
+    document.getElementById('confirmBtn').disabled = true;
+  } else {
+    document.getElementById('confirmBtn').disabled = false;
   }
 });
 checkClose.onclick = function () {
   checkModal.style.display = "none";
+  document.getElementById('items').innerHTML = "";
 }
 window.onclick = function (event) {
   if (event.target == checkModal) {
     checkModal.style.display = "none";
+    document.getElementById('items').innerHTML = "";
   }
 }
 
@@ -28,6 +35,30 @@ var confirmClose = document.getElementById("confirmClose");
 confirmBtn.addEventListener('click', () => {
   confirmModal.style.display = "block";
   checkModal.style.display = "none";
+
+  var items = document.getElementById('items').children;
+  for (var i = 0; i < items.length; i++) {
+    if (i%2 == 0) {
+      var item = items[i].innerText;
+      db.collection('store').doc('inventory').collection('items').doc(item).get().then(function(doc) {
+        var count = doc.data().count;
+        console.log(count);
+        db.collection('store').doc('inventory').collection('items').doc(item)
+        .update({
+          count: `${count -= 1}`
+        })
+      });
+      // var count;
+      // if (array[items[i]]) {
+      //   console.log(array[items[i]].count);
+      //   count = array[items[i]].count += 1;
+      // } else {
+      //   array[items[i].innerText] = JSON.parse(`{"count": "${count}"}`);
+      //   count = 1;
+      // }
+      // console.log(count);
+    }
+  }
 });
 confirmClose.onclick = function () {
   confirmModal.style.display = "none";
@@ -68,6 +99,10 @@ db.collection("store").doc("inventory").collection("items").get().then(function 
 function addToCart(item, price) {
   var count = document.getElementById(`${item.replace(/ /g, '')}count`).innerText.replace(/Count: /g, "");
   document.getElementById(`${item.replace(/ /g, '')}count`).innerText = `Count: ${--count}`;
+  var cartTotal = document.getElementById('cartTotal');
+  var total = cartTotal.innerText.slice(2);
+  var newTotal = (Number(total) + Number(price)).toFixed(2);
+  cartTotal.innerText = `$${newTotal}`;
   if (document.getElementById(`${item.replace(/ /g, '')}count`).innerText.replace(/Count: /g, "") <= 0) {
     document.getElementById(`${item.replace(/ /g, '')}btn`).disabled = true;
     document.getElementById(`${item.replace(/ /g, '')}btn`).classList.add("disabled");
@@ -75,13 +110,19 @@ function addToCart(item, price) {
   var html = `<p>
     <span>${item}</span>
     <span>${price}
-    <span onclick="removeItem(event, '${item}')" class="remove">&times;</span></span>
+    <span onclick="removeItem(event, '${item}', '${price}')" class="remove">&times;</span></span>
     </p>`;
   document.getElementById('cart').insertAdjacentHTML('beforeend', html);
 }
 
-function removeItem(e, item) {  
+function removeItem(e, item, price) {
   e.preventDefault;
+
+  var cartTotal = document.getElementById('cartTotal');
+  var total = cartTotal.innerText.slice(2);
+  var newTotal = (Number(total) - Number(price)).toFixed(2);
+  cartTotal.innerText = `$${newTotal}`;
+
   var count = document.getElementById(`${item.replace(/ /g, '')}count`).innerText.replace(/Count: /g, "");
   document.getElementById(`${item.replace(/ /g, '')}count`).innerText = `Count: ${++count}`;
   if (document.getElementById(`${item.replace(/ /g, '')}count`).innerText.replace(/Count: /g, "") > 0) {
@@ -89,7 +130,7 @@ function removeItem(e, item) {
     document.getElementById(`${item.replace(/ /g, '')}btn`).classList.remove("disabled");
   }
   var cart = document.getElementById('cart');
-  if(e.target.matches('.remove')){
+  if (e.target.matches('.remove')) {
     cart.removeChild(e.target.parentNode.parentNode);
   }
 }
