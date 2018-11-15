@@ -15,7 +15,7 @@ export class Modal {
     }
 
     findRepositories(query) {
-        return this.repositories.filter(repository => repository.name.includes(query));
+        return this.repositories.filter(repository => repository.name.toLowerCase().includes(query.toLowerCase()));
     }
 
     fetchRepositories(page, callback) {
