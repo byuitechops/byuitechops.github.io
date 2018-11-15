@@ -7,8 +7,8 @@ export class Modal {
         this.repositories = this.repositories.sort((repo1, repo2) => {
             if (!option) {
                 // Sort by last update date
-                let date1 = Date(repo1.updated_at);
-                let date2 = Date(repo2.updated_at);
+                let date1 = new Date(repo1.updated_at);
+                let date2 = new Date(repo2.updated_at);
                 return date1.getTime() - date2.getTime();
             }
         });
