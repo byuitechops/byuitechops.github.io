@@ -4,7 +4,23 @@ import {
 
 let modal = new Modal();
 let cardContainer = document.getElementById('repositories');
+let filterContainer = document.getElementById('filters');
 let spinner = document.getElementById('loader');
+
+function setupView() {
+    createFilters();
+    createCards();
+}
+
+function createFilters() {
+    let filters = ['Creation Date', 'Last Updated', 'Language', 'Name', 'Open Issues'];
+    let templateStr = '<select class="right-align">';
+    filters.forEach(filter => {
+        templateStr += `<option value="${filter.toLowerCase}">${filter}</option>`;
+    });
+    templateStr += '</select>';
+    filterContainer.innerHTML = templateStr;
+}
 
 function createCards(repositories = [], count = 8) {
     let templateStr = '';
@@ -20,7 +36,7 @@ function createCards(repositories = [], count = 8) {
                                 <ul>
                                     <li>Date Created: ${repository.created_at}</li>
                                     <li>Language: ${repository.language}</li>
-                                    <li>Last Update: ${repository.updated_at}</li>
+                                    <li>Last Updated: ${repository.updated_at}</li>
                                     <li>Open Issues: ${repository.open_issues_count}</li>
                                 </ul>
                             </div>
@@ -59,5 +75,5 @@ modal.fetchRepositories(1, (err) => {
     }
     console.log('Repositories successfully retrieved.');
     modal.sortRepositories();
-    createCards();
+    setupView();
 });
