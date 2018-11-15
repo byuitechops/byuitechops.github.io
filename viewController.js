@@ -13,7 +13,7 @@ function setupView() {
 }
 
 function createFilters() {
-    let filters = ['Creation Date', 'Last Updated', 'Language', 'Name', 'Open Issues'];
+    let filters = ['', 'Creation Date', 'Last Updated', 'Language', 'Name', 'Open Issues'];
     let templateStr = '<select>';
     filters.forEach(filter => {
         templateStr += `<option value="${filter.toLowerCase()}">${filter}</option>`;
