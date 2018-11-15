@@ -14,7 +14,7 @@ function setupView() {
 
 function createFilters() {
     let filters = ['Creation Date', 'Last Updated', 'Language', 'Name', 'Open Issues'];
-    let templateStr = '<select>';
+    let templateStr = '';
     filters.forEach(filter => {
         if (filter === 'Last Updated') {
             templateStr += `<option selected="selected" value="${filter.toLowerCase()}">${filter}</option>`;
@@ -22,7 +22,6 @@ function createFilters() {
             templateStr += `<option value="${filter.toLowerCase()}">${filter}</option>`;
         }
     });
-    templateStr += '</select><label>Filters</label>';
     filterContainer.innerHTML = templateStr;
     var elems = document.querySelectorAll('select');
     var instances = M.FormSelect.init(elems);
@@ -71,6 +70,11 @@ document.getElementById('searchBar').addEventListener('keyup', event => {
     } else if (event.srcElement.value.length === 0) {
         createCards();
     }
+});
+
+filterContainer.addEventListener('change', event => {
+    modal.sortRepositories(event.srcElement.value);
+    createCards();
 });
 
 // Start Here
