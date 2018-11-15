@@ -14,7 +14,7 @@ function setupView() {
 
 function createFilters() {
     var elems = document.querySelectorAll('select');
-    var instances = M.FormSelect.init(elems, options);
+    var instances = M.FormSelect.init(elems);
     let filters = ['Creation Date', 'Last Updated', 'Language', 'Name', 'Open Issues'];
     let templateStr = '<select class="right-align">';
     filters.forEach(filter => {
