@@ -14,7 +14,7 @@ export class Modal {
         });
     }
 
-    searchRepositories(query) {
+    findRepositories(query) {
         return this.repositories.filter(repository => repository.name.includes(query));
     }
 

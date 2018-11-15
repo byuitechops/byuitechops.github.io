@@ -6,10 +6,13 @@ let modal = new Modal();
 let cardContainer = document.getElementById('repositories');
 let spinner = document.getElementById('loader');
 
-function createCards() {
+function createCards(repositories = [], count = 8) {
     let templateStr = '';
-    modal.repositories.forEach((repository, i) => {
-        if (i < 8) {
+    if (repositories.length === 0) {
+        repositories = modal.repositories;
+    }
+    repositories.forEach((repository, i) => {
+        if (i < count) {
             let cardTemplate = `<div class="card medium light-blue darken-4">
                             <div class="card-content white-text">
                                 <span class="card-title">${repository.name}</span>
@@ -38,7 +41,13 @@ function createCards() {
 }
 
 document.getElementById('searchBar').addEventListener('keyup', event => {
-    console.log(event);
+    if (event.srcElement.value.length > 3) {
+        spinner.style.display = 'block';
+        let filteredRepos = modal.findRepositories(event.srcElement.value);
+        createCards(filteredRepos, filteredRepos.length);
+    } else if (event.srcElement.value.length === 0) {
+        createCards();
+    }
 });
 
 // Start Here
