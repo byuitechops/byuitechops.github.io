@@ -15,6 +15,7 @@ function createCards() {
                                 <span class="card-title">${repository.name}</span>
                                 <p>${repository.description}</p>
                                 <ul>
+                                    <li>Date Created: ${repository.created_at}</li>
                                     <li>Language: ${repository.language}</li>
                                     <li>Last Update: ${repository.updated_at}</li>
                                     <li>Open Issues: ${repository.open_issues_count}</li>
@@ -42,5 +43,6 @@ modal.fetchRepositories(1, (err) => {
         return;
     }
     console.log('Repositories successfully retrieved.');
+    modal.sortRepositories();
     createCards();
 });

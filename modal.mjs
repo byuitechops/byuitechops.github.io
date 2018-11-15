@@ -3,6 +3,17 @@ export class Modal {
         this.repositories = [];
     }
 
+    sortRepositories(option = '') {
+        this.repositories = this.repositories.sort((repo1, repo2) => {
+            if (!option) {
+                // Sort by last update date
+                let date1 = Date(repo1.updated_at);
+                let date2 = Date(repo2.updated_at);
+                return date1.getTime() - date2.getTime();
+            }
+        });
+    }
+
     fetchRepositories(page, callback) {
         var xhttp = new XMLHttpRequest();
         let that = this;
@@ -14,7 +25,7 @@ export class Modal {
                     that.repositories = that.repositories.concat(data);
                     that.fetchRepositories(page, callback);
                 } else {
-                    console.log('Completed Concatination of Pagination');
+                    console.log('Completed Concatenation of Pagination');
                     callback();
                 }
             } else if (this.status != 200 && this.status != 0) {
