@@ -18,8 +18,9 @@ function createFilters() {
     filters.forEach(filter => {
         if (filter === 'Last Updated') {
             templateStr += `<option selected="selected" value="${filter.toLowerCase()}">${filter}</option>`;
+        } else {
+            templateStr += `<option value="${filter.toLowerCase()}">${filter}</option>`;
         }
-        templateStr += `<option value="${filter.toLowerCase()}">${filter}</option>`;
     });
     templateStr += '</select><label>Filters</label>';
     filterContainer.innerHTML = templateStr;
