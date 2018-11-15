@@ -6,6 +6,7 @@ let modal = new Modal();
 let cardContainer = document.getElementById('repositories');
 let filterContainer = document.getElementById('filters');
 let spinner = document.getElementById('loader');
+let filteredRepos = [];
 
 function setupView() {
     createFilters();
@@ -65,16 +66,21 @@ function createCards(repositories = [], count = 8) {
 document.getElementById('searchBar').addEventListener('keyup', event => {
     if (event.srcElement.value.length > 2) {
         spinner.style.display = 'block';
-        let filteredRepos = modal.findRepositories(event.srcElement.value);
+        filteredRepos = modal.findRepositories(event.srcElement.value);
         createCards(filteredRepos, filteredRepos.length);
     } else if (event.srcElement.value.length === 0) {
+        filteredRepos = [];
         createCards();
     }
 });
 
 filterContainer.addEventListener('change', event => {
     modal.sortRepositories(event.srcElement.value);
-    createCards();
+    if (filteredRepos.length > 0) {
+        createCards(filteredRepos, filteredRepos.length);
+    } else {
+        createCards();
+    }
 });
 
 // Start Here
