@@ -9,7 +9,7 @@ export class Modal {
                 // Sort by last update date
                 let date1 = new Date(repo1.updated_at);
                 let date2 = new Date(repo2.updated_at);
-                return date1.getTime() - date2.getTime();
+                return date2.getTime() - date1.getTime();
             }
         });
     }
