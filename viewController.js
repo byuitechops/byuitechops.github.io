@@ -41,7 +41,7 @@ function createCards(repositories = [], count = 8) {
 }
 
 document.getElementById('searchBar').addEventListener('keyup', event => {
-    if (event.srcElement.value.length > 3) {
+    if (event.srcElement.value.length > 2) {
         spinner.style.display = 'block';
         let filteredRepos = modal.findRepositories(event.srcElement.value);
         createCards(filteredRepos, filteredRepos.length);
