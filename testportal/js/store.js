@@ -6,10 +6,10 @@ checkBtn.addEventListener('click', () => {
   checkModal.style.display = "block";
   var itemsDiv = document.getElementById('items');
   var cart = document.getElementById('cart');
-  console.log(cart.children[1].children[1].childNodes[0]);
   for (var i = 1; i < cart.childElementCount; i++) {
     itemsDiv.insertAdjacentElement("beforeend", cart.children[i].children[0].cloneNode(true));
-    itemsDiv.insertAdjacentHTML("beforeend", `<span>${cart.children[i].children[1].childNodes[0]}</span>`);
+    itemsDiv.insertAdjacentHTML("beforeend", `<span>${cart.children[i].children[1].childNodes[0].textContent}</span>`);
+
   }
 });
 checkClose.onclick = function () {
