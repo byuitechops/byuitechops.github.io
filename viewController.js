@@ -4,12 +4,16 @@ import {
 
 let modal = new Modal();
 let cardContainer = document.getElementById('repositories');
+let spinner = document.getElementById('loader');
 
-function createCards() {
+function createCards(repositories = [], count = 8) {
     let templateStr = '';
-    modal.repositories.forEach((repository, i) => {
-        if (i < 8) {
-            let cardTemplate = `<div class="card medium blue-grey darken-1">
+    if (repositories.length === 0) {
+        repositories = modal.repositories;
+    }
+    repositories.forEach((repository, i) => {
+        if (i < count) {
+            let cardTemplate = `<div class="card medium light-blue darken-4">
                             <div class="card-content white-text">
                                 <span class="card-title">${repository.name}</span>
                                 <p>${repository.description}</p>
@@ -21,7 +25,7 @@ function createCards() {
                                 </ul>
                             </div>
                             <div class="card-action">
-                                <a href="${repository.html_url}">Repository Link</a>
+                                <a class="orange-text darken-1" href="${repository.html_url}">Repository Link</a>
                             </div>
                         </div>`;
             if (i === 0) {
@@ -32,8 +36,20 @@ function createCards() {
             templateStr += `<div class="col s12 m4 l3">${cardTemplate}</div>`;
         }
     });
-    cardContainer.innerHTML += templateStr;
+    spinner.style.display = 'none';
+
+    cardContainer.innerHTML = templateStr.replace(/null/gi, 'N/A');
 }
+
+document.getElementById('searchBar').addEventListener('keyup', event => {
+    if (event.srcElement.value.length > 2) {
+        spinner.style.display = 'block';
+        let filteredRepos = modal.findRepositories(event.srcElement.value);
+        createCards(filteredRepos, filteredRepos.length);
+    } else if (event.srcElement.value.length === 0) {
+        createCards();
+    }
+});
 
 // Start Here
 modal.fetchRepositories(1, (err) => {
