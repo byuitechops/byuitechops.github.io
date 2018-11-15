@@ -13,12 +13,14 @@ function setupView() {
 }
 
 function createFilters() {
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems, options);
     let filters = ['Creation Date', 'Last Updated', 'Language', 'Name', 'Open Issues'];
     let templateStr = '<select class="right-align">';
     filters.forEach(filter => {
-        templateStr += `<option value="${filter.toLowerCase}">${filter}</option>`;
+        templateStr += `<option value="${filter.toLowerCase()}">${filter}</option>`;
     });
-    templateStr += '</select>';
+    templateStr += '</select><label>Filters</label>';
     filterContainer.innerHTML = templateStr;
 }
 
