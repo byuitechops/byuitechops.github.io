@@ -266,6 +266,10 @@ main {
     grid-column: 1 /span 1;
     grid-row: 2;
     height: 100%; }
+    main section:nth-of-type(2) #editContact {
+      cursor: pointer; }
+      main section:nth-of-type(2) #editContact:hover {
+        opacity: .5; }
     main section:nth-of-type(2) div {
       position: relative;
       background-color: #f7f7f7;
@@ -281,7 +285,10 @@ main {
       width: 100%;
       border: none; }
       main section:nth-of-type(2) button img {
-        height: 6%; }
+        height: 6%;
+        cursor: pointer; }
+        main section:nth-of-type(2) button img:hover {
+          opacity: .7; }
     main section:nth-of-type(2) #info {
       padding: 0 1.0em;
       height: 0;
@@ -323,7 +330,7 @@ main {
         color: #0076c6; }
     main section:nth-of-type(3) #editInfo {
       display: inline;
-      visibility: visible;
+      visibility: hidden;
       width: 60em;
       height: 20em;
       background-color: #0076c6;

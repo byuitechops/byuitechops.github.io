@@ -117,8 +117,13 @@ main {
             height: 25%;
             font-size: 0.60rem;
             cursor: pointer; }
-          main section#content section#left div div button:hover {
-            opacity: 0.75; }
+            main section#content section#left div div button:disabled {
+              background-color: grey;
+              cursor: initial; }
+              main section#content section#left div div button:disabled:hover {
+                opacity: 1; }
+            main section#content section#left div div button:hover {
+              opacity: 0.75; }
     main section#content section#right {
       grid-column: 2; }
       main section#content section#right div {

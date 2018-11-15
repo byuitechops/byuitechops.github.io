@@ -4,6 +4,13 @@ var checkBtn = document.getElementById("checkoutBtn");
 var checkClose = document.getElementById("checkoutClose");
 checkBtn.addEventListener('click', () => {
   checkModal.style.display = "block";
+  var itemsDiv = document.getElementById('items');
+  var cart = document.getElementById('cart');
+  console.log(cart.children[1].children[1].childNodes[0]);
+  for (var i = 1; i < cart.childElementCount; i++) {
+    itemsDiv.insertAdjacentElement("beforeend", cart.children[i].children[0].cloneNode(true));
+    itemsDiv.insertAdjacentHTML("beforeend", `<span>${cart.children[i].children[1].childNodes[0]}</span>`);
+  }
 });
 checkClose.onclick = function () {
   checkModal.style.display = "none";
@@ -63,22 +70,26 @@ function addToCart(item, price) {
   document.getElementById(`${item.replace(/ /g, '')}count`).innerText = `Count: ${--count}`;
   if (document.getElementById(`${item.replace(/ /g, '')}count`).innerText.replace(/Count: /g, "") <= 0) {
     document.getElementById(`${item.replace(/ /g, '')}btn`).disabled = true;
-    document.getElementById(`${item.replace(/ /g, '')}btn`).style.backgroundColor = "grey";
-    document.getElementById(`${item.replace(/ /g, '')}btn`).style.opacity = "1";
+    document.getElementById(`${item.replace(/ /g, '')}btn`).classList.add("disabled");
   }
   var html = `<p>
     <span>${item}</span>
     <span>${price}
-    <span onclick="removeItem()">&times;</span></span>
+    <span onclick="removeItem(event, '${item}')" class="remove">&times;</span></span>
     </p>`;
   document.getElementById('cart').insertAdjacentHTML('beforeend', html);
 }
 
-function removeItem() {
-  console.log(this);
-  // this.parentElement.parentElement.removeItem();
-}
-
-function checkOut() {
-
+function removeItem(e, item) {  
+  e.preventDefault;
+  var count = document.getElementById(`${item.replace(/ /g, '')}count`).innerText.replace(/Count: /g, "");
+  document.getElementById(`${item.replace(/ /g, '')}count`).innerText = `Count: ${++count}`;
+  if (document.getElementById(`${item.replace(/ /g, '')}count`).innerText.replace(/Count: /g, "") > 0) {
+    document.getElementById(`${item.replace(/ /g, '')}btn`).disabled = false;
+    document.getElementById(`${item.replace(/ /g, '')}btn`).classList.remove("disabled");
+  }
+  var cart = document.getElementById('cart');
+  if(e.target.matches('.remove')){
+    cart.removeChild(e.target.parentNode.parentNode);
+  }
 }

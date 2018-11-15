@@ -88,10 +88,18 @@ main {
                         height: 25%;
                         font-size: 0.60rem;
                         cursor: pointer;
-                    }
 
-                    button:hover {
-                        opacity: 0.75
+                        &:disabled {
+                            background-color: grey;
+                            cursor: initial;
+                            &:hover {
+                                opacity: 1;
+                            }
+                        }
+
+                        &:hover {
+                            opacity: 0.75
+                        }
                     }
                 }
             }

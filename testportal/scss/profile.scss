@@ -275,6 +275,12 @@ main {
         grid-row: 2;
         height: 100%;
 
+        #editContact {
+            cursor: pointer;
+            &:hover {
+                opacity: .5;
+            }
+        }
 
         div {
             position: relative;
@@ -297,6 +303,10 @@ main {
 
             img {
                 height: 6%;
+                cursor: pointer;
+                &:hover {
+                    opacity: .7;
+                }
             }
         }
 
@@ -356,7 +366,7 @@ main {
         }
         #editInfo{
             display: inline;
-            visibility: visible;
+            visibility: hidden;
             width: 60em;
             height: 20em;
             background-color: $primary;
