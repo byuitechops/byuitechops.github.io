@@ -35,7 +35,7 @@ export class Modal {
                 }
             } else if (this.status != 200 && this.status != 0) {
                 try {
-                    that.repositories = localStorage.getItem('techopsRepos');
+                    that.repositories = JSON.parse(localStorage.getItem('techopsRepos'));
                     if (!that.repositories) {
                         throw 'Localstorage is missing';
                     }
