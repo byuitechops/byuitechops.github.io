@@ -9,7 +9,7 @@ function createCards() {
     let templateStr = '';
     modal.repositories.forEach((repository, i) => {
         if (i < 8) {
-            let cardTemplate = `<div class="card medium blue darken-1">
+            let cardTemplate = `<div class="card medium light-blue darken-4">
                             <div class="card-content white-text">
                                 <span class="card-title">${repository.name}</span>
                                 <p>${repository.description}</p>
