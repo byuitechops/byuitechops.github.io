@@ -36,7 +36,7 @@
 
             <div class="tooltip"><img id="clock" src="assets/clockWhite.png">
                 <span style="visibility: hidden;" class="toolTipBox" id="toolTipBox">
-                    <p>Accumulated Time</p>
+                    <p>Accumulated Time (hrs)</p>
                     <div id="box"></div>
                     <p id="redeemTime">##:##</p><button id="redeem">REDEEM</button>
                 </span>
@@ -44,7 +44,7 @@
             <div style="visibility: hidden;" id="usingRedeem">
                 <h2>Redeem Confirmation</h2>
                 <p>Accumulated Time</p>
-                <h1>00:00</h1>
+                <h1 id="accumulated">00:00</h1>
                 <p id="howMuch">How much time would you like to redeem?</p>
                 <div></div>
                 <h1 id="timeDesired">00:00</h1>
@@ -65,29 +65,24 @@
         <section>
             <div>
                 <img id="editContact" src="assets/edit.png">
-                <h3 id="dbName">Lucas Wargha</h3>
-                <p id="dbTitle">Title: Steak </p>
-                <p id="dbTeam">Canvas: Team 1 </p>
-                <p id="dbPhone">T: 801-928-3255 </p>
-                <p id="dbEmail">Email: war18001@byui.edu </p>
+                <h3 id="dbName"></h3>
+                <p id="dbTitle"></p>
+                <p id="dbTeam"></p>
+                <p id="dbPhone"></p>
+                <p id="dbEmail"></p>
             </div>
             <div id="info">
                 <h4>Info</h4>
-                <p id="dbMajor">Major: Software Engineering </p>
-                <p id="dbTrack">Track: Spring/Fall </p>
-                <p id="dbGradDate">Graduation: Winter 2021 </p>
-                <p id="dbTyping">Type Speed: 60wpm</p>
+                <p id="dbMajor"></p>
+                <p id="dbTrack"></p>
+                <p id="dbGradDate"></p>
+                <p id="dbTyping"></p>
 
             </div>
             <button onclick="toggleView()"><img id="arrowImg" src="assets/arrow.png"></button>
             <div id="aboutMe">
                 <h4>About Me</h4>
-                <p id="dbAboutMe">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at maximus dui. Curabitur vitae
-                    consequat est, nec facilisis ipsum. Maecenas malesuada velit et venenatis dignissim. Fusce volutpat
-                    nunc sed nunc dignissim, quis convallis lorem facilisis. Vivamus consectetur leo eu elementum
-                    lobortis. Phasellus massa nibh, scelerisque maximus ornare at, faucibus ut dolor. Nunc id neque
-                    ante. Phasellus sed purus quis mi scelerisque convallis. Sed dapibus rutrum viverra. Aliquam erat
-                    volutpat.</p>
+                <p id="dbAboutMe"></p>
             </div>
         </section>
         <section>

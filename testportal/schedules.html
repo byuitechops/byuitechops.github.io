@@ -28,16 +28,18 @@
     </header>
     <main>
         <h1>Schedules</h1>
-        <section>
-            <select>
-                <option value="canvas1">Canvas 1</option>
-                <option value="canvas2">Canvas 2</option>
+        <section id="admin">
+            <select id="selectTeam">
+                <option value="">Select Team</option>
+                <option id="canvas1" value="canvas1">Canvas 1</option>
+                <option id="canvas2" value="canvas2">Canvas 2</option>
             </select>
             <a target="_blank" href="https://docs.google.com/spreadsheets/d/1P8rKKlO4BxLonT840yB7SeO59bjnmLnjvYNiurNaywg"><img src="assets/newTab.png"></a>
-            <div class="container"><iframe src="https://docs.google.com/spreadsheets/d/1P8rKKlO4BxLonT840yB7SeO59bjnmLnjvYNiurNaywg/?widget=true"></iframe></div>
+            <div id = "teams" class="container"><iframe id="spreadsheet" src="https://docs.google.com/spreadsheets/d/1P8rKKlO4BxLonT840yB7SeO59bjnmLnjvYNiurNaywg/?widget=true"></iframe></div>
         </section>
     </main>
 </body>
 <script src="js/main.js"></script>
+<script src="js/schedules.js"></script>
 
 </html>

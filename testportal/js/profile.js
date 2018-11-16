@@ -69,14 +69,6 @@ okBtn.addEventListener('click', () => {
 var editBtn = document.getElementById("editContact");
 var editDiv = document.getElementById("editInfo");
 editBtn.addEventListener("click", () => {
-    // db.collection("users").doc(userId).get()
-    // .then(function (doc) {
-    //     const myData = doc.data();
-    //     if (myData.admin){
-    //         editDiv.style.height = "30em";
-            
-    //     }
-    // })
     editDiv.style.visibility = "visible";
     populateInfoEdit();
 })
@@ -89,7 +81,7 @@ var submitChanges = document.getElementById("submitInfoChanges");
 submitChanges.addEventListener("click", () => {
 
     db.collection("users").doc(userId).update({
-            "name": document.getElementById("editName").value,
+            "nameDisplay": document.getElementById("editName").value,
             "info.phoneNumber": document.getElementById("editPhone").value,
             "info.major": document.getElementById("editMajor").value,
             "info.track": document.getElementById("editTrack").value,
@@ -99,22 +91,14 @@ submitChanges.addEventListener("click", () => {
         })
         .then(function () {
             console.log("Document successfully written!");
-            var user = firebase.auth().currentUser;
-            user.updateProfile({
-                displayName: document.getElementById("editName").value,
-              }).then(function() {
-                // Update successful.
-                console.log("Username updated");
                 window.location.reload();
               }).catch(function(error) {
                 // An error happened.
               });
+              editDiv.style.visibility = "hidden";
         })
-        .catch(function (error) {
-            console.error("Error writing document: ", error);
-        })
-    editDiv.style.visibility = "hidden";
-})
+       
+   
 
 
 var cancelChanges = document.getElementById("cancelInfoChanges");
@@ -126,7 +110,7 @@ cancelChanges.addEventListener("click", () => {
 function populateInfoEdit() {
     db.collection("users").doc(userId).get()
         .then(function (doc) {
-            document.getElementById("editName").setAttribute("value", `${doc.data().name}`);
+            document.getElementById("editName").setAttribute("value", `${doc.data().nameDisplay}`);
             document.getElementById("editPhone").setAttribute("value", `${doc.data().info.phoneNumber}`);
             document.getElementById("editMajor").setAttribute("value", `${doc.data().info.major}`);
             document.getElementById("editTrack").setAttribute("value", `${doc.data().info.track}`);
@@ -140,7 +124,7 @@ function loadPage() {
     db.collection("users").doc(userId).get()
         .then(function (doc) {
             const myData = doc.data();
-            document.getElementById("dbName").innerText = myData.name;
+            document.getElementById("dbName").innerText = myData.nameDisplay;
             document.getElementById("dbTitle").innerText = "Title: " + myData.title;
             document.getElementById("dbTeam").innerText = "Team: " + myData.team;
             document.getElementById("dbPhone").innerText = "T: " + myData.info.phoneNumber;
@@ -150,5 +134,12 @@ function loadPage() {
             document.getElementById("dbGradDate").innerText = "Graduation Date: " + myData.info.graduation;
             document.getElementById("dbTyping").innerText = "Typing Speed: " + myData.info.speed;
             document.getElementById("dbAboutMe").innerText = myData.info.aboutMe;
+            //fills in accumulated time
+            document.getElementById("accumulated").innerText = myData.time.accumulatedTime;
+            document.getElementById("redeemTime").innerText = myData.time.accumulatedTime;
         })
+}
+
+function redeemTime(){
+
 }
