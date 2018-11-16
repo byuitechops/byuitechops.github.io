@@ -65,11 +65,20 @@ okBtn.addEventListener('click', () => {
 })
 
 
-//allow the user to edit his/her information
+//allows the user to edit his/her information
 var editBtn = document.getElementById("editContact");
 var editDiv = document.getElementById("editInfo");
 editBtn.addEventListener("click", () => {
+    // db.collection("users").doc(userId).get()
+    // .then(function (doc) {
+    //     const myData = doc.data();
+    //     if (myData.admin){
+    //         editDiv.style.height = "30em";
+            
+    //     }
+    // })
     editDiv.style.visibility = "visible";
+    populateInfoEdit();
 })
 
 //sends to firebase info changes made by the user
@@ -78,28 +87,68 @@ editBtn.addEventListener("click", () => {
 var user = firebase.auth().currentUser;
 var submitChanges = document.getElementById("submitInfoChanges");
 submitChanges.addEventListener("click", () => {
-    // user.updateProfile({
-    //     "test": document.getElementById("phoneInfo").value
-    // }).then(function () {s
-    //     console.log("Written");
-    // }).catch(function (error) {
-    //     // An error happened.
-    // });
-    // Add a new document in collection "cities"
+
     db.collection("users").doc(userId).update({
-            "info.phoneNumber":  document.getElementById("phoneInfo").value,
-            "info.major":  document.getElementById("phoneInfo").value
+            "name": document.getElementById("editName").value,
+            "info.phoneNumber": document.getElementById("editPhone").value,
+            "info.major": document.getElementById("editMajor").value,
+            "info.track": document.getElementById("editTrack").value,
+            "info.graduation": document.getElementById("editGradDate").value,
+            "info.aboutMe": document.getElementById("editAboutMe").value
+            
         })
         .then(function () {
             console.log("Document successfully written!");
+            var user = firebase.auth().currentUser;
+            user.updateProfile({
+                displayName: document.getElementById("editName").value,
+              }).then(function() {
+                // Update successful.
+                console.log("Username updated");
+                window.location.reload();
+              }).catch(function(error) {
+                // An error happened.
+              });
         })
         .catch(function (error) {
             console.error("Error writing document: ", error);
-        });
+        })
     editDiv.style.visibility = "hidden";
 })
+
 
 var cancelChanges = document.getElementById("cancelInfoChanges");
 cancelChanges.addEventListener("click", () => {
     editDiv.style.visibility = "hidden";
 })
+
+//populates de input boxes with what we already have from the user
+function populateInfoEdit() {
+    db.collection("users").doc(userId).get()
+        .then(function (doc) {
+            document.getElementById("editName").setAttribute("value", `${doc.data().name}`);
+            document.getElementById("editPhone").setAttribute("value", `${doc.data().info.phoneNumber}`);
+            document.getElementById("editMajor").setAttribute("value", `${doc.data().info.major}`);
+            document.getElementById("editTrack").setAttribute("value", `${doc.data().info.track}`);
+            document.getElementById("editGradDate").setAttribute("value", `${doc.data().info.graduation}`);
+            document.getElementById("editAboutMe").innerText = doc.data().info.aboutMe;
+        })
+}
+
+//Loads the page with all user's information
+function loadPage() {
+    db.collection("users").doc(userId).get()
+        .then(function (doc) {
+            const myData = doc.data();
+            document.getElementById("dbName").innerText = myData.name;
+            document.getElementById("dbTitle").innerText = "Title: " + myData.title;
+            document.getElementById("dbTeam").innerText = "Team: " + myData.team;
+            document.getElementById("dbPhone").innerText = "T: " + myData.info.phoneNumber;
+            document.getElementById("dbEmail").innerText = "E-mail: " + myData.info.email;
+            document.getElementById("dbMajor").innerText = "Major: " + myData.info.major;
+            document.getElementById("dbTrack").innerText = "Track: " + myData.info.track;
+            document.getElementById("dbGradDate").innerText = "Graduation Date: " + myData.info.graduation;
+            document.getElementById("dbTyping").innerText = "Typing Speed: " + myData.info.speed;
+            document.getElementById("dbAboutMe").innerText = myData.info.aboutMe;
+        })
+}

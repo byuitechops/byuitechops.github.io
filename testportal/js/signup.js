@@ -19,8 +19,8 @@ db.settings({
 //hides elements and allows them to come as the user gives input
 //document.getElementById("signUpEmail").style.visibility.child="hidden";
 
-var signupBtn = document.getElementById('submitSignUp')
-signupBtn.addEventListener('click', () => {
+    var signupBtn = document.getElementById('submitSignUp')
+    signupBtn.addEventListener('click', () => {
 
 
     const email = document.getElementById("signUpEmail").value;

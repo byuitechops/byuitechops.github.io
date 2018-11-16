@@ -65,24 +65,24 @@
         <section>
             <div>
                 <img id="editContact" src="assets/edit.png">
-                <h3 id="editName">Lucas Wargha</h3>
-                <p>Title: Steak </p>
-                <p>Canvas: Team 1 </p>
-                <p>T: 801-928-3255 </p>
-                <p>Email: war18001@byui.edu </p>
+                <h3 id="dbName">Lucas Wargha</h3>
+                <p id="dbTitle">Title: Steak </p>
+                <p id="dbTeam">Canvas: Team 1 </p>
+                <p id="dbPhone">T: 801-928-3255 </p>
+                <p id="dbEmail">Email: war18001@byui.edu </p>
             </div>
             <div id="info">
                 <h4>Info</h4>
-                <p>Major: Software Engineering </p>
-                <p>Track: Spring/Fall </p>
-                <p>Graduation: Winter 2021 </p>
-                <p>Type Speed: 60wpm</p>
+                <p id="dbMajor">Major: Software Engineering </p>
+                <p id="dbTrack">Track: Spring/Fall </p>
+                <p id="dbGradDate">Graduation: Winter 2021 </p>
+                <p id="dbTyping">Type Speed: 60wpm</p>
 
             </div>
             <button onclick="toggleView()"><img id="arrowImg" src="assets/arrow.png"></button>
             <div id="aboutMe">
                 <h4>About Me</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at maximus dui. Curabitur vitae
+                <p id="dbAboutMe">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at maximus dui. Curabitur vitae
                     consequat est, nec facilisis ipsum. Maecenas malesuada velit et venenatis dignissim. Fusce volutpat
                     nunc sed nunc dignissim, quis convallis lorem facilisis. Vivamus consectetur leo eu elementum
                     lobortis. Phasellus massa nibh, scelerisque maximus ornare at, faucibus ut dolor. Nunc id neque
@@ -113,24 +113,34 @@
                 <p>Report a Bug</p> -->
                 <p>Viewing Mode</p>
             </div>
-            <div style="visibility: hidden;" id="editInfo">
+            <div id="editInfo">
                     <h2>Edit your Information</h2>
                     <p>Name: </p>
-                    <input type="text" placeholder="Name + Last Name">
+                    <input id="editName" type="text" placeholder="Name + Last Name">
                     <p>Phone Number: </p>
-                    <input id = "phoneInfo" type="tel" placeholder="####-###-####">
+                    <input id = "editPhone" type="tel" placeholder="####-###-####">
                     <p>Major: </p>
-                    <input type="text" placeholder="Course of Study">
+                    <input id="editMajor" type="text" placeholder="Course of Study">
                     <p>Track: </p>
-                    <input type="text" list="tracks"  placeholder="Season/Season">
+                    <input id="editTrack" type="text" list="tracks"  placeholder="Season/Season">
                     <datalist id ="tracks">
                                     <option value="Winter/Spring">
                                     <option value="Spring/Fall">
                                     <option value="Fall/Winter">
-                                   <option value="Year Round (Overwrite)"></option>
+                                    <option value="Year Round (Overwrite)"></option>
                     </datalist>
                     <p >Graduation Date: </p>
-                    <input type="text" placeholder="Year and Semester">  
+                    <input id="editGradDate"type="text" placeholder="Year and Semester"> 
+                    <p class ="hide" >Team: </p>
+                    <input class ="hide" id="editTeam"type="text" placeholder="Team"> 
+                    <p class ="hide">E-mail: </p>
+                    <input class ="hide" id="editEmail"type="email" placeholder="BYUI Email"> 
+                    <p class ="hide">Job Title: </p>
+                    <input class ="hide" id="editJobTitle"type="text" placeholder="Job Title"> 
+                    <p class ="hide" >Typigng Speed: </p>
+                    <input class ="hide" id="editSpeed"type="text" placeholder="Typing Speed"> 
+                    <p id="aboutMe">About you</p>
+                    <textarea id="editAboutMe" type="text" > Tell us more about yourself </textarea>  
                     <button id = "submitInfoChanges">Submit</button>
                     <button id = "cancelInfoChanges">Cancel</button>
                 </div>

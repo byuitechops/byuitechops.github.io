@@ -56,6 +56,9 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 function getUser() {
   db.collection("users").where("name", "==", userName)
   .onSnapshot(function(querySnapshot) {
+    console.log(querySnapshot);
     userId = querySnapshot.docs[0].id;
+    loadPage();
   })
 }
+
