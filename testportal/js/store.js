@@ -1,3 +1,7 @@
+function loadPage() {
+  document.getElementById('name').innerText = `${userName}'s Cart`;
+}
+
 // Checkout Dialog
 var checkModal = document.getElementById('checkoutModal');
 var checkBtn = document.getElementById("checkoutBtn");
@@ -52,9 +56,16 @@ confirmBtn.addEventListener('click', () => {
       }
     }
   }
+  // Update the count
   for (var i = 0; i < array.length; i++) {
     updateFirebase(array[i].name, array[i].count);
   }
+  // Push transaction record to firebase
+  var now = new Date();
+  var dateString = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()} ${now.getHours()}:${now.getMinutes()}`;
+  // db.collection('store').doc('transactions').collection('receipts').doc(dateString).set({
+
+  // })
 });
 
 function searchArray(array, item) {
