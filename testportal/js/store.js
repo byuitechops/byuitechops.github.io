@@ -37,29 +37,52 @@ confirmBtn.addEventListener('click', () => {
   checkModal.style.display = "none";
 
   var items = document.getElementById('items').children;
+  var array = [];
   for (var i = 0; i < items.length; i++) {
-    if (i%2 == 0) {
+    if (i % 2 == 0) {
       var item = items[i].innerText;
-      db.collection('store').doc('inventory').collection('items').doc(item).get().then(function(doc) {
-        var count = doc.data().count;
-        console.log(count);
-        db.collection('store').doc('inventory').collection('items').doc(item)
-        .update({
-          count: `${count -= 1}`
-        })
-      });
-      // var count;
-      // if (array[items[i]]) {
-      //   console.log(array[items[i]].count);
-      //   count = array[items[i]].count += 1;
-      // } else {
-      //   array[items[i].innerText] = JSON.parse(`{"count": "${count}"}`);
-      //   count = 1;
-      // }
-      // console.log(count);
+      var arrayResult = searchArray(array, item);
+      if (typeof arrayResult == "number") {
+        array[arrayResult].count += 1;
+      } else {
+        array.push({
+          name: item,
+          count: 1
+        });
+      }
     }
   }
+  for (var i = 0; i < array.length; i++) {
+    updateFirebase(array[i].name, array[i].count);
+  }
 });
+
+function searchArray(array, item) {
+  for (var i = 0; i < array.length; i++) {
+    if (array[i].name == item) {
+      return i;
+    }
+  }
+  return false;
+}
+
+function updateFirebase(name, sub) {
+  db.collection('store').doc('inventory').collection('items').doc(name).get().then(function (doc) {
+    var count = doc.data().count;
+    db.collection('store').doc('inventory').collection('items').doc(name)
+      .update({
+        count: `${count -= sub}`
+      })
+      .then(function () {
+        console.log("Document successfully updated!");
+      })
+      .catch(function (error) {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
+      });
+  });
+}
+
 confirmClose.onclick = function () {
   confirmModal.style.display = "none";
 }
