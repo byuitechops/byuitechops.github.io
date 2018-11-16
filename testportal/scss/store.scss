@@ -182,7 +182,7 @@ main {
         div {
             display: grid;
             grid-template-columns: 1fr 1fr;
-
+            margin: 1em 0;
             span {
                 font-size: 0.75em;
                 margin: 0.25em 1em;
@@ -264,6 +264,16 @@ main {
             height: 8px;
             border-radius: 50%;
             background: white;
+        }
+    }
+
+    button {
+        &:disabled {
+            background-color: grey;
+            cursor: initial;
+            &:hover {
+                opacity: 1;
+            }
         }
     }
 }
