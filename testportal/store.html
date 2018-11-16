@@ -57,16 +57,16 @@
                 <div id="items">
                 </div>
                 <p id="total">Total: $00.00</p>
-                <label class="container">Cash
-                    <input type="radio" name="payment">
+                <label onclick="checkPayment()" class="container">Cash
+                    <input value="cash" type="radio" name="payment">
                     <span class="checkmark"></span>
                 </label>
 
-                <label class="container">Venmo
-                    <input type="radio" name="payment">
+                <label onclick="checkPayment()" class="container">Venmo
+                    <input value="venmo" type="radio" name="payment">
                     <span class="checkmark"></span>
                 </label>
-                <button id="confirmBtn">Confirm</button>
+                <button disabled=true id="confirmBtn">Confirm</button>
             </div>
         </div>
 

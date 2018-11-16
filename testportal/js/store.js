@@ -1,5 +1,5 @@
 function loadPage() {
-  document.getElementById('name').innerText = `${userName}'s Cart`;
+  document.getElementById('name').innerText = `${data.nameDisplay}'s Cart`;
 }
 
 // Checkout Dialog
@@ -15,11 +15,6 @@ checkBtn.addEventListener('click', () => {
     itemsDiv.insertAdjacentHTML("beforeend", `<span>${cart.children[i].children[1].childNodes[0].textContent.trim()}</span>`);
   }
   document.getElementById('total').innerText = `Total: ${document.getElementById('cartTotal').innerText}`;
-  if (document.getElementById('total').innerText.slice(8) <= 0) {
-    document.getElementById('confirmBtn').disabled = true;
-  } else {
-    document.getElementById('confirmBtn').disabled = false;
-  }
 });
 checkClose.onclick = function () {
   checkModal.style.display = "none";
@@ -29,6 +24,26 @@ window.onclick = function (event) {
   if (event.target == checkModal) {
     checkModal.style.display = "none";
     document.getElementById('items').innerHTML = "";
+  }
+}
+
+// Check if payment type is selected
+var payment;
+
+function checkPayment() {
+  if (document.getElementById('total').innerText.slice(8) <= 0) {
+    document.getElementById('confirmBtn').disabled = true;
+  } else {
+    document.getElementById('confirmBtn').disabled = false;
+  }
+  var radios = document.getElementsByName('payment');
+  for (var i = 0, length = radios.length; i < length; i++) {
+    if (radios[i].checked) {
+      // do whatever you want with the checked radio
+      payment = radios[i].value;
+      // only one radio can be logically checked, don't check the rest
+      break;
+    }
   }
 }
 
@@ -56,13 +71,20 @@ confirmBtn.addEventListener('click', () => {
       }
     }
   }
+  var itemsJson = `{"items": {`;
   // Update the count
   for (var i = 0; i < array.length; i++) {
-    updateFirebase(array[i].name, array[i].count);
+    // updateFirebase(array[i].name, array[i].count);
+    itemsJson += `"${array[i].name}": "${array[i].count}",`;
   }
+  itemsJson = `${itemsJson.slice(0, -1)}}, 
+      "payTotal": ${document.getElementById('total').innerText.replace(/Total: \$/g, "")},
+      "payType": "${payment}",
+      "user": "${data.nameDisplay}"}`;
+  console.log(JSON.parse(itemsJson));
   // Push transaction record to firebase
   var now = new Date();
-  var dateString = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()} ${now.getHours()}:${now.getMinutes()}`;
+  var dateString = `${now.getFullYear()}-${("0" + now.getMonth() + 1).slice(-2)}-${("0" + now.getDate()).slice(-2)} ${("0" + now.getHours()).slice(-2)}:${("0" + now.getMinutes()).slice(-2)}`;
   // db.collection('store').doc('transactions').collection('receipts').doc(dateString).set({
 
   // })
@@ -134,7 +156,7 @@ function addToCart(item, price) {
   var count = document.getElementById(`${item.replace(/ /g, '')}count`).innerText.replace(/Count: /g, "");
   document.getElementById(`${item.replace(/ /g, '')}count`).innerText = `Count: ${--count}`;
   var cartTotal = document.getElementById('cartTotal');
-  var total = cartTotal.innerText.slice(2);
+  var total = cartTotal.innerText.replace(/\$/g, "");
   var newTotal = (Number(total) + Number(price)).toFixed(2);
   cartTotal.innerText = `$${newTotal}`;
   if (document.getElementById(`${item.replace(/ /g, '')}count`).innerText.replace(/Count: /g, "") <= 0) {
@@ -153,7 +175,7 @@ function removeItem(e, item, price) {
   e.preventDefault;
 
   var cartTotal = document.getElementById('cartTotal');
-  var total = cartTotal.innerText.slice(2);
+  var total = cartTotal.innerText.replace(/\$/g, "");
   var newTotal = (Number(total) - Number(price)).toFixed(2);
   cartTotal.innerText = `$${newTotal}`;
 
