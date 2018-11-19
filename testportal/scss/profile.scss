@@ -101,7 +101,8 @@ main {
                 color: white;
                 border-radius: 6px;
                 cursor: pointer;
-                &:hover{
+
+                &:hover {
                     opacity: 0.80;
                 }
             }
@@ -120,7 +121,7 @@ main {
         }
 
         #usingRedeem {
-            visibility: hidden;
+            visibility: visible;
             width: 60em;
             height: 22em;
             background-color: $primary;
@@ -141,6 +142,13 @@ main {
                 margin-top: .5em;
                 margin-left: 4em;
                 font-size: 40px
+            }
+
+            input {
+                margin: auto;
+                margin-top: .5em;
+                margin-left: 4em;
+                font-size: 20px
             }
 
             p {
@@ -202,9 +210,10 @@ main {
                 border-radius: 5%;
                 color: white;
                 cursor: pointer;
-            &:hover{
-                opacity: 0.80;
-            }
+
+                &:hover {
+                    opacity: 0.80;
+                }
             }
         }
 
@@ -224,23 +233,27 @@ main {
             display: grid;
             grid-template-columns: 1fr 2fr;
             grid-template-rows: 1fr 1fr 1fr;
+
             img {
                 width: 100%;
                 grid-row: 1 /span 3;
                 display: block;
                 margin: 0 auto;
             }
+
             h2 {
                 grid-row: 1;
                 position: initial;
                 margin: 0;
             }
+
             p {
                 grid-row: 2;
                 position: initial;
                 margin: 0;
                 font-size: 4em;
             }
+
             button {
                 margin: 1em auto;
                 grid-row: 3;
@@ -252,8 +265,9 @@ main {
                 cursor: pointer;
                 background-color: $third;
                 font-size: 16px;
+
                 &:hover {
-                    opacity: 0.8;                    
+                    opacity: 0.8;
                 }
             }
         }
@@ -268,6 +282,10 @@ main {
             border-radius: 50%;
             z-index: 1;
         }
+
+        #signOutBtn {
+            cursor: pointer;
+        }
     }
 
     section:nth-of-type(2) {
@@ -277,6 +295,7 @@ main {
 
         #editContact {
             cursor: pointer;
+
             &:hover {
                 opacity: .5;
             }
@@ -304,6 +323,7 @@ main {
             img {
                 height: 6%;
                 cursor: pointer;
+
                 &:hover {
                     opacity: .7;
                 }
@@ -364,7 +384,12 @@ main {
                 color: $primary;
             }
         }
-        #editInfo{
+
+        #leadAdmin {
+            visibility: hidden;
+        }
+
+        #editInfo {
             display: inline;
             visibility: hidden;
             width: 60em;
@@ -375,12 +400,13 @@ main {
             text-align: center;
             border-radius: 6px;
             padding: 5px 0;
-            
+
             position: absolute;
             top: 17%;
             // right: 10%;
             left: 33%;
             z-index: 1;
+
             h2 {
                 margin-top: .5em;
                 font-size: 30px
@@ -392,19 +418,20 @@ main {
                 margin-left: -22em;
                 font-size: 30px
             }
-            input{
+
+            input {
                 position: absolute;
                 margin-top: -2em;
                 left: 21em;
             }
 
-            #aboutMe{
+            #aboutMe {
                 position: absolute;
                 left: 39.3em;
                 top: 2em;
             }
 
-            #editAboutMe{
+            #editAboutMe {
                 position: absolute;
                 left: 35.5em;
                 top: 8em;
@@ -414,7 +441,8 @@ main {
                 word-wrap: break-word;
                 word-break: break-all;
             }
-            #submitInfoChanges{
+
+            #submitInfoChanges {
                 position: absolute;
                 margin-top: -10em;
                 left: 47em;
@@ -427,11 +455,13 @@ main {
                 cursor: pointer;
                 background-color: $third;
                 font-size: 16px;
+
                 &:hover {
-                    opacity: 0.8;                    
+                    opacity: 0.8;
                 }
             }
-            #cancelInfoChanges{
+
+            #cancelInfoChanges {
                 position: absolute;
                 margin-top: -5em;
                 left: 47em;
@@ -444,12 +474,11 @@ main {
                 cursor: pointer;
                 background-color: $third;
                 font-size: 16px;
+
                 &:hover {
-                    opacity: 0.8;                    
+                    opacity: 0.8;
                 }
             }
         }
     }
 }
-
-        
