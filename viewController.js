@@ -98,3 +98,8 @@ modal.fetchRepositories(1, (err) => {
     modal.sortRepositories();
     setupView();
 });
+// Initializes the Materialize Modal
+document.addEventListener('DOMContentLoaded', () => {
+    var elems = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(elems);
+});
