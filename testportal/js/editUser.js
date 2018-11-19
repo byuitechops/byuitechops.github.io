@@ -4,7 +4,7 @@ function loadPage(){
 
 //reads all users from firestore
 function getAllUsers(){
-         return output =
+        // return output =
         // [START get_all_users]
         db.collection("users").get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
