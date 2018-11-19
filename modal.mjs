@@ -19,20 +19,20 @@ export class Modal {
             }
             if (option === 'name') {
                 // Sort by name
-                if (repo1.name < repo2.name) {
+                if (repo1.name.toLowerCase() < repo2.name.toLowerCase()) {
                     return -1;
                 }
-                if (repo1.name > repo2.name) {
+                if (repo1.name.toLowerCase() > repo2.name.toLowerCase()) {
                     return 1;
                 }
                 return 0;
             }
             if (option === 'language') {
                 // Sort by language
-                if (repo1.language < repo2.language) {
+                if (repo1.language.toLowerCase() < repo2.language.toLowerCase()) {
                     return -1;
                 }
-                if (repo1.language > repo2.language) {
+                if (repo1.language.toLowerCase() > repo2.language.toLowerCase()) {
                     return 1;
                 }
                 return 0;
