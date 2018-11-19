@@ -180,7 +180,8 @@ main {
   /* Style the indicator (dot/circle) */ }
   #checkoutModal div div {
     display: grid;
-    grid-template-columns: 1fr 1fr; }
+    grid-template-columns: 1fr 1fr;
+    margin: 1em 0; }
     #checkoutModal div div span {
       font-size: 0.75em;
       margin: 0.25em 1em; }
@@ -232,6 +233,11 @@ main {
     height: 8px;
     border-radius: 50%;
     background: white; }
+#checkoutModal button:disabled {
+  background-color: grey;
+  cursor: initial; }
+  #checkoutModal button:disabled:hover {
+    opacity: 1; }
 
 #confirmModal div {
   height: 75%; }

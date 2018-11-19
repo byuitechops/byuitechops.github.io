@@ -36,8 +36,8 @@
             </section>
             <section id="right">
                 <div>
-                    <p>Name's Cart</p>
-                    <span>$00.00</span>
+                    <p id="name">Guest's Cart</p>
+                    <span id="cartTotal">$00.00</span>
                     <div id="cart">
                         <p>
                             <span>Item</span>
@@ -57,16 +57,16 @@
                 <div id="items">
                 </div>
                 <p id="total">Total: $00.00</p>
-                <label class="container">Cash
-                    <input type="radio" name="payment">
+                <label onclick="checkPayment()" class="container">Cash
+                    <input value="cash" type="radio" name="payment">
                     <span class="checkmark"></span>
                 </label>
 
-                <label class="container">Venmo
-                    <input type="radio" name="payment">
+                <label onclick="checkPayment()" class="container">Venmo
+                    <input value="venmo" type="radio" name="payment">
                     <span class="checkmark"></span>
                 </label>
-                <button id="confirmBtn">Confirm</button>
+                <button disabled=true id="confirmBtn">Confirm</button>
             </div>
         </div>
 

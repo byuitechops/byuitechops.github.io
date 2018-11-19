@@ -397,10 +397,27 @@ main {
                 margin-top: -2em;
                 left: 21em;
             }
+
+            #aboutMe{
+                position: absolute;
+                left: 39.3em;
+                top: 2em;
+            }
+
+            #editAboutMe{
+                position: absolute;
+                left: 35.5em;
+                top: 8em;
+                height: 14em;
+                width: 18em;
+                text-align: center;
+                word-wrap: break-word;
+                word-break: break-all;
+            }
             #submitInfoChanges{
                 position: absolute;
                 margin-top: -10em;
-                left: 45em;
+                left: 47em;
                 background-color: white;
                 border: none;
                 height: 4em;
@@ -416,8 +433,8 @@ main {
             }
             #cancelInfoChanges{
                 position: absolute;
-                margin-top: -10em;
-                left: 33em;
+                margin-top: -5em;
+                left: 47em;
                 background-color: white;
                 border: none;
                 height: 4em;
