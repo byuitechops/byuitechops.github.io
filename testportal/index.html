@@ -15,18 +15,31 @@
 </head>
 
 <body>
-    <img id="header" src="assests/header.png">
     <section>
-        <div id="container" class="login">
-            <div id="lower">
-                Login with your E-mail and Password <br><br>
-                <input id="login" type="Login" placeholder="E-mail"> <br>
-                <input id="password" type="Password" placeholder="Password"> <br> <br>
-            </div>
-            <button class="button" id="btnLogin" onclick="login()" type="submit"><span>Login</span></button>
-            <button class="button" id="btnsignup" type="submit"><span>Sign Up</span></button>
+        <img src="assets/byuiLogo.png">
+        <img src="assets/logo2.png">
     </section>
-    </div>
+    <section>
+        <div id="lower">
+            <p>Sign In</p>
+            <label>
+                <span>Email</span>
+                <input id="login" type="Login" placeholder="E-mail">
+            </label>
+            <label>
+                <span> Password </span>
+                <input id="password" type="Password" placeholder="Password">
+            </label>
+            <span>Your e-mail username is the provided account from your institution.</span>
+            
+            <div>
+                <button class="button" id="btnLogin" onclick="login()" type="submit"><span>Login</span></button>
+                <button class="button" id="btnsignup" type="submit"><span>Sign Up</span></button>
+            </div>
+            <span id="recover">Forgot Your Username/Password?</span>
+        </div>
+    </section>
+
 </body>
 <script src="js/main.js"></script>
 <script src="js/index.js"></script>

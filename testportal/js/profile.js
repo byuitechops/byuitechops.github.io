@@ -137,9 +137,23 @@ function loadPage() {
             //fills in accumulated time
             document.getElementById("accumulated").innerText = myData.time.accumulatedTime;
             document.getElementById("redeemTime").innerText = myData.time.accumulatedTime;
+
+            //displays lead/admin tools only for the right people
+            if (myData.admin){
+                document.getElementById("leadAdmin").style.visibility ="visible";
+            }
         })
 }
 
 function redeemTime(){
 
 }
+
+//handles the sign out button
+document.getElementById("signOutBtn").addEventListener("click", ()=>{
+    firebase.auth().signOut().then(function() {
+        // Sign-out successful.
+      }).catch(function(error) {
+        // An error happened.
+      });
+})
