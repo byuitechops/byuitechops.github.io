@@ -29,10 +29,10 @@ export class Modal {
             }
             if (option === 'language') {
                 // Sort by language
-                if (repo1.language.toLowerCase() < repo2.language.toLowerCase()) {
+                if (repo1.language < repo2.language) {
                     return -1;
                 }
-                if (repo1.language.toLowerCase() > repo2.language.toLowerCase()) {
+                if (repo1.language > repo2.language) {
                     return 1;
                 }
                 return 0;
