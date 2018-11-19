@@ -19,10 +19,10 @@ export class Modal {
             }
             if (option === 'name') {
                 // Sort by name
-                if (repo1.name < repo2.name) {
+                if (repo1.name.toLowerCase() < repo2.name.toLowerCase()) {
                     return -1;
                 }
-                if (repo1.name > repo2.name) {
+                if (repo1.name.toLowerCase() > repo2.name.toLowerCase()) {
                     return 1;
                 }
                 return 0;

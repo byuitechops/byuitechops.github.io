@@ -8,6 +8,7 @@ let filterContainer = document.getElementById('filters');
 let spinner = document.getElementById('loader');
 let searchBar = document.getElementById('searchBar');
 let filteredRepos = [];
+let dateFormat = 'DD, hh:mm A';
 
 function setupView() {
     createFilters();
@@ -36,14 +37,16 @@ function createCards(repositories = [], count = 8) {
     }
     repositories.forEach((repository, i) => {
         if (i < count) {
+            let dateCreated = moment(repository.created_at);
+            let dateUpdated = moment(repository.updated_at);
             let cardTemplate = `<div class="card medium light-blue darken-4">
                             <div class="card-content white-text">
                                 <span class="card-title">${repository.name}</span>
                                 <p>${repository.description}</p>
                                 <ul>
-                                    <li>Date Created: ${repository.created_at}</li>
+                                    <li>Date Created: ${dateCreated.format('YYYY')} ${dateCreated.format('MMMM').padEnd(9)} ${dateCreated.format(dateFormat)}</li>
                                     <li>Language: ${repository.language}</li>
-                                    <li>Last Updated: ${repository.updated_at}</li>
+                                    <li>Last Updated: ${dateUpdated.format('YYYY')} ${dateUpdated.format('MMMM').padEnd(9)} ${dateUpdated.format(dateFormat)}</li>
                                     <li>Open Issues: ${repository.open_issues_count}</li>
                                 </ul>
                             </div>
