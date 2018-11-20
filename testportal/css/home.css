@@ -156,7 +156,9 @@ main {
         align-items: center;
         justify-content: center; }
         main section#links a div img {
-          width: 100%;
+          position: absolute;
+          right: 0;
+          width: 75%;
           height: 100%;
           z-index: 0; }
         main section#links a div div {

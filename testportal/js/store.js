@@ -52,9 +52,6 @@ var confirmModal = document.getElementById('confirmModal');
 var confirmBtn = document.getElementById("confirmBtn");
 var confirmClose = document.getElementById("confirmClose");
 confirmBtn.addEventListener('click', () => {
-  confirmModal.style.display = "block";
-  checkModal.style.display = "none";
-
   var items = document.getElementById('items').children;
   var array = [];
   for (var i = 0; i < items.length; i++) {
@@ -74,20 +71,38 @@ confirmBtn.addEventListener('click', () => {
   var itemsJson = `{"items": {`;
   // Update the count
   for (var i = 0; i < array.length; i++) {
-    // updateFirebase(array[i].name, array[i].count);
+    updateFirebase(array[i].name, array[i].count);
     itemsJson += `"${array[i].name}": "${array[i].count}",`;
   }
   itemsJson = `${itemsJson.slice(0, -1)}}, 
       "payTotal": ${document.getElementById('total').innerText.replace(/Total: \$/g, "")},
       "payType": "${payment}",
       "user": "${data.nameDisplay}"}`;
-  console.log(JSON.parse(itemsJson));
   // Push transaction record to firebase
   var now = new Date();
-  var dateString = `${now.getFullYear()}-${("0" + now.getMonth() + 1).slice(-2)}-${("0" + now.getDate()).slice(-2)} ${("0" + now.getHours()).slice(-2)}:${("0" + now.getMinutes()).slice(-2)}`;
-  // db.collection('store').doc('transactions').collection('receipts').doc(dateString).set({
+  var dateString = `${now.getFullYear()}-${("0" + (now.getMonth() + 1)).slice(-2)}-${("0" + now.getDate()).slice(-2)} ${("0" + now.getHours()).slice(-2)}:${("0" + now.getMinutes()).slice(-2)}`;
+  db.collection('store').doc('transactions').collection('receipts').doc(dateString).set(JSON.parse(itemsJson)).then(function() {
+    console.log("Document successfully written!");
+  });
+  // Update Money fields
+  db.collection('store').doc('inventory').get().then(function (doc) {
+    var newMoneyTotal = (Number(doc.data()[payment]) + Number(document.getElementById('total').innerText.replace(/Total: \$/g, ""))).toFixed(2);
+    var moneyJson = `{"${payment}": "${newMoneyTotal}"}`;
+    db.collection('store').doc('inventory').update(JSON.parse(moneyJson))
+      .then(function () {
+        console.log("Document successfully updated!");
+      })
+      .catch(function (error) {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
+      });
+  });
 
-  // })
+  // Show Confirm Box
+  confirmModal.style.display = "block";
+  checkModal.style.display = "none";
+  document.getElementById('totalFinal').innerText = document.getElementById('total').innerText;
+  setTimeout(function(){ location.reload(); }, 3000);
 });
 
 function searchArray(array, item) {

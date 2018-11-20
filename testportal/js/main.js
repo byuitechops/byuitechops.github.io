@@ -58,6 +58,7 @@ function getUser() {
   db.collection("users").where("name", "==", userName)
   .onSnapshot(function(querySnapshot) {
     userId = querySnapshot.docs[0].id;
+    data = querySnapshot.docs[0].data();
     loadPage();
   })
 }
