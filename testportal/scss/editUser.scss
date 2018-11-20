@@ -42,6 +42,7 @@ main {
             font-size: 25px;
             margin-top: 60px;
         }
+
         #profilePic {
             position: absolute;
             top: 35%;
@@ -53,12 +54,29 @@ main {
             z-index: 1;
         }
     }
+
     section:nth-of-type(2) {
         position: flex;
 
-        h1{
+        h1 {
             text-align: center;
+        }
+
+        p {
+            display: flex;
+            flex-flow: nowrap;
+            align-items: center;
+
+            img {
+                height: 3em;
+                margin: 0 1em;
+            }
+            span{
+                margin: 1em;
+            }
+            button{
+                margin: 1em;
+            }
         }
     }
 }
-
