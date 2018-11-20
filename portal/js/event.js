@@ -211,5 +211,5 @@ if (today.getMonth() > 9) {
     christmasModal.style.display = "block";
     var christmas = new Date(today.getFullYear(), 11, 25);
     var daysLeft = Math.abs(Date.daysBetween(christmas, today));
-    document.getElementById('christmasText').innerText = `${daysLeft} left till Christmas`;
+    document.getElementById('christmasText').innerText = `${daysLeft} days left till Christmas`;
 }
