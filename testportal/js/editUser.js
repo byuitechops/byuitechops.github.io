@@ -2,6 +2,8 @@ function loadPage() {
     getAllUsers();
 }
 
+var done = false;
+
 var populate = document.getElementById("zoe");
 //reads all users from firestore
 function getAllUsers() {
@@ -14,6 +16,7 @@ function getAllUsers() {
             firebase.storage().ref().child(`images/${doc.data().info.photo}`).getDownloadURL().then(function (url) {
                 var html = `<p><img src=${url}"><span>${doc.data().nameDisplay}</span><button onclick="view('${doc.id}')">View</button> <button>Delete</button></p>`;
                 populate.insertAdjacentHTML("beforeend", html);
+                //return;
             }).catch(function (error) {
                 return error;
             })
@@ -23,40 +26,33 @@ function getAllUsers() {
 }
 
 //If the admin clicks on the edit button, gets the 
-function view(id) {
-    document.getElementById("editInfo").style.visibility = "visible";
-    populateInfoEdit();
-}
+var editInfo = document.getElementById("editInfo");
 
-//populates the editor box
-function populateInfoEdit() {
-    db.collection("users").doc(userId).get()
-        .then(function (doc) {
-            document.getElementById("nameForEdit").innerText = doc.data().nameDisplay + "'s Information";
-            document.getElementById("editName").setAttribute("value", `${doc.data().nameDisplay}`);
-            document.getElementById("editPhone").setAttribute("value", `${doc.data().info.phoneNumber}`);
-            document.getElementById("editMajor").setAttribute("value", `${doc.data().info.major}`);
-            var idTrack = doc.data().info.track;
-            console.log(idTrack);
-            document.getElementById(idTrack).setAttribute("selected", "selected");
-            document.getElementById("editGradDate").setAttribute("value", `${doc.data().info.graduation}`);
-            document.getElementById("editTeam").setAttribute("value", `${doc.data().team}`);
-            document.getElementById("editEmail").setAttribute("value", `${doc.data().info.email}`);
-            document.getElementById("editJobTitle").setAttribute("value", `${doc.data().title}`);
-            document.getElementById("editSpeed").setAttribute("value", `${doc.data().info.speed}`);
+function view(userId) {
+    if (!done) {
+        console.log(userId);
+        editInfo.style.visibility = "visible";
+        populateInfoEdit(userId);
+
+        //Cancel the the edit button changes
+        var cancelChanges = document.getElementById("cancelInfoChanges");
+        cancelChanges.addEventListener("click", () => {
+            document.getElementById("editInfo").style.visibility = "hidden";
         })
+        var submitChanges = document.getElementById("submitInfoChanges");
+        submitChanges.addEventListener("click", () => {
+            console.log("submitted");
+            submitInfoChanges(userId);
+            done = true;
+        })
+    }
+    
+
 }
 
-//Cancel the the edit button changes
-var cancelChanges = document.getElementById("cancelInfoChanges");
-cancelChanges.addEventListener("click", () => {
-    document.getElementById("editInfo").style.visibility = "hidden";
-})
 
 //connects to firebase and submits changes made by the admin
-var user = firebase.auth().currentUser;
-var submitChanges = document.getElementById("submitInfoChanges");
-submitChanges.addEventListener("click", () => {
+function submitInfoChanges(userId) {
 
     db.collection("users").doc(userId).update({
             "nameDisplay": document.getElementById("editName").value,
@@ -66,16 +62,37 @@ submitChanges.addEventListener("click", () => {
             "info.graduation": document.getElementById("editGradDate").value,
             "team": document.getElementById("editTeam").value,
             "info.email": document.getElementById("editEmail").value,
-            "job.title": document.getElementById("editJobTitle").value,
+            "title": document.getElementById("editJobTitle").value,
             "info.speed": document.getElementById("editSpeed").value
         })
         .then(function () {
             console.log("Document successfully written!");
-                window.location.reload();
-              }).catch(function(error) {
-                // An error happened.
-              });
-              editDiv.style.visibility = "hidden";
+            window.location.reload();
+        }).catch(function (error) {
+            // An error happened.
+        });
+    editInfo.style.visibility = "hidden";
+}
+
+//populates the editor box
+function populateInfoEdit(doc) {
+    db.collection("users").doc(doc).get()
+        .then(function (doc) {
+            document.getElementById("nameForEdit").innerText = doc.data().nameDisplay + "'s Information";
+            document.getElementById("editName").setAttribute("value", `${doc.data().nameDisplay}`);
+            document.getElementById("editPhone").setAttribute("value", `${doc.data().info.phoneNumber}`);
+            document.getElementById("editMajor").setAttribute("value", `${doc.data().info.major}`);
+            var idTrack = doc.data().info.track;
+            console.log(idTrack);
+            document.getElementById(idTrack).setAttribute("selected", "selected");
+            document.getElementById("editGradDate").setAttribute("value", `${doc.data().info.graduation}`);
+            var idTeam = doc.data().team;
+            console.log(idTeam);
+            document.getElementById(idTeam).setAttribute("selected", "selected");
+            document.getElementById("editEmail").setAttribute("value", `${doc.data().info.email}`);
+            var idTitle = doc.data().title;
+            console.log(idTitle);
+            document.getElementById(idTitle).setAttribute("selected", "selected");
+            document.getElementById("editSpeed").setAttribute("value", `${doc.data().info.speed}`);
         })
-       
-   
+}
