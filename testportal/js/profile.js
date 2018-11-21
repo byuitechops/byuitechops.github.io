@@ -99,8 +99,6 @@ submitChanges.addEventListener("click", () => {
         })
        
    
-
-
 var cancelChanges = document.getElementById("cancelInfoChanges");
 cancelChanges.addEventListener("click", () => {
     editDiv.style.visibility = "hidden";

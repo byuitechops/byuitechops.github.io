@@ -12,7 +12,8 @@ main {
             background-color: $secondary;
 
             .mySlides {
-                display: none
+                display: none;
+                //width: 100%;
             }
 
             img {

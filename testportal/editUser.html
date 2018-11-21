@@ -33,14 +33,41 @@
             <div id="opacity">
             </div>
             <h2>Edit User - Admin / Lead</h2>
-            <img id="profilePic" src="assets/lucas.jpg">
         </section>
         <section>
-            <h1>Firebase Interface</h1>
             <div id="zoe">
-
+            </div>
+            <div id="editInfo">
+                <h2 id="nameForEdit"></h2>
+                <p>Name: </p>
+                <input id="editName" type="text" placeholder="Name + Last Name">
+                <p>Phone Number: </p>
+                <input id = "editPhone" type="tel" placeholder="####-###-####">
+                <p>Major: </p>
+                <input id="editMajor" type="text" placeholder="Course of Study">
+                <p>Track: </p>
+                
+                <select id="editTrack" name="track">
+                                <option id="Winter/Spring" value="Winter/Spring">Winter/Spring</option>
+                                <option id="Spring/Fall" value="Spring/Fall">Spring/Fall</option>
+                                <option id="Fall/Winter" value="Fall/Winter">Fall/Winter</option>
+                                <option id="Year Round" value="Year Round">Year Round (Overwrite)"</option>
+                                </select>
+                <p>Graduating in: </p>
+                <input id="editGradDate"type="text" placeholder="Year and Semester"> 
+                <p >Team: </p>
+                <input id="editTeam"type="text" placeholder="Team"> 
+                <p>E-mail: </p>
+                <input id="editEmail"type="email" placeholder="BYUI Email"> 
+                <p>Job Title: </p>
+                <input id="editJobTitle"type="text" placeholder="Job Title"> 
+                <p>Typing Speed: </p>
+                <input  id="editSpeed"type="text" placeholder="Typing Speed"> 
+                <button id = "submitInfoChanges">Submit</button>
+                <button id = "cancelInfoChanges">Cancel</button>
             </div>
         </section>
+        
     </main>
 </body>
 <!-- Script -->

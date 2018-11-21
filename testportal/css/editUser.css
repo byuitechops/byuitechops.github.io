@@ -81,29 +81,112 @@ main {
       right: 10%;
       font-size: 25px;
       margin-top: 60px; }
-    main section:nth-of-type(1) #profilePic {
-      position: absolute;
-      top: 35%;
-      width: 9.5em;
-      height: auto;
-      left: 2.0em;
-      background: white;
-      border-radius: 50%;
-      z-index: 1; }
-  main section:nth-of-type(2) {
-    position: flex; }
-    main section:nth-of-type(2) h1 {
-      text-align: center; }
-    main section:nth-of-type(2) p {
+  main section:nth-of-type(2) div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 0 auto; }
+    main section:nth-of-type(2) div p {
       display: flex;
       flex-flow: nowrap;
-      align-items: center; }
-      main section:nth-of-type(2) p img {
+      align-items: center;
+      justify-content: space-around;
+      width: 50%; }
+      main section:nth-of-type(2) div p img {
         height: 3em;
         margin: 0 1em; }
-      main section:nth-of-type(2) p span {
+      main section:nth-of-type(2) div p span {
         margin: 1em; }
-      main section:nth-of-type(2) p button {
-        margin: 1em; }
+      main section:nth-of-type(2) div p button {
+        margin: 1em;
+        background-color: #0076c6;
+        width: 25%;
+        padding: 1em;
+        height: 3em;
+        border-radius: 5px;
+        color: #ffffff;
+        border: none;
+        font-weight: bold;
+        letter-spacing: 0.15em;
+        cursor: pointer; }
+      main section:nth-of-type(2) div p button:hover {
+        opacity: 0.8; }
+  main section:nth-of-type(2) #editInfo {
+    display: inline;
+    visibility: hidden;
+    width: 30em;
+    height: 35em;
+    background-color: #0076c6;
+    opacity: 0.95;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    top: 17%;
+    left: 60%;
+    z-index: 1; }
+    main section:nth-of-type(2) #editInfo h2 {
+      margin-top: .5em;
+      margin-bottom: 0.3em;
+      font-size: 30px; }
+    main section:nth-of-type(2) #editInfo p {
+      color: white;
+      margin-top: .1em;
+      font-size: 30px; }
+    main section:nth-of-type(2) #editInfo input {
+      position: absolute;
+      margin-top: -2em;
+      left: 21em;
+      border-radius: 3%; }
+    main section:nth-of-type(2) #editInfo select {
+      position: absolute;
+      margin-top: -2em;
+      left: 21em;
+      border-radius: 3%;
+      width: 34%; }
+    main section:nth-of-type(2) #editInfo #aboutMe {
+      position: absolute;
+      left: 39.3em;
+      top: 2em; }
+    main section:nth-of-type(2) #editInfo #editAboutMe {
+      position: absolute;
+      left: 35.5em;
+      top: 8em;
+      height: 14em;
+      width: 18em;
+      text-align: center;
+      word-wrap: break-word;
+      word-break: break-all; }
+    main section:nth-of-type(2) #editInfo #submitInfoChanges {
+      position: absolute;
+      margin-top: 1em;
+      left: 3em;
+      background-color: white;
+      border: none;
+      height: 4em;
+      width: 10em;
+      border-radius: 5%;
+      color: white;
+      cursor: pointer;
+      background-color: #7fc4fd;
+      font-size: 16px; }
+      main section:nth-of-type(2) #editInfo #submitInfoChanges:hover {
+        opacity: 0.8; }
+    main section:nth-of-type(2) #editInfo #cancelInfoChanges {
+      position: absolute;
+      margin-top: 1em;
+      left: 17em;
+      background-color: white;
+      border: none;
+      height: 4em;
+      width: 10em;
+      border-radius: 5%;
+      color: white;
+      cursor: pointer;
+      background-color: #7fc4fd;
+      font-size: 16px; }
+      main section:nth-of-type(2) #editInfo #cancelInfoChanges:hover {
+        opacity: 0.8; }
 
 /*# sourceMappingURL=editUser.css.map */

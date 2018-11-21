@@ -8,7 +8,7 @@
 
 body {
   background-repeat: no-repeat;
-  background-image: url("../assets/bannerPic.jpg");
+  background-image: url("../assets/bannerPic.png");
   background-size: 100vw; }
   body section {
     background-color: rgba(11, 109, 172, 0.7); }
