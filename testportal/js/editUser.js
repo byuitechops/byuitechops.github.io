@@ -29,24 +29,26 @@ function getAllUsers() {
 var editInfo = document.getElementById("editInfo");
 
 function view(userId) {
-    if (!done) {
-        console.log(userId);
-        editInfo.style.visibility = "visible";
-        populateInfoEdit(userId);
 
-        //Cancel the the edit button changes
-        var cancelChanges = document.getElementById("cancelInfoChanges");
-        cancelChanges.addEventListener("click", () => {
-            document.getElementById("editInfo").style.visibility = "hidden";
-        })
+    console.log(userId);
+    editInfo.style.visibility = "visible";
+    populateInfoEdit(userId);
+
+    //Cancel the the edit button changes
+    var cancelChanges = document.getElementById("cancelInfoChanges");
+    cancelChanges.addEventListener("click", () => {
+        document.getElementById("editInfo").style.visibility = "hidden";
+    })
+    if (!done) {
         var submitChanges = document.getElementById("submitInfoChanges");
         submitChanges.addEventListener("click", () => {
             console.log("submitted");
             submitInfoChanges(userId);
             done = true;
+
         })
+
     }
-    
 
 }
 
