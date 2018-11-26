@@ -84,12 +84,19 @@ document.getElementById('checkOutBtn').addEventListener('click', () => {
   var setDate = editDate(new Date());
   //verifies if the user is actually logged in
   if (data.time.check) {
-    //if the user is then logging out, updates that on firebase and updates the end time on hours worked
+    //if the user is then clocking out, updates that on firebase and updates the end time on hours worked
 
     db.collection('users').doc(userId).update({
       "time.checkKey": setDate,
-      "time.check": false
+      "time.check": false,
+
     });
+    if (data.time.break) {
+      db.collection('users').doc(userId).update({
+        "time.break": false,
+        "time.breakKey": setDate
+      });
+    }
     db.collection('users').doc(userId).collection('hoursWorked').doc(data.time.checkKey).update({
       "end": data.time.checkKey.slice(-5)
     })
@@ -114,15 +121,19 @@ document.getElementById('breakBtn').addEventListener('click', () => {
       "end": setDate.slice(-5)
     })
   } else {
-    // Start Break
-    db.collection('users').doc(userId).update({
-      "time.break": true
-    });
-    db.collection('users').doc(userId).collection('breaks').doc(setDate).set({
-      "start": setDate.slice(-5)
-    });
-    //runs this variable every second
-    timer = setInterval(countdown, 1000);
+    if (!data.time.check) {
+      alert("You are logged out. No breaks are allowed");
+    } else {
+      // Start Break
+      db.collection('users').doc(userId).update({
+        "time.break": true
+      });
+      db.collection('users').doc(userId).collection('breaks').doc(setDate).set({
+        "start": setDate.slice(-5)
+      });
+      //runs this variable every second
+      timer = setInterval(countdown, 1000);
+    }
   }
   getUserData();
 })
@@ -144,8 +155,7 @@ if (localStorage.getItem('minutes') != null) {
   var minutes = 15;
   var seconds = 00;
 }
-// var minutes = 15;
-// var seconds = 00;
+
 if (minutes < 10) {
   minutes = "0" + Number(minutes);
 }
@@ -153,9 +163,6 @@ if (seconds < 10) {
   seconds = "0" + seconds;
 }
 
-function setBreak(minutes, seconds) {
-  
-}
 var timer;
 //countdown timer
 function countdown() {
@@ -182,7 +189,7 @@ function countdown() {
     document.getElementById("seconds").style.color = "red";
     // clearInterval(timer);
   }
-  
+
   if (minutes < 10) {
     minutes = "0" + Number(minutes);
   }

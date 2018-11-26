@@ -1,6 +1,10 @@
 function loadPage() {
     getAllUsers();
+    if (!data.admin) {
+        window.location.replace('profile.html')
+    }
 }
+
 
 var done = false;
 
@@ -11,18 +15,21 @@ function getAllUsers() {
     // [START get_all_users]
     db.collection("users").orderBy("nameDisplay").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-            console.log(`${doc.id} => ${doc.data()}`);
             console.log(doc.data().nameDisplay);
-            firebase.storage().ref().child(`images/${doc.data().info.photo}`).getDownloadURL().then(function (url) {
-                var html = `<p><img src=${url}"><span>${doc.data().nameDisplay}</span><button onclick="view('${doc.id}')">View</button> <button>Delete</button></p>`;
-                populate.insertAdjacentHTML("beforeend", html);
-                //return;
-            }).catch(function (error) {
-                return error;
-            })
+            var html = `<p><img id="${(doc.data().nameDisplay).replace(/ /g, "")}pic"><span>${doc.data().nameDisplay}</span><button onclick="view('${doc.id}')">View</button> <button onclick="deleteUser('${doc.id}', '${doc.data().nameDisplay}')">Delete</button></p>`;
+            populate.insertAdjacentHTML("beforeend", html);
+            populateDiv(doc.data().info.photo, (doc.data().nameDisplay).replace(/ /g, ""));
         });
     });
+}
 
+function populateDiv(photo, name) {
+    firebase.storage().ref().child(`profile/${photo}`).getDownloadURL().then(function (url) {
+        document.getElementById(`${name}pic`).setAttribute('src', url);
+        //return;
+    }).catch(function (error) {
+        return error;
+    });
 }
 
 //If the admin clicks on the edit button, gets the 
@@ -38,6 +45,7 @@ function view(userId) {
     var cancelChanges = document.getElementById("cancelInfoChanges");
     cancelChanges.addEventListener("click", () => {
         document.getElementById("editInfo").style.visibility = "hidden";
+        window.location.reload();
     })
     if (!done) {
         var submitChanges = document.getElementById("submitInfoChanges");
@@ -52,6 +60,32 @@ function view(userId) {
 
 }
 
+function deleteUser(id, name){
+    var txt;
+    if (confirm("Are you sure you want to delete the user " + name)) {
+        var path = JSON.stringify(db.collection('users').doc(id));
+        
+    } else {
+    }
+}
+
+/**
+ * Call the 'recursiveDelete' callable function with a path to initiate
+ * a server-side delete.
+ */
+function deleteAtPath(path) {
+    var deleteFn = firebase.functions().httpsCallable('recursiveDelete');
+    deleteFn({ path: path })
+        .then(function(result) {
+            console.log('Delete success: ' + JSON.stringify(result));
+            window.replace.reload();
+        })
+        .catch(function(err) {
+            console.log('Delete failed, see console,');
+            console.warn(err);
+        });
+       
+}
 
 //connects to firebase and submits changes made by the admin
 function submitInfoChanges(userId) {

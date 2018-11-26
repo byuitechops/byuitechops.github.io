@@ -19,51 +19,67 @@ db.settings({
 //hides elements and allows them to come as the user gives input
 //document.getElementById("signUpEmail").style.visibility.child="hidden";
 
-    var signupBtn = document.getElementById('submitSignUp')
-    signupBtn.addEventListener('click', () => {
+var signupBtn = document.getElementById('submitSignUp')
+signupBtn.addEventListener('click', () => {
 
 
     const email = document.getElementById("signUpEmail").value;
     const password = document.getElementById("signUpPassword").value;
 
-    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
-        // Handle Errors here.   
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        alert("Check the information input and try again");
-    });
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then(function () {
 
-    var info = {
-        "birthday": document.getElementById('signUpBirthday').value,
-        "email": document.getElementById('signUpEmail').value,
-        "graduation": document.getElementById('signUpGraduation').value,
-        "major": document.getElementById('signUpMajor').value,
-        "phoneNumber": document.getElementById('signUpPhone').value,
-        "track": document.getElementById('signUpTrack').value
-    }
+            var info = {
+                "birthday": document.getElementById('signUpBirthday').value,
+                "email": document.getElementById('signUpEmail').value,
+                "graduation": document.getElementById('signUpGraduation').value,
+                "major": document.getElementById('signUpMajor').value,
+                "phoneNumber": document.getElementById('signUpPhone').value,
+                "track": document.getElementById('signUpTrack').value,
+                "photo": "default-image.png"
+            }
 
-    try {
-        // Send to firebase
-        var docData = {
-            admin: false,
-            name: document.getElementById('signUpName').value,
-            team: "default",
-            teamLead: false,
-            info: info
-        }
-        db.collection('users').doc().set(docData).then(function() {
-            console.log("Written");
-            // window.replace('home.html')
+            try {
+                // Send to firebase
+                var docData = {
+                    admin: false,
+                    nameDisplay: document.getElementById('signUpName').value,
+                    name: document.getElementById('signUpName').value,
+                    team: "default",
+                    teamLead: false,
+                    info: info
+                }
+                db.collection('users').doc().set(docData).then(function () {
+                    console.log("Written");
+                    console.log(firebase.auth().currentUser);
+                    firebase.auth().currentUser.updateProfile({
+                        displayName: document.getElementById('signUpName').value
+                    }).then(function () {
+                        // Update successful.
+                        window.location.replace('home.html');
+                    }).catch(function (error) {
+                        // An error happened.
+                    });
+                    // window.replace('home.html')
+                })
+                // firebase.database().ref('users/' + user).update(data);
+                // firebase.database().ref('users/' + user).child('info').update(info);
+                // firebase.database().ref('dates/' + user).update({
+                //     "birthday": document.getElementById('signUpBirthday').value
+                // });
+                // If it worked return true
+                return true;
+            } catch (err) {
+                // If it did not work alert user
+                alert(err);
+            }
         })
-        // firebase.database().ref('users/' + user).update(data);
-        // firebase.database().ref('users/' + user).child('info').update(info);
-        // firebase.database().ref('dates/' + user).update({
-        //     "birthday": document.getElementById('signUpBirthday').value
-        // });
-        // If it worked return true
-        return true;
-    } catch (err) {
-        // If it did not work alert user
-        alert(err);
-    }
+        .catch(function (error) {
+            // Handle Errors here.   
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            alert(errorMessage);
+            alert("Check the information input and try again");
+
+        });
 });

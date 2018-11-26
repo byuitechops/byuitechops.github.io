@@ -9,7 +9,6 @@ main {
         &#welcome {
             margin: 4%;
             margin-bottom: 0;
-            background-color: $secondary;
 
             .mySlides {
                 display: none;
@@ -22,7 +21,6 @@ main {
 
             /* Slideshow container */
             .slideshow-container {
-                max-width: 1000px;
                 height: 90%;
                 overflow: hidden;
                 position: relative;

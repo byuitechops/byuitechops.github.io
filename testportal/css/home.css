@@ -54,7 +54,6 @@ main {
   main section#welcome {
     margin: 4%;
     margin-bottom: 0;
-    background-color: #f1f8fe;
     /* Slideshow container */
     /* Next & previous buttons */
     /* Position the "next button" to the right */
@@ -69,7 +68,6 @@ main {
     main section#welcome img {
       vertical-align: middle; }
     main section#welcome .slideshow-container {
-      max-width: 1000px;
       height: 90%;
       overflow: hidden;
       position: relative;

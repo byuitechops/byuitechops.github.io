@@ -12,7 +12,7 @@ main {
         background-repeat: no-repeat;
         background-position: 90% 55%;
         background-size: 50%;
-        grid-column: 1 /span 2;
+        grid-column: 1;
         grid-row: 1;
 
         #opacity {
@@ -44,6 +44,10 @@ main {
     }
 
     section:nth-of-type(2) {
+        padding: 2em;
+        height: 100%;
+        width: 50%;
+        overflow-y: scroll;
         div {
             display: flex;
             flex-direction: column;
@@ -64,6 +68,7 @@ main {
 
                 span {
                     margin: 1em;
+                    width: 15em;
                 }
 
                 button {
