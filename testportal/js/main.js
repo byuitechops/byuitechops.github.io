@@ -34,6 +34,7 @@ db.settings({
 var userName = null;
 var userId = null;
 var data = null;
+var theme = "light";
 
 firebase.auth().onAuthStateChanged(firebaseUser => {
   //checks if the user is already logged in to the system
@@ -56,10 +57,22 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 
 function getUser() {
   db.collection("users").where("name", "==", userName)
-  .onSnapshot(function(querySnapshot) {
-    userId = querySnapshot.docs[0].id;
-    data = querySnapshot.docs[0].data();
-    loadPage();
-  })
+    .onSnapshot(function (querySnapshot) {
+      userId = querySnapshot.docs[0].id;
+      data = querySnapshot.docs[0].data();
+      theme = querySnapshot.docs[0].data().viewMode;
+      loadPage();
+      setTheme();
+    })
 }
 
+function setTheme() {
+  var link = document.createElement('link');
+  var url = window.location.pathname;
+  var pageName = url.slice(url.lastIndexOf('/')+1, -5);
+ 
+  link.setAttribute('rel', "stylesheet");
+  link.setAttribute('type', "text/css");
+  link.setAttribute('href', `css/${pageName}_${theme}.css`);
+  document.getElementsByTagName('head')[0].insertAdjacentElement('beforeend', link);
+}

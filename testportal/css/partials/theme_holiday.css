@@ -1,9 +1,22 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans");
 #body-image {
-  display: none; }
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30vw;
+  height: 100vh;
+  background-image: url("../assets/holiday/christmas-body.png");
+  background-repeat: no-repeat;
+  background-position: top right;
+  background-size: 100%;
+  opacity: 0.4; }
 
 header {
-  background-image: none; }
+  background-image: url("../assets/holiday/christmas-sidebar.png");
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: 100%; }
 
 * {
   box-sizing: border-box;
@@ -53,30 +66,4 @@ main {
 .hide {
   display: none; }
 
-main {
-  display: grid;
-  grid-template-rows: 10% 90%; }
-  main h1 {
-    padding: 0.5em;
-    grid-column: 1 /span 2; }
-  main section {
-    grid-column: 1 /span 2; }
-    main section a {
-      color: #ffffff;
-      background-color: #0076c6;
-      text-decoration: none;
-      position: absolute;
-      right: 0;
-      top: 7%;
-      height: 1.8em;
-      padding: 0 0.25em; }
-      main section a img {
-        width: 1.75em; }
-    main section .container {
-      background: url("../assets/loading.gif") center center no-repeat;
-      height: 99%; }
-    main section iframe {
-      width: 100%;
-      height: 100%; }
-
-/*# sourceMappingURL=maintenance.css.map */
+/*# sourceMappingURL=theme_holiday.css.map */

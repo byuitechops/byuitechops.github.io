@@ -9,14 +9,31 @@ $TimeBackgrounds: #5592d7;
 $backgroundLight: #f7f7f7;
 
 // Background Images
+$sidebar-image: "christmas-sidebar.png";
+$body-image: "christmas-body.png";
 #body-image {
-    display: none;
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30vw;
+    height: 100vh;
+    background-image: url("../assets/holiday/" + $body-image);
+    background-repeat: no-repeat;
+    background-position: top right;
+    background-size: 100%;
+    opacity: 0.4;
+    // z-index: 1;
 }
 
 header {
-    background-image: none;
+    background-image: url("../assets/holiday/" + $sidebar-image);
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    background-size: 100%;
 }
 
+// Main
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 * {
