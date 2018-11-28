@@ -71,7 +71,7 @@ searchBar.addEventListener('keyup', event => {
     if (event.srcElement.value.length > 1) {
         spinner.style.display = 'block';
         filteredRepos = model.findRepositories(event.srcElement.value);
-        if (filteredRepos.length > 1) {
+        if (filteredRepos.length > 1 || filteredRepos.length === 0) {
             resultCount.innerHTML = `${filteredRepos.length} Results`;
         } else {
             resultCount.innerHTML = `${filteredRepos.length} Result`;
