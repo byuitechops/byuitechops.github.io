@@ -8,6 +8,14 @@ $background: #ffffff;
 $TimeBackgrounds: #5592d7;
 $backgroundLight: #f7f7f7;
 
+// Background Images
+#body-image {
+    display: none;
+}
+
+header {
+    background-image: none;
+}
 
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 

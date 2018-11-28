@@ -1,377 +1,134 @@
-function loadPage(){
+function loadPage() {
     getAllUsers();
+    if (!data.admin) {
+        window.location.replace('profile.html')
+    }
 }
 
+
+var done = false;
+
+var populate = document.getElementById("zoe");
 //reads all users from firestore
-function getAllUsers(){
-        // return output =
-        // [START get_all_users]
-        db.collection("users").get().then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                console.log(`${doc.id} => ${doc.data()}`);
-                console.log(doc.id.nameDisplay);
-            });
+function getAllUsers() {
+    // return output =
+    // [START get_all_users]
+    db.collection("users").orderBy("nameDisplay").get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            console.log(doc.data().nameDisplay);
+            var html = `<p><img id="${(doc.data().nameDisplay).replace(/ /g, "")}pic"><span>${doc.data().nameDisplay}</span><button onclick="view('${doc.id}')">View</button> <button onclick="deleteUser('${doc.id}', '${doc.data().nameDisplay}')">Delete</button></p>`;
+            populate.insertAdjacentHTML("beforeend", html);
+            populateDiv(doc.data().info.photo, (doc.data().nameDisplay).replace(/ /g, ""));
         });
-        // [END get_all_users]
- 
+    });
 }
-// Set the count to zero
 
-// db.collection("users").doc(userId).get()
-//     .then(function (doc) {
-//         const myData = doc.data();
-//         if (myData.admin) {
-//             var users;
-//             var list = [];
-//             // Only create the table once
-//             tableCreate(list);
-//         }
-//         else{
-//                 // If not admin change to home
-//                 window.location.replace("home.html");
-//             }
-//         })
+function populateDiv(photo, name) {
+    firebase.storage().ref().child(`profile/${photo}`).getDownloadURL().then(function (url) {
+        document.getElementById(`${name}pic`).setAttribute('src', url);
+        //return;
+    }).catch(function (error) {
+        return error;
+    });
+}
 
+//If the admin clicks on the edit button, gets the 
+var editInfo = document.getElementById("editInfo");
 
+function view(userId) {
 
+    console.log(userId);
+    editInfo.style.visibility = "visible";
+    populateInfoEdit(userId);
+
+    //Cancel the the edit button changes
+    var cancelChanges = document.getElementById("cancelInfoChanges");
+    cancelChanges.addEventListener("click", () => {
+        document.getElementById("editInfo").style.visibility = "hidden";
+        window.location.reload();
+    })
+    if (!done) {
+        var submitChanges = document.getElementById("submitInfoChanges");
+        submitChanges.addEventListener("click", () => {
+            console.log("submitted");
+            submitInfoChanges(userId);
+            done = true;
+
+        })
+
+    }
+
+}
+
+function deleteUser(id, name){
+    var txt;
+    if (confirm("Are you sure you want to delete the user " + name)) {
+        var path = JSON.stringify(db.collection('users').doc(id));
         
+    } else {
+    }
+}
 
-// function tableCreate(list) {
-//     // Get the element the table will go in
-//     var view = document.getElementById('view');
-//     // Create the table & style it
-//     var tbl = document.createElement('table');
-//     tbl.style.width = '60%';
-//     tbl.style.minWidth = '600px';
-//     tbl.style.margin = "0 auto 30px auto";
-//     tbl.setAttribute('border', '1');
-//     var tbdy = document.createElement('tbody');
-//     var z = 0;
-//     for (var i = 0; i < list.length; i++) {
-//         var tr = document.createElement('tr');
-//         for (var j = 0; j < 2; j++) {
-//             var td = document.createElement('td');
-//             td.style.textAlign = 'center';
-//             if (j == 0) {
-//                 // If the first column put name is table cell
-//                 td.appendChild(document.createTextNode(list[z]));
-//             } else if (j == 1) {
-//                 // If the second column create the buttons
-//                 var btnV = document.createElement("BUTTON");
-//                 btnV.setAttribute('value', list[z]);
-//                 btnV.setAttribute('onclick', "viewUser(this.value)");
-//                 var tV = document.createTextNode("View");
-//                 btnV.appendChild(tV);
+/**
+ * Call the 'recursiveDelete' callable function with a path to initiate
+ * a server-side delete.
+ */
+function deleteAtPath(path) {
+    var deleteFn = firebase.functions().httpsCallable('recursiveDelete');
+    deleteFn({ path: path })
+        .then(function(result) {
+            console.log('Delete success: ' + JSON.stringify(result));
+            window.replace.reload();
+        })
+        .catch(function(err) {
+            console.log('Delete failed, see console,');
+            console.warn(err);
+        });
+       
+}
 
-//                 var btnE = document.createElement("BUTTON");
-//                 btnE.setAttribute('value', list[z]);
-//                 btnE.setAttribute('onclick', "editUser(this.value)");
-//                 var tE = document.createTextNode("Edit");
-//                 btnE.appendChild(tE);
+//connects to firebase and submits changes made by the admin
+function submitInfoChanges(userId) {
 
-//                 var btnD = document.createElement("BUTTON");
-//                 btnD.setAttribute('value', list[z]);
-//                 btnD.setAttribute('onclick', "deleteUser(this.value)");
-//                 var tD = document.createTextNode("Delete");
-//                 btnD.appendChild(tD);
+    db.collection("users").doc(userId).update({
+            "nameDisplay": document.getElementById("editName").value,
+            "info.phoneNumber": document.getElementById("editPhone").value,
+            "info.major": document.getElementById("editMajor").value,
+            "info.track": document.getElementById("editTrack").value,
+            "info.graduation": document.getElementById("editGradDate").value,
+            "team": document.getElementById("editTeam").value,
+            "info.email": document.getElementById("editEmail").value,
+            "title": document.getElementById("editJobTitle").value,
+            "info.speed": document.getElementById("editSpeed").value
+        })
+        .then(function () {
+            console.log("Document successfully written!");
+            window.location.reload();
+        }).catch(function (error) {
+            // An error happened.
+        });
+    editInfo.style.visibility = "hidden";
+}
 
-//                 // Style the buttons
-//                 btnV.style.width = "5em";
-//                 btnE.style.width = "5em";
-//                 btnD.style.width = "5em";
-
-//                 // Put the buttons into the table cell
-//                 td.appendChild(btnV);
-//                 td.appendChild(btnE);
-//                 td.appendChild(btnD);
-//                 z++;
-//             }
-//             // Put the cell into the row
-//             tr.appendChild(td);
-//         }
-//         // Put the row into the table body
-//         tbdy.appendChild(tr);
-//     }
-//     // Put the body into the table
-//     tbl.appendChild(tbdy);
-//     // Put the table into the page
-//     view.appendChild(tbl)
-// }
-
-// // This function displays the users and their permissions
-// function viewUser(user) {
-//     // Make the modal visible
-//     viewModal.style.display = "block";
-//     var shot;
-//     var list = [];
-//     var data = [];
-//     // Loop through user
-//     firebase.database().ref('users/' + user).on('value', snapshot => {
-//         shot = snapshot.val();
-//         var titles;
-//         for (titles in shot) {
-//             if (titles == 'TimeClock' || titles == "info") {
-//                 // Don't add TimeClock or info to the list
-//                 continue;
-//             } else {
-//                 // Add everything else to the list
-//                 list.push(titles);
-//                 data.push(shot[titles]);
-//             }
-//         }
-//     })
-//     // Get where the table is going into
-//     var viewTable = document.getElementById('viewTable');
-//     // Create table and stlye it
-//     var tbl = document.createElement('table');
-//     tbl.style.width = '75%';
-//     tbl.style.margin = "0 auto 1em auto";
-//     tbl.setAttribute('border', '1');
-
-//     // Create table heading and style it
-//     var heading = document.createElement('caption');
-//     var node = document.createTextNode(user);
-//     heading.appendChild(node);
-//     heading.style.fontSize = "1.5em";
-//     heading.style.margin = "15px auto 20px auto";
-//     // Put heading into table
-//     tbl.appendChild(heading);
-
-//     // Create table body
-//     var tbdy = document.createElement('tbody');
-//     var z = 0;
-//     for (var i = 0; i < list.length; i++) {
-//         var tr = document.createElement('tr');
-//         for (var j = 0; j < 2; j++) {
-//             // Create table cell
-//             var td = document.createElement('td');
-//             td.style.textAlign = 'center';
-//             td.style.padding = "0.3em";
-//             td.style.textTransform = "capitalize";
-//             if (j == 0) {
-//                 // If first column add item name
-//                 // Put text into cell
-//                 td.appendChild(document.createTextNode(list[z]));
-//             } else if (j == 1) {
-//                 // If second column add item data
-//                 var t = document.createTextNode(data[z]);
-//                 // Put text into cell
-//                 td.appendChild(t);
-//             }
-//             // Put cell into row
-//             tr.appendChild(td);
-//         }
-//         // Move to next item in list
-//         z++;
-//         // Put row into table body
-//         tbdy.appendChild(tr);
-//     }
-//     // Put body into table
-//     tbl.appendChild(tbdy);
-//     // Put table into page
-//     viewTable.appendChild(tbl);
-// }
-
-// // This function edits the users and their permissions
-// function editUser(user) {
-//     // Make modal visible
-//     editModal.style.display = "block";
-//     var shot;
-//     var list = [];
-//     var data = [];
-//     // Loop through user
-//     firebase.database().ref('users/' + user).on('value', snapshot => {
-//         shot = snapshot.val();
-//         var titles;
-//         for (titles in shot) {
-//             if (titles == 'TimeClock' || titles == 'info') {
-//                 // Don't add TimeClock or info
-//                 continue;
-//             } else {
-//                 // Add item to list
-//                 list.push(titles);
-//                 data.push(shot[titles]);
-//             }
-//         }
-//     })
-//     // Get where table is to be put into page
-//     var editTable = document.getElementById('editTable');
-//     // Create table and style it
-//     var tbl = document.createElement('table');
-//     tbl.style.width = '75%';
-//     tbl.style.margin = "0 auto 1em auto";
-//     tbl.setAttribute('border', '1');
-
-//     // Add title to table & style it
-//     var heading = document.createElement('caption');
-//     var node = document.createTextNode(user);
-//     heading.appendChild(node);
-//     heading.style.fontSize = "1.5em";
-//     heading.style.margin = "15px auto 20px auto";
-//     tbl.appendChild(heading);
-
-//     // Create table body
-//     var tbdy = document.createElement('tbody');
-//     var z = 0;
-//     for (var i = 0; i < list.length; i++) {
-//         // Create table row
-//         var tr = document.createElement('tr');
-//         for (var j = 0; j < 2; j++) {
-//             // Create table cell & style it
-//             var td = document.createElement('td');
-//             td.style.textAlign = 'center';
-//             td.style.padding = "0";
-//             td.style.textTransform = "capitalize";
-
-//             // Create dropdown
-//             var sTF = document.createElement('select');
-//             sTF.setAttribute('onChange', "updateFirebase('" + user + "', this.value, '" + list[z] + "')");
-//             sTF.style.margin = '0.5em';
-//             var caps = data[z];
-//             caps = String(caps);
-//             caps = caps.charAt(0).toUpperCase() + caps.slice(1);
-//             sTF.innerHTML = "<option value='' selected disabled hidden>" + caps + "</option>";
-
-//             if (j == 0) {
-//                 // If column 1 put item name into cell
-//                 var t = document.createTextNode(list[z]);
-//                 td.setAttribute('value', list[z]);
-//                 td.appendChild(t);
-//                 td.value
-//             } else if (j == 1 && list[z] == 'Team') {
-//                 // If column 2 and item is Team add dropdown & options of team
-//                 sTF.innerHTML += "<select><option value='canvas 1'>Canvas 1</option><option value='canvas 2'>Canvas 2</option></select>";
-//                 td.appendChild(sTF);
-//             } else if (j == 1) {
-//                 // If column 2 add dropdown & options of true or false
-//                 sTF.innerHTML += "<select><option value='true'>True</option><option value='false'>False</option></select>";
-//                 td.appendChild(sTF);
-//             }
-//             // Style cell
-//             td.style.padding = '0.25em';
-//             // Put cell into row
-//             tr.appendChild(td);
-//         }
-//         // Move to next item
-//         z++;
-//         // Put row into table body
-//         tbdy.appendChild(tr);
-//     }
-//     // Put table body into table
-//     tbl.appendChild(tbdy);
-//     // Put table into page
-//     editTable.appendChild(tbl);
-// }
-
-// // This function sends the updated info to firebase
-// function updateFirebase(user, value, title) {
-//     var info;
-//     if (value === 'true') {
-//         // If the input is true change the text to a bool
-//         value === true;
-//         // Create Data string
-//         info = '{"' + title + '": ' + value + '}';
-//     } else if (value === 'false') {
-//         // If the input is false change the text to a bool
-//         value === false;
-//         // Create Data string
-//         info = '{"' + title + '": ' + value + '}';
-//     } else {
-//         // If not true or false keep the text and create data string
-//         info = '{"' + title + '": "' + value + '"}';
-//     };
-
-//     // Turn data string into json object
-//     info = JSON.parse(info);
-//     // Send to firebase
-//     firebase.database().ref('users/' + user).update(info)
-//         .then(function () {
-//             // If it worked tell the user
-//             alert('Firebase has been updated.')
-//         })
-//         .catch(function (error) {
-//             // If it did not work show the user
-//             alert(error);
-//         });
-//     // Reload page
-//     location.reload();
-// }
-
-// // Deletes the user from the database
-// function deleteUser(user) {
-//     // Check if user really wants to delete the person
-//     if (confirm('Are you sure you want to delete ' + user + ' from the database?')) {
-//         // If they said yes remove person
-//         return firebase.database().ref('users').child(user).remove()
-//             .then(function () {
-//                 // If removing the person worked remove person from dates
-//                 return firebase.database().ref('dates').child(user).remove()
-//                     .then(function () {
-//                         // If removing person from dates worked alert user
-//                         alert(user + ' is deleted');
-//                         // Reload page
-//                         location.reload();
-//                     })
-//                     .catch(function (error) {
-//                         // If removing persom from date did not work alert user
-//                         alert(error)
-//                     });
-//             })
-//             .catch(function (error) {
-//                 // If removing the person did not work alert user
-//                 alert(error)
-//             });
-//     }
-// }
-
-// // Get the View modal
-// var viewModal = document.getElementById('viewModal');
-
-// // Get the <span> element that closes the modal
-// var span = document.getElementsByClassName("close")[0];
-
-// // When the user clicks on <span> (x), close the modal
-// span.addEventListener('click', e => {
-//     var tableContent = document.getElementById('viewTable');
-//     while (tableContent.firstChild) {
-//         tableContent.removeChild(tableContent.firstChild);
-//     }
-//     viewModal.style.display = "none";
-// });
-
-// // When the user clicks anywhere outside of the modal, close it
-// window.addEventListener('click', e => {
-//     if (event.target == viewModal) {
-//         var tableContent = document.getElementById('viewTable');
-//         while (tableContent.firstChild) {
-//             tableContent.removeChild(tableContent.firstChild);
-//         }
-//         viewModal.style.display = "none";
-//     }
-// });
-
-// // Get the Edit modal
-// var editModal = document.getElementById('editModal');
-
-// // Get the <span> element that closes the modal
-// var span2 = document.getElementsByClassName("close")[1];
-
-// // When the user clicks on <span> (x), close the modal
-// span2.addEventListener('click', e => {
-//     var tableContent = document.getElementById('editTable');
-//     while (tableContent.firstChild) {
-//         tableContent.removeChild(tableContent.firstChild);
-//     }
-//     editModal.style.display = "none";
-// });
-
-// // When the user clicks anywhere outside of the modal, close it
-// window.addEventListener('click', e => {
-//     if (event.target == editModal) {
-//         var tableContent = document.getElementById('editTable');
-//         while (tableContent.firstChild) {
-//             tableContent.removeChild(tableContent.firstChild);
-//         }
-//         editModal.style.display = "none";
-//     }
-// });
+//populates the editor box
+function populateInfoEdit(doc) {
+    db.collection("users").doc(doc).get()
+        .then(function (doc) {
+            document.getElementById("nameForEdit").innerText = doc.data().nameDisplay + "'s Information";
+            document.getElementById("editName").setAttribute("value", `${doc.data().nameDisplay}`);
+            document.getElementById("editPhone").setAttribute("value", `${doc.data().info.phoneNumber}`);
+            document.getElementById("editMajor").setAttribute("value", `${doc.data().info.major}`);
+            var idTrack = doc.data().info.track;
+            console.log(idTrack);
+            document.getElementById(idTrack).setAttribute("selected", "selected");
+            document.getElementById("editGradDate").setAttribute("value", `${doc.data().info.graduation}`);
+            var idTeam = doc.data().team;
+            console.log(idTeam);
+            document.getElementById(idTeam).setAttribute("selected", "selected");
+            document.getElementById("editEmail").setAttribute("value", `${doc.data().info.email}`);
+            var idTitle = doc.data().title;
+            console.log(idTitle);
+            document.getElementById(idTitle).setAttribute("selected", "selected");
+            document.getElementById("editSpeed").setAttribute("value", `${doc.data().info.speed}`);
+        })
+}

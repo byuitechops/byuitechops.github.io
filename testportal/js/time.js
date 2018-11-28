@@ -1,28 +1,24 @@
-function getUserData() {
-  if (userName != null) {
-    db.collection('users').where("name", "==", userName)
-      .get()
-      .then(function (querySnapshot) {
-        if (querySnapshot.empty) {
-          console.log("No User with the name: " + userName);
-        } else {
-          querySnapshot.forEach(function (doc) {
-            console.log(doc.id, " => ", doc.data());
-            data = doc.data();
-            userId = doc.id;
-            loadUser();
-          });
-        }
-      })
-      .catch(function (error) {
-        console.log("Error getting documents: ", error);
-      });
-  } else {
-    window.setTimeout("getUserData()", 100);
-  }
+var minutes = 15;
+var seconds = 00;
+if (localStorage.getItem('minutes') != null) {
+  minutes = Number(localStorage.getItem("minutes"));
+  seconds = localStorage.getItem("seconds");
 }
-getUserData();
 
+function loadPage() {
+
+  if (minutes < 10) {
+    minutes = "0" + Number(minutes);
+  }
+  if (seconds < 10) {
+    seconds = "0" + seconds;
+  }
+  localStorage.setItem("minutes", minutes);
+  localStorage.setItem("minutes", seconds);
+  document.getElementById("minutes").textContent = minutes;
+  document.getElementById("seconds").textContent = seconds;
+  loadUser();
+}
 
 function loadUser() {
   if (data.time.break) {
@@ -68,7 +64,8 @@ document.getElementById('checkInBtn').addEventListener('click', () => {
   if (!data.time.check) {
     //if the user is logged out, update firebase so now it is logged in
     db.collection('users').doc(userId).update({
-      "time.check": true
+      "time.check": true,
+      "time.breakAllowed": false
     });
     db.collection('users').doc(userId).collection('hoursWorked').doc(setDate).set({
       "start": setDate.slice(-5)
@@ -84,12 +81,20 @@ document.getElementById('checkOutBtn').addEventListener('click', () => {
   var setDate = editDate(new Date());
   //verifies if the user is actually logged in
   if (data.time.check) {
-    //if the user is then logging out, updates that on firebase and updates the end time on hours worked
+    //if the user is then clocking out, updates that on firebase and updates the end time on hours worked
 
     db.collection('users').doc(userId).update({
       "time.checkKey": setDate,
-      "time.check": false
+      "time.check": false,
+
     });
+    if (data.time.break) {
+      db.collection('users').doc(userId).update({
+        "time.break": false,
+        "time.breakKey": setDate,
+        "time.breakAllowed": false
+      });
+    }
     db.collection('users').doc(userId).collection('hoursWorked').doc(data.time.checkKey).update({
       "end": data.time.checkKey.slice(-5)
     })
@@ -106,6 +111,8 @@ document.getElementById('breakBtn').addEventListener('click', () => {
   var setDate = editDate(new Date());
   // End break
   if (data.time.break) {
+    document.getElementById("minutes").style.color = "black";
+    document.getElementById("seconds").style.color = "black";
     db.collection('users').doc(userId).update({
       "time.break": false,
       "time.breakKey": setDate
@@ -114,17 +121,21 @@ document.getElementById('breakBtn').addEventListener('click', () => {
       "end": setDate.slice(-5)
     })
   } else {
-    // Start Break
-    db.collection('users').doc(userId).update({
-      "time.break": true
-    });
-    db.collection('users').doc(userId).collection('breaks').doc(setDate).set({
-      "start": setDate.slice(-5)
-    });
-    //runs this variable every second
-    timer = setInterval(countdown, 1000);
+    if (!data.time.check) {
+      alert("You are logged out. No breaks are allowed");
+    } else {
+      // Start Break
+      db.collection('users').doc(userId).update({
+        "time.break": true
+      });
+      db.collection('users').doc(userId).collection('breaks').doc(setDate).set({
+        "start": setDate.slice(-5)
+      });
+      //runs this variable every second
+      timer = setInterval(countdown, 1000);
+    }
   }
-  getUserData();
+  getUser();
 })
 
 function editDate(date) {
@@ -137,25 +148,6 @@ function editDate(date) {
   return setDate;
 }
 
-if (localStorage.getItem('minutes') != null) {
-  var minutes = localStorage.getItem("minutes");
-  var seconds = localStorage.getItem("seconds");
-} else {
-  var minutes = 15;
-  var seconds = 00;
-}
-// var minutes = 15;
-// var seconds = 00;
-if (minutes < 10) {
-  minutes = "0" + Number(minutes);
-}
-if (seconds < 10) {
-  seconds = "0" + seconds;
-}
-
-function setBreak(minutes, seconds) {
-  
-}
 var timer;
 //countdown timer
 function countdown() {
@@ -175,14 +167,15 @@ function countdown() {
     localStorage.removeItem('seconds');
   }
 
-  if (minutes == 0 && seconds <= 0) {
+
+  if (minutes <= 0 && seconds <= 0) {
     minutes = 15;
     seconds = 00;
     document.getElementById("minutes").style.color = "red";
     document.getElementById("seconds").style.color = "red";
     // clearInterval(timer);
   }
-  
+
   if (minutes < 10) {
     minutes = "0" + Number(minutes);
   }
@@ -193,8 +186,6 @@ function countdown() {
   document.getElementById("minutes").textContent = minutes;
   document.getElementById("seconds").textContent = seconds;
 }
-document.getElementById("minutes").textContent = minutes;
-document.getElementById("seconds").textContent = seconds;
 
 //calculator
 var modal = document.getElementById('myModal');
@@ -234,3 +225,41 @@ document.getElementById("submitBtn").addEventListener('click', () => {
 
   document.getElementById('clockOutTime').innerText = `${ansHour}:${ansMin} ${mer}`;
 })
+
+
+
+//attempt to implement regulated and timed breaks
+// function loadPage() {
+//   totalMinWorked = getMinWorked();
+//   allowBreak(totalMinWorked);
+//   if (localStorage.getItem('minutes') != null && data.time.breakAllowed) {
+//     var minutes = Number(localStorage.getItem("minutes")) + Number(5);
+//     //var minutes = Number(localStorage.getItem("minutes")) + Number(15);
+//     var seconds = localStorage.getItem("seconds");
+//     localStorage.setItem('minutes', minutes);
+//     localStorage.setItem('seconds', seconds);
+//   } else {
+//     var minutes = 00;
+//     var seconds = 00;
+//     localStorage.setItem('minutes', minutes);
+//     localStorage.setItem('seconds', seconds);
+//   }
+
+// function allowBreak(totalMinWorked) {
+//   if (totalMinWorked > 20 && totalMinWorked < 40) {
+//     db.collection('users').doc(userId).update({
+//       "time.breakAllowed": true
+//     });
+//   }
+// }
+
+// function getMinWorked() {
+//   var newTime = editDate(new Date()).slice(-5);
+//   //checks if the user is logged in
+//   var newTimeTotalMin = Number(newTime.slice(0, 2)) * 60 + Number(newTime.slice(3, 5));
+//   console.log(data.time.checkKey);
+//   var checkTimeTotalMin = Number(data.time.checkKey.slice(-5).slice(0, 2)) * 60 + Number(data.time.checkKey.slice(-5).slice(3, 5));
+//   var totalMinWorked = Number(newTimeTotalMin - checkTimeTotalMin);
+//   console.log(totalMinWorked);
+//   return totalMinWorked;
+// }

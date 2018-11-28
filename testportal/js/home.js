@@ -1,5 +1,5 @@
-function loadPage(){
-
+function loadPage() {
+  
 }
 
 var slideIndex = 1;

@@ -1,0 +1,430 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+#body-image {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30vw;
+  height: 100vh;
+  background-image: url("../../assets/holiday/christmas-body.png");
+  background-repeat: no-repeat;
+  background-position: top right;
+  background-size: 100%;
+  opacity: 0.4; }
+
+header {
+  background-image: url("../../assets/holiday/christmas-sidebar.png");
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: 100%; }
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: 'Open Sans', sans-serif; }
+
+body {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-areas: "a b b b b b b b b b" "a b b b b b b b b b" "a b b b b b b b b b" "a b b b b b b b b b" "a b b b b b b b b b";
+  height: 100vh;
+  width: 100%; }
+
+header {
+  grid-area: a;
+  background-color: #0076c6;
+  padding: 2em; }
+  header img {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%; }
+  header nav {
+    margin-top: 7em; }
+    header nav ul a {
+      color: #ffffff;
+      text-decoration: none; }
+      header nav ul a li {
+        list-style: none;
+        margin: 2em 0;
+        text-transform: uppercase; }
+
+main {
+  display: grid;
+  grid-area: b;
+  grid-template-rows: 20% 80%; }
+  main h1 {
+    padding: 2em;
+    grid-column: 1 /span 2;
+    font-size: 2.7em;
+    color: #727272;
+    font-weight: bold;
+    padding-left: 2.1em; }
+
+.hide {
+  display: none; }
+
+main {
+  display: grid;
+  grid-template-rows: 15% 85%;
+  grid-template-columns: 25% 70%;
+  grid-column-gap: 5%; }
+  main section:nth-of-type(1) {
+    position: relative;
+    background-image: url("../../assets/logo3.png");
+    background-repeat: no-repeat;
+    background-position: 90% 55%;
+    background-size: 50%;
+    grid-column: 1 /span 2;
+    grid-row: 1; }
+    main section:nth-of-type(1) #opacity {
+      background-color: #0076c6;
+      opacity: .8;
+      padding: 1em;
+      width: 100%;
+      height: 100%; }
+    main section:nth-of-type(1) h2 {
+      color: #ffffff;
+      position: absolute;
+      top: 1%;
+      left: 10%;
+      font-size: 50px;
+      margin-top: 50px;
+      margin-left: 100px; }
+    main section:nth-of-type(1) p {
+      color: #ffffff;
+      position: absolute;
+      top: 1%;
+      right: 10%;
+      font-size: 25px;
+      margin-top: 60px; }
+    main section:nth-of-type(1) #clock {
+      position: absolute;
+      top: 35%;
+      width: 3.5em;
+      height: auto;
+      right: 4.0em;
+      cursor: pointer; }
+    main section:nth-of-type(1) #toolTipBox {
+      visibility: hidden;
+      width: 450px;
+      height: 12em;
+      background-color: #0076c6;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px 0;
+      /* Position the tooltip */
+      position: absolute;
+      top: 110%;
+      right: 4.0em;
+      z-index: 1; }
+      main section:nth-of-type(1) #toolTipBox p {
+        position: absolute;
+        top: -50px;
+        left: 1.5em; }
+      main section:nth-of-type(1) #toolTipBox #box {
+        background-color: white;
+        height: 50%;
+        width: 70%;
+        margin: auto;
+        margin-top: 3em;
+        border-radius: 6spx; }
+      main section:nth-of-type(1) #toolTipBox #redeemTime {
+        font-size: 65px;
+        color: black;
+        top: -5px;
+        left: 50px; }
+      main section:nth-of-type(1) #toolTipBox #redeem {
+        border: none;
+        height: 2.3em;
+        width: 7em;
+        font-size: 15px;
+        margin: auto;
+        margin-top: 0.3em;
+        background-color: #7fc4fd;
+        color: white;
+        border-radius: 6px;
+        cursor: pointer; }
+        main section:nth-of-type(1) #toolTipBox #redeem:hover {
+          opacity: 0.80; }
+    main section:nth-of-type(1) #toolTipBox::after {
+      content: " ";
+      position: absolute;
+      bottom: 100%;
+      /* At the top of the tooltip */
+      left: 90%;
+      margin-left: -5px;
+      border-width: 10px;
+      border-style: solid;
+      border-color: transparent transparent #0076c6 transparent; }
+    main section:nth-of-type(1) #usingRedeem {
+      visibility: visible;
+      width: 60em;
+      height: 22em;
+      background-color: #0076c6;
+      opacity: 0.98;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px 0;
+      /* Position the tooltip */
+      position: absolute;
+      top: 200%;
+      right: 25%;
+      z-index: 1; }
+      main section:nth-of-type(1) #usingRedeem h2 {
+        margin: auto;
+        margin-top: .5em;
+        margin-left: 4em;
+        font-size: 40px; }
+      main section:nth-of-type(1) #usingRedeem input {
+        margin: auto;
+        margin-top: .5em;
+        margin-left: 4em;
+        font-size: 20px; }
+      main section:nth-of-type(1) #usingRedeem p {
+        margin-top: 3em;
+        margin-right: 18em;
+        font-size: 30px; }
+      main section:nth-of-type(1) #usingRedeem h1 {
+        margin-top: 1em;
+        margin-right: 18em;
+        margin-left: .5em;
+        font-size: 45px;
+        color: white; }
+      main section:nth-of-type(1) #usingRedeem #howMuch {
+        display: absolute;
+        padding-top: .8em;
+        top: .2em;
+        right: -17em;
+        margin-left: 5em;
+        font-size: 25px;
+        color: white; }
+      main section:nth-of-type(1) #usingRedeem div {
+        background-color: #f7f7f7;
+        height: 4em;
+        margin: auto;
+        margin-top: -9.5em;
+        margin-right: 5em;
+        padding-left: 2em;
+        margin-bottom: 2.5em;
+        border-radius: 2%;
+        width: 40%; }
+      main section:nth-of-type(1) #usingRedeem #timeDesired {
+        color: black;
+        position: relative;
+        margin-top: -4.2em;
+        margin-left: 12em; }
+      main section:nth-of-type(1) #usingRedeem button {
+        display: absolute;
+        border: none;
+        height: 4em;
+        width: 10em;
+        top: -3em;
+        margin-right: 2em;
+        background-color: #7fc4fd;
+        font-size: 16px;
+        margin-top: -12em;
+        margin-right: 3em;
+        border-radius: 5%;
+        color: white;
+        cursor: pointer; }
+        main section:nth-of-type(1) #usingRedeem button:hover {
+          opacity: 0.80; }
+    main section:nth-of-type(1) #confirmRedeem {
+      position: absolute;
+      width: 60em;
+      height: 22em;
+      background-color: #0076c6;
+      opacity: 0.98;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px 0;
+      top: 200%;
+      right: 25%;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      grid-template-rows: 1fr 1fr 1fr; }
+      main section:nth-of-type(1) #confirmRedeem img {
+        width: 100%;
+        grid-row: 1 /span 3;
+        display: block;
+        margin: 0 auto; }
+      main section:nth-of-type(1) #confirmRedeem h2 {
+        grid-row: 1;
+        position: initial;
+        margin: 0; }
+      main section:nth-of-type(1) #confirmRedeem p {
+        grid-row: 2;
+        position: initial;
+        margin: 0;
+        font-size: 4em; }
+      main section:nth-of-type(1) #confirmRedeem button {
+        margin: 1em auto;
+        grid-row: 3;
+        border: none;
+        height: 4em;
+        width: 10em;
+        border-radius: 5%;
+        color: white;
+        cursor: pointer;
+        background-color: #7fc4fd;
+        font-size: 16px; }
+        main section:nth-of-type(1) #confirmRedeem button:hover {
+          opacity: 0.8; }
+    main section:nth-of-type(1) #profilePic {
+      position: absolute;
+      top: 35%;
+      width: 9.5em;
+      height: auto;
+      left: 2.0em;
+      background: white;
+      border-radius: 50%;
+      z-index: 1; }
+    main section:nth-of-type(1) #signOutBtn {
+      cursor: pointer; }
+  main section:nth-of-type(2) {
+    grid-column: 1 /span 1;
+    grid-row: 2;
+    height: 100%; }
+    main section:nth-of-type(2) #editContact {
+      cursor: pointer; }
+      main section:nth-of-type(2) #editContact:hover {
+        opacity: .5; }
+    main section:nth-of-type(2) div {
+      position: relative;
+      background-color: #f7f7f7;
+      height: 15em;
+      padding-top: 70px;
+      padding-bottom: 0;
+      padding-left: 1em; }
+      main section:nth-of-type(2) div img {
+        position: absolute;
+        right: 1em;
+        top: 5.5em; }
+    main section:nth-of-type(2) button {
+      width: 100%;
+      border: none; }
+      main section:nth-of-type(2) button img {
+        height: 6%;
+        cursor: pointer; }
+        main section:nth-of-type(2) button img:hover {
+          opacity: .7; }
+    main section:nth-of-type(2) #info {
+      padding: 0 1.0em;
+      height: 0;
+      transition: height 1s;
+      overflow: hidden; }
+    main section:nth-of-type(2) #aboutMe {
+      padding: 0.5em;
+      padding-left: 1em;
+      height: 64%;
+      transition: height 1s, overflow 1s;
+      overflow: auto; }
+    main section:nth-of-type(2) h3 {
+      color: #0076c6;
+      font-size: 27px;
+      margin-bottom: 5px; }
+    main section:nth-of-type(2) p {
+      margin-bottom: 5px; }
+  main section:nth-of-type(3) {
+    grid-column: 2 /span 1;
+    grid-row: 2; }
+    main section:nth-of-type(3) div {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      background-color: #f7f7f7;
+      height: 12em;
+      margin-top: 60px;
+      padding-top: 16px;
+      padding-left: 2em;
+      margin-bottom: 2.5em;
+      width: 90%; }
+      main section:nth-of-type(3) div h3 {
+        grid-column: 1/span 3;
+        color: #0076c6;
+        font-size: 27px;
+        margin-bottom: 5px;
+        align-content: right;
+        color: black; }
+      main section:nth-of-type(3) div p {
+        color: #0076c6; }
+    main section:nth-of-type(3) #leadAdmin {
+      visibility: hidden; }
+    main section:nth-of-type(3) #editInfo {
+      display: inline;
+      visibility: hidden;
+      width: 60em;
+      height: 20em;
+      background-color: #0076c6;
+      opacity: 0.98;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px 0;
+      position: absolute;
+      top: 17%;
+      left: 33%;
+      z-index: 1; }
+      main section:nth-of-type(3) #editInfo h2 {
+        margin-top: .5em;
+        font-size: 30px; }
+      main section:nth-of-type(3) #editInfo p {
+        color: white;
+        margin-top: .1em;
+        margin-left: -22em;
+        font-size: 30px; }
+      main section:nth-of-type(3) #editInfo input {
+        position: absolute;
+        margin-top: -2em;
+        left: 21em; }
+      main section:nth-of-type(3) #editInfo #aboutMe {
+        position: absolute;
+        left: 39.3em;
+        top: 2em; }
+      main section:nth-of-type(3) #editInfo #editAboutMe {
+        position: absolute;
+        left: 35.5em;
+        top: 8em;
+        height: 14em;
+        width: 18em;
+        text-align: center;
+        word-wrap: break-word;
+        word-break: break-all; }
+      main section:nth-of-type(3) #editInfo #submitInfoChanges {
+        position: absolute;
+        margin-top: -10em;
+        left: 47em;
+        background-color: white;
+        border: none;
+        height: 4em;
+        width: 10em;
+        border-radius: 5%;
+        color: white;
+        cursor: pointer;
+        background-color: #7fc4fd;
+        font-size: 16px; }
+        main section:nth-of-type(3) #editInfo #submitInfoChanges:hover {
+          opacity: 0.8; }
+      main section:nth-of-type(3) #editInfo #cancelInfoChanges {
+        position: absolute;
+        margin-top: -5em;
+        left: 47em;
+        background-color: white;
+        border: none;
+        height: 4em;
+        width: 10em;
+        border-radius: 5%;
+        color: white;
+        cursor: pointer;
+        background-color: #7fc4fd;
+        font-size: 16px; }
+        main section:nth-of-type(3) #editInfo #cancelInfoChanges:hover {
+          opacity: 0.8; }
+
+/*# sourceMappingURL=profile_holiday.css.map */

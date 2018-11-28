@@ -1,0 +1,3 @@
+function loadPage() {
+    // load page
+}

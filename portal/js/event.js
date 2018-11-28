@@ -16,6 +16,7 @@ window.onclick = function (event) {
 }
 
 function showEvent() {
+    christmasCountdown();
     firebase.database().ref('dates').on('value', snap => {
         snap = snap.val();
 
@@ -178,4 +179,41 @@ function showEvent() {
             }
         }
     })
+}
+
+
+function christmasCountdown() {
+    // Get the modal
+    var christmasModal = document.getElementById('christmasModal');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == christmasModal) {
+            christmasModal.style.display = "none";
+            document.getElementsByClassName('content')[0].style.overflow = 'initial';
+        }
+    }
+
+    Date.daysBetween = function (date1, date2) {
+        //Get 1 day in milliseconds
+        var one_day = 1000 * 60 * 60 * 24;
+
+        // Convert both dates to milliseconds
+        var date1_ms = date1.getTime();
+        var date2_ms = date2.getTime();
+
+        // Calculate the difference in milliseconds
+        var difference_ms = date2_ms - date1_ms;
+
+        // Convert back to days and return
+        return Math.round(difference_ms / one_day);
+    }
+
+    const today = new Date();
+    if (today.getMonth() > 9) {
+        christmasModal.style.display = "block";
+        var christmas = new Date(today.getFullYear(), 11, 25);
+        var daysLeft = Math.abs(Date.daysBetween(christmas, today));
+        document.getElementById('christmasText').innerText = `${daysLeft} days left till Christmas`;
+    }
 }

@@ -1,0 +1,187 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+#body-image {
+  display: none; }
+
+header {
+  background-image: none; }
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: 'Open Sans', sans-serif; }
+
+body {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-areas: "a b b b b b b b b b" "a b b b b b b b b b" "a b b b b b b b b b" "a b b b b b b b b b" "a b b b b b b b b b";
+  height: 100vh;
+  width: 100%; }
+
+header {
+  grid-area: a;
+  background-color: #0076c6;
+  padding: 2em; }
+  header img {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%; }
+  header nav {
+    margin-top: 7em; }
+    header nav ul a {
+      color: #ffffff;
+      text-decoration: none; }
+      header nav ul a li {
+        list-style: none;
+        margin: 2em 0;
+        text-transform: uppercase; }
+
+main {
+  display: grid;
+  grid-area: b;
+  grid-template-rows: 20% 80%; }
+  main h1 {
+    padding: 2em;
+    grid-column: 1 /span 2;
+    font-size: 2.7em;
+    color: #727272;
+    font-weight: bold;
+    padding-left: 2.1em; }
+
+.hide {
+  display: none; }
+
+main {
+  display: grid;
+  grid-template-rows: 55% 40%;
+  grid-row-gap: 4%; }
+  main section#welcome {
+    margin: 4%;
+    margin-bottom: 0;
+    /* Slideshow container */
+    /* Next & previous buttons */
+    /* Position the "next button" to the right */
+    /* On hover, add a black background color with a little bit see-through */
+    /* Caption text */
+    /* Number text (1/3 etc) */
+    /* The dots/bullets/indicators */
+    /* Fading animation */
+    /* On smaller screens, decrease text size */ }
+    main section#welcome .mySlides {
+      display: none; }
+    main section#welcome img {
+      vertical-align: middle; }
+    main section#welcome .slideshow-container {
+      height: 90%;
+      overflow: hidden;
+      position: relative;
+      margin: auto; }
+    main section#welcome .prev,
+    main section#welcome .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      width: auto;
+      padding: 16px;
+      margin-top: -22px;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      transition: 0.6s ease;
+      border-radius: 0 3px 3px 0; }
+    main section#welcome .next {
+      right: 0;
+      border-radius: 3px 0 0 3px; }
+    main section#welcome .prev:hover,
+    main section#welcome .next:hover {
+      background-color: rgba(0, 0, 0, 0.8); }
+    main section#welcome .text {
+      color: #f2f2f2;
+      font-size: 15px;
+      padding: 8px 12px;
+      position: absolute;
+      bottom: 8px;
+      width: 100%;
+      text-align: center; }
+    main section#welcome .numbertext {
+      color: #f2f2f2;
+      font-size: 12px;
+      padding: 8px 12px;
+      position: absolute;
+      top: 0; }
+    main section#welcome .dot {
+      cursor: pointer;
+      height: 15px;
+      width: 15px;
+      margin: 0 2px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.6s ease; }
+    main section#welcome .active,
+    main section#welcome .dot:hover {
+      background-color: #717171; }
+    main section#welcome .fade {
+      -webkit-animation-name: fade;
+      -webkit-animation-duration: 1.5s;
+      animation-name: fade;
+      animation-duration: 1.5s; }
+@-webkit-keyframes fade {
+  from {
+    opacity: 0.4; }
+  to {
+    opacity: 1; } }
+@keyframes fade {
+  from {
+    opacity: 0.4; }
+  to {
+    opacity: 1; } }
+    @media only screen and (max-width: 300px) {
+      main section#welcome .prev,
+      main section#welcome .next,
+      main section#welcome .text {
+        font-size: 11px; } }
+  main section#links {
+    margin: 4%;
+    margin-top: 0;
+    display: flex;
+    justify-content: space-between; }
+    main section#links a {
+      width: 30%; }
+      main section#links a div {
+        background-color: #f1f8fe;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        justify-content: center; }
+        main section#links a div img {
+          position: absolute;
+          right: 0;
+          width: 75%;
+          height: 100%;
+          z-index: 0; }
+        main section#links a div div {
+          position: absolute;
+          padding: 1em;
+          width: 100%;
+          height: 100%;
+          background-color: #0076c6;
+          opacity: .7; }
+          main section#links a div div:hover {
+            opacity: 0.5; }
+        main section#links a div p {
+          position: absolute; }
+          main section#links a div p span {
+            color: #ffffff;
+            display: block; }
+            main section#links a div p span:nth-of-type(1) {
+              font-size: 300%; }
+            main section#links a div p span:nth-of-type(2) {
+              font-size: 1.5em; }
+
+/*# sourceMappingURL=home_light.css.map */
