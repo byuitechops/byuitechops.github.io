@@ -71,9 +71,14 @@ searchBar.addEventListener('keyup', event => {
     if (event.srcElement.value.length > 1) {
         spinner.style.display = 'block';
         filteredRepos = model.findRepositories(event.srcElement.value);
-        resultCount.innerHTML = `${filteredRepos.length} Results`;
+        if (filteredRepos.length > 1) {
+            resultCount.innerHTML = `${filteredRepos.length} Results`;
+        } else {
+            resultCount.innerHTML = `${filteredRepos.length} Result`;
+        }
         createCards(filteredRepos, filteredRepos.length);
     } else if (event.srcElement.value.length === 0) {
+        resultCount.innerHTML = '';
         filteredRepos = [];
         createCards();
     }
