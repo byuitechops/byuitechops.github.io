@@ -1,3 +1,7 @@
+function loadPage() {
+  getBreakTime();
+}
+
 function getUserData() {
   if (userName != null) {
     db.collection('users').where("name", "==", userName)
@@ -148,12 +152,39 @@ function editDate(date) {
   return setDate;
 }
 
+
+var done = false;
+
+function getBreakTime() {
+
+  var newTime = editDate(new Date()).slice(-5);
+  //checks if the user is logged in
+  var newTimeTotalMin = Number(newTime.slice(0, 2)) * 60 + Number(newTime.slice(3, 5));
+  console.log(data.time.checkKey);
+  var checkTimeTotalMin = Number(data.time.checkKey.slice(-5).slice(0, 2)) * 60 + Number(data.time.checkKey.slice(-5).slice(3, 5));
+  var totalMinWorked = Number(newTimeTotalMin - checkTimeTotalMin);
+  console.log(totalMinWorked);
+  if (totalMinWorked > 120 && !done) {
+    done = true;
+    return 15;
+  }
+  // if (totalMinWorked == 255) {
+  //   return 15;
+  // }
+  // if (totalMinWorked == 370) {
+  //   return 15;
+  // }
+}
+
 if (localStorage.getItem('minutes') != null) {
-  var minutes = localStorage.getItem("minutes");
+  var temp = localStorage.getItem("minutes");
+ // temp = Number(temp) + Number(15);
+  //var minutes = Number(localStorage.getItem("minutes")) + Number(getBreakTime());
+  var minutes = Number(localStorage.getItem("minutes")) + Number(15);
   var seconds = localStorage.getItem("seconds");
 } else {
-  var minutes = 15;
-  var seconds = 00;
+  var minutes = 01;
+  var seconds = 01;
 }
 
 if (minutes < 10) {
@@ -181,6 +212,7 @@ function countdown() {
     localStorage.removeItem('minutes');
     localStorage.removeItem('seconds');
   }
+  
 
   if (minutes == 0 && seconds <= 0) {
     minutes = 15;

@@ -174,6 +174,8 @@ main {
         main section#content section#right div button {
           width: 100%;
           cursor: pointer; }
+        main section#content section#right div button:hover {
+          opacity: 0.8; }
 
 #checkoutModal div {
   /* The container */

@@ -92,6 +92,7 @@ main {
                         &:disabled {
                             background-color: grey;
                             cursor: initial;
+
                             &:hover {
                                 opacity: 1;
                             }
@@ -142,6 +143,7 @@ main {
                         span:last-child {
                             position: relative;
                             left: 3em;
+
                             span {
                                 margin: 0 1em;
                                 display: inline;
@@ -154,6 +156,7 @@ main {
                     p:first-of-type {
                         display: flex;
                         justify-content: space-between;
+
                         span {
                             left: 0;
                         }
@@ -170,6 +173,10 @@ main {
                     width: 100%;
                     cursor: pointer;
                 }
+
+                button:hover {
+                    opacity: 0.8;
+                }
             }
         }
 
@@ -183,6 +190,7 @@ main {
             display: grid;
             grid-template-columns: 1fr 1fr;
             margin: 1em 0;
+
             span {
                 font-size: 0.75em;
                 margin: 0.25em 1em;
@@ -271,10 +279,12 @@ main {
         &:disabled {
             background-color: grey;
             cursor: initial;
-            &:hover {
-                opacity: 1;
-            }
         }
+
+        &:hover {
+            opacity: 0.8;
+        }
+
     }
 }
 
