@@ -1,4 +1,4 @@
-export class Modal {
+export class Model {
     constructor() {
         this.repositories = [];
     }

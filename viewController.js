@@ -1,12 +1,13 @@
 import {
-    Modal
-} from '/modal.mjs';
+    Model
+} from '/model.mjs';
 
-let modal = new Modal();
+let model = new Model();
 let cardContainer = document.getElementById('repositories');
 let filterContainer = document.getElementById('filters');
 let spinner = document.getElementById('loader');
 let searchBar = document.getElementById('searchBar');
+let resultCount = document.getElementById('resultCount');
 let filteredRepos = [];
 let dateFormat = 'DD, hh:mm A';
 
@@ -33,7 +34,7 @@ function createFilters() {
 function createCards(repositories = [], count = 8) {
     let templateStr = '';
     if (repositories.length === 0) {
-        repositories = modal.repositories;
+        repositories = model.repositories;
     }
     repositories.forEach((repository, i) => {
         if (i < count) {
@@ -63,14 +64,14 @@ function createCards(repositories = [], count = 8) {
         }
     });
     spinner.style.display = 'none';
-
     cardContainer.innerHTML = templateStr.replace(/null/gi, 'N/A');
 }
 
 searchBar.addEventListener('keyup', event => {
-    if (event.srcElement.value.length > 2) {
+    if (event.srcElement.value.length > 1) {
         spinner.style.display = 'block';
-        filteredRepos = modal.findRepositories(event.srcElement.value);
+        filteredRepos = model.findRepositories(event.srcElement.value);
+        resultCount.innerHTML = `${filteredRepos.length} Results`;
         createCards(filteredRepos, filteredRepos.length);
     } else if (event.srcElement.value.length === 0) {
         filteredRepos = [];
@@ -79,9 +80,9 @@ searchBar.addEventListener('keyup', event => {
 });
 
 filterContainer.addEventListener('change', event => {
-    modal.sortRepositories(event.srcElement.value);
+    model.sortRepositories(event.srcElement.value);
     if (filteredRepos.length > 0) {
-        filteredRepos = modal.findRepositories(searchBar.value);
+        filteredRepos = model.findRepositories(searchBar.value);
         createCards(filteredRepos, filteredRepos.length);
     } else {
         createCards();
@@ -89,17 +90,17 @@ filterContainer.addEventListener('change', event => {
 });
 
 // Start Here
-modal.fetchRepositories(1, (err) => {
+model.fetchRepositories(1, (err) => {
     if (err) {
         console.error(err);
         return;
     }
     console.log('Repositories successfully retrieved.');
-    modal.sortRepositories();
+    model.sortRepositories();
     setupView();
 });
-// Initializes the Materialize Modal
+// Initializes the Materialize model
 document.addEventListener('DOMContentLoaded', () => {
-    var elems = document.querySelectorAll('.modal');
-    var instances = M.Modal.init(elems);
+    var elems = document.querySelectorAll('.model');
+    var instances = M.model.init(elems);
 });
