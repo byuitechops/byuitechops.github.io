@@ -104,8 +104,3 @@ model.fetchRepositories(1, (err) => {
     model.sortRepositories();
     setupView();
 });
-// Initializes the Materialize model
-document.addEventListener('DOMContentLoaded', () => {
-    var elems = document.querySelectorAll('.model');
-    var instances = M.model.init(elems);
-});
