@@ -52,7 +52,7 @@ function createCards(repositories = [], count = 8) {
                                 </ul>
                             </div>
                             <div class="card-action">
-                                <a class="orange-text darken-1" href="${repository.html_url}">Repository Link</a>
+                                <a class="orange-text darken-1" target="_blank" href="${repository.html_url}">Repository Link</a>
                             </div>
                         </div>`;
             if (i === 0) {
