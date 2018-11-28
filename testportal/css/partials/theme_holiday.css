@@ -6,14 +6,14 @@
   right: 0;
   width: 30vw;
   height: 100vh;
-  background-image: url("../assets/holiday/christmas-body.png");
+  background-image: url("../../assets/holiday/christmas-body.png");
   background-repeat: no-repeat;
   background-position: top right;
   background-size: 100%;
   opacity: 0.4; }
 
 header {
-  background-image: url("../assets/holiday/christmas-sidebar.png");
+  background-image: url("../../assets/holiday/christmas-sidebar.png");
   background-repeat: no-repeat;
   background-position: bottom center;
   background-size: 100%; }

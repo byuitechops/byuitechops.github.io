@@ -73,6 +73,6 @@ function setTheme() {
  
   link.setAttribute('rel', "stylesheet");
   link.setAttribute('type', "text/css");
-  link.setAttribute('href', `css/${pageName}_${theme}.css`);
+  link.setAttribute('href', `css/${pageName}/${pageName}_${theme}.css`);
   document.getElementsByTagName('head')[0].insertAdjacentElement('beforeend', link);
 }

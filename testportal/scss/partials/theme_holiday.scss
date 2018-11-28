@@ -18,7 +18,7 @@ $body-image: "christmas-body.png";
     right: 0;
     width: 30vw;
     height: 100vh;
-    background-image: url("../assets/holiday/" + $body-image);
+    background-image: url("../../assets/holiday/" + $body-image);
     background-repeat: no-repeat;
     background-position: top right;
     background-size: 100%;
@@ -27,7 +27,7 @@ $body-image: "christmas-body.png";
 }
 
 header {
-    background-image: url("../assets/holiday/" + $sidebar-image);
+    background-image: url("../../assets/holiday/" + $sidebar-image);
     background-repeat: no-repeat;
     background-position: bottom center;
     background-size: 100%;

@@ -50,3 +50,7 @@ accessibility.addEventListener("click", () => {
 slack.addEventListener("click", () => {
     window.open("https://byuitechops.slack.com/messages/GABFXPE8L/details/");
 })
+
+function loadPage() {
+    // load the page
+}
