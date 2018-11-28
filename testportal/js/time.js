@@ -1,32 +1,24 @@
+var minutes = 15;
+var seconds = 00;
+if (localStorage.getItem('minutes') != null) {
+  minutes = Number(localStorage.getItem("minutes"));
+  seconds = localStorage.getItem("seconds");
+}
+
 function loadPage() {
-  getBreakTime();
-}
 
-function getUserData() {
-  if (userName != null) {
-    db.collection('users').where("name", "==", userName)
-      .get()
-      .then(function (querySnapshot) {
-        if (querySnapshot.empty) {
-          console.log("No User with the name: " + userName);
-        } else {
-          querySnapshot.forEach(function (doc) {
-            console.log(doc.id, " => ", doc.data());
-            data = doc.data();
-            userId = doc.id;
-            loadUser();
-          });
-        }
-      })
-      .catch(function (error) {
-        console.log("Error getting documents: ", error);
-      });
-  } else {
-    window.setTimeout("getUserData()", 100);
+  if (minutes < 10) {
+    minutes = "0" + Number(minutes);
   }
+  if (seconds < 10) {
+    seconds = "0" + seconds;
+  }
+  localStorage.setItem("minutes", minutes);
+  localStorage.setItem("minutes", seconds);
+  document.getElementById("minutes").textContent = minutes;
+  document.getElementById("seconds").textContent = seconds;
+  loadUser();
 }
-getUserData();
-
 
 function loadUser() {
   if (data.time.break) {
@@ -72,7 +64,8 @@ document.getElementById('checkInBtn').addEventListener('click', () => {
   if (!data.time.check) {
     //if the user is logged out, update firebase so now it is logged in
     db.collection('users').doc(userId).update({
-      "time.check": true
+      "time.check": true,
+      "time.breakAllowed": false
     });
     db.collection('users').doc(userId).collection('hoursWorked').doc(setDate).set({
       "start": setDate.slice(-5)
@@ -98,7 +91,8 @@ document.getElementById('checkOutBtn').addEventListener('click', () => {
     if (data.time.break) {
       db.collection('users').doc(userId).update({
         "time.break": false,
-        "time.breakKey": setDate
+        "time.breakKey": setDate,
+        "time.breakAllowed": false
       });
     }
     db.collection('users').doc(userId).collection('hoursWorked').doc(data.time.checkKey).update({
@@ -117,6 +111,8 @@ document.getElementById('breakBtn').addEventListener('click', () => {
   var setDate = editDate(new Date());
   // End break
   if (data.time.break) {
+    document.getElementById("minutes").style.color = "black";
+    document.getElementById("seconds").style.color = "black";
     db.collection('users').doc(userId).update({
       "time.break": false,
       "time.breakKey": setDate
@@ -139,7 +135,7 @@ document.getElementById('breakBtn').addEventListener('click', () => {
       timer = setInterval(countdown, 1000);
     }
   }
-  getUserData();
+  getUser();
 })
 
 function editDate(date) {
@@ -150,48 +146,6 @@ function editDate(date) {
   var minute = ("0" + date.getMinutes()).slice(-2);
   var setDate = `${year}-${month}-${day} ${hour}:${minute}`;
   return setDate;
-}
-
-
-var done = false;
-
-function getBreakTime() {
-
-  var newTime = editDate(new Date()).slice(-5);
-  //checks if the user is logged in
-  var newTimeTotalMin = Number(newTime.slice(0, 2)) * 60 + Number(newTime.slice(3, 5));
-  console.log(data.time.checkKey);
-  var checkTimeTotalMin = Number(data.time.checkKey.slice(-5).slice(0, 2)) * 60 + Number(data.time.checkKey.slice(-5).slice(3, 5));
-  var totalMinWorked = Number(newTimeTotalMin - checkTimeTotalMin);
-  console.log(totalMinWorked);
-  if (totalMinWorked > 120 && !done) {
-    done = true;
-    return 15;
-  }
-  // if (totalMinWorked == 255) {
-  //   return 15;
-  // }
-  // if (totalMinWorked == 370) {
-  //   return 15;
-  // }
-}
-
-if (localStorage.getItem('minutes') != null) {
-  var temp = localStorage.getItem("minutes");
- // temp = Number(temp) + Number(15);
-  //var minutes = Number(localStorage.getItem("minutes")) + Number(getBreakTime());
-  var minutes = Number(localStorage.getItem("minutes")) + Number(15);
-  var seconds = localStorage.getItem("seconds");
-} else {
-  var minutes = 01;
-  var seconds = 01;
-}
-
-if (minutes < 10) {
-  minutes = "0" + Number(minutes);
-}
-if (seconds < 10) {
-  seconds = "0" + seconds;
 }
 
 var timer;
@@ -212,9 +166,9 @@ function countdown() {
     localStorage.removeItem('minutes');
     localStorage.removeItem('seconds');
   }
-  
 
-  if (minutes == 0 && seconds <= 0) {
+
+  if (minutes <= 0 && seconds <= 0) {
     minutes = 15;
     seconds = 00;
     document.getElementById("minutes").style.color = "red";
@@ -232,8 +186,6 @@ function countdown() {
   document.getElementById("minutes").textContent = minutes;
   document.getElementById("seconds").textContent = seconds;
 }
-document.getElementById("minutes").textContent = minutes;
-document.getElementById("seconds").textContent = seconds;
 
 //calculator
 var modal = document.getElementById('myModal');
@@ -273,3 +225,41 @@ document.getElementById("submitBtn").addEventListener('click', () => {
 
   document.getElementById('clockOutTime').innerText = `${ansHour}:${ansMin} ${mer}`;
 })
+
+
+
+//attempt to implement regulated and timed breaks
+// function loadPage() {
+//   totalMinWorked = getMinWorked();
+//   allowBreak(totalMinWorked);
+//   if (localStorage.getItem('minutes') != null && data.time.breakAllowed) {
+//     var minutes = Number(localStorage.getItem("minutes")) + Number(5);
+//     //var minutes = Number(localStorage.getItem("minutes")) + Number(15);
+//     var seconds = localStorage.getItem("seconds");
+//     localStorage.setItem('minutes', minutes);
+//     localStorage.setItem('seconds', seconds);
+//   } else {
+//     var minutes = 00;
+//     var seconds = 00;
+//     localStorage.setItem('minutes', minutes);
+//     localStorage.setItem('seconds', seconds);
+//   }
+
+// function allowBreak(totalMinWorked) {
+//   if (totalMinWorked > 20 && totalMinWorked < 40) {
+//     db.collection('users').doc(userId).update({
+//       "time.breakAllowed": true
+//     });
+//   }
+// }
+
+// function getMinWorked() {
+//   var newTime = editDate(new Date()).slice(-5);
+//   //checks if the user is logged in
+//   var newTimeTotalMin = Number(newTime.slice(0, 2)) * 60 + Number(newTime.slice(3, 5));
+//   console.log(data.time.checkKey);
+//   var checkTimeTotalMin = Number(data.time.checkKey.slice(-5).slice(0, 2)) * 60 + Number(data.time.checkKey.slice(-5).slice(3, 5));
+//   var totalMinWorked = Number(newTimeTotalMin - checkTimeTotalMin);
+//   console.log(totalMinWorked);
+//   return totalMinWorked;
+// }
