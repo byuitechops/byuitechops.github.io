@@ -64,7 +64,7 @@ function deleteUser(id, name){
     var txt;
     if (confirm("Are you sure you want to delete the user " + name)) {
         var path = JSON.stringify(db.collection('users').doc(id));
-        
+        deleteAthPath(path);
     } else {
     }
 }

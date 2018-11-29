@@ -85,7 +85,7 @@ main {
           cursor: pointer;
           opacity: 0.65; }
       main section div:nth-of-type(6), main section div:nth-of-type(12) {
-        background-color: #ffffff;
+        background-color: initial;
         color: #535353; }
 
 /*# sourceMappingURL=applications_dark.css.map */

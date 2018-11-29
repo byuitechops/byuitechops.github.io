@@ -10,7 +10,8 @@
   background-repeat: no-repeat;
   background-position: top right;
   background-size: 100%;
-  opacity: 0.4; }
+  opacity: 0.4;
+  z-index: -1; }
 
 header {
   background-image: url("../../assets/holiday/christmas-sidebar.png");

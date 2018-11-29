@@ -10,7 +10,8 @@
   background-repeat: no-repeat;
   background-position: top right;
   background-size: 100%;
-  opacity: 0.4; }
+  opacity: 0.4;
+  z-index: -1; }
 
 header {
   background-image: url("../../assets/holiday/christmas-sidebar.png");
@@ -98,7 +99,7 @@ main {
           cursor: pointer;
           opacity: 0.65; }
       main section div:nth-of-type(6), main section div:nth-of-type(12) {
-        background-color: #ffffff;
+        background-color: initial;
         color: #0076c6; }
 
 /*# sourceMappingURL=applications_holiday.css.map */

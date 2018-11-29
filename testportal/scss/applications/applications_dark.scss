@@ -54,7 +54,7 @@ main {
 
             &:nth-of-type(6),
             &:nth-of-type(12) {
-                background-color: $background;
+                background-color: initial;
                 color: $primary;
             }
         }
