@@ -22,7 +22,6 @@ db.settings({
 var signupBtn = document.getElementById('submitSignUp')
 signupBtn.addEventListener('click', () => {
 
-
     const email = document.getElementById("signUpEmail").value;
     const password = document.getElementById("signUpPassword").value;
 
@@ -30,13 +29,18 @@ signupBtn.addEventListener('click', () => {
         .then(function () {
 
             var info = {
-                "birthday": document.getElementById('signUpBirthday').value,
-                "email": document.getElementById('signUpEmail').value,
-                "graduation": document.getElementById('signUpGraduation').value,
-                "major": document.getElementById('signUpMajor').value,
-                "phoneNumber": document.getElementById('signUpPhone').value,
-                "track": document.getElementById('signUpTrack').value,
-                "photo": "default-image.png"
+                "email": email,
+                "photo": "default-image.png",
+                "phoneNumber": "000-000-0000",
+                "major": "",
+                "track": "",
+                "graduation": "",
+                "speed": ""
+            }
+
+            var time = {
+                "break": false,
+                "check": false
             }
 
             try {
@@ -47,7 +51,10 @@ signupBtn.addEventListener('click', () => {
                     name: document.getElementById('signUpName').value,
                     team: "default",
                     teamLead: false,
-                    info: info
+                    info: info,
+                    title: "Team Member",
+                    viewMode: "light",
+                    time: time
                 }
                 db.collection('users').doc().set(docData).then(function () {
                     console.log("Written");
@@ -62,11 +69,6 @@ signupBtn.addEventListener('click', () => {
                     });
                     // window.replace('home.html')
                 })
-                // firebase.database().ref('users/' + user).update(data);
-                // firebase.database().ref('users/' + user).child('info').update(info);
-                // firebase.database().ref('dates/' + user).update({
-                //     "birthday": document.getElementById('signUpBirthday').value
-                // });
                 // If it worked return true
                 return true;
             } catch (err) {
@@ -80,6 +82,9 @@ signupBtn.addEventListener('click', () => {
             var errorMessage = error.message;
             alert(errorMessage);
             alert("Check the information input and try again");
-
         });
 });
+
+document.getElementById('cancelSignUp').addEventListener('click', () => {
+    window.location.replace('index.html');
+})

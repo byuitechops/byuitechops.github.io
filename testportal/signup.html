@@ -14,35 +14,31 @@
 </head>
 
 <body>
-    <img id="header" src="assets/header.png">
     <section>
-        <div id="container" class="login">
-            <div id="lower">
-                <input type="text" id="signUpName" type="text" placeholder="First name - Last name" required>
-
-                <input id="signUpEmail" type="email" placeholder="BYU-I Email" required>
-
-                <input id="signUpPassword" type="password" placeholder="Password" required>
-
-                <input type="tel" id="signUpPhone" type="tel" placeholder="Phone Number" maxlength="10">
-
-                <input type="date" id="signUpBirthday" placeholder="Birthday mm/dd/yyyy" required>
-                <input type="text" id="signUpMajor" type="text" placeholder="Major" required>
-                <input type="text" id="signUpGraduation" required placeholder="Est. Graduation: ex. Fall 2020">
-                <select id="signUpTrack" required>
-
-                    <option value="" disabled selected hidden>Track</option>
-                    <option value='Winter/Spring'>Winter/Spring</option>
-                    <option value='Spring/Fall'>Spring/Fall</option>
-                    <option value='Fall/Winter'>Fall/Winter</option>
-
-                </select>
-
-                <button class="button" type="submit" id="submitSignUp"><span>Submit</span></button>
-            </div>
+        <img src="assets/byuiLogo.png">
+        <img src="assets/logo2.png">
     </section>
-    </div>
-
+    <section>
+        <div id="lower">
+            <p>Sign Up</p>
+            <label>
+                <span>Name</span>
+                <input type="text" id="signUpName" type="text" placeholder="First name - Last name" required>
+            </label>
+            <label>
+                <span>Email</span>
+                <input id="signUpEmail" type="email" placeholder="BYU-I Email" required>
+            </label>
+            <label>
+                <span>Password</span>
+                <input id="signUpPassword" type="password" placeholder="Password" required>
+            </label>
+            <div>
+                <button class="button" type="submit" id="submitSignUp"><span>Sign Up</span></button>
+                <button class="button" id="cancelSignUp"><span>Cancel</span></button>
+            </div>
+        </div>
+    </section>
 </body>
 <script src="js/signup.js"></script>
 

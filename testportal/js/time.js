@@ -11,7 +11,7 @@ function loadPage() {
     minutes = "0" + Number(minutes);
   }
   if (seconds < 10) {
-    seconds = "0" + seconds;
+    seconds = "0" + Number(seconds);
   }
   localStorage.setItem("minutes", minutes);
   localStorage.setItem("minutes", seconds);
@@ -21,38 +21,42 @@ function loadPage() {
 }
 
 function loadUser() {
-  if (data.time.break) {
-    // On break
-    document.getElementById('breakTime').innerText = "";
-    document.getElementById('breakBtn').innerText = "Return from Break";
-    document.getElementById('breakBtn').style.backgroundColor = $accent2;
-    document.getElementById('breakBtn').style.borderColor = $accent2;
-  } else {
-    // Off break
-    document.getElementById('breakBtn').innerText = "Start Break";
-    document.getElementById('breakTime').innerText = `Last break finished at: ${data.time.breakKey.slice(-5)}`;
-    document.getElementById('breakBtn').style.backgroundColor = $primary;
-    document.getElementById('breakBtn').style.borderColor = $primary;
+  if (data.time.breakKey != undefined) {
+    if (data.time.break) {
+      // On break
+      document.getElementById('breakTime').innerText = "";
+      document.getElementById('breakBtn').innerText = "Return from Break";
+      document.getElementById('breakBtn').style.backgroundColor = $accent2;
+      document.getElementById('breakBtn').style.borderColor = $accent2;
+    } else {
+      // Off break
+      document.getElementById('breakBtn').innerText = "Start Break";
+      document.getElementById('breakTime').innerText = `Last break finished at: ${data.time.breakKey.slice(-5)}`;
+      document.getElementById('breakBtn').style.backgroundColor = $primary;
+      document.getElementById('breakBtn').style.borderColor = $primary;
+    }
   }
 
-  if (data.time.check) {
-    // Checked In
-    document.getElementById('checkTime').innerText = `Check in time: ${data.time.checkKey.slice(-5)}`;
-    document.getElementById('checkInBtn').style.backgroundColor = $accent2;
-    document.getElementById('checkInBtn').style.borderColor = $accent2;
-    document.getElementById('checkOutBtn').style.backgroundColor = $primary;
-    document.getElementById('checkOutBtn').style.borderColor = $primary;
-    // Checkout Reminder
-    setInterval(() => {
-      alertify.error('Reminder to check out using the portal and workday.');
-    }, 3600000);
-  } else {
-    // Checked Out
-    document.getElementById('checkTime').innerText = `Check out time: ${data.time.checkKey.slice(-5)}`;
-    document.getElementById('checkInBtn').style.backgroundColor = $primary;
-    document.getElementById('checkInBtn').style.borderColor = $primary;
-    document.getElementById('checkOutBtn').style.backgroundColor = $accent2;
-    document.getElementById('checkOutBtn').style.borderColor = $accent2;
+  if (data.time.checkKey != undefined) {
+    if (data.time.check) {
+      // Checked In
+      document.getElementById('checkTime').innerText = `Check in time: ${data.time.checkKey.slice(-5)}`;
+      document.getElementById('checkInBtn').style.backgroundColor = $accent2;
+      document.getElementById('checkInBtn').style.borderColor = $accent2;
+      document.getElementById('checkOutBtn').style.backgroundColor = $primary;
+      document.getElementById('checkOutBtn').style.borderColor = $primary;
+      // Checkout Reminder
+      setInterval(() => {
+        alertify.error('Reminder to check out using the portal and workday.');
+      }, 3600000);
+    } else {
+      // Checked Out
+      document.getElementById('checkTime').innerText = `Check out time: ${data.time.checkKey.slice(-5)}`;
+      document.getElementById('checkInBtn').style.backgroundColor = $primary;
+      document.getElementById('checkInBtn').style.borderColor = $primary;
+      document.getElementById('checkOutBtn').style.backgroundColor = $accent2;
+      document.getElementById('checkOutBtn').style.borderColor = $accent2;
+    }
   }
 }
 
@@ -73,7 +77,7 @@ document.getElementById('checkInBtn').addEventListener('click', () => {
   } else {
     alert("You are already logged in");
   }
-  getUserData();
+  getUser();
 })
 
 //sequence of events when the user clocks out
@@ -103,6 +107,8 @@ document.getElementById('checkOutBtn').addEventListener('click', () => {
   } else {
     alert("You are already logged out");
   }
+  localStorage.removeItem('minutes');
+  localStorage.removeItem('seconds');
   getUserData();
 })
 
@@ -111,8 +117,8 @@ document.getElementById('breakBtn').addEventListener('click', () => {
   var setDate = editDate(new Date());
   // End break
   if (data.time.break) {
-    document.getElementById("minutes").style.color = "black";
-    document.getElementById("seconds").style.color = "black";
+    document.getElementById("minutes").style.color = "grey";
+    document.getElementById("seconds").style.color = "grey";
     db.collection('users').doc(userId).update({
       "time.break": false,
       "time.breakKey": setDate
@@ -126,7 +132,8 @@ document.getElementById('breakBtn').addEventListener('click', () => {
     } else {
       // Start Break
       db.collection('users').doc(userId).update({
-        "time.break": true
+        "time.break": true,
+        "time.breakKey": setDate
       });
       db.collection('users').doc(userId).collection('breaks').doc(setDate).set({
         "start": setDate.slice(-5)
@@ -139,8 +146,8 @@ document.getElementById('breakBtn').addEventListener('click', () => {
 })
 
 function editDate(date) {
-  var month = date.getMonth() + 1;
-  var day = date.getDate();
+  var month = ("0" + date.getMonth() + 1).slice(-2);
+  var day = ("0" + date.getDate()).slice(-2);
   var year = date.getFullYear();
   var hour = ("0" + date.getHours()).slice(-2);
   var minute = ("0" + date.getMinutes()).slice(-2);
@@ -180,7 +187,7 @@ function countdown() {
     minutes = "0" + Number(minutes);
   }
   if (seconds < 10) {
-    seconds = "0" + seconds;
+    seconds = "0" + Number(seconds);
   }
 
   document.getElementById("minutes").textContent = minutes;

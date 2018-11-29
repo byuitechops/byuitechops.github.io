@@ -70,9 +70,11 @@ function setTheme() {
   var link = document.createElement('link');
   var url = window.location.pathname;
   var pageName = url.slice(url.lastIndexOf('/')+1, -5);
- 
-  link.setAttribute('rel', "stylesheet");
-  link.setAttribute('type', "text/css");
-  link.setAttribute('href', `css/${pageName}/${pageName}_${theme}.css`);
-  document.getElementsByTagName('head')[0].insertAdjacentElement('beforeend', link);
+
+  if (!window.location.href.includes("index.html")) { 
+    link.setAttribute('rel', "stylesheet");
+    link.setAttribute('type', "text/css");
+    link.setAttribute('href', `css/${pageName}/${pageName}_${theme}.css`);
+    document.getElementsByTagName('head')[0].insertAdjacentElement('beforeend', link);
+  }
 }
