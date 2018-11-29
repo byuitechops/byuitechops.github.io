@@ -38,6 +38,12 @@ signupBtn.addEventListener('click', () => {
                 "speed": ""
             }
 
+            var time = {
+                "break": false,
+                "check": false,
+                "breakAllowed": false
+            }
+
             try {
                 // Send to firebase
                 var docData = {
