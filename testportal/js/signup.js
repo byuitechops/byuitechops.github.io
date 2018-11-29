@@ -29,7 +29,7 @@ signupBtn.addEventListener('click', () => {
         .then(function () {
 
             var info = {
-                "email": document.getElementById('signUpEmail').value,
+                "email": email,
                 "photo": "default-image.png",
                 "phoneNumber": "000-000-0000",
                 "major": "",
