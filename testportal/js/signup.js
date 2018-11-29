@@ -54,7 +54,8 @@ signupBtn.addEventListener('click', () => {
                     teamLead: false,
                     info: info,
                     title: "Team Member",
-                    viewMode: "light"
+                    viewMode: "light",
+                    time: time
                 }
                 db.collection('users').doc().set(docData).then(function () {
                     console.log("Written");
