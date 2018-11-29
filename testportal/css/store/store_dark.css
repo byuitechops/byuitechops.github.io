@@ -132,6 +132,8 @@ main {
               opacity: 0.75; }
     main section#content section#right {
       grid-column: 2; }
+      main section#content section#right > div {
+        background-color: rgba(240, 248, 254, 0.9); }
       main section#content section#right div {
         box-shadow: 1px 1px 50px -15px #727272;
         text-align: center;
