@@ -2,7 +2,8 @@ var minutes = 15;
 var seconds = 00;
 if (localStorage.getItem('minutes') != null) {
   minutes = Number(localStorage.getItem("minutes"));
-  seconds = localStorage.getItem("seconds");
+  seconds = Number(localStorage.getItem("seconds"));
+  console.log(minutes);
 }
 
 function loadPage() {
@@ -14,14 +15,14 @@ function loadPage() {
     seconds = "0" + Number(seconds);
   }
   localStorage.setItem("minutes", minutes);
-  localStorage.setItem("minutes", seconds);
+  localStorage.setItem("seconds", seconds);
   document.getElementById("minutes").textContent = minutes;
   document.getElementById("seconds").textContent = seconds;
   loadUser();
 }
 
 function loadUser() {
-  if (data.time.breakKey != undefined) {
+  if (data.time.breakKey != "") {
     if (data.time.break) {
       // On break
       document.getElementById('breakTime').innerText = "";
@@ -37,7 +38,7 @@ function loadUser() {
     }
   }
 
-  if (data.time.checkKey != undefined) {
+  if (data.time.checkKey != "") {
     if (data.time.check) {
       // Checked In
       document.getElementById('checkTime').innerText = `Check in time: ${data.time.checkKey.slice(-5)}`;
@@ -62,7 +63,12 @@ function loadUser() {
 
 //sequence of events as the user checks in
 document.getElementById('checkInBtn').addEventListener('click', () => {
+  localStorage.removeItem('minutes');
+  localStorage.removeItem('seconds');
   loadUser();
+  localStorage.clear();
+   minutes = 15;
+   seconds = 00;
   var setDate = editDate(new Date());
   //verify if the user is actually logged out
   if (!data.time.check) {
@@ -158,6 +164,7 @@ function editDate(date) {
 var timer;
 //countdown timer
 function countdown() {
+  console.log(minutes);
   if (!data.time.break) {
     localStorage.setItem('minutes', minutes);
     localStorage.setItem('seconds', seconds);
