@@ -119,6 +119,7 @@ function populateInfoEdit() {
 
 //Loads the page with all user's information
 function loadPage() {
+    document.getElementById(theme).setAttribute('checked', true);
     db.collection("users").doc(userId).get()
         .then(function (doc) {
             const myData = doc.data();
@@ -141,6 +142,20 @@ function loadPage() {
                 document.getElementById("leadAdmin").style.visibility ="visible";
             }
         })
+}
+
+function changeViewMode(newTheme) {
+    db.collection('users').doc(userId).update({
+        viewMode: newTheme
+    })
+    .then(function() {
+        console.log("Document successfully updated!");
+    })
+    .catch(function(error) {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
+    });
+    
 }
 
 function redeemTime(){
