@@ -11,7 +11,7 @@ function loadPage() {
     minutes = "0" + Number(minutes);
   }
   if (seconds < 10) {
-    seconds = "0" + seconds;
+    seconds = "0" + Number(seconds);
   }
   localStorage.setItem("minutes", minutes);
   localStorage.setItem("minutes", seconds);
@@ -111,8 +111,8 @@ document.getElementById('breakBtn').addEventListener('click', () => {
   var setDate = editDate(new Date());
   // End break
   if (data.time.break) {
-    document.getElementById("minutes").style.color = "black";
-    document.getElementById("seconds").style.color = "black";
+    document.getElementById("minutes").style.color = "grey";
+    document.getElementById("seconds").style.color = "grey";
     db.collection('users').doc(userId).update({
       "time.break": false,
       "time.breakKey": setDate
@@ -126,7 +126,8 @@ document.getElementById('breakBtn').addEventListener('click', () => {
     } else {
       // Start Break
       db.collection('users').doc(userId).update({
-        "time.break": true
+        "time.break": true,
+      "time.breakKey": setDate
       });
       db.collection('users').doc(userId).collection('breaks').doc(setDate).set({
         "start": setDate.slice(-5)
@@ -139,8 +140,8 @@ document.getElementById('breakBtn').addEventListener('click', () => {
 })
 
 function editDate(date) {
-  var month = date.getMonth() + 1;
-  var day = date.getDate();
+  var month = ("0" + date.getMonth() + 1).slice(-2);
+  var day = ("0" + date.getDate()).slice(-2);
   var year = date.getFullYear();
   var hour = ("0" + date.getHours()).slice(-2);
   var minute = ("0" + date.getMinutes()).slice(-2);
@@ -180,7 +181,7 @@ function countdown() {
     minutes = "0" + Number(minutes);
   }
   if (seconds < 10) {
-    seconds = "0" + seconds;
+    seconds = "0" + Number(seconds);
   }
 
   document.getElementById("minutes").textContent = minutes;
