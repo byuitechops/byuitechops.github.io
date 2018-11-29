@@ -77,7 +77,7 @@ document.getElementById('checkInBtn').addEventListener('click', () => {
   } else {
     alert("You are already logged in");
   }
-  getUserData();
+  getUser();
 })
 
 //sequence of events when the user clocks out

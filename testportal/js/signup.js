@@ -40,8 +40,7 @@ signupBtn.addEventListener('click', () => {
 
             var time = {
                 "break": false,
-                "check": false,
-                "breakAllowed": false
+                "check": false
             }
 
             try {
