@@ -30,7 +30,12 @@ signupBtn.addEventListener('click', () => {
 
             var info = {
                 "email": document.getElementById('signUpEmail').value,
-                "photo": "default-image.png"
+                "photo": "default-image.png",
+                "phoneNumber": "000-000-0000",
+                "major": "",
+                "track": "",
+                "graduation": "",
+                "speed": ""
             }
 
             try {
