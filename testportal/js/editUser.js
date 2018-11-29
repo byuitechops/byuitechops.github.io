@@ -89,6 +89,15 @@ function deleteAtPath(path) {
 
 //connects to firebase and submits changes made by the admin
 function submitInfoChanges(userId) {
+    var isLead;
+    if (document.getElementById("editJobTitle").value == "Project Lead" 
+    || document.getElementById("editJobTitle").value == "Student Lead" 
+    || document.getElementById("editJobTitle").value == "Assistent Lead"){
+         isLead = true;
+    }
+    else{
+        isLead = false;
+    }
 
     db.collection("users").doc(userId).update({
             "nameDisplay": document.getElementById("editName").value,
@@ -99,7 +108,8 @@ function submitInfoChanges(userId) {
             "team": document.getElementById("editTeam").value,
             "info.email": document.getElementById("editEmail").value,
             "title": document.getElementById("editJobTitle").value,
-            "info.speed": document.getElementById("editSpeed").value
+            "info.speed": document.getElementById("editSpeed").value,
+            "lead": isLead
         })
         .then(function () {
             console.log("Document successfully written!");
