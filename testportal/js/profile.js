@@ -87,18 +87,18 @@ submitChanges.addEventListener("click", () => {
             "info.track": document.getElementById("editTrack").value,
             "info.graduation": document.getElementById("editGradDate").value,
             "info.aboutMe": document.getElementById("editAboutMe").value
-            
+
         })
         .then(function () {
             console.log("Document successfully written!");
-                window.location.reload();
-              }).catch(function(error) {
-                // An error happened.
-              });
-              editDiv.style.visibility = "hidden";
-        })
-       
-   
+            window.location.reload();
+        }).catch(function (error) {
+            // An error happened.
+        });
+    editDiv.style.visibility = "hidden";
+})
+
+
 var cancelChanges = document.getElementById("cancelInfoChanges");
 cancelChanges.addEventListener("click", () => {
     editDiv.style.visibility = "hidden";
@@ -120,6 +120,13 @@ function populateInfoEdit() {
 //Loads the page with all user's information
 function loadPage() {
     document.getElementById(theme).setAttribute('checked', true);
+    var photo = data.info.photo;
+    firebase.storage().ref().child(`profile/${photo}`).getDownloadURL().then(function (url) {
+        document.getElementById(`profilePic`).setAttribute('src', url);
+        //return;
+    }).catch(function (error) {
+        return error;
+    });
     db.collection("users").doc(userId).get()
         .then(function (doc) {
             const myData = doc.data();
@@ -138,35 +145,35 @@ function loadPage() {
             document.getElementById("redeemTime").innerText = myData.time.accumulatedTime;
 
             //displays lead/admin tools only for the right people
-            if (myData.admin){
-                document.getElementById("leadAdmin").style.visibility ="visible";
+            if (myData.admin) {
+                document.getElementById("leadAdmin").style.visibility = "visible";
             }
         })
 }
 
 function changeViewMode(newTheme) {
     db.collection('users').doc(userId).update({
-        viewMode: newTheme
-    })
-    .then(function() {
-        console.log("Document successfully updated!");
-    })
-    .catch(function(error) {
-        // The document probably doesn't exist.
-        console.error("Error updating document: ", error);
-    });
-    
+            viewMode: newTheme
+        })
+        .then(function () {
+            console.log("Document successfully updated!");
+        })
+        .catch(function (error) {
+            // The document probably doesn't exist.
+            console.error("Error updating document: ", error);
+        });
+
 }
 
-function redeemTime(){
+function redeemTime() {
 
 }
 
 //handles the sign out button
-document.getElementById("signOutBtn").addEventListener("click", ()=>{
-    firebase.auth().signOut().then(function() {
+document.getElementById("signOutBtn").addEventListener("click", () => {
+    firebase.auth().signOut().then(function () {
         // Sign-out successful.
-      }).catch(function(error) {
+    }).catch(function (error) {
         // An error happened.
-      });
+    });
 })
