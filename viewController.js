@@ -1,6 +1,4 @@
-import {
-    Model
-} from '/model.mjs';
+import Model from '/model.mjs';
 
 let model = new Model();
 let cardContainer = document.getElementById('repositories');
@@ -103,4 +101,9 @@ model.fetchRepositories(1, (err) => {
     console.log('Repositories successfully retrieved.');
     model.sortRepositories();
     setupView();
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    var elems = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(elems);
 });
