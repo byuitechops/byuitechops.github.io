@@ -48,6 +48,7 @@ main {
         height: 100%;
         width: 50%;
         overflow-y: scroll;
+
         div {
             display: flex;
             flex-direction: column;
@@ -59,14 +60,16 @@ main {
                 flex-flow: nowrap;
                 align-items: center;
                 justify-content: space-around;
-                width: 50%;
+                width: 100%;
+                margin-bottom: 0.5em;
 
                 img {
-                    height: 3em;
+                    height: 4.5em;
                     margin: 0 1em;
                 }
 
                 span {
+                    font-size: 1.3em;
                     margin: 1em;
                     width: 15em;
                 }
@@ -74,13 +77,14 @@ main {
                 button {
                     margin: 1em;
                     background-color: $primary;
-                    width: 25%;
+                    width: 35%;
                     padding: 1em;
                     height: 3em;
                     border-radius: 5px;
                     color: $accent1;
                     border: none;
                     font-weight: bold;
+                    font-size: 1em;
                     letter-spacing: 0.15em;
                     cursor: pointer;
                 }
@@ -94,8 +98,8 @@ main {
         #editInfo {
             display: inline;
             visibility: hidden;
-            width: 30em;
-            height: 35em;
+            width: 35em;
+            height: 45em;
             background-color: $primary;
             opacity: 0.95;
             color: #fff;
@@ -116,25 +120,26 @@ main {
 
             p {
                 color: white;
-                margin-top: .1em;
-                font-size: 30px
+                font-size: 30px;
+                display: flex;
+                justify-content: space-between;
+                margin-left: 2em;
+                width: 80%;
+
+                input {
+                    border-radius: 3%;
+                    margin-left: 1em;
+                    font-size: 1rem;
+                }
+
+                select {
+                    border-radius: 3%;
+                    width: 34%;
+                    margin-left: 1em;
+                    font-size: 1rem;
+                }
             }
 
-            input {
-                position: absolute;
-                margin-top: -2em;
-                left: 21em;
-                border-radius: 3%;
-            }
-
-            select{
-                position: absolute;
-                margin-top: -2em;
-                left: 21em;
-                border-radius: 3%;
-                width: 34%;
-            
-            }
 
             #aboutMe {
                 position: absolute;
@@ -154,9 +159,7 @@ main {
             }
 
             #submitInfoChanges {
-                position: absolute;
                 margin-top: 1em;
-                left: 3em;
                 background-color: white;
                 border: none;
                 height: 4em;
@@ -173,9 +176,7 @@ main {
             }
 
             #cancelInfoChanges {
-                position: absolute;
                 margin-top: 1em;
-                left: 17em;
                 background-color: white;
                 border: none;
                 height: 4em;

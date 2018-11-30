@@ -60,42 +60,74 @@ function view(userId) {
 
 }
 
-function deleteUser(id, name){
+function deleteUser(id, name) {
     var txt;
     if (confirm("Are you sure you want to delete the user " + name)) {
-        var path = JSON.stringify(db.collection('users').doc(id));
-        deleteAthPath(path);
-    } else {
-    }
-}
+        db.collection('users').doc(id).collection('breaks').get()
+            .then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                    // doc.data() is never undefined for query doc snapshots
+                    console.log(doc.id, " => ", doc.data());
+                    db.collection("users").doc(id).collection('breaks').doc(doc.id).delete().then(function () {
+                        console.log("Document successfully deleted!");
+                    }).catch(function (error) {
+                        console.error("Error removing document: ", error);
+                    });
+                })
+            });
 
-/**
- * Call the 'recursiveDelete' callable function with a path to initiate
- * a server-side delete.
- */
-function deleteAtPath(path) {
-    var deleteFn = firebase.functions().httpsCallable('recursiveDelete');
-    deleteFn({ path: path })
-        .then(function(result) {
-            console.log('Delete success: ' + JSON.stringify(result));
-            window.replace.reload();
-        })
-        .catch(function(err) {
-            console.log('Delete failed, see console,');
-            console.warn(err);
+        db.collection('users').doc(id).collection('hoursWorked').get()
+            .then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                    // doc.data() is never undefined for query doc snapshots
+                    console.log(doc.id, " => ", doc.data());
+                    db.collection("users").doc(id).collection('hoursWorked').doc(doc.id).delete().then(function () {
+                        console.log("Document successfully deleted!");
+                    }).catch(function (error) {
+                        console.error("Error removing document: ", error);
+                    });
+                });
+            });
+        db.collection("users").doc(id).delete().then(function () {
+            console.log("Document successfully deleted!");
+        }).catch(function (error) {
+            console.error("Error removing document: ", error);
         });
-       
+        
+        var hoursLength;
+        var breaksLength;
+        var docExist;
+        setInterval(function() {
+            db.collection('users').doc(id).collection('hoursWorked').get().then(function (querySnapshot) {
+                console.log(querySnapshot);
+                hoursLength = querySnapshot.size;
+            })
+            db.collection('users').doc(id).collection('breaks').get().then(function (querySnapshot) {
+                console.log(querySnapshot);
+                breaksLength = querySnapshot.size;
+            })
+            db.collection("users").doc(id).get().then(function (doc) {
+                console.log(doc);
+               docExist = doc.exists;
+            })
+            console.log(hoursLength);
+            console.log(breaksLength);
+            console.log(docExist);
+            if (hoursLength == 0 && breaksLength == 0 && docExist == false) {
+                window.location.reload();
+            }
+        }, 1000)
+    } else {}
 }
 
 //connects to firebase and submits changes made by the admin
 function submitInfoChanges(userId) {
     var isLead;
-    if (document.getElementById("editJobTitle").value == "Project Lead" 
-    || document.getElementById("editJobTitle").value == "Student Lead" 
-    || document.getElementById("editJobTitle").value == "Assistent Lead"){
-         isLead = true;
-    }
-    else{
+    if (document.getElementById("editJobTitle").value == "Project Lead" ||
+        document.getElementById("editJobTitle").value == "Student Lead" ||
+        document.getElementById("editJobTitle").value == "Assistent Lead") {
+        isLead = true;
+    } else {
         isLead = false;
     }
 
