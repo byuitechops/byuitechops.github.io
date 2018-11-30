@@ -32,7 +32,7 @@ email.addEventListener("click", () => {
 
 
 katana.addEventListener("click", () => {
-    window.open("http://10.5.188.113:8000/");
+    window.open("http://10.5.188.138:8000/home");
 })
 
 equella.addEventListener("click", () => {

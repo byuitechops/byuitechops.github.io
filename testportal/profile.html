@@ -43,13 +43,13 @@
                     <p id="redeemTime">##:##</p><button id="redeem">REDEEM</button>
                 </span>
             </div>
-            <div style="visibility: visible;" id="usingRedeem">
+            <div style="visibility: hidden;" id="usingRedeem">
                 <h2>Redeem Confirmation</h2>
                 <p>Accumulated Time</p>
                 <h1 id="accumulated">00:00</h1>
-                <p id="howMuch">How much time would you like to redeem?</p>
+                <p id="howMuch">How much time would you like to redeem? (Hours)</p>
 
-                <input id="timeDesired" type="text"></input>
+                <input id="timeDesired" type="number" min="0"></input>
                 <button id="cancel">Cancel</button>
                 <button id="redeembtn">Redeem</button>
             </div>
@@ -57,7 +57,7 @@
             <div style="visibility: hidden;" id="confirmRedeem">
                 <img src="assets/check-01.png">
                 <h2>Redeemed Hours</h2>
-                <p>00:00</p>
+                <p id="resultRedeem">00:00</p>
                 <button id="close">Ok</button>
             </div>
 

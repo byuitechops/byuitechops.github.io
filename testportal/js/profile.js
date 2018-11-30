@@ -55,7 +55,34 @@ cancelBtn.addEventListener('click', () => {
 var redeemConfirmBtn = document.getElementById("redeembtn");
 redeemConfirmBtn.addEventListener('click', () => {
     redeemTool.style.visibility = "hidden";
-    document.getElementById("confirmRedeem").style.visibility = "visible";
+    var hoursRedeemed = document.getElementById("resultRedeem");
+    
+    
+    if (data.time.accumulatedTime < document.getElementById("timeDesired").value) {
+        redeemTool.style.visibility = "hidden";
+        alert("You don't have enough accumulated hours to redeem the time desired");
+       
+
+    } else {
+
+        db.collection("users").doc(userId).update({
+                "time.accumulatedTime": Number(data.time.accumulatedTime) - Number(document.getElementById("timeDesired").value),
+            })
+            .then(function () {
+                console.log("Document successfully written!");
+                window.location.reload();
+            }).catch(function (error) {
+                // An error happened.
+            });
+            if (data.time.accumulatedTime < 10){
+                hoursRedeemed.innerText = "0" + document.getElementById("timeDesired").value + ":00";
+            }
+            else{
+                hoursRedeemed.innerText = document.getElementById("timeDesired").value + ":00";
+            }
+            document.getElementById("confirmRedeem").style.visibility = "visible";
+
+    }
 })
 
 // When the use clicks ok close confirm
@@ -141,8 +168,15 @@ function loadPage() {
             document.getElementById("dbTyping").innerText = "Typing Speed: " + myData.info.speed;
             document.getElementById("dbAboutMe").innerText = myData.info.aboutMe;
             //fills in accumulated time
-            document.getElementById("accumulated").innerText = myData.time.accumulatedTime;
-            document.getElementById("redeemTime").innerText = myData.time.accumulatedTime;
+            if (data.time.accumulatedTime < 10){
+                document.getElementById("accumulated").innerText = "0" + myData.time.accumulatedTime + ":00";
+                document.getElementById("redeemTime").innerText = "0" + myData.time.accumulatedTime + ":00";
+            }
+            else{
+                document.getElementById("accumulated").innerText = myData.time.accumulatedTime + ":00";
+                document.getElementById("redeemTime").innerText =  myData.time.accumulatedTime + ":00";
+            }
+            
 
             //displays lead/admin tools only for the right people
             if (myData.admin) {
@@ -162,10 +196,6 @@ function changeViewMode(newTheme) {
             // The document probably doesn't exist.
             console.error("Error updating document: ", error);
         });
-
-}
-
-function redeemTime() {
 
 }
 

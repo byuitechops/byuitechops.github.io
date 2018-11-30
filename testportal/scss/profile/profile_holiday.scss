@@ -137,82 +137,107 @@ main {
             right: 25%;
             z-index: 1;
 
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); 
+            grid-template-rows: 1fr 1fr 1fr 2fr;
+
             h2 {
-                margin: auto;
-                margin-top: .5em;
-                margin-left: 4em;
-                font-size: 40px
+                grid-column: 1/span 2;
+                grid-row: 1;
+                margin-top: 0;
+                margin-left: 0;
+                position: relative;
+                left: 0;
+                right: 0;
+                // margin: auto;
+                // margin-top: .5em;
+                // margin-left: 4em;
+                // font-size: 40px
             }
 
             input {
-                margin: auto;
-                margin-top: .5em;
-                margin-left: 4em;
-                font-size: 20px
+                grid-column: 2;
+                grid-row: 2;
+                height: 3em;
+                width: 50%;
+                margin: 0  auto;
+                margin-top: 6em;
+                z-index: 1;
+                // margin: auto;
+                // margin-top: .5em;
+                // margin-left: 4em;
+                // font-size: 20px
             }
 
             p {
-                margin-top: 3em;
-                margin-right: 18em;
-                font-size: 30px
+                grid-column: 1;
+                grid-row: 2;
+                margin-top: 0;
+                margin-left: 0;
+                position: relative;
+                left: 0;
+                right: 0;
+                height: 2em;
+                // margin-top: 3em;
+                // margin-right: 18em;
+                // font-size: 30px
+                &:nth-of-type(2) {
+                    grid-column: 2;
+                    grid-row: 2;
+                }
             }
 
             h1 {
-                margin-top: 1em;
-                margin-right: 18em;
-                margin-left: .5em;
-                font-size: 45px;
+                grid-column: 1;
+                grid-row: 2;
+                margin-top: 0;
+                position: relative;
+                padding: 0;
+                padding-top: 1.7em;
+                // margin-top: 1em;
+                // margin-right: 18em;
+                // margin-left: .5em;
+                // font-size: 45px;
                 color: white;
             }
 
             #howMuch {
-                display: absolute;
-                padding-top: .8em;
-                top: .2em;
-                right: -17em;
-                // margin-top: 3em;
-                margin-left: 5em;
-                font-size: 25px;
+                // display: absolute;
+                // padding-top: .8em;
+                // top: .2em;
+                // right: -17em;
+                // // margin-top: 3em;
+                // margin-left: 5em;
+                // font-size: 25px;
                 color: white;
-            }
-
-            div {
-                background-color: $backgroundLight;
-                height: 4em;
-                margin: auto;
-                margin-top: -9.5em;
-                margin-right: 5em;
-                padding-left: 2em;
-                margin-bottom: 2.5em;
-                border-radius: 2%;
-                width: 40%;
-
             }
 
             #timeDesired {
                 color: black;
-                position: relative;
-                margin-top: -4.2em;
-                margin-left: 12em;
+                // position: relative;
+                // margin-top: -2.2em;
+                // margin-left: 12em;
             }
 
             button {
-                display: absolute;
+                grid-row: 4;
+                // display: absolute;
                 border: none;
                 height: 4em;
                 width: 10em;
-                top: -3em;
-                margin-right: 2em;
+                // top: -3em;
+                // margin-right: 2em;
                 background-color: $third;
                 font-size: 16px;
-                margin-top: -12em;
-                margin-right: 3em;
+                // margin-top: -12em;
+                // margin-right: 3em;
                 border-radius: 5%;
                 color: white;
                 cursor: pointer;
+                margin: 0em auto;
 
                 &:hover {
-                    opacity: 0.80;
+                     opacity: 0.80;
                 }
             }
         }
@@ -482,6 +507,7 @@ main {
         }
     }
 }
+
 
 /* Customize the label (the container) */
 .container {
