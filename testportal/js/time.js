@@ -80,6 +80,7 @@ document.getElementById('checkInBtn').addEventListener('click', () => {
     db.collection('users').doc(userId).collection('hoursWorked').doc(setDate).set({
       "start": setDate.slice(-5)
     })
+    window.open('https://www.myworkday.com/byuhi/d/home.htmld', '_blank');
   } else {
     alert("You are already logged in");
   }
