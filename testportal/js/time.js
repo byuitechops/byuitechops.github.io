@@ -110,13 +110,14 @@ document.getElementById('checkOutBtn').addEventListener('click', () => {
       "end": data.time.checkKey.slice(-5)
     })
     loadUser();
+    window.open('https://www.myworkday.com/byuhi/d/home.htmld', '_blank');
     //alerts the user 
   } else {
     alert("You are already logged out");
   }
   localStorage.removeItem('minutes');
   localStorage.removeItem('seconds');
-  getUserData();
+  getUser();
 })
 
 //if user starts or end break, call necessary events

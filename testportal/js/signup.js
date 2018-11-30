@@ -52,7 +52,7 @@ signupBtn.addEventListener('click', () => {
                     nameDisplay: document.getElementById('signUpName').value,
                     name: document.getElementById('signUpName').value,
                     team: "default",
-                    teamLead: false,
+                    lead: false,
                     info: info,
                     title: "Team Member",
                     viewMode: "light",

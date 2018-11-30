@@ -7,7 +7,7 @@ function loadPage(){
       var team =  document.getElementById("teams");
       var iframe = document.getElementById("spreadsheet");
       //checks for permissions to see both teams' schedule
-        if (myData.admin || myData.teamLead){
+        if (myData.admin || myData.lead){
             document.getElementById("admin").style.visibility = "visible";
             team.style.visibility = "visible";
             //clicked on team 1
