@@ -166,11 +166,18 @@ function populateInfoEdit(doc) {
             document.getElementById("editGradDate").setAttribute("value", `${doc.data().info.graduation}`);
             var idTeam = doc.data().team;
             console.log(idTeam);
-            document.getElementById(idTeam).setAttribute("selected", "selected");
+            document.getElementById("editTeam").setAttribute("selected", "selected");
+            //console.log(doc.data().info.email);
             document.getElementById("editEmail").setAttribute("value", `${doc.data().info.email}`);
             var idTitle = doc.data().title;
             console.log(idTitle);
-            document.getElementById(idTitle).setAttribute("selected", "selected");
+            var i = document.getElementById("editJobTitle").selectedIndex;
+            if (doc.data().team == "Canvas 1"){
+                document.getElementById("editTeam").selectedIndex = 0;
+            }
+            if (doc.data().team == "Canvas 2") {
+                document.getElementById("editTeam").selectedIndex = 1;
+            }
             document.getElementById("editSpeed").setAttribute("value", `${doc.data().info.speed}`);
         })
 }
