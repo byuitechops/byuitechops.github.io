@@ -1,6 +1,6 @@
 function loadPage() {
     getAllUsers();
-    if (!data.admin) {
+    if (!data.admin && data.title != "Project Lead") {
         window.location.replace('profile.html')
     }
 }
@@ -11,8 +11,7 @@ var done = false;
 var populate = document.getElementById("zoe");
 //reads all users from firestore
 function getAllUsers() {
-    // return output =
-    // [START get_all_users]
+if (data.admin){
     db.collection("users").orderBy("nameDisplay").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             console.log(doc.data().nameDisplay);
@@ -21,6 +20,19 @@ function getAllUsers() {
             populateDiv(doc.data().info.photo, (doc.data().nameDisplay).replace(/ /g, ""));
         });
     });
+}
+
+else{
+    db.collection("users").orderBy("nameDisplay").get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            console.log(doc.data().nameDisplay);
+            var html = `<p><img id="${(doc.data().nameDisplay).replace(/ /g, "")}pic"><span>${doc.data().nameDisplay}</span><button onclick="view('${doc.id}')">View</button></p>`;
+            populate.insertAdjacentHTML("beforeend", html);
+            populateDiv(doc.data().info.photo, (doc.data().nameDisplay).replace(/ /g, ""));
+        });
+    });
+}
+   
 }
 
 function populateDiv(photo, name) {
@@ -141,7 +153,8 @@ function submitInfoChanges(userId) {
             "info.email": document.getElementById("editEmail").value,
             "title": document.getElementById("editJobTitle").value,
             "info.speed": document.getElementById("editSpeed").value,
-            "lead": isLead
+            "lead": isLead,
+            "time.accumulatedTime": document.getElementById("editAccumulatedTime").value
         })
         .then(function () {
             console.log("Document successfully written!");
@@ -179,5 +192,6 @@ function populateInfoEdit(doc) {
                 document.getElementById("editTeam").selectedIndex = 1;
             }
             document.getElementById("editSpeed").setAttribute("value", `${doc.data().info.speed}`);
+            document.getElementById("editAccumulatedTime").setAttribute("value", `${doc.data().time.accumulatedTime}`);
         })
 }
