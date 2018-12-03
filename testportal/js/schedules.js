@@ -17,6 +17,7 @@ function loadPage(){
                }
                else{
                 iframe.src = "https://docs.google.com/spreadsheets/d/1TaUkWSifGGYkE5um2Rjtfi_Q37EzPUWmY-_X87sBQSo/?widget=true"
+                document.getElementById("newTab").href ="https://docs.google.com/spreadsheets/d/1TaUkWSifGGYkE5um2Rjtfi_Q37EzPUWmY-_X87sBQSo/?widget=true";
                }  
             })
         }
@@ -26,7 +27,8 @@ function loadPage(){
             }
             else{
                 team.style.visibility = "visible";
-                iframe.src = "https://docs.google.com/spreadsheets/d/1TaUkWSifGGYkE5um2Rjtfi_Q37EzPUWmY-_X87sBQSo/?widget=true"
+                iframe.src = "https://docs.google.com/spreadsheets/d/1TaUkWSifGGYkE5um2Rjtfi_Q37EzPUWmY-_X87sBQSo/?widget=true";
+                document.getElementById("newTab").href ="https://docs.google.com/spreadsheets/d/1TaUkWSifGGYkE5um2Rjtfi_Q37EzPUWmY-_X87sBQSo/?widget=true";
                 
             }
         }
