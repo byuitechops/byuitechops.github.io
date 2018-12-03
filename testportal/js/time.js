@@ -74,6 +74,7 @@ document.getElementById('checkInBtn').addEventListener('click', () => {
   if (!data.time.check) {
     //if the user is logged out, update firebase so now it is logged in
     db.collection('users').doc(userId).update({
+      "time.checkKey": setDate,
       "time.check": true,
       "time.breakAllowed": false
     });
