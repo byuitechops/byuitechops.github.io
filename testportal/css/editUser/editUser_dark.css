@@ -181,7 +181,7 @@ main {
         border-radius: 5%;
         color: white;
         cursor: pointer;
-        background-color: #7fc4fd;
+        background-color: #bebebe;
         font-size: 16px; }
         main section:nth-of-type(2) #editInfo #submitInfoChanges:hover {
           opacity: 0.8; }
@@ -196,7 +196,7 @@ main {
         border-radius: 5%;
         color: white;
         cursor: pointer;
-        background-color: #7fc4fd;
+        background-color: #bebebe;
         font-size: 16px; }
         main section:nth-of-type(2) #editInfo #cancelInfoChanges:hover {
           opacity: 0.8; }
