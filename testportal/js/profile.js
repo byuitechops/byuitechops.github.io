@@ -179,11 +179,7 @@ function loadPage() {
             
 
             //displays lead/admin tools only for the right people
-<<<<<<< HEAD
             if (myData.admin || myData.title == "Project Lead") {
-=======
-            if (myData.admin || data.title == "Project Lead") {
->>>>>>> d5f1a8b36031f3b3921000d0bb847c9bda5b31de
                 document.getElementById("leadAdmin").style.visibility = "visible";
             }
         })
