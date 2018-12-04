@@ -13,6 +13,11 @@ window.onclick = function (event) {
             elements[0].parentNode.removeChild(elements[0]);
         }
     }
+
+    if (event.target == christmasModal) {
+        christmasModal.style.display = "none";
+        document.getElementsByClassName('content')[0].style.overflow = 'initial';
+    }
 }
 
 function showEvent() {
@@ -182,18 +187,10 @@ function showEvent() {
 }
 
 
+// Get the modal
+var christmasModal = document.getElementById('christmasModal');
+
 function christmasCountdown() {
-    // Get the modal
-    var christmasModal = document.getElementById('christmasModal');
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function (event) {
-        if (event.target == christmasModal) {
-            christmasModal.style.display = "none";
-            document.getElementsByClassName('content')[0].style.overflow = 'initial';
-        }
-    }
-
     Date.daysBetween = function (date1, date2) {
         //Get 1 day in milliseconds
         var one_day = 1000 * 60 * 60 * 24;

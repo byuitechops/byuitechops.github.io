@@ -63,9 +63,15 @@ main {
     grid-template-rows: repeat(2, 40%);
     grid-gap: 0.5em; }
     main section div {
-      background-color: #7fc4fd;
+      position: relative;
+      background-color: #bebebe;
       color: #ffffff;
       width: 100%; }
+      main section div img {
+        height: 100%;
+        z-index: -1; }
+      main section div span {
+        position: absolute; }
       main section div p {
         font-weight: bold; }
       main section div a {

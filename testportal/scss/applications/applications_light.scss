@@ -12,9 +12,20 @@ main {
         grid-gap: 0.5em;
 
         div {
+            position: relative;
             background-color: $third;
             color: $accent1;
             width: 100%;
+            // opacity: 0.5;
+
+            img {
+                height: 100%;
+                z-index: -1;
+            }
+
+            span {
+                position: absolute;
+            }
 
             p {
                 font-weight: bold;
