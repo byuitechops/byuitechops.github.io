@@ -102,26 +102,23 @@ main {
         flex-flow: nowrap;
         align-items: center;
         justify-content: space-around;
-        width: 100%;
-        margin-bottom: 0.5em; }
+        width: 50%; }
         main section:nth-of-type(2) div p img {
-          height: 4.5em;
+          height: 3em;
           margin: 0 1em; }
         main section:nth-of-type(2) div p span {
-          font-size: 1.3em;
           margin: 1em;
           width: 15em; }
         main section:nth-of-type(2) div p button {
           margin: 1em;
           background-color: #0076c6;
-          width: 35%;
+          width: 25%;
           padding: 1em;
           height: 3em;
           border-radius: 5px;
           color: #ffffff;
           border: none;
           font-weight: bold;
-          font-size: 1em;
           letter-spacing: 0.15em;
           cursor: pointer; }
         main section:nth-of-type(2) div p button:hover {
@@ -129,8 +126,8 @@ main {
     main section:nth-of-type(2) #editInfo {
       display: inline;
       visibility: hidden;
-      width: 35em;
-      height: 45em;
+      width: 30em;
+      height: 35em;
       background-color: #0076c6;
       opacity: 0.95;
       color: #fff;
@@ -147,20 +144,19 @@ main {
         font-size: 30px; }
       main section:nth-of-type(2) #editInfo p {
         color: white;
-        font-size: 30px;
-        display: flex;
-        justify-content: space-between;
-        margin-left: 2em;
-        width: 80%; }
-        main section:nth-of-type(2) #editInfo p input {
-          border-radius: 3%;
-          margin-left: 1em;
-          font-size: 1rem; }
-        main section:nth-of-type(2) #editInfo p select {
-          border-radius: 3%;
-          width: 34%;
-          margin-left: 1em;
-          font-size: 1rem; }
+        margin-top: .1em;
+        font-size: 30px; }
+      main section:nth-of-type(2) #editInfo input {
+        position: absolute;
+        margin-top: -2em;
+        left: 21em;
+        border-radius: 3%; }
+      main section:nth-of-type(2) #editInfo select {
+        position: absolute;
+        margin-top: -2em;
+        left: 21em;
+        border-radius: 3%;
+        width: 34%; }
       main section:nth-of-type(2) #editInfo #aboutMe {
         position: absolute;
         left: 39.3em;
@@ -175,7 +171,9 @@ main {
         word-wrap: break-word;
         word-break: break-all; }
       main section:nth-of-type(2) #editInfo #submitInfoChanges {
+        position: absolute;
         margin-top: 1em;
+        left: 3em;
         background-color: white;
         border: none;
         height: 4em;
@@ -188,7 +186,9 @@ main {
         main section:nth-of-type(2) #editInfo #submitInfoChanges:hover {
           opacity: 0.8; }
       main section:nth-of-type(2) #editInfo #cancelInfoChanges {
+        position: absolute;
         margin-top: 1em;
+        left: 17em;
         background-color: white;
         border: none;
         height: 4em;
