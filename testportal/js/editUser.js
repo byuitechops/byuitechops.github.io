@@ -1,6 +1,6 @@
 function loadPage() {
     getAllUsers();
-    if (!data.admin) {
+    if (!data.admin && data.title != "Project Lead") {
         window.location.replace('profile.html')
     }
 }
@@ -16,7 +16,11 @@ function getAllUsers() {
     db.collection("users").orderBy("nameDisplay").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             console.log(doc.data().nameDisplay);
-            var html = `<p><img id="${(doc.data().nameDisplay).replace(/ /g, "")}pic"><span>${doc.data().nameDisplay}</span><button onclick="view('${doc.id}')">View</button> <button onclick="deleteUser('${doc.id}', '${doc.data().nameDisplay}')">Delete</button></p>`;
+            if (data.admin) {
+                var html = `<p><img id="${(doc.data().nameDisplay).replace(/ /g, "")}pic"><span>${doc.data().nameDisplay}</span><button onclick="view('${doc.id}')">View</button> <button onclick="deleteUser('${doc.id}', '${doc.data().nameDisplay}')">Delete</button></p>`;
+            } else {
+                var html = `<p><img id="${(doc.data().nameDisplay).replace(/ /g, "")}pic"><span>${doc.data().nameDisplay}</span><button onclick="view('${doc.id}')">View</button></p>`;
+            }
             populate.insertAdjacentHTML("beforeend", html);
             populateDiv(doc.data().info.photo, (doc.data().nameDisplay).replace(/ /g, ""));
         });
@@ -93,11 +97,11 @@ function deleteUser(id, name) {
         }).catch(function (error) {
             console.error("Error removing document: ", error);
         });
-        
+
         var hoursLength;
         var breaksLength;
         var docExist;
-        setInterval(function() {
+        setInterval(function () {
             db.collection('users').doc(id).collection('hoursWorked').get().then(function (querySnapshot) {
                 console.log(querySnapshot);
                 hoursLength = querySnapshot.size;
@@ -108,7 +112,7 @@ function deleteUser(id, name) {
             })
             db.collection("users").doc(id).get().then(function (doc) {
                 console.log(doc);
-               docExist = doc.exists;
+                docExist = doc.exists;
             })
             console.log(hoursLength);
             console.log(breaksLength);
@@ -172,7 +176,7 @@ function populateInfoEdit(doc) {
             var idTitle = doc.data().title;
             console.log(idTitle);
             var i = document.getElementById("editJobTitle").selectedIndex;
-            if (doc.data().team == "Canvas 1"){
+            if (doc.data().team == "Canvas 1") {
                 document.getElementById("editTeam").selectedIndex = 0;
             }
             if (doc.data().team == "Canvas 2") {

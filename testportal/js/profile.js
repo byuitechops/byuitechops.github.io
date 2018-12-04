@@ -179,7 +179,7 @@ function loadPage() {
             
 
             //displays lead/admin tools only for the right people
-            if (myData.admin) {
+            if (myData.admin || data.title == "Project Lead") {
                 document.getElementById("leadAdmin").style.visibility = "visible";
             }
         })
