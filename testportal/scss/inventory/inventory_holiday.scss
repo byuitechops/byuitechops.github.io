@@ -15,6 +15,16 @@ main {
     grid-template-columns: 60% 30%;
     grid-gap: 5%;
 
+    div#head {
+        display: flex;
+        grid-column: 1 /span 2;
+        justify-content: left;
+        align-items: baseline;
+        button {
+            width: 10em;
+        }
+    }
+
     button {
         background-color: $primary;
         width: 25%;
