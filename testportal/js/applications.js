@@ -54,3 +54,12 @@ slack.addEventListener("click", () => {
 function loadPage() {
     // load the page
 }
+
+document.getElementsByTagName('h1')[0].addEventListener('click', () => {
+    var divs = document.getElementsByTagName('div');
+    for (var i = 0; i < divs.length; i++) {
+        // if (i != 6 || i != 12) {
+            divs[i].classList.add('filter');
+        // }
+    }
+})
