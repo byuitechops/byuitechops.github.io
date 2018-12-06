@@ -33,7 +33,6 @@ function getTotalBreak(date) {
                     totalBreak += (endTime - startTime);
                 }
             });
-            console.log(totalBreak);
             return totalBreak;
         })
 }
@@ -64,21 +63,27 @@ function getTotalTimeWorked(date) {
                 }
             });
             time.push(totalTimeWorked);
+            console.log(time);
             return time;
         })
 }
 
-function gather(date, name) {
+function displayDay(date, name) {
     var breakTotal = getTotalBreak(date);
     var timeWorked = getTotalTimeWorked(date);
-    displayDay(date, name, breakTotal, timeWorked);
 
+    var interval = setInterval(function () {
+        console.log(getTotalTimeWorked(date));
+        if (breakTotal != undefined && timeWorked != undefined) {
+            stopInterval(interval);
+            console.log(breakTotal);
+            console.log(timeWorked);
+            document.getElementById('data').insertAdjacentHTML('afterbegin', name);
+            document.getElementById('data').insertAdjacentHTML('afterbegin', `Break Total ${breakTotal}`);
+        }
+    }, 1000);
 }
 
-function displayDay(date, name, breakTotal, timeWorked) {
-    console.log("Run");
-
-    document.getElementById('data').insertAdjacentHTML('afterbegin', name);
-    document.getElementById('data').insertAdjacentHTML('afterbegin', `Break Total ${breakTotal}`);
-
+function stopInterval(interval) {
+    clearInterval(interval);
 }
