@@ -10,10 +10,16 @@ var editOneItem = false;
 var checkModal = document.getElementById('checkoutModal');
 var confirmEditBtn = document.getElementById("submitEdit");
 confirmEditBtn.addEventListener('click', () => {
-  var name = document.getElementById('nameEdit').innerText;
+  var name;
   var count;
   var price;
   var imgFile;
+
+  if (document.getElementById('nameInput') != undefined) {
+    name = document.getElementById('nameInput').value;
+  } else {
+    name = document.getElementById('nameEdit').innerText;
+  }
   
   if (document.getElementById('countInput') != undefined) {
     count = document.getElementById('countInput').value;
@@ -161,6 +167,21 @@ function editItem(item, price, count, url) {
     location.reload();
   }
 }
+
+// add a new item
+document.getElementById("addNewItem").addEventListener("click", () =>{
+  if (!editOneItem) {
+    document.getElementById('editItemBox').style.visibility = "visible";
+    document.getElementById('name').innerText = `New Item`;
+    document.getElementById('nameEdit').innerHTML =`<input type="text" id="nameInput">`;
+    document.getElementById('countEdit').innerHTML = `<input type="text" id="countInput">`;
+    document.getElementById('priceEdit').innerHTML = `<input type="text" id="priceInput">`;
+    document.getElementById('imgEdit').innerHTML = `<input type="file" id="imgFile">`;
+    editOneItem = true;
+  } else {
+    location.reload();
+  }
+})
 //handles the item's name editing call
 // var doneName = false;
 // document.getElementById('nameEdit').addEventListener('click', () => {
