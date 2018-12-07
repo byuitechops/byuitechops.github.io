@@ -155,7 +155,7 @@ document.getElementById('breakBtn').addEventListener('click', () => {
 })
 
 function editDate(date) {
-  var month = ("0" + date.getMonth() + 1).slice(-2);
+  var month = ("0" + (date.getMonth() + 1)).slice(-2);
   var day = ("0" + date.getDate()).slice(-2);
   var year = date.getFullYear();
   var hour = ("0" + date.getHours()).slice(-2);
