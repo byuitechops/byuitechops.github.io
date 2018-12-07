@@ -21,7 +21,13 @@ function displayDay(date, name) {
         day = `0${day}`;
     }
     var inputDay = `${year}-${month}-${day} 00:00`;
-    db.collection("users").doc(userId).collection("breaks").where(firebase.firestore.FieldPath.documentId(), ">", inputDay).get()
+
+    db.collection('users').where("nameDisplay", "==", name).get()
+        .then(function(querySnapshot) {
+            console.log(querySnapshot);
+            var nameId = querySnapshot.docs[0].id;
+
+    db.collection("users").doc(nameId).collection("breaks").where(firebase.firestore.FieldPath.documentId(), ">", inputDay).get()
         .then(function (querySnapshot) {
             var totalBreak = 0;
             querySnapshot.docs.forEach(element => {
@@ -33,7 +39,7 @@ function displayDay(date, name) {
                     totalBreak += (endTime - startTime);
                 }
             });
-            db.collection("users").doc(userId).collection("hoursWorked").where(firebase.firestore.FieldPath.documentId(), ">", inputDay).get()
+            db.collection("users").doc(nameId).collection("hoursWorked").where(firebase.firestore.FieldPath.documentId(), ">", inputDay).get()
                 .then(function (querySnapshot) {
                     var totalTimeWorked = 0;
                     var time = [];
@@ -41,16 +47,17 @@ function displayDay(date, name) {
                         time.push([element.data().start, element.data().end]);
                         if (element.data().end != undefined) {
                             var start = element.data().start.split(":");
-                            var startTime = Number(start[0] * 60) + Number(start[1]);
+                            var startTime = Number(start[0]) + Number(start[1] / 60);
                             var end = element.data().end.split(":");
-                            var endTime = Number(end[0] * 60) + Number(end[1]);
-                            totalTimeWorked += (endTime - startTime);
+                            var endTime = Number(end[0]) + Number(end[1] / 60);
+                            totalTimeWorked += (endTime - startTime).toFixed(2);
                         }
                     });
                     time.push(totalTimeWorked);
 
-                    document.getElementById('data').insertAdjacentHTML('beforeend', `${name}<br>`);
-                    document.getElementById('data').insertAdjacentHTML('beforeend', `<b>Break Total:</b> ${totalBreak}<br>`);
+                    document.getElementById('data').insertAdjacentHTML('beforeend', `<h3>${name}</h3>`);
+                    document.getElementById('data').insertAdjacentHTML('beforeend', `<span><b>Break Total:</b> ${totalBreak}</span>`);
+                    document.getElementById('data').insertAdjacentHTML('beforeend', `<span><b>Time Total:</b> ${time[time.length - 1]}</span>`);
 
                     for (var i = 0; i < time.length - 1; i++) {
                         if (time[i][0] == undefined) {
@@ -62,11 +69,10 @@ function displayDay(date, name) {
                         console.log(time[i][0]);
                         console.log(time[i][1]);
 
-                        document.getElementById('data').insertAdjacentHTML('beforeend', `<b>Clocked In:</b> ${time[i][0]}<br>`);
-                        document.getElementById('data').insertAdjacentHTML('beforeend', `<b>Clocked Out:</b> ${time[i][1]}<br>`);
+                        document.getElementById('data').insertAdjacentHTML('beforeend', `<p><span><b>Clocked In:</b> ${time[i][0]}</span><span><b>Clocked Out:</b> ${time[i][1]}</span></p>`);
                     }
-                    document.getElementById('data').insertAdjacentHTML('beforeend', `Time Total ${time[time.length - 1]}<br>`);
 
                 })
         })
+    })
 }
