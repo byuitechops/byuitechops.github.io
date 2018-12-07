@@ -22,6 +22,11 @@ db.settings({
 var signupBtn = document.getElementById('submitSignUp')
 signupBtn.addEventListener('click', () => {
 
+    if (document.getElementById('signUpName').value == "" || document.getElementById("signUpEmail").value || document.getElementById("signUpPassword").value) {
+        alert('Please make sure all fields are filled');
+        return;
+    }
+
     const email = document.getElementById("signUpEmail").value;
     const password = document.getElementById("signUpPassword").value;
 

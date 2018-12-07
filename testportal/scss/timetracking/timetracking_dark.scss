@@ -9,7 +9,8 @@ main {
     }
     section {
         grid-column: 1 /span 2;
-        visibility: hidden;
+        grid-row: 2;
+        // visibility: hidden;
         select {
             display: block;
             position: absolute;
