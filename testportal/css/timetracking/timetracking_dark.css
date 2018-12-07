@@ -55,14 +55,19 @@ main {
 
 main {
   display: grid;
-  grid-template-rows: 10% 90%; }
+  grid-template-rows: 10% 10% 80%; }
   main h1 {
     padding: 0.5em;
     grid-column: 1 /span 2; }
   main section {
     grid-column: 1 /span 2;
     grid-row: 2; }
+    main section input[type=date] {
+      position: absolute;
+      right: 15.85em;
+      top: 7.5%; }
     main section select {
+      visibility: hidden;
       display: block;
       position: absolute;
       right: 1.85em;
@@ -75,25 +80,5 @@ main {
       border-radius: 20px; }
       main section select option {
         border-radius: 20px; }
-    main section a {
-      color: #ffffff;
-      background-color: #535353;
-      text-decoration: none;
-      position: absolute;
-      right: 0;
-      top: 7%;
-      height: 1.8em;
-      padding: 0 0.25em; }
-      main section a img {
-        width: 1.75em;
-        border-radius: 20px; }
-    main section div {
-      visibility: hidden; }
-    main section .container {
-      background: url("../../assets/loading.gif") center center no-repeat;
-      height: 99%; }
-    main section iframe {
-      width: 100%;
-      height: 100%; }
 
 /*# sourceMappingURL=timetracking_dark.css.map */

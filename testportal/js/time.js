@@ -126,6 +126,9 @@ document.getElementById('breakBtn').addEventListener('click', () => {
   var setDate = editDate(new Date());
   // End break
   if (data.time.break) {
+    for (var i = 0; i < document.getElementsByTagName("a").length; i++){
+      document.getElementsByTagName("a")[i].setAttribute("target", "_self");
+    }
     document.getElementById("minutes").style.color = "grey";
     document.getElementById("seconds").style.color = "grey";
     db.collection('users').doc(userId).update({
@@ -140,6 +143,11 @@ document.getElementById('breakBtn').addEventListener('click', () => {
       alert("You are logged out. No breaks are allowed");
     } else {
       // Start Break
+      for (var i = 0; i < document.getElementsByTagName("a").length; i++){
+        document.getElementsByTagName("a")[i].setAttribute("target", "_blank");
+      }
+              
+      
       db.collection('users').doc(userId).update({
         "time.break": true,
         "time.breakKey": setDate

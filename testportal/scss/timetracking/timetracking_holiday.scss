@@ -9,8 +9,14 @@ main {
     }
     section {
         grid-column: 1 /span 2;
-        // visibility: hidden;
+        grid-row: 2;
+        input[type=date] {
+            position: absolute;
+            right: 15.85em;
+            top: 7.5%;
+        }
         select {
+            visibility: hidden;
             display: block;
             position: absolute;
             right: 1.85em;

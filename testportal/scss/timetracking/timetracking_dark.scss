@@ -2,7 +2,7 @@
 
 main {
     display: grid;
-    grid-template-rows: 10% 90%;
+    grid-template-rows: 10% 10% 80%;
     h1 {
         padding: 0.5em;
         grid-column: 1 /span 2;
@@ -10,8 +10,13 @@ main {
     section {
         grid-column: 1 /span 2;
         grid-row: 2;
-        // visibility: hidden;
+        input[type=date] {
+            position: absolute;
+            right: 15.85em;
+            top: 7.5%;
+        }
         select {
+            visibility: hidden;
             display: block;
             position: absolute;
             right: 1.85em;
@@ -25,31 +30,6 @@ main {
             option{
                 border-radius: 20px;
             }
-        }
-        a {
-            color: $accent1;
-            background-color: $primary;
-            text-decoration: none;
-            position: absolute;
-            right: 0;
-            top: 7%;
-            height: 1.8em;
-            padding: 0 0.25em;
-            img {
-                width: 1.75em;
-                border-radius: 20px;
-            }
-        }
-        div{
-            visibility: hidden;
-        }
-        .container {
-            background:url("../../assets/loading.gif") center center no-repeat;
-            height: 99%;
-        }
-        iframe {
-            width: 100%;
-            height: 100%;
         }
     }
 }
