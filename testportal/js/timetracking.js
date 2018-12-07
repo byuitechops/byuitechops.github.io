@@ -48,8 +48,25 @@ function displayDay(date, name) {
                         }
                     });
                     time.push(totalTimeWorked);
-                    document.getElementById('data').insertAdjacentHTML('afterbegin', name);
-                    document.getElementById('data').insertAdjacentHTML('afterbegin', `Break Total ${totalBreak}`);
+
+                    document.getElementById('data').insertAdjacentHTML('beforeend', `${name}<br>`);
+                    document.getElementById('data').insertAdjacentHTML('beforeend', `<b>Break Total:</b> ${totalBreak}<br>`);
+
+                    for (var i = 0; i < time.length - 1; i++) {
+                        if (time[i][0] == undefined) {
+                            time[i][0] = "Not clocked in";
+                        }
+                        if (time[i][1] == undefined) {
+                            time[i][1] = "Not clocked out";
+                        }
+                        console.log(time[i][0]);
+                        console.log(time[i][1]);
+
+                        document.getElementById('data').insertAdjacentHTML('beforeend', `<b>Clocked In:</b> ${time[i][0]}<br>`);
+                        document.getElementById('data').insertAdjacentHTML('beforeend', `<b>Clocked Out:</b> ${time[i][1]}<br>`);
+                    }
+                    document.getElementById('data').insertAdjacentHTML('beforeend', `Time Total ${time[time.length - 1]}<br>`);
+
                 })
         })
 }

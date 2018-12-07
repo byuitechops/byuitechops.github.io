@@ -22,7 +22,7 @@ db.settings({
 var signupBtn = document.getElementById('submitSignUp')
 signupBtn.addEventListener('click', () => {
 
-    if (document.getElementById('signUpName').value == "" || document.getElementById("signUpEmail").value || document.getElementById("signUpPassword").value) {
+    if (document.getElementById('signUpName').value == "" || document.getElementById("signUpEmail").value == "" || document.getElementById("signUpPassword").value == "") {
         alert('Please make sure all fields are filled');
         return;
     }
