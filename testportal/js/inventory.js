@@ -1,3 +1,4 @@
+
 function loadPage() {
   document.getElementById('name').innerText = `Edit Item`;
   document.getElementById('editItemBox').style.visibility = "hidden";
