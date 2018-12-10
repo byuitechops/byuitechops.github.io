@@ -14,11 +14,11 @@ document.getElementById('dateInput').addEventListener('change', () => {
     var date = document.getElementById('dateInput').value;
     if (team != "") {
         db.collection('users').where("team", "==", team).get()
-        .then(function (querySnapshot) {
-            querySnapshot.forEach(function(doc) {
-                displayDay(new Date(`${date} 00:00:00`), doc.data().nameDisplay, doc.id);
+            .then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                    displayDay(new Date(`${date} 00:00:00`), doc.data().nameDisplay, doc.id);
+                })
             })
-        })
     } else {
         console.log(`${date} 00:00:00`);
         console.log(new Date(`${date} 00:00:00`));
@@ -33,21 +33,19 @@ document.getElementById('selectTeam').addEventListener('change', () => {
     var date = new Date();
     db.collection('users').where("team", "==", team).get()
         .then(function (querySnapshot) {
-            querySnapshot.forEach(function(doc) {
+            querySnapshot.forEach(function (doc) {
                 displayDay(date, doc.data().nameDisplay, doc.id);
             })
         })
 })
 
-function getPreviousMonday()
-{
+function getPreviousMonday() {
     var date = new Date();
     var day = date.getDay();
     var prevMonday;
-    if(date.getDay() == 1){
+    if (date.getDay() == 1) {
         prevMonday = new Date().setDate(date.getDate() - 7);
-    }
-    else{
+    } else {
         prevMonday = new Date().setDate(date.getDate() - (day - 1));
     }
 
@@ -65,23 +63,47 @@ function getWeek() {
     for (var i = 0; i < 6; i++) {
         var newDate = date + i;
         var day = new Date(displayMonday.setDate(newDate));
-        day.setHours(00,00,00);
+        day.setHours(00, 00, 00);
         week.push(day);
     }
 
     db.collection('users').orderBy("name").get()
-        .then(function(querySnapshot) {
+        .then(function (querySnapshot) {
             querySnapshot.forEach((doc) => {
-                console.log(doc.data());
+                var timeEarned;
+                var totalTimeWorked = 0;
+                document.getElementById('data').insertAdjacentHTML('beforeend', `<h3 id="${doc.data().nameDisplay}">${doc.data().nameDisplay}</h3>`);
                 for (var i = 0; i < week.length; i++) {
-                }  
+                    var year = week[i].getFullYear();
+                    var month = week[i].getMonth() + 1;
+                    if (month < 10) {
+                        month = `0${month}`;
+                    }
+                    var searchDay = week[i].getDate();
+                    if (searchDay < 10) {
+                        searchDay = `0${searchDay}`;
+                    }
+                    var inputDay = `${year}-${month}-${searchDay} 00:00`;
+                    db.collection('users').doc(doc.id).collection("hoursWorked").where(firebase.firestore.FieldPath.documentId(), ">", inputDay).get()
+                        .then(function (querySnapshot) {
+                            querySnapshot.forEach((doc) => {
+                                console.log(doc);
+                                if (doc.data().end != undefined) {
+                                    var start = doc.data().start.split(":");
+                                    var startTime = Number(start[0]) + Number(start[1] / 60);
+                                    var end = doc.data().end.split(":");
+                                    var endTime = Number(end[0]) + Number(end[1] / 60);
+                                    totalTimeWorked += Number(totalTimeWorked) + Number((endTime - startTime).toFixed(2));
+                                    console.log(totalTimeWorked);
+                                }
+                            })
+                            
+                            document.getElementById(doc.data().nameDisplay).insertAdjacentHTML('afterend', `<p>Time Worked: ${totalTimeWorked}</p><p>Time Earned: ${timeEarned}</p>`);
+                                
+                        })
+                }
             })
         })
-
-    
-
-    console.log(week);
-
 }
 
 function displayDay(date, name, nameId) {
