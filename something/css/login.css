@@ -1,0 +1,50 @@
+body {
+    margin: 0 10em;
+}
+
+.form button {
+    width: 30%;
+}
+
+.form {
+    border: .5px solid #b9b9b9;
+    width: 70%;
+    padding: .25em;
+    margin-top: 10%;
+    margin-bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-flow: row wrap;
+    align-content: center;
+    justify-content: center;
+}
+
+@media screen and (max-width: 1400px) {
+    .form {
+        display: block;
+        width: 100%;
+    }
+
+    input {
+        width: 98%;
+    }
+
+    .form button {
+        margin: 0.5em auto;
+        display: block;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    body {
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .form {
+        width: 80%;
+    }
+
+}

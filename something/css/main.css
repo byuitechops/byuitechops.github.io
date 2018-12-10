@@ -1,0 +1,254 @@
+/* Default Style Values*/
+
+body {
+    margin: 0;
+    font-family: Verdana;
+    font-size: 20px;
+}
+
+h1 {
+    color: #0076c6;
+    text-align: center;
+}
+
+h2 {
+    color: #0076c6;
+}
+
+h3 {
+    color: #f89901;
+}
+
+input {
+    font-size: 14px;
+    margin: .5em;
+    padding: .5em;
+    height: 3em;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    width: 48%;
+}
+
+button {
+    background-color: #0076c6;
+    color: white;
+    margin: 0.6em;
+    border: none;
+    cursor: pointer;
+    height: 2.5em;
+    border-radius: 1em;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+a {
+    text-decoration: none;
+}
+
+/*************** CLASSES ***************/
+
+.col-1 {
+    width: 8.33%;
+}
+
+.col-2 {
+    width: 16.66%;
+}
+
+.col-3 {
+    width: 25%;
+}
+
+.col-4 {
+    width: 33.33%;
+}
+
+.col-5 {
+    width: 41.66%;
+}
+
+.col-6 {
+    width: 50%;
+}
+
+.col-7 {
+    width: 58.33%;
+}
+
+.col-8 {
+    width: 66.66%;
+}
+
+.col-9 {
+    width: 75%;
+}
+
+.col-10 {
+    width: 83.33%;
+}
+
+.col-11 {
+    width: 91.66%;
+}
+
+.col-12 {
+    width: 100%;
+}
+
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+[class*="col-"] {
+    float: left;
+}
+
+ul.sidenav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: #0076c6;
+    position: fixed;
+    height: 100%;
+}
+
+ul.sidenav li a {
+    display: block;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+ul.sidenav li a.active {
+    background-color: #f89901;
+    color: white;
+}
+
+ul.sidenav li a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+}
+
+div.content {
+    margin-left: 36%;
+    height: 100%;
+}
+
+input[type=checkbox] {
+    -webkit-appearance: none;
+    background-color: #fafafa;
+    border: 1px solid #808080;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+    padding: 9px;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+input[type=checkbox]:hover {
+    background-color: #9cb7d4
+}
+
+input[type=checkbox]:active,
+input[type=checkbox]:checked:active {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+input[type=checkbox]:checked {
+    background-color: #0076c6;
+    border: 1px solid #adb8c0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
+    color: #99a1a7;
+}
+
+input[type=radio] {
+    -webkit-appearance: none;
+    background-color: #fafafa;
+    border: 1px solid #808080;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+    padding: 9px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+input[type=radio]:hover {
+    background-color: #9cb7d4
+}
+
+input[type=radio]:active,
+input[type=radio]:checked:active {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+input[type=radio]:checked {
+    background-color: #0076c6;
+    border: 1px solid #adb8c0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
+    color: #99a1a7;
+}
+
+.hide {
+    display: none;
+}
+
+
+/* --------------------------- Resize for Tablets -------------------------- */
+
+@media screen and (max-width: 1200px) {
+    h1 {
+        font-size: 45px;
+    }
+    ul.sidenav {
+        width: 100%;
+        height: auto;
+        position: fixed;
+    }
+    ul.sidenav li a {
+        float: left;
+        padding: 15px;
+        text-align: center;
+    }
+    div.content {
+        padding-top: 10%;
+        margin: 0 auto;
+    }
+    [class*="col-"] {
+        width: 100%;
+        text-align: center;
+    }
+
+}
+
+/* --------------------------- End of Resize for Tablets -------------------------- */
+
+/* --------------------------- Resize for Mobile -------------------------- */
+
+@media screen and (max-width: 1000px) {
+    h1 {
+        font-size: 45px;
+    }
+    div.content {
+        padding-top: 1%;
+            }
+    
+    ul.sidenav {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+    ul.sidenav li a {
+        
+        text-align: center;
+        float: none;
+    }
+    .flex-container {
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+/* --------------------------- End of Resize for Mobile -------------------------- */

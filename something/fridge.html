@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Fridge Cleaning</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.gif">
+    <link type="text/css" rel="stylesheet" href="css/main.css">
+    <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+    <link type="text/css" rel="stylesheet" href="css/fridge.css">
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-2">
+            <ul class="sidenav" id="sidenav">
+                <li>
+                    <a href="home.html">Home</a>
+                </li>
+                <li>
+                    <a href="schedule.html">Schedules</a>
+                </li>
+                <li>
+                    <a class="active" href="fridge.html">Fridge Cleaning</a>
+                </li>
+                <li>
+                    <a href="shoppingCart.html">Shopping Cart</a>
+                </li>
+                <li>
+                    <a href="videoTimeCalculator.html">Time Calculator</a>
+                </li>
+                <li>
+                    <a href="timeTracking.html">Time Tracking</a>
+                </li>
+                <li>
+                    <a href="workCalc.html">Work Calculator</a>
+                </li>
+                <li>
+                    <a href="profile.html">Profile</a>
+                </li>
+                <li>
+                    <a href="employeehandbook.html">Employee Handbook</a>
+                </li>
+                <div id='adminlink' class="hide">
+                    <li>
+                        <a href="admin.html">Admin</a>
+                    </li>
+                    <li>
+                        <a href="inventory.html">Inventory</a>
+                    </li>
+                    <li>
+                        <a href="invoice.html">Invoice</a>
+                    </li>
+                </div>
+            </ul>
+        </div>
+        <div class="col-10">
+            <div class="content">
+                <h1>Fridge Cleaning</h1>
+                <div id='frame'>
+                    <iframe id='scheduleFrame' src="https://docs.google.com/spreadsheets/d/18U2hkUafZ1EXmtze9BWI_1U4t6619uy4FZmPiQxfWss/edit#gid=590424193"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="js/fridge.js"></script>
+</html>
