@@ -39,6 +39,51 @@ document.getElementById('selectTeam').addEventListener('change', () => {
         })
 })
 
+function getPreviousMonday()
+{
+    var date = new Date();
+    var day = date.getDay();
+    var prevMonday;
+    if(date.getDay() == 1){
+        prevMonday = new Date().setDate(date.getDate() - 7);
+    }
+    else{
+        prevMonday = new Date().setDate(date.getDate() - (day - 1));
+    }
+
+    return prevMonday;
+}
+
+function getWeek() {
+    // if (new Date().getDay() != 1) {
+    //     return;
+    // }
+    document.getElementById('data').innerHTML = "";
+    var displayMonday = new Date(getPreviousMonday());
+    var week = [];
+    var date = displayMonday.getDate();
+    for (var i = 0; i < 6; i++) {
+        var newDate = date + i;
+        var day = new Date(displayMonday.setDate(newDate));
+        day.setHours(00,00,00);
+        week.push(day);
+    }
+
+    db.collection('users').orderBy("name").get()
+        .then(function(querySnapshot) {
+            querySnapshot.forEach((doc) => {
+                console.log(doc.data());
+                for (var i = 0; i < week.length; i++) {
+                }  
+            })
+        })
+
+    
+
+    console.log(week);
+
+}
+
 function displayDay(date, name, nameId) {
     console.log(date);
     var year = date.getFullYear();
