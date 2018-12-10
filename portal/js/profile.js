@@ -1,244 +1,209 @@
-// Connect to firebase
-const config = {
-    apiKey: "AIzaSyA_I75-CU5_GlNP1QSKvvH8nbYVkaAUgNA",
-    authDomain: "techopsportal.firebaseapp.com",
-    databaseURL: "https://techopsportal.firebaseio.com",
-    projectId: "techopsportal",
-    storageBucket: "techopsportal.appspot.com",
-    messagingSenderId: "265124430634"
-};
-firebase.initializeApp(config);
+// dropdown toggleView funcionality 
 
-var user;
-var name;
-var data;
-var teamBase;
-
-firebase.auth().onAuthStateChanged(firebaseUser => {
-    if (firebaseUser) {
-        // If logged in do this
-        user = firebase.auth().currentUser;
-        user.providerData.forEach(function (profile) {
-            name = profile.displayName;
-            firebase.database().ref('users').child(name).on('value', snap => {
-                var titles;
-                var shot = snap.val();
-                for (titles in shot) {
-                    if (titles == 'Admin') {
-                        if (shot[titles] == true) {
-                            //Load Admin Link
-                            document.getElementById('adminlink').classList.remove('hide');
-                            // Build drop down list
-                            firebase.database().ref('users').on('value', snap => {
-                                snap = snap.val();
-                                var namesList = [];
-                                var x;
-                                for (x in snap) {
-                                    namesList.push(x);
-                                }
-                                var namesDiv = document.getElementById('names');
-                                var selectTag = "<select id='sNames' onchange='displayInfo(this.value)'>";
-                                for (y = 0; y < namesList.length; y++) {
-                                    if (name == namesList[y]) {
-                                        selectTag += "<option value='" + namesList[y] + "' selected>" + namesList[y] + "</option>";
-                                    } else {
-                                        selectTag += "<option value='" + namesList[y] + "'>" + namesList[y] + "</option>";
-                                    }
-                                }
-                                selectTag += "</select>";
-                                namesDiv.innerHTML = selectTag;
-                            })
-                        }
-                    }
-                }
-            });
-        });
-        displayInfo(name);
+function toggleView() {
+    var info = document.getElementById('info');
+    var aboutMe = document.getElementById('aboutMe');
+    var img = document.getElementById('arrowImg');
+    // If info is shown
+    if (info.style.height == "20%") {
+        info.style.height = "0%";
+        aboutMe.style.height = "64%";
+        aboutMe.style.overflow = "auto";
+        img.style.transform = "rotate(0deg)";
     } else {
-        window.location.replace("index.html");
+        info.style.height = "20%";
+        aboutMe.style.height = "44%";
+        aboutMe.style.overflow = "hidden";
+        img.style.transform = "rotate(180deg)";
     }
-});
-
-function displayInfo(selected) {
-    name = selected;
-    data = firebase.database().ref('users').child(name).child("info");
-    data.on('value', snapshot => {
-        var snap = snapshot.val();
-
-        document.getElementById('dName').innerHTML = name;
-
-        if (snap.email == "") {
-            document.getElementById('dEmail').innerHTML = "No Data";
-        } else {
-            document.getElementById('dEmail').innerHTML = snap.email;
-        }
-
-        if (snap.phoneNum == "") {
-            document.getElementById('dPhone').innerHTML = "No Data";
-        } else {
-            document.getElementById('dPhone').innerHTML = snap.phoneNum;
-        }
-
-        if (snap.birthday == "") {
-            document.getElementById('dBirthday').innerHTML = "No Data";
-        } else {
-            document.getElementById('dBirthday').innerHTML = snap.birthday;
-        }
-
-        if (snap.graduation == "") {
-            document.getElementById('dGraduation').innerHTML = "No Data";
-        } else {
-            document.getElementById('dGraduation').innerHTML = snap.graduation;
-        }
-
-        if (snap.major == "") {
-            document.getElementById('dMajor').innerHTML = "No Data";
-        } else {
-            document.getElementById('dMajor').innerHTML = snap.major;
-        }
-
-        if (snap.track == "") {
-            document.getElementById('dTrack').innerHTML = "No Data";
-        } else {
-            document.getElementById('dTrack').innerHTML = snap.track;
-        }
-
-        if (snap.position == "") {
-            document.getElementById('dPosition').innerHTML = "No Data";
-        } else {
-            document.getElementById('dPosition').innerHTML = snap.position;
-        }
-
-        if (snap.speed == "") {
-            document.getElementById('dSpeed').innerHTML = "No Data";
-        } else {
-            document.getElementById('dSpeed').innerHTML = snap.speed;
-        }
-
-        if (snap.strikes == "" && snap.strikes != 0) {
-            document.getElementById('dStrikes').innerHTML = "No Data";
-        } else {
-            document.getElementById('dStrikes').innerHTML = snap.strikes;
-        }
-
-        if (snap.sick == "" && snap.sick != 0) {
-            document.getElementById('dSick').innerHTML = "No Data";
-        } else {
-            document.getElementById('dSick').innerHTML = snap.sick;
-        }
-
-        if (snap.personalDays == "" && snap.personalDays != 0) {
-            document.getElementById('dPD').innerHTML = "No Data";
-        } else {
-            document.getElementById('dPD').innerHTML = snap.personalDays;
-        }
-    });
-
-    teamBase = firebase.database().ref('users').child(name);
-    teamBase.on('value', snapshot => {
-        var snap = snapshot.val();
-
-        document.getElementById('dTeam').innerHTML = snap.Team;
-        document.getElementById('dTeam').style.textTransform = 'capitalize';
-    });
 }
 
-function updateInfo(title) {
+//tool tip on click
 
-    // Get the modal
-    var modal = document.getElementById('myModal');
+var toolTip = document.getElementById("clock");
+var toolTipBox = document.getElementById("toolTipBox");
+toolTip.addEventListener("click", () => {
 
-    // Get the <span> element that closes the modal
-    var span = document.getElementById("close");
-
-    // Open the modal 
-    modal.style.display = "block";
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function () {
-        modal.style.display = "none";
-        document.getElementById('haha').remove();
-        document.getElementById('hahaSubmit').remove();
+    if (toolTipBox.style.visibility == "hidden") {
+        toolTipBox.style.visibility = "visible";
+    } else {
+        toolTipBox.style.visibility = "hidden";
     }
 
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function (event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-            document.getElementById('haha').remove();
-            document.getElementById('hahaSubmit').remove();
-        }
+})
+
+//showing up the redeem tool
+var redeemBtn = document.getElementById("redeem");
+var redeemTool = document.getElementById("usingRedeem");
+redeemBtn.addEventListener("click", () => {
+
+    if (redeemTool.style.visibility == "hidden") {
+        redeemTool.style.visibility = "visible";
+        toolTipBox.style.visibility = "hidden";
+    } else {
+        redeemTool.style.visibility = "hidden";
     }
+})
 
-    if (title == "phoneNum" || title == "major" || title == "position" || title == "speed") {
-        var newItem = document.createElement('input');
-        newItem.setAttribute('id', 'haha');
-        newItem.setAttribute('type', 'text');
+//when the user presses the "cancel" button, goes back to the screen
+var cancelBtn = document.getElementById("cancel");
+cancelBtn.addEventListener('click', () => {
+    redeemTool.style.visibility = "hidden";
+})
 
-        var newSubmit = document.createElement('button');
-        newSubmit.setAttribute('id', 'hahaSubmit');
-        var t = document.createTextNode('Submit');
-        newSubmit.appendChild(t);
+// when the user clicks the "redeem" button, it shows the confirm
+var redeemConfirmBtn = document.getElementById("redeembtn");
+redeemConfirmBtn.addEventListener('click', () => {
+    redeemTool.style.visibility = "hidden";
+    var hoursRedeemed = document.getElementById("resultRedeem");
+    
+    
+    if (data.time.accumulatedTime < document.getElementById("timeDesired").value) {
+        redeemTool.style.visibility = "hidden";
+        alert("You don't have enough accumulated hours to redeem the time desired");
+       
 
-        var modolly = document.getElementById('modal-content');
-        modolly.insertBefore(newItem, modolly.lastChild.nextSibling);
-        modolly.insertBefore(newSubmit, modolly.lastChild.nextSibling);
-    } else if (title == "graduation") {
-        var newItem = document.createElement('select');
-        newItem.setAttribute('id', 'haha');
-        newItem.setAttribute('required', '');
-        newItem.innerHTML = "<option value='' disabled hidden selected>Select One</option>"
-        var sem = ['Winter', 'Spring', 'Fall'];
-        var year = ['2018', '2019', '2020', '2021', '2022'];
-        for (i = 0; i < year.length; i++) {
-            for (y = 0; y < sem.length; y++) {
-                var t = sem[y] + " " + year[i];
-                newItem.innerHTML += "<option value='" + t + "'>" + t + "</option>";
+    } else {
+
+        db.collection("users").doc(userId).update({
+                "time.accumulatedTime": Number(data.time.accumulatedTime) - Number(document.getElementById("timeDesired").value),
+            })
+            .then(function () {
+                console.log("Document successfully written!");
+                window.location.reload();
+            }).catch(function (error) {
+                // An error happened.
+            });
+            if (data.time.accumulatedTime < 10){
+                hoursRedeemed.innerText = "0" + document.getElementById("timeDesired").value + ":00";
             }
-        }
+            else{
+                hoursRedeemed.innerText = document.getElementById("timeDesired").value + ":00";
+            }
+            document.getElementById("confirmRedeem").style.visibility = "visible";
 
-        var newSubmit = document.createElement('button');
-        newSubmit.setAttribute('id', 'hahaSubmit');
-        var t = document.createTextNode('Submit');
-        newSubmit.appendChild(t);
-
-        var modolly = document.getElementById('modal-content');
-        modolly.insertBefore(newItem, modolly.lastChild.nextElementSibling);
-        modolly.insertBefore(newSubmit, modolly.lastChild.nextSibling);
-    } else if (title == "track") {
-        var newItem = document.createElement('select');
-        newItem.setAttribute('id', 'haha');
-        newItem.setAttribute('required', '');
-        newItem.innerHTML = "<option value='' disabled hidden selected>Select One</option><option value='Winter/Spring'>Winter/Spring</option><option value='Spring/Fall'>Spring/Fall</option><option value='Fall/Winter'>Fall/Winter</option>";
-
-        var newSubmit = document.createElement('button');
-        newSubmit.setAttribute('id', 'hahaSubmit');
-        var t = document.createTextNode('Submit');
-        newSubmit.appendChild(t);
-
-        var modolly = document.getElementById('modal-content');
-        modolly.insertBefore(newItem, modolly.lastChild.nextElementSibling);
-        modolly.insertBefore(newSubmit, modolly.lastChild.nextSibling);
     }
+})
 
-    document.getElementById("hahaSubmit").addEventListener("click", function () {
-        var info = document.getElementById('haha').value;
-        info = String(info);
-        var data = firebase.database().ref('users').child(name).child("info");
-        if (info != "") {
-            var j = '{"' + title + '": "' + info + '"}';
-            j = JSON.parse(j);
-            data.update(j)
-                .then(function () {
-                    //Update successful
-                    modal.style.display = "none";
-                    document.getElementById('haha').remove();
-                    document.getElementById('hahaSubmit').remove();
-                }).catch(function (error) {
-                    //An error happened
-                    alert(error);
-                })
-        }
+// When the use clicks ok close confirm
+var okBtn = document.getElementById("close");
+okBtn.addEventListener('click', () => {
+    document.getElementById("confirmRedeem").style.visibility = "hidden";
+})
 
-    });
+
+//allows the user to edit his/her information
+var editBtn = document.getElementById("editContact");
+var editDiv = document.getElementById("editInfo");
+editBtn.addEventListener("click", () => {
+    editDiv.style.visibility = "visible";
+    populateInfoEdit();
+})
+
+//sends to firebase info changes made by the user
+// Initialize Firebase
+
+var user = firebase.auth().currentUser;
+var submitChanges = document.getElementById("submitInfoChanges");
+submitChanges.addEventListener("click", () => {
+
+    db.collection("users").doc(userId).update({
+            "nameDisplay": document.getElementById("editName").value,
+            "info.phoneNumber": document.getElementById("editPhone").value,
+            "info.major": document.getElementById("editMajor").value,
+            "info.track": document.getElementById("editTrack").value,
+            "info.graduation": document.getElementById("editGradDate").value,
+            "info.aboutMe": document.getElementById("editAboutMe").value
+
+        })
+        .then(function () {
+            console.log("Document successfully written!");
+            window.location.reload();
+        }).catch(function (error) {
+            // An error happened.
+        });
+    editDiv.style.visibility = "hidden";
+})
+
+
+var cancelChanges = document.getElementById("cancelInfoChanges");
+cancelChanges.addEventListener("click", () => {
+    editDiv.style.visibility = "hidden";
+})
+
+//populates de input boxes with what we already have from the user
+function populateInfoEdit() {
+    db.collection("users").doc(userId).get()
+        .then(function (doc) {
+            document.getElementById("editName").setAttribute("value", `${doc.data().nameDisplay}`);
+            document.getElementById("editPhone").setAttribute("value", `${doc.data().info.phoneNumber}`);
+            document.getElementById("editMajor").setAttribute("value", `${doc.data().info.major}`);
+            document.getElementById("editTrack").setAttribute("value", `${doc.data().info.track}`);
+            document.getElementById("editGradDate").setAttribute("value", `${doc.data().info.graduation}`);
+            document.getElementById("editAboutMe").innerText = doc.data().info.aboutMe;
+        })
 }
+
+//Loads the page with all user's information
+function loadPage() {
+    document.getElementById(theme).setAttribute('checked', true);
+    var photo = data.info.photo;
+    firebase.storage().ref().child(`profile/${photo}`).getDownloadURL().then(function (url) {
+        document.getElementById(`profilePic`).setAttribute('src', url);
+        //return;
+    }).catch(function (error) {
+        return error;
+    });
+    db.collection("users").doc(userId).get()
+        .then(function (doc) {
+            const myData = doc.data();
+            document.getElementById("dbName").innerText = myData.nameDisplay;
+            document.getElementById("dbTitle").innerText = "Title: " + myData.title;
+            document.getElementById("dbTeam").innerText = "Team: " + myData.team;
+            document.getElementById("dbPhone").innerText = "T: " + myData.info.phoneNumber;
+            document.getElementById("dbEmail").innerText = "E-mail: " + myData.info.email;
+            document.getElementById("dbMajor").innerText = "Major: " + myData.info.major;
+            document.getElementById("dbTrack").innerText = "Track: " + myData.info.track;
+            document.getElementById("dbGradDate").innerText = "Graduation Date: " + myData.info.graduation;
+            document.getElementById("dbTyping").innerText = "Typing Speed: " + myData.info.speed;
+            document.getElementById("dbAboutMe").innerText = myData.info.aboutMe;
+            //fills in accumulated time
+            if (data.time.accumulatedTime < 10){
+                document.getElementById("accumulated").innerText = "0" + myData.time.accumulatedTime + ":00";
+                document.getElementById("redeemTime").innerText = "0" + myData.time.accumulatedTime + ":00";
+            }
+            else{
+                document.getElementById("accumulated").innerText = myData.time.accumulatedTime + ":00";
+                document.getElementById("redeemTime").innerText =  myData.time.accumulatedTime + ":00";
+            }
+            
+
+            //displays lead/admin tools only for the right people
+            if (myData.admin || myData.title == "Project Lead") {
+                document.getElementById("leadAdmin").style.visibility = "visible";
+            }
+        })
+}
+
+function changeViewMode(newTheme) {
+    db.collection('users').doc(userId).update({
+            viewMode: newTheme
+        })
+        .then(function () {
+            console.log("Document successfully updated!");
+        })
+        .catch(function (error) {
+            // The document probably doesn't exist.
+            console.error("Error updating document: ", error);
+        });
+
+}
+
+//handles the sign out button
+document.getElementById("signOutBtn").addEventListener("click", () => {
+    firebase.auth().signOut().then(function () {
+        // Sign-out successful.
+    }).catch(function (error) {
+        // An error happened.
+    });
+})

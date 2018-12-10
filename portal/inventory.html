@@ -1,112 +1,73 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Inventory</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.gif">
-    <!-- Css -->
-    <link type="text/css" rel="stylesheet" href="css/main.css">
-    <link type="text/css" rel="stylesheet" href="css/inventory.css">
-    <!-- Script -->
-    <script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/byui_favicon.gif">
+    <!-- Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
+    <!-- -->
+    <!-- Partials -->
+    <script type="module">
+        import {addHeader} from './partials/header.js';
+        addHeader();
+    </script>
+    <!-- -->
+    <!-- CSS -->
+    <link id="defaultCss" rel="stylesheet" type="text/css" href="css/inventory/inventory_light.css">
+    <!-- -->
+    <title>Inventory | BYU-I Techops Portal</title>
 </head>
 
 <body>
-    <div class="row">
-        <div class="col-2">
-            <ul class="sidenav" id="sidenav">
-                <li>
-                    <a href="home.html">Home</a>
-                </li>
-                <li>
-                    <a href="schedule.html">Schedules</a>
-                </li>
-                <li>
-                    <a href="fridge.html">Fridge Cleaning</a>
-                </li>
-                <li>
-                    <a href="shoppingCart.html">Shopping Cart</a>
-                </li>
-                <li>
-                    <a href="videoTimeCalculator.html">Time Calculator</a>
-                </li>
-                <li>
-                    <a href="timeTracking.html">Time Tracking</a>
-                </li>
-                <li>
-                    <a href="workCalc.html">Work Calculator</a>
-                </li>
-                <li>
-                    <a href="profile.html">Profile</a>
-                </li>
-                <li>
-                    <a href="employeehandbook.html">Employee Handbook</a>
-                </li>
-                <div id='adminlink' class="hide">
-                    <li>
-                        <a href="admin.html">Admin</a>
-                    </li>
-                    <li>
-                        <a class="active" href="inventory.html">Inventory</a>
-                    </li>
-                    <li>
-                        <a href="invoice.html">Invoice</a>
-                    </li>
-                </div>
-            </ul>
+    <div id="body-image"></div>
+    <header>
+    </header>
+    <main>
+        <div id="head">
+            <h1>Inventory</h1>
+            <button id="addNewItem">Add New Item</button>
         </div>
-        <div class="col-10">
-            <div class="content">
-                <h1 style="text-align: center">Inventory</h1>
-                <table id="inventory-table">
-                </table>
-                <form id="form">
-                </form>
-                <div id="warning"></div>
-                <!-- The Modal -->
-                <div id="myModal" class="modal">
+        <section id="content">
 
-                    <!-- Modal content -->
-                    <div id="modal-content">
-                        <span id="close">&times;</span>
-                        <div class="modal-column-container">
-                            <h3>Edit Item Information</h3>
-                            <form>
-                                <label for="itemName">Item:
-                                <span id="name"></span></label>
+            <section id="left">
 
-                                <label for="itemName">Image:
-                                <div id="image" class="image-container">
-                                </div>
-                                </label>
-
-                                <label for="img" class="modal-file-upload">New Image
-                                <input type="file" multiple="false" accept="image/*" id="img" onchange="modalDisplayImageFile()">
-                                        </label>
-
-                                <label for="itemName">Price:
-                                <input type="number" id="price" step="0.01" min="0" required>
-                                </label>
-
-                                <label for="itemName">Quantity:
-                                <input type="number" id="quantity" min="0" required></label>
-
-                                <div class="button" onclick="editItem()">Edit</div>
-                                <input type="hidden" id="hiddenInput">
-                                <div id="modal-warning"></div>
-                            </form>
+            </section>
+            <section id="right">
+                <div id="editItemBox">
+                    <p id="name">Edit Item's information</p>
+                    <div id="cart">
+                        <p> <span> Current Name:</span> <span id="nameEdit"></span></p>
+                        <p> <span> Current Count:</span> <span id="countEdit"></span></p>
+                        <p> <span> Current Price:</span> <span id="priceEdit"></span></p>
+                        <p> <span> Current Image:</span> </p>
+                        <div id="imgEdit">
                         </div>
+                        <button id="submitEdit">Confirm Edition</button>
+                        <button id="cancelEdit">Cancel Edition</button>
                     </div>
-                </div>
+            </section>
+        </section>
+        <div id="confirmModal" class="modal">
 
-                <button id="partyButton" onclick="clearPartyNames()">Clear Party Names</button>
-
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span id="confirmClose" class="close">&times;</span>
+                <h3>Checkout</h3>
+                <img src="assets/check-01.png">
+                <p id="totalFinal">Total: $00.00</p>
             </div>
         </div>
-    </div>
-    <script src="js/inventory.js"></script>
+    </main>
 </body>
+<!-- Script -->
+<script src="js/main.js"></script>
+<script src="js/inventory.js"></script>
+<!-- -->
 
 </html>

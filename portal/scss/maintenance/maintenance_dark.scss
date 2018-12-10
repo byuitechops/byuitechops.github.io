@@ -1,0 +1,34 @@
+@import "../partials/theme_dark";
+
+main {
+    display: grid;
+    grid-template-rows: 10% 90%;
+    h1 {
+        padding: 0.5em;
+        grid-column: 1 /span 2;
+    }
+    section {
+        grid-column: 1 /span 2;
+        a {
+            color: $accent1;
+            background-color: $primary;
+            text-decoration: none;
+            position: absolute;
+            right: 0;
+            top: 7%;
+            height: 1.8em;
+            padding: 0 0.25em;
+            img {
+                width: 1.75em;
+            }
+        }
+        .container {
+            background:url("../assets/loading.gif") center center no-repeat;
+            height: 99%;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+        }
+    }
+}

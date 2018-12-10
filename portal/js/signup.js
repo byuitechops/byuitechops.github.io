@@ -1,5 +1,5 @@
-// Connect to firebase
-const config = {
+// Initialize Firebase
+var config = {
     apiKey: "AIzaSyA_I75-CU5_GlNP1QSKvvH8nbYVkaAUgNA",
     authDomain: "techopsportal.firebaseapp.com",
     databaseURL: "https://techopsportal.firebaseio.com",
@@ -8,72 +8,91 @@ const config = {
     messagingSenderId: "265124430634"
 };
 firebase.initializeApp(config);
+// Initialize Cloud Firestore through Firebase
+var db = firebase.firestore();
 
-// This function is run when user clicks submit
-document.getElementById('submitSignUp').addEventListener('click', e => {
-    // Get the values from the inputs
-    var user = document.getElementById('signUpName').value;
-    const email = document.getElementById('signUpEmail').value;
-    const pass = document.getElementById('signUpPassword').value;
-    // Connect to firebase authentication
-    const auth = firebase.auth();
-
-
-    // Sign up in firebase with email and password
-    const promise = auth.createUserWithEmailAndPassword(email, pass);
-    promise.then(e => {
-        // If it worked call setUser function
-        var itWorked = setUser(user);
-        if (itWorked) {
-            // If it worked set current users name
-            var profile = firebase.auth().currentUser;
-            profile.updateProfile({
-                displayName: user
-            }).catch(function (error) {
-                console.log(error);
-            });
-            setTimeout(function () {
-                window.location.replace("home.html");
-            }, 1400);
-        } else {
-            // If it did not work alert user
-            alert('Sorry Registration did not work, try again.');
-            // Reload page
-            window.location.reload();
-        }
-
-    });
-    // If it did not work alert user
-    promise.catch(e => alert(e.message));
+// Disable deprecated features
+db.settings({
+    timestampsInSnapshots: true
 });
 
-function setUser(user) {
-    // Setup user into database with default permissions
-    var data = {
-        "Admin": false,
-        "Team": 'default',
-        "TeamLead": false
-    };
-    // Set up user with inputed info
-    var info = {
-        "birthday": document.getElementById('signUpBirthday').value,
-        "email": document.getElementById('signUpEmail').value,
-        "graduation": document.getElementById('signUpGraduation').value,
-        "major": document.getElementById('signUpMajor').value,
-        "phoneNumber": document.getElementById('signUpPhone').value,
-        "track": document.getElementById('signUpTrack').value
+//hides elements and allows them to come as the user gives input
+//document.getElementById("signUpEmail").style.visibility.child="hidden";
+
+var signupBtn = document.getElementById('submitSignUp')
+signupBtn.addEventListener('click', () => {
+
+    if (document.getElementById('signUpName').value == "" || document.getElementById("signUpEmail").value == "" || document.getElementById("signUpPassword").value == "") {
+        alert('Please make sure all fields are filled');
+        return;
     }
-    try {
-        // Send ot firebase
-        firebase.database().ref('users/' + user).update(data);
-        firebase.database().ref('users/' + user).child('info').update(info);
-        firebase.database().ref('dates/' + user).update({
-            "birthday": document.getElementById('signUpBirthday').value
+
+    const email = document.getElementById("signUpEmail").value;
+    const password = document.getElementById("signUpPassword").value;
+
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then(function () {
+
+            var info = {
+                "email": email,
+                "photo": "default-image.png",
+                "phoneNumber": "000-000-0000",
+                "major": "",
+                "track": "",
+                "graduation": "",
+                "speed": ""
+            }
+
+            var time = {
+                "break": false,
+                "check": false,
+                "breakKey":"",
+                "checkKey":"",
+                "accumulatedTime": "4"
+            }
+
+            try {
+                // Send to firebase
+                var docData = {
+                    admin: false,
+                    nameDisplay: document.getElementById('signUpName').value,
+                    name: document.getElementById('signUpName').value,
+                    team: "default",
+                    lead: false,
+                    info: info,
+                    title: "Team Member",
+                    viewMode: "light",
+                    time: time
+                }
+                db.collection('users').doc().set(docData).then(function () {
+                    console.log("Written");
+                    console.log(firebase.auth().currentUser);
+                    firebase.auth().currentUser.updateProfile({
+                        displayName: document.getElementById('signUpName').value
+                    }).then(function () {
+                        // Update successful.
+                        window.location.replace('home.html');
+                    }).catch(function (error) {
+                        // An error happened.
+                    });
+                    // window.replace('home.html')
+                })
+                // If it worked return true
+                return true;
+            } catch (err) {
+                // If it did not work alert user
+                alert(err);
+            }
+        })
+        .catch(function (error) {
+            // Handle Errors here.   
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            alert(errorMessage);
+            alert("Check the information input and try again");
         });
-        // If it worked return true
-        return true;
-    } catch (err) {
-        // If it did not work alert user
-        alert(err);
-    }
-}
+});
+
+document.getElementById('cancelSignUp').addEventListener('click', () => {
+    window.location.replace('index.html');
+})

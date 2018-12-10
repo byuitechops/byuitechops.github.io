@@ -1,0 +1,222 @@
+@import "../partials/main.scss";
+
+main {
+    display: grid;
+    grid-template-rows: 20% 80%;
+    grid-template-columns: 35% 65%;
+
+    section:nth-of-type(1) {
+        margin: 3em;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        padding: 0 2.5em;
+
+        span {
+            margin-bottom: 20px;
+        }
+
+        .button {
+            width: 99%;
+
+            div {
+                display: flex;
+                flex-flow: row nowrap;
+                justify-content: space-between;
+            }
+
+            #calculator {
+                width: 30px;
+                height: 30px;
+            }
+        }
+
+
+        button {
+            background-color: $primary;
+            width: 100%;
+            padding: 1em;
+            height: 4em;
+            border-radius: 5px;
+            color: $accent1;
+            border: none;
+            margin: 2.5em 0 1em;
+            font-weight: bold;
+            letter-spacing: 0.15em;
+            cursor: pointer;
+
+            &#checkInBtn,
+            &#checkOutBtn {
+                margin-top: 0;
+                width: 48%;
+                height: 5em;
+            }
+
+            &:hover {
+                opacity: 0.75;
+            }
+
+        }
+
+        div#countdownContainer {
+            display: flex;
+
+            div {
+                border-radius: 5%;
+                background-color: $primary;
+                color: $accent1;
+                margin: 0.4rem;
+                padding: 3rem 1.75rem 1rem;
+                
+                // padding-bottom: 0.5rem;
+                text-align: center;
+
+                p {
+                    margin-top: 1em;
+                    font-size: 1.5rem;
+                }
+
+                span {
+                    border-radius: 5%;
+                    font-size: 6.25rem;
+                    height: 1rem;
+                    padding: 1rem;
+                    text-align: center;
+                    color: $accent2;
+                    background-color: $accent1;
+                }
+            }
+        }
+    }
+
+    section:nth-of-type(2) {
+        display: flex;
+        flex-flow: column nowrap;
+        padding: 0 8rem 4rem 0rem;
+        margin: 3em 0;
+
+        a {
+            background-color: $primary;
+            padding: 3rem;
+            // width: 60%;
+            height: 25.5%;
+            border-bottom: 1;
+            border-radius: 25px;
+            justify-content: center;
+            position: relative;
+            // text-align: center;
+            font-size: 2.5rem;
+            color: $accent1;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover{
+            opacity:0.75;
+        }
+    }
+
+    #calculator:hover{
+        opacity:0.75;
+    }
+
+    .modal {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 1;
+        /* Sit on top */
+        padding-top: 200px;
+        /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0);
+        /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4);
+        /* Black w/ opacity */
+        font-size: 1.5em;
+
+        input {
+            text-align: center;
+            position: relative;
+            margin: 0.7em;
+            font-size: 0.8em;
+        }
+
+        span {
+            margin: 2em;
+            &.close {
+                margin: 0;
+            }
+        }
+
+        button {
+            background-color: $primary;
+            width: 100%;
+            padding: 1em;
+            height: 4em;
+            border-radius: 5px;
+            color: $accent1;
+            border: none;
+            margin: 2.5em 0 1em;
+            font-weight: bold;
+            letter-spacing: 0.15em;
+            cursor: pointer;            
+
+            &:hover {
+                opacity: 0.75;
+            }
+        }
+
+    }
+
+    /* Modal Content */
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 30%;
+        height: 52%;
+        // display:flex;
+        // flex-flow: column nowrap;
+    }
+
+    /* The Close Button */
+    .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td,
+    th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+}
