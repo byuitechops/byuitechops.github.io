@@ -65,6 +65,13 @@ header {
 main {
   grid-template-columns: 60% 30%;
   grid-gap: 5%; }
+  main div#head {
+    display: flex;
+    grid-column: 1 /span 2;
+    justify-content: left;
+    align-items: baseline; }
+    main div#head button {
+      width: 10em; }
   main button {
     background-color: #535353;
     width: 25%;

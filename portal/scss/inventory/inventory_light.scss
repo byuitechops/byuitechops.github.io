@@ -15,6 +15,17 @@ main {
     grid-template-columns: 60% 30%;
     grid-gap: 5%;
 
+    div#head {
+        display: flex;
+        grid-column: 1 /span 2;
+        justify-content: left;
+        align-items: baseline;
+
+        button {
+            width: 10em;
+        }
+    }
+
     button {
         background-color: $primary;
         width: 25%;
@@ -110,7 +121,7 @@ main {
             grid-column: 2;
 
             &>div {
-                background-color: rgba(240,248,254,0.9);
+                background-color: rgba(240, 248, 254, 0.9);
             }
 
             div {
@@ -139,8 +150,8 @@ main {
                     flex-flow: column nowrap;
                     width: 80%;
                     margin: 0 auto;
-                    
-                    img{
+
+                    img {
                         position: absolute;
                         height: 8em;
                         top: -3em;
