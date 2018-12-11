@@ -20,8 +20,8 @@ document.getElementById('dateInput').addEventListener('change', () => {
                 })
             })
     } else {
-        console.log(`${date} 00:00:00`);
-        console.log(new Date(`${date} 00:00:00`));
+        // console.log(`${date} 00:00:00`);
+        // console.log(new Date(`${date} 00:00:00`));
         displayDay(new Date(`${date} 00:00:00`), data.nameDisplay, userId);
     }
 
@@ -70,10 +70,10 @@ function getWeek() {
     db.collection('users').orderBy("name").get()
         .then(function (querySnapshot) {
             querySnapshot.forEach((doc) => {
-                var timeEarned;
-                var totalTimeWorked = 0;
-                document.getElementById('data').insertAdjacentHTML('beforeend', `<h3 id="${doc.data().nameDisplay}">${doc.data().nameDisplay}</h3>`);
+                document.getElementById('data').insertAdjacentHTML('beforeend', `<div id="${doc.data().nameDisplay}"> <h3>${doc.data().nameDisplay}</h3></div>`);
                 for (var i = 0; i < week.length; i++) {
+                    var dayNumber = new Date(week[i]).getDay();
+                    document.getElementById(doc.data().nameDisplay).insertAdjacentHTML('beforeend', `<p>Day: ${days[dayNumber]}</p>`);
                     var year = week[i].getFullYear();
                     var month = week[i].getMonth() + 1;
                     if (month < 10) {
@@ -84,30 +84,37 @@ function getWeek() {
                         searchDay = `0${searchDay}`;
                     }
                     var inputDay = `${year}-${month}-${searchDay} 00:00`;
-                    db.collection('users').doc(doc.id).collection("hoursWorked").where(firebase.firestore.FieldPath.documentId(), ">", inputDay).get()
-                        .then(function (querySnapshot) {
-                            querySnapshot.forEach((doc) => {
-                                console.log(doc);
-                                if (doc.data().end != undefined) {
-                                    var start = doc.data().start.split(":");
-                                    var startTime = Number(start[0]) + Number(start[1] / 60);
-                                    var end = doc.data().end.split(":");
-                                    var endTime = Number(end[0]) + Number(end[1] / 60);
-                                    totalTimeWorked += Number(totalTimeWorked) + Number((endTime - startTime).toFixed(2));
-                                    console.log(totalTimeWorked);
-                                }
-                            })
-                            
-                            document.getElementById(doc.data().nameDisplay).insertAdjacentHTML('afterend', `<p>Time Worked: ${totalTimeWorked}</p><p>Time Earned: ${timeEarned}</p>`);
-                                
-                        })
+                    displayWeek(inputDay, week[i], doc);
                 }
             })
         })
 }
 
+function displayWeek(inputDay, day, doc) {
+    var timeEarned;
+    var totalTimeWorked = 0;
+    db.collection('users').doc(doc.id).collection("hoursWorked").where(firebase.firestore.FieldPath.documentId(), ">", inputDay).get()
+    .then(function (querySnapshot) {
+        querySnapshot.forEach((doc) => {
+            if (doc.data().end != undefined) {
+                var start = doc.data().start.split(":");
+                var startTime = Number(start[0]) + Number(start[1] / 60);
+                var end = doc.data().end.split(":");
+                var endTime = Number(end[0]) + Number(end[1] / 60);
+                totalTimeWorked = Number(totalTimeWorked) + Number((endTime - startTime).toFixed(2));
+
+                console.log(day);
+                console.log(Number((endTime - startTime).toFixed(2)));
+            }
+        })
+        document.getElementById(doc.data().nameDisplay).insertAdjacentHTML('beforeend', `<p>Time Worked: ${totalTimeWorked}</p><p>Time Earned: ${timeEarned}</p>`);
+    })
+}
+
+var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
 function displayDay(date, name, nameId) {
-    console.log(date);
+    // console.log(date);
     var year = date.getFullYear();
     var month = date.getMonth() + 1;
     if (month < 10) {
@@ -118,7 +125,7 @@ function displayDay(date, name, nameId) {
         day = `0${day}`;
     }
     var inputDay = `${year}-${month}-${day} 00:00`;
-    console.log(inputDay);
+    // console.log(inputDay);
 
     db.collection("users").doc(nameId).collection("breaks").where(firebase.firestore.FieldPath.documentId(), ">", inputDay).get()
         .then(function (querySnapshot) {

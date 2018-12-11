@@ -108,7 +108,7 @@ document.getElementById('checkOutBtn').addEventListener('click', () => {
       });
     }
     db.collection('users').doc(userId).collection('hoursWorked').doc(data.time.checkKey).update({
-      "end": data.time.checkKey.slice(-5)
+      "end": setDate.slice(-5)
     })
     loadUser();
     window.open('https://www.myworkday.com/byuhi/d/home.htmld', '_blank');
