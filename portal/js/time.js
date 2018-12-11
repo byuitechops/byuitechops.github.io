@@ -41,7 +41,15 @@ function loadUser() {
   if (data.time.checkKey != "") {
     if (data.time.check) {
       // Checked In
-      document.getElementById('checkTime').innerText = `Check in time: ${data.time.checkKey.slice(-5)}`;
+      var checkinTime = data.time.checkKey.slice(-5);
+      var hour = checkinTime.split(":")[0];
+      var min = checkinTime.split(":")[1];
+      var mer = "am";
+      if (checkinTime.split(":")[0] > 12) {
+        hour = checkinTime.split(":")[0] - 12;
+        mer = "pm";
+      }
+      document.getElementById('checkTime').innerText = `Check in time: ${hour}:${min} ${mer}`;
       document.getElementById('checkInBtn').style.backgroundColor = $accent2;
       document.getElementById('checkInBtn').style.borderColor = $accent2;
       document.getElementById('checkOutBtn').style.backgroundColor = $primary;
@@ -52,11 +60,23 @@ function loadUser() {
       }, 3600000);
     } else {
       // Checked Out
-      document.getElementById('checkTime').innerText = `Check out time: ${data.time.checkKey.slice(-5)}`;
-      document.getElementById('checkInBtn').style.backgroundColor = $primary;
-      document.getElementById('checkInBtn').style.borderColor = $primary;
-      document.getElementById('checkOutBtn').style.backgroundColor = $accent2;
-      document.getElementById('checkOutBtn').style.borderColor = $accent2;
+      db.collection('users').doc(userId).collection('hoursWorked').doc(data.time.checkKey).get()
+      .then(function(doc) {
+        console.log(doc.data().end);
+        var checkoutTime = doc.data().end;
+      var hour = checkoutTime.split(":")[0];
+      var min = checkoutTime.split(":")[1];
+      var mer = "am";
+      if (checkoutTime.split(":")[0] > 12) {
+        hour = checkoutTime.split(":")[0] - 12;
+        mer = "pm";
+      }
+        document.getElementById('checkTime').innerText = `Check out time: ${hour}:${min} ${mer}`;
+        document.getElementById('checkInBtn').style.backgroundColor = $primary;
+        document.getElementById('checkInBtn').style.borderColor = $primary;
+        document.getElementById('checkOutBtn').style.backgroundColor = $accent2;
+        document.getElementById('checkOutBtn').style.borderColor = $accent2;
+      })
     }
   }
 }
@@ -96,7 +116,6 @@ document.getElementById('checkOutBtn').addEventListener('click', () => {
     //if the user is then clocking out, updates that on firebase and updates the end time on hours worked
 
     db.collection('users').doc(userId).update({
-      "time.checkKey": setDate,
       "time.check": false,
 
     });
