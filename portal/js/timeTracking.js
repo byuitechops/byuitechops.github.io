@@ -167,8 +167,8 @@ function displayDay(date, name, nameId) {
                     time.push(totalTimeWorked);
 
                     document.getElementById('data').insertAdjacentHTML('beforeend', `<h3>${name}</h3>`);
-                    document.getElementById('data').insertAdjacentHTML('beforeend', `<span><b>Break Total:</b> ${totalBreak}</span>`);
-                    document.getElementById('data').insertAdjacentHTML('beforeend', `<span><b>Time Total:</b> ${time[time.length - 1]}</span>`);
+                    document.getElementById('data').insertAdjacentHTML('beforeend', `<span><b>Break Total:</b> ${totalBreak}</span> </br>`);
+                    document.getElementById('data').insertAdjacentHTML('beforeend', `<span><b>Time Total:</b> ${time[time.length - 1]}</span> </br>`);
 
                     for (var i = 0; i < time.length - 1; i++) {
                         if (time[i][0] == undefined) {
@@ -178,7 +178,7 @@ function displayDay(date, name, nameId) {
                             time[i][1] = "Not clocked out";
                         }
 
-                        document.getElementById('data').insertAdjacentHTML('beforeend', `<p><span><b>Clocked In:</b> ${time[i][0]}</span><span><b>Clocked Out:</b> ${time[i][1]}</span></p>`);
+                        document.getElementById('data').insertAdjacentHTML('beforeend', `<p><span><b>Clocked In:</b> ${time[i][0]}</span></br><span><b>Clocked Out:</b> ${time[i][1]}</span></p></br>`);
                     }
 
                 })
