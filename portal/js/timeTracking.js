@@ -4,7 +4,11 @@ function loadPage() {
 
     if (data.admin || data.lead) {
         document.getElementById('selectTeam').style.visibility = "initial";
-        displayDay(new Date(), data.nameDisplay, userId);
+        if (new Date().getDay() === 1) {
+            getWeek();
+        } else {
+            displayDay(new Date(), data.nameDisplay, userId);
+        }
     }
 }
 
@@ -71,44 +75,51 @@ function getWeek() {
         .then(function (querySnapshot) {
             querySnapshot.forEach((doc) => {
                 document.getElementById('data').insertAdjacentHTML('beforeend', `<div id="${doc.data().nameDisplay}"> <h3>${doc.data().nameDisplay}</h3></div>`);
-                for (var i = 0; i < week.length; i++) {
-                    var dayNumber = new Date(week[i]).getDay();
-                    document.getElementById(doc.data().nameDisplay).insertAdjacentHTML('beforeend', `<p>Day: ${days[dayNumber]}</p>`);
-                    var year = week[i].getFullYear();
-                    var month = week[i].getMonth() + 1;
-                    if (month < 10) {
-                        month = `0${month}`;
-                    }
-                    var searchDay = week[i].getDate();
-                    if (searchDay < 10) {
-                        searchDay = `0${searchDay}`;
-                    }
-                    var inputDay = `${year}-${month}-${searchDay} 00:00`;
-                    displayWeek(inputDay, week[i], doc);
-                }
+                setTimeout(displayWeek(week, doc, doc.data().nameDisplay), 10000);
             })
         })
 }
 
-function displayWeek(inputDay, day, doc) {
+function displayWeek(week, doc, name) {
     var timeEarned;
     var totalTimeWorked = 0;
-    db.collection('users').doc(doc.id).collection("hoursWorked").where(firebase.firestore.FieldPath.documentId(), ">", inputDay).get()
-    .then(function (querySnapshot) {
-        querySnapshot.forEach((doc) => {
-            if (doc.data().end != undefined) {
-                var start = doc.data().start.split(":");
-                var startTime = Number(start[0]) + Number(start[1] / 60);
-                var end = doc.data().end.split(":");
-                var endTime = Number(end[0]) + Number(end[1] / 60);
-                totalTimeWorked = Number(totalTimeWorked) + Number((endTime - startTime).toFixed(2));
-
-                console.log(day);
-                console.log(Number((endTime - startTime).toFixed(2)));
-            }
-        })
-        document.getElementById(doc.data().nameDisplay).insertAdjacentHTML('beforeend', `<p>Time Worked: ${totalTimeWorked}</p><p>Time Earned: ${timeEarned}</p>`);
-    })
+    var dayCount = 0;
+    for (var i = 0; i < week.length; i++) {
+        var year = week[i].getFullYear();
+        var month = week[i].getMonth() + 1;
+        if (month < 10) {
+            month = `0${month}`;
+        }
+        var searchDay = week[i].getDate();
+        if (searchDay < 10) {
+            searchDay = `0${searchDay}`;
+        }
+        var inputDay = `${year}-${month}-${searchDay} 00:00`;
+        db.collection('users').doc(doc.id).collection("hoursWorked").where(firebase.firestore.FieldPath.documentId(), ">", inputDay).get()
+            .then(function (querySnapshot) {
+                var key = 0;
+                dayCount++
+                if (querySnapshot.empty) {
+                    totalTimeWorked = Number(totalTimeWorked) + Number(0);
+                    if (week.length == dayCount) {
+                        document.getElementById(name).insertAdjacentHTML('beforeend', `<p>Time Worked: ${totalTimeWorked}</p><p>Time Earned: ${timeEarned}</p>`);
+                    }
+                }
+                querySnapshot.forEach((doc) => {
+                    key++
+                    if (doc.data().end != undefined) {
+                        var start = doc.data().start.split(":");
+                        var startTime = Number(start[0]) + Number(start[1] / 60);
+                        var end = doc.data().end.split(":");
+                        var endTime = Number(end[0]) + Number(end[1] / 60);
+                        totalTimeWorked = Number(totalTimeWorked) + Number((endTime - startTime).toFixed(2));
+                    }
+                    if (Object.is(querySnapshot.size - 1, key) && (week.length == dayCount)) {
+                        document.getElementById(name).insertAdjacentHTML('beforeend', `<p>Time Worked: ${totalTimeWorked}</p><p>Time Earned: ${timeEarned}</p>`);
+                    }
+                })
+            })
+    }
 }
 
 var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
