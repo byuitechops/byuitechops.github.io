@@ -48,7 +48,7 @@ function showAllUsers() {
             querySnapshot.forEach((doc) => {
                 var docData = `<div><h3>${doc.id}</h3>`;
                 var items = doc.data().items;
-                
+
                 docData += `<p><b>Items:</b><br> `;
                 for (var key in items) {
                     docData += `<span>Amount of ${key}s: ${items[key]}<br></span>`;
