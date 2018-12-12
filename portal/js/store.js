@@ -115,7 +115,7 @@ function searchArray(array, item) {
 }
 
 function updateFirebase(name, sub) {
-  db.collection('store').doc('inventory').collection('items').doc(name).get().then(function (doc) {
+  db.collection('store').doc('inventory').collection('items').doc(`${name}`).get().then(function (doc) {
     var count = doc.data().count;
     db.collection('store').doc('inventory').collection('items').doc(name)
       .update({
