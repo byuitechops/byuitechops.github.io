@@ -64,10 +64,11 @@ main {
     grid-gap: 0.5em; }
     main section div {
       position: relative;
-      background-color: #7fc4fd;
+      background-color: #0076c6;
       color: #ffffff;
       width: 100%; }
       main section div img {
+        opacity: 0.4;
         height: 100%;
         z-index: -1; }
       main section div span {
@@ -96,8 +97,8 @@ main {
         color: #0076c6; }
 
 .filter {
-  opacity: 0.6; }
+  opacity: 0.4; }
   .filter span {
-    color: black; }
+    color: white; }
 
 /*# sourceMappingURL=applications_light.css.map */

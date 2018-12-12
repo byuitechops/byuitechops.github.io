@@ -13,12 +13,13 @@ main {
 
         div {
             position: relative;
-            background-color: $third;
+            background-color: $primary;
             color: $accent1;
             width: 100%;
-            // opacity: 0.5;
+             //opacity: 0.5;
 
             img {
+                opacity: 0.4;
                 height: 100%;
                 z-index: -1;
             }
@@ -75,8 +76,8 @@ main {
 }
 
 .filter {
-    opacity: 0.6;
+    opacity: 0.4;
     span {
-        color: black;
+        color: white;
     }
 }

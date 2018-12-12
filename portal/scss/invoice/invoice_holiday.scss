@@ -3,32 +3,32 @@
 main {
     display: grid;
     grid-template-rows: 10% 10% 80%;
+
     h1 {
         padding: 0.5em;
         grid-column: 1 /span 2;
     }
+
     section {
         grid-column: 1 /span 2;
         grid-row: 2;
-        input[type=date] {
-            position: absolute;
-            right: 15.85em;
-            top: 7.5%;
-        }
-        select {
-            visibility: hidden;
-            display: block;
-            position: absolute;
-            right: 1.85em;
-            top: 7%;
-            font-size: 1.25em;
-            padding: 0 0.5em;
-            color: $accent1;
-            background-color: $primary;
-            border: 0;
-            border-radius: 20px;
-            option{
-                border-radius: 20px;
+        overflow-y: scroll;
+        height: 90vh;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+
+        div {
+            margin-bottom: 1em;
+
+            span{
+                margin-left: 0.5em;
+            }
+            h3 {
+                margin-left: 2.5em;
+            }
+
+            p {
+                margin-left: 3em;
             }
         }
     }

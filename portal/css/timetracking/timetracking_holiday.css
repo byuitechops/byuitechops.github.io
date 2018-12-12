@@ -75,7 +75,9 @@ main {
     grid-column: 1 /span 2; }
   main section {
     grid-column: 1 /span 2;
-    grid-row: 2; }
+    grid-row: 2;
+    overflow-y: scroll;
+    height: 90vh; }
     main section input[type=date] {
       position: absolute;
       right: 15.85em;

@@ -2,8 +2,7 @@
 function loadPage() {
     //checks if the user has correct permissions first
     if (data.admin || data.title == "Store Manager") {
-        //showAllUsers();
-        showOneUser();
+        showAllUsers();
     } else {
         showOneUser();
     }

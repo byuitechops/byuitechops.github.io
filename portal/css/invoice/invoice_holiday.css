@@ -75,24 +75,18 @@ main {
     grid-column: 1 /span 2; }
   main section {
     grid-column: 1 /span 2;
-    grid-row: 2; }
-    main section input[type=date] {
-      position: absolute;
-      right: 15.85em;
-      top: 7.5%; }
-    main section select {
-      visibility: hidden;
-      display: block;
-      position: absolute;
-      right: 1.85em;
-      top: 7%;
-      font-size: 1.25em;
-      padding: 0 0.5em;
-      color: #ffffff;
-      background-color: #0076c6;
-      border: 0;
-      border-radius: 20px; }
-      main section select option {
-        border-radius: 20px; }
+    grid-row: 2;
+    overflow-y: scroll;
+    height: 90vh;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); }
+    main section div {
+      margin-bottom: 1em; }
+      main section div span {
+        margin-left: 0.5em; }
+      main section div h3 {
+        margin-left: 2.5em; }
+      main section div p {
+        margin-left: 3em; }
 
 /*# sourceMappingURL=invoice_holiday.css.map */
