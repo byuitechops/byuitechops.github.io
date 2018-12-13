@@ -113,7 +113,8 @@ submitChanges.addEventListener("click", () => {
             "info.major": document.getElementById("editMajor").value,
             "info.track": document.getElementById("editTrack").value,
             "info.graduation": document.getElementById("editGradDate").value,
-            "info.aboutMe": document.getElementById("editAboutMe").value
+            "info.aboutMe": document.getElementById("editAboutMe").value,
+            "info.birthday": document.getElementById("editBirthday").value
 
         })
         .then(function () {
@@ -141,6 +142,7 @@ function populateInfoEdit() {
             document.getElementById("editTrack").setAttribute("value", `${doc.data().info.track}`);
             document.getElementById("editGradDate").setAttribute("value", `${doc.data().info.graduation}`);
             document.getElementById("editAboutMe").innerText = doc.data().info.aboutMe;
+            document.getElementById("editBirthday").setAttribute("value", `${doc.data().info.birthday}`);
         })
 }
 
@@ -167,6 +169,7 @@ function loadPage() {
             document.getElementById("dbGradDate").innerText = "Graduation Date: " + myData.info.graduation;
             document.getElementById("dbTyping").innerText = "Typing Speed: " + myData.info.speed;
             document.getElementById("dbAboutMe").innerText = myData.info.aboutMe;
+            document.getElementById("dbBirth").innerText =`Birthday: `+ myData.info.birthday;
             //fills in accumulated time
             if (data.time.accumulatedTime < 10){
                 document.getElementById("accumulated").innerText = "0" + myData.time.accumulatedTime + ":00";

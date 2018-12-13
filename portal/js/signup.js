@@ -40,7 +40,8 @@ signupBtn.addEventListener('click', () => {
                 "major": "",
                 "track": "",
                 "graduation": "",
-                "speed": ""
+                "speed": "",
+                "birthday": "00/00"
             }
 
             var time = {
@@ -62,7 +63,8 @@ signupBtn.addEventListener('click', () => {
                     info: info,
                     title: "Team Member",
                     viewMode: "light",
-                    time: time
+                    time: time,
+                   
                 }
                 db.collection('users').doc().set(docData).then(function () {
                     console.log("Written");
