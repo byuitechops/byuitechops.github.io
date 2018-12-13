@@ -55,7 +55,8 @@ main {
 
 main {
   display: grid;
-  grid-template-rows: 20% 80%; }
+  grid-template-rows: 20% 80%;
+  grid-template-columns: 100%; }
   main section {
     margin: 5em;
     display: grid;
@@ -68,6 +69,8 @@ main {
       color: #ffffff;
       width: 100%; }
       main section div img {
+        position: absolute;
+        right: 0;
         opacity: 0.4;
         height: 100%;
         z-index: -1; }
