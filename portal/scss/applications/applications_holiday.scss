@@ -3,6 +3,7 @@
 main {
     display: grid;
     grid-template-rows: 20% 80%;
+    grid-template-columns: 100%;
 
     section {
         margin: 5em;
@@ -19,6 +20,8 @@ main {
              //opacity: 0.5;
 
             img {
+                position: absolute;
+                right: 0;
                 opacity: 0.4;
                 height: 100%;
                 z-index: -1;

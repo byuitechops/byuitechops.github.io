@@ -3,9 +3,10 @@
 main {
     display: grid;
     grid-template-rows: 20% 80%;
+    grid-template-columns: 100%;
 
     section {
-        margin: 3em;
+        margin: 5em;
         display: grid;
         grid-template-columns: repeat(6, 1fr);
         grid-template-rows: repeat(2, 40%);
@@ -14,15 +15,16 @@ main {
         div {
             position: relative;
             background-color: $primary;
-            color: $accent1;    
-            width: calc(80vw / 6);    
+            color: $accent1;
+            width: 100%;
+             //opacity: 0.5;
 
             img {
+                position: absolute;
+                right: 0;
                 opacity: 0.4;
                 height: 100%;
                 z-index: -1;
-                position: absolute;
-                right: 0;
             }
 
             span {
