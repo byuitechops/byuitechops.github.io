@@ -18,7 +18,7 @@
     </script>
     <!-- -->
     <!-- CSS -->
-<link id="defaultCss" rel="stylesheet" type="text/css" href="css/invoice/invoice_light.css">
+    <link id="defaultCss" rel="stylesheet" type="text/css" href="css/invoice/invoice_light.css">
     <!-- -->
     <title> Invoice - Store | BYU-I Techops Portal</title>
 </head>
@@ -27,8 +27,16 @@
     <div id="body-image"></div>
     <header>
     </header>
-       <main>
-        <h1>Invoice - Store</h1>
+    <main>
+        <section id="heading">
+            <h1>Invoice - Store</h1>
+            <div>
+                <span><strong>Cash:&nbsp; </strong> <span id="cash"></span></span>
+                <span><strong>Venmo:&nbsp; </strong> <span id="venmo"></span></span>
+                <span><strong>Storage:&nbsp;</strong> <span id="storage"></span></span>
+                <button onclick="submitMoney()">Submit</button>
+            </div>
+        </section>
         <section id="data"></section>
     </main>
 </body>
