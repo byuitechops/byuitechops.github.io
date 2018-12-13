@@ -6,14 +6,15 @@ main {
 
     #heading {
         grid-column: 1 /span 2;
-        // display: flex;
-        // justify-content: space-between;
-        // align-items: baseline;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
         display: grid;
         grid-template-columns: 30% 70%;
 
         h1 {
             grid-column: 1;
+            padding: 0.5em 1em;
         }
 
         div {

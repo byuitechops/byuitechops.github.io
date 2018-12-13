@@ -58,6 +58,9 @@ main {
   grid-template-rows: 10% 10% 80%; }
   main #heading {
     grid-column: 1 /span 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
     display: grid;
     grid-template-columns: 30% 70%; }
     main #heading h1 {
