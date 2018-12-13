@@ -57,7 +57,7 @@ main {
   display: grid;
   grid-template-rows: 20% 80%; }
   main section {
-    margin: 5em;
+    margin: 3em;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(2, 40%);
@@ -66,11 +66,13 @@ main {
       position: relative;
       background-color: #535353;
       color: #ffffff;
-      width: 100%; }
+      width: calc(80vw / 6); }
       main section div img {
         opacity: 0.4;
         height: 100%;
-        z-index: -1; }
+        z-index: -1;
+        position: absolute;
+        right: 0; }
       main section div span {
         position: absolute; }
       main section div p {

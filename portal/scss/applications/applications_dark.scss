@@ -5,7 +5,7 @@ main {
     grid-template-rows: 20% 80%;
 
     section {
-        margin: 5em;
+        margin: 3em;
         display: grid;
         grid-template-columns: repeat(6, 1fr);
         grid-template-rows: repeat(2, 40%);
@@ -14,14 +14,15 @@ main {
         div {
             position: relative;
             background-color: $primary;
-            color: $accent1;
-            width: 100%;
-             //opacity: 0.5;
+            color: $accent1;    
+            width: calc(80vw / 6);    
 
             img {
                 opacity: 0.4;
                 height: 100%;
                 z-index: -1;
+                position: absolute;
+                right: 0;
             }
 
             span {

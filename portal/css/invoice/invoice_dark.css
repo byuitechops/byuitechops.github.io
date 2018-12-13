@@ -67,12 +67,14 @@ main {
     display: grid;
     grid-template-columns: repeat(3, 1fr); }
     main section div {
-      margin-bottom: 1em; }
+      margin: 0 2em 2em 2em;
+      padding-bottom: 1em;
+      border-bottom: 1px solid black; }
       main section div span {
         margin-left: 0.5em; }
       main section div h3 {
-        margin-left: 2.5em; }
+        margin-left: 0em; }
       main section div p {
-        margin-left: 3em; }
+        margin-left: 1em; }
 
 /*# sourceMappingURL=invoice_dark.css.map */
