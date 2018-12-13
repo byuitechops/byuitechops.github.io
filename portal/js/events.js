@@ -1,2 +1,2 @@
-// // reads from firestore and searches for a matching date.
-// db.collection("users").doc()
+//  reads from firestore and searches for a matching date.
+ db.collection("users").doc().where("birthday", )

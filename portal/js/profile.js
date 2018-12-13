@@ -93,12 +93,12 @@ okBtn.addEventListener('click', () => {
 
 
 //allows the user to edit his/her information
-var editBtn = document.getElementById("editContact");
-var editDiv = document.getElementById("editInfo");
-editBtn.addEventListener("click", () => {
-    editDiv.style.visibility = "visible";
-    populateInfoEdit();
-})
+// var editBtn = document.getElementById("editContact");
+// var editDiv = document.getElementById("editInfo");
+// editBtn.addEventListener("click", () => {
+//     editDiv.style.visibility = "visible";
+//     populateInfoEdit();
+// })
 
 //sends to firebase info changes made by the user
 // Initialize Firebase
