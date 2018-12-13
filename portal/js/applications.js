@@ -54,12 +54,23 @@ slack.addEventListener("click", () => {
 function loadPage() {
     // load the page
 }
-
+var clicked = false;
 document.getElementsByTagName('h1')[0].addEventListener('click', () => {
-    var divs = document.getElementsByTagName('div');
-    for (var i = 0; i < divs.length; i++) {
-        // if (i != 6 || i != 12) {
-            divs[i].classList.add('filter');
-        // }
+    if (!clicked) {
+        var divs = document.getElementsByTagName('div');
+        for (var i = 0; i < divs.length; i++) {
+            if (i != 6 && i != 12) {
+                divs[i].classList.add('filter');
+            }
+        }
+        clicked = true;
+    } else {
+        var divs = document.getElementsByTagName('div');
+        for (var i = 0; i < divs.length; i++) {
+            if (i != 6 && i != 12) {
+                divs[i].classList.remove('filter');
+            }
+        }
+        clicked = false;
     }
 })
