@@ -102,29 +102,31 @@ editBtn.addEventListener("click", () => {
 
 //sends to firebase info changes made by the user
 // Initialize Firebase
-
+var doneUser = false;
 var user = firebase.auth().currentUser;
 var submitChanges = document.getElementById("submitInfoChanges");
 submitChanges.addEventListener("click", () => {
+    if (!doneUser) {
+        doneUser = true;
+        db.collection("users").doc(userId).update({
+                "nameDisplay": document.getElementById("editName").value,
+                "info.phoneNumber": document.getElementById("editPhone").value,
+                "info.major": document.getElementById("editMajor").value,
+                "info.track": document.getElementById("editTrack").value,
+                "info.graduation": document.getElementById("editGradDate").value,
+                "info.aboutMe": document.getElementById("editAboutMe").value,
+                "info.birthday": document.getElementById("editBirthday").value
 
-    db.collection("users").doc(userId).update({
-            "nameDisplay": document.getElementById("editName").value,
-            "info.phoneNumber": document.getElementById("editPhone").value,
-            "info.major": document.getElementById("editMajor").value,
-            "info.track": document.getElementById("editTrack").value,
-            "info.graduation": document.getElementById("editGradDate").value,
-            "info.aboutMe": document.getElementById("editAboutMe").value,
-            "info.birthday": document.getElementById("editBirthday").value
-
-        })
-        .then(function () {
-            console.log("Document successfully written!");
-            alert("User Updated Successfully");
-            window.location.reload();
-        }).catch(function (error) {
-            // An error happened.
-        });
-    editDiv.style.visibility = "hidden";
+            })
+            .then(function () {
+                console.log("Document successfully written!");
+                alert("User Updated Successfully");
+                window.location.reload();
+            }).catch(function (error) {
+                // An error happened.
+            });
+        editDiv.style.visibility = "hidden";
+    }
 })
 
 
@@ -188,20 +190,22 @@ function loadPage() {
         })
 }
 
+var doneEdit = false;
 function changeViewMode(newTheme) {
-    db.collection('users').doc(userId).update({
-            viewMode: newTheme
-        })
-        .then(function () {
-            console.log("Document successfully updated!");
-            alert("User Updated Successfully");
-            window.location.reload();
-        })
-        .catch(function (error) {
-            // The document probably doesn't exist.
-            console.error("Error updating document: ", error);
-        });
-
+    if (!doneEdit) {
+        db.collection('users').doc(userId).update({
+                viewMode: newTheme
+            })
+            .then(function () {
+                console.log("Document successfully updated!");
+                alert("User Updated Successfully");
+                window.location.reload();
+            })
+            .catch(function (error) {
+                // The document probably doesn't exist.
+                console.error("Error updating document: ", error);
+            });
+    }
 }
 
 //handles the sign out button
