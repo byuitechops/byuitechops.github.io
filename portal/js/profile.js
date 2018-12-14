@@ -56,12 +56,12 @@ var redeemConfirmBtn = document.getElementById("redeembtn");
 redeemConfirmBtn.addEventListener('click', () => {
     redeemTool.style.visibility = "hidden";
     var hoursRedeemed = document.getElementById("resultRedeem");
-    
-    
+
+
     if (data.time.accumulatedTime < document.getElementById("timeDesired").value) {
         redeemTool.style.visibility = "hidden";
         alert("You don't have enough accumulated hours to redeem the time desired");
-       
+
 
     } else {
 
@@ -70,17 +70,17 @@ redeemConfirmBtn.addEventListener('click', () => {
             })
             .then(function () {
                 console.log("Document successfully written!");
+                alert("User Updated Successfully");
                 window.location.reload();
             }).catch(function (error) {
                 // An error happened.
             });
-            if (data.time.accumulatedTime < 10){
-                hoursRedeemed.innerText = "0" + document.getElementById("timeDesired").value + ":00";
-            }
-            else{
-                hoursRedeemed.innerText = document.getElementById("timeDesired").value + ":00";
-            }
-            document.getElementById("confirmRedeem").style.visibility = "visible";
+        if (data.time.accumulatedTime < 10) {
+            hoursRedeemed.innerText = "0" + document.getElementById("timeDesired").value + ":00";
+        } else {
+            hoursRedeemed.innerText = document.getElementById("timeDesired").value + ":00";
+        }
+        document.getElementById("confirmRedeem").style.visibility = "visible";
 
     }
 })
@@ -93,12 +93,12 @@ okBtn.addEventListener('click', () => {
 
 
 //allows the user to edit his/her information
-// var editBtn = document.getElementById("editContact");
-// var editDiv = document.getElementById("editInfo");
-// editBtn.addEventListener("click", () => {
-//     editDiv.style.visibility = "visible";
-//     populateInfoEdit();
-// })
+var editBtn = document.getElementById("editContact");
+var editDiv = document.getElementById("editInfo");
+editBtn.addEventListener("click", () => {
+    editDiv.style.visibility = "visible";
+    populateInfoEdit();
+})
 
 //sends to firebase info changes made by the user
 // Initialize Firebase
@@ -119,6 +119,7 @@ submitChanges.addEventListener("click", () => {
         })
         .then(function () {
             console.log("Document successfully written!");
+            alert("User Updated Successfully");
             window.location.reload();
         }).catch(function (error) {
             // An error happened.
@@ -169,17 +170,16 @@ function loadPage() {
             document.getElementById("dbGradDate").innerText = "Graduation Date: " + myData.info.graduation;
             document.getElementById("dbTyping").innerText = "Typing Speed: " + myData.info.speed;
             document.getElementById("dbAboutMe").innerText = myData.info.aboutMe;
-            document.getElementById("dbBirth").innerText =`Birthday: `+ myData.info.birthday;
+            document.getElementById("dbBirth").innerText = `Birthday: ` + myData.info.birthday;
             //fills in accumulated time
-            if (data.time.accumulatedTime < 10){
+            if (data.time.accumulatedTime < 10) {
                 document.getElementById("accumulated").innerText = "0" + myData.time.accumulatedTime + ":00";
                 document.getElementById("redeemTime").innerText = "0" + myData.time.accumulatedTime + ":00";
-            }
-            else{
+            } else {
                 document.getElementById("accumulated").innerText = myData.time.accumulatedTime + ":00";
-                document.getElementById("redeemTime").innerText =  myData.time.accumulatedTime + ":00";
+                document.getElementById("redeemTime").innerText = myData.time.accumulatedTime + ":00";
             }
-            
+
 
             //displays lead/admin tools only for the right people
             if (myData.admin || myData.title == "Project Lead") {
@@ -194,6 +194,8 @@ function changeViewMode(newTheme) {
         })
         .then(function () {
             console.log("Document successfully updated!");
+            alert("User Updated Successfully");
+            window.location.reload();
         })
         .catch(function (error) {
             // The document probably doesn't exist.

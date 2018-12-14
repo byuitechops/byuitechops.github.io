@@ -11,32 +11,30 @@ var done = false;
 var populate = document.getElementById("zoe");
 //reads all users from firestore
 function getAllUsers() {
-if (data.admin){
-    db.collection("users").orderBy("nameDisplay").get().then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            console.log(doc.data().nameDisplay);
-            if (data.admin) {
-                var html = `<p><img id="${(doc.data().nameDisplay).replace(/ /g, "")}pic"><span>${doc.data().nameDisplay}</span><button onclick="view('${doc.id}')">View</button> <button onclick="deleteUser('${doc.id}', '${doc.data().nameDisplay}')">Delete</button></p>`;
-            } else {
+    if (data.admin) {
+        db.collection("users").orderBy("nameDisplay").get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                console.log(doc.data().nameDisplay);
+                if (data.admin) {
+                    var html = `<p><img id="${(doc.data().nameDisplay).replace(/ /g, "")}pic"><span>${doc.data().nameDisplay}</span><button onclick="view('${doc.id}')">View</button> <button onclick="deleteUser('${doc.id}', '${doc.data().nameDisplay}')">Delete</button></p>`;
+                } else {
+                    var html = `<p><img id="${(doc.data().nameDisplay).replace(/ /g, "")}pic"><span>${doc.data().nameDisplay}</span><button onclick="view('${doc.id}')">View</button></p>`;
+                }
+                populate.insertAdjacentHTML("beforeend", html);
+                populateDiv(doc.data().info.photo, (doc.data().nameDisplay).replace(/ /g, ""));
+            });
+        });
+    } else {
+        db.collection("users").orderBy("nameDisplay").get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                console.log(doc.data().nameDisplay);
                 var html = `<p><img id="${(doc.data().nameDisplay).replace(/ /g, "")}pic"><span>${doc.data().nameDisplay}</span><button onclick="view('${doc.id}')">View</button></p>`;
-            }
-            populate.insertAdjacentHTML("beforeend", html);
-            populateDiv(doc.data().info.photo, (doc.data().nameDisplay).replace(/ /g, ""));
+                populate.insertAdjacentHTML("beforeend", html);
+                populateDiv(doc.data().info.photo, (doc.data().nameDisplay).replace(/ /g, ""));
+            });
         });
-    });
-}
+    }
 
-else{
-    db.collection("users").orderBy("nameDisplay").get().then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            console.log(doc.data().nameDisplay);
-            var html = `<p><img id="${(doc.data().nameDisplay).replace(/ /g, "")}pic"><span>${doc.data().nameDisplay}</span><button onclick="view('${doc.id}')">View</button></p>`;
-            populate.insertAdjacentHTML("beforeend", html);
-            populateDiv(doc.data().info.photo, (doc.data().nameDisplay).replace(/ /g, ""));
-        });
-    });
-}
-   
 }
 
 function populateDiv(photo, name) {
@@ -162,6 +160,7 @@ function submitInfoChanges(userId) {
         })
         .then(function () {
             console.log("Document successfully written!");
+            alert("User Updated Successfully");
             window.location.reload();
         }).catch(function (error) {
             // An error happened.
