@@ -64,7 +64,8 @@ main {
     display: grid;
     grid-template-columns: 30% 70%; }
     main #heading h1 {
-      grid-column: 1; }
+      grid-column: 1;
+      padding: 0.5em 1em; }
     main #heading div {
       width: 100%;
       grid-column: 2;
