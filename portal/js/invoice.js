@@ -83,7 +83,7 @@ document.getElementById('cash').addEventListener('click', () => {
 //handles the venmo edit call
 var doneVenmo = false;
 document.getElementById('venmo').addEventListener('click', () => {
-    if (!doneStorage) {
+    if (!doneVenmo) {
         var input = document.createElement('input');
         input.id = "venmoInput";
         input.type = "number";

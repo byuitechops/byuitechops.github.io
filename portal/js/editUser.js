@@ -134,40 +134,45 @@ function deleteUser(id, name) {
     } else {}
 }
 
+var doneUser = false;
 //connects to firebase and submits changes made by the admin
 function submitInfoChanges(userId) {
-    var isLead;
-    if (document.getElementById("editJobTitle").value == "Project Lead" ||
-        document.getElementById("editJobTitle").value == "Student Lead" ||
-        document.getElementById("editJobTitle").value == "Assistent Lead") {
-        isLead = true;
-    } else {
-        isLead = false;
+    if (!doneUser) {
+        doneUser = true;
+        console.log("Done user is now " + doneUser + " = No updates are allowed until page reload");
+        var isLead;
+        if (document.getElementById("editJobTitle").value == "Project Lead" ||
+            document.getElementById("editJobTitle").value == "Student Lead" ||
+            document.getElementById("editJobTitle").value == "Assistent Lead") {
+            isLead = true;
+        } else {
+            isLead = false;
+        }
+
+        db.collection("users").doc(userId).update({
+                "nameDisplay": document.getElementById("editName").value,
+                "info.phoneNumber": document.getElementById("editPhone").value,
+                "info.major": document.getElementById("editMajor").value,
+                "info.track": document.getElementById("editTrack").value,
+                "info.graduation": document.getElementById("editGradDate").value,
+                "team": document.getElementById("editTeam").value,
+                "info.email": document.getElementById("editEmail").value,
+                "title": document.getElementById("editJobTitle").value,
+                "info.speed": document.getElementById("editSpeed").value,
+                "lead": isLead,
+                "time.accumulatedTime": document.getElementById("editAccumulatedTime").value
+            })
+            .then(function () {
+                console.log("Document successfully written!");
+                alert("User Updated Successfully");
+                window.location.reload();
+            }).catch(function (error) {
+                // An error happened.
+            });
+        editInfo.style.visibility = "hidden";
     }
 
-    db.collection("users").doc(userId).update({
-            "nameDisplay": document.getElementById("editName").value,
-            "info.phoneNumber": document.getElementById("editPhone").value,
-            "info.major": document.getElementById("editMajor").value,
-            "info.track": document.getElementById("editTrack").value,
-            "info.graduation": document.getElementById("editGradDate").value,
-            "team": document.getElementById("editTeam").value,
-            "info.email": document.getElementById("editEmail").value,
-            "title": document.getElementById("editJobTitle").value,
-            "info.speed": document.getElementById("editSpeed").value,
-            "lead": isLead,
-            "time.accumulatedTime": document.getElementById("editAccumulatedTime").value
-        })
-        .then(function () {
-            console.log("Document successfully written!");
-            alert("User Updated Successfully");
-            window.location.reload();
-        }).catch(function (error) {
-            // An error happened.
-        });
-    editInfo.style.visibility = "hidden";
 }
-
 //populates the editor box
 function populateInfoEdit(doc) {
     db.collection("users").doc(doc).get()
