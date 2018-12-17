@@ -12,6 +12,10 @@ main {
         grid-row: 2;
         overflow-y: scroll;
         height: 90vh;
+        div{
+            padding-left: 2em;
+            pading-botom: 2em;
+        }
         input[type=date] {
             position: absolute;
             right: 15.85em;

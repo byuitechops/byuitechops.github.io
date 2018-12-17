@@ -112,7 +112,7 @@ function displayWeek(week, doc, name) {
                 if (querySnapshot.empty) {
                     totalTimeWorked = Number(totalTimeWorked) + Number(0);
                     if (week.length == dayCount) {
-                        document.getElementById(name).insertAdjacentHTML('beforeend', `<p>Time Worked: ${totalTimeWorked.toFixed(2)} minutes</p><p>Time Earned: ${timeEarned}</p>`);
+                        document.getElementById(name).insertAdjacentHTML('beforeend', `<p>Time Worked: ${totalTimeWorked.toFixed(2)} hours </p><p>Time Earned: ${timeEarned}</p> </br>`);
                     }
                 }
                 querySnapshot.forEach((doc) => {
@@ -125,7 +125,7 @@ function displayWeek(week, doc, name) {
                         totalTimeWorked = Number(totalTimeWorked) + Number((endTime - startTime).toFixed(2));
                     }
                     if (Object.is(querySnapshot.size - 1, key) && (week.length == dayCount)) {
-                        document.getElementById(name).insertAdjacentHTML('beforeend', `<p>Time Worked: ${totalTimeWorked.toFixed(2)} minutes </p><p>Time Earned: ${timeEarned}</p>`);
+                        document.getElementById(name).insertAdjacentHTML('beforeend', `<p>Time Worked: ${totalTimeWorked.toFixed(2)} hours </p><p>Time Earned: ${timeEarned}</p> </br>`);
                     }
                 })
             })

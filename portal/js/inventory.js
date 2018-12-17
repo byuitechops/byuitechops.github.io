@@ -6,6 +6,7 @@ function loadPage() {
     window.location.replace('profile.html')
   }
 }
+
 var editOneItem = false;
 // CONFIRM EDITIONS TO THE ITEM
 var checkModal = document.getElementById('checkoutModal');
@@ -150,6 +151,7 @@ function editItem(item, price, count, url) {
     document.getElementById('nameEdit').innerText = item;
     document.getElementById('countEdit').innerText = count;
     document.getElementById('priceEdit').innerText = price;
+    document.getElementById('priceEdit').value = price;
     document.getElementById('imgEdit').innerHTML = `<img src="${url}" id="${item}">`;
     editOneItem = true;
   } else {
@@ -194,7 +196,9 @@ document.getElementById('priceEdit').addEventListener('click', () => {
   if (!donePrice) {
     var input = document.createElement('input');
     input.id = "priceInput";
-    input.value = document.getElementById('priceEdit').innerHTML;
+    if (document.getElementById('priceEdit').value != undefined){
+      input.value = document.getElementById('priceEdit').value;
+    }
     document.getElementById('priceEdit').insertAdjacentElement('afterbegin', input);
     document.getElementById('priceEdit').removeChild(document.getElementById('priceEdit').lastChild);
     donePrice = true;

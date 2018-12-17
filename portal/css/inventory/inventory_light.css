@@ -178,11 +178,6 @@ main {
                 display: inline;
                 left: 0;
                 cursor: pointer; }
-          main section#content section#right div div p:first-of-type {
-            display: flex;
-            justify-content: space-between; }
-            main section#content section#right div div p:first-of-type span {
-              left: 0; }
           main section#content section#right div div span {
             font-size: 1em; }
         main section#content section#right div button {

@@ -1,6 +1,5 @@
 @import "../partials/theme_dark";
 
-
 body {
     width: 100%;
 }
@@ -121,6 +120,9 @@ main {
         section#right {
             grid-column: 2;
 
+            // #cart>p:nth-child(4){
+            //     padding-left: 0.5em;
+            // }
             &>div {
                 background-color: rgba(240, 248, 254, 0.9);
             }
@@ -151,6 +153,7 @@ main {
                     flex-flow: column nowrap;
                     width: 80%;
                     margin: 0 auto;
+                   
 
                     img {
                         position: absolute;
@@ -176,14 +179,6 @@ main {
                         }
                     }
 
-                    p:first-of-type {
-                        display: flex;
-                        justify-content: space-between;
-
-                        span {
-                            left: 0;
-                        }
-                    }
 
                     // margin: 1em 0;
                     span {
