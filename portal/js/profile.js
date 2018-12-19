@@ -107,7 +107,15 @@ var user = firebase.auth().currentUser;
 var submitChanges = document.getElementById("submitInfoChanges");
 submitChanges.addEventListener("click", () => {
     if (!doneUser) {
+
         doneUser = true;
+        if (!sameBirthday){
+            var birthday = `${document.getElementById("editBirthdayMonth").value} ${document.getElementById("editBirthdayDay").value}`;
+        }
+        else{
+            var birthday = birthdayPopulate;
+        }
+       
         db.collection("users").doc(userId).update({
                 "nameDisplay": document.getElementById("editName").value,
                 "info.phoneNumber": document.getElementById("editPhone").value,
@@ -115,8 +123,7 @@ submitChanges.addEventListener("click", () => {
                 "info.track": document.getElementById("editTrack").value,
                 "info.graduation": document.getElementById("editGradDate").value,
                 "info.aboutMe": document.getElementById("editAboutMe").value,
-                "info.birthday": document.getElementById("editBirthday").value
-
+                "info.birthday": birthday
             })
             .then(function () {
                 console.log("Document successfully written!");
@@ -145,11 +152,23 @@ function populateInfoEdit() {
             document.getElementById("editTrack").setAttribute("value", `${doc.data().info.track}`);
             document.getElementById("editGradDate").setAttribute("value", `${doc.data().info.graduation}`);
             document.getElementById("editAboutMe").innerText = doc.data().info.aboutMe;
-            document.getElementById("editBirthday").setAttribute("value", `${doc.data().info.birthday}`);
+            document.getElementById("displayBirthday").setAttribute("value", `${doc.data().info.birthday}`);
         })
 }
 
+//handles the event listener for the birthday call
+//if the birthday doesn't get changed, by the following event listener, then it will keep the same on firebase
+var sameBirthday = true; 
+
+document.getElementById("displayBirthday").addEventListener("click", () => {
+    document.getElementById("displayBirthday").style.visibility = "hidden";
+    document.getElementById("editBirthdayMonth").style.visibility = "visible";
+    document.getElementById("editBirthdayDay").style.visibility = "visible";
+    sameBirthday = false;
+})
 //Loads the page with all user's information
+var birthdayPopulate;
+
 function loadPage() {
     document.getElementById(theme).setAttribute('checked', true);
     var photo = data.info.photo;
@@ -170,9 +189,10 @@ function loadPage() {
             document.getElementById("dbMajor").innerText = "Major: " + myData.info.major;
             document.getElementById("dbTrack").innerText = "Track: " + myData.info.track;
             document.getElementById("dbGradDate").innerText = "Graduation Date: " + myData.info.graduation;
-            document.getElementById("dbTyping").innerText = "Typing Speed: " + myData.info.speed;
+            //document.getElementById("dbTyping").innerText = "Typing Speed: " + myData.info.speed;
             document.getElementById("dbAboutMe").innerText = myData.info.aboutMe;
             document.getElementById("dbBirth").innerText = `Birthday: ` + myData.info.birthday;
+            birthdayPopulate = myData.info.birthday;
             //fills in accumulated time
             if (data.time.accumulatedTime < 10) {
                 document.getElementById("accumulated").innerText = "0" + myData.time.accumulatedTime + ":00";
@@ -191,6 +211,7 @@ function loadPage() {
 }
 
 var doneEdit = false;
+
 function changeViewMode(newTheme) {
     if (!doneEdit) {
         db.collection('users').doc(userId).update({

@@ -367,6 +367,16 @@ main {
         position: absolute;
         margin-top: -2em;
         left: 21em; }
+      main section:nth-of-type(3) #editInfo select {
+        visibility: hidden;
+        position: absolute;
+        margin-top: -2em;
+        left: 21em; }
+      main section:nth-of-type(3) #editInfo #editBirthdayDay {
+        visibility: hidden;
+        position: absolute;
+        margin-top: -2em;
+        left: 25em; }
       main section:nth-of-type(3) #editInfo #aboutMe {
         position: absolute;
         left: 39.3em;

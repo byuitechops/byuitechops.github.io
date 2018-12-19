@@ -449,6 +449,19 @@ main {
                 margin-top: -2em;
                 left: 21em;
             }
+            
+            select{
+                visibility: hidden;
+                position: absolute;
+                margin-top: -2em;
+                left: 21em;
+            }
+            #editBirthdayDay{
+                visibility: hidden;
+                position: absolute;
+                margin-top: -2em;
+                left: 25em;
+            }
 
             #aboutMe {
                 position: absolute;
