@@ -1,7 +1,7 @@
 //  reads from firestore and searches for a matching date.
 var today = new Date().toString();
 var editToday = today.slice(4, 10);
-
+console.log("Hoje e" + editToday);
 db.collection("users").where("info.birthday", "==", editToday).get()
     .then(function (querySnapshot) {
         if (!querySnapshot.empty){
