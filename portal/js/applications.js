@@ -8,6 +8,7 @@ var equella = document.getElementById("equella");
 var trello = document.getElementById("trello");
 var accessibility = document.getElementById("accessibility");
 var slack = document.getElementById("slack");
+var googleChat = document.getElementById("googleChat");
 
 canvas.addEventListener("click", () => {
     window.open("https://byui.instructure.com/login/canvas");
@@ -47,9 +48,12 @@ accessibility.addEventListener("click", () => {
     window.open("https://byuitechops.github.io/accessibility/");
 })
 
-slack.addEventListener("click", () => {
-    window.open("https://byuitechops.slack.com/messages/GABFXPE8L/details/");
+googleChat.addEventListener("click", () => {
+    window.open("https://chat.google.com/room/AAAAGWGIzV4");
 })
+// slack.addEventListener("click", () => {
+//     window.open("https://byuitechops.slack.com/messages/GABFXPE8L/details/");
+// })
 
 function loadPage() {
     // load the page
