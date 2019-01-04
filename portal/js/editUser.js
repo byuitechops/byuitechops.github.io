@@ -143,7 +143,7 @@ function submitInfoChanges(userId) {
         var isLead;
         if (document.getElementById("editJobTitle").value == "Project Lead" ||
             document.getElementById("editJobTitle").value == "Student Lead" ||
-            document.getElementById("editJobTitle").value == "Assistent Lead") {
+            document.getElementById("editJobTitle").value == "Assistant Lead") {
             isLead = true;
         } else {
             isLead = false;
@@ -188,11 +188,39 @@ function populateInfoEdit(doc) {
             var idTeam = doc.data().team;
             console.log(idTeam);
             document.getElementById("editTeam").setAttribute("selected", "selected");
-            //console.log(doc.data().info.email);
+           
             document.getElementById("editEmail").setAttribute("value", `${doc.data().info.email}`);
             var idTitle = doc.data().title;
             console.log(idTitle);
-            var i = document.getElementById("editJobTitle").selectedIndex;
+            document.getElementById("editJobTitle").setAttribute("selected", "selected");
+            if (idTitle == 'Team Member'){
+                document.getElementById("editJobTitle").selectedIndex = 0;
+            }
+            
+            if (idTitle == 'Student Lead'){
+                document.getElementById("editJobTitle").selectedIndex = 1;
+            }
+
+            if (idTitle == 'Project Lead'){
+                document.getElementById("editJobTitle").selectedIndex = 2;
+            }
+
+            if (idTitle == 'Assistant Lead'){
+                document.getElementById("editJobTitle").selectedIndex = 3;
+            }
+
+            if (idTitle == 'Tech'){
+                document.getElementById("editJobTitle").selectedIndex = 4;
+            }
+
+            if (idTitle == 'Training'){
+                document.getElementById("editJobTitle").selectedIndex = 5;
+            }
+
+            if (idTitle == 'Transcripts Lead'){
+                document.getElementById("editJobTitle").selectedIndex = 6;
+            }
+
             if (doc.data().team == "Canvas 1") {
                 document.getElementById("editTeam").selectedIndex = 0;
             }
