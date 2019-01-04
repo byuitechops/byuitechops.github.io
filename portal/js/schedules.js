@@ -13,11 +13,11 @@ function loadPage(){
             //clicked on team 1
             document.getElementById("selectTeam").addEventListener("change", ()=>{
                if (document.getElementById("selectTeam").value == "canvas1"){
-                iframe.src = "https://docs.google.com/spreadsheets/d/1P8rKKlO4BxLonT840yB7SeO59bjnmLnjvYNiurNaywg/?widget=true"
+                iframe.src = "https://docs.google.com/spreadsheets/d/12WXvcWmS7S2E0NZaTnyyhLdzNsrwllD85UsavRXfpZM/edit?ts=5c2e753c#gid=0"
                }
                else{
-                iframe.src = "https://docs.google.com/spreadsheets/d/1TaUkWSifGGYkE5um2Rjtfi_Q37EzPUWmY-_X87sBQSo/?widget=true"
-                document.getElementById("newTab").href ="https://docs.google.com/spreadsheets/d/1TaUkWSifGGYkE5um2Rjtfi_Q37EzPUWmY-_X87sBQSo/?widget=true";
+                iframe.src = "https://docs.google.com/spreadsheets/d/1xZGwTxPbx9w56hC-4CUJnBxK0fPJTrMLqj-91pCFRhQ/edit?ts=5c2e752e#gid=0/?widget=true"
+                document.getElementById("newTab").href ="https://docs.google.com/spreadsheets/d/1xZGwTxPbx9w56hC-4CUJnBxK0fPJTrMLqj-91pCFRhQ/edit?ts=5c2e752e#gid=0/?widget=true";
                }  
             })
         }
