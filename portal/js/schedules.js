@@ -7,7 +7,7 @@ function loadPage(){
       var team =  document.getElementById("teams");
       var iframe = document.getElementById("spreadsheet");
       //checks for permissions to see both teams' schedule
-        if (myData.admin || myData.lead){
+        if (myData.admin || myData.lead ){
             document.getElementById("admin").style.visibility = "visible";
             team.style.visibility = "visible";
             //clicked on team 1
@@ -24,11 +24,13 @@ function loadPage(){
         else {
             if (myData.team == "Canvas 1" || myData.team == "canvas1"){
                 team.style.visibility = "visible";
+                iframe.src = "https://docs.google.com/spreadsheets/d/12WXvcWmS7S2E0NZaTnyyhLdzNsrwllD85UsavRXfpZM/edit#gid=0";
+                document.getElementById("newTab").href ="https://docs.google.com/spreadsheets/d/12WXvcWmS7S2E0NZaTnyyhLdzNsrwllD85UsavRXfpZM/edit#gid=0";
             }
             else{
                 team.style.visibility = "visible";
-                iframe.src = "https://docs.google.com/spreadsheets/d/1TaUkWSifGGYkE5um2Rjtfi_Q37EzPUWmY-_X87sBQSo/?widget=true";
-                document.getElementById("newTab").href ="https://docs.google.com/spreadsheets/d/1TaUkWSifGGYkE5um2Rjtfi_Q37EzPUWmY-_X87sBQSo/?widget=true";
+                iframe.src = "https://docs.google.com/spreadsheets/d/1xZGwTxPbx9w56hC-4CUJnBxK0fPJTrMLqj-91pCFRhQ/edit#gid=0";
+                document.getElementById("newTab").href ="https://docs.google.com/spreadsheets/d/1xZGwTxPbx9w56hC-4CUJnBxK0fPJTrMLqj-91pCFRhQ/edit#gid=0";
                 
             }
         }
