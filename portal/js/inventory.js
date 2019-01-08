@@ -2,7 +2,7 @@
 function loadPage() {
   document.getElementById('name').innerText = `Edit Item`;
   document.getElementById('editItemBox').style.visibility = "hidden";
-  if (!data.admin && data.title != "Store Manager") {
+  if (!data.admin && !data.storeManager) {
     window.location.replace('profile.html')
   }
 }

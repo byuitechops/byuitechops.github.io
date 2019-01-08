@@ -67,7 +67,6 @@ function view(userId) {
             console.log("submitted");
             submitInfoChanges(userId);
             done = true;
-
         })
 
     }
