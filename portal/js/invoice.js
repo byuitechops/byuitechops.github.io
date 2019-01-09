@@ -1,7 +1,7 @@
 // loads the page providing different information if the user is an admin/lead
 function loadPage() {
     //checks if the user has correct permissions first
-    if (data.admin || !data.storeManager) {
+    if (data.admin || data.storeManager) {
         showAllUsers();
     } else {
         showOneUser();
