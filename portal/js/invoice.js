@@ -35,9 +35,11 @@ function showAllUsers() {
     var today = new Date();
     var month = today.getMonth();
     if (month == 0) {
-        month = 12;
+        month++;
     }
+    console.log(month);
     var queryDay = `${today.getFullYear()}-${month}-${today.getDate()} 00:00`;
+    console.log(queryDay);
 
     db.collection('store').doc('inventory').get()
         .then(function (doc) {
@@ -47,7 +49,8 @@ function showAllUsers() {
         })
 
     db.collection("store").doc("transactions").collection("receipts")
-        .where(firebase.firestore.FieldPath.documentId(), ">", queryDay).get()
+       .get()
+       // .where(firebase.firestore.FieldPath.documentId(), ">", queryDay)
         .then(function (querySnapshot) {
             var html = ``;
             querySnapshot.forEach((doc) => {
