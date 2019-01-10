@@ -50,8 +50,9 @@ function showAllUsers() {
 
     db.collection("store").doc("transactions").collection("receipts")
        .get()
-       // .where(firebase.firestore.FieldPath.documentId(), ">", queryDay)
+    //    .where(firebase.firestore.FieldPath.documentId(), ">", queryDay)
         .then(function (querySnapshot) {
+            console.log
             var html = ``;
             querySnapshot.forEach((doc) => {
                 var docData = `<div><h3>${doc.id}</h3>`;

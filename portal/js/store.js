@@ -205,3 +205,4 @@ function removeItem(e, item, price) {
     cart.removeChild(e.target.parentNode.parentNode);
   }
 }
+

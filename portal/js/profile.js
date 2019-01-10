@@ -180,6 +180,7 @@ function loadPage() {
     });
     db.collection("users").doc(userId).get()
         .then(function (doc) {
+            console.log(doc);
             const myData = doc.data();
             document.getElementById("dbName").innerText = myData.nameDisplay;
             document.getElementById("dbTitle").innerText = "Title: " + myData.title;
