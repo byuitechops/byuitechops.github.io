@@ -102,6 +102,7 @@ document.getElementById('checkInBtn').addEventListener('click', () => {
       "start": setDate.slice(-5)
     })
     window.open('https://www.myworkday.com/byuhi/d/home.htmld', '_blank');
+    window.open('https://chat.google.com/room/AAAAGWGIzV4', '_blank');
   } else {
     alert("You are already logged in");
   }
