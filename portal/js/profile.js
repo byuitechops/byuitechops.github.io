@@ -152,19 +152,19 @@ function populateInfoEdit() {
             document.getElementById("editMajor").setAttribute("value", `${doc.data().info.major}`);
             //document.getElementById(idTrack).setAttribute("selected", "selected");
             document.getElementById("editTrack").style.visibility = "visible";
-            if (idTrack =='Winter/Spring'){
+            if (idTrack == 'Winter/Spring') {
                 document.getElementById("editTrack").selectedIndex = 0;
             }
 
-            if (idTrack =='Spring/Fall'){
+            if (idTrack == 'Spring/Fall') {
                 document.getElementById("editTrack").selectedIndex = 1;
             }
 
-            if (idTrack =='Fall/Winter'){
+            if (idTrack == 'Fall/Winter') {
                 document.getElementById("editTrack").selectedIndex = 2;
             }
 
-            if (idTrack =='Year Round'){
+            if (idTrack == 'Year Round') {
                 document.getElementById("editTrack").selectedIndex = 3;
             }
 
