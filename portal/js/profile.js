@@ -139,6 +139,7 @@ submitChanges.addEventListener("click", () => {
 var cancelChanges = document.getElementById("cancelInfoChanges");
 cancelChanges.addEventListener("click", () => {
     editDiv.style.visibility = "hidden";
+    document.getElementById('editTrack').style.visibility = "hidden";
 })
 
 //populates de input boxes with what we already have from the user
@@ -146,26 +147,26 @@ function populateInfoEdit() {
     db.collection("users").doc(userId).get()
         .then(function (doc) {
             var idTrack = doc.data().info.track;
-            console.log(idTrack);
+            var selectTrack = document.getElementById("editTrack").selectedIndex;
             document.getElementById("editName").setAttribute("value", `${doc.data().nameDisplay}`);
             document.getElementById("editPhone").setAttribute("value", `${doc.data().info.phoneNumber}`);
             document.getElementById("editMajor").setAttribute("value", `${doc.data().info.major}`);
             //document.getElementById(idTrack).setAttribute("selected", "selected");
-            document.getElementById("editTrack").style.visibility = "visible";
+           document.getElementById("editTrack").style.visibility = "visible";
             if (idTrack == 'Winter/Spring') {
-                document.getElementById("editTrack").selectedIndex = 0;
+                selectTrack = 0;
             }
 
             if (idTrack == 'Spring/Fall') {
-                document.getElementById("editTrack").selectedIndex = 1;
+                selectTrack = 1;
             }
 
             if (idTrack == 'Fall/Winter') {
-                document.getElementById("editTrack").selectedIndex = 2;
+                selectTrack = 2;
             }
 
             if (idTrack == 'Year Round') {
-                document.getElementById("editTrack").selectedIndex = 3;
+                selectTrack = 3;
             }
 
             // document.getElementById("editTrack").setAttribute("value", `${doc.data().info.track}`);
