@@ -109,13 +109,12 @@ submitChanges.addEventListener("click", () => {
     if (!doneUser) {
 
         doneUser = true;
-        if (!sameBirthday){
+        if (!sameBirthday) {
             var birthday = `${document.getElementById("editBirthdayMonth").value} ${document.getElementById("editBirthdayDay").value}`;
-        }
-        else{
+        } else {
             var birthday = birthdayPopulate;
         }
-       
+
         db.collection("users").doc(userId).update({
                 "nameDisplay": document.getElementById("editName").value,
                 "info.phoneNumber": document.getElementById("editPhone").value,
@@ -146,10 +145,30 @@ cancelChanges.addEventListener("click", () => {
 function populateInfoEdit() {
     db.collection("users").doc(userId).get()
         .then(function (doc) {
+            var idTrack = doc.data().info.track;
+            console.log(idTrack);
             document.getElementById("editName").setAttribute("value", `${doc.data().nameDisplay}`);
             document.getElementById("editPhone").setAttribute("value", `${doc.data().info.phoneNumber}`);
             document.getElementById("editMajor").setAttribute("value", `${doc.data().info.major}`);
-            document.getElementById("editTrack").setAttribute("value", `${doc.data().info.track}`);
+            //document.getElementById(idTrack).setAttribute("selected", "selected");
+            document.getElementById("editTrack").style.visibility = "visible";
+            if (idTrack =='Winter/Spring'){
+                document.getElementById("editTrack").selectedIndex = 0;
+            }
+
+            if (idTrack =='Spring/Fall'){
+                document.getElementById("editTrack").selectedIndex = 1;
+            }
+
+            if (idTrack =='Fall/Winter'){
+                document.getElementById("editTrack").selectedIndex = 2;
+            }
+
+            if (idTrack =='Year Round'){
+                document.getElementById("editTrack").selectedIndex = 3;
+            }
+
+            // document.getElementById("editTrack").setAttribute("value", `${doc.data().info.track}`);
             document.getElementById("editGradDate").setAttribute("value", `${doc.data().info.graduation}`);
             document.getElementById("editAboutMe").innerText = doc.data().info.aboutMe;
             document.getElementById("displayBirthday").setAttribute("value", `${doc.data().info.birthday}`);
@@ -158,7 +177,7 @@ function populateInfoEdit() {
 
 //handles the event listener for the birthday call
 //if the birthday doesn't get changed, by the following event listener, then it will keep the same on firebase
-var sameBirthday = true; 
+var sameBirthday = true;
 
 document.getElementById("displayBirthday").addEventListener("click", () => {
     document.getElementById("displayBirthday").style.visibility = "hidden";

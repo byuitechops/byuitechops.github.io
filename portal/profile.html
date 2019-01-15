@@ -79,7 +79,7 @@
                 <p id="dbMajor"></p>
                 <p id="dbTrack"></p>
                 <p id="dbGradDate"></p>
-                
+
 
             </div>
             <button onclick="toggleView()"><img id="arrowImg" src="assets/arrow.png"></button>
@@ -105,7 +105,7 @@
                     Handbook</a>
 
                 <a href="invoice.html">
-                   Store Invoice</a>
+                    Store Invoice</a>
                 <!-- <p>Steak(carne, mucha carne)</p> -->
                 <!-- <p>File a Complaint</p> -->
             </div>
@@ -147,13 +147,13 @@
                 <p>Major: </p>
                 <input id="editMajor" type="text" placeholder="Course of Study">
                 <p>Track: </p>
-                <input id="editTrack" type="text" list="tracks" placeholder="Season/Season">
-                <datalist id="tracks">
-                    <option value="Winter/Spring">
-                    <option value="Spring/Fall">
-                    <option value="Fall/Winter">
-                    <option value="Year Round (Overwrite)"></option>
-                </datalist>
+                <!-- <input id="editTrack" type="text" list="tracks" placeholder="Season/Season"> -->
+                <select id="editTrack">
+                    <option id="Winter/Spring">Winter/Spring</option>
+                    <option id="Spring/Fall">Spring/Fall</option>
+                    <option id="Fall/Winter">Fall/Winter</option>
+                    <option id="Year Round">Year Round (Overwrite)"</option>
+                </select>
                 <p>Graduation Date: </p>
                 <input id="editGradDate" type="text" placeholder="Year and Semester">
                 <p>Birthday Date: </p>

@@ -14,7 +14,7 @@ function getAllUsers() {
     if (data.admin) {
         db.collection("users").orderBy("nameDisplay").get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
-                console.log(doc.data().nameDisplay);
+                console.log(doc.data());
                 if (data.admin) {
                     var html = `<p><img id="${(doc.data().nameDisplay).replace(/ /g, "")}pic"><span>${doc.data().nameDisplay}</span><button onclick="view('${doc.id}')">View</button> <button onclick="deleteUser('${doc.id}', '${doc.data().nameDisplay}')">Delete</button></p>`;
                 } else {
@@ -147,7 +147,7 @@ function submitInfoChanges(userId) {
         } else {
             isLead = false;
         }
-
+        
         db.collection("users").doc(userId).update({
                 "nameDisplay": document.getElementById("editName").value,
                 "info.phoneNumber": document.getElementById("editPhone").value,
