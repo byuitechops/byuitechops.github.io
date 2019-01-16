@@ -131,10 +131,14 @@ function claimItem(docId) {
 
 function search() {
     document.getElementById('searchcancel').classList.remove('hide');
-
-    var sVal = document.getElementById('searchValue').value;
+    var sVal = document.getElementById('searchValue').value; 
     var sType = document.getElementById('searchType').value;
-    // console.log(`sval: ${sVal}, sType: ${sType}`);
+    // when the user is looking for a transcript by the course code, brings whatever query inputed into capital letters, so it provides more accurate results, since the
+    // course code for the transcripts are stored in capital letters. Ex: AUTO155 == AuTo155
+    if (sType == 'courseCode') {
+        sVal = sVal.toUpperCase();
+    }
+
     document.getElementById('text').innerHTML = "";
     var adminQuery = 0;
     var copyQuery = 0;
@@ -288,6 +292,7 @@ function search() {
             })
         });
 }
+
 document.getElementById('searchValue').addEventListener("keyup", function () {
     event.preventDefault();
     if (event.keyCode === 13) {
