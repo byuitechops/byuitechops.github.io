@@ -12,6 +12,7 @@ const $accent1 = "#ffffff";
 const $accent2 = "#727272";
 const $background = "#ffffff";
 const $TimeBackgrounds = "#5592d7";
+const $backGroundMarvelTheme = 'rgb(255, 145, 0)'
 
 // Initialize Firebase
 var config = {
@@ -76,5 +77,8 @@ function setTheme() {
     link.setAttribute('type', "text/css");
     link.setAttribute('href', `css/${pageName}/${pageName}_${theme}.css`);
     document.getElementsByTagName('head')[0].insertAdjacentElement('beforeend', link);
+  }
+  if (theme == 'holiday'){
+    document.getElementsByTagName('header')[0].style.backgroundColor = $backGroundMarvelTheme;
   }
 }

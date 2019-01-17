@@ -10,7 +10,7 @@
   background-repeat: no-repeat;
   background-position: top right;
   background-size: 100%;
-  opacity: 0.4;
+  opacity: 0.2;
   z-index: -1; }
 
 header {
@@ -79,7 +79,7 @@ main {
     grid-gap: 0.5em; }
     main section div {
       position: relative;
-      background-color: #0076c6;
+      background-color: #FF9100;
       color: #ffffff;
       width: 100%; }
       main section div img {
