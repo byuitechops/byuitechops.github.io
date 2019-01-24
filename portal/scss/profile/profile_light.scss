@@ -1,5 +1,6 @@
 @import "../partials/main";
 
+
 main {
     display: grid;
     grid-template-rows: 15% 85%;
@@ -138,7 +139,7 @@ main {
             z-index: 1;
 
             display: grid;
-            grid-template-columns: repeat(2, 1fr); 
+            grid-template-columns: repeat(2, 1fr);
             grid-template-rows: 1fr 1fr 1fr 2fr;
 
             h2 {
@@ -160,7 +161,7 @@ main {
                 grid-row: 2;
                 height: 3em;
                 width: 50%;
-                margin: 0  auto;
+                margin: 0 auto;
                 margin-top: 6em;
                 z-index: 1;
                 // margin: auto;
@@ -178,6 +179,7 @@ main {
                 left: 0;
                 right: 0;
                 height: 2em;
+
                 // margin-top: 3em;
                 // margin-right: 18em;
                 // font-size: 30px
@@ -237,7 +239,7 @@ main {
                 margin: 0em auto;
 
                 &:hover {
-                     opacity: 0.80;
+                    opacity: 0.80;
                 }
             }
         }
@@ -449,24 +451,6 @@ main {
                 margin-top: -2em;
                 left: 21em;
             }
-            
-            select{
-                visibility: hidden;
-                position: absolute;
-                margin-top: -2em;
-                left: 21em;
-                
-            }
-
-            #editTrack{
-                width: 17%;
-            }
-            #editBirthdayDay{
-                visibility: hidden;
-                position: absolute;
-                margin-top: -2em;
-                left: 25em;
-            }
 
             #aboutMe {
                 position: absolute;
@@ -540,15 +524,16 @@ main {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    
+
     &:nth-of-type(2) {
         span {
             background-color: $accent2;
         }
     }
+
     &:nth-of-type(3) {
         span {
-            background-image: linear-gradient(white, rgba(60,101,200,0), rgba(60,101,200,1));
+            background-image: linear-gradient(white, rgba(60, 101, 200, 0), rgba(60, 101, 200, 1));
         }
     }
 }
@@ -599,4 +584,30 @@ main {
     height: 8px;
     border-radius: 50%;
     background: white;
+}
+
+#completeTeamActivities {
+    // position: relative;
+    // top: -25px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    //padding: 3em;
+    
+    select {
+        width: 45%;
+        height: 30%;
+        border-radius:0.5em;
+    }
+
+    button {
+        width: 45%;
+        height: 30%;
+        border-radius: 0.5em;
+        background-color: $secondary;
+
+        &:hover {
+            opacity: 0.5;
+        }
+    }
 }

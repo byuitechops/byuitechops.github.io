@@ -178,7 +178,7 @@ main {
         grid-row: 2;
         height: 3em;
         width: 50%;
-        margin: 0  auto;
+        margin: 0 auto;
         margin-top: 6em;
         z-index: 1; }
       main section:nth-of-type(1) #usingRedeem p {
@@ -367,18 +367,6 @@ main {
         position: absolute;
         margin-top: -2em;
         left: 21em; }
-      main section:nth-of-type(3) #editInfo select {
-        visibility: hidden;
-        position: absolute;
-        margin-top: -2em;
-        left: 21em; }
-      main section:nth-of-type(3) #editInfo #editTrack {
-        width: 17%; }
-      main section:nth-of-type(3) #editInfo #editBirthdayDay {
-        visibility: hidden;
-        position: absolute;
-        margin-top: -2em;
-        left: 25em; }
       main section:nth-of-type(3) #editInfo #aboutMe {
         position: absolute;
         left: 39.3em;
@@ -481,5 +469,21 @@ main {
   height: 8px;
   border-radius: 50%;
   background: white; }
+
+#completeTeamActivities {
+  display: flex;
+  flex-direction: column;
+  align-content: center; }
+  #completeTeamActivities select {
+    width: 45%;
+    height: 30%;
+    border-radius: 0.5em; }
+  #completeTeamActivities button {
+    width: 45%;
+    height: 30%;
+    border-radius: 0.5em;
+    background-color: #f1f8fe; }
+    #completeTeamActivities button:hover {
+      opacity: 0.5; }
 
 /*# sourceMappingURL=profile_light.css.map */
