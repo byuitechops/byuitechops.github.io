@@ -1,5 +1,6 @@
 @import "../partials/theme_dark";
 
+
 main {
     display: grid;
     grid-template-rows: 15% 85%;
@@ -451,6 +452,13 @@ main {
                 left: 21em;
             }
 
+            select{
+                position: absolute;
+                margin-top: -2em;
+                left: 21em;
+                width: 17%;
+            }
+
             #aboutMe {
                 position: absolute;
                 left: 39.3em;
@@ -587,7 +595,7 @@ main {
 
 #completeTeamActivities {
     // position: relative;
-    // top: -25px;
+    // top: -40px;
     display: flex;
     flex-direction: column;
     align-content: center;

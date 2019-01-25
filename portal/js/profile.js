@@ -97,6 +97,9 @@ var editBtn = document.getElementById("editContact");
 var editDiv = document.getElementById("editInfo");
 editBtn.addEventListener("click", () => {
     editDiv.style.visibility = "visible";
+    document.getElementById("displayBirthday").style.visibility = "visible";
+    document.getElementById("editBirthdayMonth").style.visibility = "hidden";
+    document.getElementById("editBirthdayDay").style.visibility = "hidden";
     populateInfoEdit();
 })
 
@@ -140,6 +143,9 @@ var cancelChanges = document.getElementById("cancelInfoChanges");
 cancelChanges.addEventListener("click", () => {
     editDiv.style.visibility = "hidden";
     document.getElementById('editTrack').style.visibility = "hidden";
+    document.getElementById("displayBirthday").style.visibility = "hidden";
+    document.getElementById("editBirthdayMonth").style.visibility = "hidden";
+    document.getElementById("editBirthdayDay").style.visibility = "hidden";
 })
 
 //populates de input boxes with what we already have from the user
@@ -152,21 +158,17 @@ function populateInfoEdit() {
             document.getElementById("editPhone").setAttribute("value", `${doc.data().info.phoneNumber}`);
             document.getElementById("editMajor").setAttribute("value", `${doc.data().info.major}`);
             //document.getElementById(idTrack).setAttribute("selected", "selected");
-           document.getElementById("editTrack").style.visibility = "visible";
+            document.getElementById("editTrack").style.visibility = "visible";
             if (idTrack == 'Winter/Spring') {
-                selectTrack = 0;
-            }
-
-            if (idTrack == 'Spring/Fall') {
-                selectTrack = 1;
-            }
-
-            if (idTrack == 'Fall/Winter') {
-                selectTrack = 2;
-            }
-
-            if (idTrack == 'Year Round') {
-                selectTrack = 3;
+                document.getElementById("editTrack").selectedIndex = 0;
+            } else if (idTrack == 'Spring/Fall') {
+                document.getElementById("editTrack").selectedIndex = 1;
+            } else if (idTrack == 'Fall/Winter') {
+                document.getElementById("editTrack").selectedIndex = 2;
+            } else if (idTrack == 'Year Round') {
+                document.getElementById("editTrack").selectedIndex = 3;
+            } else {
+                document.getElementById("editTrack").selectedIndex = 0;
             }
 
             // document.getElementById("editTrack").setAttribute("value", `${doc.data().info.track}`);
@@ -190,13 +192,20 @@ document.getElementById("displayBirthday").addEventListener("click", () => {
 var birthdayPopulate;
 var results = []; //will be used as part of the results for 
 function loadPage() {
-    db.collection("teams").where("points", ">=", 0).get()
-    .then(function(querySnapshot){
-        //console.log(querySnapshot);
-        querySnapshot.forEach(function(doc){
+
+    db.collection("teams").doc('canvas1').get()
+        .then(function (doc) {
             results.push(doc.data().points);
+            console.log(results);
         })
-    });
+
+
+    db.collection("teams").doc('canvas2').get()
+        .then(function (doc) {
+            results.push(doc.data().points);
+            console.log(results);
+        })
+
     document.getElementById(theme).setAttribute('checked', true);
     var photo = data.info.photo;
     firebase.storage().ref().child(`profile/${photo}`).getDownloadURL().then(function (url) {
@@ -265,93 +274,71 @@ document.getElementById("signOutBtn").addEventListener("click", () => {
     });
 })
 
-function updateTeamPoints(pointsToAdd, activityType, timeStamp){
+function updateTeamPoints(pointsToAdd, activityType, timeStamp) {
     db.collection("users").doc(userId).get()
-    .then(function(doc){
-       var team = doc.data().team.replace(" ",'').toLowerCase();
-       var name = doc.data().nameDisplay; 
-        db.collection("teams").doc(team).get()
-        .then(function(doc){
-            var newPoints = doc.data().points += pointsToAdd;
-           db.collection("teams").doc(team).update({
-            points: newPoints
-           }).catch(function(error){
-               alert('An error Ocurred, try updating the points again');
-           })
-           db.collection("teams").doc(team).collection('logs').doc(timeStamp).set({
-               "Activity Type": activityType,
-               "Points added" : pointsToAdd,
-               "Date Added": timeStamp,
-               "Added by" : name
-           })
-           .then(function () {
-            console.log("Document successfully written!");
-            alert("User Updated Successfully");
-            window.location.reload();
-        }).catch(function (error) {
-            // An error happened.
-        });
+        .then(function (doc) {
+            var team = doc.data().team.replace(" ", '').toLowerCase();
+            var name = doc.data().nameDisplay;
+            db.collection("teams").doc(team).get()
+                .then(function (doc) {
+                    var newPoints = doc.data().points += pointsToAdd;
+                    db.collection("teams").doc(team).update({
+                        points: newPoints
+                    }).catch(function (error) {
+                        alert('An error Ocurred, try updating the points again');
+                    })
+                    db.collection("teams").doc(team).collection('logs').doc(timeStamp).set({
+                            "Activity Type": activityType,
+                            "Points added": pointsToAdd,
+                            "Date Added": timeStamp,
+                            "Added by": name
+                        })
+                        .then(function () {
+                            console.log("Document successfully written!");
+                            alert("User Updated Successfully");
+                            window.location.reload();
+                        }).catch(function (error) {
+                            // An error happened.
+                        });
+                })
         })
-    })
 }
 
 
-    document.getElementById("completeTeamActivities").addEventListener('click', ()=>{
-    document.getElementById("pointsOptions").setAttribute("class","visible");
-    document.getElementById("submitPoints").setAttribute("class","visible");
+document.getElementById("completeTeamActivities").addEventListener('click', () => {
+    document.getElementById("pointsOptions").setAttribute("class", "visible");
+    document.getElementById("submitPoints").setAttribute("class", "visible");
 })
 
-function submitTeamPoints(){
+function submitTeamPoints() {
     var setDate = editDate(new Date());
     var points = 0;
     var activityType = document.getElementById("pointsOptions").value;
-    if (activityType == 'Checked in on time(sharp)'){
+    if (activityType == 'Checked in on time(sharp)') {
         points = 1;
-    }
-    
-    else if (activityType == 'Checked with lead for a project'){
+    } else if (activityType == 'Checked with lead for a project') {
         points = 1;
-    }
-
-    else if (activityType == 'Helped restock/organize store'){
+    } else if (activityType == 'Helped restock/organize store') {
         points = 1;
-    }
-
-    else if (activityType == 'Giving Devotional'){
+    } else if (activityType == 'Giving Devotional') {
         points = 1;
-    }
-
-    else if (activityType == 'First to react to Posts on General'){
+    } else if (activityType == 'First to react to Posts on General') {
         points = 10;
-    }
-
-    else if (activityType == 'Cleaned the fridge'){
+    } else if (activityType == 'Cleaned the fridge') {
         points = 1;
-    }
-
-    else if (activityType == 'Came to Thursday meeting'){
+    } else if (activityType == 'Came to Thursday meeting') {
         points = 5;
-    }
-
-    else if (activityType == 'Moved Trello cards on prep into dev. transition'){
+    } else if (activityType == 'Moved Trello cards on prep into dev. transition') {
         points = 1;
-    }
-
-    else if (activityType == 'Won an office competition'){
+    } else if (activityType == 'Won an office competition') {
         points = 10;
-    }
-
-    
-    else if (activityType == 'Beat Lucas on foosball (x100)'){
+    } else if (activityType == 'Beat Lucas on foosball (x100)') {
         points = 50;
-    }
-
-    
-    else if (activityType == 'Brought a treat to share with the office'){
+    } else if (activityType == 'Brought a treat to share with the office') {
         points = 10;
     }
 
- updateTeamPoints(points, activityType, setDate);
+    updateTeamPoints(points, activityType, setDate);
 }
 
 function editDate(date) {
@@ -362,12 +349,9 @@ function editDate(date) {
     var minute = ("0" + date.getMinutes()).slice(-2);
     var setDate = `${year}-${month}-${day} ${hour}:${minute}`;
     return setDate;
-  }
+}
 
-  //this function gets each team's points and addes it to the html file previously created
-  function showResults(){
+//this function gets each team's points and addes it to the html file previously created
+function showResults() {
     document.getElementById("results").innerText = `Canvas 1 (Marvel) = ${results[0]} x Canvas 2 (DC) = ${results[1]} `
-  }
-
- 
-  
+}

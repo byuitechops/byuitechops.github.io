@@ -381,6 +381,11 @@ main {
         position: absolute;
         margin-top: -2em;
         left: 21em; }
+      main section:nth-of-type(3) #editInfo select {
+        position: absolute;
+        margin-top: -2em;
+        left: 21em;
+        width: 17%; }
       main section:nth-of-type(3) #editInfo #aboutMe {
         position: absolute;
         left: 39.3em;

@@ -19,7 +19,7 @@
     </script>
     <!-- -->
     <!-- CSS -->
-    <link id="defaultCss" rel="stylesheet" type="text/css" href="css/profile/profile_light.css">
+    <!-- <link id="defaultCss" rel="stylesheet" type="text/css" href="css/profile/profile_light.css"> -->
     <!-- -->
     <title>Profile | BYU-I Techops Portal</title>
 </head>
@@ -106,14 +106,7 @@
 
                 <a href="invoice.html">
                     Store Invoice</a>
-                <!-- <p>Steak(carne, mucha carne)</p> -->
-                <!-- <p>File a Complaint</p> -->
-            </div>
 
-            <div>
-                <h3>Settings</h3>
-                <!-- <p>Notifications</p>
-                <p>Report a Bug</p> -->
                 <p>Viewing Mode
                     <label class="container">
                         <input type="radio" name="viewMode" id="light" onclick="changeViewMode('light')">
@@ -128,24 +121,33 @@
                         <span class="checkmark"></span>
                     </label>
                 </p>
-              
-            <p id="results" onclick="showResults()">Show Results</p>
-            <p id="completeTeamActivities">Check Team Activity
-                <select name="" id="pointsOptions" class="hide">
-                    <option>Checked in on time(sharp)</option>
-                    <option>Checked with lead for a project</option>
-                    <option>Helped restock/organize store</option>
-                    <option>Giving Devotional</option>
-                    <option>First to react to Posts on General</option>
-                    <option>Cleaned the fridge</option>
-                    <option>Came to Thursday meeting</option>
-                    <option>Moved Trello cards on prep into dev. transition</option>
-                    <option>Won an office competition</option>
-                    <option>Beat Lucas on foosball (x100)</option>
-                    <option>Brought a treat to share with the office</option>
-                </select>
-                <button type="submit" id="submitPoints" class="hide" onclick="submitTeamPoints()">Submit</button>
-            </p>
+                <!-- <p>Steak(carne, mucha carne)</p> -->
+                <!-- <p>File a Complaint</p> -->
+            </div>
+
+            <div>
+                <h3>Team Points</h3>
+                <!-- <p>Notifications</p>
+                <p>Report a Bug</p> -->
+
+
+                <p id="results" onclick="showResults()">Show Results</p>
+                <p id="completeTeamActivities">Check Team Activity
+                    <select name="" id="pointsOptions" class="hide">
+                        <option>Checked in on time(sharp)</option>
+                        <option>Checked with lead for a project</option>
+                        <option>Helped restock/organize store</option>
+                        <option>Giving Devotional</option>
+                        <option>First to react to Posts on General</option>
+                        <option>Cleaned the fridge</option>
+                        <option>Came to Thursday meeting</option>
+                        <option>Moved Trello cards on prep into dev. transition</option>
+                        <option>Won an office competition</option>
+                        <option>Beat Lucas on foosball (x100)</option>
+                        <option>Brought a treat to share with the office</option>
+                    </select>
+                    <button type="submit" id="submitPoints" class="hide" onclick="submitTeamPoints()">Submit</button>
+                </p>
             </div>
 
             <div id="leadAdmin">
@@ -198,6 +200,10 @@
                 <button id="submitInfoChanges">Submit</button>
                 <button id="cancelInfoChanges">Cancel</button>
             </div>
+        </section>
+        <section>
+
+
         </section>
     </main>
 </body>
