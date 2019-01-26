@@ -325,7 +325,7 @@ function submitTeamPoints() {
     } else if (activityType == 'First to react to Posts on General') {
         points = 10;
     } else if (activityType == 'Cleaned the fridge') {
-        points = 1;
+        points = 5;
     } else if (activityType == 'Came to Thursday meeting') {
         points = 5;
     } else if (activityType == 'Moved Trello cards on prep into dev. transition') {
