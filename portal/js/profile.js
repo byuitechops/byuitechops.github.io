@@ -336,6 +336,8 @@ function submitTeamPoints() {
         points = 50;
     } else if (activityType == 'Brought a treat to share with the office') {
         points = 10;
+    } else if (activityType == 'Checked out with lead concerning your project') {
+        points = 1;
     }
 
     updateTeamPoints(points, activityType, setDate);
