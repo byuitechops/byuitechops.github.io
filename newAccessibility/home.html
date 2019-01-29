@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Home | BYUI Accessibility</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="assests/favicon.gif">
+    <link type="text/css" rel="stylesheet" href="css/main.css">
+    <link type="text/css" rel="stylesheet" href="css/home.css">
+    <!-- Script -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script> -->
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-auth.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+</head>
+
+<body>
+    <head>
+        <h1>BYUI Technical Accessibility</h1>
+        <nav>
+            <ul>
+                <a class="active" href="home.html">
+                    <li>Home</li>
+                </a>
+                <a href="form.html">
+                    <li>Request</li>
+                </a>
+                <a href="claim.html">
+                    <li>Claim</li>
+                </a>
+                <a class="hide" id="place" href="place.html">
+                    <li>Place</li>
+                </a>
+                <a class="hide" id="master" href="master.html">
+                    <li>Master</li>
+                </a>
+                <a onclick="userLogout()">
+                    <li>Logout</li>
+                </a>
+            </ul>
+        </nav>
+    </head>
+    <main>
+        <p id="message"></p>
+        <div id="text">
+            <h3>Course</h3>
+            <h3>Priority</h3>
+            <h3>Type</h3>
+            <h3>Title</h3>
+            <h3>Doc Url</h3>
+            <h3>Canvas URL</h3>
+            <h3>Video/Page Url</h3>
+            <h3></h3>
+            <h3></h3>
+        </div>
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content" id="modal-content">
+                <span class="close">&times;</span>
+                <h2>Doc URL Input</h2>
+                <p id="modal-message"></p>
+                <p>Input both Published and Edit version links</p>
+                <input type="text" id="docUrlInput" placeholder="Edit Link">
+                <input type="text" id="docUrlInput2" placeholder="Published link">
+            </div>
+        </div>
+
+        <!-- The Modal -->
+        <div id="errorModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content" id="errorModal-content">
+                <span class="close">&times;</span>
+                <h2>Report a problem</h2>
+                <p>What is the problem with this transcript</p>
+                <textarea id="problem"></textarea>
+                <button id="submitReport">Submit</button>
+            </div>
+        </div>
+    </main>
+</body>
+<script src="js/main.js"></script>
+<script src="js/home.js"></script>
+</html>

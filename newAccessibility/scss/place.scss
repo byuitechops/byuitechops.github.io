@@ -1,0 +1,114 @@
+#text {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-row-gap: 1em;
+    margin-bottom: 2em;
+}
+
+/* The Modal (background) */
+
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 70%;
+    /* The Close Button */
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        &:hover,
+        &:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    }
+}
+
+#modal-content {
+    #buttons {
+        display: flex;
+        justify-content: center;
+        button {
+            width: 5em;
+            height: 2em;
+            font-size: 2em;
+            margin: auto 2em;
+        }
+        #cancelButton {
+            background-color: darkgrey;
+        }
+    }
+}
+
+#intro {
+    text-align: center;
+    font-size: 1.5em;
+    &.intro {
+        text-align: left;
+        font-size: 1em;
+        word-wrap: break-word;
+        background: #2d2d2d;
+        padding: 1em;
+        margin: .5em 0;
+        overflow: auto;
+        color: #ccc;
+        font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+        line-height: 1.5;
+        border-radius: 6px;
+    }
+}
+
+#load {
+    cursor: pointer;
+    width: 20%;
+    margin: 20px 35%;
+}
+
+#searchcancel {
+    font-size: 1.6em;
+    font-weight: bold;
+    color: #BF0000;
+    cursor: pointer;
+    position: relative;
+    top: 7px;
+    &:hover {
+        color: darkgrey;
+    }
+}
+
+#searchValue {
+    font-size: .9em;
+    margin: 0 5px;
+}
+
+#searchType {
+    font-size: 1em;
+}
