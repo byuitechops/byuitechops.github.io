@@ -1,20 +1,7 @@
-function countDocs(){
-db.collection('accessibility').get()
-            .then((querySnapshot) => {
-                var count = 0;
-                querySnapshot.forEach((doc) => {
-                    count +=1;
-                    console.log(count);
-                })
-            })           
-}
-
-// Check if Logged In
-
 getCourses();
 
 var message = document.getElementById('message');
-
+//according to the request type, displays or hide specific pages 
 document.getElementById('requestType').addEventListener('change', function () {
     if (document.getElementById('requestType').value === 'Transcript') {
         document.getElementById('requestVideoURLLabel').classList.remove('hide');
@@ -45,7 +32,7 @@ document.getElementById('requestType').addEventListener('change', function () {
 
 document.getElementById('requestSubmit').addEventListener('click', function () {
     var requestType = document.getElementById('requestType').value;
-    var title = document.getElementById('requestTitle').value;
+    var title = document.getElementById('requestTitle').value.toUpperCase();
     var priority = document.getElementById('requestPriority').value;
     var course = document.getElementById('requestCourse').value;
     var lmsURL = document.getElementById('requestLMSURL').value;
@@ -74,77 +61,44 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
     } else {
         var user = firebase.auth().currentUser;
        
+        var docData = {
+            title: title,
+            type: requestType,
+            priority: priority,
+            courseCode: course,
+            lmsURL: lmsURL,
+            week: week,
+            requestor: user.displayName,
+            requestDate: new Date(),
+            status: 'Ready for Transcript',
+            placed: false,
+            notes: comments
+        }
+
         if (requestType == "Transcript") {
-            var docData = {
-                title: title,
-                type: requestType,
-                priority: priority,
-                courseCode: course,
-                lmsURL: lmsURL,
-                week: week,
-                requestor: user.displayName,
-                requestDate: new Date(),
-                status: 'Ready for Transcript',
+          var extraInfo = { 
                 srcURL: srcURL,
                 videoLength: videoLength,
                 softwareUsed: softwareUsed,
-                videoHeight: 315,
-                placed: false,
-                 notes: comments
+                videoHeight: 315
             }
+            var test = Object.assign(extraInfo, docData)  
         }
+        
 
         if (requestType == "Audio") {
-            var docData = {
-                title: title,
-                type: requestType,
-                priority: priority,
-                courseCode: course,
-                lmsURL: lmsURL,
-                week: week,
-                requestor: user.displayName,
-                requestDate: new Date(),
-                status: 'Ready for Transcript',
-                videoLength: videoLength,
-                placed: false,
-                notes: comments
+            var extraInfo = {
+                videoLength: videoLength
             }
+            var test = Object.assign(extraInfo, docData)
         }
 
-        if (requestType == "Alt Text") {
-            var docData = {
-                title: title,
-                type: requestType,
-                priority: priority,
-                courseCode: course,
-                lmsURL: lmsURL,
-                week: week,
-                requestor: user.displayName,
-                requestDate: new Date(),
-                status: 'Ready for Transcript',
-                placed: false,
-                notes: comments
-            }
-        }
-
-        if (requestType == "Slide") {
-            var docData = {
-                title: title,
-                type: requestType,
-                priority: priority,
-                courseCode: course,
-                lmsURL: lmsURL,
-                week: week,
-                requestor: user.displayName,
-                requestDate: new Date(),
-                status: 'Ready for Transcript',
-                placed: false,
-                notes: comments
-            }
+        if (requestType == "Alt Text" || requestType == "Slide") {
+            var test = Object.assign({}, docData)
         }
 
         // Add a new document in collection "accessibility"
-        db.collection('accessibility').add(docData)
+        db.collection('accessibility').add(test)
             .then(function (docRef) {
                 console.log('Document written with ID: ', docRef.id);
                 message.innerHTML = 'Request has been made.';
@@ -153,7 +107,7 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
 
                 var elems = document.getElementsByClassName('prev');
 
-                for (var i = 0; i < elems.length; i++) {
+                for (var i = 0; i < elems.length - 1; i++) {
                     elems[i].classList.replace('row-13', 'hide');
                     elems[i].classList.replace('row-12', 'row-13');
                     elems[i].classList.replace('row-11', 'row-12');
@@ -165,9 +119,9 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
                 }
 
                 // var prev = [requestType, course, title, priority, lmsURL, week, srcURL, videoLength];
-                var prev = [315, videoLength, srcURL, week, lmsURL, priority, title, course, requestType];
+                var prev = [videoLength, srcURL, week, lmsURL, priority, title, course, requestType];
 
-                for (var i = 0; i < 9; i++) {
+                for (var i = 0; i < 8; i++) {
                     var elem = document.createElement('input');
                     elem.value = prev[i];
                     elem.classList.add('row-6');
@@ -208,17 +162,19 @@ function resetMessage() {
     }, 3000);
 }
 
-
-document.getElementById('requestVideoURL').addEventListener('keyup', () => {
-    var link = document.getElementById('requestVideoURL').value;
-    var count = 0;
-    db.collection("accessibility").where("srcURL", "==", link)
+// This function compares the title and URL to make sure that we do not have duplicates
+// The HTML sends string x and that is used to decide if it is a URL or title
+function searchForSameTranscript(x) {
+    var value = document.getElementById(x).value.toUpperCase();
+    var repeated = false;
+    if (x == "requestVideoURL"){
+        db.collection("accessibility").where("srcURL", "==", value )
         .get()
         .then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
-                count++;
+                repeated = true;
             });
-            if (count > 0) {
+            if (repeated) {
                 message.innerHTML = `A request for this video has been found`;
                 message.style.color = 'red';
                 document.getElementById('requestSubmit').setAttribute('disabled', true);
@@ -230,18 +186,14 @@ document.getElementById('requestVideoURL').addEventListener('keyup', () => {
         .catch(function (error) {
             console.log("Error getting documents: ", error);
         });
-});
-
-document.getElementById('requestTitle').addEventListener('keyup', () => {
-    var title = document.getElementById('requestTitle').value;
-    var count = 0;
-    db.collection("accessibility").where("title", "==", title)
+    } else if (x == "requestTitle"){
+        db.collection("accessibility").where("title", "==", value)
         .get()
         .then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
-                count++;
+                repeated = true;
             });
-            if (count > 0) {
+            if (repeated) {
                 message.innerHTML = `A request for this video has been found`;
                 message.style.color = 'red';
                 document.getElementById('requestSubmit').setAttribute('disabled', true);
@@ -253,7 +205,8 @@ document.getElementById('requestTitle').addEventListener('keyup', () => {
         .catch(function (error) {
             console.log("Error getting documents: ", error);
         });
-});
+    }
+}
 
 function getCourses() {
     var xhttp = new XMLHttpRequest();
@@ -334,6 +287,8 @@ document.getElementById('requestExternalSoftware').addEventListener('change', ()
     document.getElementById('requestExternalSoftware').style.borderColor = "rgb(169, 169, 169)";
 })
 
+//Calculates the total of time in seconds according 
+//to user's input for the transcript selected
 function calculateTotal() {
     var hours = 0;
     var minutes = 0;
@@ -387,3 +342,15 @@ function calculateSubmit() {
     document.getElementById('requestLength').style.borderColor = "rgb(169, 169, 169)";
     modal.style.display = "none";
 }
+
+//Counts the ammount of transcripts in the database
+function countDocs(){
+    db.collection('accessibility').get()
+                .then((querySnapshot) => {
+                    var count = 0;
+                    querySnapshot.forEach((doc) => {
+                        count +=1;
+                        console.log(count);
+                    })
+                })           
+    }

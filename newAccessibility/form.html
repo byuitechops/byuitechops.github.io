@@ -64,7 +64,7 @@
             <label id="requestTitleLabel">
                 <h3>Media Title</h3>
             </label>
-            <input type="text" id="requestTitle">
+            <input type="text" id="requestTitle" onfocusout="searchForSameTranscript('requestTitle')">
             <label id="requestPriorityLabel">
                 <h3>Priority</h3>
             </label>
@@ -108,7 +108,7 @@
             <label id="requestVideoURLLabel" class="hide">
                 <h3>Video Source URL</h3>
             </label>
-            <input type="url" id="requestVideoURL" class="hide">
+            <input type="url" id="requestVideoURL" class="hide" onfocusout="searchForSameTranscript('requestVideoURL')">
             <label id="requestLengthLabel" class="hide">
                 <div id="timeCalc" class="hide tooltip">
                     <img src="assests/calcIcon.png">
@@ -120,7 +120,7 @@
             <label id="requestSoftwareLabel" class="hide">
                 <div class="tooltip">
                     <span>&#x1f4a1;</span>
-                    <span class="tooltiptext">Set width to 560px then get height. If the video is from Kaltura it is probably 315px</span>
+                    <span class="tooltiptext">Check this box if the video is being processed through Verbit</span>
                 </div>
                 <h3>External (Y/N)</h3>
             </label>
@@ -157,9 +157,6 @@
             </label>
             <label class="row-5">
                 <h3>Time Length (secs)</h3>
-            </label>
-            <label class="row-5">
-                <h3>Video Height (px)</h3>
             </label>
         </div>
         <!-- The Modal -->
