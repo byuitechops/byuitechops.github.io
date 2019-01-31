@@ -323,7 +323,7 @@ function submitTeamPoints() {
     } else if (activityType == 'Giving Devotional') {
         points = 1;
     } else if (activityType == 'First to react to Posts on General') {
-        points = 10;
+        points = 1;
     } else if (activityType == 'Cleaned the fridge') {
         points = 5;
     } else if (activityType == 'Came to Thursday meeting') {
@@ -335,9 +335,12 @@ function submitTeamPoints() {
     } else if (activityType == 'Beat Lucas on foosball (x100)') {
         points = 50;
     } else if (activityType == 'Brought a treat to share with the office') {
-        points = 10;
+        points = 5;
     } else if (activityType == 'Checked out with lead concerning your project') {
         points = 1;
+    }
+        else if (activityType == 'Went to the FTC for Thursday Mtg') {
+        points = 2;
     }
 
     updateTeamPoints(points, activityType, setDate);
