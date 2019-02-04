@@ -21,7 +21,7 @@ body {
 
 header {
   grid-area: a;
-  background-color: #0076c6;
+  background-color: #535353;
   padding: 2em; }
   header img {
     display: block;
@@ -73,4 +73,4 @@ input {
   visibility: hidden;
   width: 2em; }
 
-/*# sourceMappingURL=accumulatedList_light.css.map */
+/*# sourceMappingURL=accumulatedList_dark.css.map */
