@@ -10,12 +10,16 @@
 main {
     overflow: auto;
     h1 { 
-        text-align: center;
+        text-align: left;
     }
 }
 
 #admin {
+    
     display: flex;
+    align-content: center;
+    width: 100%;
+    padding: 4em 6em;
     table {
         th, td {
             text-align:left;

@@ -76,10 +76,13 @@ main {
 main {
   overflow: auto; }
   main h1 {
-    text-align: center; }
+    text-align: left; }
 
 #admin {
-  display: flex; }
+  display: flex;
+  align-content: center;
+  width: 100%;
+  padding: 4em 6em; }
   #admin table th, #admin table td {
     text-align: left; }
 
