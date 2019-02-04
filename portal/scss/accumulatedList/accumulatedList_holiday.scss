@@ -1,0 +1,30 @@
+@import "../partials/theme_holiday";
+
+*{
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+    clear: both;
+}
+
+main {
+    overflow: auto;
+    h1 { 
+        text-align: center;
+    }
+}
+
+#admin {
+    display: flex;
+    table {
+        th, td {
+            text-align:left;
+        }
+        
+    }
+}
+
+input {
+    visibility: hidden;
+    width: 2em;
+}

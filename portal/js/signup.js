@@ -49,7 +49,7 @@ signupBtn.addEventListener('click', () => {
                 "check": false,
                 "breakKey":"",
                 "checkKey":"",
-                "accumulatedTime": "4"
+                "accumulatedTime": 4
             }
 
             try {
