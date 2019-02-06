@@ -326,7 +326,7 @@ main {
     main section:nth-of-type(2) #aboutMe {
       padding: 0.5em;
       padding-left: 1em;
-      height: 60%;
+      height: 40%;
       transition: height 1s, overflow 1s;
       overflow: auto; }
     main section:nth-of-type(2) h3 {

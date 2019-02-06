@@ -7,12 +7,12 @@ function toggleView() {
     // If info is shown
     if (info.style.height == "20%") {
         info.style.height = "0%";
-        aboutMe.style.height = "64%";
+        aboutMe.style.height = "60%";
         aboutMe.style.overflow = "auto";
         img.style.transform = "rotate(0deg)";
     } else {
         info.style.height = "20%";
-        aboutMe.style.height = "44%";
+        aboutMe.style.height = "40%";
         aboutMe.style.overflow = "hidden";
         img.style.transform = "rotate(180deg)";
     }
