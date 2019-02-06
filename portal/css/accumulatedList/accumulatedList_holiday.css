@@ -70,24 +70,46 @@ main {
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  clear: both; }
+  box-sizing: border-box; }
 
 main {
+  padding: 3rem 7rem;
+  width: 100%;
   overflow: auto; }
   main h1 {
     text-align: left; }
 
 #admin {
   display: flex;
-  align-content: center;
+  border: auto;
   width: 100%;
   padding: 4em 6em; }
-  #admin table th, #admin table td {
-    text-align: left; }
+  #admin table {
+    width: 100vh; }
+    #admin table th,
+    #admin table td {
+      text-align: left; }
+      #admin table th span,
+      #admin table td span {
+        padding: 1em; }
+        #admin table th span button,
+        #admin table th span input,
+        #admin table th span optgroup,
+        #admin table th span select,
+        #admin table th span textarea,
+        #admin table td span button,
+        #admin table td span input,
+        #admin table td span optgroup,
+        #admin table td span select,
+        #admin table td span textarea {
+          margin-right: .5rem;
+          width: 2em; }
+      #admin table th button:hover,
+      #admin table td button:hover {
+        opacity: 0.7;
+        color: gray; }
 
-input {
-  visibility: hidden;
-  width: 2em; }
+.hide {
+  display: none; }
 
 /*# sourceMappingURL=accumulatedList_holiday.css.map */

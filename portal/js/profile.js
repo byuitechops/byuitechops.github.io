@@ -196,14 +196,14 @@ function loadPage() {
     db.collection("teams").doc('canvas1').get()
         .then(function (doc) {
             results.push(doc.data().points);
-            console.log(results);
+            // console.log(results);
         })
 
 
     db.collection("teams").doc('canvas2').get()
         .then(function (doc) {
             results.push(doc.data().points);
-            console.log(results);
+            // console.log(results);
         })
 
     document.getElementById(theme).setAttribute('checked', true);
@@ -358,5 +358,6 @@ function editDate(date) {
 
 //this function gets each team's points and addes it to the html file previously created
 function showResults() {
-    document.getElementById("results").innerText = `Canvas 1 (Marvel) = ${results[0]} x Canvas 2 (DC) = ${results[1]} `
+    // document.getElementById("results").innerText = `Canvas 1 (Marvel) = ${results[0]} x Canvas 2 (DC) = ${results[1]} `
+    console.log("Canvas 1 = " + results[0] + " x Canvas 2 = " + results[1]);
 }

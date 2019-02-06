@@ -11,6 +11,9 @@ header {
   margin: 0;
   font-family: 'Open Sans', sans-serif; }
 
+a {
+  text-decoration: none; }
+
 body {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
@@ -52,6 +55,11 @@ main {
 
 .hide {
   display: none; }
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0; }
 
 main {
   display: grid;
@@ -307,7 +315,7 @@ main {
     main section:nth-of-type(2) #aboutMe {
       padding: 0.5em;
       padding-left: 1em;
-      height: 64%;
+      height: 60%;
       transition: height 1s, overflow 1s;
       overflow: auto; }
     main section:nth-of-type(2) h3 {
@@ -319,6 +327,11 @@ main {
   main section:nth-of-type(3) {
     grid-column: 2 /span 1;
     grid-row: 2; }
+    main section:nth-of-type(3) #leadAdmin {
+      visibility: hidden;
+      height: 7em;
+      padding: 0;
+      margin: 0; }
     main section:nth-of-type(3) div {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -338,13 +351,11 @@ main {
         color: black; }
       main section:nth-of-type(3) div p {
         color: #0076c6; }
-    main section:nth-of-type(3) #leadAdmin {
-      visibility: hidden; }
     main section:nth-of-type(3) #editInfo {
       display: inline;
       visibility: hidden;
       width: 60em;
-      height: 22em;
+      height: 12em;
       background-color: #0076c6;
       opacity: 0.98;
       color: #fff;
@@ -475,20 +486,24 @@ main {
   border-radius: 50%;
   background: white; }
 
-#completeTeamActivities {
+#styleTeam {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-content: center; }
-  #completeTeamActivities select {
-    width: 45%;
+  #styleTeam select {
+    width: 100%;
     height: 30%;
     border-radius: 0.5em; }
-  #completeTeamActivities button {
+  #styleTeam button {
+    display: inline-block;
     width: 45%;
     height: 30%;
     border-radius: 0.5em;
     background-color: #f1f8fe; }
-    #completeTeamActivities button:hover {
+    #styleTeam button:hover {
       opacity: 0.5; }
+
+.hide {
+  visibility: hidden; }
 
 /*# sourceMappingURL=profile_light.css.map */

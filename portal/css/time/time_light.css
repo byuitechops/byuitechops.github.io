@@ -11,6 +11,9 @@ header {
   margin: 0;
   font-family: 'Open Sans', sans-serif; }
 
+a {
+  text-decoration: none; }
+
 body {
   display: grid;
   grid-template-columns: repeat(10, 1fr);

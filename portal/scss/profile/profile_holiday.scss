@@ -1,5 +1,11 @@
 @import "../partials/theme_holiday";
 
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 main {
     display: grid;
     grid-template-rows: 15% 85%;
@@ -149,10 +155,6 @@ main {
                 position: relative;
                 left: 0;
                 right: 0;
-                // margin: auto;
-                // margin-top: .5em;
-                // margin-left: 4em;
-                // font-size: 40px
             }
 
             input {
@@ -163,10 +165,6 @@ main {
                 margin: 0 auto;
                 margin-top: 6em;
                 z-index: 1;
-                // margin: auto;
-                // margin-top: .5em;
-                // margin-left: 4em;
-                // font-size: 20px
             }
 
             p {
@@ -179,9 +177,6 @@ main {
                 right: 0;
                 height: 2em;
 
-                // margin-top: 3em;
-                // margin-right: 18em;
-                // font-size: 30px
                 &:nth-of-type(2) {
                     grid-column: 2;
                     grid-row: 2;
@@ -195,43 +190,25 @@ main {
                 position: relative;
                 padding: 0;
                 padding-top: 1.7em;
-                // margin-top: 1em;
-                // margin-right: 18em;
-                // margin-left: .5em;
-                // font-size: 45px;
                 color: white;
             }
 
             #howMuch {
-                // display: absolute;
-                // padding-top: .8em;
-                // top: .2em;
-                // right: -17em;
-                // // margin-top: 3em;
-                // margin-left: 5em;
-                // font-size: 25px;
                 color: white;
             }
 
             #timeDesired {
                 color: black;
-                // position: relative;
-                // margin-top: -2.2em;
-                // margin-left: 12em;
             }
 
             button {
                 grid-row: 4;
-                // display: absolute;
+
                 border: none;
                 height: 4em;
                 width: 10em;
-                // top: -3em;
-                // margin-right: 2em;
                 background-color: $third;
                 font-size: 16px;
-                // margin-top: -12em;
-                // margin-right: 3em;
                 border-radius: 5%;
                 color: white;
                 cursor: pointer;
@@ -366,7 +343,7 @@ main {
         #aboutMe {
             padding: 0.5em;
             padding-left: 1em;
-            height: 64%;
+            height: 60%;
             transition: height 1s, overflow 1s;
             overflow: auto;
         }
@@ -385,7 +362,12 @@ main {
     section:nth-of-type(3) {
         grid-column: 2 /span 1;
         grid-row: 2;
-
+        #leadAdmin {
+            visibility: hidden;
+            height: 7em;
+            padding: 0;
+            margin: 0;
+        }
         div {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -411,15 +393,13 @@ main {
             }
         }
 
-        #leadAdmin {
-            visibility: hidden;
-        }
+       
 
         #editInfo {
             display: inline;
             visibility: hidden;
             width: 60em;
-            height: 22em;
+            height: 12em;
             background-color: $primary;
             opacity: 0.98;
             color: #fff;
@@ -429,7 +409,6 @@ main {
 
             position: absolute;
             top: 17%;
-            // right: 10%;
             left: 33%;
             z-index: 1;
 
@@ -451,7 +430,7 @@ main {
                 left: 21em;
             }
 
-            select{
+            select {
                 position: absolute;
                 margin-top: -2em;
                 left: 21em;
@@ -592,21 +571,19 @@ main {
     background: white;
 }
 
-#completeTeamActivities {
-    // position: relative;
-    // top: -40px;
+#styleTeam {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-content: center;
-    //padding: 3em;
-    
+
     select {
-        width: 45%;
+        width: 100%;
         height: 30%;
-        border-radius:0.5em;
+        border-radius: 0.5em;
     }
 
     button {
+        display: inline-block;
         width: 45%;
         height: 30%;
         border-radius: 0.5em;
@@ -618,3 +595,6 @@ main {
     }
 }
 
+.hide {
+    visibility: hidden;
+}
