@@ -11,9 +11,6 @@ header {
   margin: 0;
   font-family: 'Open Sans', sans-serif; }
 
-a {
-  text-decoration: none; }
-
 body {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
@@ -66,10 +63,10 @@ main {
     grid-column: 1 /span 2;
     grid-row: 2;
     overflow-y: scroll;
-    height: 90vh; }
+    height: 90vh;
+    padding: 2rem 3rem; }
     main section div {
-      padding-left: 2em;
-      pading-botom: 2em; }
+      padding-left: 2em; }
     main section input[type=date] {
       position: absolute;
       right: 15.85em;
