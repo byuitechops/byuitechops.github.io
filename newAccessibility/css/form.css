@@ -1,230 +1,73 @@
+main {
+  display: flex;
+  justify-content: space-around;
+}
 #requestForm {
-  display: grid;
-  grid-template-columns: repeat(11, 8.3%);
-  grid-template-rows: repeat(13, 1fr);
-  column-gap: 1em; }
+  display: flex;
+  flex-flow:column;
+  max-width: 40%;
+  height: 100vh;
+  padding: 1rem 4rem;
+ }
 
-.row-4 {
-  grid-row: 4;
-  height: 1.5em;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  text-align: center; }
-
-.row-5 {
-  grid-row: 5;
-  height: 1.5em;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  text-align: center; }
-
-.row-6 {
-  grid-row: 6;
-  height: 1.5em;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  text-align: center; }
-
-.row-7 {
-  grid-row: 7;
-  height: 1.5em;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  text-align: center; }
-
-.row-8 {
-  grid-row: 8;
-  height: 1.5em;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  text-align: center; }
-
-.row-9 {
-  grid-row: 9;
-  height: 1.5em;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  text-align: center; }
-
-.row-10 {
-  grid-row: 10;
-  height: 1.5em;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  text-align: center; }
-
-.row-11 {
-  grid-row: 11;
-  height: 1.5em;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  text-align: center; }
-
-.row-12 {
-  grid-row: 12;
-  height: 1.5em;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  text-align: center; }
-
-.row-13 {
-  grid-row: 13;
-  height: 1.5em;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  text-align: center; }
-
-#prevRequest {
-  grid-column: 1 / span 10;
-  text-align: left;
-  padding-top: 0.25em;
-  margin: 0.2em; }
-
-#message {
-  grid-column: 1 / span 11;
-  margin: 0; }
-
-#requestTypeLabel {
-  grid-column: 1 / span 1;
-  grid-row: 2; }
-
-#requestType {
-  grid-column: 1 / span 1;
-  grid-row: 3; }
-
-#requestCourseLabel {
-  grid-column: 2 / span 1;
-  grid-row: 2; }
-
-#requestCourse {
-  grid-column: 2 / span 1;
-  grid-row: 3; }
-
-#requestTitleLabel {
-  grid-column: 3 / span 1;
-  grid-row: 2; }
-
-#requestTitle {
-  grid-column: 3 / span 1;
-  grid-row: 3; }
-
-#requestPriorityLabel {
-  grid-column: 4 / span 1;
-  grid-row: 2; }
-
-#requestPriority {
-  grid-column: 4 / span 1;
-  grid-row: 3; }
-
-#requestLMSURLLabel {
-  grid-column: 5 / span 1;
-  grid-row: 2;
-  position: relative; }
-  #requestLMSURLLabel span:nth-of-type(1) {
-    font-size: 1.5em; }
-
-#requestLMSURL {
-  grid-column: 5 / span 1;
-  grid-row: 3;
-  position: relative; }
-
-#requestWeekLabel {
-  grid-column: 6 / span 1;
-  grid-row: 2; }
-
-#requestWeek {
-  grid-column: 6 / span 1;
-  grid-row: 3; }
-
-#requestVideoURLLabel {
-  grid-column: 7 / span 1;
-  grid-row: 2; }
-
-#requestVideoURL {
-  grid-column: 7 / span 1;
-  grid-row: 3; }
-
-#requestLengthLabel {
-  grid-column: 8 / span 1;
-  grid-row: 2;
-  position: relative; }
-
-#requestLength {
-  grid-column: 8 / span 1;
-  grid-row: 3; }
-
-#requestCommentsLabel {
-  grid-column: 10 / span 1;
-  grid-row: 2;
-  position: relative; }
-
-#requestComments {
-  grid-column: 10 / span 1;
-  grid-row: 3; }
-
-#timeCalc {
-  height: 1em;
-  margin-left: 10px; }
-
-#requestSoftwareLabel {
-  grid-column: 9 / span 1;
-  grid-row: 2;
-  position: relative; }
-  #requestSoftwareLabel span:nth-of-type(1) {
-    font-size: 1.5em; }
-
-#requestExternalSoftware {
-  grid-column: 9 / span 1;
-  grid-row: 3;
-  position: relative; }
-
-#requestSubmit {
-  grid-column: 11;
-  grid-row: 3;
-  height: auto;
-  font-size: 1.5em; }
+ #ticketInfo {
+   display: flex;
+   flex-flow: column;
+   max-width: 50%;
+ }
 
 input,
 select {
-  font-size: 16px;
-  border-radius: 10px;
-  border-color: red; }
+  height: 2.5rem;
+  font-size: 1.3rem;
+  border-radius: 5px;
+  border-color: var(--primary-color); 
+  width: 70%;
+  margin: .7rem;
+}
 
-label h3 {
-  margin: 5px 0; }
-
-/* Tooltip container */
-.tooltip {
-  position: absolute;
-  right: 0; }
-
-/* Tooltip text */
-.tooltip .tooltiptext {
+#verbit { 
   visibility: hidden;
-  width: 250px;
-  background-color: black;
-  color: #fff;
-  text-align: center;
-  padding: 5px 5px;
-  border-radius: 6px;
-  /* Position the tooltip text - see examples below! */
   position: absolute;
-  z-index: 1;
-  left: -80px; }
+  top: 6.6rem;
+  left: 40rem;
+  display: flex;
+  flex-direction: row;
+  text-align: right;
+  height: 5rem;
+  width: 5rem;
+}
 
-/* Show the tooltip text when you mouse over the tooltip container */
-.tooltip:hover .tooltiptext {
-  visibility: visible; }
+#verbit input { 
+  position: absolute;
+  top: 2rem;
+}
+
+#verbit h3 { 
+  position: absolute;
+  top: 2.5rem;
+  left: 4rem;
+}
+
+#timeCalc { 
+  position: absolute;
+  top: 36.9rem;
+  left: 41rem;
+  display: flex;
+  flex-direction: row;
+  text-align: right;
+}
+#timeCalc:hover { 
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+h3 {
+  margin: 5px 0;
+  font-size: 1.2rem;
+  padding: 0 1rem;
+}
+
 
 /* The Modal (background) */
 .modal {
@@ -269,10 +112,6 @@ label h3 {
 #form {
   padding: 1em;
   text-align: left; }
-  #form button {
-    width: 25%;
-    margin: 0 38%;
-    font-size: 1.25em; }
   #form input {
     width: 100%;
     font-size: 14px;
@@ -299,7 +138,27 @@ label h3 {
     margin-right: auto;
     margin-left: auto; }
 
-h2 {
+  h2 {
   text-align: center; }
 
-/*# sourceMappingURL=form.css.map */
+  #ticketInfo { 
+    max-width: 50%;
+    padding-top: 2rem;
+  }
+
+  #ticketInfo h3 { 
+    text-align: center;
+  }
+  #ticketInfo #ticketbox {
+    display: flex;
+    flex-flow: column;
+    /* flex-wrap: wrap-reverse; */
+    line-height: 3rem;
+    text-align: center;
+  }
+
+  #ticketInfo #ticketbox p { 
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }

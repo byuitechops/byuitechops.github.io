@@ -1,0 +1,39 @@
+main {
+  padding: 1rem;
+}
+
+#list {
+  display: flex;
+  max-width: 95%;
+  height: 60vh;
+  border: lightgray 1px solid;
+}
+
+#receiveInput { 
+  display: relative;
+
+  display: flex;
+  flex-direction: row;
+  max-width: 18rem;
+  justify-content: space-evenly;
+  z-index: 1;
+}
+
+#text { 
+  background: #f3f3f3;
+  max-width: 95%;
+  height: 5rem;
+  border: lightgray 1px solid;
+}
+h3 {
+  display: inline-block;
+  padding: 2rem;
+}
+
+  #requestCourse, #coursePriority {
+    font-size: 1em;
+    height: 2rem;
+    border-radius: 10px;
+ }
+
+/*# sourceMappingURL=claim.css.map */

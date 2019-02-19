@@ -1,30 +1,48 @@
 getCourses();
 
+function updateTitle(newTitle) {
+    document.getElementById('titleSide').innerText = 'Transcript Title: ' + newTitle;
+}
+
+function updatePriority(newPriority) {
+    document.getElementById('prioritySide').innerText = 'Transcript Priority: ' + newPriority;
+}
+
+function updateType(newType) {
+    if (newType == 'Transcript') { 
+        document.getElementById('verbit').style.visibility = 'visible';
+    }
+    else { 
+        document.getElementById('verbit').style.visibility = 'hidden';
+    }
+    document.getElementById('typeSide').innerText = 'Transcript Type: ' + newType;
+}
+
+function updateCode(newCode) {
+    document.getElementById('codeSide').innerText = 'Course Code: ' + newCode;
+}
+
+function updateLocation(newLocation) {
+    document.getElementById('locationSide').innerText = 'Location in Course: ' + newLocation;
+}
+
 var message = document.getElementById('message');
 //according to the request type, displays or hide specific pages 
 document.getElementById('requestType').addEventListener('change', function () {
     if (document.getElementById('requestType').value === 'Transcript') {
-        document.getElementById('requestVideoURLLabel').classList.remove('hide');
         document.getElementById('requestVideoURL').classList.remove('hide');
-        document.getElementById('requestLengthLabel').classList.remove('hide');
         document.getElementById('requestLength').classList.remove('hide');
-        document.getElementById('requestSoftwareLabel').classList.remove('hide');
-        document.getElementById('requestExternalSoftware').classList.remove('hide');
+        // document.getElementById('requestExternalSoftware').classList.remove('hide');
         document.getElementById('timeCalc').classList.remove('hide');
+        document.getElementById('requestHeight').classList.remove('hide');
     } else if (document.getElementById('requestType').value === 'Audio') {
-        document.getElementById('requestVideoURLLabel').classList.add('hide');
         document.getElementById('requestVideoURL').classList.add('hide');
-        document.getElementById('requestLengthLabel').classList.remove('hide');
         document.getElementById('requestLength').classList.remove('hide');
-        document.getElementById('requestSoftwareLabel').classList.add('hide');
-        document.getElementById('requestExternalSoftware').classList.add('hide');
+        // document.getElementById('requestExternalSoftware').classList.add('hide');
         document.getElementById('timeCalc').classList.remove('hide');
     } else {
-        document.getElementById('requestVideoURLLabel').classList.add('hide');
         document.getElementById('requestVideoURL').classList.add('hide');
-        document.getElementById('requestLengthLabel').classList.add('hide');
         document.getElementById('requestLength').classList.add('hide');
-        document.getElementById('requestSoftwareLabel').classList.add('hide');
         document.getElementById('requestExternalSoftware').classList.add('hide');
         document.getElementById('timeCalc').classList.add('hide');
     }
@@ -36,14 +54,13 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
     var priority = document.getElementById('requestPriority').value;
     var course = document.getElementById('requestCourse').value;
     var lmsURL = document.getElementById('requestLMSURL').value;
-    var week = document.getElementById('requestWeek').value;
     var srcURL = document.getElementById('requestVideoURL').value;
     var videoLength = document.getElementById('requestLength').value;
+    var videoHeight = document.getElementById('requestHeight').value;
     var softwareUsed = document.getElementById('requestExternalSoftware').checked;
     var comments = document.getElementById('requestComments').value;
 
-    if (requestType === 'Request Type' || title === '' || priority === 'Priority' || course === 'Course' || lmsURL === '' ||
-        week === 'Week') {
+    if (requestType === 'Request Type' || title === '' || priority === 'Priority' || course === 'Course' || lmsURL === '') {
         message.innerHTML = 'You must fill in all inputs';
         message.style.color = 'red';
         resetMessage();
@@ -60,14 +77,13 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
         return;
     } else {
         var user = firebase.auth().currentUser;
-       
+
         var docData = {
             title: title,
             type: requestType,
             priority: priority,
             courseCode: course,
             lmsURL: lmsURL,
-            week: week,
             requestor: user.displayName,
             requestDate: new Date(),
             status: 'Ready for Transcript',
@@ -76,74 +92,49 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
         }
 
         if (requestType == "Transcript") {
-          var extraInfo = { 
+            var extraInfo = {
                 srcURL: srcURL,
                 videoLength: videoLength,
                 softwareUsed: softwareUsed,
-                videoHeight: 315
+                videoHeight: videoHeight
             }
-            var test = Object.assign(extraInfo, docData)  
+            var requestTranscript = Object.assign(extraInfo, docData)
         }
-        
+
 
         if (requestType == "Audio") {
             var extraInfo = {
                 videoLength: videoLength
             }
-            var test = Object.assign(extraInfo, docData)
+            var requestTranscript = Object.assign(extraInfo, docData)
         }
 
         if (requestType == "Alt Text" || requestType == "Slide") {
-            var test = Object.assign({}, docData)
+            var requestTranscript = Object.assign({}, docData)
         }
 
         // Add a new document in collection "accessibility"
-        db.collection('accessibility').add(test)
+        db.collection('accessibility').add(requestTranscript)
             .then(function (docRef) {
                 console.log('Document written with ID: ', docRef.id);
                 message.innerHTML = 'Request has been made.';
                 message.style.color = 'blue';
                 resetMessage();
 
-                var elems = document.getElementsByClassName('prev');
-
-                for (var i = 0; i < elems.length - 1; i++) {
-                    elems[i].classList.replace('row-13', 'hide');
-                    elems[i].classList.replace('row-12', 'row-13');
-                    elems[i].classList.replace('row-11', 'row-12');
-                    elems[i].classList.replace('row-10', 'row-11');
-                    elems[i].classList.replace('row-9', 'row-10');
-                    elems[i].classList.replace('row-8', 'row-9');
-                    elems[i].classList.replace('row-7', 'row-8');
-                    elems[i].classList.replace('row-6', 'row-7');
-                }
-
-                // var prev = [requestType, course, title, priority, lmsURL, week, srcURL, videoLength];
-                var prev = [videoLength, srcURL, week, lmsURL, priority, title, course, requestType];
-
-                for (var i = 0; i < 8; i++) {
-                    var elem = document.createElement('input');
-                    elem.value = prev[i];
-                    elem.classList.add('row-6');
-                    elem.classList.add('prev');
-                    document.getElementById('prevRequest').insertAdjacentElement('afterend', elem);
-                }
-
                 document.getElementById('requestType').options[0].selected = 'selected';
                 document.getElementById('requestCourse').options[0].selected = 'selected';
                 document.getElementById('requestTitle').value = '';
                 document.getElementById('requestPriority').options[0].selected = 'selected';
                 document.getElementById('requestLMSURL').value = '';
-                document.getElementById('requestWeek').options[0].selected = 'selected';
                 document.getElementById('requestVideoURL').value = '';
                 document.getElementById('requestLength').value = '';
+                document.getElementById('requestHeight').value = '';
+                document.getElementById('requestComments').value = '';
                 document.getElementById('requestExternalSoftware').value = '';
-                document.getElementById('requestVideoURLLabel').classList.add('hide');
                 document.getElementById('requestVideoURL').classList.add('hide');
-                document.getElementById('requestLengthLabel').classList.add('hide');
                 document.getElementById('requestLength').classList.add('hide');
-                document.getElementById('requestSoftwareLabel').classList.add('hide');
                 document.getElementById('requestExternalSoftware').classList.add('hide');
+                document.getElementById('requestHeight').classList.add('hide');
                 document.getElementById('timeCalc').classList.add('hide');
             })
             .catch(function (error) {
@@ -164,49 +155,49 @@ function resetMessage() {
 
 // This function compares the title and URL to make sure that we do not have duplicates
 // The HTML sends string x and that is used to decide if it is a URL or title
-function searchForSameTranscript(x) {
-    var value = document.getElementById(x).value.toUpperCase();
-    var repeated = false;
-    if (x == "requestVideoURL"){
-        db.collection("accessibility").where("srcURL", "==", value )
-        .get()
-        .then(function (querySnapshot) {
-            querySnapshot.forEach(function (doc) {
-                repeated = true;
-            });
-            if (repeated) {
-                message.innerHTML = `A request for this video has been found`;
-                message.style.color = 'red';
-                document.getElementById('requestSubmit').setAttribute('disabled', true);
-                resetMessage();
-            } else {
-                document.getElementById('requestSubmit').removeAttribute('disabled');
-            }
-        })
-        .catch(function (error) {
-            console.log("Error getting documents: ", error);
-        });
-    } else if (x == "requestTitle"){
-        db.collection("accessibility").where("title", "==", value)
-        .get()
-        .then(function (querySnapshot) {
-            querySnapshot.forEach(function (doc) {
-                repeated = true;
-            });
-            if (repeated) {
-                message.innerHTML = `A request for this video has been found`;
-                message.style.color = 'red';
-                document.getElementById('requestSubmit').setAttribute('disabled', true);
-                resetMessage();
-            } else {
-                document.getElementById('requestSubmit').removeAttribute('disabled');
-            }
-        })
-        .catch(function (error) {
-            console.log("Error getting documents: ", error);
-        });
-    }
-}
+// function searchForSameTranscript(x) {
+//     var value = document.getElementById(x).value.toUpperCase();
+//     var repeated = false;
+//     if (x == "requestVideoURL") {
+//         db.collection("accessibility").where("srcURL", "==", value)
+//             .get()
+//             .then(function (querySnapshot) {
+//                 querySnapshot.forEach(function (doc) {
+//                     repeated = true;
+//                 });
+//                 if (repeated) {
+//                     message.innerHTML = `A request for this video has been found`;
+//                     message.style.color = 'red';
+//                     document.getElementById('requestSubmit').setAttribute('disabled', true);
+//                     resetMessage();
+//                 } else {
+//                     document.getElementById('requestSubmit').removeAttribute('disabled');
+//                 }
+//             })
+//             .catch(function (error) {
+//                 console.log("Error getting documents: ", error);
+//             });
+//     } else if (x == "requestTitle") {
+//         db.collection("accessibility").where("title", "==", value)
+//             .get()
+//             .then(function (querySnapshot) {
+//                 querySnapshot.forEach(function (doc) {
+//                     repeated = true;
+//                 });
+//                 if (repeated) {
+//                     message.innerHTML = `A request for this video has been found`;
+//                     message.style.color = 'red';
+//                     document.getElementById('requestSubmit').setAttribute('disabled', true);
+//                     resetMessage();
+//                 } else {
+//                     document.getElementById('requestSubmit').removeAttribute('disabled');
+//                 }
+//             })
+//             .catch(function (error) {
+//                 console.log("Error getting documents: ", error);
+//             });
+//     }
+// }
 
 function getCourses() {
     var xhttp = new XMLHttpRequest();
@@ -271,8 +262,8 @@ document.getElementById('requestLMSURL').addEventListener('change', () => {
     document.getElementById('requestLMSURL').style.borderColor = "rgb(169, 169, 169)";
 })
 
-document.getElementById('requestWeek').addEventListener('change', () => {
-    document.getElementById('requestWeek').style.borderColor = "rgb(169, 169, 169)";
+document.getElementById('requestHeight').addEventListener('change', () => {
+    document.getElementById('requestHeight').style.borderColor = "rgb(169, 169, 169)";
 })
 
 document.getElementById('requestVideoURL').addEventListener('change', () => {
@@ -344,13 +335,13 @@ function calculateSubmit() {
 }
 
 //Counts the ammount of transcripts in the database
-function countDocs(){
+function countDocs() {
     db.collection('accessibility').get()
-                .then((querySnapshot) => {
-                    var count = 0;
-                    querySnapshot.forEach((doc) => {
-                        count +=1;
-                        console.log(count);
-                    })
-                })           
-    }
+        .then((querySnapshot) => {
+            var count = 0;
+            querySnapshot.forEach((doc) => {
+                count += 1;
+            })
+            console.log(count);
+        })
+}

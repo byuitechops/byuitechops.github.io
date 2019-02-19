@@ -15,6 +15,7 @@
 </head>
 
 <body>
+
     <head>
         <h1>BYUI Technical Accessibility</h1>
         <nav>
@@ -22,14 +23,14 @@
                 <a class="active" href="home.html">
                     <li>Home</li>
                 </a>
-                <a href="form.html">
+                <a href="request.html">
                     <li>Request</li>
                 </a>
-                <a href="claim.html">
-                    <li>Claim</li>
+                <a href="prepare.html">
+                    <li>Prepare</li>
                 </a>
-                <a class="hide" id="place" href="place.html">
-                    <li>Place</li>
+                <a id="place" href="transcribe.html">
+                    <li>Transcribe</li>
                 </a>
                 <a class="hide" id="master" href="master.html">
                     <li>Master</li>
@@ -42,34 +43,7 @@
     </head>
     <main>
         <p id="message"></p>
-        <div id="text">
-            <h3>Course</h3>
-            <h3>Priority</h3>
-            <h3>Type</h3>
-            <h3>Title</h3>
-            <h3>Doc Url</h3>
-            <h3>Canvas URL</h3>
-            <h3>Video/Page Url</h3>
-            <h3></h3>
-            <h3></h3>
-        </div>
-        <!-- The Modal -->
-        <div id="myModal" class="modal">
-
-            <!-- Modal content -->
-            <div class="modal-content" id="modal-content">
-                <span class="close">&times;</span>
-                <h2>Doc URL Input</h2>
-                <p id="modal-message"></p>
-                <p>Input both Published and Edit version links</p>
-                <input type="text" id="docUrlInput" placeholder="Edit Link">
-                <input type="text" id="docUrlInput2" placeholder="Published link">
-            </div>
-        </div>
-
-        <!-- The Modal -->
         <div id="errorModal" class="modal">
-
             <!-- Modal content -->
             <div class="modal-content" id="errorModal-content">
                 <span class="close">&times;</span>
@@ -79,8 +53,12 @@
                 <button id="submitReport">Submit</button>
             </div>
         </div>
+        <div class="displayTranscript">
+            <h3>You Currently Have no Transcripts that have been requested</h3>
+        </div>
     </main>
 </body>
 <script src="js/main.js"></script>
 <script src="js/home.js"></script>
+
 </html>

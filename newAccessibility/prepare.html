@@ -7,7 +7,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="assests/favicon.gif">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="css/main.css">
-    <link type="text/css" rel="stylesheet" href="css/claim.css">
+    <link type="text/css" rel="stylesheet" href="css/prepare.css">
     <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-auth.js"></script>
@@ -22,14 +22,14 @@
                 <a href="home.html">
                     <li>Home</li>
                 </a>
-                <a href="form.html">
+                <a href="request.html">
                     <li>Request</li>
                 </a>
-                <a class="active" href="claim.html">
-                    <li>Claim</li>
+                <a class="active" href="prepare.html">
+                    <li>Prepare</li>
                 </a>
-                <a class="hide" id="place" href="place.html">
-                    <li>Place</li>
+                <a id="place" href="transcribe.html">
+                    <li>Transcribe</li>
                 </a>
                 <a class="hide" id="master" href="master.html">
                     <li>Master</li>
@@ -41,32 +41,34 @@
         </nav>
     </head>
     <main>
-        <div>
-            <select id="searchType">
-                <option disabled hidden selected>Search by</option>
-                <option value="title">Title</option>
-                <option value="priority">Priority (ex. 1)</option>
-                <option value="courseCode">Course Code</option>
-                <option value="srcURL">Source Url</option>
-                <option value="type">Request Type</option>
-            </select>
-            <input id="searchValue">
-            <button onclick="search()">Search</button>
-            <i id="searchcancel" class="material-icons hide">clear</i>
-        </div>
         <p id="message"></p>
-        <div id="text">
-            <h3>Course</h3>
-            <h3>Priority</h3>
-            <h3>Status</h3>
-            <h3>Type</h3>
-            <h3>Title</h3>
-            <h3>Video Length</h3>
-            <h3></h3>
+        <div>
+                <div id="text">
+                        <h3>Course</h3>
+                        <h3>Priority</h3>
+                        <h3>Status</h3>
+                        <h3>Type</h3>
+                        <h3>Title</h3>
+                        <h3>Video Length</h3>
+                    </div>
+                <div id="receiveInput">
+                        <select id="requestCourse">
+                            <option disabled selected hidden>Course Code</option>
+                        </select>
+                        <select name="" id="coursePriority">
+                            <option disabled selected hidden>Priority</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                        </div>
+        <div id="list">
         </div>
+    </div>
     </main>
 </body>
 <script src="js/main.js"></script>
-<script src="js/claim.js"></script>
+<script src="js/prepare.js"></script>
 
 </html>

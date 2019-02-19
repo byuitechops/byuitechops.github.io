@@ -1,7 +1,12 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans");
-html,
-body {
-  margin: 0; }
+:root {
+  --primary-color: #0076c6;
+}
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
 
 body {
   display: grid;
@@ -9,7 +14,9 @@ body {
   grid-template-rows: repeat(26, 4.1%);
   grid-template-areas: "a a a a a a a a a a a a" "a a a a a a a a a a a a" "a a a a a a a a a a a a" "b b b b b b b b b b b b" "b b b b b b b b b b b b" "c c c c c c c c c c c c" "c c c c c c c c c c c c" "c c c c c c c c c c c c" "c c c c c c c c c c c c" "c c c c c c c c c c c c" "c c c c c c c c c c c c";
   height: 90vh;
-  font-family: 'Open Sans', sans-serif; }
+  font-family: 'Open Sans', sans-serif; 
+  font-size: 16px;
+  overflow: hidden;}
 
 h1 {
   grid-area: a;
@@ -81,6 +88,7 @@ button a {
 
 /*-- Classes --*/
 .hide {
-  display: none; }
+  display: none; 
+  visibility: hidden;}
 
 /*# sourceMappingURL=main.css.map */
