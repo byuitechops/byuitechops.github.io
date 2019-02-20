@@ -20,6 +20,10 @@ document.getElementById('dateInput').addEventListener('change', () => {
     var team = document.getElementById('selectTeam').value;
     var date = document.getElementById('dateInput').value;
     //check to see if any team has already been selected
+
+
+
+    
     if (team != "") {
         db.collection('users').where("team", "==", team).get()
             .then(function (querySnapshot) {
@@ -76,7 +80,7 @@ function getWeek() {
         day.setHours(00, 00, 00);
         week.push(day);
     }
-//pulls information from firebase user by user
+    //pulls information from firebase user by user
     db.collection('users').orderBy("name").get()
         .then(function (querySnapshot) {
             querySnapshot.forEach((doc) => {
@@ -132,6 +136,7 @@ function displayWeek(week, doc, name) {
     }
 }
 
+
 var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 //this function manages the display of an individual day for the user. It takes a date, a name, and a nameId
@@ -182,7 +187,7 @@ function displayDay(date, name, nameId) {
                     document.getElementById('data').insertAdjacentHTML('beforeend', `<h3>${name}</h3>`);
                     document.getElementById('data').insertAdjacentHTML('beforeend', `<span><b>Break Total:</b> ${totalBreak}</span> </br>`);
                     document.getElementById('data').insertAdjacentHTML('beforeend', `<span><b>Time Total:</b> ${time[time.length - 1]}</span> </br>`);
-                  
+
                     for (var i = 0; i < time.length - 1; i++) {
                         if (time[i][0] == undefined) {
                             time[i][0] = "Not clocked in";
