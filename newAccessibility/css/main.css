@@ -1,5 +1,21 @@
+/***********************************************************
+* CSS Table of Conttents
+* 1. Imports
+* 2. General Style Rules
+*  2a. Login
+*  2b. Content Pages
+* 3. Mobile Styles
+* 4. Large Screen Styles
+********************************************************** */
+
+/***********************************************************
+* 1. Imports
+************************************************************/
 @import url("https://fonts.googleapis.com/css?family=Open+Sans");
 
+/***********************************************************
+* 2. General Rules
+************************************************************/
 :root {
   --primary-color: #0076c6;
 }
@@ -16,7 +32,97 @@ body {
   overflow: hidden;
 }
 
-h1 {
+li {
+  list-style: none;
+}
+
+.bg-primary {
+  background: var(--primary-color);
+  color: #F3F3F3;
+}
+
+.hide {
+  display: none;
+}
+
+.container-center { 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mg-top { 
+  padding: 3rem;
+}
+
+.container-half { 
+  width: 50%;
+  flex: 1;
+}
+
+/***********************************************************
+* 2. Navbar
+************************************************************/
+#main-nav .bg-primary {
+  padding: 1.5rem 1rem;
+}
+
+#main-nav h3 {
+  font-size: 2.5rem;
+}
+
+#main-nav ul {
+  display: flex;
+  flex-flow: row;
+  background: #ebebeb;
+  border: .5px 0 #d8d4d4 solid;
+}
+
+#main-nav ul li {
+  padding: 0.7rem 4rem;
+}
+
+
+#main-nav ul li a {
+  text-decoration: none;
+  font-weight: 600;
+  color: rgb(44, 39, 39);
+}
+
+#main-nav ul li a:hover {
+  color: #f3f3f3;
+}
+
+#main-nav ul li:hover {
+  background: #F58300;
+  cursor: pointer;
+}
+
+#main-nav ul li:hover a {
+  color: #f3f3f3;
+}
+
+#main-nav ul li.active {
+  background-color: #0076C6;
+  color: #FFFFFF;
+}
+
+#main-nav ul li.active a {
+  color: #FFFFFF;
+}
+
+/***********************************************************
+* 2. Home Page Page Sections
+************************************************************/
+#content section { 
+  width: 45%;
+  flex: 1;
+  padding: 1rem 2rem;
+  background: rgb(127,127,127, 0.1)
+
+}
+
+/* h1 {
 
   color: #FFFFFF;
   background-color: #0076C6;
@@ -26,7 +132,6 @@ h1 {
 
 
 nav {
-
   font-size: 1.1em;
   width: 100%;
   top: 63px;
@@ -104,7 +209,3 @@ button a {
 }
 
 /*-- Classes --*/
-.hide {
-  display: none;
-  visibility: hidden;
-}

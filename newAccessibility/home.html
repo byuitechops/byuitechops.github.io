@@ -6,9 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/x-icon" href="assests/favicon.gif">
     <link type="text/css" rel="stylesheet" href="css/main.css">
-    <link type="text/css" rel="stylesheet" href="css/home.css">
-    <!-- Script -->
-    <!-- <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script> -->
     <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-auth.js"></script>
@@ -17,34 +14,50 @@
 <body>
 
     <head>
-        <h1>BYUI Technical Accessibility</h1>
-        <nav>
+        <nav id="main-nav">
+            <div class="bg-primary">
+                <h1>BYUI Technical Accessibility</h1>
+            </div>
             <ul>
-                <a class="active" href="home.html">
-                    <li>Home</li>
-                </a>
-                <a href="request.html">
-                    <li>Request</li>
-                </a>
-                <a href="prepare.html">
-                    <li>Prepare</li>
-                </a>
-                <a id="place" href="transcribe.html">
-                    <li>Transcribe</li>
-                </a>
-                <a class="hide" id="master" href="master.html">
-                    <li>Master</li>
-                </a>
-                <a onclick="userLogout()">
-                    <li>Logout</li>
-                </a>
+                <li class="active"><a href="home.html">Home</a>
+                </li>
+                <li><a href="request.html">Request</a>
+                </li>
+                <li><a href="prepare.html">Prepare</a>
+                </li>
+                <li><a href="transcribe.html">Transcribe</a>
+                </li>
+                <li class="hide"><a href="master.html">Master</a>
+                </li>
+                <li><a href="home.html">Log Out</a>
+                </li>
             </ul>
         </nav>
     </head>
     <main>
-        <p id="message"></p>
+        <div id="content" class="container-center">
+            <section>
+                <div class="container-center mg-top">
+                    <h2>Iortant Linmpks</h2>
+                </div>
+            </section>
+
+            <section>
+                <div class="container-center mg-top">
+                    <h3 class="hide">You currently have no transcripts that have been requested</h3>
+                    <div id="transcript" class="container-center">
+                        <p>Everything is Awesome</p>
+                        <p>Everything is Awesome</p>
+                        <p>Everything is Awesome</p>
+                        <p>Everything is Awesome</p>
+                        <p>Everything is Awesome</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <!-- <p id="message"></p>
         <div id="errorModal" class="modal">
-            <!-- Modal content -->
+        
             <div class="modal-content" id="errorModal-content">
                 <span class="close">&times;</span>
                 <h2>Report a problem</h2>
@@ -52,10 +65,8 @@
                 <textarea id="problem"></textarea>
                 <button id="submitReport">Submit</button>
             </div>
-        </div>
-        <div class="displayTranscript">
-            <h3>You Currently Have no Transcripts that have been requested</h3>
-        </div>
+        </div> -->
+
     </main>
 </body>
 <script src="js/main.js"></script>
