@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/x-icon" href="assests/favicon.gif">
     <link type="text/css" rel="stylesheet" href="css/main.css">
-    <link type="text/css" rel="stylesheet" href="css/form.css">
     <!-- Script -->
     <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-firestore.js"></script>
@@ -17,31 +16,29 @@
 
 <body>
     <head>
-        <h1>BYUI Technical Accessibility</h1>
-        <nav>
+        <nav id="main-nav">
+                <p id="message" class="hide"></p>
+                <div class="bg-primary">
+                    <h1>BYUI Technical Accessibility</h1>
+                </div>
                 <ul>
-                    <a href="home.html">
-                        <li>Home</li>
-                    </a>
-                    <a class="active" href="request.html">
-                        <li>Request</li>
-                    </a>
-                    <a href="prepare.html">
-                        <li>Prepare</li>
-                    </a>
-                    <a id="place" href="transcribe.html">
-                        <li>Transcribe</li>
-                    </a>
-                    <a class="hide" id="master" href="master.html">
-                        <li>Master</li>
-                    </a>
-                    <a onclick="userLogout()">
-                        <li>Logout</li>
-                    </a>
+                    <li ><a href="home.html">Home</a>
+                    </li>
+                    <li class="active"><a href="request.html">Request</a>
+                    </li>
+                    <li><a href="prepare.html">Prepare</a>
+                    </li>
+                    <li><a href="transcribe.html">Transcribe</a>
+                    </li>
+                    <li class="hide"><a href="master.html">Master</a>
+                    </li>
+                    <li><a href="home.html">Log Out</a>
+                    </li>
                 </ul>
             </nav>
     </head>
-    <main ng-app="myApp">
+    <main>
+        <div id="request">
         <section id="requestForm">
             <p id="message"></p>
             <select id="requestType" onfocusout="updateType(value)">
@@ -123,7 +120,7 @@
         </section>
         <section id="ticketInfo">
             <h3>Ticket Information</h3>
-            <div id="ticketbox">
+            <div class="ticketbox">
                 <p class="description" id="typeSide">Transcript Type</p>
                 <p class="description" id="codeSide">Course Code</p>
                 <p class="description" id="titleSide">Transcript Title: </p>
@@ -131,6 +128,7 @@
                 <p class="description" id="locationSide" >Location in Course</p>
             </div>
         </section>
+    </div>
     </main>
 </body>
 <script src="js/main.js"></script>

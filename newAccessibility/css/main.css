@@ -41,6 +41,11 @@ li {
   color: #F3F3F3;
 }
 
+.bg-error {
+  background: rgba(197, 18, 18, 0.842);
+  color: #f3f3f3;
+}
+
 .hide {
   display: none;
 }
@@ -59,6 +64,80 @@ li {
   width: 50%;
   flex: 1;
 }
+
+.btn-hover {
+  border: none;
+}
+
+.btn-hover:hover { 
+  opacity: 0.7; 
+  cursor: pointer
+}
+
+/***********************************************************
+* 2.1 Modal Boxes
+************************************************************/
+
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 35%;
+  display: flex;
+  flex-direction: row;
+}
+
+.modal-content textarea { 
+  margin-left: 2rem;
+  border: 1px dotted #888;
+  border-radius: 1rem;
+  font-family: 'Open Sans', sans-serif;
+}
+.modal button { 
+  height: 3rem;
+  position: relative;
+  top: 5rem;
+  left: 46rem;
+  float: left;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  position: relative;
+  top: -1.5rem;
+  right: -1.5rem;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
 
 /***********************************************************
 * 2. Navbar
@@ -112,100 +191,105 @@ li {
 }
 
 /***********************************************************
-* 2. Home Page Page Sections
+* 3. Home Page Page Sections
 ************************************************************/
+#content { 
+  height: 80vh;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+}
+
 #content section { 
   width: 45%;
-  flex: 1;
-  padding: 1rem 2rem;
-  background: rgb(127,127,127, 0.1)
-
+  margin: 1rem 1rem;
+  background: rgb(127,127,127, 0.1);
 }
 
-/* h1 {
-
-  color: #FFFFFF;
-  background-color: #0076C6;
-  margin: 0;
-  padding: 15px;
+#content #transcript-box { 
+  flex-flow: column;
+  line-height: 3rem;
 }
 
-
-nav {
-  font-size: 1.1em;
-  width: 100%;
-  top: 63px;
-}
-
-nav ul {
-  display: flex;
-  padding: 0;
-  justify-content: flex-start;
-  margin: 0;
-}
-
-nav ul a {
-  padding: 0rem 4rem;
-  text-decoration: none;
-  text-align: center;
-  color: #525252;
-  font-weight: bold;
-  background-color: #EBEBEB;
-}
-
-nav ul a li {
-  list-style: none;
-  padding: 0.38em 0.25em;
-}
-
-nav ul a.active {
-  background-color: #0076C6;
-  color: #FFFFFF;
-}
-
-nav ul a:hover {
-  background-color: #F58300;
-  color: #FFFFFF;
-}
-
-main {
-  padding: 0 2em;
-}
-
-#message {
-  font-size: 1.25em;
-  padding-top: 12px;
-}
-
-input[type='submit'],
-button {
-  border-radius: 10px;
-  background-color: #0076C6;
-  border-color: #8DD6F0;
-  color: #FFFFFF;
-  height: 2em;
+#content #transcript-box button { 
+  padding: 1rem;
+  border-radius: 1rem;
   font-size: 1rem;
+  margin: 2rem;
 }
 
-input[type='submit']:hover,
-button:hover {
-  cursor: pointer;
-  opacity: 0.8;
+#content #transcript-box label {
+  font-weight: bold;
+  color: #494646;
 }
 
-#btnLogout {
-  position: absolute;
-  right: 0;
-  width: 13%;
+#content #transcript-box a  { 
+  color: var([--primary-color])
 }
 
-#btnLogout li {
-  cursor: pointer;
+#content #links { 
+  display: flex;
+  flex-flow: column;
+  height: 100%;
 }
 
-button a {
+#content #links p  {
+  padding-top: 2rem;
+}
+
+#content #links .group-links {
+  margin-top: 3rem;
+  height: 100%;
+  width: 80%;
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#content #links div div { 
+  height: 10rem;
+  width: 10rem;
+  background-color: var(--primary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  border-radius: 2px;
+}
+
+#content #links a { 
   text-decoration: none;
-  color: #FFFFFF;
 }
 
-/*-- Classes --*/
+#content #links div div:hover { 
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+
+/***********************************************************
+* 4. Request page sections
+************************************************************/
+#request { 
+  display: flex;
+  flex-flow: row;
+  justify-content: space-around;
+  margin: 4rem;
+}
+#request #requestForm { 
+  display: flex;
+  flex-flow: column;
+  width: 35%;
+}
+
+#request #requestForm select, #request #requestForm input {
+  height: 2rem;
+  margin: .5rem;
+}
+
+#input {
+display: inline;
+}

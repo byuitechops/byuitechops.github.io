@@ -16,28 +16,26 @@
 <body>
     <head>
         <h1>BYUI Technical Accessibility</h1>
-        <nav>
-            <ul>
-                <a href="home.html">
-                    <li>Home</li>
-                </a>
-                <a href="request.html">
-                    <li>Request</li>
-                </a>
-                <a class="active" href="prepare.html">
-                    <li>Prepare</li>
-                </a>
-                <a id="place" href="transcribe.html">
-                    <li>Transcribe</li>
-                </a>
-                <a class="hide" id="master" href="master.html">
-                    <li>Master</li>
-                </a>
-                <a onclick="userLogout()">
-                    <li>Logout</li>
-                </a>
-            </ul>
-        </nav>
+        <nav id="main-nav">
+                <p id="message" class="hide"></p>
+                <div class="bg-primary">
+                    <h1>BYUI Technical Accessibility</h1>
+                </div>
+                <ul>
+                    <li><a href="home.html">Home</a>
+                    </li>
+                    <li><a href="request.html">Request</a>
+                    </li>
+                    <li class="active"><a href="prepare.html">Prepare</a>
+                    </li>
+                    <li><a href="transcribe.html">Transcribe</a>
+                    </li>
+                    <li class="hide"><a href="master.html">Master</a>
+                    </li>
+                    <li><a href="home.html">Log Out</a>
+                    </li>
+                </ul>
+            </nav>
     </head>
     <main>
         <p id="message"></p>
