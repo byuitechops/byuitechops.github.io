@@ -15,120 +15,123 @@
 </head>
 
 <body>
+
     <head>
         <nav id="main-nav">
-                <p id="message" class="hide"></p>
-                <div class="bg-primary">
-                    <h1>BYUI Technical Accessibility</h1>
-                </div>
-                <ul>
-                    <li ><a href="home.html">Home</a>
-                    </li>
-                    <li class="active"><a href="request.html">Request</a>
-                    </li>
-                    <li><a href="prepare.html">Prepare</a>
-                    </li>
-                    <li><a href="transcribe.html">Transcribe</a>
-                    </li>
-                    <li class="hide"><a href="master.html">Master</a>
-                    </li>
-                    <li><a href="home.html">Log Out</a>
-                    </li>
-                </ul>
-            </nav>
+            <p id="message" class="hide"></p>
+            <div class="bg-primary">
+                <h1>BYUI Technical Accessibility</h1>
+            </div>
+            <ul>
+                <li><a href="home.html">Home</a>
+                </li>
+                <li class="active"><a href="request.html">Request</a>
+                </li>
+                <li><a href="prepare.html">Prepare</a>
+                </li>
+                <li><a href="transcribe.html">Transcribe</a>
+                </li>
+                <li class="hide"><a href="master.html">Master</a>
+                </li>
+                <li><a href="home.html">Log Out</a>
+                </li>
+            </ul>
+        </nav>
     </head>
     <main>
         <div id="request">
-        <section id="requestForm">
-            <p id="message"></p>
-            <select id="requestType" onfocusout="updateType(value)">
-                <option disabled selected hidden >Transcript Type</option>
-                <option value="Transcript">Transcript</option>
-                <option value="Audio">Audio</option>
-                <option value="Alt Text">Alt Text</option>
-                <option value="Slide">Slide Show</option>
-            </select>
-            <div id="verbit">
-                <h3>VerbIt?</h3>
-            <input type="checkbox" id="requestExternalSoftware" >
-            </div>
-          
-            <select id="requestCourse" onfocusout="updateCode(value)">
-                <option disabled selected hidden >Course Code</option>
-            </select>
-            <input type="text" id="requestTitle" placeholder="Transcript Title" onfocusout="updateTitle(value)">
-            <select id="requestPriority" onfocusout="updatePriority(value)">
-                <option disabled selected hidden>Priority</option>
-                <option value="1">1 ADA Emergency of Special Request</option>
-                <option value="2">2 Improvement Project for Live Course</option>
-                <option value="3">3 New/Re-Development Project</option>
-                <option value="4">4 Transcript Project</option>
-            </select>
-               
-            <input type="url" id="requestLMSURL" placeholder="Canvas URL" onfocusout="updateLocation(value)">
-            <input type="number" id="requestHeight" class="hide" placeholder="Video Height">
-           
-            <input type="url" id="requestVideoURL" class="hide" placeholder="Video URL">
+            <section id="requestForm">
+                <p id="message"></p>
+                <div class="container">
+                    <select id="requestType" onfocusout="updateType(value)">
+                        <option disabled selected hidden>Transcript Type</option>
+                        <option value="Transcript">Video Transcript</option>
+                        <option value="Audio">Audio</option>
+                        <option value="Alt Text">Alt Text</option>
+                        <option value="Slide">Slide Show</option>
+                    </select>
+                    <div class="container" id="verbit">
+                        <h3 class="container-center">VerbIt?</h3>
+                        <input class="container-center" type="checkbox" id="requestExternalSoftware">
+                    </div>
+                </div>
+
+                <select id="requestCourse" onfocusout="updateCode(value)">
+                    <option disabled selected hidden>Course Code</option>
+                </select>
+                <input type="text" id="requestTitle" placeholder="Transcript Title" onfocusout="updateTitle(value)">
+                <select id="requestPriority" onfocusout="updatePriority(value)">
+                    <option disabled selected hidden>Priority</option>
+                    <option value="1">1 ADA Emergency of Special Request</option>
+                    <option value="2">2 Improvement Project for Live Course</option>
+                    <option value="3">3 New/Re-Development Project</option>
+                    <option value="4">4 Transcript Project</option>
+                </select>
+
+                <input type="url" id="requestLMSURL" placeholder="Canvas URL" onfocusout="updateLocation(value)">
+                <input type="number" id="requestHeight" class="hide" placeholder="Video Height">
+
+                <input type="url" id="requestVideoURL" class="hide" placeholder="Video URL">
                 <div id="timeCalc" class="hide tooltip">
                     <img src="assests/calcIcon.png">
-           </div>
-            <input type="number" id="requestLength" class="hide" placeholder="Video Length">
-                
-
-            <label id="requestCommentsLabel">
-                <h3>Comments</h3>
-            </label>
-            <input type="text" id="requestComments">
-            <input type="submit" id="requestSubmit">
-
-        <!-- The Modal -->
-        <div id="myModal" class="modal">
-
-            <!-- Modal content -->
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>Time Calculator</h2>
-                <div id="form">
-                    <table>
-                        <tbody>
-                            <tr>
-                                <th>Hours</th>
-                                <th>Minutes</th>
-                                <th>Seconds</th>
-                                <th>Total in seconds</th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input onchange="calculateTotal()" id="hours0" type="number">
-                                </td>
-                                <td>
-                                    <input onchange="calculateTotal()" id="minutes0" type="number">
-                                </td>
-                                <td>
-                                    <input onchange="calculateTotal()" id="seconds0" type="number">
-                                </td>
-                                <td>
-                                    <input onchange="calculateTotal()" id="total0" type="text" readonly>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <button onclick="calculateSubmit()">Submit</button>
                 </div>
-            </div>
+                <input type="number" id="requestLength" class="hide" placeholder="Video Length">
 
-        </section>
-        <section id="ticketInfo">
-            <h3>Ticket Information</h3>
-            <div class="ticketbox">
-                <p class="description" id="typeSide">Transcript Type</p>
-                <p class="description" id="codeSide">Course Code</p>
-                <p class="description" id="titleSide">Transcript Title: </p>
-                <p class="description" id="prioritySide">Transcript Priority</p>
-                <p class="description" id="locationSide" >Location in Course</p>
-            </div>
-        </section>
-    </div>
+
+                <label id="requestCommentsLabel">
+                    <h3>Comments</h3>
+                </label>
+                <input type="text" id="requestComments">
+                <input type="submit" id="requestSubmit">
+
+                <!-- The Modal -->
+                <div id="myModal" class="modal">
+
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>Time Calculator</h2>
+                        <div id="form">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <th>Hours</th>
+                                        <th>Minutes</th>
+                                        <th>Seconds</th>
+                                        <th>Total in seconds</th>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input onchange="calculateTotal()" id="hours0" type="number">
+                                        </td>
+                                        <td>
+                                            <input onchange="calculateTotal()" id="minutes0" type="number">
+                                        </td>
+                                        <td>
+                                            <input onchange="calculateTotal()" id="seconds0" type="number">
+                                        </td>
+                                        <td>
+                                            <input onchange="calculateTotal()" id="total0" type="text" readonly>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button onclick="calculateSubmit()">Submit</button>
+                        </div>
+                    </div>
+
+            </section>
+            <section id="ticketInfo">
+                <h3>Ticket Information</h3>
+                <div class="ticketbox">
+                    <p class="description" id="typeSide">Transcript Type: </p>
+                    <p class="description" id="codeSide">Course Code: </p>
+                    <p class="description" id="titleSide">Transcript Title: </p>
+                    <p class="description" id="prioritySide">Transcript Priority: </p>
+                    <p class="description" id="locationSide">Location in Course: </p>
+                </div>
+            </section>
+        </div>
     </main>
 </body>
 <script src="js/main.js"></script>
