@@ -22,25 +22,36 @@
                 <h1>BYUI Technical Accessibility</h1>
             </div>
             <ul>
-                <li><a href="home.html">Home</a>
-                </li>
-                <li><a href="request.html">Request</a>
-                </li>
-                <li class="active"><a href="prepare.html">Prepare</a>
-                </li>
-                <li><a href="transcribe.html">Transcribe</a>
-                </li>
-                <li class="hide"><a href="master.html">Master</a>
-                </li>
-                <li><a href="home.html">Log Out</a>
-                </li>
+                <a href="home.html">
+                    <li>Home
+                    </li>
+                </a>
+                <a href="request.html">
+                    <li>Request
+                    </li>
+                </a>
+                <a href="prepare.html">
+                    <li class="active">Prepare
+                    </li>
+                </a>
+                <a href="transcribe.html">
+                    <li>Transcribe
+                    </li>
+                </a>
+                <a href="master.html">
+                    <li class="hide">Master
+                    </li>
+                </a>
+                <a href="home.html">
+                    <li>Log Out
+                    </li>
+                </a>
             </ul>
         </nav>
     </head>
     <main>
-        <p id="message"></p>
-        <div class="container-end">
-            <div>
+        <div class="container mg-top">
+            <!-- <div class="container-end">
                 <select id="requestCourse" class="btn-outline-whites dropdown-toggle">
                     <option disabled selected hidden>Course Code</option>
                 </select>
@@ -52,19 +63,47 @@
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
-                </select>
+                </select> -->
+            <div class="container-half">
+                <div class="display-info">
+                    <div id="text">
+                        <h3>Priority</h3>
+                        <h3>Course</h3>
+                        <h3>Media Type</h3>
+                        <h3>Title</h3>
+                    </div>
+                    <div id="list">
+                    </div>
+                </div>
             </div>
-        </div>
-        <div>
-            <div id="text" >
-                <h3>Course</h3>
-                <h3>Priority</h3>
-                <h3>Status</h3>
-                <h3>Type</h3>
-                <h3>Title</h3>
-                <h3>Video Length</h3>
-            </div>
-            <div id="list">
+            <div class="container-half">
+                <div class="ticket-info">
+                    <h3>Ticket Information</h3>
+                    <div class="ticketbox">
+                        <div>
+                            <p class="description" id="typeSide">Google Drive Edit Link: </p>
+                            <input type="text">
+                        </div>
+                        <div>
+                            <p class="description" id="codeSide">Google Drive Published Link: </p>
+                            <input type="text">
+                        </div>
+                        <div>
+                            <p class="description" id="codeSide">Check for Prior Completion</p>
+                            <input type="checkbox" name="" id="">
+                        </div>
+                        <div>
+                            <p>Verbit</p>
+                                <input type="checkbox" name="" id="">
+                            <p class="description" id="titleSide">Verbit Link </p>
+                            <input type="text" name="" id="">
+                        </div>
+                        <div>
+                            <button disabled="disabled">HTML Code</button>
+                            <button disabled="disabled">Link Code</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>

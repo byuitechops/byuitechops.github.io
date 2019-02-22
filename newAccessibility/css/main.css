@@ -74,7 +74,8 @@ li {
 
 .container-half { 
   width: 50%;
-  flex: 1;
+  display: flex;
+  flex-flow: row;
 }
 
 .btn-hover {
@@ -174,7 +175,7 @@ li {
 }
 
 
-#main-nav ul li a {
+#main-nav ul a  {
   text-decoration: none;
   font-weight: 600;
   color: rgb(44, 39, 39);
@@ -243,6 +244,7 @@ li {
   display: flex;
   flex-flow: column;
   height: 100%;
+  background-color: white;
 }
 
 #content #links p  {
@@ -327,7 +329,45 @@ display: inline;
   padding-left: .5rem;
 }
 
-#timeCalc{
-  padding-left: .5rem;
-
+#time-calculator { 
+  display: flex;
+  flex-flow: row;
+  width: 100%;
 }
+
+#time-calculator input {
+  width: 75%;
+}
+
+#time-calculator img {
+  margin: auto .5rem;
+}
+
+#time-calculator img:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+ 
+/***********************************************************
+* 4. Prepare page sections
+************************************************************/
+.display-info {
+  width: 100%;
+}
+
+#list  {
+ display: grid;
+ grid-template-columns: 1fr 1fr 1fr 2fr;
+}
+
+.ticket-info {
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+  align-items: center;
+}
+
+.ticket-info .ticketbox div {
+  padding: .8rem; 
+}
+

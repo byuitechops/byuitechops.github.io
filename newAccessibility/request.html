@@ -23,18 +23,18 @@
                 <h1>BYUI Technical Accessibility</h1>
             </div>
             <ul>
-                <li><a href="home.html">Home</a>
-                </li>
-                <li class="active"><a href="request.html">Request</a>
-                </li>
-                <li><a href="prepare.html">Prepare</a>
-                </li>
-                <li><a href="transcribe.html">Transcribe</a>
-                </li>
-                <li class="hide"><a href="master.html">Master</a>
-                </li>
-                <li><a href="home.html">Log Out</a>
-                </li>
+                <a href="home.html"><li>Home
+                </li></a>
+                <a href="request.html"><li class="active">Request
+                </li></a>
+                <a href="prepare.html"> <li>Prepare
+                </li></a>
+                <a href="transcribe.html"> <li>Transcribe
+                </li></a>
+                <a href="master.html"> <li class="hide">Master
+                </li></a>
+                <a href="home.html"><li>Log Out
+                </li></a>
             </ul>
         </nav>
     </head>
@@ -72,11 +72,10 @@
                 <input type="number" id="requestHeight" class="hide" placeholder="Video Height">
 
                 <input type="url" id="requestVideoURL" class="hide" placeholder="Video URL">
-                <div id="timeCalc" class="hide tooltip">
-                    <img src="assests/calcIcon.png">
+                <div id="time-calculator" >
+                    <input type="number" id="requestLength" class="hide" placeholder="Video Length">
+                    <img class="hide" id="timeCalc" src="assests/calcIcon.png">
                 </div>
-                <input type="number" id="requestLength" class="hide" placeholder="Video Length">
-
 
                 <label id="requestCommentsLabel">
                     <h3>Comments</h3>
