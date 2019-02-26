@@ -3,7 +3,6 @@ var seconds = 00;
 if (localStorage.getItem('minutes') != null) {
   minutes = Number(localStorage.getItem("minutes"));
   seconds = Number(localStorage.getItem("seconds"));
-  console.log(minutes);
 }
 
 function loadPage() {
@@ -62,7 +61,6 @@ function loadUser() {
       // Checked Out
       db.collection('users').doc(userId).collection('hoursWorked').doc(data.time.checkKey).get()
       .then(function(doc) {
-        console.log(doc.data().end);
         var checkoutTime = doc.data().end;
       var hour = checkoutTime.split(":")[0];
       var min = checkoutTime.split(":")[1];
@@ -195,7 +193,6 @@ function editDate(date) {
 var timer;
 //countdown timer
 function countdown() {
-  console.log(minutes);
   if (!data.time.break) {
     localStorage.setItem('minutes', minutes);
     localStorage.setItem('seconds', seconds);
