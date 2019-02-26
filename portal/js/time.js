@@ -1,3 +1,8 @@
+function resetBreak() {
+  localStorage.setItem('minutes', 15);
+  localStorage.setItem('seconds', 0);
+}
+
 var minutes = 15;
 var seconds = 00;
 if (localStorage.getItem('minutes') != null) {
