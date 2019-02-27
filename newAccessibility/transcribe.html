@@ -2,12 +2,11 @@
 <html>
 
 <head>
-    <title>Place | BYUI Accessibility</title>
+    <title>Transcribe | BYUI Accessibility</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/x-icon" href="assests/favicon.gif">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.gif">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="css/main.css">
-    <link type="text/css" rel="stylesheet" href="css/place.css">
     <!-- Script -->
     <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-firestore.js"></script>
@@ -17,7 +16,6 @@
 <body>
 
     <head>
-        <h1>BYUI Technical Accessibility</h1>
         <nav id="main-nav">
             <p id="message" class="hide"></p>
             <div class="bg-primary">
@@ -26,12 +24,15 @@
             <ul>
                 <a href="home.html"><li>Home
                 </li></a>
-                <a href="request.html"><li class="active">Request
+                <a href="request.html"><li>Request
                 </li></a>
                 <a href="prepare.html"> <li>Prepare
                 </li></a>
-                <a href="transcribe.html"> <li>Transcribe
+                <a href="transcribe.html"> <li class="active">Transcribe
                 </li></a>
+                <a href="copyedit.html">
+                    <li>Copyedit
+                </li>
                 <a href="master.html"> <li class="hide">Master
                 </li></a>
                 <a href="home.html"><li>Log Out
@@ -40,43 +41,28 @@
         </nav>
     </head>
     <main>
-        <div>
-            <select id="searchType">
-                <option disabled hidden selected>Search by</option>
-                <option value="title">Title</option>
-                <option value="courseCode">Course Code</option>
-                <option value="srcURL">Source Url</option>
-            </select>
-            <input id="searchValue">
-            <button onclick="search()">Search</button>
-            <i id="searchcancel" class="material-icons hide">clear</i>
-        </div>
-        <p id="message"></p>
-        <div id="text">
-            <h3>Course</h3>
-            <h3>Priority</h3>
-            <h3>Type</h3>
-            <h3>Title</h3>
-            <h3>Canvas Url</h3>
-            <h3>Video Embed</h3>
-            <h3>Video Link</h3>
-            <h3>Doc Url</h3>
-            <h3></h3>
-        </div>
-        <!-- The Modal -->
-        <div id="myModal" class="modal">
-
-            <!-- Modal content -->
-            <div class="modal-content" id="modal-content">
-                <span class="close">&times;</span>
-                <h2 id="modal-heading"></h2>
-                <p id="modal-message"></p>
-                <p id="intro"></p>
+            <div class="container col group-all">
+                    <div class="container row select-transcript">
+                            <select onchange="fillTranscribeTable(value)" id="requestCourse" class="btn-outline-whites dropdown-toggle">
+                                <option disabled selected hidden>Course Code</option>
+                            </select>
+                        </div>
+                <section class="container col table">
+                        <div id="table-header" class="container row bg-gray">
+                                <h3>Priority</h3>
+                                <h3>Course</h3>
+                                <h3>Type</h3>
+                                <h3>Title</h3>
+                                <h3>Claim Transcription</h3>
+                            </div>
+                    <div id="transcripts-table" class="grid transcripts-table">
+                       
+                    </div>
+                </section>
             </div>
-        </div>
     </main>
 </body>
 <script src="js/main.js"></script>
-<script src="js/place.js"></script>
+<script src="js/transcribe.js"></script>
 
 </html>

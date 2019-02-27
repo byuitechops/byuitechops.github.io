@@ -2,9 +2,9 @@
 <html>
 
 <head>
-    <title>Form | BYUI Accessibility</title>
+    <title>Request | BYUI Accessibility</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/x-icon" href="assests/favicon.gif">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.gif">
     <link type="text/css" rel="stylesheet" href="css/main.css">
     <!-- Script -->
     <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-app.js"></script>
@@ -18,7 +18,6 @@
 
     <head>
         <nav id="main-nav">
-            <p id="message" class="hide"></p>
             <div class="bg-primary">
                 <h1>BYUI Technical Accessibility</h1>
             </div>
@@ -31,6 +30,9 @@
                 </li></a>
                 <a href="transcribe.html"> <li>Transcribe
                 </li></a>
+                <a href="copyedit.html">
+                    <li>Copyedit
+                </li>
                 <a href="master.html"> <li class="hide">Master
                 </li></a>
                 <a href="home.html"><li>Log Out
@@ -39,11 +41,12 @@
         </nav>
     </head>
     <main>
-        <div id="request">
-            <section id="requestForm">
-                <p id="message"></p>
+        <div id="content">
+            <section id="requestForm" class="container mg-top-light half col">
+                    <h2>Request</h2>
+                <h3 style="text-align: center; padding-bottom: 2rem">Ticket Information</h3>
                 <div class="container">
-                    <select id="requestType" onfocusout="updateType(value)">
+                    <select id="requestType" onchange="updateType(value)">
                         <option disabled selected hidden>Transcript Type</option>
                         <option value="Transcript">Video Transcript</option>
                         <option value="Audio">Audio</option>
@@ -56,11 +59,11 @@
                     </div>
                 </div>
 
-                <select id="requestCourse" onfocusout="updateCode(value)">
+                <select id="requestCourse" onchange="updateCode(value)">
                     <option disabled selected hidden>Course Code</option>
                 </select>
-                <input type="text" id="requestTitle" placeholder="Transcript Title" onfocusout="updateTitle(value)">
-                <select id="requestPriority" onfocusout="updatePriority(value)">
+                <input type="text" id="requestTitle" placeholder="Transcript Title" onkeyup="updateTitle(value)">
+                <select id="requestPriority" onchange="updatePriority(value)">
                     <option disabled selected hidden>Priority</option>
                     <option value="1">1 ADA Emergency of Special Request</option>
                     <option value="2">2 Improvement Project for Live Course</option>
@@ -68,27 +71,26 @@
                     <option value="4">4 Transcript Project</option>
                 </select>
 
-                <input type="url" id="requestLMSURL" placeholder="Canvas URL" onfocusout="updateLocation(value)">
+                <input type="url" id="requestLMSURL" placeholder="Canvas URL" onkeyup="updateLocation(value)">
                 <input type="number" id="requestHeight" class="hide" placeholder="Video Height">
 
                 <input type="url" id="requestVideoURL" class="hide" placeholder="Video URL">
                 <div id="time-calculator" >
                     <input type="number" id="requestLength" class="hide" placeholder="Video Length">
-                    <img class="hide" id="timeCalc" src="assests/calcIcon.png">
+                    <img class="hide" id="timeCalc" src="assets/calcIcon.png">
                 </div>
 
                 <label id="requestCommentsLabel">
                     <h3>Comments</h3>
                 </label>
                 <input type="text" id="requestComments">
-                <input type="submit" id="requestSubmit">
 
                 <!-- The Modal -->
                 <div id="myModal" class="modal">
 
                     <!-- Modal content -->
-                    <div class="modal-content">
-                        <span class="close">&times;</span>
+                    <div class="modal-content2">
+                       
                         <h2>Time Calculator</h2>
                         <div id="form">
                             <table>
@@ -115,12 +117,14 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <button onclick="calculateSubmit()">Submit</button>
+                          
+                            <button id="btn-modal2" onclick="calculateSubmit()">Submit</button>
                         </div>
+                        <span class="close">&times;</span>
                     </div>
 
             </section>
-            <section id="ticketInfo">
+            <section id="ticketInfo" class="container mg-top-light half col">
                 <h3>Ticket Information</h3>
                 <div class="ticketbox">
                     <p class="description" id="typeSide">Transcript Type: </p>
@@ -128,12 +132,23 @@
                     <p class="description" id="titleSide">Transcript Title: </p>
                     <p class="description" id="prioritySide">Transcript Priority: </p>
                     <p class="description" id="locationSide">Location in Course: </p>
+                    <input type="submit" id="requestSubmit">
+                    <p id="message" class=""></p>
                 </div>
             </section>
         </div>
     </main>
+    <p>Hey guys, first of all. We're proud of the job we're getting to do this semester. Lots of special assignments and things that we haven't done before and we're getting it all done. We would like to remind you all about a few rules of the office and some general work ethic points that our team is having a very hard time with though.
+        1- Changing your schedule about every day of the week.
+        2- Using your phone non stop and even playing games
+        3- Watching whole videos and keep on gifs websites
+        4- Making the cave a big distraction
+        5- Night shifts not effective at all
+        6- Lack of quality on course projects
+        7- Dress code 
+         </p>
 </body>
 <script src="js/main.js"></script>
-<script src="js/form.js"></script>
+<script src="js/request.js"></script>
 
 </html>

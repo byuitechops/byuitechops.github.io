@@ -1,5 +1,7 @@
 getCourses();
 
+//the following functions are triggered on a onchange basis, to update the right side of the screen
+// with the ticket information
 function updateTitle(newTitle) {
     document.getElementById('titleSide').innerText = 'Transcript Title: ' + newTitle;
 }
@@ -26,8 +28,7 @@ function updateLocation(newLocation) {
     document.getElementById('locationSide').innerText = 'Location in Course: ' + newLocation;
 }
 
-var message = document.getElementById('message');
-//according to the request type, displays or hide specific pages 
+//according to the request type, displays or hide specific input boxes 
 document.getElementById('requestType').addEventListener('change', function () {
     if (document.getElementById('requestType').value === 'Transcript') {
         document.getElementById('requestVideoURL').classList.remove('hide');
@@ -48,6 +49,7 @@ document.getElementById('requestType').addEventListener('change', function () {
     }
 });
 
+//once the user requests a transcript, this makes sure that the transcript is filled out correctly and thoroughly
 document.getElementById('requestSubmit').addEventListener('click', function () {
     var requestType = document.getElementById('requestType').value;
     var title = document.getElementById('requestTitle').value.toUpperCase();
@@ -86,8 +88,7 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
             lmsURL: lmsURL,
             requestor: user.displayName,
             requestDate: new Date(),
-            status: 'Ready for Transcript',
-            placed: false,
+            status: 'Ready for Prep',
             notes: comments
         }
 
@@ -95,8 +96,8 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
             var extraInfo = {
                 srcURL: srcURL,
                 videoLength: videoLength,
-                softwareUsed: softwareUsed,
-                videoHeight: videoHeight
+                verbit: softwareUsed,
+                videoHeight: videoHeight,
             }
             var requestTranscript = Object.assign(extraInfo, docData)
         }
@@ -152,52 +153,6 @@ function resetMessage() {
         message.style.color = 'black';
     }, 3000);
 }
-
-// This function compares the title and URL to make sure that we do not have duplicates
-// The HTML sends string x and that is used to decide if it is a URL or title
-// function searchForSameTranscript(x) {
-//     var value = document.getElementById(x).value.toUpperCase();
-//     var repeated = false;
-//     if (x == "requestVideoURL") {
-//         db.collection("accessibility").where("srcURL", "==", value)
-//             .get()
-//             .then(function (querySnapshot) {
-//                 querySnapshot.forEach(function (doc) {
-//                     repeated = true;
-//                 });
-//                 if (repeated) {
-//                     message.innerHTML = `A request for this video has been found`;
-//                     message.style.color = 'red';
-//                     document.getElementById('requestSubmit').setAttribute('disabled', true);
-//                     resetMessage();
-//                 } else {
-//                     document.getElementById('requestSubmit').removeAttribute('disabled');
-//                 }
-//             })
-//             .catch(function (error) {
-//                 console.log("Error getting documents: ", error);
-//             });
-//     } else if (x == "requestTitle") {
-//         db.collection("accessibility").where("title", "==", value)
-//             .get()
-//             .then(function (querySnapshot) {
-//                 querySnapshot.forEach(function (doc) {
-//                     repeated = true;
-//                 });
-//                 if (repeated) {
-//                     message.innerHTML = `A request for this video has been found`;
-//                     message.style.color = 'red';
-//                     document.getElementById('requestSubmit').setAttribute('disabled', true);
-//                     resetMessage();
-//                 } else {
-//                     document.getElementById('requestSubmit').removeAttribute('disabled');
-//                 }
-//             })
-//             .catch(function (error) {
-//                 console.log("Error getting documents: ", error);
-//             });
-//     }
-// }
 
 function getCourses() {
     var xhttp = new XMLHttpRequest();
@@ -345,3 +300,4 @@ function countDocs() {
             console.log(count);
         })
 }
+

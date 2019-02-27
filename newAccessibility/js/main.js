@@ -20,41 +20,45 @@ db.settings({
 });
 
 
-
-    firebase.auth().onAuthStateChanged(function (user) {
-        if (user) {
-            if (window.location.pathname != '/index.html') {
-                // User is signed in.
-                db.collection('users').where('name', "==", user.displayName).get()
-                    .then((querySnapshot) => {
-                        querySnapshot.forEach((doc) => {
-                            var userData = doc.data();
-                            if (userData.role != "Copyedit") {
-                                // document.getElementById('place').classList.remove('hide');
-                            }
-                            if (userData.role == "Admin" || userData.role == "Techops" || userData.role == "Lead") {
-                                // document.getElementById('master').classList.remove('hide');
-                            }
-                        })
+firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+        if (window.location.pathname != '/index.html') {
+            // User is signed in.
+            db.collection('users').where('name', "==", user.displayName).get()
+                .then((querySnapshot) => {
+                    querySnapshot.forEach((doc) => {
+                        var userData = doc.data();
+                        if (userData.role != "Copyedit") {
+                            // document.getElementById('place').classList.remove('hide');
+                        }
+                        if (userData.role == "Admin" || userData.role == "Techops" || userData.role == "Lead") {
+                            // document.getElementById('master').classList.remove('hide');
+                        }
                     })
-            } else {
-                if (window.location.pathname != '/home.html') {
-                    window.location.assign('home.html');
-                } else {
-
-                }
-            }
+                })
         } else {
-            //  window.location.assign('index.html');
+            if (window.location.pathname != '/home.html') {
+                window.location.assign('home.html');
+            } else {
+
+            }
         }
-    });
+    } else {
+        if (window.location.pathname != '/index.html') {
+            window.location.assign('index.html');
+        } else {
+
+        }
+
+    }
+});
 
 //logs out the user
 // Logout of firebase and website
 function userLogout() {
     console.log("It's working");
     firebase.auth().signOut();
-   window.location.reload();
+    window.location.reload();
 }
 
 // Initialize Firebase

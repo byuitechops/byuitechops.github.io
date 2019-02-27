@@ -2,12 +2,13 @@
 <html>
 
 <head>
-    <title>Claim | BYUI Accessibility</title>
+    <title>Prepare | BYUI Accessibility</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/x-icon" href="assests/favicon.gif">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.gif">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="css/main.css">
-    <link type="text/css" rel="stylesheet" href="css/prepare.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+        crossorigin="anonymous">
     <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-auth.js"></script>
@@ -17,7 +18,6 @@
 
     <head>
         <nav id="main-nav">
-            <p id="message" class="hide"></p>
             <div class="bg-primary">
                 <h1>BYUI Technical Accessibility</h1>
             </div>
@@ -38,75 +38,109 @@
                     <li>Transcribe
                     </li>
                 </a>
-                <a href="master.html">
-                    <li class="hide">Master
+                <a href="copyedit.html">
+                    <li>Copyedit
                     </li>
-                </a>
-                <a href="home.html">
-                    <li>Log Out
-                    </li>
-                </a>
+                    <a href="master.html">
+                        <li class="hide">Master
+                        </li>
+                    </a>
+                    <a href="home.html">
+                        <li>Log Out
+                        </li>
+                    </a>
             </ul>
         </nav>
     </head>
     <main>
-        <div class="container mg-top">
-            <!-- <div class="container-end">
-                <select id="requestCourse" class="btn-outline-whites dropdown-toggle">
+        <div id="prepare-view" class="container hide">
+            <div id="content">
+                <section id="left-prep" class="container mg-top-light half col">
+                    <h2>Prepare</h2>
+                    <h3>Google Document</h3>
+                    <input type="text" placeholder="Editable Document Link" id="googleDocEdit">
+                    <input type="text" placeholder="Published Document Link" id="googleDocPublish">
+                    <div>
+                        <div class="check-completion container row">
+                            <input type="checkbox" onchange="updateCompletionRight()" id="priorCompletionBox">
+                            <p>Prior Completion</p>
+                            <i class="far fa-question-circle"></i>
+                        </div>
+                    </div>
+                    <div id="hideVerbit" class="verbit-check">
+                        <input type="checkbox" id="check-verbit-checked">
+                        <p>Verbit:</p>
+                        <p class="small-text">If the video has been requested on verbit, please update the video ID here.</p>
+                    </div>
+                    <input type="text" placeholder="Verbit ID" disabled id="getVerbitId">
+                    <div class="organize-buttons container col">
+                        <h3 style="padding-left: 6.5rem;">Place it in the Course</h3>
+                    <button id="embeddedCode" class="bg-primary btn-hover code-btn" onclick="showCodeEmbedded()">
+                        Get Embedded Code
+                    </button>
+                    <button class="bg-primary btn-hover code-btn" onclick="showCodeLink()">
+                        Get Link Code 
+                    </button>
+                </div>
+                </section>
+                <section id="ticketInfo" class="container mg-top-light half col">
+                    <h3>Ticket Information</h3>
+                    <div class="ticketbox">
+                        <p class="description" id="typeSide">Transcript Type: </p>
+                        <p class="description" id="codeSide">Course Code: </p>
+                        <p class="description" id="titleSide">Transcript Title: </p>
+                        <p class="description" id="prioritySide">Transcript Priority: </p>
+                        <p class="description" id="locationSide">Location in Course: </p>
+                        <p class="description" id="mediaSide">Media URL: </p>
+                        <p class="description" id="priorCompletionSide">Prior Completion: </p>
+                        <!-- <p class="description" id="verbitUsed">Verbit ID: </p> -->
+                        <div class="check-placeholder-completion">
+                            <div>
+                                <p>Place Holder Complete?</p>
+                                <input type="checkbox" name="" id="placeHolderCheckbox">
+                            </div>
+                            <input type="submit" id="requestSubmit">
+                        </div>
+                        <p id="message" class=""></p>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div id="search-view" class="container col group-all">
+            <div class="container row select-transcript">
+                <select onchange="fillPrepTable(value)" id="requestCourse" class="btn-outline-whites dropdown-toggle">
                     <option disabled selected hidden>Course Code</option>
                 </select>
             </div>
-            <div>
-                <select name="" id="coursePriority" class="btn-outline-white dropdown-toggle">
-                    <option disabled selected hidden>Priority</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                </select> -->
-            <div class="container-half">
-                <div class="display-info">
-                    <div id="text">
-                        <h3>Priority</h3>
-                        <h3>Course</h3>
-                        <h3>Media Type</h3>
-                        <h3>Title</h3>
-                    </div>
-                    <div id="list">
-                    </div>
+            <section class="container col table">
+                <div id="table-header" class="container row bg-gray">
+                    <h3>Priority</h3>
+                    <h3>Course</h3>
+                    <h3>Type</h3>
+                    <h3>Title</h3>
+                    <h3>Claim Prep</h3>
                 </div>
-            </div>
-            <div class="container-half">
-                <div class="ticket-info">
-                    <h3>Ticket Information</h3>
-                    <div class="ticketbox">
-                        <div>
-                            <p class="description" id="typeSide">Google Drive Edit Link: </p>
-                            <input type="text">
-                        </div>
-                        <div>
-                            <p class="description" id="codeSide">Google Drive Published Link: </p>
-                            <input type="text">
-                        </div>
-                        <div>
-                            <p class="description" id="codeSide">Check for Prior Completion</p>
-                            <input type="checkbox" name="" id="">
-                        </div>
-                        <div>
-                            <p>Verbit</p>
-                                <input type="checkbox" name="" id="">
-                            <p class="description" id="titleSide">Verbit Link </p>
-                            <input type="text" name="" id="">
-                        </div>
-                        <div>
-                            <button disabled="disabled">HTML Code</button>
-                            <button disabled="disabled">Link Code</button>
-                        </div>
-                    </div>
+                <div id="prep-table" class="grid transcripts-table">
+                    
                 </div>
-            </div>
+            </section>
         </div>
     </main>
+    <div id="myModal3" class="modal3">
+            <!-- Modal content -->
+            <div class="modal-content3">
+              <div class="modal-header3">
+                <span class="close3">&times;</span>
+                <h2>Copy the link below and place the video in the course</h2>
+              </div>
+              <div class="modal-body3">
+              <p id="codehtml"></p>
+              </div>
+            </div>
+          
+          </div>
+    <p class ="hide" id='storeTranscriptID'></p>
+    <p class ="hide" id='storeUserID'></p>
 </body>
 <script src="js/main.js"></script>
 <script src="js/prepare.js"></script>

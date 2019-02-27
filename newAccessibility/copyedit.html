@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Copyedit | BYUI Accessibility</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.gif">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="css/main.css">
+    <!-- Script -->
+    <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-auth.js"></script>
+</head>
+
+<body>
+
+    <head>
+        <nav id="main-nav">
+            <p id="message" class="hide"></p>
+            <div class="bg-primary">
+                <h1>BYUI Technical Accessibility</h1>
+            </div>
+            <ul>
+                <a href="home.html"><li>Home
+                </li></a>
+                <a href="request.html"><li>Request
+                </li></a>
+                <a href="prepare.html"> <li>Prepare
+                </li></a>
+                <a href="transcribe.html"> <li>Transcribe
+                </li></a>
+                <a href="copyedit.html">
+                    <li class="active">Copyedit
+                </li>
+                <a href="master.html"> <li class="hide">Master
+                </li></a>
+                <a href="home.html"><li>Log Out
+                </li></a>
+            </ul>
+        </nav>
+    </head>
+    <main>
+            <div class="container col group-all">
+                    <div class="container row select-transcript">
+                            <select id="requestCourse" class="btn-outline-whites dropdown-toggle">
+                                <option disabled selected hidden>Course Code</option>
+                            </select>
+                        </div>
+                <section class="container col table">
+                        <div id="table-header" class="container row bg-gray">
+                                <h3>Priority</h3>
+                                <h3>Course</h3>
+                                <h3>Type</h3>
+                                <h3>Title</h3>
+                                <h3>Claim Review</h3>
+                            </div>
+                    <div class="grid transcripts-table">
+                       <p>1</p>
+                       <p>MATH101</p>
+                       <p>Transcript</p>
+                       <p>Lorem ipsum dolor sit amet.</p>
+                       <button class="bg-primary btn-hover claim-transcription-btn"> Review </button>
+                       <p>1</p>
+                       <p>MATH101</p>
+                       <p>Transcript</p>
+                       <p>Lorem ipsum dolor sit amet.</p>
+                       <button class="bg-primary btn-hover claim-transcription-btn"> Review </button>
+                       <p>1</p>
+                       <p>MATH101</p>
+                       <p>Transcript</p>
+                       <p>Lorem ipsum dolor sit amet.</p>
+                       <button class="bg-primary btn-hover claim-transcription-btn"> Review </button>
+                       <p>1</p>
+                       <p>MATH101</p>
+                       <p>Transcript</p>
+                       <p>Lorem ipsum dolor sit amet.</p>
+                       <button class="bg-primary btn-hover claim-transcription-btn"> Review </button>
+                       <p>1</p>
+                       <p>MATH101</p>
+                       <p>Transcript</p>
+                       <p>Lorem ipsum dolor sit amet.</p>
+                       <button class="bg-primary btn-hover claim-transcription-btn"> Review </button>
+                       <p>1</p>
+                       <p>MATH101</p>
+                       <p>Transcript</p>
+                       <p>Lorem ipsum dolor sit amet.</p>
+                       <button class="bg-primary btn-hover claim-transcription-btn"> Review </button>
+                       <p>1</p>
+                       <p>MATH101</p>
+                       <p>Transcript</p>
+                       <p>Lorem ipsum dolor sit amet.</p>
+                       <button class="bg-primary btn-hover claim-transcription-btn"> Review </button>
+                       <p>1</p>
+                       <p>MATH101</p>
+                       <p>Transcript</p>
+                       <p>Lorem ipsum dolor sit amet.</p>
+                       <button class="bg-primary btn-hover claim-transcription-btn"> Review </button>
+                       <p>1</p>
+                       <p>MATH101</p>
+                       <p>Transcript</p>
+                       <p>Lorem ipsum dolor sit amet.</p>
+                       <button class="bg-primary btn-hover claim-transcription-btn"> Review </button>
+                       <p>1</p>
+                       <p>MATH101</p>
+                       <p>Transcript</p>
+                       <p>Lorem ipsum dolor sit amet.</p>
+                       <button class="bg-primary btn-hover claim-transcription-btn"> Review </button>
+                       <p>1</p>
+                       <p>MATH101</p>
+                       <p>Transcript</p>
+                       <p>Lorem ipsum dolor sit amet.</p>
+                       <button class="bg-primary btn-hover claim-transcription-btn"> Review </button>
+                       <p>1</p>
+                       <p>MATH101</p>
+                       <p>Transcript</p>
+                       <p>Lorem ipsum dolor sit amet.</p>
+                       <button class="bg-primary btn-hover claim-transcription-btn"> Review </button>
+                       
+                    </div>
+                </section>
+            </div>
+    </main>
+</body>
+<script src="js/main.js"></script>
+<script src="js/copyedit.js"></script>
+
+</html>

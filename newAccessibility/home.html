@@ -4,7 +4,7 @@
 <head>
     <title>Home | BYUI Accessibility</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/x-icon" href="assests/favicon.gif">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.gif">
     <link type="text/css" rel="stylesheet" href="css/main.css">
     <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-firestore.js"></script>
@@ -20,82 +20,89 @@
                 <h1>BYUI Technical Accessibility</h1>
             </div>
             <ul>
-                <a href="home.html"><li class="active">Home
-                </li></a>
-                <a href="request.html"><li >Request
-                </li></a>
-                <a href="prepare.html"> <li>Prepare
-                </li></a>
-                <a href="transcribe.html"> <li>Transcribe
-                </li></a>
-                <a href="master.html"> <li class="hide">Master
-                </li></a>
-                <a href="home.html"><li>Log Out
-                </li></a>
+                <a href="home.html">
+                    <li class="active">Home
+                    </li>
+                </a>
+                <a href="request.html">
+                    <li>Request
+                    </li>
+                </a>
+                <a href="prepare.html">
+                    <li>Prepare
+                    </li>
+                </a>
+                <a href="transcribe.html">
+                    <li>Transcribe
+                    </li>
+                </a>
+                <a href="copyedit.html">
+                    <li>Copyedit
+                    </li>
+                    <a href="master.html">
+                        <li class="hide">Master
+                        </li>
+                    </a>
+                    <a href="home.html">
+                        <li>Log Out
+                        </li>
+                    </a>
             </ul>
         </nav>
     </head>
     <main>
         <div id="content">
-            <section>
-                <div id="links" class="container-center mg-top">
-                    <h2>Important Links - News</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque mollitia omnis voluptatibus
-                        possimus amet labore! Illo corporis, aspernatur consequuntur commodi, fugiat, doloremque
-                        suscipit eius beatae doloribus cumque aut voluptatem ea.</p>
-                    <div class="group-links">
-                        <a href="https://drive.google.com/drive/folders/0AJzE0BZcnVJpUk9PVA" target="_blank">
-                            <div>Google Drive</div>
-                        </a>
-                        <a href="https://docs.google.com/spreadsheets/d/1755CupoDLtrpePFnj_Dd_Y-FZEH8_6QMX4gAVDNh_AQ/edit#gid=1437701904" target="_blank">
-                            <div>Transcript Style Guide</div>
-                        </a>
-                        <a href="https://byu-idaho.screenstepslive.com/login" target="_blank">
-                            <div>Screen Steps</div>
-                        </a>
-                        <a href="http://10.5.188.122:8000/" target="_blank">
-                            <div>Katana</div>
-                        </a>
-                        <a href="https://byuitechops.github.io/portal/home.html">
-                            <div>Tech Ops Portal</div>
-                        </a>
-                        <a href="https://platform.verbit.co/" target="_blank">
-                            <div>Verbit</div>
-                        </a>
-                    </div>
+            <section id="links" class="container center half col">
+                <h2>Important Links - News</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque mollitia omnis voluptatibus
+                    possimus amet labore! Illo corporis, aspernatur consequuntur commodi, fugiat, doloremque
+                    suscipit eius beatae doloribus cumque aut voluptatem ea.</p>
+                <div id="group-links">
+                    <a href="https://drive.google.com/drive/folders/0AJzE0BZcnVJpUk9PVA" target="_blank">
+                        Google Drive
+                    </a>
+                    <a href="https://docs.google.com/spreadsheets/d/1755CupoDLtrpePFnj_Dd_Y-FZEH8_6QMX4gAVDNh_AQ/edit#gid=1437701904"
+                        target="_blank">
+                        Transcript Style Guide
+                    </a>
+                    <a href="https://byu-idaho.screenstepslive.com/login" target="_blank">
+                        Screen Steps
+                    </a>
+                    <a href="https://platform.verbit.co/" target="_blank">
+                        Verbit
+                    </a>
                 </div>
             </section>
-            <section>
-                <div class="container-center mg-top">
-                    <h3 class="hide">You currently have no transcripts that have been requested</h3>
-                    <div id="transcript-box" class="container-center">
-                        <h2>Transcript Found </h2>
-                        <label for="transcript-title">Transcript Title</label>
-                        <p> Lorem, ipsum dolor.</p>
-                        <label for="transcript-title">Course Code</label>
-                        <p>MATH 999</p>
-                        <a href="https://www.youtube.com/watch?v=Fdf5aTYRW0E">Media Link</a>
-                        <label for="transcript-title"></label>
-                        <a href="https://docs.google.com/spreadsheets/d/1mhCCTU-3vR69KCsJbKkcHDnVU4ZMLbcmIU97txvhQd4/edit#gid=0">Google
-                            Document Link</a>
-                        <label for="">Verbit Link (if applicable)</label>
-                        <p>0_c27e0l3x_0_3f5jgkzb_2-0_c27e0l3x_0_3f5jgkzb_2.mp4</p>
-                        <div class="container-center mg-top">
-                            <button class="bg-primary btn-hover">Transcript Finished</button>
-                            <button id="btn-report" class="bg-error btn-hover red">Send Back to Prep</button>
-                        </div>
+            <section id="transcript-not-found" class="">
+                    <h3>You currently have no projects requested for transcrition</h3>
+            </section>
+            <section id="transcript-found" class="container center half col hide">
+
+                <div id="transcript-box" class="container center">
+                    <h3>Transcript Found </h3>
+                    <label for="transcript-title">Course Code</label>
+                    <p id="updateCode"> Lorem, ipsum dolor.</p>
+                    <label for="transcript-title">Transcript Title</label>
+                    <p id="updateTitle">MATH 999</p>
+                    <a id="updateMediaLink" href="https://www.youtube.com/watch?v=Fdf5aTYRW0E" target="_blank">Media Link</a>
+                    <label for="transcript-title"></label>
+                    <a id="updateDocLink" href="https://docs.google.com/spreadsheets/d/1mhCCTU-3vR69KCsJbKkcHDnVU4ZMLbcmIU97txvhQd4/edit#gid=0" target="_blank">Google
+                        Document Link</a>
+                    <label for="">Verbit ID (if applicable)</label>
+                    <p>0_c27e0l3x_0_3f5jgkzb_2-0_c27e0l3x_0_3f5jgkzb_2.mp4</p>
+                    <div class="container-center mg-top">
+                        <button id="btn-finish" class="bg-primary btn-hover" value="" onclick="finalizeTranscript(value)">Transcript Finished</button>
+                        <button id="btn-report" value="" class="bg-error btn-hover red">Send Back to Prep</button>
                     </div>
                     <div id="myModal" class="modal">
-                        <button id="submit-report" class="bg-primary btn-hover">Submit Report</button>
+                        <button id="submit-report" class="bg-primary btn-hover" value="" onclick="sendBackPrep(value)">Submit Report</button>
                         <!-- Modal content -->
                         <div class="modal-content">
                             <p> Report Problem with the Transcript: </p>
                             <textarea name="" id="problem-description" cols="30" rows="10"></textarea>
                             <span class="close">&times;</span>
-
                         </div>
                     </div>
-                </div>
             </section>
         </div>
     </main>

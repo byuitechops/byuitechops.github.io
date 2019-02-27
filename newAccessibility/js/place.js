@@ -300,16 +300,3 @@ function search() {
             console.log(error);
         })
 }
-
-document.getElementById('searchValue').addEventListener("keyup", function() {
-    event.preventDefault();
-    if (event.keyCode === 13) {
-    search();
-}});
-
-document.getElementById('searchcancel').addEventListener('click', () => {
-    document.getElementById('searchcancel').classList.add('hide');
-    document.getElementById('text').innerHTML = "";
-    document.getElementById('searchValue').value = "";
-    document.getElementById('searchType').options[0].selected = true;
-});
