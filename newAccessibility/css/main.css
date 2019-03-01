@@ -490,7 +490,7 @@ width: 8rem;
   padding: .5rem 0;
 }
 
-#left-prep input{
+#left-prep input {
  margin: .5rem;
  height: 2rem;
  width: 60%;
@@ -567,7 +567,7 @@ width: 8rem;
   width: 60%;
   border: 1px solid var(--primary-color);
   border-radius: 10px;
-  background: white;
+  background: lightgray;
  }
 
  .code-btn { 
@@ -642,27 +642,62 @@ width: 8rem;
 padding: 2px 16px;
 height: 10rem;
 color: white;
-background-color: black;
+background: lightgray;
 display: flex;
-align-content: center;
+/* align-content: center;
 justify-content: center;
-text-align: center;
+text-align: center; */
+flex-flow: row;
 }
 
-.modal-body3 p {
+.modal-body3 i { 
+  position: relative;
+  left: 0rem;
+  top: 1.76rem;
+  color: var(--primary-color);
+}
+
+.modal-body3 i:hover { 
+opacity: 0.5;
+cursor: pointer;
+}
+
+.modal-body3 p { 
+color: var(--primary-color);
+font-size: .63rem;
+position: relative;
+left: 2rem;
+}
+.modal-body3 textarea {
+  width: 90%;
+  max-width: 90%;
+  min-width: 90%;
+  max-height: 85%;
+  min-height: 85%;
   padding-top: 2rem;
+  font-family:'Open Sans', sans-serif;
+  border-radius: 10px;
+  text-align: center;
+  background: lightgray;
+  border: none;
 }
 
+.modal-body3 textarea::selection {
+  color: var(--primary-color);
+  background: white;
+  text-decoration: none;
+
+}
 
 /* Add Animation */
 @-webkit-keyframes slideIn {
   from {bottom: 0; opacity: 0} 
-  to {bottom: 450px; opacity: 1}
+  to {bottom: 340px; opacity: 1}
 }
 
 @keyframes slideIn {
   from {bottom: 0; opacity: 0}
-  to {bottom: 450px; opacity: 1}
+  to {bottom: 340px; opacity: 1}
 }
 
 @-webkit-keyframes fadeIn {

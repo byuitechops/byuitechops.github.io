@@ -9,18 +9,7 @@ firebase.auth().onAuthStateChanged(function (user) {
                 querySnapshot.forEach(function (doc) {
                     userID.push(doc.id);
                     userName.push(doc.data().name);
-                    if (doc.data().currentAction == 'preparing' || doc.data().currentAction == 'transcribing') {
-                        //user has a prep project that is unfinished
-                        alert('Please, finish preparing or transcribing transcript before claiming another one for transcription');
-                        if (doc.data().currentAction == 'preparing') {
-                            window.location.replace('prepare.html')
-                        } else {
-                            window.location.replace('home.html');
-                        }
-                    } else { 
-                        //user doesn't have any projects, we will let him choose one
-                        fillTranscribeTableStart();
-                    }
+                        fillReviewStart();
                 })
 
             })
@@ -30,13 +19,13 @@ firebase.auth().onAuthStateChanged(function (user) {
 })
 
 //fill the transcript table according to its status on firestore
-function fillTranscribeTableStart() {
-    db.collection("accessibility").where('status', '==', 'Ready for Transcription').orderBy('priority').get()
+function fillReviewStart() {
+    db.collection("accessibility").where('status', '==', 'Ready for Review').orderBy('priority').get()
         .then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
                 var p = `<p> ${doc.data().priority}</p> <p>${doc.data().courseCode}</p> <p>${doc.data().type}</p>
                     <p>${doc.data().title}</p>  <button onclick="claimTranscription('${doc.id}')" class="bg-primary btn-hover prepare-btn">
-                    Transcribe</button>`;
+                    Review</button>`;
                 document.getElementById('transcripts-table').insertAdjacentHTML('beforeend', p);
             })
         })

@@ -65,6 +65,7 @@
                             <input type="checkbox" onchange="updateCompletionRight()" id="priorCompletionBox">
                             <p>Prior Completion</p>
                             <i class="far fa-question-circle"></i>
+                            <!-- <button class="bg-primary bg-hover">See Comments</button> -->
                         </div>
                     </div>
                     <div id="hideVerbit" class="verbit-check">
@@ -134,13 +135,16 @@
                 <h2>Copy the link below and place the video in the course</h2>
               </div>
               <div class="modal-body3">
-              <p id="codehtml"></p>
+              <textarea id="codehtml" readonly></textarea>
+              <p>Copy Link</p>
+              <i id="" class="fas fa-copy fa-2x" onclick="copyToClipboard()"></i>
               </div>
             </div>
           
           </div>
     <p class ="hide" id='storeTranscriptID'></p>
     <p class ="hide" id='storeUserID'></p>
+    <p class ="hide" id='storeHeight'></p>
 </body>
 <script src="js/main.js"></script>
 <script src="js/prepare.js"></script>

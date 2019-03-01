@@ -49,18 +49,15 @@ function displayPrepareModal(transcriptID) {
                 })
                 //updates the page so the user can now prepare the transcript
                 .then(function () {
-                    console.log('User retrived this prep project');
                     searchPrepPage.classList.add('hide');
                     doPrepPage.classList.remove('hide');
                     fillPrepTicket(transcriptID);
-                    console.log(userID);
                 })
         })
 }
 
 //Uses the id selected to update the ticket information on the right side of prep
 function fillPrepTicket(transcriptID) {
-    console.log(transcriptID);
     db.collection('accessibility').doc(transcriptID).get()
         .then(function (doc) {
             //updates left side as far as if verbit is being used and prior completion
@@ -83,13 +80,27 @@ function fillPrepTicket(transcriptID) {
             // document.getElementById('verbitUsed').innerText = 'Verbit ID: ' + 
             document.getElementById('storeTranscriptID').innerText = transcriptID;
             document.getElementById('storeUserID').innerText = userID;
+            document.getElementById('storeHeight').innerText = doc.data().videoHeight;
             document.getElementsByClassName('code');
+
             if (doc.data().type != 'Transcript') {
                 document.getElementById('embeddedCode').classList.add('hide');
                 document.getElementById('hideVerbit').classList.add('hide');
                 document.getElementById('getVerbitId').classList.add('hide');
-            } else { 
+            } else {
 
+            }
+
+            if (doc.data().docPublishURL != 'undefined' || doc.data().docPublishURL != '') {
+                document.getElementById('googleDocPublish').value = doc.data().docPublishURL;
+            }
+
+            if (doc.data().docEditURL != 'undefined' || doc.data().docEditURL != '') {
+                document.getElementById('googleDocEdit').value = doc.data().docEditURL;
+            }
+
+            if (doc.data().verbitID != 'undefined' || doc.data().verbitID != '') {
+                document.getElementById('getVerbitId').value = doc.data().verbitID;
             }
         })
         .catch(function (error) {
@@ -101,6 +112,13 @@ function fillPrepTicket(transcriptID) {
 function updateCompletionRight() {
     var priorCompletion = document.getElementById('priorCompletionBox').checked ? 'Transcript Previously Done' : 'New Transcript'
     document.getElementById('priorCompletionSide').innerText = 'Prior Completion: ' + priorCompletion;
+    if (priorCompletion = document.getElementById('priorCompletionBox').checked) {
+        document.getElementById('hideVerbit').classList.add('hide');
+        document.getElementById('getVerbitId').classList.add('hide');
+    } else {
+        document.getElementById('hideVerbit').classList.remove('hide');
+        document.getElementById('getVerbitId').classList.remove('hide');
+    }
 }
 //If verbit is checked through the user or through request 
 //input from firestore, allows the  verbit IDinput to be enabled
@@ -123,6 +141,11 @@ document.getElementById('requestSubmit').addEventListener('click', () => {
     var placed = document.getElementById('placeHolderCheckbox');
     if (docEdit.value == '' || docPublished.value == '' || !placed.checked) {
         message.innerHTML = 'You must fill in all inputs';
+        message.style.color = 'red';
+        resetMessage();
+    } 
+    else if (!docPublished.value.includes('/pub')) { 
+        message.innerHTML = 'You must add a valid publishable link before continuing';
         message.style.color = 'red';
         resetMessage();
     } else {
@@ -220,11 +243,9 @@ function resetMessage() {
 
 function secondsToHms(d) {
     d = Number(d);
-
     var h = Math.floor(d / 3600);
     var m = Math.floor(d % 3600 / 60);
     var s = Math.floor(d % 3600 % 60);
-
     if (h == 0) {
         return ('0' + m).slice(-2) + ":" + ('0' + s).slice(-2);
     } else {
@@ -234,78 +255,102 @@ function secondsToHms(d) {
 
 //generates the code to the user, according to the media url received
 function showCodeEmbedded() {
+    document.getElementById('codehtml').innerText = '';
     var transcriptID = document.getElementById('storeTranscriptID').innerText;
-    getModal();
     db.collection('accessibility').doc(transcriptID).get()
-    .then(function(doc) {
-        var link, height, seconds, title, pubLink;
-        link = doc.data().srcURL;
-        height = doc.data().videoHeight;
-        seconds = doc.data().videoLenght;
-        title = doc.data().title;
-        pubLink = doc.data().docPublishURL;
-        var setlink = pubLink;
-        var time = secondsToHms(seconds);
-        if (link.includes("youtube")) {
-            var id = link.slice(link.indexOf("watch?v=") + 8, (link.indexOf("watch?v=") + 9) + 11);
-            // console.log(id);
-            var html = `<p><iframe width="560" height="${height}px" src="https://www.youtube-nocookie.com/embed/${id}?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe><br>
-                        (${time} mins, <a href="${setlink}" target="_blank">${title} Transcript</a>)</p>`;
-            document.getElementById('codehtml').innerText = html;
-    
-            var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div>`;
-            document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);
-        } else if (link.includes("youtu.be")) {
-            var id = link.slice(link.indexOf(".be/") + 4, (link.indexOf(".be/") + 4) + 11);
-            // console.log(id);
-            var html = `<p><iframe width="560" height="${height}px" src="https://www.youtube-nocookie.com/embed/${id}?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe><br>
-                        (${time} mins, <a href="${setlink}" target="_blank">${title} Transcript</a>)</p>`;
-            document.getElementById('codehtml').innerText = html;
-    
-            var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div>`;
-            document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);
-        } else if (link.includes("video.byui.edu")) {
-            var id = link.slice(link.indexOf("/0_") + 1, (link.indexOf("/0_") + 1) + 10);
-            // console.log(id);
-            var html = `<p><iframe id="kaltura_player_1534785808" src="https://cdnapisec.kaltura.com/p/1157612/sp/115761200/embedIframeJs/uiconf_id/33020032/partner_id/1157612?iframeembed=true&playerId=kaltura_player_1534785808&entry_id=${id}&flashvars[streamerType]=auto" width="560" height="${height}" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay; fullscreen; encrypted-media" frameborder="0"></iframe><br>
-                         (${time} mins, <a href="${setlink}" target="_blank">${title} Transcript</a>)</p>`;
-            document.getElementById('codehtml').innerText = html;
-    
-            var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div>`;
-            document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);
-        } else if (link.includes("vimeo")) {
-            var id = link.slice(link.indexOf("vimeo.com/") + 10, (link.indexOf("vimeo.com/") + 10) + 9);
-            // console.log(id);
-            var html = `<p><iframe src="https://player.vimeo.com/video/${id}?title=0&byline=0&portrait=0" width="560" height="${height}px" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe><br>
+        .then(function (doc) {
+            var link, height, seconds, title, pubLink;
+            link = doc.data().srcURL;
+            height = document.getElementById('storeHeight').innerText;
+            seconds = doc.data().videoLength;
+            title = doc.data().title;
+            if (document.getElementById('googleDocPublish').value != '' && document.getElementById('googleDocPublish').value.includes('/pub')) {
+                pubLink = document.getElementById('googleDocPublish').value;
+                getModal();
+            } else {
+                alert("Before getting the code, make sure to add a published google doc to the transcript.");
+            }
+            var setlink = pubLink;
+            var time = secondsToHms(seconds);
+
+            if (link.includes("youtube")) {
+                var id = link.slice(link.indexOf("watch?v=") + 8, (link.indexOf("watch?v=") + 9) + 11);
+                var html = `<p><iframe width="560" height="${height}px" src="https://www.youtube-nocookie.com/embed/${id}?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe><br>(${time} mins, <a href="${setlink}" target="_blank">${title} Transcript</a>)</p>`;
+                document.getElementById('codehtml').innerText = html;
+
+
+            } else if (link.includes("youtu.be")) {
+                var id = link.slice(link.indexOf(".be/") + 4, (link.indexOf(".be/") + 4) + 11);
+                var html = `<p><iframe width="560" height="${height}px" src="https://www.youtube-nocookie.com/embed/${id}?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe><br>(${time} mins, <a href="${setlink}" target="_blank">${title} Transcript</a>)</p>`;
+                document.getElementById('codehtml').innerText = html;
+
+            } else if (link.includes("video.byui.edu")) {
+                var id = link.slice(link.indexOf("/0_") + 1, (link.indexOf("/0_") + 1) + 10);
+                var html = `<p><iframe id="kaltura_player_1534785808" src="https://cdnapisec.kaltura.com/p/1157612/sp/115761200/embedIframeJs/uiconf_id/33020032/partner_id/1157612?iframeembed=true&playerId=kaltura_player_1534785808&entry_id=${id}&flashvars[streamerType]=auto" width="560" height="${height}" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay; fullscreen; encrypted-media" frameborder="0"></iframe><br>(${time} mins, <a href="${setlink}" target="_blank">${title} Transcript</a>)</p>`;
+                document.getElementById('codehtml').innerText = html;
+
+            } else if (link.includes("vimeo")) {
+                var id = link.slice(link.indexOf("vimeo.com/") + 10, (link.indexOf("vimeo.com/") + 10) + 9);
+                var html = `<p><iframe src="https://player.vimeo.com/video/${id}?title=0&byline=0&portrait=0" width="560" height="${height}px" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe><br>
             (${time} mins, <a href="${setlink}" target="_blank">${title} Transcript</a>)</p>`;
-            document.getElementById('codehtml').innerText = html;
-    
-            var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div>`;
-            document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);
-        } else if (link.includes("fod.infobase.com")) {
-            var id = link.slice(link.indexOf("loid=") + 5, (link.indexOf("loid=") + 5) + 5);
-            // console.log(id);
-            var html = `<p><iframe allow='encrypted-media' height='${height}' frameborder='0' width='560' style='border: 1px solid #ddd;'  src='https://byui.idm.oclc.org/login?url=https://fod-infobase-com.byui.idm.oclc.org/OnDemandEmbed.aspx?token=42704&wID=104034&loid=${id}&plt=FOD&w=560&h=360' allowfullscreen >&nbsp;</iframe><br>
-                         (${time} mins, <a href="${setlink}" target="_blank">${title} Transcript</a>)</p>`;
-            document.getElementById('codehtml').innerText = html;
-    
-            var html = `<div id="buttons"><button id="placeButton" onclick="cancel()">Close</button></div>`;
-            document.getElementById('modal-content').insertAdjacentHTML('beforeend', html);
-        } else {
-            var html = `<p><a href='${link}' target="_blank">Go to this link and get the embed code to place</a><br>
-            Copy the rest of this and place it in with the embed in a single p tag<br>
-            (${time} mins, <a href="${setlink}" target="_blank">${title} Transcript</a>)</p>`;
-            document.getElementById('codehtml').innerText = html;
-        }
-    })
+                document.getElementById('codehtml').innerText = html;
+
+            } else if (link.includes("fod.infobase.com")) {
+                var id = link.slice(link.indexOf("loid=") + 5, (link.indexOf("loid=") + 5) + 5);
+                var html = `<p><iframe allow='encrypted-media' height='${height}' frameborder='0' width='560' style='border: 1px solid #ddd;'  src='https://byui.idm.oclc.org/login?url=https://fod-infobase-com.byui.idm.oclc.org/OnDemandEmbed.aspx?token=42704&wID=104034&loid=${id}&plt=FOD&w=560&h=360' allowfullscreen >&nbsp;</iframe><br>(${time} mins, <a href="${setlink}" target="_blank">${title} Transcript</a>)</p>`;
+                document.getElementById('codehtml').innerText = html;
+
+            } else {
+                var html = `<p><a href='${link}' target="_blank">Go to this link and get the embed code to place</a><br>Copy the rest of this and place it in with the embedded in a single p tag<br>(${time} mins, <a href="${setlink}" target="_blank">${title} Transcript</a>)</p>`;
+                document.getElementById('codehtml').innerText = html;
+            }
+        })
 }
 
 function showCodeLink() {
     var transcriptID = document.getElementById('storeTranscriptID').innerText;
-    console.log(transcriptID);
-    getModal();
-  
+    document.getElementById('codehtml').innerText = '';
+    db.collection('accessibility').doc(transcriptID).get()
+        .then(function (doc) {
+            var link, seconds, title, pubLink;
+            link = doc.data().srcURL;
+            // height = document.getElementById('storeHeight').innerText;
+            seconds = doc.data().videoLength;
+            title = doc.data().title;
+            if (document.getElementById('googleDocPublish').value != '' && document.getElementById('googleDocPublish').value.includes('/pub')) {
+                pubLink = document.getElementById('googleDocPublish').value;
+                getModal();
+            } else {
+                alert("Before getting the code, make sure to add a published google doc to the transcript.");
+            }
+            var setlink = pubLink;
+            var time = secondsToHms(seconds);
 
+            if (link.includes("youtube")) {
+                var id = link.slice(link.indexOf("watch?v=") + 8, (link.indexOf("watch?v=") + 9) + 11);
+                var html = `<p><a href="https://www.youtube-nocookie.com/embed/${id}?rel=0&amp;showinfo=0" target="_blank">${title}</a>(${time} mins, <a href="${setlink}" target="_blank">${title} Transcript</a></p>`;
+                document.getElementById('codehtml').innerText = html;
+            } else if (link.includes("youtu.be")) {
+                var id = link.slice(link.indexOf(".be/") + 4, (link.indexOf(".be/") + 4) + 11);
+                var html = `<p><a href="https://www.youtube-nocookie.com/embed/${id}?rel=0&amp;showinfo=0 target="_blank">${title}</a>(${time} mins, <a href="${setlink}" target="_blank">${title} Transcript</a>)</p>`;
+                document.getElementById('codehtml').innerText = html;
+            } else if (link.includes("video.byui.edu")) {
+                var id = link.slice(link.indexOf("/0_") + 1, (link.indexOf("/0_") + 1) + 10);
+                var html = `<p><a href="https://cdnapisec.kaltura.com/p/1157612/sp/115761200/embedIframeJs/uiconf_id/33020032/partner_id/1157612?iframeembed=true&playerId=kaltura_player_1534785808&entry_id=${id}&flashvars[streamerType]=auto" target="_blank">${title}</a>(${time} mins, <a href="${setlink}" target="_blank">${title} Transcript</a>)</p>`;
+                document.getElementById('codehtml').innerText = html;
+            } else if (link.includes("vimeo")) {
+                var id = link.slice(link.indexOf("vimeo.com/") + 10, (link.indexOf("vimeo.com/") + 10) + 9);
+                var html = `<p><a href="https://player.vimeo.com/video/${id}?title=0&byline=0&portrait=0 target="_blank">${title}</a>(${time} mins, <a href="${setlink}" target="_blank">${title} Transcript</a>)</p>`;
+                document.getElementById('codehtml').innerText = html;
+            } else if (link.includes("fod.infobase.com")) {
+                var id = link.slice(link.indexOf("loid=") + 5, (link.indexOf("loid=") + 5) + 5);
+                var html = `<p><a href='https://byui.idm.oclc.org/login?url=https://fod-infobase-com.byui.idm.oclc.org/OnDemandEmbed.aspx?token=42704&wID=104034&loid=${id}&plt=FOD&w=560&h=360' target="_blank">${title}</a>(${time} mins, <a href="${setlink}" target="_blank">${title} Transcript</a>)</p>`;
+                document.getElementById('codehtml').innerText = html;
+            } else {
+                var html = `<p><a href='${link}' target="_blank">${title}</a>(${time} mins, <a href="${setlink}" target="_blank">${title} Transcript</a>)</p>`;
+                document.getElementById('codehtml').innerText = html;
+            }
+        })
 }
 
 function getModal() {
@@ -320,5 +365,11 @@ function getModal() {
             modal.style.display = "none";
         }
     }
-   
+
+}
+
+function copyToClipboard() {
+    let textarea = document.getElementById("codehtml");
+    textarea.select();
+    document.execCommand("copy");
 }
