@@ -33,7 +33,7 @@ body {
   overflow: hidden;
 }
 
-h2  {
+h2 {
   padding-bottom: 2rem;
   font-size: 2rem;
   color: #8c8c8c;
@@ -62,18 +62,18 @@ input::placeholder {
   display: none !important;
 }
 
-.center { 
+.center {
   justify-content: center;
   align-items: center;
   /* align-content: center; */
   text-align: center;
 }
 
-.container{
+.container {
   display: flex;
 }
 
-.container-end{
+.container-end {
   display: flex;
   justify-content: flex-end;
   padding: 0.5rem 5rem;
@@ -92,11 +92,11 @@ input::placeholder {
   flex-flow: column;
 }
 
-.mg-top { 
+.mg-top {
   padding-top: 3rem;
 }
 
-.container-half { 
+.container-half {
   width: 50%;
   display: flex;
   flex-flow: row;
@@ -106,14 +106,14 @@ input::placeholder {
   border: none;
 }
 
-.btn-hover:hover { 
-  opacity: 0.7; 
+.btn-hover:hover {
+  opacity: 0.7;
   cursor: pointer
 }
 
 .mg-top-light {
   margin-top: 1.5rem;
-  
+
 }
 
 .dim-width {
@@ -124,7 +124,7 @@ input::placeholder {
   width: 40%;
 }
 
-#content { 
+#content {
   display: flex;
   flex-flow: row;
   justify-content: space-around;
@@ -132,22 +132,22 @@ input::placeholder {
   width: 90%;
 }
 
-#content section { 
+#content section {
   margin: 3rem 2rem;
   height: 80%;
 }
 
 .bg-gray {
-  background: rgb(172,172,172, 0.3);
+  background: rgb(172, 172, 172, 0.3);
   opacity: 0.7
 }
 
-.container .table { 
+.container .table {
   width: 100%;
 }
 
 
-#table-header { 
+#table-header {
   float: left;
   height: 3rem;
   width: 100%;
@@ -166,36 +166,47 @@ input::placeholder {
   left: 92.5%;
   padding-bottom: 0.5rem;
 }
-.select-transcript select { 
- margin-right: 1rem;
- border-radius: 10px;
- border: var(--primary-color) 1px solid;
- background-color:white;
- color: var(--primary-color);
+
+.select-transcript select {
+  margin-right: 1rem;
+  border-radius: 10px;
+  border: var(--primary-color) 1px solid;
+  background-color: white;
+  color: var(--primary-color);
 }
 
 .grid {
   display: grid;
 }
 
-.small-text { 
+.small-text {
   font-size: 12px;
 }
+
 /***********************************************************
 * 2.1 Modal Boxes
 ************************************************************/
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  padding-top: 100px;
+  /* Location of the box */
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0);
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
 }
 
 /* Modal Content */
@@ -209,13 +220,14 @@ input::placeholder {
   flex-direction: row;
 }
 
-.modal-content textarea { 
+.modal-content textarea {
   margin-left: 2rem;
   border: 1px dotted #888;
   border-radius: 1rem;
   font-family: 'Open Sans', sans-serif;
 }
-.modal button { 
+
+.modal button {
   height: 3rem;
   position: relative;
   top: 5rem;
@@ -224,6 +236,7 @@ input::placeholder {
   padding: 1rem;
   border-radius: 1rem;
 }
+
 /* The Close Button */
 .close {
   color: #aaaaaa;
@@ -270,6 +283,93 @@ input::placeholder {
 }
 
 
+.close3 {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close3:hover,
+.close3:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-body4 {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 35%;
+  display: flex;
+  flex-direction: row;
+  max-height: 30rem;
+  overflow: scroll;
+}
+
+
+.close4 {
+  color: black;
+  position: relative;
+  /* left: 28rem; */
+  bottom: 1.5rem;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close4:hover,
+.close4:focus {
+  color: var(--primary-color);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#myModal #problem-description {
+  max-width: 15rem;
+  max-height: 12rem;
+  min-width: 15rem;
+  min-height: 12rem;
+}
+
+.close5 {
+  color: black;
+  position: absolute;
+  left: 40rem; 
+  top: 0rem;
+  font-size: 28px;
+  font-weight: bold;
+  position: sticky;
+}
+
+.close5:hover,
+.close5:focus {
+  color: var(--primary-color);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-content5 {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 40px;
+  border: 1px solid #888;
+  min-width: 42rem;
+  max-width: 42rem;
+  display: flex;
+  height: 12rem;
+  position: absolute;
+  left: 35rem;
+  top: 20rem;
+  overflow-x: auto;
+}
+
+.modal-content5 p {
+  padding: 0.5rem 1rem;
+}
+
+
 /***********************************************************
 * 2. Navbar
 ************************************************************/
@@ -293,7 +393,7 @@ input::placeholder {
 }
 
 
-#main-nav ul a  {
+#main-nav ul a {
   text-decoration: none;
   font-weight: 600;
   color: rgb(44, 39, 39);
@@ -326,19 +426,19 @@ input::placeholder {
 * 3. Home Page Page Sections
 ************************************************************/
 #content #transcript-found {
-  background: rgb(127,127,127, 0.1);
+  background: rgb(127, 127, 127, 0.1);
 }
 
-#content #transcript-box { 
+#content #transcript-box {
   flex-flow: column;
   line-height: 3rem;
 }
 
-#content #transcript-box button { 
+#content #transcript-box button {
   padding: 1rem;
   border-radius: 1rem;
   font-size: 1rem;
-  margin: 2rem;
+  margin: 0rem 1rem;
 }
 
 #content #transcript-box label {
@@ -346,13 +446,13 @@ input::placeholder {
   color: #494646;
 }
 
-#content #transcript-box a  { 
+#content #transcript-box a {
   color: var([--primary-color])
 }
 
 
-#content #links p  {
-  padding-top: 2rem;
+#content #links p {
+  padding-top: 1.5rem;
 }
 
 #content #links #group-links {
@@ -365,7 +465,7 @@ input::placeholder {
 }
 
 
-#content #links #group-links a { 
+#content #links #group-links a {
   text-decoration: none;
   height: 9rem;
   width: 9rem;
@@ -376,44 +476,47 @@ input::placeholder {
   align-items: center;
 }
 
-#content #links #group-links a:hover { 
+#content #links #group-links a:hover {
   opacity: 0.7;
   cursor: pointer;
 }
 
 
+
 /***********************************************************
 * 4. Request page sections
 ************************************************************/
-  #requestForm select, #requestForm input {
+#requestForm select,
+#requestForm input {
   height: 2rem;
   margin: .5rem;
 }
 
-#ticketInfo{
-  background: rgb(127,127,127, 0.1);
+#ticketInfo {
+  background: rgb(127, 127, 127, 0.1);
   /* width: 80vh; */
   text-align: center;
   line-height: 3rem;
   overflow-wrap: break-word;
 }
 
-.container #requestType{
+.container #requestType {
   width: 80%;
 }
 
-#verbit  {
+#verbit {
   visibility: hidden;
 }
-#verbit input{
+
+#verbit input {
   width: 1.25rem;
 }
 
-#requestCommentsLabel h3{
+#requestCommentsLabel h3 {
   padding-left: .5rem;
 }
 
-#time-calculator { 
+#time-calculator {
   display: flex;
   flex-flow: row;
   width: 100%;
@@ -432,36 +535,37 @@ input::placeholder {
   cursor: pointer;
 }
 
-#ticketInfo { 
+#ticketInfo {
   line-height: 3.5rem;
 }
 
-#ticketInfo #requestSubmit { 
-margin-top: 3rem;
-background: var(--primary-color);
-padding: .8rem;
-border-radius: 1rem;
-border: none;
-color: white;
-width: 8rem;
+#ticketInfo #requestSubmit {
+  margin-top: 3rem;
+  background: var(--primary-color);
+  padding: .8rem;
+  border-radius: 1rem;
+  border: none;
+  color: white;
+  width: 8rem;
 }
 
-#ticketInfo #requestSubmit:hover { 
+#ticketInfo #requestSubmit:hover {
   opacity: 0.8;
   cursor: pointer;
 }
+
 /***********************************************************
 * 4. Prepare page sections
 ************************************************************/
 .group-all {
   /* border: 1px solid black; */
-  margin: 4rem 6rem; 
+  margin: 4rem 6rem;
   width: 80%;
   height: 70vh;
 }
 
 .transcripts-table {
-  border: 1px rgb(127,127,127, 0.5) solid;
+  border: 1px rgb(127, 127, 127, 0.5) solid;
   height: 60vh;
   grid-template-columns: 1fr 1fr 1fr 2fr 1fr;
   /* grid-template-rows: repeat(auto-fill, minmax(5, 4rem)); */
@@ -472,10 +576,11 @@ width: 8rem;
   overflow: auto;
   /* grid-row-gap: 2rem; */
   grid-auto-rows: 3rem;
-  
+
 }
 
-.prepare-btn, .claim-transcription-btn { 
+.prepare-btn,
+.claim-transcription-btn {
   border: none;
   height: 1.5rem;
   border-radius: 10px;
@@ -486,18 +591,18 @@ width: 8rem;
   line-height: 2rem;
 }
 
-#left-prep div { 
+#left-prep div {
   padding: .5rem 0;
 }
 
 #left-prep input {
- margin: .5rem;
- height: 2rem;
- width: 60%;
- border: 1px solid var(--primary-color);
- border-radius: 10px;
- background: white;
-} 
+  margin: .5rem;
+  height: 2rem;
+  width: 60%;
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  background: white;
+}
 
 #left-prep .verbit-check {
   width: 50%;
@@ -519,78 +624,97 @@ width: 8rem;
   width: 2rem;
 }
 
-#left-prep input::placeholder{
+#left-prep input::placeholder {
   color: var(--primary-color);
   padding: 1rem;
- } 
+}
 
- #left-prep .check-completion { 
-   position: relative;
-   left: -31.2rem;
-   float: right;
- }
+#left-prep #seeErrorMessage {
+  position: relative;
+  left: 10rem;
+  top: 0.5rem;
+  padding: 1rem;
+  background-color: red;
+  border-radius: 10px;
+}
 
- #left-prep #getVerbitId {
-   margin-top: 1.5rem;
- }
- #left-prep .check-completion p {
-   font-size: 12px;
-   color: var(--primary-color);
-   line-height: 1.5rem;
- }
+#left-prep .check-completion {
+  position: relative;
+  left: -31.2rem;
+  float: right;
+}
 
- .check-placeholder-completion {
-    width: 100%;
-    display: flex;
-    flex-flow: row;
-    justify-content: center;
-    line-height: 1.3rem;
- }
+#left-prep #getVerbitId {
+  margin-top: 1.5rem;
+}
 
- .check-placeholder-completion input[type='submit'] { 
+#left-prep .check-completion p {
+  font-size: 12px;
+  color: var(--primary-color);
+  line-height: 1.5rem;
+}
+
+.check-placeholder-completion {
+  width: 100%;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  line-height: 1.3rem;
+}
+
+.check-placeholder-completion input[type='submit'] {
   position: relative;
   bottom: .5rem;
- }
+}
 
- .check-placeholder-completion p { 
-   color: var(--primary-color);
+.check-placeholder-completion p {
+  color: var(--primary-color);
   font-size: 12px;
- }
- 
- .check-placeholder-completion div { 
-   width: 15%;
- }
+}
 
- .check-placeholder-completion input[type='checkbox']{
+.check-placeholder-completion div {
+  width: 15%;
+}
+
+.check-placeholder-completion input[type='checkbox'] {
   margin: .5rem;
   height: 2rem;
   width: 60%;
   border: 1px solid var(--primary-color);
   border-radius: 10px;
   background: lightgray;
- }
+}
 
- .code-btn { 
-   padding: 1rem;
-   width: 50%;
-   margin: 1rem 2rem;
-   border-radius: 10px;
- }
+.code-btn {
+  padding: 1rem;
+  width: 50%;
+  margin: 1rem 2rem;
+  border-radius: 10px;
+}
 
- /* Another Special Modal for the Embedded Code */
+/* Another Special Modal for the Embedded Code */
 
- .modal3 {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+.modal3 {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  -webkit-animation-name: fadeIn; /* Fade in the background */
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0);
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+  -webkit-animation-name: fadeIn;
+  /* Fade in the background */
   -webkit-animation-duration: 0.4s;
   animation-name: fadeIn;
   animation-duration: 0.4s
@@ -633,41 +757,42 @@ width: 8rem;
   height: 3rem;
 }
 
-.modal-header3 h2  {
+.modal-header3 h2 {
   color: white !important;
   font-size: 25px;
 }
 
 .modal-body3 {
-padding: 2px 16px;
-height: 10rem;
-color: white;
-background: lightgray;
-display: flex;
-/* align-content: center;
+  padding: 2px 16px;
+  height: 10rem;
+  color: white;
+  background: lightgray;
+  display: flex;
+  /* align-content: center;
 justify-content: center;
 text-align: center; */
-flex-flow: row;
+  flex-flow: row;
 }
 
-.modal-body3 i { 
+.modal-body3 i {
   position: relative;
   left: 0rem;
   top: 1.76rem;
   color: var(--primary-color);
 }
 
-.modal-body3 i:hover { 
-opacity: 0.5;
-cursor: pointer;
+.modal-body3 i:hover {
+  opacity: 0.5;
+  cursor: pointer;
 }
 
-.modal-body3 p { 
-color: var(--primary-color);
-font-size: .63rem;
-position: relative;
-left: 2rem;
+.modal-body3 p {
+  color: var(--primary-color);
+  font-size: .63rem;
+  position: relative;
+  left: 2rem;
 }
+
 .modal-body3 textarea {
   width: 90%;
   max-width: 90%;
@@ -675,7 +800,7 @@ left: 2rem;
   max-height: 85%;
   min-height: 85%;
   padding-top: 2rem;
-  font-family:'Open Sans', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   border-radius: 10px;
   text-align: center;
   background: lightgray;
@@ -691,21 +816,45 @@ left: 2rem;
 
 /* Add Animation */
 @-webkit-keyframes slideIn {
-  from {bottom: 0; opacity: 0} 
-  to {bottom: 340px; opacity: 1}
+  from {
+    bottom: 0;
+    opacity: 0
+  }
+
+  to {
+    bottom: 340px;
+    opacity: 1
+  }
 }
 
 @keyframes slideIn {
-  from {bottom: 0; opacity: 0}
-  to {bottom: 340px; opacity: 1}
+  from {
+    bottom: 0;
+    opacity: 0
+  }
+
+  to {
+    bottom: 340px;
+    opacity: 1
+  }
 }
 
 @-webkit-keyframes fadeIn {
-  from {opacity: 0} 
-  to {opacity: 1}
+  from {
+    opacity: 0
+  }
+
+  to {
+    opacity: 1
+  }
 }
 
 @keyframes fadeIn {
-  from {opacity: 0} 
-  to {opacity: 1}
+  from {
+    opacity: 0
+  }
+
+  to {
+    opacity: 1
+  }
 }

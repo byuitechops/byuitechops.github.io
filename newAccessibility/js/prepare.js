@@ -102,6 +102,27 @@ function fillPrepTicket(transcriptID) {
             if (doc.data().verbitID != 'undefined' || doc.data().verbitID != '') {
                 document.getElementById('getVerbitId').value = doc.data().verbitID;
             }
+            if (doc.data().returnToPrepNote != 'undefined' || doc.data().returnToPrepNote != '') {
+                document.getElementById('seeErrorMessage').classList.remove('hide');
+                document.getElementById('seePrepReturnNote').innerHTML = `<b style="color: red;">This transcript was sent back to prep with the following note: </b>  ${doc.data().returnToPrepNote}`
+            }
+
+            if (doc.data().returnToPrepNote != '' || doc.data().returnToPrepNote != 'undefined') {
+                alert('This video has been transfered back to prep. Please read carefully the notes provided to update the document.');
+                document.getElementById('myModalReadError').style.display = 'block';
+            }
+
+
+        })
+        .then(function () {
+            // if the element selected to fill the box is undefined, instead of showing undefined, shows only
+            // a blank space
+            document.querySelectorAll('input').forEach(function (element) {
+                if (element.value == 'undefined') {
+                    element.value = '';
+                    console.log(element.value);
+                }
+            })
         })
         .catch(function (error) {
             console.log(error);
@@ -143,8 +164,7 @@ document.getElementById('requestSubmit').addEventListener('click', () => {
         message.innerHTML = 'You must fill in all inputs';
         message.style.color = 'red';
         resetMessage();
-    } 
-    else if (!docPublished.value.includes('/pub')) { 
+    } else if (!docPublished.value.includes('/pub')) {
         message.innerHTML = 'You must add a valid publishable link before continuing';
         message.style.color = 'red';
         resetMessage();
@@ -372,4 +392,13 @@ function copyToClipboard() {
     let textarea = document.getElementById("codehtml");
     textarea.select();
     document.execCommand("copy");
+}
+
+//Handles the modal box created for the user to see request notes and pertaining information to it
+document.getElementById('seeErrorMessage').addEventListener('click', () => {
+    document.getElementById('myModalReadError').style.display = "block";
+})
+
+document.getElementsByClassName("close5")[0].onclick = function () {
+    document.getElementById('myModalReadError').style.display = "none";
 }

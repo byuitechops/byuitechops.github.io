@@ -89,7 +89,7 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
             requestor: user.displayName,
             requestDate: new Date(),
             status: 'Ready for Prep',
-            notes: comments
+            requestNotes: comments + `. Comment made by: ${user.displayName}`
         }
 
         if (requestType == "Transcript") {

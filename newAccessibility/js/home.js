@@ -13,6 +13,12 @@ firebase.auth().onAuthStateChanged(function (user) {
                         //user has a prep project that is unfinished
                         fillTranscriptBox(doc.data().actionID);
                     }
+                    else if (doc.data().currentAction == 'reviewing') {
+                        fillTranscriptBox(doc.data().actionID);
+                        document.getElementById('btn-finish').innerText = 'Review Finished';
+                        document.getElementById('verbitID-display').classList.add('hide');
+                        document.getElementById('verbitLabel').classList.add('hide');
+                    }
                 })
 
             })
@@ -31,27 +37,52 @@ function fillTranscriptBox(transcriptID) {
             document.getElementById('updateMediaLink').href = doc.data().srcURL;
             document.getElementById('btn-finish').value = transcriptID;
             document.getElementById('submit-report').value = transcriptID;
+            document.getElementById('verbitID-display').innerText = doc.data().verbitID;
+            document.getElementById('addRequestNotes').innerText = `Request Notes: ${doc.data().requestNotes}`
+            
         })
 
 }
 
+
 //handles the user click on the button finishing the transcript
 function finalizeTranscript(transcriptID) {
     if (confirm("Are you sure you finished transcribing this project?")) {
-        db.collection('users').doc(userID[0]).update({
-                currentAction: '',
-                actionID: ''
-            })
-            .then(() => {
-                db.collection('accessibility').doc(transcriptID).update({
-                        status: 'Ready for Review',
-                        dateTranscriptionFinished: new Date()
-                    })
-                    .then(() => {
-                        window.location.reload();
-                    })
-
-            })
+        db.collection('users').doc(userID[0]).get()
+        .then(function(doc) { 
+            if (doc.data().currentAction == 'transcribing') {
+                db.collection('users').doc(userID[0]).update({
+                    currentAction: '',
+                    actionID: ''
+                })
+                .then(() => {
+                    db.collection('accessibility').doc(transcriptID).update({
+                            status: 'Ready for Review',
+                            dateTranscriptionFinished: new Date()
+                        })
+                        .then(() => {
+                            window.location.reload();
+                        })
+    
+                })
+            }
+            else if ((doc.data().currentAction == 'reviewing')) { 
+                db.collection('users').doc(userID[0]).update({
+                    currentAction: '',
+                    actionID: ''
+                })
+                .then(() => {
+                    db.collection('accessibility').doc(transcriptID).update({
+                            status: 'Review Completed',
+                            dateReviewFinished: new Date()
+                        })
+                        .then(() => {
+                            window.location.reload();
+                        })
+                })
+            }
+        })
+        
 
     } else {
 
@@ -70,7 +101,7 @@ function sendBackPrep(transcriptID) {
             .then(function () {
                 db.collection('accessibility').doc(transcriptID).update({
                     status: 'Ready for Prep',
-                    notes: document.getElementById('problem-description').value + ".  Note Submitted by: " + userName[0]
+                    returnToPrepNote: document.getElementById('problem-description').value + ".  Note Submitted by: " + userName[0]
                 })
             })
             .then(() => {
@@ -97,6 +128,7 @@ var submitReportBtn = document.getElementById('submit-report').addEventListener(
     // })
     modal.style.display = "none";
 })
+
 // When the user clicks the button, open the modal 
 btn.onclick = function () {
     modal.style.display = "block";
@@ -120,4 +152,13 @@ function resetMessage() {
         message.innerHTML = "";
         message.style.color = "black";
     }, 10000);
+}
+
+//Handles the modal box created for the user to see request notes and pertaining information to it
+document.getElementById('read-notes').addEventListener('click', () => { 
+    document.getElementById('myModalRead').style.display = "block";
+})
+
+document.getElementsByClassName("close4")[0].onclick = function () {
+    document.getElementById('myModalRead').style.display = "none";
 }

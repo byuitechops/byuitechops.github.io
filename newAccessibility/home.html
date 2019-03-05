@@ -43,7 +43,7 @@
                         <li class="hide">Master
                         </li>
                     </a>
-                    <a href="home.html">
+                    <a onclick="userLogout()">
                         <li>Log Out
                         </li>
                     </a>
@@ -74,7 +74,7 @@
                 </div>
             </section>
             <section id="transcript-not-found" class="">
-                    <h3>You currently have no projects requested for transcrition</h3>
+                <h3>You currently have no projects requested for transcrition</h3>
             </section>
             <section id="transcript-found" class="container center half col hide">
 
@@ -84,18 +84,29 @@
                     <p id="updateCode"> Lorem, ipsum dolor.</p>
                     <label for="transcript-title">Transcript Title</label>
                     <p id="updateTitle">MATH 999</p>
-                    <a id="updateMediaLink" href="https://www.youtube.com/watch?v=Fdf5aTYRW0E" target="_blank">Media Link</a>
+                    <a id="updateMediaLink" href="https://www.youtube.com/watch?v=Fdf5aTYRW0E" target="_blank">Media
+                        Link</a>
                     <label for="transcript-title"></label>
-                    <a id="updateDocLink" href="https://docs.google.com/spreadsheets/d/1mhCCTU-3vR69KCsJbKkcHDnVU4ZMLbcmIU97txvhQd4/edit#gid=0" target="_blank">Google
+                    <a id="updateDocLink" href="https://docs.google.com/spreadsheets/d/1mhCCTU-3vR69KCsJbKkcHDnVU4ZMLbcmIU97txvhQd4/edit#gid=0"
+                        target="_blank">Google
                         Document Link</a>
-                    <label for="">Verbit ID (if applicable)</label>
-                    <p>0_c27e0l3x_0_3f5jgkzb_2-0_c27e0l3x_0_3f5jgkzb_2.mp4</p>
+                    <label id="verbitLabel" for="">Verbit ID (if applicable)</label>
+                    <p id="verbitID-display">0_c27e0l3x_0_3f5jgkzb_2-0_c27e0l3x_0_3f5jgkzb_2.mp4</p>
+                    <button id="read-notes" class="bg-primary btn-hover"> See Request Notes </button>
+                    <div id="myModalRead" class="modal">
+                        <div class="modal-content">
+                            <p id="addRequestNotes">Request Notes</p>
+                            <span class="close4">&times;</span>
+                        </div>
+                    </div>
                     <div class="container-center mg-top">
-                        <button id="btn-finish" class="bg-primary btn-hover" value="" onclick="finalizeTranscript(value)">Transcript Finished</button>
+                        <button id="btn-finish" class="bg-primary btn-hover" value="" onclick="finalizeTranscript(value)">Transcript
+                            Finished</button>
                         <button id="btn-report" value="" class="bg-error btn-hover red">Send Back to Prep</button>
                     </div>
                     <div id="myModal" class="modal">
-                        <button id="submit-report" class="bg-primary btn-hover" value="" onclick="sendBackPrep(value)">Submit Report</button>
+                        <button id="submit-report" class="bg-primary btn-hover" value="" onclick="sendBackPrep(value)">Submit
+                            Report</button>
                         <!-- Modal content -->
                         <div class="modal-content">
                             <p> Report Problem with the Transcript: </p>
@@ -111,3 +122,4 @@
 <script src="js/home.js"></script>
 
 </html>
+
