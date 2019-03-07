@@ -1,5 +1,7 @@
 var userID = [];
 var userName = [];
+var checkDuplicates = [];
+var userAction = []
 //checks if the user has actually finished a prep before starting another one + handles permission requirements
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
@@ -9,16 +11,21 @@ firebase.auth().onAuthStateChanged(function (user) {
                 querySnapshot.forEach(function (doc) {
                     userID.push(doc.id);
                     userName.push(doc.data().name);
+                    if (doc.data().role == 'Copyedit') {
+                        window.location.assign('home.html');
+                    }
                     if (doc.data().currentAction == 'preparing' || doc.data().currentAction == 'transcribing') {
                         //user has a prep project that is unfinished
                         // alert('Please, finish preparing or transcribing previous transcript before proceding');
                         if (doc.data().currentAction == 'preparing') {
                             displayPrepareModal(doc.data().actionID);
+                            userAction.push(doc.data().actionID);
+                            document.getElementById('storeUserID').innerText = doc.id;
                         } else {
                             window.location.replace('home.html');
                         }
-
-                    } else { //user doesn't have any projects, we will let him choose one
+                        //user doesn't have any projects, we will let him choose one
+                    } else {
                         fillPrepTableStart();
                     }
                 })
@@ -58,8 +65,21 @@ function displayPrepareModal(transcriptID) {
 
 //Uses the id selected to update the ticket information on the right side of prep
 function fillPrepTicket(transcriptID) {
+    console.log(transcriptID);
+
+    //this section is really important. It handles us finding duplicate videos. If a video
+    // is found having the same src URL
+
     db.collection('accessibility').doc(transcriptID).get()
         .then(function (doc) {
+
+            // if (doc.data().copied == true) { 
+
+            // }
+            if (doc.data().type != 'Transcript') {
+                document.getElementById('getVerbitId').value = 'The transcript does not use Verbit';
+            }
+
             //updates left side as far as if verbit is being used and prior completion
             if (doc.data().verbit) {
                 document.getElementById('check-verbit-checked').checked = true;
@@ -77,9 +97,9 @@ function fillPrepTicket(transcriptID) {
             document.getElementById('mediaSide').innerText = 'Media URL: ' + doc.data().srcURL;
             var priorCompletion = document.getElementById('priorCompletionBox').checked ? 'Transcript Previously Done' : 'New Transcript'
             document.getElementById('priorCompletionSide').innerText = 'Prior Completion: ' + priorCompletion;
-            // document.getElementById('verbitUsed').innerText = 'Verbit ID: ' + 
             document.getElementById('storeTranscriptID').innerText = transcriptID;
-            document.getElementById('storeUserID').innerText = userID;
+            // document.getElementById('verbitUsed').innerText = 'Verbit ID: ' + 
+
             document.getElementById('storeHeight').innerText = doc.data().videoHeight;
             document.getElementsByClassName('code');
 
@@ -87,38 +107,32 @@ function fillPrepTicket(transcriptID) {
                 document.getElementById('embeddedCode').classList.add('hide');
                 document.getElementById('hideVerbit').classList.add('hide');
                 document.getElementById('getVerbitId').classList.add('hide');
-            } else {
-
             }
 
-            if (doc.data().docPublishURL != 'undefined' || doc.data().docPublishURL != '') {
+            if (doc.data().docPublishURL != undefined && doc.data().docPublishURL != '') {
                 document.getElementById('googleDocPublish').value = doc.data().docPublishURL;
             }
 
-            if (doc.data().docEditURL != 'undefined' || doc.data().docEditURL != '') {
+            if (doc.data().docEditURL != undefined && doc.data().docEditURL != '') {
                 document.getElementById('googleDocEdit').value = doc.data().docEditURL;
             }
 
-            if (doc.data().verbitID != 'undefined' || doc.data().verbitID != '') {
+            if (doc.data().verbitID != undefined && doc.data().verbitID != '') {
                 document.getElementById('getVerbitId').value = doc.data().verbitID;
             }
-            if (doc.data().returnToPrepNote != 'undefined' || doc.data().returnToPrepNote != '') {
+
+            if (doc.data().returnToPrepNote != '' && doc.data().returnToPrepNote != undefined) {
+                alert('This video has been transfered back to prep. Please read carefully the notes provided to update the document. If you cannot solve the problem, contact a lead');
+                document.getElementById('myModalReadError').style.display = 'block';
                 document.getElementById('seeErrorMessage').classList.remove('hide');
                 document.getElementById('seePrepReturnNote').innerHTML = `<b style="color: red;">This transcript was sent back to prep with the following note: </b>  ${doc.data().returnToPrepNote}`
             }
-
-            if (doc.data().returnToPrepNote != '' || doc.data().returnToPrepNote != 'undefined') {
-                alert('This video has been transfered back to prep. Please read carefully the notes provided to update the document.');
-                document.getElementById('myModalReadError').style.display = 'block';
-            }
-
-
         })
         .then(function () {
             // if the element selected to fill the box is undefined, instead of showing undefined, shows only
             // a blank space
             document.querySelectorAll('input').forEach(function (element) {
-                if (element.value == 'undefined') {
+                if (element.value == undefined) {
                     element.value = '';
                     console.log(element.value);
                 }
@@ -168,9 +182,13 @@ document.getElementById('requestSubmit').addEventListener('click', () => {
         message.innerHTML = 'You must add a valid publishable link before continuing';
         message.style.color = 'red';
         resetMessage();
+    } else if (verbitID.value == '' && verbit.checked) {
+        message.innerHTML = 'You must fill in all inputs Verbit';
+        message.style.color = 'red';
+        resetMessage();
     } else {
-        var id = document.getElementById('storeTranscriptID').innerText;
-        db.collection('accessibility').doc(id).update({
+        var transcriptID = document.getElementById('storeTranscriptID').innerText;
+        db.collection('accessibility').doc(transcriptID).update({
                 status: 'Ready for Transcription',
                 docEditURL: docEdit.value,
                 docPublishURL: docPublished.value,
@@ -178,7 +196,7 @@ document.getElementById('requestSubmit').addEventListener('click', () => {
                 verbit: verbit.checked
             })
             .then(() => {
-                var idUser = document.getElementById('storeUserID').innerText;
+                var idUser = userID[0];
                 db.collection('users').doc(idUser).update({
                         currentAction: '',
                         actionID: ''
@@ -186,14 +204,10 @@ document.getElementById('requestSubmit').addEventListener('click', () => {
                     .then(() => {
                         searchPrepPage.classList.remove('hide');
                         doPrepPage.classList.add('hide');
-                        fillPrepTableStart();
+                        window.location.reload();
                     })
-
             })
-
     }
-
-
 })
 // fill the prep table with available transcripts
 
@@ -201,9 +215,16 @@ function fillPrepTableStart() {
     db.collection("accessibility").where('status', '==', 'Ready for Prep').orderBy('priority').get()
         .then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
+                var classRed = '';
+                var flaggedStr = '';
+                // console.log(doc.data().returnToPrepNote);
+                if (doc.data().returnToPrepNote != '' && doc.data().returnToPrepNote != undefined) {
+                    var classRed = 'red';
+                    var flaggedStr = ' (Returned)';
+                }
                 var p = `<p> ${doc.data().priority}</p> <p>${doc.data().courseCode}</p> <p>${doc.data().type}</p>
-                    <p>${doc.data().title}</p>  <button onclick="displayPrepareModal('${doc.id}')" class="bg-primary btn-hover prepare-btn">
-                    Prepare</button>`;
+                    <p>${doc.data().title}</p>  <button onclick="displayPrepareModal('${doc.id}')" class="bg-primary btn-hover prepare-btn ${classRed}">
+                    Prepare${flaggedStr}</button>`;
                 document.getElementById('prep-table').insertAdjacentHTML('beforeend', p);
             })
         })
@@ -225,7 +246,6 @@ function fillPrepTable(selectedCourseCode) {
             })
         })
 }
-
 
 //get courses for the drop down menu
 getCourses();
@@ -402,3 +422,58 @@ document.getElementById('seeErrorMessage').addEventListener('click', () => {
 document.getElementsByClassName("close5")[0].onclick = function () {
     document.getElementById('myModalReadError').style.display = "none";
 }
+
+
+//updates the page so the user can now prepare the transcript
+// .then(function () {
+//     db.collection('accessibility').doc(transcriptID).get()
+//         .then(function (doc) {
+//             checkDuplicates.push(doc.data().srcURL);
+//             db.collection('accessibility').where('srcURL', "==", checkDuplicates[0]).get()
+//                 .then(function (querySnapshot) {
+//                     if (querySnapshot.size == 1) {
+//                         db.collection('accessibility').doc(transcriptID).update({
+//                             parentTranscript: true
+//                         })
+//                     } else {
+//                         db.collection('accessibility').doc(transcriptID).update({
+//                             parentTranscript: false
+//                         })
+//                     }
+//     querySnapshot.forEach(function(doc) {
+//         if (doc.data().parentTranscript == true) {
+//             var arrayCopy = {
+//                 title: doc.data().title,
+//                 srcURL: doc.data().srcURL,
+//                 docEditURL: doc.data().docEditURL,
+//                 docPublishURL: doc.data().docPublishURL,
+//                 type: doc.data().type,
+//                 parentTranscript: false,
+//                 verbit: doc.data().verbit,
+//                 verbitID: doc.data().verbitID,
+//                 copied: true
+//             }
+//             if (doc.id != transcriptID) {
+//                 db.collection('accessibility').doc(transcriptID).update(arrayCopy)
+//                 .then(function() {
+//                     console.log("Copied successifully");
+//                     var disableElms = document.getElementsByTagName('input');
+//                     for (var i = 0; i < disableElms.length; i++) {
+//                         disableElms[i].disabled = true;
+//                     }
+//                     document.getElementById('placeHolderCheckbox').disabled = false;
+//                     document.getElementById('priorCompletionBox').disabled = false;
+//                     document.getElementById('requestSubmit').disabled = false;
+//                     document.getElementById('getVerbitId').classList.add('hard-hide');
+//                    window.location.reload();
+
+//                 })
+//             } else { 
+
+//             }
+
+//         }
+
+
+//     })
+// })

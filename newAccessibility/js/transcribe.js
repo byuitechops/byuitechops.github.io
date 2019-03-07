@@ -50,7 +50,7 @@ function fillTranscribeTable(selectedCourseCode) {
                 if (selectedCourseCode == doc.data().courseCode) {
                     var p = `<p> ${doc.data().priority}</p> <p>${doc.data().courseCode}</p> <p>${doc.data().type}</p>
                         <p>${doc.data().title}</p>  <button onclick="claimTranscription('${doc.id}')" class="bg-primary btn-hover prepare-btn">
-                        Prepare</button>`;
+                        Transcribe</button>`;
                     document.getElementById('transcripts-table').insertAdjacentHTML('beforeend', p);
                 } else {
 

@@ -11,10 +11,9 @@ function updatePriority(newPriority) {
 }
 
 function updateType(newType) {
-    if (newType == 'Transcript') { 
+    if (newType == 'Transcript') {
         document.getElementById('verbit').style.visibility = 'visible';
-    }
-    else { 
+    } else {
         document.getElementById('verbit').style.visibility = 'hidden';
     }
     document.getElementById('typeSide').innerText = 'Transcript Type: ' + newType;
@@ -31,18 +30,18 @@ function updateLocation(newLocation) {
 //according to the request type, displays or hide specific input boxes 
 document.getElementById('requestType').addEventListener('change', function () {
     if (document.getElementById('requestType').value === 'Transcript') {
-        document.getElementById('requestVideoURL').classList.remove('hide');
+        // document.getElementById('requestVideoURL').classList.remove('hide');
         document.getElementById('requestLength').classList.remove('hide');
         // document.getElementById('requestExternalSoftware').classList.remove('hide');
         document.getElementById('timeCalc').classList.remove('hide');
         document.getElementById('requestHeight').classList.remove('hide');
     } else if (document.getElementById('requestType').value === 'Audio') {
-        document.getElementById('requestVideoURL').classList.add('hide');
+        // document.getElementById('requestVideoURL').classList.add('hide');
         document.getElementById('requestLength').classList.remove('hide');
         // document.getElementById('requestExternalSoftware').classList.add('hide');
         document.getElementById('timeCalc').classList.remove('hide');
     } else {
-        document.getElementById('requestVideoURL').classList.add('hide');
+        // document.getElementById('requestVideoURL').classList.add('hide');
         document.getElementById('requestLength').classList.add('hide');
         document.getElementById('requestExternalSoftware').classList.add('hide');
         document.getElementById('timeCalc').classList.add('hide');
@@ -79,16 +78,21 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
         return;
     } else {
         var user = firebase.auth().currentUser;
-
         var docData = {
             title: title,
+            docPublishURL: '',
+            docEditURL: '',
+            verbit: softwareUsed,
+            verbitID: '',
             type: requestType,
             priority: priority,
             courseCode: course,
             lmsURL: lmsURL,
+            srcURL: srcURL,
             requestor: user.displayName,
             requestDate: new Date(),
             status: 'Ready for Prep',
+            copied: false,
             requestNotes: comments + `. Comment made by: ${user.displayName}`
         }
 
@@ -96,7 +100,6 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
             var extraInfo = {
                 srcURL: srcURL,
                 videoLength: videoLength,
-                verbit: softwareUsed,
                 videoHeight: videoHeight,
             }
             var requestTranscript = Object.assign(extraInfo, docData)
@@ -116,8 +119,8 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
 
         // Add a new document in collection "accessibility"
         db.collection('accessibility').add(requestTranscript)
-            .then(function (docRef) {
-                console.log('Document written with ID: ', docRef.id);
+            .then(function (doc) {
+                console.log('Document written with ID: ', doc.id);
                 message.innerHTML = 'Request has been made.';
                 message.style.color = 'blue';
                 resetMessage();
@@ -193,45 +196,6 @@ window.onclick = function (event) {
     }
 }
 
-document.getElementById('timeCalc').addEventListener('click', function () {
-    modal.style.display = "block";
-});
-
-document.getElementById('requestType').addEventListener('change', () => {
-    document.getElementById('requestType').style.borderColor = "rgb(169, 169, 169)";
-})
-
-document.getElementById('requestCourse').addEventListener('change', () => {
-    document.getElementById('requestCourse').style.borderColor = "rgb(169, 169, 169)";
-})
-
-document.getElementById('requestTitle').addEventListener('change', () => {
-    document.getElementById('requestTitle').style.borderColor = "rgb(169, 169, 169)";
-})
-
-document.getElementById('requestPriority').addEventListener('change', () => {
-    document.getElementById('requestPriority').style.borderColor = "rgb(169, 169, 169)";
-})
-
-document.getElementById('requestLMSURL').addEventListener('change', () => {
-    document.getElementById('requestLMSURL').style.borderColor = "rgb(169, 169, 169)";
-})
-
-document.getElementById('requestHeight').addEventListener('change', () => {
-    document.getElementById('requestHeight').style.borderColor = "rgb(169, 169, 169)";
-})
-
-document.getElementById('requestVideoURL').addEventListener('change', () => {
-    document.getElementById('requestVideoURL').style.borderColor = "rgb(169, 169, 169)";
-})
-
-document.getElementById('requestLength').addEventListener('change', () => {
-    document.getElementById('requestLength').style.borderColor = "rgb(169, 169, 169)";
-})
-
-document.getElementById('requestExternalSoftware').addEventListener('change', () => {
-    document.getElementById('requestExternalSoftware').style.borderColor = "rgb(169, 169, 169)";
-})
 
 //Calculates the total of time in seconds according 
 //to user's input for the transcript selected
@@ -300,4 +264,3 @@ function countDocs() {
             console.log(count);
         })
 }
-

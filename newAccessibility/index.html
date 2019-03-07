@@ -14,27 +14,38 @@
 </head>
 
 <body>
-
-    <head>
-        <h1>BYUI Accessibility</h1>
-    </head>
+    <header id="front-page">
+        <img src="./assets/byuiLogo.png" alt="">
+        <h3>Technical Accessibility</h3>
+    </header>
     <main>
         <p id="message"></p>
-        <div id="formId" class="form">
+        <div id="signin" class="container col center">
+            <p>Sign In</p>
             <input id="txtEmail" placeholder="Email" pattern="[a-z0-9]{0,}(@byui.edu)+$" title="BYUI email">
-
             <input id="txtPassword" type="password" placeholder="Password">
-
-            <button id="btnLogin" onclick="logIn()" type="submit">Login</button>
-
-            <a href="signup.html">
-                <button id="btnSignUp">Sign Up</button>
-            </a>
-
-            <button id="resetPassword" onclick="resetPassword()">Reset Password</button>
+            <div class="buttons container row">
+                <button id="btnLogin" class="bg-primary btn-hover" onclick="logIn()" type="submit">Login</button>
+                <button id="btnSignUp" class="bg-primary btn-hover" onclick="signUp()">Sign Up</button>
+            </div>
+            <p id="resetPassword" onclick="resetPassword()">Reset Password</p>
+        </div>
+        <div id="signup" class="container col center hide">
+            <p>Sign Up</p>
+            <input id="nameSP" placeholder="First Name - Last Name" pattern="[a-z0-9]{0,}(@byui.edu)+$" title="BYUI email">
+            <input id="txtEmailSP" placeholder="Email" pattern="[a-z0-9]{0,}(@byui.edu)+$" title="BYUI email">
+            <input id="txtPasswordSP" type="password" placeholder="Password">
+            <input id="txtPasswordConfirmSP" type="password" placeholder="Confirm Password">
+            <select name="role" id="signUpRole">
+                <option value="" disabled selected hidden>Select Role</option>
+                <option value="">Copyedit</option>
+                <option value="">Quality Assurance</option>
+                <option value="">Designer</option>
+            </select>
+            <button type="submit" class="bg-primary btn-hover" onclick="submitSignUp()">Create Account</button>
         </div>
     </main>
 </body>
-<script src="js/main.js"></script>
 <script src="js/login.js"></script>
+
 </html>

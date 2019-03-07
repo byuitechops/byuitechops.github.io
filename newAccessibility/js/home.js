@@ -39,7 +39,6 @@ function fillTranscriptBox(transcriptID) {
             document.getElementById('submit-report').value = transcriptID;
             document.getElementById('verbitID-display').innerText = doc.data().verbitID;
             document.getElementById('addRequestNotes').innerText = `Request Notes: ${doc.data().requestNotes}`
-            
         })
 
 }
