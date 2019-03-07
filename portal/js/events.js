@@ -3,7 +3,7 @@ var today = new Date().toString();
 var editToday = today.slice(4, 10);
 db.collection("users").where("info.birthday", "==", editToday).get()
     .then(function (querySnapshot) {
-        if (!querySnapshot.empty){
+        if (!querySnapshot.empty) {
             modal.style.visibility = "visible";
             modal.style.display = "block";
             console.log(querySnapshot);
@@ -187,6 +187,4 @@ document.ontouchstart = evt => birthday.onClick(evt);
 
     then = now
     birthday.update(delta / 1000)
-
-
 })()
