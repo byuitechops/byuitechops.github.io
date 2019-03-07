@@ -264,3 +264,7 @@ function countDocs() {
             console.log(count);
         })
 }
+
+function revealModalCalc() { 
+    document.getElementById('myModal').style.display = 'block';
+}
