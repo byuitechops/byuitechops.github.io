@@ -34,7 +34,7 @@ function logIn() {
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then(function () {
                 var user = firebase.auth().currentUser;
-                window.location.assign('/home.html');
+                window.location.assign('home.html');
             })
             .catch(function (error) {
                 // Handle Errors here. 
