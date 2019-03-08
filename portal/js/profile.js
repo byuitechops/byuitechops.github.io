@@ -66,7 +66,7 @@ redeemConfirmBtn.addEventListener('click', () => {
     } else {
 
         db.collection("users").doc(userId).update({
-                "time.accumulatedTime": Number(data.time.accumulatedTime) - Number(document.getElementById("timeDesired").value),
+                "time.accumulatedTime": Number(data.time.accumulatedTime) - Math.round(Number(document.getElementById("timeDesired").value)),
             })
             .then(function () {
                 console.log("Document successfully written!");
