@@ -58,6 +58,7 @@ function displayPrepareModal(transcriptID) {
                 .then(function () {
                     searchPrepPage.classList.add('hide');
                     doPrepPage.classList.remove('hide');
+                    checkForDuplicates(transcriptID);
                     fillPrepTicket(transcriptID);
                 })
         })
@@ -65,17 +66,12 @@ function displayPrepareModal(transcriptID) {
 
 //Uses the id selected to update the ticket information on the right side of prep
 function fillPrepTicket(transcriptID) {
-    console.log(transcriptID);
-
     //this section is really important. It handles us finding duplicate videos. If a video
     // is found having the same src URL
 
     db.collection('accessibility').doc(transcriptID).get()
         .then(function (doc) {
 
-            // if (doc.data().copied == true) { 
-
-            // }
             if (doc.data().type != 'Transcript') {
                 document.getElementById('getVerbitId').value = 'The transcript does not use Verbit';
             }
@@ -212,9 +208,11 @@ document.getElementById('requestSubmit').addEventListener('click', () => {
 // fill the prep table with available transcripts
 
 function fillPrepTableStart() {
+    document.getElementById('prep-table').innerHTML = '';
     db.collection("accessibility").where('status', '==', 'Ready for Prep').orderBy('priority').get()
         .then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
+                console.log(doc.id);
                 var classRed = '';
                 var flaggedStr = '';
                 // console.log(doc.data().returnToPrepNote);
@@ -423,57 +421,55 @@ document.getElementsByClassName("close5")[0].onclick = function () {
     document.getElementById('myModalReadError').style.display = "none";
 }
 
-
-//updates the page so the user can now prepare the transcript
-// .then(function () {
-//     db.collection('accessibility').doc(transcriptID).get()
-//         .then(function (doc) {
-//             checkDuplicates.push(doc.data().srcURL);
-//             db.collection('accessibility').where('srcURL', "==", checkDuplicates[0]).get()
-//                 .then(function (querySnapshot) {
-//                     if (querySnapshot.size == 1) {
-//                         db.collection('accessibility').doc(transcriptID).update({
-//                             parentTranscript: true
-//                         })
-//                     } else {
-//                         db.collection('accessibility').doc(transcriptID).update({
-//                             parentTranscript: false
-//                         })
-//                     }
-//     querySnapshot.forEach(function(doc) {
-//         if (doc.data().parentTranscript == true) {
-//             var arrayCopy = {
-//                 title: doc.data().title,
-//                 srcURL: doc.data().srcURL,
-//                 docEditURL: doc.data().docEditURL,
-//                 docPublishURL: doc.data().docPublishURL,
-//                 type: doc.data().type,
-//                 parentTranscript: false,
-//                 verbit: doc.data().verbit,
-//                 verbitID: doc.data().verbitID,
-//                 copied: true
-//             }
-//             if (doc.id != transcriptID) {
-//                 db.collection('accessibility').doc(transcriptID).update(arrayCopy)
-//                 .then(function() {
-//                     console.log("Copied successifully");
-//                     var disableElms = document.getElementsByTagName('input');
-//                     for (var i = 0; i < disableElms.length; i++) {
-//                         disableElms[i].disabled = true;
-//                     }
-//                     document.getElementById('placeHolderCheckbox').disabled = false;
-//                     document.getElementById('priorCompletionBox').disabled = false;
-//                     document.getElementById('requestSubmit').disabled = false;
-//                     document.getElementById('getVerbitId').classList.add('hard-hide');
-//                    window.location.reload();
-
-//                 })
-//             } else { 
-
-//             }
-
-//         }
-
-
-//     })
-// })
+function checkForDuplicates(transcriptID) {
+    //first let's receive into a variable the link used in this media
+    var mediaURL = [];
+    var copied = [];
+    var copyObject = {};
+    db.collection('accessibility').doc(transcriptID).get()
+        .then(function (doc) {
+            mediaURL.push(doc.data().srcURL);
+            copied.push(doc.data().copied);
+            console.log(mediaURL[0]);
+            console.log(copied[0]);
+        })
+        .then(function () {
+            // console.log(mediaURL[0]);
+            db.collection('accessibility').where('srcURL', '==', mediaURL[0]).where('parentTranscript', "==", true).get()
+                .then(function (querySnapshot) {
+                    if (querySnapshot.size == 1 && !copied[0]) {
+                        querySnapshot.forEach(function (doc) {
+                            object = {
+                                title: doc.data().title,
+                                docEditURL: doc.data().docEditURL,
+                                docPublishURL: doc.data().docPublishURL,
+                                videoHeight: doc.data().videoHeight,
+                                videoLength: doc.data().videoLength,
+                                verbit: doc.data().verbit,
+                                parentTranscript: false,
+                                copied: true,
+                                copiedFrom: doc.id
+                            }
+                            Object.assign(object, copyObject);
+                            console.log(object);
+                            db.collection('accessibility').doc(transcriptID).update(object)
+                                .then(() => {
+                                    console.log('document copied successfully');
+                                })
+                        })
+                    } else if (copied[0]) {
+                        var disableElms = document.getElementsByTagName('input');
+                        for (var i = 0; i < disableElms.length; i++) {
+                            disableElms[i].disabled = true;
+                        }
+                        document.getElementById('placeHolderCheckbox').disabled = false;
+                        document.getElementById('priorCompletionBox').disabled = false;
+                        document.getElementById('requestSubmit').disabled = false;
+                        document.getElementById('getVerbitId').classList.add('hard-hide');
+                    } else {
+                        console.log("There is more than one parent for the same transcript. This is wrong");
+                        return;
+                    }
+                })
+        })
+}
