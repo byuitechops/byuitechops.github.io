@@ -13,116 +13,137 @@
     <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-auth.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-    crossorigin="anonymous">
+        crossorigin="anonymous">
 </head>
 
 <body>
-        <nav id="main-nav">
-                <ul>
-                    <a href="home.html">
-                        <li class=" container col center"><i class="fas fa-home fa-2x"></i>
-                            Home
-                        </li>
-                    </a>
-                    <a href="request.html">
-                        <li class="container col center"> <i class="fas fa-concierge-bell fa-2x bg-white"></i>
-                            Request
-                        </li>
-                    </a>
-                    <a href="prepare.html">
-                        <li class="active container col center"> <i class="far fa-file-alt fa-2x"></i>
-                            Prepare
-                        </li>
-                    </a>
-                    <a href="transcribe.html">
-                        <li class="container col center"><i class="far fa-edit fa-2x"></i>Transcribe
-                        </li>
-                    </a>
-                    <a href="copyedit.html">
-                        <li class="container col center"> <i class="fas fa-clipboard-check fa-2x"></i>Copyedit
-                        </li>
-                    </a>
-                    <a href="master.html">
-                        <li class="hide">Master
-                        </li>
-                    </a>
-                    
-                    <div class="container row center byuiLogo">
-                        <img src="./assets/byuiLogo.png" alt="">
-                        <h2>Technical Accessibility</h2>
-                    </div>
-                    <div onclick="userLogout()"class="container row center logout btn-hover">
-                            <i class="fas fa-sign-out-alt fa-2x"></i>
-                           <p> Log Out </p>
-                    </div>
-                </ul>
-            </nav>
+    <nav id="main-nav">
+        <ul>
+            <a href="home.html">
+                <li class=" container col center"><i class="fas fa-home fa-2x"></i>
+                    Home
+                </li>
+            </a>
+            <a href="request.html">
+                <li class="container col center"> <i class="fas fa-concierge-bell fa-2x bg-white"></i>
+                    Request
+                </li>
+            </a>
+            <a href="prepare.html">
+                <li class="active container col center"> <i class="far fa-file-alt fa-2x"></i>
+                    Prepare
+                </li>
+            </a>
+            <a href="transcribe.html">
+                <li class="container col center"><i class="far fa-edit fa-2x"></i>Transcribe
+                </li>
+            </a>
+            <a href="copyedit.html">
+                <li class="container col center"> <i class="fas fa-clipboard-check fa-2x"></i>Copyedit
+                </li>
+            </a>
+            <a href="master.html">
+                <li class="hide">Master
+                </li>
+            </a>
+
+            <div class="container row center byuiLogo">
+                <img src="./assets/byuiLogo.png" alt="">
+                <h2>Accessibility</h2>
+            </div>
+            <div onclick="userLogout()" class="container row center logout btn-hover">
+                <i class="fas fa-sign-out-alt fa-2x"></i>
+                <p> Log Out </p>
+            </div>
+        </ul>
+    </nav>
     <main>
         <div id="prepare-view" class="container hide">
             <div id="content">
-                <section id="left-prep" class="container mg-top-light half col">
+                <section id="left-prep" class="container half col">
                     <h2>Prepare</h2>
-                    <h3>Google Document</h3>
-                    <input type="text" placeholder="Editable Document Link" id="googleDocEdit">
-                    <input type="text" placeholder="Published Document Link" id="googleDocPublish">
-                    <div>
-                        <div class="check-completion container row">
-                            <input type="checkbox" onchange="updateCompletionRight()" id="priorCompletionBox">
-                            <p>Prior Completion</p>
-                            <i class="far fa-question-circle"></i>
-                            <!-- <button class="bg-primary bg-hover">See Comments</button> -->
-                        </div>
-                        <button class="btn-hover bg-primary hide" id="seeErrorMessage">See Return Comments</button>
-                        <div id="myModalReadError" class="modal">
-                            <div class="modal-content5">
-                                <p id="seePrepReturnNote">Prep Return Note</p>
-                                <span class="close5">&times;</span>
+                    <div class="container col">
+                        <h3>1. Has this transcript been previously completed or <br> found on the drive / external
+                            link?</h3>
+                        <!-- <i class="far fa-question-circle"></i> -->
+                        <div class="container col center-text">
+                            <div class="inline">
+                                <input id="radio-check1" onchange='updateVerbitAccordingToPriorCompletion(true)' type="radio"
+                                    name="previously-completed" value="true">
+                                <label for="previously-completed">Yes</label>
+                            </div>
+                            <div class="inline">
+                                <input id="radio-check2" onchange='updateVerbitAccordingToPriorCompletion(false)' type="radio"
+                                    name="previously-completed" value="false">
+                                <label for="previously-completed">No</label>
                             </div>
                         </div>
                     </div>
-                    <div id="hideVerbit" class="verbit-check">
-                        <input type="checkbox" id="check-verbit-checked">
-                        <p>Verbit:</p>
-                        <p class="small-text">If the video has been requested on Verbit, please update the Verbit video
-                            ID here.</p>
-                    </div>
-                    <input type="text" placeholder="Verbit ID" disabled id="getVerbitId">
+                    <h3>2. Fill Google Document Info</h3>
+                    <input type="text" placeholder="Editable Document Link" id="googleDocEdit">
+                    <input type="text" placeholder="Published Document Link" id="googleDocPublish">
                     <div class="organize-buttons container col">
-                        <h3 style="padding-left: 6.5rem;">Place it in the Course</h3>
-                        <button id="embeddedCode" class="bg-primary btn-hover code-btn" onclick="showCodeEmbedded()">
-                            Get Embedded Code
-                        </button>
-                        <button class="bg-primary btn-hover code-btn" onclick="showCodeLink()">
-                            Get Link Code
-                        </button>
+                        <h3>3. Place it in the Course</h3>
+                        <div class="container row">
+                            <button id="embeddedCode" class="bg-primary btn-hover" style="margin-right: 1rem;" onclick="showCodeEmbedded()">
+                                HTML
+                            </button>
+                            <button class="bg-primary btn-hover" onclick="showCodeLink()">
+                                Link
+                            </button>
+                        </div>
+                    </div>
+                    <div id="hideVerbit" class="verbit-check">
+                        <h3>4. If necessary, create a Verbit request and provide ID</h3>
+                        <div class="inline">
+                            <input type="checkbox" id="check-verbit-checked">
+                            <label>Verbit:</label>
+                        </div>
+                        <input type="text" placeholder="Verbit ID" disabled id="getVerbitId">
                     </div>
                 </section>
-                <section id="ticketInfo" class="container mg-top-light half col">
-                    <h3>Ticket Information</h3>
-                    <div class="ticketbox">
-                        <p class="description" id="typeSide">Transcript Type: </p>
-                        <p class="description" id="codeSide">Course Code: </p>
-                        <p class="description" id="titleSide">Transcript Title: </p>
-                        <p class="description" id="prioritySide">Transcript Priority: </p>
-                        <p class="description" id="locationSide">Location in Course: </p>
-                        <p class="description" id="mediaSide">Media URL: </p>
-                        <p class="description" id="priorCompletionSide">Prior Completion: </p>
-                        <!-- <p class="description" id="verbitUsed">Verbit ID: </p> -->
-                        <div class="check-placeholder-completion">
+                <section id="ticketInfo" class="container half col">
+                    <h2>Ticket Information</h2>
+                    <div class="ticketbox container row">
+                        <div class="container col cover-65 pd-right hidden-overflow">
+                            <label>Media Type:</label>
+                            <p class="description" id="typeSide">Type: </p>
+                            <label>Course Code:</label>
+                            <p class="description" id="codeSide">Course Code: </p>
+                            <label>Title:</label>
+                            <p class="description" id="titleSide">Transcript Title: </p>
+                            <label>Location in Course:</label>
+                            <p class="description" id="locationSide">Location in Course: </p>
+                            <label>Media URL:</label>
+                            <p class="description" id="mediaSide"></p>
+                            <p class="description hide" id="priorCompletionSide">Prior Completion: </p>
+                            <!-- <div class="check-placeholder-completion">
                             <div>
                                 <p>Place Holder Complete?</p>
                                 <input type="checkbox" name="" id="placeHolderCheckbox">
                             </div>
                             <input type="submit" id="requestSubmit">
+                        </div> -->
+
+                            <div class="container row">
+                                <button type="submit" class="bg-primary btn-hover" id="requestSubmit"> Submit </button>
+                                <p style="margin-left: 2rem; margin-top: .8rem;" id="message"></p>
+                            </div>
                         </div>
-                        <p id="message" class=""></p>
+                        <div class="container col cover-35 nice-overflow">
+                            <label for="">Comments</label>
+                            <p id="fillCommentsIn">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente aut officia
+                                reprehenderit vitae fugiat. Explicabo, minus voluptatibus hic consectetur commodi
+                                voluptatem totam tenetur sunt exercitationem sit, dolore asperiores porro sequi?</p>
+                        </div>
                     </div>
+
                 </section>
             </div>
         </div>
         <div id="search-view" class="container col group-all">
             <div class="container row select-transcript">
-                <select onchange="fillPrepTable(value)" id="requestCourse" class="btn-outline-whites dropdown-toggle">
+                <select onchange="fillPrepTable(value)" id="requestCourse" class="dropdown-toggle">
                     <option disabled selected hidden>Course Code</option>
                 </select>
             </div>

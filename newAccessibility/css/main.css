@@ -99,6 +99,10 @@ input::placeholder {
   padding: 0.5rem 5rem;
 }
 
+.inline  {
+  display: inline;
+}
+
 .red {
   background-color: #AD0C20;
   color: white;
@@ -153,10 +157,29 @@ input::placeholder {
   width: 40%;
 }
 
+.cover-65 { 
+  width: 65%;
+}
+
+.cover-35 { 
+  width: 35%;
+}
+
 .real-half { 
   width: 50%;
 }
 
+.nice-overflow { 
+  overflow: auto;
+}
+
+.hidden-overflow { 
+  /* overflow-x: hidden; */
+}
+
+.pd-right {
+  padding-right: 1rem;
+}
 
 #content {
   display: flex;
@@ -182,11 +205,22 @@ input::placeholder {
   height: 3rem;
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 2fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 4fr 1fr;
   text-align: left;
   padding-left: 1rem;
   padding-top: 0.5rem;
   border: 1px #ccc solid;
+}
+
+.transcripts-table {
+  border: 1px rgb(127, 127, 127, 0.5) solid;
+  height: 60vh;
+  grid-template-columns: 1fr 1fr 1fr 4fr 1fr;
+  text-align: left;
+  padding-left: 1rem;
+  padding-top: 0.5rem;
+  overflow: auto;
+  grid-auto-rows: 3rem;
 }
 
 .select-transcript {
@@ -199,7 +233,7 @@ input::placeholder {
 
 .select-transcript select {
   margin-right: 1rem;
-  border-radius: 10px;
+  border-radius: .5rem;
   border: var(--primary-color) 1px solid;
   background-color: white;
   color: var(--primary-color);
@@ -207,10 +241,6 @@ input::placeholder {
 
 .grid {
   display: grid;
-}
-
-.small-text {
-  font-size: 12px;
 }
 
 button {
@@ -372,41 +402,6 @@ input::placeholder {
   max-height: 12rem;
   min-width: 15rem;
   min-height: 12rem;
-}
-
-.close5 {
-  color: black;
-  position: absolute;
-  left: 40rem;
-  top: 0rem;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close5:hover,
-.close5:focus {
-  color: var(--primary-color);
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.modal-content5 {
-  background-color: #fefefe;
-  margin: auto;
-  padding: 40px;
-  border: 1px solid #888;
-  min-width: 42rem;
-  max-width: 42rem;
-  display: flex;
-  height: 12rem;
-  position: absolute;
-  left: 35rem;
-  top: 20rem;
-  overflow-x: auto;
-}
-
-.modal-content5 p {
-  padding: 0.5rem 1rem;
 }
 
 /***********************************************************
@@ -579,6 +574,7 @@ input::placeholder {
 
 #requestForm { 
   line-height: 3.05rem;
+  margin-top: -1rem;
 }
 
 #requestForm #requestLength { 
@@ -647,25 +643,9 @@ input::placeholder {
 * 4. Prepare page sections
 ************************************************************/
 .group-all { 
-  /* border: 1px solid black; */
-  margin: 4rem 6rem;
-  width: 80%;
+  margin: 4rem 7rem;
+  width: 87%;
   height: 70vh;
-}
-
-.transcripts-table {
-  border: 1px rgb(127, 127, 127, 0.5) solid;
-  height: 60vh;
-  grid-template-columns: 1fr 1fr 1fr 2fr 1fr;
-  /* grid-template-rows: repeat(auto-fill, minmax(5, 4rem)); */
-  text-align: left;
-  padding-left: 1rem;
-  padding-top: 0.5rem;
-  /* align-items: baseline; */
-  overflow: auto;
-  /* grid-row-gap: 2rem; */
-  grid-auto-rows: 3rem;
-
 }
 
 .prepare-btn,
@@ -680,38 +660,28 @@ input::placeholder {
   line-height: 2rem;
 }
 
-#left-prep div {
-  padding: .5rem 0;
-}
-
-#left-prep input {
-  margin: .5rem;
+#left-prep input[type=text] {
   height: 2rem;
-  width: 60%;
-  border: 1px solid var(--primary-color);
-  border-radius: 10px;
-  background: white;
+  margin: .5rem;
+  width: 65%;
 }
 
 #left-prep .verbit-check {
-  width: 50%;
-  display: flex;
-  flex-flow: row;
+  padding-top: 1rem;
+  width: 80%;
   height: 4rem;
   flex-wrap: wrap;
 }
 
 #left-prep .verbit-check .small-text {
   position: relative;
-  bottom: 1rem;
+  bottom: 0rem;
   left: 3rem;
   line-height: 1rem;
   padding-bottom: 1rem;
 }
 
-#left-prep .verbit-check input {
-  width: 2rem;
-}
+
 
 #left-prep input::placeholder {
   color: var(--primary-color);
@@ -725,22 +695,6 @@ input::placeholder {
   padding: 1rem;
   background-color: red;
   border-radius: 10px;
-}
-
-#left-prep .check-completion {
-  position: relative;
-  left: -31.2rem;
-  float: right;
-}
-
-#left-prep #getVerbitId {
-  margin-top: 1.5rem;
-}
-
-#left-prep .check-completion p {
-  font-size: 12px;
-  color: var(--primary-color);
-  line-height: 1.5rem;
 }
 
 .check-placeholder-completion {
@@ -774,12 +728,7 @@ input::placeholder {
   background: lightgray;
 }
 
-.code-btn {
-  padding: 1rem;
-  width: 50%;
-  margin: 1rem 2rem;
-  border-radius: 10px;
-}
+
 
 /* Another Special Modal for the Embedded Code */
 

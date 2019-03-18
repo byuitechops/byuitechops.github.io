@@ -84,14 +84,14 @@ function fillPrepTicket(transcriptID) {
                 document.getElementById('check-verbit-checked').checked = false;
             }
             //updates right side of ticket
-            document.getElementById('typeSide').innerText = 'Transcript Type: ' + doc.data().type;
-            document.getElementById('codeSide').innerText = 'Course Code: ' + doc.data().courseCode;
-            document.getElementById('titleSide').innerText = 'Transcript Title: ' + doc.data().title;
-            document.getElementById('prioritySide').innerText = 'Transcript Priority: ' + doc.data().priority;
-            document.getElementById('locationSide').innerText = 'Location in Course: ' + doc.data().lmsURL;
-            document.getElementById('mediaSide').innerText = 'Media URL: ' + doc.data().srcURL;
-            var priorCompletion = document.getElementById('priorCompletionBox').checked ? 'Transcript Previously Done' : 'New Transcript'
-            document.getElementById('priorCompletionSide').innerText = 'Prior Completion: ' + priorCompletion;
+            document.getElementById('typeSide').innerText = doc.data().type;
+            document.getElementById('codeSide').innerText = doc.data().courseCode;
+            document.getElementById('titleSide').innerText = doc.data().title;
+            // document.getElementById('prioritySide').innerText = 'Transcript Priority: ' + doc.data().priority;
+            document.getElementById('locationSide').innerText = doc.data().lmsURL;
+            document.getElementById('mediaSide').innerText = doc.data().srcURL;
+            // var priorCompletion = document.getElementById('priorCompletionBox').checked ? 'Transcript Previously Done' : 'New Transcript'
+            // document.getElementById('priorCompletionSide').innerText = 'Prior Completion: ' + priorCompletion;
             document.getElementById('storeTranscriptID').innerText = transcriptID;
             // document.getElementById('verbitUsed').innerText = 'Verbit ID: ' + 
 
@@ -117,10 +117,8 @@ function fillPrepTicket(transcriptID) {
             }
 
             if (doc.data().returnToPrepNote != '' && doc.data().returnToPrepNote != undefined) {
-                alert('This video has been transfered back to prep. Please read carefully the notes provided to update the document. If you cannot solve the problem, contact a lead');
-                document.getElementById('myModalReadError').style.display = 'block';
-                document.getElementById('seeErrorMessage').classList.remove('hide');
-                document.getElementById('seePrepReturnNote').innerHTML = `<b style="color: red;">This transcript was sent back to prep with the following note: </b>  ${doc.data().returnToPrepNote}`
+                // alert('This video has been transfered back to prep. Please read carefully the notes provided to update the document. If you cannot solve the problem, contact a lead');
+                 document.getElementById('fillCommentsIn').innerHTML = `${doc.data().returnToPrepNote}`
             }
         })
         .then(function () {
@@ -168,8 +166,12 @@ document.getElementById('requestSubmit').addEventListener('click', () => {
     var docPublished = document.getElementById('googleDocPublish');
     var verbit = document.getElementById('check-verbit-checked');
     var verbitID = document.getElementById('getVerbitId');
-    var placed = document.getElementById('placeHolderCheckbox');
-    if (docEdit.value == '' || docPublished.value == '' || !placed.checked) {
+
+    if (!document.getElementById('radio-check1').checked && !document.getElementById('radio-check2').checked) {
+        message.innerHTML = 'You must fill in all inputs';
+        message.style.color = 'red';
+        resetMessage();
+    } else if (docEdit.value == '' || docPublished.value == '') {
         message.innerHTML = 'You must fill in all inputs';
         message.style.color = 'red';
         resetMessage();
@@ -178,7 +180,7 @@ document.getElementById('requestSubmit').addEventListener('click', () => {
         message.style.color = 'red';
         resetMessage();
     } else if (verbitID.value == '' && verbit.checked) {
-        message.innerHTML = 'You must fill in all inputs Verbit';
+        message.innerHTML = 'You must fill in all inputs';
         message.style.color = 'red';
         resetMessage();
     } else {
@@ -402,7 +404,6 @@ function getModal() {
             modal.style.display = "none";
         }
     }
-
 }
 
 function copyToClipboard() {
@@ -411,12 +412,12 @@ function copyToClipboard() {
     document.execCommand("copy");
 }
 
-//Handles the modal box created for the user to see request notes and pertaining information to it
-document.getElementById('seeErrorMessage').addEventListener('click', () => {
-    document.getElementById('myModalReadError').style.display = "block";
-})
-
-document.getElementsByClassName("close5")[0].onclick = function () {
-    document.getElementById('myModalReadError').style.display = "none";
+function updateVerbitAccordingToPriorCompletion(bool) {
+    if (bool) {
+        document.getElementById('hideVerbit').classList.add('hide');
+        document.getElementById('getVerbitId').classList.add('hide');
+    } else {
+        document.getElementById('hideVerbit').classList.remove('hide');
+        document.getElementById('getVerbitId').classList.remove('hide');
+    }
 }
-

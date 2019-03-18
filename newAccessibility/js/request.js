@@ -268,7 +268,7 @@ function checkForDuplicates(videoURL) {
     //first let's receive into a variable the link used in this media
     db.collection('accessibility').where('srcURL', '==', videoURL).where('parentTranscript', "==", true).get()
         .then(function (querySnapshot) {
-            if (querySnapshot.size == 1 && !copied[0]) {
+            if (querySnapshot.size == 1) {
                 querySnapshot.forEach(function (doc) {
                     object = {
                         title: doc.data().title,
@@ -282,13 +282,18 @@ function checkForDuplicates(videoURL) {
                         copied: true,
                         copiedFrom: doc.id
                     }
+                    var copyObject = {}
                     //lets assign object to a empty object as a push, so it saves whatever we set it to
                     Object.assign(object, copyObject);
                     console.log(object);
-                    return true;
+                    return object;
                 })
             } else {
-                return false;
+                object = { 
+                    parentTranscript: true
+                }
+                console.log(object);
+                return object;
             }
             //{ parentTranscript: true, copied: false }
         })
