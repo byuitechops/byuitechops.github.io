@@ -78,6 +78,7 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
         return;
     } else {
         var user = firebase.auth().currentUser;
+
         var docData = {
             title: title,
             docPublishURL: '',
@@ -265,6 +266,58 @@ function countDocs() {
         })
 }
 
-function revealModalCalc() { 
+function revealModalCalc() {
     document.getElementById('myModal').style.display = 'block';
 }
+
+function checkForDuplicates(videoURL) {
+    //first let's receive into a variable the link used in this media
+    db.collection('accessibility').where('srcURL', '==', videoURL).where('parentTranscript', "==", true).get()
+        .then(function (querySnapshot) {
+            if (querySnapshot.size == 1 && !copied[0]) {
+                querySnapshot.forEach(function (doc) {
+                    object = {
+                        title: doc.data().title,
+                        type: doc.data().type,
+                        docEditURL: doc.data().docEditURL,
+                        docPublishURL: doc.data().docPublishURL,
+                        videoHeight: doc.data().videoHeight,
+                        videoLength: doc.data().videoLength,
+                        verbit: doc.data().verbit,
+                        parentTranscript: false,
+                        copied: true,
+                        copiedFrom: doc.id
+                    }
+                    //lets assign object to a empty object as a push, so it saves whatever we set it to
+                    Object.assign(object, copyObject);
+                    console.log(object);
+                    return true;
+                })
+            } else {
+                return false;
+            }
+            //{ parentTranscript: true, copied: false }
+        })
+}
+
+
+
+
+
+    
+    function update() { 
+        let promise = new Promise(function (resolve, reject) {
+           
+                resolve(
+                db.collection('accessibility').doc('7nlnHstuffaFSvcuyHwX').get()
+                    .then(function (doc) {
+                        console.log(doc);
+                    }))
+            
+        })
+        promise.then(
+            result => console.log('yaya'),
+            error => console.log('didnt work'));
+    }
+
+    

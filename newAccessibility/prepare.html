@@ -12,46 +12,51 @@
     <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-auth.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+    crossorigin="anonymous">
 </head>
 
 <body>
-
-    <head>
         <nav id="main-nav">
-            <div class="bg-primary">
-                <h1>BYUI Technical Accessibility</h1>
-            </div>
-            <ul>
-                <a href="home.html">
-                    <li>Home
-                    </li>
-                </a>
-                <a href="request.html">
-                    <li>Request
-                    </li>
-                </a>
-                <a href="prepare.html">
-                    <li class="active">Prepare
-                    </li>
-                </a>
-                <a href="transcribe.html">
-                    <li>Transcribe
-                    </li>
-                </a>
-                <a href="copyedit.html">
-                    <li>Copyedit
-                    </li>
+                <ul>
+                    <a href="home.html">
+                        <li class=" container col center"><i class="fas fa-home fa-2x"></i>
+                            Home
+                        </li>
+                    </a>
+                    <a href="request.html">
+                        <li class="container col center"> <i class="fas fa-concierge-bell fa-2x bg-white"></i>
+                            Request
+                        </li>
+                    </a>
+                    <a href="prepare.html">
+                        <li class="active container col center"> <i class="far fa-file-alt fa-2x"></i>
+                            Prepare
+                        </li>
+                    </a>
+                    <a href="transcribe.html">
+                        <li class="container col center"><i class="far fa-edit fa-2x"></i>Transcribe
+                        </li>
+                    </a>
+                    <a href="copyedit.html">
+                        <li class="container col center"> <i class="fas fa-clipboard-check fa-2x"></i>Copyedit
+                        </li>
+                    </a>
                     <a href="master.html">
                         <li class="hide">Master
                         </li>
                     </a>
-                    <a onclick="userLogout()">
-                        <li>Log Out
-                        </li>
-                    </a>
-            </ul>
-        </nav>
-    </head>
+                    
+                    <div class="container row center byuiLogo">
+                        <img src="./assets/byuiLogo.png" alt="">
+                        <h2>Technical Accessibility</h2>
+                    </div>
+                    <div onclick="userLogout()"class="container row center logout btn-hover">
+                            <i class="fas fa-sign-out-alt fa-2x"></i>
+                           <p> Log Out </p>
+                    </div>
+                </ul>
+            </nav>
     <main>
         <div id="prepare-view" class="container hide">
             <div id="content">
@@ -66,30 +71,31 @@
                             <p>Prior Completion</p>
                             <i class="far fa-question-circle"></i>
                             <!-- <button class="bg-primary bg-hover">See Comments</button> -->
-                        </div> 
+                        </div>
                         <button class="btn-hover bg-primary hide" id="seeErrorMessage">See Return Comments</button>
                         <div id="myModalReadError" class="modal">
-                                <div class="modal-content5">
-                                    <p id="seePrepReturnNote">Prep Return Note</p>
-                                    <span class="close5">&times;</span>
-                                </div>
+                            <div class="modal-content5">
+                                <p id="seePrepReturnNote">Prep Return Note</p>
+                                <span class="close5">&times;</span>
                             </div>
+                        </div>
                     </div>
                     <div id="hideVerbit" class="verbit-check">
                         <input type="checkbox" id="check-verbit-checked">
                         <p>Verbit:</p>
-                        <p class="small-text">If the video has been requested on Verbit, please update the Verbit video ID here.</p>
+                        <p class="small-text">If the video has been requested on Verbit, please update the Verbit video
+                            ID here.</p>
                     </div>
                     <input type="text" placeholder="Verbit ID" disabled id="getVerbitId">
                     <div class="organize-buttons container col">
                         <h3 style="padding-left: 6.5rem;">Place it in the Course</h3>
-                    <button id="embeddedCode" class="bg-primary btn-hover code-btn" onclick="showCodeEmbedded()">
-                        Get Embedded Code
-                    </button>
-                    <button class="bg-primary btn-hover code-btn" onclick="showCodeLink()">
-                        Get Link Code 
-                    </button>
-                </div>
+                        <button id="embeddedCode" class="bg-primary btn-hover code-btn" onclick="showCodeEmbedded()">
+                            Get Embedded Code
+                        </button>
+                        <button class="bg-primary btn-hover code-btn" onclick="showCodeLink()">
+                            Get Link Code
+                        </button>
+                    </div>
                 </section>
                 <section id="ticketInfo" class="container mg-top-light half col">
                     <h3>Ticket Information</h3>
@@ -129,29 +135,29 @@
                     <h3>Claim Prep</h3>
                 </div>
                 <div id="prep-table" class="grid transcripts-table">
-                    
+
                 </div>
             </section>
         </div>
     </main>
     <div id="myModal3" class="modal3">
-            <!-- Modal content -->
-            <div class="modal-content3">
-              <div class="modal-header3">
+        <!-- Modal content -->
+        <div class="modal-content3">
+            <div class="modal-header3">
                 <span class="close3">&times;</span>
                 <h2>Copy the link below and place the video in the course</h2>
-              </div>
-              <div class="modal-body3">
-              <textarea id="codehtml" readonly></textarea>
-              <p>Copy Link</p>
-              <i id="" class="fas fa-copy fa-2x" onclick="copyToClipboard()"></i>
-              </div>
             </div>
-          
-          </div>
-    <p class ="hide" id='storeTranscriptID'></p>
-    <p class ="hide" id='storeUserID'></p>
-    <p class ="hide" id='storeHeight'></p>
+            <div class="modal-body3">
+                <textarea id="codehtml" readonly></textarea>
+                <p>Copy Link</p>
+                <i id="" class="fas fa-copy fa-2x" onclick="copyToClipboard()"></i>
+            </div>
+        </div>
+
+    </div>
+    <p class="hide" id='storeTranscriptID'></p>
+    <p class="hide" id='storeUserID'></p>
+    <p class="hide" id='storeHeight'></p>
 </body>
 <script src="js/main.js"></script>
 <script src="js/prepare.js"></script>

@@ -58,7 +58,6 @@ function displayPrepareModal(transcriptID) {
                 .then(function () {
                     searchPrepPage.classList.add('hide');
                     doPrepPage.classList.remove('hide');
-                    checkForDuplicates(transcriptID);
                     fillPrepTicket(transcriptID);
                 })
         })
@@ -370,7 +369,7 @@ function showCodeLink() {
                 document.getElementById('codehtml').innerText = html;
             } else if (link.includes("youtu.be")) {
                 var id = link.slice(link.indexOf(".be/") + 4, (link.indexOf(".be/") + 4) + 11);
-                var html = `<p><a href="https://www.youtube-nocookie.com/embed/${id}?rel=0&amp;showinfo=0 target="_blank">${title}</a>(${time} mins, <a href="${setlink}" target="_blank">${title} Transcript</a>)</p>`;
+                var html = `<p><a href="https://www.youtube-nocookie.com/embed/${id}?rel=0&amp;showinfo=0" target="_blank">${title}</a>(${time} mins, <a href="${setlink}" target="_blank">${title} Transcript</a>)</p>`;
                 document.getElementById('codehtml').innerText = html;
             } else if (link.includes("video.byui.edu")) {
                 var id = link.slice(link.indexOf("/0_") + 1, (link.indexOf("/0_") + 1) + 10);
@@ -421,55 +420,3 @@ document.getElementsByClassName("close5")[0].onclick = function () {
     document.getElementById('myModalReadError').style.display = "none";
 }
 
-function checkForDuplicates(transcriptID) {
-    //first let's receive into a variable the link used in this media
-    var mediaURL = [];
-    var copied = [];
-    var copyObject = {};
-    db.collection('accessibility').doc(transcriptID).get()
-        .then(function (doc) {
-            mediaURL.push(doc.data().srcURL);
-            copied.push(doc.data().copied);
-            console.log(mediaURL[0]);
-            console.log(copied[0]);
-        })
-        .then(function () {
-            // console.log(mediaURL[0]);
-            db.collection('accessibility').where('srcURL', '==', mediaURL[0]).where('parentTranscript', "==", true).get()
-                .then(function (querySnapshot) {
-                    if (querySnapshot.size == 1 && !copied[0]) {
-                        querySnapshot.forEach(function (doc) {
-                            object = {
-                                title: doc.data().title,
-                                docEditURL: doc.data().docEditURL,
-                                docPublishURL: doc.data().docPublishURL,
-                                videoHeight: doc.data().videoHeight,
-                                videoLength: doc.data().videoLength,
-                                verbit: doc.data().verbit,
-                                parentTranscript: false,
-                                copied: true,
-                                copiedFrom: doc.id
-                            }
-                            Object.assign(object, copyObject);
-                            console.log(object);
-                            db.collection('accessibility').doc(transcriptID).update(object)
-                                .then(() => {
-                                    console.log('document copied successfully');
-                                })
-                        })
-                    } else if (copied[0]) {
-                        var disableElms = document.getElementsByTagName('input');
-                        for (var i = 0; i < disableElms.length; i++) {
-                            disableElms[i].disabled = true;
-                        }
-                        document.getElementById('placeHolderCheckbox').disabled = false;
-                        document.getElementById('priorCompletionBox').disabled = false;
-                        document.getElementById('requestSubmit').disabled = false;
-                        document.getElementById('getVerbitId').classList.add('hard-hide');
-                    } else {
-                        console.log("There is more than one parent for the same transcript. This is wrong");
-                        return;
-                    }
-                })
-        })
-}

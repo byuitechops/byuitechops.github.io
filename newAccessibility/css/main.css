@@ -18,7 +18,11 @@
 * 2. General Rules
 ************************************************************/
 :root {
-  --primary-color: #0076c6;
+  --primary-color: #0076C6;
+  --secondary-color: #000000;
+  --terciary-color: #FFFFFF;
+  --content-color: #EBEBEB;
+  --active-color: #F58300;
 }
 
 * {
@@ -29,15 +33,19 @@
 
 body {
   font-family: 'Open Sans', sans-serif;
-  font-size: 16px;
+  font-size: 13px;
   overflow: hidden;
+  height: 100%;
+}
+
+h1 {
+  font-size: 2rem;
 }
 
 h2 {
   padding-bottom: 2rem;
-  font-size: 2rem;
-  color: #8c8c8c;
-  text-align: center;
+  font-size: 1.6rem;
+  /* color: #8c8c8c; */
 }
 
 li {
@@ -53,6 +61,10 @@ input::placeholder {
   color: #F3F3F3;
 }
 
+.bg-white {
+  color: white
+}
+
 .bg-error {
   background: rgba(197, 18, 18, 0.842);
   color: #f3f3f3;
@@ -62,7 +74,7 @@ input::placeholder {
   display: none !important;
 }
 
-.hard-hide { 
+.hard-hide {
   display: none !important;
 }
 
@@ -84,7 +96,8 @@ input::placeholder {
 }
 
 .red {
-  background-color: red;
+  background-color: #AD0C20;
+  color: white;
 }
 
 .container-start {
@@ -101,13 +114,20 @@ input::placeholder {
 }
 
 .mg-top {
-  padding-top: 3rem;
+  padding-top: 2.5rem;
+}
+
+.pd-left { 
+  padding-left: 1rem;
+}
+
+.pd-bottom {
+  padding-bottom: 1rem;
 }
 
 .container-half {
   width: 50%;
   display: flex;
-  flex-flow: row;
 }
 
 .btn-hover {
@@ -124,10 +144,6 @@ input::placeholder {
 
 }
 
-.dim-width {
-  width: 80vh;
-}
-
 .half {
   width: 40%;
 }
@@ -136,13 +152,9 @@ input::placeholder {
   display: flex;
   flex-flow: row;
   justify-content: space-around;
-  height: 90vh;
-  width: 90%;
-}
-
-#content section {
-  margin: 3rem 2rem;
-  height: 80%;
+  width: 100%;
+  height: 100vh;
+  padding: 3rem 2rem;
 }
 
 .bg-gray {
@@ -191,6 +203,13 @@ input::placeholder {
   font-size: 12px;
 }
 
+button { 
+  width: 8rem;
+  height: 2rem;
+  border-radius: .3rem;
+  margin: none;
+  font-size: .8rem;
+}
 /***********************************************************
 * 2.1 Modal Boxes
 ************************************************************/
@@ -290,7 +309,6 @@ input::placeholder {
   cursor: pointer;
 }
 
-
 .close3 {
   color: white;
   float: right;
@@ -316,7 +334,6 @@ input::placeholder {
   max-height: 30rem;
   overflow: scroll;
 }
-
 
 .close4 {
   color: black;
@@ -376,29 +393,32 @@ input::placeholder {
   padding: 0.5rem 1rem;
 }
 
-
 /***********************************************************
 * 2. Navbar
 ************************************************************/
+
 #main-nav .bg-primary {
   padding: 1.5rem 1rem;
-}
-
-#main-nav h3 {
-  font-size: 2.5rem;
 }
 
 #main-nav ul {
   display: flex;
   flex-flow: row;
-  background: #ebebeb;
-  border: .5px 0 #d8d4d4 solid;
+  background: var(--primary-color);
+  max-height: 4rem;
 }
 
 #main-nav ul li {
-  padding: 0.7rem 4rem;
+  padding: 0.7rem 2.5rem;
+  color: white;
+  font-weight: 150;
+  font-size: .8rem;
 }
 
+#main-nav h2 {
+  color: white;
+  padding-left: 1.5rem;
+}
 
 #main-nav ul a {
   text-decoration: none;
@@ -411,7 +431,7 @@ input::placeholder {
 }
 
 #main-nav ul li:hover {
-  background: #F58300;
+  background: var(--active-color);
   cursor: pointer;
 }
 
@@ -419,63 +439,94 @@ input::placeholder {
   color: #f3f3f3;
 }
 
-#main-nav ul li.active {
-  background-color: #0076C6;
-  color: #FFFFFF;
+#main-nav ul li.active > i, #main-nav ul li.active {
+  background-color: white;
+  color: #0076C6;
 }
 
 #main-nav ul li.active a {
   color: #FFFFFF;
 }
 
+#main-nav ul .byuiLogo {
+  max-height: 100%;
+  position: relative;
+  left: 30rem;
+}
+
+#main-nav ul .byuiLogo img  {
+  max-height: 3rem;
+}
+
+#main-nav ul .byuiLogo h2  {
+  padding-top: 1.5rem;
+  font-weight: 250;
+}
+
+#main-nav .logout { 
+  position: relative;
+  left: 38rem;
+  color: white;
+}
+
+#main-nav .logout p  { 
+padding-left: .5rem;
+}
 
 /***********************************************************
 * 3. Home Page Page Sections
 ************************************************************/
-#content #transcript-found {
-  background: rgb(127, 127, 127, 0.1);
-}
 
+#content #transcript-not-found div {
+  background: var(--content-color);
+  padding: 1.5rem;
+  height: 58%;
+  justify-content: center;
+  text-align: center;
+}
+#content #transcript-box h3  {
+  font-size: 1.5rem;
+}
 #content #transcript-box {
-  flex-flow: column;
-  line-height: 3rem;
+  line-height: 2rem;
+  background: var(--content-color);
+  padding: 1.5rem;
+  height: 58%;
 }
 
-#content #transcript-box button {
-  padding: 1rem;
-  border-radius: 1rem;
-  font-size: 1rem;
-  margin: 0rem 1rem;
+#content #transcript-box p  {
+ font-size: 1.1rem;
 }
 
 #content #transcript-box label {
+  font-size: 1rem;
   font-weight: bold;
   color: #494646;
+}
+#content #transcript-box button { 
+  margin: 0.3rem;
 }
 
 #content #transcript-box a {
   color: var([--primary-color])
 }
 
-
 #content #links p {
-  padding-top: 1.5rem;
+  font-size: 1.1rem;
 }
 
 #content #links #group-links {
-  margin-top: 3rem;
-  height: 55%;
-  width: 60%;
+  height: 30%;
+  width: 100%;
   display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
+  flex-flow: row;
+  justify-content: space-between;
 }
-
 
 #content #links #group-links a {
   text-decoration: none;
   height: 9rem;
-  width: 9rem;
+  width: 11rem;
   background: var(--primary-color);
   color: white;
   display: flex;
@@ -488,7 +539,12 @@ input::placeholder {
   cursor: pointer;
 }
 
-
+#content #transcript-box #read-notes { 
+  position: relative;
+  top: .2rem;
+  color: var(--primary-color);
+  border: none;
+}
 
 /***********************************************************
 * 4. Request page sections
@@ -500,7 +556,7 @@ input::placeholder {
 }
 
 #ticketInfo {
-  background: rgb(127, 127, 127, 0.1);
+  background: var(--content-color);
   /* width: 80vh; */
   text-align: center;
   line-height: 3rem;
@@ -879,7 +935,7 @@ text-align: center; */
   height: 13rem;
 }
 
-#front-page h3 {
+#front-page h1 {
   color: white;
   padding-left: 10rem;
   letter-spacing: 0.05rem;
@@ -924,8 +980,6 @@ text-align: center; */
   font-size: 2rem;
 }
 
-
-
 #signin #resetPassword {
   padding-top: 1rem;
   text-decoration: underline;
@@ -947,12 +1001,12 @@ text-align: center; */
   border: var(--primary-color) solid 1px;
 }
 
-
 #signup p {
   font-weight: bold;
   font-size: 2rem;
 }
-#signup select { 
+
+#signup select {
   margin-top: 1.5rem;
   width: 18rem;
   height: 2.5rem;
@@ -960,8 +1014,7 @@ text-align: center; */
   border: var(--primary-color) 1px solid;
 }
 
-
-#signup button { 
+#signup button {
   margin-top: 1.5rem;
   border-radius: 10px;
 }

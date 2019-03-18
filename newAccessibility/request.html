@@ -12,34 +12,51 @@
     <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-auth.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://apis.google.com/js/api.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+    crossorigin="anonymous">
 </head>
 
 <body>
-
-    <head>
         <nav id="main-nav">
-            <div class="bg-primary">
-                <h1>BYUI Technical Accessibility</h1>
-            </div>
-            <ul>
-                <a href="home.html"><li>Home
-                </li></a>
-                <a href="request.html"><li class="active">Request
-                </li></a>
-                <a href="prepare.html"> <li>Prepare
-                </li></a>
-                <a href="transcribe.html"> <li>Transcribe
-                </li></a>
-                <a href="copyedit.html">
-                    <li>Copyedit
-                </li>
-                <a href="master.html"> <li class="hide">Master
-                </li></a>
-                <a onclick="userLogout()"><li>Log Out
-                </li></a>
-            </ul>
-        </nav>
-    </head>
+                <ul>
+                    <a href="home.html">
+                        <li class=" container col center"><i class="fas fa-home fa-2x"></i>
+                            Home
+                        </li>
+                    </a>
+                    <a href="request.html">
+                        <li class="active container col center"> <i class="fas fa-concierge-bell fa-2x bg-white"></i>
+                            Request
+                        </li>
+                    </a>
+                    <a href="prepare.html">
+                        <li class="container col center"> <i class="far fa-file-alt fa-2x"></i>
+                            Prepare
+                        </li>
+                    </a>
+                    <a href="transcribe.html">
+                        <li class="container col center"><i class="far fa-edit fa-2x"></i>Transcribe
+                        </li>
+                    </a>
+                    <a href="copyedit.html">
+                        <li class="container col center"> <i class="fas fa-clipboard-check fa-2x"></i>Copyedit
+                        </li>
+                    </a>
+                    <a href="master.html">
+                        <li class="hide">Master
+                        </li>
+                    </a>
+                    
+                    <div class="container row center byuiLogo">
+                        <img src="./assets/byuiLogo.png" alt="">
+                        <h2>Technical Accessibility</h2>
+                    </div>
+                    <div onclick="userLogout()"class="container row center logout btn-hover">
+                            <i class="fas fa-sign-out-alt fa-2x"></i>
+                           <p> Log Out </p>
+                    </div>
+                </ul>
+            </nav>
     <main>
         <div id="content">
             <section id="requestForm" class="container mg-top-light half col">
@@ -138,15 +155,6 @@
             </section>
         </div>
     </main>
-    <p>Hey guys, first of all. We're proud of the job we're getting to do this semester. Lots of special assignments and things that we haven't done before and we're getting it all done. We would like to remind you all about a few rules of the office and some general work ethic points that our team is having a very hard time with though.
-        1- Changing your schedule about every day of the week.
-        2- Using your phone non stop and even playing games
-        3- Watching whole videos and keep on gifs websites
-        4- Making the cave a big distraction
-        5- Night shifts not effective at all
-        6- Lack of quality on course projects
-        7- Dress code 
-         </p>
 </body>
 <script src="js/main.js"></script>
 <script src="js/request.js"></script>

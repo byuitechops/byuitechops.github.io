@@ -9,80 +9,90 @@
     <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-auth.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+        crossorigin="anonymous">
 </head>
 
 <body>
+    <nav id="main-nav">
+        <ul>
+            <a href="home.html">
+                <li class="active container col center"><i class="fas fa-home fa-2x"></i>
+                    Home
+                </li>
+            </a>
+            <a href="request.html">
+                <li class="container col center"> <i class="fas fa-concierge-bell fa-2x bg-white"></i>
+                    Request
+                </li>
+            </a>
+            <a href="prepare.html">
+                <li class="container col center"> <i class="far fa-file-alt fa-2x"></i>
+                    Prepare
+                </li>
+            </a>
+            <a href="transcribe.html">
+                <li class="container col center"><i class="far fa-edit fa-2x"></i>Transcribe
+                </li>
+            </a>
+            <a href="copyedit.html">
+                <li class="container col center"> <i class="fas fa-clipboard-check fa-2x"></i>Copyedit
+                </li>
+            </a>
+            <a href="master.html">
+                <li class="hide">Master
+                </li>
+            </a>
 
-    <head>
-        <nav id="main-nav">
-            <p id="message" class="hide"></p>
-            <div class="bg-primary">
-                <h1>BYUI Technical Accessibility</h1>
+            <div class="container row center byuiLogo">
+                <img src="./assets/byuiLogo.png" alt="">
+                <h2>Technical Accessibility</h2>
             </div>
-            <ul>
-                <a href="home.html">
-                    <li class="active">Home
-                    </li>
-                </a>
-                <a href="request.html">
-                    <li>Request
-                    </li>
-                </a>
-                <a href="prepare.html">
-                    <li>Prepare
-                    </li>
-                </a>
-                <a href="transcribe.html">
-                    <li>Transcribe
-                    </li>
-                </a>
-                <a href="copyedit.html">
-                    <li>Copyedit
-                    </li>
-                    <a href="master.html">
-                        <li class="hide">Master
-                        </li>
-                    </a>
-                    <a onclick="userLogout()">
-                        <li>Log Out
-                        </li>
-                    </a>
-            </ul>
-        </nav>
-    </head>
+            <div onclick="userLogout()" class="container row center logout btn-hover">
+                <i class="fas fa-sign-out-alt fa-2x"></i>
+                <p> Log Out </p>
+            </div>
+        </ul>
+    </nav>
     <main>
+        <p id="message" class="hide"></p>
         <div id="content">
-            <section id="links" class="container center half col">
-                <h2>Important Links - News</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque mollitia omnis voluptatibus
-                    possimus amet labore! Illo corporis, aspernatur consequuntur commodi, fugiat, doloremque
-                    suscipit eius beatae doloribus cumque aut voluptatem ea.</p>
+            <section id="links" class="container half col">
+                <h2>Get Started</h2>
+
                 <div id="group-links">
                     <a href="https://drive.google.com/drive/folders/0AJzE0BZcnVJpUk9PVA" target="_blank">
                         Google Drive
                     </a>
                     <a href="https://docs.google.com/spreadsheets/d/1755CupoDLtrpePFnj_Dd_Y-FZEH8_6QMX4gAVDNh_AQ/edit#gid=1437701904"
                         target="_blank">
-                        Transcript Style Guide
-                    </a>
-                    <a href="https://byu-idaho.screenstepslive.com/login" target="_blank">
-                        Screen Steps
-                    </a>
-                    <a href="https://platform.verbit.co/" target="_blank">
-                        Verbit
-                    </a>
+                        Training
+                        <a href="https://platform.verbit.co/" target="_blank">
+                            Verbit
+                        </a>
+                </div>
+                <h2>Announcements: </h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque mollitia omnis voluptatibus
+                    possimus amet labore! Illo corporis, aspernatur consequuntur commodi, fugiat, doloremque
+                    suscipit eius beatae doloribus cumque aut voluptatem ea.</p>
+            </section>
+            <section id="transcript-not-found" class="container half col">
+                <h2>Claimed Requests</h2>
+                <div id="transcript-box" class="container col">
+                    <h3>No Transcript Claimed</h3>
                 </div>
             </section>
-            <section id="transcript-not-found" class="">
-                <h3>You currently have no projects requested for transcrition</h3>
-            </section>
-            <section id="transcript-found" class="container center half col hide">
+            <section id="transcript-found" class="container half col hide">
+                <h2>Claimed Requests</h2>
+                <div id="transcript-box" class="container col">
+                    <div class="container row pd-bottom">
+                        <h3>Video</h3>
+                        <i id="read-notes" class="fas fa-comment-dots btn-hover fa-2x pd-left"> </i>
+                    </div>
 
-                <div id="transcript-box" class="container center">
-                    <h3>Transcript Found </h3>
-                    <label for="transcript-title">Course Code</label>
+                    <label for="transcript-title">Course</label>
                     <p id="updateCode"> Lorem, ipsum dolor.</p>
-                    <label for="transcript-title">Transcript Title</label>
+                    <label for="transcript-title">Title</label>
                     <p id="updateTitle">MATH 999</p>
                     <a id="updateMediaLink" href="https://www.youtube.com/watch?v=Fdf5aTYRW0E" target="_blank">Media
                         Link</a>
@@ -92,7 +102,6 @@
                         Document Link</a>
                     <label id="verbitLabel" for="">Verbit ID (if applicable)</label>
                     <p id="verbitID-display">0_c27e0l3x_0_3f5jgkzb_2-0_c27e0l3x_0_3f5jgkzb_2.mp4</p>
-                    <button id="read-notes" class="bg-primary btn-hover"> See Request Notes </button>
                     <div id="myModalRead" class="modal">
                         <div class="modal-content">
                             <p id="addRequestNotes">Request Notes</p>
@@ -100,9 +109,8 @@
                         </div>
                     </div>
                     <div class="container-center mg-top">
-                        <button id="btn-finish" class="bg-primary btn-hover" value="" onclick="finalizeTranscript(value)">Transcript
-                            Finished</button>
-                        <button id="btn-report" value="" class="bg-error btn-hover red">Send Back to Prep</button>
+                        <button id="btn-report" value="" class="btn-hover red">Return to Prep</button>
+                        <button id="btn-finish" class="bg-primary btn-hover" value="" onclick="finalizeTranscript(value)">Complete</button>
                     </div>
                     <div id="myModal" class="modal">
                         <button id="submit-report" class="bg-primary btn-hover" value="" onclick="sendBackPrep(value)">Submit
@@ -122,4 +130,3 @@
 <script src="js/home.js"></script>
 
 </html>
-

@@ -25,12 +25,13 @@ firebase.auth().onAuthStateChanged(function (user) {
 
 //fill the transcript table according to its status on firestore
 function fillReviewStart() {
-    db.collection("accessibility").where('status', '==', 'Ready for Review').orderBy('priority').get()
+    document.getElementById('transcripts-table').innerHTML = '';
+    db.collection("accessibility").where('status', '==', 'Review Completed').orderBy('priority').get()
         .then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
                 var p = `<p> ${doc.data().priority}</p> <p>${doc.data().courseCode}</p> <p>${doc.data().type}</p>
-                    <p>${doc.data().title}</p>  <button onclick="claimReview('${doc.id}')" class="bg-primary btn-hover prepare-btn">
-                    Review</button>`;
+                    <p>${doc.data().title}</p>  <button onclick="concludeTranscript('${doc.id}')" class="bg-primary btn-hover prepare-btn">
+                    Approve Review</button>`;
                 document.getElementById('transcripts-table').insertAdjacentHTML('beforeend', p);
             })
         })
@@ -39,13 +40,13 @@ function fillReviewStart() {
 
 function fillTranscribeTable(selectedCourseCode) {
     document.getElementById('transcripts-table').innerHTML = '';
-    db.collection("accessibility").where('status', '==', 'Ready for Review').orderBy('priority').get()
+    db.collection("accessibility").where('status', '==', 'Review Completed').orderBy('priority').get()
         .then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
                 if (selectedCourseCode == doc.data().courseCode) {
                     var p = `<p> ${doc.data().priority}</p> <p>${doc.data().courseCode}</p> <p>${doc.data().type}</p>
-                        <p>${doc.data().title}</p>  <button onclick="claimReview('${doc.id}')" class="bg-primary btn-hover prepare-btn">
-                        Prepare</button>`;
+                        <p>${doc.data().title}</p>  <button onclick="concludeTranscript('${doc.id}')" class="bg-primary btn-hover prepare-btn">
+                        Approve Review</button>`;
                     document.getElementById('transcripts-table').insertAdjacentHTML('beforeend', p);
                 } else {
 
@@ -56,21 +57,20 @@ function fillTranscribeTable(selectedCourseCode) {
 
 
 //handles event onclick of user requesting video to transcribe
-function claimReview(transcriptID) {
+function concludeTranscript(transcriptID) {
     db.collection('users').doc(userID[0]).update({
-            currentAction: 'reviewing',
-            actionID: transcriptID
+            currentAction: '',
+            actionID: ''
         })
         //generates the table
         .then(() => {
             db.collection('accessibility').doc(transcriptID).update({
-                    status: 'In Review',
+                    status: 'Finished',
                     reviewer: userName[0]
                 })
                 //updates the page so the user can now prepare the transcript
                 .then(function () {
-                    console.log('User retrived this project for reviewing');
-                    window.location.replace('home.html');
+                    fillReviewStart();
                 })
         })
 }
