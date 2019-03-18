@@ -74,6 +74,10 @@ input::placeholder {
   display: none !important;
 }
 
+.soft-hide { 
+  visibility: hidden;
+}
+
 .hard-hide {
   display: none !important;
 }
@@ -114,10 +118,10 @@ input::placeholder {
 }
 
 .mg-top {
-  padding-top: 2.5rem;
+  padding-top: 3.2rem;
 }
 
-.pd-left { 
+.pd-left {
   padding-left: 1rem;
 }
 
@@ -132,6 +136,7 @@ input::placeholder {
 
 .btn-hover {
   border: none;
+  text-decoration: none;
 }
 
 .btn-hover:hover {
@@ -147,6 +152,11 @@ input::placeholder {
 .half {
   width: 40%;
 }
+
+.real-half { 
+  width: 50%;
+}
+
 
 #content {
   display: flex;
@@ -203,12 +213,16 @@ input::placeholder {
   font-size: 12px;
 }
 
-button { 
+button {
   width: 8rem;
   height: 2rem;
   border-radius: .3rem;
   margin: none;
   font-size: .8rem;
+}
+
+input::placeholder { 
+  padding-left: .25rem;
 }
 /***********************************************************
 * 2.1 Modal Boxes
@@ -250,18 +264,15 @@ button {
 .modal-content textarea {
   margin-left: 2rem;
   border: 1px dotted #888;
-  border-radius: 1rem;
+  border-radius: .5rem;
   font-family: 'Open Sans', sans-serif;
 }
 
 .modal button {
-  height: 3rem;
   position: relative;
-  top: 5rem;
-  left: 46rem;
+  top: 11rem;
+  left: 40.8rem;
   float: left;
-  padding: 1rem;
-  border-radius: 1rem;
 }
 
 /* The Close Button */
@@ -269,8 +280,8 @@ button {
   color: #aaaaaa;
   float: right;
   position: relative;
-  top: -1.5rem;
-  right: -1.5rem;
+  top: -1.2rem;
+  right: -.5rem;
   font-size: 28px;
   font-weight: bold;
 }
@@ -287,26 +298,31 @@ button {
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 59%;
-  display: flex;
-  height: 12rem;
-  flex-direction: row;
+  width: 59%; 
+  height: 13rem;
 }
 
-.modal #btn-modal2 {
-  /* position: relative; */
-  top: .8rem;
-  left: 16rem;
-  height: .5rem;
-  padding: 1.8rem 2rem;
-  border: none;
-  background: var(--primary-color);
-  color: white;
+.close2 { 
+  color: #aaaaaa;
+  float: right;
+  position: relative;
+  bottom: 11rem;
+  right: -.5rem;
+  font-size: 28px;
+  font-weight: bold;
 }
 
-.modal #btn-modal2:hover {
-  opacity: 0.8;
-  cursor: pointer;
+
+
+.modal-content2 a {
+  width: 8rem;
+  height: 2rem;
+  border-radius: .3rem;
+  margin: none;
+  font-size: .8rem;
+  position: relative;
+  top: .5rem;
+  left: 53.3rem;
 }
 
 .close3 {
@@ -439,7 +455,8 @@ button {
   color: #f3f3f3;
 }
 
-#main-nav ul li.active > i, #main-nav ul li.active {
+#main-nav ul li.active>i,
+#main-nav ul li.active {
   background-color: white;
   color: #0076C6;
 }
@@ -449,28 +466,28 @@ button {
 }
 
 #main-nav ul .byuiLogo {
-  max-height: 100%;
   position: relative;
-  left: 30rem;
+  left: 46rem;
 }
 
-#main-nav ul .byuiLogo img  {
-  max-height: 3rem;
+#main-nav ul .byuiLogo img {
+  max-height: 2rem;
 }
 
-#main-nav ul .byuiLogo h2  {
+#main-nav ul .byuiLogo h2 {
   padding-top: 1.5rem;
   font-weight: 250;
+  font-size: 1.4rem;
 }
 
-#main-nav .logout { 
+#main-nav .logout {
   position: relative;
-  left: 38rem;
+  left: 49rem;
   color: white;
 }
 
-#main-nav .logout p  { 
-padding-left: .5rem;
+#main-nav .logout p {
+  padding-left: .5rem;
 }
 
 /***********************************************************
@@ -484,9 +501,12 @@ padding-left: .5rem;
   justify-content: center;
   text-align: center;
 }
-#content #transcript-box h3  {
+
+#content #transcript-box h3 {
   font-size: 1.5rem;
+  padding-bottom: 1rem;
 }
+
 #content #transcript-box {
   line-height: 2rem;
   background: var(--content-color);
@@ -494,8 +514,8 @@ padding-left: .5rem;
   height: 58%;
 }
 
-#content #transcript-box p  {
- font-size: 1.1rem;
+#content #transcript-box p {
+  font-size: 1.1rem;
 }
 
 #content #transcript-box label {
@@ -503,7 +523,8 @@ padding-left: .5rem;
   font-weight: bold;
   color: #494646;
 }
-#content #transcript-box button { 
+
+#content #transcript-box button {
   margin: 0.3rem;
 }
 
@@ -539,7 +560,7 @@ padding-left: .5rem;
   cursor: pointer;
 }
 
-#content #transcript-box #read-notes { 
+#content #transcript-box #read-notes {
   position: relative;
   top: .2rem;
   color: var(--primary-color);
@@ -553,26 +574,28 @@ padding-left: .5rem;
 #requestForm input {
   height: 2rem;
   margin: .5rem;
-}
-
-#ticketInfo {
-  background: var(--content-color);
-  /* width: 80vh; */
-  text-align: center;
-  line-height: 3rem;
-  overflow-wrap: break-word;
-}
-
-.container #requestType {
   width: 80%;
 }
 
+#requestForm { 
+  line-height: 3.05rem;
+}
+
+#requestForm #requestLength { 
+  width: 35%;
+}
+
+#requestForm #requestHeight { 
+  width: 90%;
+}
+
 #verbit {
-  visibility: hidden;
+  position: relative;
+  right: 10rem;
 }
 
 #verbit input {
-  width: 1.25rem;
+  width: .9rem;
 }
 
 #requestCommentsLabel h3 {
@@ -582,15 +605,16 @@ padding-left: .5rem;
 #time-calculator {
   display: flex;
   flex-flow: row;
-  width: 100%;
+  width: 89%;
 }
 
 #time-calculator input {
-  width: 75%;
+  width: 80%;
 }
 
 #time-calculator img {
-  margin: auto .5rem;
+  margin: auto .2rem;;
+  max-height: 1.5rem;
 }
 
 #time-calculator img:hover {
@@ -598,29 +622,31 @@ padding-left: .5rem;
   cursor: pointer;
 }
 
-#ticketInfo {
-  line-height: 3.5rem;
+
+
+.ticketbox { 
+  line-height: 2.2rem;
+  background: var(--content-color);
+  padding: 1.5rem;
+  height: 58%;
+  font-size: 1rem;
 }
 
-#ticketInfo #requestSubmit {
-  margin-top: 3rem;
-  background: var(--primary-color);
-  padding: .8rem;
-  border-radius: 1rem;
-  border: none;
-  color: white;
-  width: 8rem;
+.ticketbox label  {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #494646;
 }
 
-#ticketInfo #requestSubmit:hover {
-  opacity: 0.8;
-  cursor: pointer;
-}
+.ticketbox button  {
+  position: relative;
+  top: 1rem;
 
+}
 /***********************************************************
 * 4. Prepare page sections
 ************************************************************/
-.group-all {
+.group-all { 
   /* border: 1px solid black; */
   margin: 4rem 6rem;
   width: 80%;
@@ -1012,6 +1038,10 @@ text-align: center; */
   height: 2.5rem;
   border-radius: 10px;
   border: var(--primary-color) 1px solid;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: black;
 }
 
 #signup button {

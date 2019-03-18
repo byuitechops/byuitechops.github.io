@@ -3,51 +3,41 @@ getCourses();
 //the following functions are triggered on a onchange basis, to update the right side of the screen
 // with the ticket information
 function updateTitle(newTitle) {
-    document.getElementById('titleSide').innerText = 'Transcript Title: ' + newTitle;
+    document.getElementById('titleSide').innerText = newTitle;
 }
 
 function updatePriority(newPriority) {
-    document.getElementById('prioritySide').innerText = 'Transcript Priority: ' + newPriority;
+    document.getElementById('prioritySide').innerText = newPriority;
 }
 
 function updateType(newType) {
-    if (newType == 'Transcript') {
-        document.getElementById('verbit').style.visibility = 'visible';
-    } else {
-        document.getElementById('verbit').style.visibility = 'hidden';
-    }
-    document.getElementById('typeSide').innerText = 'Transcript Type: ' + newType;
+    document.getElementById('typeSide').innerText = newType;
 }
 
 function updateCode(newCode) {
-    document.getElementById('codeSide').innerText = 'Course Code: ' + newCode;
+    document.getElementById('codeSide').innerText = newCode;
 }
 
 function updateLocation(newLocation) {
-    document.getElementById('locationSide').innerText = 'Location in Course: ' + newLocation;
+    document.getElementById('locationSide').innerText = newLocation;
 }
 
 //according to the request type, displays or hide specific input boxes 
 document.getElementById('requestType').addEventListener('change', function () {
     if (document.getElementById('requestType').value === 'Transcript') {
-        // document.getElementById('requestVideoURL').classList.remove('hide');
-        document.getElementById('requestLength').classList.remove('hide');
-        // document.getElementById('requestExternalSoftware').classList.remove('hide');
-        document.getElementById('timeCalc').classList.remove('hide');
+        document.getElementById('time-calculator').classList.remove('soft-hide');
+        document.getElementById('requestLength').classList.remove('soft-hide');
+        document.getElementById('verbit').classList.remove('soft-hide');
         document.getElementById('requestHeight').classList.remove('hide');
     } else if (document.getElementById('requestType').value === 'Audio') {
-        // document.getElementById('requestVideoURL').classList.add('hide');
-        document.getElementById('requestLength').classList.remove('hide');
-        // document.getElementById('requestExternalSoftware').classList.add('hide');
-        document.getElementById('timeCalc').classList.remove('hide');
+        document.getElementById('time-calculator').classList.remove('soft-hide');
+        document.getElementById('verbit').classList.remove('soft-hide');
     } else {
-        // document.getElementById('requestVideoURL').classList.add('hide');
-        document.getElementById('requestLength').classList.add('hide');
-        document.getElementById('requestExternalSoftware').classList.add('hide');
-        document.getElementById('timeCalc').classList.add('hide');
+        document.getElementById('time-calculator').classList.add('soft-hide');
+        document.getElementById('verbit').classList.add('soft-hide');
+        document.getElementById('requestHeight').classList.add('hide');
     }
 });
-
 //once the user requests a transcript, this makes sure that the transcript is filled out correctly and thoroughly
 document.getElementById('requestSubmit').addEventListener('click', function () {
     var requestType = document.getElementById('requestType').value;
@@ -61,12 +51,12 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
     var softwareUsed = document.getElementById('requestExternalSoftware').checked;
     var comments = document.getElementById('requestComments').value;
 
-    if (requestType === 'Request Type' || title === '' || priority === 'Priority' || course === 'Course' || lmsURL === '') {
+    if (requestType === 'Request Type' || title === '' || priority === 'Priority' || course === 'Course' || lmsURL === '' || srcURL === '') {
         message.innerHTML = 'You must fill in all inputs';
         message.style.color = 'red';
         resetMessage();
         return;
-    } else if (requestType === 'Transcript' && (srcURL === '' || videoLength === '' || softwareUsed === '')) {
+    } else if (requestType === 'Transcript' && (videoLength === '' || videoHeight === '')) {
         message.innerHTML = 'You must fill in all inputs';
         message.style.color = 'red';
         resetMessage();
@@ -135,12 +125,16 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
                 document.getElementById('requestLength').value = '';
                 document.getElementById('requestHeight').value = '';
                 document.getElementById('requestComments').value = '';
-                document.getElementById('requestExternalSoftware').value = '';
-                document.getElementById('requestVideoURL').classList.add('hide');
-                document.getElementById('requestLength').classList.add('hide');
-                document.getElementById('requestExternalSoftware').classList.add('hide');
                 document.getElementById('requestHeight').classList.add('hide');
-                document.getElementById('timeCalc').classList.add('hide');
+                document.getElementById('time-calculator').classList.add('soft-hide');
+                document.getElementById('verbit').classList.add('soft-hide');
+                var elms = document.getElementsByClassName('description');
+                console.log(elms);
+                for (var i = 0; i < elms.length; i++) { 
+                    elms[i].innerText = '--';
+                }
+                //updates the side of the document
+
             })
             .catch(function (error) {
                 console.error('Error adding document: ', error);
@@ -185,7 +179,7 @@ function getCourses() {
 // Get the modal
 var modal = document.getElementById('myModal');
 // Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+var span = document.getElementsByClassName("close2")[0];
 // When the user clicks on <span> (x), close the modal
 span.onclick = function () {
     modal.style.display = "none";
@@ -304,20 +298,18 @@ function checkForDuplicates(videoURL) {
 
 
 
-    
-    function update() { 
-        let promise = new Promise(function (resolve, reject) {
-           
-                resolve(
-                db.collection('accessibility').doc('7nlnHstuffaFSvcuyHwX').get()
-                    .then(function (doc) {
-                        console.log(doc);
-                    }))
-            
-        })
-        promise.then(
-            result => console.log('yaya'),
-            error => console.log('didnt work'));
-    }
 
-    
+function update() {
+    let promise = new Promise(function (resolve, reject) {
+
+        resolve(
+            db.collection('accessibility').doc('7nlnHstuffaFSvcuyHwX').get()
+            .then(function (doc) {
+                console.log(doc);
+            }))
+
+    })
+    promise.then(
+        result => console.log('yaya'),
+        error => console.log('didnt work'));
+}

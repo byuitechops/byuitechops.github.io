@@ -13,55 +13,54 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://apis.google.com/js/api.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-    crossorigin="anonymous">
+        crossorigin="anonymous">
 </head>
 
 <body>
-        <nav id="main-nav">
-                <ul>
-                    <a href="home.html">
-                        <li class=" container col center"><i class="fas fa-home fa-2x"></i>
-                            Home
-                        </li>
-                    </a>
-                    <a href="request.html">
-                        <li class="active container col center"> <i class="fas fa-concierge-bell fa-2x bg-white"></i>
-                            Request
-                        </li>
-                    </a>
-                    <a href="prepare.html">
-                        <li class="container col center"> <i class="far fa-file-alt fa-2x"></i>
-                            Prepare
-                        </li>
-                    </a>
-                    <a href="transcribe.html">
-                        <li class="container col center"><i class="far fa-edit fa-2x"></i>Transcribe
-                        </li>
-                    </a>
-                    <a href="copyedit.html">
-                        <li class="container col center"> <i class="fas fa-clipboard-check fa-2x"></i>Copyedit
-                        </li>
-                    </a>
-                    <a href="master.html">
-                        <li class="hide">Master
-                        </li>
-                    </a>
-                    
-                    <div class="container row center byuiLogo">
-                        <img src="./assets/byuiLogo.png" alt="">
-                        <h2>Technical Accessibility</h2>
-                    </div>
-                    <div onclick="userLogout()"class="container row center logout btn-hover">
-                            <i class="fas fa-sign-out-alt fa-2x"></i>
-                           <p> Log Out </p>
-                    </div>
-                </ul>
-            </nav>
+    <nav id="main-nav">
+        <ul>
+            <a href="home.html">
+                <li class=" container col center"><i class="fas fa-home fa-2x"></i>
+                    Home
+                </li>
+            </a>
+            <a href="request.html">
+                <li class="active container col center"> <i class="fas fa-concierge-bell fa-2x bg-white"></i>
+                    Request
+                </li>
+            </a>
+            <a href="prepare.html">
+                <li class="container col center"> <i class="far fa-file-alt fa-2x"></i>
+                    Prepare
+                </li>
+            </a>
+            <a href="transcribe.html">
+                <li class="container col center"><i class="far fa-edit fa-2x"></i>Transcribe
+                </li>
+            </a>
+            <a href="copyedit.html">
+                <li class="container col center"> <i class="fas fa-clipboard-check fa-2x"></i>Copyedit
+                </li>
+            </a>
+            <a href="master.html">
+                <li class="hide">Master
+                </li>
+            </a>
+
+            <div class="container row center byuiLogo">
+                <img src="./assets/byuiLogo.png" alt="">
+                <h2>Accessibility</h2>
+            </div>
+            <div onclick="userLogout()" class="container col center logout btn-hover">
+                <i class="fas fa-sign-out-alt fa-2x"></i>
+                <p> Sign Out </p>
+            </div>
+        </ul>
+    </nav>
     <main>
         <div id="content">
-            <section id="requestForm" class="container mg-top-light half col">
-                    <h2>Request</h2>
-                <h3 style="text-align: center; padding-bottom: 2rem">Ticket Information</h3>
+            <section id="requestForm" class="container half col">
+                <h2>Request</h2>
                 <div class="container">
                     <select id="requestType" onchange="updateType(value)">
                         <option disabled selected hidden>Transcript Type</option>
@@ -70,10 +69,6 @@
                         <option value="Alt Text">Alt Text</option>
                         <option value="Slide">Slide Show</option>
                     </select>
-                    <div class="container" id="verbit">
-                        <h3 class="container-center">VerbIt?</h3>
-                        <input class="container-center" type="checkbox" id="requestExternalSoftware">
-                    </div>
                 </div>
 
                 <select id="requestCourse" onchange="updateCode(value)">
@@ -87,14 +82,20 @@
                     <option value="3">3 New/Re-Development Project</option>
                     <option value="4">4 Transcript Project</option>
                 </select>
-
                 <input type="url" id="requestLMSURL" placeholder="Canvas URL" onkeyup="updateLocation(value)">
-                <input type="number" id="requestHeight" class="hide" placeholder="Video Height">
-
                 <input type="url" id="requestVideoURL" placeholder="Media URL">
-                <div id="time-calculator" >
-                    <input type="number" id="requestLength" class="hide" placeholder="Video Length">
-                    <img class="hide" id="timeCalc" onclick="revealModalCalc()" src="assets/calcIcon.png">
+                <div class="container row" style="width: 80%">
+                    <div>
+                        <input type="number" id="requestHeight" class="hide" placeholder="Video Height">
+                    </div>
+                    <div id="time-calculator" class="soft-hide">
+                        <input type="number" min=0 id="requestLength" placeholder="Video Length">
+                        <img id="timeCalc" onclick="revealModalCalc()" src="assets/calcIcon.png">
+                    </div>
+                    <div class="container row center soft-hide" id="verbit">
+                        <h3>VerbIt?</h3>
+                        <input type="checkbox" id="requestExternalSoftware">
+                    </div>
                 </div>
 
                 <label id="requestCommentsLabel">
@@ -107,50 +108,38 @@
 
                     <!-- Modal content -->
                     <div class="modal-content2">
-                       
                         <h2>Time Calculator</h2>
-                        <div id="form">
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <th>Hours</th>
-                                        <th>Minutes</th>
-                                        <th>Seconds</th>
-                                        <th>Total in seconds</th>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input onchange="calculateTotal()" id="hours0" type="number">
-                                        </td>
-                                        <td>
-                                            <input onchange="calculateTotal()" id="minutes0" type="number">
-                                        </td>
-                                        <td>
-                                            <input onchange="calculateTotal()" id="seconds0" type="number">
-                                        </td>
-                                        <td>
-                                            <input onchange="calculateTotal()" id="total0" type="text" readonly>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                          
-                            <button id="btn-modal2" onclick="calculateSubmit()">Submit</button>
+                        <div id="form" class="container center row">
+                            <input placeholder="Minutes" onchange="calculateTotal()" id="hours0" type="number">
+                            <input placeholder="Hours" onchange="calculateTotal()" id="minutes0" type="number">
+                            <input placeholder="Seconds" onchange="calculateTotal()" id="seconds0" type="number">
+                            <input placeholder="Total in seconds" onchange="calculateTotal()" id="total0" type="text"
+                                readonly>
                         </div>
-                        <span class="close">&times;</span>
+                        <div class="container row" id="btn-finish">
+                            <a id="btn-modal2" class="bg-primary btn-hover container center" onclick="calculateSubmit()">Submit</a>
+                        </div>
+                        <span class="close2">&times;</span>
                     </div>
 
             </section>
-            <section id="ticketInfo" class="container mg-top-light half col">
-                <h3>Ticket Information</h3>
-                <div class="ticketbox">
-                    <p class="description" id="typeSide">Transcript Type: </p>
-                    <p class="description" id="codeSide">Course Code: </p>
-                    <p class="description" id="titleSide">Transcript Title: </p>
-                    <p class="description" id="prioritySide">Transcript Priority: </p>
-                    <p class="description" id="locationSide">Location in Course: </p>
-                    <input type="submit" id="requestSubmit">
-                    <p id="message" class=""></p>
+            <section id="transcript-box-info" class="container half col">
+                <h2>Ticket Information</h2>
+                <div class="ticketbox container col">
+                    <label>Media Type:</label>
+                    <p class="description" id="typeSide"> -- </p>
+                    <label>Course Code:</label>
+                    <p class="description" id="codeSide"> -- </p>
+                    <label>Title:</label>
+                    <p class="description" id="titleSide"> --</p>
+                    <label>Priority:</label>
+                    <p class="description" id="prioritySide"> --</p>
+                    <label>Location in Course:</label>
+                    <p class="description" id="locationSide"> --</p>
+                    <div class="container row">
+                        <button type="submit" class="bg-primary btn-hover" id="requestSubmit"> Submit </button>
+                        <p style="margin-left: 2rem; margin-top: .8rem;" id="message"></p>
+                    </div>
                 </div>
             </section>
         </div>

@@ -12,6 +12,7 @@ firebase.auth().onAuthStateChanged(function (user) {
                     if (doc.data().currentAction == 'transcribing') {
                         //user has a prep project that is unfinished
                         fillTranscriptBox(doc.data().actionID);
+                        document.getElementById('transcript-not-found').classList.add('hide');
                     }
                     else if (doc.data().currentAction == 'reviewing') {
                         fillTranscriptBox(doc.data().actionID);
@@ -38,7 +39,7 @@ function fillTranscriptBox(transcriptID) {
             document.getElementById('btn-finish').value = transcriptID;
             document.getElementById('submit-report').value = transcriptID;
             document.getElementById('verbitID-display').innerText = doc.data().verbitID;
-            document.getElementById('addRequestNotes').innerText = `Request Notes: ${doc.data().requestNotes}`
+            // document.getElementById('addRequestNotes').innerText = `Request Notes: ${doc.data().requestNotes}`
         })
 
 }
@@ -153,11 +154,3 @@ function resetMessage() {
     }, 10000);
 }
 
-//Handles the modal box created for the user to see request notes and pertaining information to it
-document.getElementById('read-notes').addEventListener('click', () => { 
-    document.getElementById('myModalRead').style.display = "block";
-})
-
-document.getElementsByClassName("close4")[0].onclick = function () {
-    document.getElementById('myModalRead').style.display = "none";
-}
