@@ -470,7 +470,7 @@ input::placeholder {
 
 #main-nav ul .byuiLogo {
   position: relative;
-  left: 46rem;
+  left: 55rem;
 }
 
 
@@ -486,13 +486,13 @@ input::placeholder {
 
 #main-nav .logout {
   position: relative;
-  left: 49rem;
+  left: 58rem;
   color: white;
 }
 
 .bring-left {
   position: absolute !important;
-  right: -31rem;
+  right: -28.8rem;
   top: -.7rem;
 }
 
@@ -507,7 +507,7 @@ input::placeholder {
 #content #transcript-not-found div {
   background: var(--content-color);
   padding: 1.5rem;
-  height: 58%;
+  height: 53%;
   justify-content: center;
   text-align: center;
 }
@@ -518,10 +518,10 @@ input::placeholder {
 }
 
 #content #transcript-box {
-  line-height: 2rem;
+  line-height: 2.3rem;
   background: var(--content-color);
   padding: 1.5rem;
-  height: 58%;
+  height: 53%;
 }
 
 #content #transcript-box p {
@@ -539,7 +539,8 @@ input::placeholder {
 }
 
 #content #transcript-box a {
-  color: var([--primary-color])
+  color: var([--primary-color]);
+  font-size: 1rem;
 }
 
 #content #links p {
@@ -631,7 +632,7 @@ input::placeholder {
   line-height: 2.2rem;
   background: var(--content-color);
   padding: 1.5rem;
-  height: 58%;
+  height: 53%;
   font-size: 1rem;
 }
 
