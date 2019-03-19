@@ -120,7 +120,7 @@ function fillPrepTicket(transcriptID) {
             document.getElementById('codeSide').innerText = doc.data().courseCode;
             document.getElementById('titleSide').innerText = doc.data().title;
             document.getElementById('locationSide').innerText = doc.data().lmsURL;
-            document.getElementById('mediaSide').innerText = doc.data().srcURL;
+            document.getElementById('mediaSide').setAttribute('href', doc.data().srcURL);
             document.getElementById('storeTranscriptID').innerText = transcriptID;
         })
         .then(function () {
