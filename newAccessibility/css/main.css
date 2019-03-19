@@ -74,7 +74,7 @@ input::placeholder {
   display: none !important;
 }
 
-.soft-hide { 
+.soft-hide {
   visibility: hidden;
 }
 
@@ -99,7 +99,7 @@ input::placeholder {
   padding: 0.5rem 5rem;
 }
 
-.inline  {
+.inline {
   display: inline;
 }
 
@@ -129,6 +129,10 @@ input::placeholder {
   padding-left: 1rem;
 }
 
+.pd-left2 {
+  padding-left: 2rem;
+}
+
 .pd-bottom {
   padding-bottom: 1rem;
 }
@@ -150,31 +154,38 @@ input::placeholder {
 
 .mg-top-light {
   margin-top: 1.5rem;
+}
 
+.mg-left {
+  margin-left: 1rem;
 }
 
 .half {
   width: 40%;
 }
 
-.cover-65 { 
+.cover-65 {
   width: 65%;
 }
 
-.cover-35 { 
+.cover-35 {
   width: 35%;
 }
 
-.real-half { 
+.real-half {
   width: 50%;
 }
 
-.nice-overflow { 
+.nice-overflow {
   overflow: auto;
 }
 
 .pd-right {
   padding-right: 1rem;
+}
+
+.pd-left {
+  padding-left: 1rem;
 }
 
 #content {
@@ -247,9 +258,10 @@ button {
   font-size: .8rem;
 }
 
-input::placeholder { 
+input::placeholder {
   padding-left: .25rem;
 }
+
 /***********************************************************
 * 2.1 Modal Boxes
 ************************************************************/
@@ -324,11 +336,11 @@ input::placeholder {
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 59%; 
+  width: 59%;
   height: 13rem;
 }
 
-.close2 { 
+.close2 {
   color: #aaaaaa;
   float: right;
   position: relative;
@@ -461,6 +473,7 @@ input::placeholder {
   left: 46rem;
 }
 
+
 #main-nav ul .byuiLogo img {
   max-height: 2rem;
 }
@@ -475,6 +488,12 @@ input::placeholder {
   position: relative;
   left: 49rem;
   color: white;
+}
+
+.bring-left {
+  position: absolute !important;
+  right: -31rem;
+  top: -.7rem;
 }
 
 #main-nav .logout p {
@@ -568,26 +587,17 @@ input::placeholder {
   width: 80%;
 }
 
-#requestForm { 
+#requestForm {
   line-height: 3.05rem;
   margin-top: -1rem;
 }
 
-#requestForm #requestLength { 
+#requestForm #requestLength {
   width: 35%;
 }
 
-#requestForm #requestHeight { 
+#requestForm #requestHeight {
   width: 90%;
-}
-
-#verbit {
-  position: relative;
-  right: 10rem;
-}
-
-#verbit input {
-  width: .9rem;
 }
 
 #requestCommentsLabel h3 {
@@ -605,7 +615,8 @@ input::placeholder {
 }
 
 #time-calculator img {
-  margin: auto .2rem;;
+  margin: auto .2rem;
+  ;
   max-height: 1.5rem;
 }
 
@@ -616,7 +627,7 @@ input::placeholder {
 
 
 
-.ticketbox { 
+.ticketbox {
   line-height: 2.2rem;
   background: var(--content-color);
   padding: 1.5rem;
@@ -624,21 +635,22 @@ input::placeholder {
   font-size: 1rem;
 }
 
-.ticketbox label  {
+.ticketbox label {
   font-size: 1rem;
   font-weight: bold;
   color: #494646;
 }
 
-.ticketbox button  {
+.ticketbox button {
   position: relative;
   top: 1rem;
 
 }
+
 /***********************************************************
 * 4. Prepare page sections
 ************************************************************/
-.group-all { 
+.group-all {
   margin: 4rem 7rem;
   width: 87%;
   height: 70vh;
@@ -658,15 +670,22 @@ input::placeholder {
 
 #left-prep input[type=text] {
   height: 2rem;
-  margin: .5rem;
+  margin: .5rem 0;
   width: 65%;
 }
 
 #left-prep .verbit-check {
-  padding-top: 1rem;
-  width: 80%;
-  height: 4rem;
   flex-wrap: wrap;
+}
+
+#left-prep .group-inputs {
+  height: 2.5rem;
+  padding-top: .5rem;
+}
+
+#left-prep .group-inputs input {
+  width: 8rem;
+  margin-right: 1rem;
 }
 
 #left-prep .verbit-check .small-text {
@@ -677,10 +696,7 @@ input::placeholder {
   padding-bottom: 1rem;
 }
 
-
-
 #left-prep input::placeholder {
-  color: var(--primary-color);
   padding: 1rem;
 }
 

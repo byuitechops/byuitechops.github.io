@@ -48,9 +48,9 @@
                 <img src="./assets/byuiLogo.png" alt="">
                 <h2>Accessibility</h2>
             </div>
-            <div onclick="userLogout()" class="container col center logout btn-hover">
+            <div onclick="userLogout()" class="container row center logout btn-hover">
                 <i class="fas fa-sign-out-alt fa-2x"></i>
-                <p> Sign Out </p>
+                <p> Log Out </p>
             </div>
         </ul>
     </nav>
@@ -87,34 +87,43 @@
                 <div id="transcript-box" class="container row">
                     <div class="container real-half col">
                         <h3>Video</h3>
-                    <label for="transcript-title">Course</label>
-                    <p id="updateCode"> Lorem, ipsum dolor.</p>
-                    <label for="transcript-title">Title</label>
-                    <p id="updateTitle">MATH 999</p>
-                    <a id="updateMediaLink" href="https://www.youtube.com/watch?v=Fdf5aTYRW0E" target="_blank">Media
-                        Link</a>
-                    <label for="transcript-title"></label>
-                    <a id="updateDocLink" href="https://docs.google.com/spreadsheets/d/1mhCCTU-3vR69KCsJbKkcHDnVU4ZMLbcmIU97txvhQd4/edit#gid=0"
-                        target="_blank">Google
-                        Document Link</a>
-                    <label id="verbitLabel" for="">Verbit ID (if applicable)</label>
-                    <p id="verbitID-display">0_c27e0l3x_0_3f5jgkzb_2-0_c27e0l3x_0_3f5jgkzb_2.mp4</p>
-                   
-                    <div class="container-center mg-top">
-                        <button id="btn-report" value="" class="btn-hover red">Return to Prep</button>
-                        <button id="btn-finish" class="bg-primary btn-hover" value="" onclick="finalizeTranscript(value)">Complete</button>
+                        <label for="transcript-title">Course</label>
+                        <p id="updateCode"> Lorem, ipsum dolor.</p>
+                        <label for="transcript-title">Title</label>
+                        <p id="updateTitle">MATH 999</p>
+                        <a id="updateMediaLink" href="https://www.youtube.com/watch?v=Fdf5aTYRW0E" target="_blank">Media
+                            Link</a>
+                        <label for="transcript-title"></label>
+                        <a id="updateDocLink" href="https://docs.google.com/spreadsheets/d/1mhCCTU-3vR69KCsJbKkcHDnVU4ZMLbcmIU97txvhQd4/edit#gid=0"
+                            target="_blank">Google
+                            Document Link</a>
+                        <label id="verbitLabel" for="">Verbit ID (if applicable)</label>
+                        <p id="verbitID-display">0_c27e0l3x_0_3f5jgkzb_2-0_c27e0l3x_0_3f5jgkzb_2.mp4</p>
+
+                        <div class="container-center mg-top">
+                            <button id="btn-report" value="" class="btn-hover red">Return to Prep</button>
+                            <button id="btn-finish" class="bg-primary btn-hover" value="" onclick="finalizeTranscript(value)">Complete</button>
+                        </div>
                     </div>
-                </div>
-                <div class="container real-half col">
-                    <h3>Comments: </h3>
-                    <p id="get-comments" style="overflow: auto; font-size: 1rem;" >Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vero aliquid natus non officiis quos ipsum modi maiores, a neque error doloribus fugiat dignissimos dolores aliquam facilis iure accusantium nihil et exercitationem minus hic id pariatur? Fugiat, cum? Quos suscipit corrupti veritatis quod laboriosam, corporis molestiae qui beatae doloribus asperiores officiis voluptate! Delectus ab sequi ad itaque doloremque, possimus libero, beatae rerum ipsam harum sed a aperiam debitis ducimus ut autem dolore placeat laboriosam expedita. Ipsam commodi soluta voluptatibus eum possimus dolor atque autem, architecto voluptatem, cumque obcaecati nulla molestias voluptate iusto nisi nemo! Perferendis sed vitae quis nemo illo id.</p>
-                </div>
+                    <div class="container real-half col">
+                        <h3>Comments: </h3>
+                        <p id="get-comments" style="overflow: auto; font-size: 1rem;">Lorem ipsum, dolor sit amet
+                            consectetur adipisicing elit. Vero aliquid natus non officiis quos ipsum modi maiores, a
+                            neque error doloribus fugiat dignissimos dolores aliquam facilis iure accusantium nihil et
+                            exercitationem minus hic id pariatur? Fugiat, cum? Quos suscipit corrupti veritatis quod
+                            laboriosam, corporis molestiae qui beatae doloribus asperiores officiis voluptate! Delectus
+                            ab sequi ad itaque doloremque, possimus libero, beatae rerum ipsam harum sed a aperiam
+                            debitis ducimus ut autem dolore placeat laboriosam expedita. Ipsam commodi soluta
+                            voluptatibus eum possimus dolor atque autem, architecto voluptatem, cumque obcaecati nulla
+                            molestias voluptate iusto nisi nemo! Perferendis sed vitae quis nemo illo id.</p>
+                    </div>
                     <div id="myModal" class="modal">
                         <button id="submit-report" class="bg-primary btn-hover" value="" onclick="sendBackPrep(value)">Submit
                             Report</button>
                         <!-- Modal content -->
                         <div class="modal-content">
-                            <p> Please, describe the issue and why the transcript needs to be returned to the prepare stage.</p>
+                            <p> Please, describe the issue and why the transcript needs to be returned to the prepare
+                                stage.</p>
                             <textarea name="" id="problem-description" cols="30" rows="10"></textarea>
                             <span class="close">&times;</span>
                         </div>

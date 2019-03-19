@@ -63,16 +63,17 @@
                 <section id="left-prep" class="container half col">
                     <h2>Prepare</h2>
                     <div class="container col">
-                        <h3>1. Has this transcript been previously completed or <br> found on the drive / external
+                        <h3>1. Has this transcript been previously completed or <br>&nbsp; &nbsp; found on the drive /
+                            external
                             link?</h3>
                         <!-- <i class="far fa-question-circle"></i> -->
                         <div class="container col center-text">
-                            <div class="inline">
+                            <div class="inline mg-left">
                                 <input id="radio-check1" onchange='updateVerbitAccordingToPriorCompletion(true)' type="radio"
                                     name="previously-completed" value="true">
                                 <label for="previously-completed">Yes</label>
                             </div>
-                            <div class="inline">
+                            <div class="inline mg-left">
                                 <input id="radio-check2" onchange='updateVerbitAccordingToPriorCompletion(false)' type="radio"
                                     name="previously-completed" value="false">
                                 <label for="previously-completed">No</label>
@@ -80,11 +81,19 @@
                         </div>
                     </div>
                     <h3>2. Fill Google Document Info</h3>
-                    <input type="text" placeholder="Editable Document Link" id="googleDocEdit">
-                    <input type="text" placeholder="Published Document Link" id="googleDocPublish">
+                    <input type="text" placeholder="Editable Document Link" id="googleDocEdit" style="margin-left: 1rem;">
+                    <input type="text" placeholder="Published Document Link" id="googleDocPublish" style="margin-left: 1rem;">
+                    <h3>3. If the transcript is a video, provide additional information for it</h3>
+                    <div class="container row group-inputs mg-left">
+                        <input type="number" id="requestHeight" class="" placeholder="Video Height">
+                        <div id="time-calculator" class=>
+                            <input type="number" min=0 id="requestLength" placeholder="Video Length">
+                            <img id="timeCalc" onclick="revealModalCalc()" src="assets/calcIcon.png">
+                        </div>
+                    </div>
                     <div class="organize-buttons container col">
-                        <h3>3. Place it in the Course</h3>
-                        <div class="container row">
+                        <h3>4. Place it in the Course</h3>
+                        <div class="container row mg-left">
                             <button id="embeddedCode" class="bg-primary btn-hover" style="margin-right: 1rem;" onclick="showCodeEmbedded()">
                                 HTML
                             </button>
@@ -93,14 +102,30 @@
                             </button>
                         </div>
                     </div>
-                    <div id="hideVerbit" class="verbit-check">
-                        <h3>4. If necessary, create a Verbit request and provide ID</h3>
-                        <div class="inline">
+                    <h3>5. If necessary, create a Verbit request and provide ID</h3>
+                    <div id="hideVerbit" class="verbit-check container col mg-left">
+                            <div class="inline">
                             <input type="checkbox" id="check-verbit-checked">
-                            <label>Verbit:</label>
-                        </div>
-                        <input type="text" placeholder="Verbit ID" disabled id="getVerbitId">
+                            <label>Verbit:</label></div>
+                            <input type="text" placeholder="Verbit ID" disabled id="getVerbitId">
                     </div>
+                    <div id="myModal" class="modal">
+
+                        <!-- Modal content -->
+                        <div class="modal-content2">
+                            <h2>Time Calculator</h2>
+                            <div id="form" class="container center row">
+                                <input placeholder="Minutes" onchange="calculateTotal()" id="hours0" type="number">
+                                <input placeholder="Hours" onchange="calculateTotal()" id="minutes0" type="number">
+                                <input placeholder="Seconds" onchange="calculateTotal()" id="seconds0" type="number">
+                                <input placeholder="Total in seconds" onchange="calculateTotal()" id="total0" type="text"
+                                    readonly>
+                            </div>
+                            <div class="container row" id="btn-finish">
+                                <a id="btn-modal2" class="bg-primary btn-hover container center" onclick="calculateSubmit()">Submit</a>
+                            </div>
+                            <span class="close2">&times;</span>
+                        </div>
                 </section>
                 <section id="ticketInfo" class="container half col">
                     <h2>Ticket Information</h2>
@@ -116,15 +141,6 @@
                             <p class="description" id="locationSide">Location in Course: </p>
                             <label>Media URL:</label>
                             <p class="description" id="mediaSide"></p>
-                            <p class="description hide" id="priorCompletionSide">Prior Completion: </p>
-                            <!-- <div class="check-placeholder-completion">
-                            <div>
-                                <p>Place Holder Complete?</p>
-                                <input type="checkbox" name="" id="placeHolderCheckbox">
-                            </div>
-                            <input type="submit" id="requestSubmit">
-                        </div> -->
-
                             <div class="container row">
                                 <button type="submit" class="bg-primary btn-hover" id="requestSubmit"> Submit </button>
                                 <p style="margin-left: 2rem; margin-top: .8rem;" id="message"></p>
@@ -132,7 +148,8 @@
                         </div>
                         <div class="container col cover-35 nice-overflow">
                             <label for="">Comments</label>
-                            <p id="fillCommentsIn">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente aut officia
+                            <p id="fillCommentsIn">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente
+                                aut officia
                                 reprehenderit vitae fugiat. Explicabo, minus voluptatibus hic consectetur commodi
                                 voluptatem totam tenetur sunt exercitationem sit, dolore asperiores porro sequi?</p>
                         </div>
@@ -178,7 +195,6 @@
     </div>
     <p class="hide" id='storeTranscriptID'></p>
     <p class="hide" id='storeUserID'></p>
-    <p class="hide" id='storeHeight'></p>
 </body>
 <script src="js/main.js"></script>
 <script src="js/prepare.js"></script>

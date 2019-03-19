@@ -48,9 +48,9 @@ async function submitTranscriptRequest() {
     var course = document.getElementById('requestCourse').value;
     var lmsURL = document.getElementById('requestLMSURL').value;
     var srcURL = document.getElementById('requestVideoURL').value;
-    var videoLength = document.getElementById('requestLength').value;
-    var videoHeight = document.getElementById('requestHeight').value;
-    var softwareUsed = document.getElementById('requestExternalSoftware').checked;
+    // var videoLength = document.getElementById('requestLength').value;
+    // var videoHeight = document.getElementById('requestHeight').value;
+    // var softwareUsed = document.getElementById('requestExternalSoftware').checked;
     var comments = document.getElementById('requestComments').value;
 
     console.log("before");
@@ -67,16 +67,6 @@ async function submitTranscriptRequest() {
         message.style.color = 'red';
         resetMessage();
         return;
-    } else if (requestType === 'Transcript' && (videoLength === '' || videoHeight === '')) {
-        message.innerHTML = 'You must fill in all inputs';
-        message.style.color = 'red';
-        resetMessage();
-        return;
-    } else if (requestType === 'Audio' && videoLength === '') {
-        message.innerHTML = 'You must fill in all inputs';
-        message.style.color = 'red';
-        resetMessage();
-        return;
     } else {
         var user = firebase.auth().currentUser;
 
@@ -84,8 +74,6 @@ async function submitTranscriptRequest() {
             title: title,
             docPublishURL: '',
             docEditURL: '',
-            verbit: softwareUsed,
-            verbitID: '',
             type: requestType,
             priority: priority,
             courseCode: course,
@@ -96,29 +84,8 @@ async function submitTranscriptRequest() {
             status: 'Ready for Prep',
             requestNotes: comments + `. Comment made by: ${user.displayName}`
         }
-
-        if (requestType == "Transcript") {
-            var extraInfo = {
-                srcURL: srcURL,
-                videoLength: videoLength,
-                videoHeight: videoHeight,
-            }
-            var requestTranscript = Object.assign(extraInfo, docData)
-        }
-
-
-        if (requestType == "Audio") {
-            var extraInfo = {
-                videoLength: videoLength
-            }
-            var requestTranscript = Object.assign(extraInfo, docData)
-        }
-
-        if (requestType == "Alt Text" || requestType == "Slide") {
-            var requestTranscript = Object.assign({}, docData)
-        }
         // Add a new document in collection "accessibility"
-        var finalObject = Object.assign(requestTranscript, parentObject);
+        var finalObject = Object.assign(docData, parentObject);
         console.log(finalObject);
         db.collection('accessibility').add(finalObject)
             .then(function (doc) {
@@ -132,12 +99,7 @@ async function submitTranscriptRequest() {
                 document.getElementById('requestPriority').options[0].selected = 'selected';
                 document.getElementById('requestLMSURL').value = '';
                 document.getElementById('requestVideoURL').value = '';
-                document.getElementById('requestLength').value = '';
-                document.getElementById('requestHeight').value = '';
                 document.getElementById('requestComments').value = '';
-                document.getElementById('requestHeight').classList.add('hide');
-                document.getElementById('time-calculator').classList.add('soft-hide');
-                document.getElementById('verbit').classList.add('soft-hide');
                 var elms = document.getElementsByClassName('description');
                 console.log(elms);
                 for (var i = 0; i < elms.length; i++) { 
@@ -185,94 +147,8 @@ function getCourses() {
     xhttp.send();
 }
 
-// Get the modal
-var modal = document.getElementById('myModal');
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close2")[0];
-// When the user clicks on <span> (x), close the modal
-span.onclick = function () {
-    modal.style.display = "none";
-}
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function (event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-
-
 //Calculates the total of time in seconds according 
 //to user's input for the transcript selected
-function calculateTotal() {
-    var hours = 0;
-    var minutes = 0;
-    var seconds = 0;
-    var total = 0;
-    hours = document.getElementById("hours0").value;
-    minutes = document.getElementById("minutes0").value;
-    seconds = document.getElementById("seconds0").value;
-    if (hours == "" && minutes == "" && seconds == "") {
-        document.getElementById("total" + i).value = "";
-    }
-    if (hours == "") {
-        hours = 0;
-    }
-    if (minutes == "") {
-        minutes = 0;
-    }
-    if (seconds == "") {
-        seconds = 0;
-    }
-    if (hours < 0 || minutes < 0 || seconds < 0) {
-        document.getElementById("total0").value = "NaN";
-    }
-    if (seconds >= 60 && seconds <= 1000000) {
-        while (seconds >= 60) {
-            minutes++;
-            seconds -= 60;
-        }
-        document.getElementById("seconds0").value = seconds;
-        document.getElementById("minutes0").value = minutes;
-    }
-    if (minutes >= 60 && minutes <= 1000000) {
-        while (minutes >= 60) {
-            hours++;
-            minutes -= 60;
-        }
-        document.getElementById("minutes0").value = minutes;
-        document.getElementById("hours0").value = hours;
-    }
-    total = (hours * 60 * 60) + (minutes * 60) + (seconds * 1);
-    if (total === 0) {
-        total = "";
-        document.getElementById("total0").value = total;
-    }
-    document.getElementById("total0").value = total;
-};
-
-function calculateSubmit() {
-    var total = document.getElementById('total0').value;
-    document.getElementById('requestLength').value = total;
-    document.getElementById('requestLength').style.borderColor = "rgb(169, 169, 169)";
-    modal.style.display = "none";
-}
-
-//Counts the ammount of transcripts in the database
-function countDocs() {
-    db.collection('accessibility').get()
-        .then((querySnapshot) => {
-            var count = 0;
-            querySnapshot.forEach((doc) => {
-                count += 1;
-            })
-            console.log(count);
-        })
-}
-
-function revealModalCalc() {
-    document.getElementById('myModal').style.display = 'block';
-}
-
 function generateParentObject(videoURL) {
     return new Promise((resolve, reject) => {
     db.collection('accessibility').where('srcURL', '==', videoURL).where('parentTranscript', "==", true).get()

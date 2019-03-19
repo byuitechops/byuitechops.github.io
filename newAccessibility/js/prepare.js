@@ -65,61 +65,63 @@ function displayPrepareModal(transcriptID) {
 
 //Uses the id selected to update the ticket information on the right side of prep
 function fillPrepTicket(transcriptID) {
-    //this section is really important. It handles us finding duplicate videos. If a video
-    // is found having the same src URL
-
     db.collection('accessibility').doc(transcriptID).get()
         .then(function (doc) {
+            if (doc.data().copied) {
+                document.querySelectorAll('input').forEach(doc=> { 
+                    doc.setAttribute('disabled', true);
+                })
+                document.getElementById('radio-check1').checked = true;
+            }
 
             if (doc.data().type != 'Transcript') {
                 document.getElementById('getVerbitId').value = 'The transcript does not use Verbit';
-            }
-
-            //updates left side as far as if verbit is being used and prior completion
-            if (doc.data().verbit) {
-                document.getElementById('check-verbit-checked').checked = true;
-                document.getElementById('getVerbitId').disabled = false;
-
-            } else {
-                document.getElementById('check-verbit-checked').checked = false;
-            }
-            //updates right side of ticket
-            document.getElementById('typeSide').innerText = doc.data().type;
-            document.getElementById('codeSide').innerText = doc.data().courseCode;
-            document.getElementById('titleSide').innerText = doc.data().title;
-            // document.getElementById('prioritySide').innerText = 'Transcript Priority: ' + doc.data().priority;
-            document.getElementById('locationSide').innerText = doc.data().lmsURL;
-            document.getElementById('mediaSide').innerText = doc.data().srcURL;
-            // var priorCompletion = document.getElementById('priorCompletionBox').checked ? 'Transcript Previously Done' : 'New Transcript'
-            // document.getElementById('priorCompletionSide').innerText = 'Prior Completion: ' + priorCompletion;
-            document.getElementById('storeTranscriptID').innerText = transcriptID;
-            // document.getElementById('verbitUsed').innerText = 'Verbit ID: ' + 
-
-            document.getElementById('storeHeight').innerText = doc.data().videoHeight;
-            document.getElementsByClassName('code');
-
-            if (doc.data().type != 'Transcript') {
-                document.getElementById('embeddedCode').classList.add('hide');
                 document.getElementById('hideVerbit').classList.add('hide');
+                document.getElementById('embeddedCode').classList.add('hide');
                 document.getElementById('getVerbitId').classList.add('hide');
             }
 
-            if (doc.data().docPublishURL != undefined && doc.data().docPublishURL != '') {
+            if (doc.data().verbit) {
+                document.getElementById('check-verbit-checked').checked = true;
+                document.getElementById('getVerbitId').disabled = false;
+            } else {
+                document.getElementById('check-verbit-checked').checked = false;
+            }
+
+            if (doc.data().verbitID != undefined) {
+                document.getElementById('getVerbitId').value = doc.data().verbitID;
+            }
+            //updates right side of ticket
+
+            if (doc.data().returnToPrepNote != undefined) {
+                document.getElementById('fillCommentsIn').innerText = doc.data().returnToPrepNote;
+                alert('This video has been transfered back to prep. Please read carefully the notes provided to update the document. If you cannot resolve the problem, contact a lead');
+            } else {
+                document.getElementById('fillCommentsIn').innerText = 'No return comments have been posted.'
+            }
+
+            if (doc.data().videoHeight != undefined) {
+                document.getElementById('requestHeight').value = doc.data().videoHeight;
+            }
+
+            if (doc.data().videoLength != undefined) {
+                document.getElementById('requestLength').value = doc.data().videoLength;
+            }
+
+            if (doc.data().docPublishURL != undefined) {
                 document.getElementById('googleDocPublish').value = doc.data().docPublishURL;
             }
 
-            if (doc.data().docEditURL != undefined && doc.data().docEditURL != '') {
+            if (doc.data().docEditURL != undefined) {
                 document.getElementById('googleDocEdit').value = doc.data().docEditURL;
             }
 
-            if (doc.data().verbitID != undefined && doc.data().verbitID != '') {
-                document.getElementById('getVerbitId').value = doc.data().verbitID;
-            }
-
-            if (doc.data().returnToPrepNote != '' && doc.data().returnToPrepNote != undefined) {
-                // alert('This video has been transfered back to prep. Please read carefully the notes provided to update the document. If you cannot solve the problem, contact a lead');
-                 document.getElementById('fillCommentsIn').innerHTML = `${doc.data().returnToPrepNote}`
-            }
+            document.getElementById('typeSide').innerText = doc.data().type;
+            document.getElementById('codeSide').innerText = doc.data().courseCode;
+            document.getElementById('titleSide').innerText = doc.data().title;
+            document.getElementById('locationSide').innerText = doc.data().lmsURL;
+            document.getElementById('mediaSide').innerText = doc.data().srcURL;
+            document.getElementById('storeTranscriptID').innerText = transcriptID;
         })
         .then(function () {
             // if the element selected to fill the box is undefined, instead of showing undefined, shows only
@@ -137,17 +139,6 @@ function fillPrepTicket(transcriptID) {
 }
 
 //handles change as the user says if the transcript has been checked for prior completion
-function updateCompletionRight() {
-    var priorCompletion = document.getElementById('priorCompletionBox').checked ? 'Transcript Previously Done' : 'New Transcript'
-    document.getElementById('priorCompletionSide').innerText = 'Prior Completion: ' + priorCompletion;
-    if (priorCompletion = document.getElementById('priorCompletionBox').checked) {
-        document.getElementById('hideVerbit').classList.add('hide');
-        document.getElementById('getVerbitId').classList.add('hide');
-    } else {
-        document.getElementById('hideVerbit').classList.remove('hide');
-        document.getElementById('getVerbitId').classList.remove('hide');
-    }
-}
 //If verbit is checked through the user or through request 
 //input from firestore, allows the  verbit IDinput to be enabled
 document.getElementById('check-verbit-checked').addEventListener('change', () => {
@@ -165,7 +156,9 @@ document.getElementById('requestSubmit').addEventListener('click', () => {
     var docEdit = document.getElementById('googleDocEdit');
     var docPublished = document.getElementById('googleDocPublish');
     var verbit = document.getElementById('check-verbit-checked');
-    var verbitID = document.getElementById('getVerbitId');
+    var verbitID = '' ? !verbit : document.getElementById('getVerbitId');
+    var height = document.getElementById('requestHeight');
+    var length = document.getElementById('requestLength');
 
     if (!document.getElementById('radio-check1').checked && !document.getElementById('radio-check2').checked) {
         message.innerHTML = 'You must fill in all inputs';
@@ -187,10 +180,12 @@ document.getElementById('requestSubmit').addEventListener('click', () => {
         var transcriptID = document.getElementById('storeTranscriptID').innerText;
         db.collection('accessibility').doc(transcriptID).update({
                 status: 'Ready for Transcription',
-                docEditURL: docEdit.value,
-                docPublishURL: docPublished.value,
-                verbitID: verbitID.value,
-                verbit: verbit.checked
+                docEditURL: String(docEdit.value),
+                docPublishURL: String(docPublished.value),
+                verbitID: String(verbitID.value),
+                verbit: Boolean(verbit.checked),
+                videoHeight: Number(height.value),
+                videoLength: Number(length.value)
             })
             .then(() => {
                 var idUser = userID[0];
@@ -216,7 +211,6 @@ function fillPrepTableStart() {
                 console.log(doc.id);
                 var classRed = '';
                 var flaggedStr = '';
-                // console.log(doc.data().returnToPrepNote);
                 if (doc.data().returnToPrepNote != '' && doc.data().returnToPrepNote != undefined) {
                     var classRed = 'red';
                     var flaggedStr = ' (Returned)';
@@ -300,15 +294,16 @@ function showCodeEmbedded() {
         .then(function (doc) {
             var link, height, seconds, title, pubLink;
             link = doc.data().srcURL;
-            height = document.getElementById('storeHeight').innerText;
-            seconds = doc.data().videoLength;
+            height = Number(document.getElementById('requestHeight').value);
+            seconds = Number(document.getElementById('requestLength').value);
             title = doc.data().title;
-            if (document.getElementById('googleDocPublish').value != '' && document.getElementById('googleDocPublish').value.includes('/pub')) {
+            if (document.getElementById('googleDocPublish').value != '' && document.getElementById('googleDocPublish').value.includes('/pub') && height != '' && seconds != '') {
                 pubLink = document.getElementById('googleDocPublish').value;
                 getModal();
             } else {
-                alert("Before getting the code, make sure to add a published google doc to the transcript.");
+                alert("Before getting the code, make sure to add a published google doc to the transcript as well as a height a and a length for the transcript, if necessary.");
             }
+
             var setlink = pubLink;
             var time = secondsToHms(seconds);
 
@@ -353,14 +348,14 @@ function showCodeLink() {
         .then(function (doc) {
             var link, seconds, title, pubLink;
             link = doc.data().srcURL;
-            // height = document.getElementById('storeHeight').innerText;
-            seconds = doc.data().videoLength;
+            // height = Number(document.getElementById('requestHeight').value);
+            seconds = Number(document.getElementById('requestLength').value);
             title = doc.data().title;
-            if (document.getElementById('googleDocPublish').value != '' && document.getElementById('googleDocPublish').value.includes('/pub')) {
+            if (document.getElementById('googleDocPublish').value != '' && document.getElementById('googleDocPublish').value.includes('/pub') && seconds != '') {
                 pubLink = document.getElementById('googleDocPublish').value;
                 getModal();
             } else {
-                alert("Before getting the code, make sure to add a published google doc to the transcript.");
+                alert("Before getting the code, make sure to add a published google doc to the transcript as well as a length for the transcript, if necessary.");
             }
             var setlink = pubLink;
             var time = secondsToHms(seconds);
@@ -420,4 +415,88 @@ function updateVerbitAccordingToPriorCompletion(bool) {
         document.getElementById('hideVerbit').classList.remove('hide');
         document.getElementById('getVerbitId').classList.remove('hide');
     }
+}
+
+function calculateTotal() {
+    var hours = 0;
+    var minutes = 0;
+    var seconds = 0;
+    var total = 0;
+    hours = document.getElementById("hours0").value;
+    minutes = document.getElementById("minutes0").value;
+    seconds = document.getElementById("seconds0").value;
+    if (hours == "" && minutes == "" && seconds == "") {
+        document.getElementById("total" + i).value = "";
+    }
+    if (hours == "") {
+        hours = 0;
+    }
+    if (minutes == "") {
+        minutes = 0;
+    }
+    if (seconds == "") {
+        seconds = 0;
+    }
+    if (hours < 0 || minutes < 0 || seconds < 0) {
+        document.getElementById("total0").value = "NaN";
+    }
+    if (seconds >= 60 && seconds <= 1000000) {
+        while (seconds >= 60) {
+            minutes++;
+            seconds -= 60;
+        }
+        document.getElementById("seconds0").value = seconds;
+        document.getElementById("minutes0").value = minutes;
+    }
+    if (minutes >= 60 && minutes <= 1000000) {
+        while (minutes >= 60) {
+            hours++;
+            minutes -= 60;
+        }
+        document.getElementById("minutes0").value = minutes;
+        document.getElementById("hours0").value = hours;
+    }
+    total = (hours * 60 * 60) + (minutes * 60) + (seconds * 1);
+    if (total === 0) {
+        total = "";
+        document.getElementById("total0").value = total;
+    }
+    document.getElementById("total0").value = total;
+};
+
+function calculateSubmit() {
+    var total = document.getElementById('total0').value;
+    document.getElementById('requestLength').value = total;
+    document.getElementById('requestLength').style.borderColor = "rgb(169, 169, 169)";
+    modal.style.display = "none";
+}
+
+//Counts the ammount of transcripts in the database
+function countDocs() {
+    db.collection('accessibility').get()
+        .then((querySnapshot) => {
+            var count = 0;
+            querySnapshot.forEach((doc) => {
+                count += 1;
+            })
+            console.log(count);
+        })
+}
+
+var modal = document.getElementById('myModal');
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close2")[0];
+// When the user clicks on <span> (x), close the modal
+span.onclick = function () {
+    modal.style.display = "none";
+}
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+function revealModalCalc() {
+    document.getElementById('myModal').style.display = 'block';
 }
