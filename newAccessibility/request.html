@@ -115,7 +115,7 @@
                                 readonly>
                         </div>
                         <div class="container row" id="btn-finish">
-                            <a id="btn-modal2" class="bg-primary btn-hover container center" onclick="calculateSubmit()">Submit</a>
+                            <a id="btn-modal2" class="bg-primary btn-hover container center" onclick="submitTranscriptRequest()">Submit</a>
                         </div>
                         <span class="close2">&times;</span>
                     </div>
@@ -135,7 +135,7 @@
                     <label>Location in Course:</label>
                     <p class="description" id="locationSide"> --</p>
                     <div class="container row">
-                        <button type="submit" class="bg-primary btn-hover" id="requestSubmit"> Submit </button>
+                        <button type="submit" class="bg-primary btn-hover" onclick="submitTranscriptRequest()" id="requestSubmit"> Submit </button>
                         <p style="margin-left: 2rem; margin-top: .8rem;" id="message"></p>
                     </div>
                 </div>

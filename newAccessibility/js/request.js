@@ -38,8 +38,10 @@ document.getElementById('requestType').addEventListener('change', function () {
         document.getElementById('requestHeight').classList.add('hide');
     }
 });
+
 //once the user requests a transcript, this makes sure that the transcript is filled out correctly and thoroughly
-document.getElementById('requestSubmit').addEventListener('click', function () {
+//it also checks if the transcript is a duplicate. if it is, brings necessary information over.
+async function submitTranscriptRequest() {
     var requestType = document.getElementById('requestType').value;
     var title = document.getElementById('requestTitle').value.toUpperCase();
     var priority = document.getElementById('requestPriority').value;
@@ -51,6 +53,15 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
     var softwareUsed = document.getElementById('requestExternalSoftware').checked;
     var comments = document.getElementById('requestComments').value;
 
+    console.log("before");
+    try {
+        var parentObject = await generateParentObject(srcURL);
+    } catch (err) {
+        console.error(err);
+    }
+    console.log(parentObject);
+    console.log("After");
+    
     if (requestType === 'Request Type' || title === '' || priority === 'Priority' || course === 'Course' || lmsURL === '' || srcURL === '') {
         message.innerHTML = 'You must fill in all inputs';
         message.style.color = 'red';
@@ -83,7 +94,6 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
             requestor: user.displayName,
             requestDate: new Date(),
             status: 'Ready for Prep',
-            copied: false,
             requestNotes: comments + `. Comment made by: ${user.displayName}`
         }
 
@@ -107,15 +117,15 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
         if (requestType == "Alt Text" || requestType == "Slide") {
             var requestTranscript = Object.assign({}, docData)
         }
-
         // Add a new document in collection "accessibility"
-        db.collection('accessibility').add(requestTranscript)
+        var finalObject = Object.assign(requestTranscript, parentObject);
+        console.log(finalObject);
+        db.collection('accessibility').add(finalObject)
             .then(function (doc) {
                 console.log('Document written with ID: ', doc.id);
                 message.innerHTML = 'Request has been made.';
                 message.style.color = 'blue';
                 resetMessage();
-
                 document.getElementById('requestType').options[0].selected = 'selected';
                 document.getElementById('requestCourse').options[0].selected = 'selected';
                 document.getElementById('requestTitle').value = '';
@@ -134,7 +144,6 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
                     elms[i].innerText = '--';
                 }
                 //updates the side of the document
-
             })
             .catch(function (error) {
                 console.error('Error adding document: ', error);
@@ -143,7 +152,7 @@ document.getElementById('requestSubmit').addEventListener('click', function () {
                 resetMessage();
             });
     }
-});
+}
 
 function resetMessage() {
     setTimeout(() => {
@@ -264,57 +273,36 @@ function revealModalCalc() {
     document.getElementById('myModal').style.display = 'block';
 }
 
-function checkForDuplicates(videoURL) {
-    //first let's receive into a variable the link used in this media
+function generateParentObject(videoURL) {
+    return new Promise((resolve, reject) => {
     db.collection('accessibility').where('srcURL', '==', videoURL).where('parentTranscript', "==", true).get()
         .then(function (querySnapshot) {
             if (querySnapshot.size == 1) {
-                querySnapshot.forEach(function (doc) {
-                    object = {
-                        title: doc.data().title,
-                        type: doc.data().type,
-                        docEditURL: doc.data().docEditURL,
-                        docPublishURL: doc.data().docPublishURL,
-                        videoHeight: doc.data().videoHeight,
-                        videoLength: doc.data().videoLength,
-                        verbit: doc.data().verbit,
-                        parentTranscript: false,
-                        copied: true,
-                        copiedFrom: doc.id
-                    }
-                    var copyObject = {}
-                    //lets assign object to a empty object as a push, so it saves whatever we set it to
-                    Object.assign(object, copyObject);
-                    console.log(object);
-                    return object;
-                })
-            } else {
-                object = { 
-                    parentTranscript: true
+                querySnapshot.forEach(doc => {
+                object = {
+                    title: doc.data().title,
+                    type: doc.data().type,
+                    docEditURL: doc.data().docEditURL,
+                    docPublishURL: doc.data().docPublishURL,
+                    videoHeight: doc.data().videoHeight,
+                    videoLength: doc.data().videoLength,
+                    verbit: doc.data().verbit,
+                    parentTranscript: false,
+                    copied: true,
+                    copiedFrom: doc.id
                 }
-                console.log(object);
-                return object;
+                    // returns the object
+                resolve(object);
+                });
+            } else if (querySnapshot.size == 0) {
+                object = {
+                    parentTranscript: true,
+                    copied: false
+                }
+                 resolve(object);
             }
-            //{ parentTranscript: true, copied: false }
-        })
-}
-
-
-
-
-
-
-function update() {
-    let promise = new Promise(function (resolve, reject) {
-
-        resolve(
-            db.collection('accessibility').doc('7nlnHstuffaFSvcuyHwX').get()
-            .then(function (doc) {
-                console.log(doc);
-            }))
-
-    })
-    promise.then(
-        result => console.log('yaya'),
-        error => console.log('didnt work'));
+        }, err => {
+            reject(err);
+        });
+    });
 }

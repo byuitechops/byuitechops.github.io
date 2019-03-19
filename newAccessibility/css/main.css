@@ -173,10 +173,6 @@ input::placeholder {
   overflow: auto;
 }
 
-.hidden-overflow { 
-  /* overflow-x: hidden; */
-}
-
 .pd-right {
   padding-right: 1rem;
 }
