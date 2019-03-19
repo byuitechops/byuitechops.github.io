@@ -16,7 +16,7 @@ firebase.auth().onAuthStateChanged(function (user) {
                     }
                     if (doc.data().currentAction == 'preparing' || doc.data().currentAction == 'transcribing') {
                         //user has a prep project that is unfinished
-                        // alert('Please, finish preparing or transcribing previous transcript before proceding');
+                         alert('Please, finish preparing or transcribing previous transcript before proceding');
                         if (doc.data().currentAction == 'preparing') {
                             displayPrepareModal(doc.data().actionID);
                             userAction.push(doc.data().actionID);
