@@ -74,7 +74,7 @@ function fillPrepTicket(transcriptID) {
                 document.getElementById('radio-check1').checked = true;
             }
 
-            if (doc.data().type != 'Transcript') {
+            if (doc.data().type != 'Video') {
                 document.getElementById('getVerbitId').value = 'The transcript does not use Verbit';
                 document.getElementById('hideVerbit').classList.add('hide');
                 document.getElementById('embeddedCode').classList.add('hide');

@@ -24,7 +24,7 @@ function updateLocation(newLocation) {
 
 //according to the request type, displays or hide specific input boxes 
 document.getElementById('requestType').addEventListener('change', function () {
-    if (document.getElementById('requestType').value === 'Transcript') {
+    if (document.getElementById('requestType').value === 'Video') {
         document.getElementById('time-calculator').classList.remove('soft-hide');
         document.getElementById('requestLength').classList.remove('soft-hide');
         document.getElementById('verbit').classList.remove('soft-hide');
@@ -92,6 +92,7 @@ async function submitTranscriptRequest() {
                 console.log('Document written with ID: ', doc.id);
                 message.innerHTML = 'Request has been made.';
                 message.style.color = 'blue';
+                document.getElementById('transcript-box-info').classList.add('wobble-hor-bottom');
                 resetMessage();
                 document.getElementById('requestType').options[0].selected = 'selected';
                 document.getElementById('requestCourse').options[0].selected = 'selected';
