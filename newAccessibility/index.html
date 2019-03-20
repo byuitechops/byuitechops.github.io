@@ -19,7 +19,7 @@
         <h1>Technical Accessibility</h1>
     </header>
     <main>
-        <p id="message"></p>
+      
         <div id="signin" class="container col center">
             <p>Sign In</p>
             <input id="txtEmail" placeholder="Email" pattern="[a-z0-9]{0,}(@byui.edu)+$" title="BYUI email">
@@ -28,6 +28,7 @@
                 <button id="btnLogin" class="bg-primary btn-hover" onclick="logIn()" type="submit">Login</button>
                 <button id="btnSignUp" class="bg-primary btn-hover" onclick="signUp()">Sign Up</button>
             </div>
+            <p  style="font-size: 1rem;" id="message"></p>
             <p id="resetPassword" onclick="resetPassword()">Reset Password</p>
         </div>
         <div id="signup" class="container col center hide">

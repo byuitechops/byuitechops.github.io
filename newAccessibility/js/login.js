@@ -30,6 +30,12 @@ function logIn() {
         message.innerHTML = "All fields must be filled in.";
         message.style.color = "red";
         resetMessage();
+        document.getElementById('txtEmail').classList.add('wobble-hor-bottom');
+        document.getElementById('txtPassword').classList.add('wobble-hor-bottom');
+        setTimeout(() => {
+            document.getElementById('txtEmail').classList.remove('wobble-hor-bottom');
+            document.getElementById('txtPassword').classList.remove('wobble-hor-bottom');
+        }, 2000);
     } else {
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then(function () {
@@ -38,6 +44,12 @@ function logIn() {
             })
             .catch(function (error) {
                 // Handle Errors here. 
+                document.getElementById('txtEmail').classList.add('wobble-hor-bottom');
+                document.getElementById('txtPassword').classList.add('wobble-hor-bottom');
+                setTimeout(() => {
+                    document.getElementById('txtEmail').classList.remove('wobble-hor-bottom');
+                    document.getElementById('txtPassword').classList.remove('wobble-hor-bottom');
+                }, 2000);
                 message.innerHTML = error.message;
                 message.style.color = "red";
                 resetMessage();
@@ -60,7 +72,12 @@ function resetPassword() {
     if (emailAddress == "") {
         message.innerHTML = "The email field must be filled in.";
         message.style.color = "red";
-        resetMessage();
+        
+        document.getElementById('txtEmail').classList.add('wobble-hor-bottom');
+        setTimeout(() => {
+            document.getElementById('txtEmail').classList.remove('wobble-hor-bottom');
+            resetMessage();
+        }, 2000);
     } else {
         // Send reset password email
         firebase.auth().sendPasswordResetEmail(emailAddress)
@@ -73,7 +90,11 @@ function resetPassword() {
                 // Handle Errors here
                 message.innerHTML = error.message;
                 message.style.color = "red";
-                resetMessage();
+                document.getElementById('txtEmail').classList.add('wobble-hor-bottom');
+                setTimeout(() => {
+                    document.getElementById('txtEmail').classList.remove('wobble-hor-bottom');
+                    resetMessage();
+                }, 2000);
             });
     }
 }
