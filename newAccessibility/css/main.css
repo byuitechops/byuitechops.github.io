@@ -474,8 +474,9 @@ input::placeholder {
 }
 
 #main-nav ul .byuiLogo {
-  position: relative;
-  left: 55rem;
+  position: absolute;
+  right: 14rem;
+  top: -.5rem;
 }
 
 
@@ -490,15 +491,10 @@ input::placeholder {
 }
 
 #main-nav .logout {
-  position: relative;
-  left: 58rem;
+  position: absolute;
+  right: 4rem;
+  top: 1rem;
   color: white;
-}
-
-.bring-left {
-  position: absolute !important;
-  right: -28.8rem;
-  top: -.7rem;
 }
 
 #main-nav .logout p {
@@ -558,6 +554,7 @@ input::placeholder {
   display: flex;
   flex-flow: row;
   justify-content: space-between;
+  margin-left: -.5rem;
 }
 
 #content #links #group-links a {

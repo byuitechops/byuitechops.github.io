@@ -9,6 +9,9 @@ firebase.auth().onAuthStateChanged(function (user) {
                 querySnapshot.forEach(function (doc) {
                     userID.push(doc.id);
                     userName.push(doc.data().name);
+                    if (doc.data().role == 'Copyedit') {
+                        window.location.assign('home.html');
+                    }
                     if (doc.data().currentAction == 'preparing' || doc.data().currentAction == 'transcribing') {
                         //user has a prep project that is unfinished
                         alert('Please, finish preparing or transcribing transcript before claiming another one for transcription');

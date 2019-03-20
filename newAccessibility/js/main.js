@@ -19,7 +19,6 @@ db.settings({
     timestampsInSnapshots: true
 });
 
-
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
         if (window.location.pathname != '/index.html') {
@@ -28,11 +27,20 @@ firebase.auth().onAuthStateChanged(function (user) {
                 .then((querySnapshot) => {
                     querySnapshot.forEach((doc) => {
                         var userData = doc.data();
-                        if (userData.role != "Copyedit") {
-                            // document.getElementById('place').classList.remove('hide');
+                        console.log(userData.role);
+                        if (userData.lead) {
+                            document.getElementById('master').classList.remove('hide');
                         }
-                        if (userData.role == "Admin" || userData.role == "Techops" || userData.role == "Lead") {
-                            // document.getElementById('master').classList.remove('hide');
+                        if (userData.role == "Copyedit") {
+                            document.getElementById('copyEdit').classList.remove('hide');
+                            document.getElementById('prepare').classList.add('hide');
+                            if (userData.lead) {
+                                document.getElementById('copyEditCheck').classList.remove('hide');
+                            }
+                        }
+                        if (userData.role == "Quality Assurance") {
+                            document.getElementById('copyEdit').classList.add('hide');
+                            document.getElementById('copyEditCheck').classList.add('hide');
                         }
                     })
                 })
@@ -60,6 +68,3 @@ function userLogout() {
     firebase.auth().signOut();
     window.location.reload();
 }
-
-// Initialize Firebase
-
