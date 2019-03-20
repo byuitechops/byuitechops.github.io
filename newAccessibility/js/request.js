@@ -22,22 +22,6 @@ function updateLocation(newLocation) {
     document.getElementById('locationSide').innerText = newLocation;
 }
 
-//according to the request type, displays or hide specific input boxes 
-document.getElementById('requestType').addEventListener('change', function () {
-    if (document.getElementById('requestType').value === 'Video') {
-        document.getElementById('time-calculator').classList.remove('soft-hide');
-        document.getElementById('requestLength').classList.remove('soft-hide');
-        document.getElementById('verbit').classList.remove('soft-hide');
-        document.getElementById('requestHeight').classList.remove('hide');
-    } else if (document.getElementById('requestType').value === 'Audio') {
-        document.getElementById('time-calculator').classList.remove('soft-hide');
-        document.getElementById('verbit').classList.remove('soft-hide');
-    } else {
-        document.getElementById('time-calculator').classList.add('soft-hide');
-        document.getElementById('verbit').classList.add('soft-hide');
-        document.getElementById('requestHeight').classList.add('hide');
-    }
-});
 
 //once the user requests a transcript, this makes sure that the transcript is filled out correctly and thoroughly
 //it also checks if the transcript is a duplicate. if it is, brings necessary information over.
@@ -61,7 +45,7 @@ async function submitTranscriptRequest() {
     }
     console.log(parentObject);
     console.log("After");
-    
+
     if (requestType === 'Request Type' || title === '' || priority === 'Priority' || course === 'Course' || lmsURL === '' || srcURL === '') {
         message.innerHTML = 'You must fill in all inputs';
         message.style.color = 'red';
@@ -71,17 +55,20 @@ async function submitTranscriptRequest() {
         var user = firebase.auth().currentUser;
 
         var docData = {
-            title: title,
-            docPublishURL: '',
-            docEditURL: '',
-            type: requestType,
-            priority: priority,
-            courseCode: course,
-            lmsURL: lmsURL,
-            srcURL: srcURL,
-            requestor: user.displayName,
+            title: String(title),
+            docPublishURL: String(''),
+            docEditURL: String(''),
+            type: String(requestType),
+            priority: Number(priority),
+            courseCode: String(course),
+            lmsURL: String(lmsURL),
+            videoHeight: Number(''),
+            srcURL: String(srcURL),
+            requestor: String(user.displayName),
             requestDate: new Date(),
-            status: 'Ready for Prep',
+            verbit: Boolean(''),
+            verbitID: String(''),
+            status: String('Ready for Prep'),
             requestNotes: comments + `. Comment made by: ${user.displayName}`
         }
         // Add a new document in collection "accessibility"
@@ -103,7 +90,7 @@ async function submitTranscriptRequest() {
                 document.getElementById('requestComments').value = '';
                 var elms = document.getElementsByClassName('description');
                 console.log(elms);
-                for (var i = 0; i < elms.length; i++) { 
+                for (var i = 0; i < elms.length; i++) {
                     elms[i].innerText = '--';
                 }
                 //updates the side of the document
@@ -152,34 +139,35 @@ function getCourses() {
 //to user's input for the transcript selected
 function generateParentObject(videoURL) {
     return new Promise((resolve, reject) => {
-    db.collection('accessibility').where('srcURL', '==', videoURL).where('parentTranscript', "==", true).get()
-        .then(function (querySnapshot) {
-            if (querySnapshot.size == 1) {
-                querySnapshot.forEach(doc => {
-                object = {
-                    title: doc.data().title,
-                    type: doc.data().type,
-                    docEditURL: doc.data().docEditURL,
-                    docPublishURL: doc.data().docPublishURL,
-                    videoHeight: doc.data().videoHeight,
-                    videoLength: doc.data().videoLength,
-                    verbit: doc.data().verbit,
-                    parentTranscript: false,
-                    copied: true,
-                    copiedFrom: doc.id
+        db.collection('accessibility').where('srcURL', '==', videoURL).where('parentTranscript', "==", true).get()
+            .then(function (querySnapshot) {
+                if (querySnapshot.size == 1) {
+                    querySnapshot.forEach(doc => {
+                        object = {
+                            title: doc.data().title,
+                            type: doc.data().type,
+                            docEditURL: doc.data().docEditURL,
+                            docPublishURL: doc.data().docPublishURL,
+                            videoHeight: doc.data().videoHeight,
+                            videoLength: doc.data().videoLength,
+                            verbit: doc.data().verbit,
+                            verbitID: doc.data().verbitID,
+                            parentTranscript: false,
+                            copied: true,
+                            copiedFrom: doc.id
+                        }
+                        // returns the object
+                        resolve(object);
+                    });
+                } else if (querySnapshot.size == 0) {
+                    object = {
+                        parentTranscript: true,
+                        copied: false
+                    }
+                    resolve(object);
                 }
-                    // returns the object
-                resolve(object);
-                });
-            } else if (querySnapshot.size == 0) {
-                object = {
-                    parentTranscript: true,
-                    copied: false
-                }
-                 resolve(object);
-            }
-        }, err => {
-            reject(err);
-        });
+            }, err => {
+                reject(err);
+            });
     });
 }
