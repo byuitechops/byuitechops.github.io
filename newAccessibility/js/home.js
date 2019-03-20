@@ -37,7 +37,7 @@ function fillTranscriptBox(transcriptID, role) {
             document.getElementById('updateMediaLink').href = doc.data().srcURL;
             document.getElementById('btn-finish').value = transcriptID;
             document.getElementById('submit-report').value = transcriptID;
-            document.getElementById('verbitID-display').innerText = doc.data().verbitID;
+            document.getElementById('verbitID-display').innerText = doc.data().verbitID ? !'' : "--";
             if (!doc.data().copied) {
                 document.getElementById('get-comments').innerText = `Request Notes: ${doc.data().requestNotes}`;
             } else {
@@ -140,11 +140,6 @@ var btn = document.getElementById("btn-report");
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 var submitReportBtn = document.getElementById('submit-report').addEventListener('click', () => {
-    // db.collection('accessibility').doc(docId).update({
-    //     status: "Error",
-    //     errorNote: note
-    // }).then(() => {
-    // })
     modal.style.display = "none";
 })
 
