@@ -288,6 +288,11 @@ input::placeholder {
   /* Black w/ opacity */
 }
 
+.modal #submit-report { 
+  position: absolute;
+  right: -5rem;
+}
+
 /* Modal Content */
 .modal-content {
   background-color: #fefefe;
