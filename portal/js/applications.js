@@ -33,7 +33,7 @@ email.addEventListener("click", () => {
 
 
 katana.addEventListener("click", () => {
-    window.open("#");
+    // window.open("#");
 })
 
 equella.addEventListener("click", () => {
