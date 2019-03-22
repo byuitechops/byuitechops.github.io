@@ -40,10 +40,12 @@ async function submitTranscriptRequest() {
     console.log("before");
     try {
         var parentObject = await generateParentObject(srcURL);
+        var userObject = await getRequestsNumber();
     } catch (err) {
         console.error(err);
     }
     console.log(parentObject);
+    console.log(userObject);
     console.log("After");
 
     if (requestType === 'Request Type' || title === '' || priority === 'Priority' || course === 'Course' || lmsURL === '' || srcURL === '') {
@@ -63,13 +65,14 @@ async function submitTranscriptRequest() {
             courseCode: String(course),
             lmsURL: String(lmsURL),
             videoHeight: Number(''),
+            videoLenght: Number(''),
             srcURL: String(srcURL),
             requestor: String(user.displayName),
             requestDate: new Date(),
             verbit: Boolean(''),
             verbitID: String(''),
             status: String('Ready for Prep'),
-            requestNotes: comments + `. Comment made by: ${user.displayName}`
+            requestNotes: comments + `. Comment made by: ${user.displayName}`,
         }
         // Add a new document in collection "accessibility"
         var finalObject = Object.assign(docData, parentObject);
@@ -94,6 +97,8 @@ async function submitTranscriptRequest() {
                     elms[i].innerText = '--';
                 }
                 //updates the side of the document
+            }).then(() => {
+                db.collection('users').doc(userObject.userID).update({requests: userObject.requests +=1})
             })
             .catch(function (error) {
                 console.error('Error adding document: ', error);
@@ -102,6 +107,23 @@ async function submitTranscriptRequest() {
                 resetMessage();
             });
     }
+}
+
+function getRequestsNumber() {
+    var user = firebase.auth().currentUser;
+    return new Promise((resolve, reject) => {
+        db.collection('users').where('name', "==", user.displayName).get()
+            .then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                    resolve({
+                        requests: doc.data().requests,
+                        userID: doc.id
+                    });
+                })
+            })
+    })
+
+
 }
 
 function resetMessage() {

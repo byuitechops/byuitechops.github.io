@@ -1,5 +1,7 @@
 var userID = [];
 var userName = [];
+var userTranscriptions = [];
+var userReviews = [];
 //checks if the user has actually finished a prep before starting another one + handles permission requirements
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
@@ -9,6 +11,8 @@ firebase.auth().onAuthStateChanged(function (user) {
                 querySnapshot.forEach(function (doc) {
                     userID.push(doc.id);
                     userName.push(doc.data().name);
+                    userTranscriptions.push(doc.data().transcriptions);
+                    userReviews.push(doc.data().reviews);
                     if (doc.data().currentAction == 'transcribing') {
                         //user has a prep project that is unfinished
                         fillTranscriptBox(doc.data().actionID, 'qualityAssurance');
@@ -74,7 +78,8 @@ function finalizeTranscript(transcriptID) {
                 if (doc.data().currentAction == 'transcribing') {
                     db.collection('users').doc(userID[0]).update({
                             currentAction: '',
-                            actionID: ''
+                            actionID: '',
+                            transcriptions: userTranscriptions[0] + 1
                         })
                         .then(() => {
                             db.collection('accessibility').doc(transcriptID).update({
@@ -89,7 +94,8 @@ function finalizeTranscript(transcriptID) {
                 } else if ((doc.data().currentAction == 'reviewing')) {
                     db.collection('users').doc(userID[0]).update({
                             currentAction: '',
-                            actionID: ''
+                            actionID: '',
+                            reviews: userReviews[0] + 1
                         })
                         .then(() => {
                             db.collection('accessibility').doc(transcriptID).update({

@@ -1,6 +1,6 @@
 var userID = [];
 var userName = [];
-
+var userTranscriptions = [];
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
         //user is logged in
@@ -9,6 +9,7 @@ firebase.auth().onAuthStateChanged(function (user) {
                 querySnapshot.forEach(function (doc) {
                     userID.push(doc.id);
                     userName.push(doc.data().name);
+                    userTranscriptions.push(doc.data().transcriptions);
                     if (doc.data().role == 'Copyedit') {
                         window.location.assign('home.html');
                     }
@@ -67,7 +68,7 @@ function fillTranscribeTable(selectedCourseCode) {
 function claimTranscription(transcriptID) {
     db.collection('users').doc(userID[0]).update({
             currentAction: 'transcribing',
-            actionID: transcriptID
+            actionID: transcriptID,
         })
         //generates the table
         .then(() => {

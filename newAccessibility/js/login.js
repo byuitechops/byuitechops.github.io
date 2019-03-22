@@ -149,7 +149,12 @@ function submitSignUp() {
                             role: inputRole,
                             lead: Boolean(false),
                             actionID: '',
-                            currentAction: ''
+                            currentAction: '',
+                            typingSpeed: 0,
+                            requests: 0,
+                            prepares: 0,
+                            transcriptions: 0,
+                            reviews: 0,
                         })
                         .then(function (docRef) {
                             console.log("Document written with ID: ", docRef.id);

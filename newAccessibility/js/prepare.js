@@ -1,7 +1,8 @@
 var userID = [];
 var userName = [];
 var checkDuplicates = [];
-var userAction = []
+var userAction = [];
+var userPrepares = [];
 //checks if the user has actually finished a prep before starting another one + handles permission requirements
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
@@ -11,6 +12,7 @@ firebase.auth().onAuthStateChanged(function (user) {
                 querySnapshot.forEach(function (doc) {
                     userID.push(doc.id);
                     userName.push(doc.data().name);
+                    userPrepares.push(doc.data().prepares);
                     if (doc.data().role == 'Copyedit') {
                         window.location.assign('home.html');
                     }
@@ -185,13 +187,15 @@ document.getElementById('requestSubmit').addEventListener('click', () => {
                 verbitID: String(verbitID.value),
                 verbit: Boolean(verbit.checked),
                 videoHeight: Number(height.value),
-                videoLength: Number(length.value)
+                videoLength: Number(length.value),
+                datePrepareFinished: new Date()
             })
             .then(() => {
                 var idUser = userID[0];
                 db.collection('users').doc(idUser).update({
                         currentAction: '',
-                        actionID: ''
+                        actionID: '',
+                        prepares: userPrepares[0] + 1
                     })
                     .then(() => {
                         searchPrepPage.classList.remove('hide');

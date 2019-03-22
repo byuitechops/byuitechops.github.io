@@ -27,7 +27,6 @@ firebase.auth().onAuthStateChanged(function (user) {
                 .then((querySnapshot) => {
                     querySnapshot.forEach((doc) => {
                         var userData = doc.data();
-                        console.log(userData.role);
                         if (userData.lead) {
                             document.getElementById('master').classList.remove('hide');
                         }
