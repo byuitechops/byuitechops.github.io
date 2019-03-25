@@ -221,7 +221,6 @@ function getTotals(userID) {
                         console.log('There was an error =>', err);
                   })
       }) //ends the promise;
-
 }
 
 function toggleTab(i) {

@@ -27,7 +27,7 @@ function updateLocation(newLocation) {
 //it also checks if the transcript is a duplicate. if it is, brings necessary information over.
 async function submitTranscriptRequest() {
     var requestType = document.getElementById('requestType').value;
-    var title = document.getElementById('requestTitle').value.toUpperCase();
+    var title = document.getElementById('requestTitle').value;
     var priority = document.getElementById('requestPriority').value;
     var course = document.getElementById('requestCourse').value;
     var lmsURL = document.getElementById('requestLMSURL').value;

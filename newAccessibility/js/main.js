@@ -33,6 +33,7 @@ firebase.auth().onAuthStateChanged(function (user) {
                         if (userData.role == "Copyedit") {
                             document.getElementById('copyEdit').classList.remove('hide');
                             document.getElementById('prepare').classList.add('hide');
+                            document.getElementById('transcribe').classList.add('hide');
                             if (userData.lead) {
                                 document.getElementById('copyEditCheck').classList.remove('hide');
                             }
