@@ -41,28 +41,28 @@ function fillUserTable() {
 
 function fillTranscriptTable(courseCode) {
       document.getElementById('master-table-transcript').innerHTML = '';
-      if (courseCode == undefined) { 
+      if (courseCode == undefined) {
             db.collection("accessibility").orderBy('priority').get()
-            .then(function (querySnapshot) {
-                  querySnapshot.forEach(function (doc) {
-                        var p = `<p> ${doc.data().priority}</p> <p>${doc.data().courseCode}</p> <p style="padding-right: .5rem;">${doc.data().title}</p>
+                  .then(function (querySnapshot) {
+                        querySnapshot.forEach(function (doc) {
+                              var p = `<p> ${doc.data().priority}</p> <p>${doc.data().courseCode}</p> <p style="padding-right: .5rem;">${doc.data().title}</p>
                     <p>${doc.data().status}</p>  <button onclick="displayTranscriptInfo('${doc.id}')" class="bg-primary btn-hover prepare-btn">
                     View / Edit</button>`;
-                        document.getElementById('master-table-transcript').insertAdjacentHTML('beforeend', p);
+                              document.getElementById('master-table-transcript').insertAdjacentHTML('beforeend', p);
+                        })
                   })
-            })
-      } else { 
+      } else {
             db.collection("accessibility").orderBy('priority').where('courseCode', '==', courseCode).get()
-            .then(function (querySnapshot) {
-                  querySnapshot.forEach(function (doc) {
-                        var p = `<p> ${doc.data().priority}</p> <p>${doc.data().courseCode}</p> <p style="padding-right: .5rem;">${doc.data().title}</p>
+                  .then(function (querySnapshot) {
+                        querySnapshot.forEach(function (doc) {
+                              var p = `<p> ${doc.data().priority}</p> <p>${doc.data().courseCode}</p> <p style="padding-right: .5rem;">${doc.data().title}</p>
                     <p>${doc.data().status}</p>  <button onclick="displayTranscriptInfo('${doc.id}')" class="bg-primary btn-hover prepare-btn">
                     View / Edit</button>`;
-                        document.getElementById('master-table-transcript').insertAdjacentHTML('beforeend', p);
+                              document.getElementById('master-table-transcript').insertAdjacentHTML('beforeend', p);
+                        })
                   })
-            })
       }
-     
+
 }
 
 function displayUserInfo(userID) {
@@ -84,44 +84,103 @@ function displayUserInfo(userID) {
             })
 }
 
-function displayTranscriptInfo(transcriptID) { 
+function displayTranscriptInfo(transcriptID) {
       db.collection('accessibility').doc(transcriptID).get()
-      .then(function(doc) { 
-            console.log(doc.data());
-            document.getElementById('transcript-title').innerText = 'Transcript Title: ' + doc.data().title;
-            document.getElementById('transcript-status').innerText = 'Stage: ' + doc.data().status;
-            document.getElementById('transcript-code').innerText = 'Course Code: ' + doc.data().courseCode;
-            document.getElementById('transcript-priority').innerText = 'Priority: ' + doc.data().priority;
-            document.getElementById('transcript-type').innerText = 'Type: ' + doc.data().type;
-            document.getElementById('transcript-length').innerText = 'Length: ' + doc.data().length;
-            document.getElementById('transcript-height').innerText = 'Height: ' + doc.data().height;
-            document.getElementById('transcript-googleEditLink').setAttribute('href', doc.data().docEditURL);
-            document.getElementById('transcript-googlePubLink').setAttribute('href', doc.data().docPublishURL);
-            document.getElementById('transcript-canvasLink').setAttribute('href', doc.data().lmsURL);
-            document.getElementById('transcript-mediaLink').setAttribute('href', doc.data().srcURL);
-            document.getElementById('transcript-verbit').innerText = 'Verbit Used: ' + doc.data().verbit;
-            document.getElementById('transcript-verbitID').innerText = 'Verbit ID: ' + doc.data().verbitID;
-            document.getElementById('transcript-copied').innerText = 'Copied as duplicate: ' + doc.data().copied;
-            document.getElementById('transcript-copiedFrom').innerText = 'Copied from: -- ';
-            //right half of the transcript info box starts here
-            document.getElementById('transcript-requestor').innerText = 'Requested by: ' + doc.data().requestor;
-            document.getElementById('transcript-requestDate').innerText = 'Requested on: ' + doc.data().requestDate.date.firebase.firestore.Timestamp;
-            document.getElementById('transcript-preparer').innerText = 'Prepared by: ' + doc.data().preparer;
-            document.getElementById('transcript-prepareDate').innerText = 'Prepared Completed on:  ' + doc.data().datePrepareFinished.firebase.firestore.Timestamp;
-            document.getElementById('transcript-transcriber').innerText = 'Transcribed by: ' + doc.data().transcriber;
-            document.getElementById('transcript-transcriptionDate').innerText = 'Transcription Completed on: ' + doc.data().dateTranscriptionFinished.firebase.firestore.Timestamp;
-            document.getElementById('transcript-reviewer').innerText = 'Reviewed by: ' + doc.data().reviewer;
-            document.getElementById('transcript-reviewDate').innerText = 'Review Completed on: ' + doc.data().dateReviewFinished.firebase.firestore.Timestamp;
-            document.getElementById('transcript-requestNotes').innerText = 'Request Notes: ' + doc.data().requestNotes;
-            document.getElementById('transcript-returnNotes').innerText = 'Return to prep notes: ' + doc.data().returnToPrepNote;
-          
-            document.getElementById('transcript-info-box').classList.remove('hide');
-      })
+            .then(function (doc) {
+                  console.log(doc.data());
+                  document.getElementById('transcript-title').innerText = 'Transcript Title: ' + doc.data().title;
+                  document.getElementById('transcript-status').innerText = 'Stage: ' + doc.data().status;
+                  document.getElementById('transcript-code').innerText = 'Course Code: ' + doc.data().courseCode;
+                  document.getElementById('transcript-priority').innerText = 'Priority: ' + doc.data().priority;
+                  document.getElementById('transcript-type').innerText = 'Type: ' + doc.data().type;
+                  if (doc.data().length != undefined) {
+                        document.getElementById('transcript-length').innerText = 'Length: ' + doc.data().length;
+                  } else {
+                        document.getElementById('transcript-length').innerText = 'Length: -- ';
+                  }
+
+                  if (doc.data().height != undefined) {
+                        document.getElementById('transcript-height').innerText = 'Height: ' + doc.data().height;
+                  } else {
+                        document.getElementById('transcript-height').innerText = 'Height: -- '
+                  }
+
+                  if (doc.data().docEditURL != undefined) {
+                        document.getElementById('transcript-googleEditLink').setAttribute('href', doc.data().docEditURL);
+                  }
+
+                  if (doc.data().docPublishURL != undefined) {
+                        document.getElementById('transcript-googlePubLink').setAttribute('href', doc.data().docPublishURL);
+                  }
+
+
+                  document.getElementById('transcript-canvasLink').setAttribute('href', doc.data().lmsURL);
+                  document.getElementById('transcript-mediaLink').setAttribute('href', doc.data().srcURL);
+
+                  if (doc.data().verbit != undefined) {
+                        document.getElementById('transcript-verbit').innerText = 'Verbit Used: ' + doc.data().verbit;
+                  } else {
+                        document.getElementById('transcript-verbit').innerText = 'Verbit Used: Not yet set'
+                  }
+
+                  document.getElementById('transcript-verbitID').innerText = 'Verbit ID: ' + doc.data().verbitID;
+                  document.getElementById('transcript-copied').innerText = 'Copied as duplicate: ' + doc.data().copied;
+                  document.getElementById('transcript-copiedFrom').innerText = 'Copied from: -- ';
+                  //right half of the transcript info box starts here
+                  if (doc.data().requestor != undefined && doc.data().requestDate != undefined) {
+                        document.getElementById('transcript-requestor').innerText = 'Requested by: ' + doc.data().requestor;
+                        document.getElementById('transcript-requestDate').innerText = 'Requested on: ' + doc.data().requestDate.toDate().toString().slice(4, 15);
+                  } else {
+                        document.getElementById('transcript-requestor').innerText = 'Requested by: -- ';
+                        document.getElementById('transcript-requestDate').innerText = 'Requested on: --'
+                  }
+
+                  if (doc.data().preparer != undefined && doc.data().datePrepareFinished != undefined) {
+                        document.getElementById('transcript-preparer').innerText = 'Prepared by: ' + doc.data().preparer;
+                        document.getElementById('transcript-prepareDate').innerText = 'Prepared Completed on:  ' + doc.data().datePrepareFinished.toDate().toString().slice(4, 15);
+                  } else {
+                        document.getElementById('transcript-preparer').innerText = 'Prepared by: --';
+                        document.getElementById('transcript-prepareDate').innerText = 'Prepared Completed on: --';
+                  }
+
+                  if (doc.data().transcriber != undefined && doc.data().dateTranscriptionFinished != undefined) {
+                        document.getElementById('transcript-transcriber').innerText = 'Transcribed by: ' + doc.data().transcriber;
+                        document.getElementById('transcript-transcriptionDate').innerText = 'Transcription Completed on: ' + doc.data().dateTranscriptionFinished.toDate().toString().slice(4, 15);
+                  } else {
+                        document.getElementById('transcript-transcriber').innerText = 'Transcribed by: --';
+                        document.getElementById('transcript-transcriptionDate').innerText = 'Transcription Completed on: --';
+                  }
+
+                  if (doc.data().reviewer != undefined && doc.data().dateReviewFinished != undefined) {
+                        document.getElementById('transcript-reviewer').innerText = 'Reviewed by: ' + doc.data().reviewer;
+                        document.getElementById('transcript-reviewDate').innerText = 'Review Completed on: ' + doc.data().dateReviewFinished.toDate().toString().slice(4, 15);
+                  } else {
+                        document.getElementById('transcript-reviewer').innerText = 'Reviewed by: --';
+                        document.getElementById('transcript-reviewDate').innerText = 'Review Completed on: --';
+                  }
+
+                  if (doc.data().requestNotes != undefined) {
+                        document.getElementById('transcript-requestNotes').innerText = 'Request Notes: ' + doc.data().requestNotes;
+                  } else {
+                        document.getElementById('transcript-requestNotes').innerText = 'Request Notes: -- '
+                  }
+
+                  if (doc.data().returnToPrepNote != undefined) {
+                        document.getElementById('transcript-returnNotes').innerText = 'Return to Prep Notes: ' + doc.data().returnToPrepNote;
+                  } else { 
+                        document.getElementById('transcript-returnNotes').innerText = 'Return to Prep Notes: --';
+                  }
+
+                  document.getElementById('transcript-info-box').classList.remove('hide');
+                  document.getElementById('transcript-info-box').querySelectorAll('undefined');
+            })
 }
 
-function resetAction() { 
+function resetAction() {
       console.log('run');
 }
+
+
 
 //calculates the total amount of transcripts of each user
 function getTotals(userID) {
@@ -142,7 +201,7 @@ function getTotals(userID) {
                               }).then(() => {
                                     db.collection('accessibility').where('preparer', '==', name[0]).get()
                                           .then(function (querySnapshot) {
-                                                objectTotal.prepares = querySnapshot.size; 
+                                                objectTotal.prepares = querySnapshot.size;
                                           }).then(() => {
                                                 db.collection('accessibility').where('transcriber', '==', name[0]).get()
                                                       .then(function (querySnapshot) {
@@ -158,8 +217,8 @@ function getTotals(userID) {
                               })
 
 
-                  }, err => { 
-                        console.log('There was an error =>', err );
+                  }, err => {
+                        console.log('There was an error =>', err);
                   })
       }) //ends the promise;
 
@@ -172,6 +231,7 @@ function toggleTab(i) {
             document.getElementById('users-table').classList.remove('hide');
             document.getElementById('transcripts-table').classList.add('hide');
             document.getElementById('requestCourse').classList.add('hide');
+            document.getElementById('transcript-info-box').classList.add('hide');
       } else { //switches to the transcript tab
             document.getElementById('tab-users').classList.remove('option-selected');
             document.getElementById('tab-transcripts').classList.add('option-selected');
@@ -186,25 +246,25 @@ function toggleTab(i) {
 getCourses();
 
 function getCourses() {
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status === 200) {
-            var res = JSON.parse(this.responseText);
-            var id = res._id;
-            var newxhttp = new XMLHttpRequest();
-            newxhttp.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status === 200) {
-                    var newres = JSON.parse(this.responseText);
-                    for (var i = 0; i < newres.length; i++) {
-                        var course = newres[i]['__catalogCourseId'];
-                        document.getElementById('requestCourse').insertAdjacentHTML('beforeend', '<option value=\'' + course + '\'>' + course + '</option>');
-                    }
-                }
-            };
-            newxhttp.open('GET', 'https://byui.kuali.co/api/v1/catalog/courses/' + id, true);
-            newxhttp.send();
-        }
-    };
-    xhttp.open('GET', 'https://byui.kuali.co/api/v1/catalog/public/catalogs/current', true);
-    xhttp.send();
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status === 200) {
+                  var res = JSON.parse(this.responseText);
+                  var id = res._id;
+                  var newxhttp = new XMLHttpRequest();
+                  newxhttp.onreadystatechange = function () {
+                        if (this.readyState == 4 && this.status === 200) {
+                              var newres = JSON.parse(this.responseText);
+                              for (var i = 0; i < newres.length; i++) {
+                                    var course = newres[i]['__catalogCourseId'];
+                                    document.getElementById('requestCourse').insertAdjacentHTML('beforeend', '<option value=\'' + course + '\'>' + course + '</option>');
+                              }
+                        }
+                  };
+                  newxhttp.open('GET', 'https://byui.kuali.co/api/v1/catalog/courses/' + id, true);
+                  newxhttp.send();
+            }
+      };
+      xhttp.open('GET', 'https://byui.kuali.co/api/v1/catalog/public/catalogs/current', true);
+      xhttp.send();
 }

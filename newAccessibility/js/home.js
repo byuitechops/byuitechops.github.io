@@ -84,7 +84,7 @@ function finalizeTranscript(transcriptID) {
                         .then(() => {
                             db.collection('accessibility').doc(transcriptID).update({
                                     status: 'Ready for Review',
-                                    dateTranscriptionFinished: new Date()
+                                    dateTranscriptionFinished: new Date(),
                                 })
                                 .then(() => {
                                     window.location.reload();
