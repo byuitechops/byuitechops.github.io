@@ -121,7 +121,7 @@ function fillPrepTicket(transcriptID) {
             document.getElementById('typeSide').innerText = doc.data().type;
             document.getElementById('codeSide').innerText = doc.data().courseCode;
             document.getElementById('titleSide').innerText = doc.data().title;
-            document.getElementById('locationSide').innerText = doc.data().lmsURL;
+            document.getElementById('locationSide').setAttribute('href', doc.data().lmsURL);
             document.getElementById('mediaSide').setAttribute('href', doc.data().srcURL);
             document.getElementById('storeTranscriptID').innerText = transcriptID;
         })
@@ -415,9 +415,11 @@ function updateVerbitAccordingToPriorCompletion(bool) {
     if (bool) {
         document.getElementById('hideVerbit').classList.add('hide');
         document.getElementById('getVerbitId').classList.add('hide');
+        document.getElementById('hideVerbit2').classList.add('hide');
     } else {
         document.getElementById('hideVerbit').classList.remove('hide');
         document.getElementById('getVerbitId').classList.remove('hide');
+        document.getElementById('hideVerbit2').classList.remove('hide');
     }
 }
 
