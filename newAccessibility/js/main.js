@@ -28,24 +28,24 @@ firebase.auth().onAuthStateChanged(function (user) {
                     querySnapshot.forEach((doc) => {
                         var userData = doc.data();
                         if (userData.lead) {
-                            document.getElementById('master').classList.remove('hide');
+                            document.getElementById('master').classList.remove('hard-hide');
                         }
                         if (userData.role == "Copyedit") {
-                            document.getElementById('copyEdit').classList.remove('hide');
-                            document.getElementById('prepare').classList.add('hide');
-                            document.getElementById('transcribe').classList.add('hide');
+                            document.getElementById('copyEdit').classList.remove('hard-hide');
+                            document.getElementById('prepare').classList.add('hard-hide');
+                            document.getElementById('transcribe').classList.add('hard-hide');
                             if (userData.lead) {
-                                document.getElementById('copyEditCheck').classList.remove('hide');
+                                document.getElementById('copyEditCheck').classList.remove('hard-hide');
                             }
                         }
                         if (userData.role == "Quality Assurance") {
-                            document.getElementById('copyEdit').classList.add('hide');
-                            document.getElementById('copyEditCheck').classList.add('hide');
+                            document.getElementById('copyEdit').classList.add('hard-hide');
+                            document.getElementById('copyEditCheck').classList.add('hard-hide');
                         }
                         if(doc.data().name ='Lucas Wargha') { 
-                            document.getElementById('master').classList.remove('hide');
-                            document.getElementById('copyEdit').classList.remove('hide');
-                            document.getElementById('copyEditCheck').classList.remove('hide');
+                            document.getElementById('master').classList.remove('hard-hide');
+                            document.getElementById('copyEdit').classList.remove('hard-hide');
+                            document.getElementById('copyEditCheck').classList.remove('hard-hide');
                         }
                     })
                 })
