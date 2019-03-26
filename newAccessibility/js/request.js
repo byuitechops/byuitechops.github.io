@@ -184,7 +184,7 @@ function generateParentObject(videoURL) {
                             docEditURL: doc.data().docEditURL,
                             docPublishURL: doc.data().docPublishURL,
                             height: doc.data().height,
-                            length: doc.data().lenght,
+                            length: doc.data().length,
                             verbit: doc.data().verbit,
                             verbitID: doc.data().verbitID,
                             parentTranscript: false,
