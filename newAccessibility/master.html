@@ -123,7 +123,7 @@
                         <label for="role">Role</label>
                         <p id="info-role"></p>
                         <label for="role">Typing Speed</label>
-                        <p id="info-typing" onclick="editItem('typing')">97 wpm</p>
+                        <p id="info-typing" onclick="editItem('typing')"></p>
                         <label for="tole">Transcripts Requested</label>
                         <p id="info-transcriptsRequested"></p>
                         <label for="">Transcripts Prepared</label>
@@ -143,19 +143,19 @@
                         <div class="real-half">
                             <h3>Transcript Info</h3>
                             <p id="storeTranscriptID" class="hide"></p>
-                            <p id="transcript-title">Transcript Title: McDonalds</p>
+                            <p id="transcript-title" onclick="editItem('title')">Transcript Title: McDonalds</p>
                             <p id="transcript-status">Stage: Ready for Transcription</p>
                             <p id="transcript-code">Course Code: STEAK101</p>
-                            <p id="transcript-priority">Priority: 1</p>
+                            <p id="transcript-priority" onclick="editItem('priority')">Priority: 1</p>
                             <p id="transcript-type">Type: Video</p>
                             <p id="transcript-length">Length: 200</p>
                             <p id="transcript-height">Height: 315</p>
-                            <p>Google Doc Edit Link: <a id="transcript-googleEditLink" href="#">Click Here</a> </p>
-                            <p>Google Doc Publish Link: <a id="transcript-googlePubLink" href="#">Click Here</a> </p>
-                            <p>LMS URL: <a id="transcript-canvasLink" href="#">Click Here</a></p>
-                            <p>Media URL: <a id="transcript-mediaLink" href="#">Click Here</a></p>
-                            <p id="transcript-verbit">Uses Verbit: Yes</p>
-                            <p id="transcript-verbitID">Verbit ID: 194lw_1234_294u8wkd</p>
+                            <p onclick="editItem('docEditURL')">Google Doc Edit Link: <a id="transcript-googleEditLink" href="#">Click Here</a> </p>
+                            <p onclick="editItem('docPublishURL')">Google Doc Publish Link: <a id="transcript-googlePubLink" href="#">Click Here</a> </p>
+                            <p onclick="editItem('lmsURL')">LMS URL: <a id="transcript-canvasLink" href="#">Click Here</a></p>
+                            <p onclick="editItem('srcURL')" >Media URL: <a id="transcript-mediaLink" href="#">Click Here</a></p>
+                            <p onclick="editItem('verbit')" id="transcript-verbit">Uses Verbit: Yes</p>
+                            <p onclick="editItem('verbitID')" id="transcript-verbitID">Verbit ID: 194lw_1234_294u8wkd</p>
                             <p id="transcript-copied">Copied as duplicate: Yes</p>
                             <p id="transcript-copiedFrom">Copied from: </p>
                         </div>
@@ -170,10 +170,10 @@
                             <p id="transcript-reviewer"></p>
                             <p id="transcript-reviewDate"></p>
                             <h3>Notes</h3>
-                            <p id="transcript-requestNotes"><b>Request Notes: </b> Lorem ipsum dolor sit amet
+                            <p onclick="editItem('requestNotes')" id="transcript-requestNotes"><b>Request Notes: </b> Lorem ipsum dolor sit amet
                                 consectetur adipisicing elit. Vel ipsa dolorum totam sapiente illo quo recusandae quasi
                                 vitae nam dolores! </p>
-                            <p id="transcript-returnNotes"><b>Return to prepare notes: </b> Lorem ipsum dolor sit amet
+                            <p onclick="editItem('returnToPrepNote')" id="transcript-returnNotes"><b>Return to prepare notes: </b> Lorem ipsum dolor sit amet
                                 consectetur adipisicing elit. Fugit doloremque possimus laborum inventore dolorem illum
                                 enim rerum eveniet quasi, vitae odio dolore ipsam ipsa explicabo! </p>
                         </div>

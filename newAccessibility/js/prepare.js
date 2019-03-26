@@ -215,8 +215,8 @@ document.getElementById('requestSubmit').addEventListener('click', () => {
                 docPublishURL: String(docPublished.value),
                 verbitID: String(verbitID.value),
                 verbit: Boolean(verbit.checked),
-                videoHeight: Number(height.value),
-                videoLength: Number(length.value),
+                height: Number(height.value),
+                length: Number(length.value),
                 datePrepareFinished: new Date()
             })
             .then(() => {

@@ -93,6 +93,9 @@ input::placeholder {
   display: flex;
 }
 
+.hover:hover { 
+  cursor: pointer;
+}
 .container-end {
   display: flex;
   justify-content: flex-end;
@@ -224,6 +227,7 @@ label {
   border: 1px #ccc solid;
 }
 
+
 .transcripts-table {
   border: 1px rgb(127, 127, 127, 0.5) solid;
   height: 60vh;
@@ -233,6 +237,29 @@ label {
   padding-top: 0.5rem;
   overflow: auto;
   grid-auto-rows: 3rem;
+}
+
+.transcripts-table-transcribe {
+  border: 1px rgb(127, 127, 127, 0.5) solid;
+  height: 60vh;
+  grid-template-columns: 1fr 1fr 1fr 2fr 1fr 1fr;
+  text-align: left;
+  padding-left: 1rem;
+  padding-top: 0.5rem;
+  overflow: auto;
+  grid-auto-rows: 3rem;
+}
+
+#table-header-transcribe{
+  float: left;
+  height: 3rem;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 2fr 1fr 1fr;
+  text-align: left;
+  padding-left: 1rem;
+  padding-top: 0.5rem;
+  border: 1px #ccc solid;
 }
 
 .select-transcript {

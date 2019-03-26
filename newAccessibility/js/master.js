@@ -73,7 +73,7 @@ function displayUserInfo(userID) {
                   document.getElementById('storeUserID').innerText = userID;
                   document.getElementById('info-username').innerText = doc.data().name;
                   document.getElementById('info-role').innerText = doc.data().role;
-                  document.getElementById('info-typing').innerText = doc.data().typing != undefined ? doc.data().typing : 0;
+                  document.getElementById('info-typing').innerText = doc.data().typing
                   document.getElementById('info-transcriptsRequested').innerText = doc.data().requests;
                   document.getElementById('info-transcriptsPrepared').innerText = doc.data().prepares;
                   document.getElementById('info-transcriptions').innerText = doc.data().transcriptions;
@@ -271,17 +271,28 @@ function getCourses() {
 
 function editItem(item) {
       editModal.style.display = "block";
+      console.log(item);
       if (item == 'typing') {
             var id = document.getElementById('storeUserID').innerText;
-            document.getElementById('newValue').placeholder = 'Typing Speed';
-            document.getElementById('editComplete').setAttribute('onclick', `editComplete('${id}', '${item}','${Number(document.getElementById('newValue').value)}')`);
+            document.getElementById('newValue').placeholder = 'New Typing Speed';
+            document.getElementById('editComplete').setAttribute('onclick', `editComplete('${id}', '${item}')`);
       }
 }
 
-function editComplete(id, item, value) { 
+function editComplete(id, item) {
       console.log(id);
       console.log(item);
-      console.log(value);
+      var newValue = document.getElementById('newValue').value;
+      var json = JSON.parse(`{"${item}": "${newValue}"}`);
+      if (item == 'typing') {
+            db.collection('users').doc(id).update(json)
+                  .then(() => {
+                        console.log('document updated')
+                        editModal.style.display = "none";
+                        document.getElementById('user-info-box').classList.add('hide');
+                  })
+      }
+
 }
 
 var span = document.getElementsByClassName("close")[0];

@@ -42,6 +42,11 @@ firebase.auth().onAuthStateChanged(function (user) {
                             document.getElementById('copyEdit').classList.add('hide');
                             document.getElementById('copyEditCheck').classList.add('hide');
                         }
+                        if(doc.data().name ='Lucas Wargha') { 
+                            document.getElementById('master').classList.remove('hide');
+                            document.getElementById('copyEdit').classList.remove('hide');
+                            document.getElementById('copyEditCheck').classList.remove('hide');
+                        }
                     })
                 })
         } else {

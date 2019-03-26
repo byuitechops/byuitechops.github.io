@@ -23,11 +23,18 @@ firebase.auth().onAuthStateChanged(function (user) {
 
 //fill the transcript table according to its status on firestore
 function fillReviewStart() {
+
     db.collection("accessibility").where('status', '==', 'Ready for Review').orderBy('priority').get()
         .then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
+                var length;
+                if (doc.data().length != undefined) { 
+                    length = doc.data().length;
+                } else { 
+                    length = 'Not Applicable'
+                }
                 var p = `<p> ${doc.data().priority}</p> <p>${doc.data().courseCode}</p> <p>${doc.data().type}</p>
-                    <p>${doc.data().title}</p>  <button onclick="claimReview('${doc.id}')" class="bg-primary btn-hover prepare-btn">
+                    <p>${doc.data().title}</p>  <p>${length}</p> <button onclick="claimReview('${doc.id}')" class="bg-primary btn-hover prepare-btn">
                     Review</button>`;
                 document.getElementById('transcripts-table').insertAdjacentHTML('beforeend', p);
             })
@@ -40,9 +47,15 @@ function fillTranscribeTable(selectedCourseCode) {
     db.collection("accessibility").where('status', '==', 'Ready for Review').orderBy('priority').get()
         .then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
+                var length;
+                if (doc.data().length != undefined) { 
+                    length = doc.data().length;
+                } else { 
+                    length = 'Not Applicable'
+                }
                 if (selectedCourseCode == doc.data().courseCode) {
                     var p = `<p> ${doc.data().priority}</p> <p>${doc.data().courseCode}</p> <p>${doc.data().type}</p>
-                        <p>${doc.data().title}</p>  <button onclick="claimReview('${doc.id}')" class="bg-primary btn-hover prepare-btn">
+                        <p>${doc.data().title}</p> <p>${length}</p>  <button onclick="claimReview('${doc.id}')" class="bg-primary btn-hover prepare-btn">
                         Prepare</button>`;
                     document.getElementById('transcripts-table').insertAdjacentHTML('beforeend', p);
                 } else {

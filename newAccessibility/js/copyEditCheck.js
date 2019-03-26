@@ -9,7 +9,7 @@ firebase.auth().onAuthStateChanged(function (user) {
                 querySnapshot.forEach(function (doc) {
                     userID.push(doc.id);
                     userName.push(doc.data().name);
-                    if (doc.data().role == 'Copyedit' && doc.data().lead) {
+                    if (doc.data().role == 'Copyedit' && doc.data().lead || doc.data().name == 'Lucas Wargha') {
                         fillReviewStart();
                     } else  {
                         window.location.assign('home.html')
@@ -29,7 +29,7 @@ function fillReviewStart() {
         .then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
                 var p = `<p> ${doc.data().priority}</p> <p>${doc.data().courseCode}</p> <p>${doc.data().type}</p>
-                    <p>${doc.data().title}</p>  <button onclick="concludeTranscript('${doc.id}')" class="bg-primary btn-hover prepare-btn">
+                    <p>${doc.data().title}</p>  <p> ${doc.data().reviewer}</p> <button onclick="concludeTranscript('${doc.id}')" class="bg-primary btn-hover prepare-btn">
                     Approve Review</button>`;
                 document.getElementById('transcripts-table').insertAdjacentHTML('beforeend', p);
             })
@@ -44,7 +44,7 @@ function fillTranscribeTable(selectedCourseCode) {
             querySnapshot.forEach(function (doc) {
                 if (selectedCourseCode == doc.data().courseCode) {
                     var p = `<p> ${doc.data().priority}</p> <p>${doc.data().courseCode}</p> <p>${doc.data().type}</p>
-                        <p>${doc.data().title}</p>  <button onclick="concludeTranscript('${doc.id}')" class="bg-primary btn-hover prepare-btn">
+                        <p>${doc.data().title}</p> <p> ${doc.data().reviewer}</p>  <button onclick="concludeTranscript('${doc.id}')" class="bg-primary btn-hover prepare-btn">
                         Approve Review</button>`;
                     document.getElementById('transcripts-table').insertAdjacentHTML('beforeend', p);
                 } else {
