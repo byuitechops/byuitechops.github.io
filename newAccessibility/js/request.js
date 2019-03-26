@@ -41,6 +41,13 @@ async function submitTranscriptRequest() {
         resetMessage();
         return;
     }
+
+    if (requestType == 'Transcript Type') { 
+        message.innerHTML = 'You must fill in all inputs';
+        message.style.color = 'red';
+        resetMessage();
+        return;
+    }
     var comments = document.getElementById('requestComments').value;
 
     console.log("before");
@@ -176,8 +183,8 @@ function generateParentObject(videoURL) {
                             type: doc.data().type,
                             docEditURL: doc.data().docEditURL,
                             docPublishURL: doc.data().docPublishURL,
-                            videoHeight: doc.data().videoHeight,
-                            videoLength: doc.data().videoLength,
+                            height: doc.data().height,
+                            length: doc.data().lenght,
                             verbit: doc.data().verbit,
                             verbitID: doc.data().verbitID,
                             parentTranscript: false,

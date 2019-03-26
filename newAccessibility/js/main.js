@@ -73,3 +73,4 @@ function userLogout() {
     firebase.auth().signOut();
     window.location.reload();
 }
+

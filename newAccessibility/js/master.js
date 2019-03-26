@@ -89,6 +89,7 @@ function displayTranscriptInfo(transcriptID) {
       db.collection('accessibility').doc(transcriptID).get()
             .then(function (doc) {
                   console.log(doc.data());
+                  document.getElementById('storeTranscriptID').innerText = doc.id;
                   document.getElementById('transcript-title').innerText = 'Transcript Title: ' + doc.data().title;
                   document.getElementById('transcript-status').innerText = 'Stage: ' + doc.data().status;
                   document.getElementById('transcript-code').innerText = 'Course Code: ' + doc.data().courseCode;
@@ -271,10 +272,13 @@ function getCourses() {
 
 function editItem(item) {
       editModal.style.display = "block";
-      console.log(item);
       if (item == 'typing') {
             var id = document.getElementById('storeUserID').innerText;
             document.getElementById('newValue').placeholder = 'New Typing Speed';
+            document.getElementById('editComplete').setAttribute('onclick', `editComplete('${id}', '${item}')`);
+      } else { 
+            var id = document.getElementById('storeTranscriptID').innerText;
+            document.getElementById('newValue').placeholder = "New " + item;
             document.getElementById('editComplete').setAttribute('onclick', `editComplete('${id}', '${item}')`);
       }
 }
@@ -291,6 +295,15 @@ function editComplete(id, item) {
                         editModal.style.display = "none";
                         document.getElementById('user-info-box').classList.add('hide');
                   })
+      } else { 
+            var json = JSON.parse(`{"${item}" : "${newValue}"}`);
+           db.collection('accessibility').doc(id).update(json)
+           .then(solved=> { 
+                 console.log('Document Changed Successfuly')
+                 displayTranscriptInfo(id);
+                 editModal.style.display = "none";
+                 document.getElementById('newValue').value = '';
+           })
       }
 
 }
