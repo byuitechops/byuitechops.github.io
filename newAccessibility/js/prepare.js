@@ -83,6 +83,17 @@ function fillPrepTicket(transcriptID) {
                 document.getElementById('getVerbitId').classList.add('hide');
             }
 
+            if (doc.data().type == 'Alt Text') { 
+                document.getElementById('hide-row-alt').classList.add('hide');
+                document.getElementById('requestHeight').value = 0;
+                document.getElementById('requestLength').value = 0;
+            }
+
+            if (doc.data().type == 'Audio') { 
+                document.getElementById('requestHeight').value = 0;
+                document.getElementById('requestHeight').classList.add('hide');
+            }
+
             if (doc.data().verbit) {
                 document.getElementById('check-verbit-checked').checked = true;
                 document.getElementById('getVerbitId').disabled = false;
@@ -150,7 +161,25 @@ document.getElementById('check-verbit-checked').addEventListener('change', () =>
         document.getElementById('getVerbitId').disabled = true;
     }
 })
-
+//handles the user canceling the transcript preparing action
+document.getElementById("requestCancelPrep").addEventListener('click', () => { 
+    var transcriptID = document.getElementById('storeTranscriptID').innerText;
+    db.collection('accessibility').doc(transcriptID).update({
+        status: 'Ready for Prep',
+        preparer: ''
+    })
+    .then(()=> { 
+        var idUser = userID[0];
+        db.collection('users').doc(idUser).update({
+            currentAction: '',
+            actionID: ''
+        })
+        .then(()=> { 
+            console.log('Success');
+            window.location.reload();
+        })
+    })
+})
 //when the user submits prep transcript, doest all the necessary checking and takes the user back to the list of transcritps to be preped
 document.getElementById('requestSubmit').addEventListener('click', () => {
     //first thing we want to check if all information required was added correctly

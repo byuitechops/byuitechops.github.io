@@ -88,7 +88,7 @@
                     <input type="text" placeholder="Editable Document Link" id="googleDocEdit" style="margin-left: 1rem;">
                     <input type="text" placeholder="Published Document Link" id="googleDocPublish" style="margin-left: 1rem;">
                     <h3>3. If the transcript is a video, provide additional information for it</h3>
-                    <div class="container row group-inputs mg-left">
+                    <div id="hide-row-alt" class="container row group-inputs mg-left">
                         <input type="number" id="requestHeight" class="" placeholder="Video Height">
                         <div id="time-calculator" class=>
                             <input type="number" min=0 id="requestLength" placeholder="Video Length">
@@ -138,7 +138,7 @@
                             <label>Media Type:</label>
                             <p class="description" id="typeSide">Type: </p>
                             <label>Course Code:</label>
-                            <p class="description" id="codeSide">Course Code: </p>
+                            <p class="description" id="codeSide"></p>
                             <label>Title:</label>
                             <p class="description" id="titleSide">Transcript Title: </p>
                             <label>Location in Course:</label>
@@ -147,15 +147,20 @@
                             <a href="#" id='mediaSide' target="_blank"> View URL</a>
                             <div class="container row">
                                 <button type="submit" class="bg-primary btn-hover" id="requestSubmit"> Submit </button>
+                                <button type="submit" style ="margin-left: .5rem;" class="red btn-hover" id="requestCancelPrep"> Cancel </button>
                                 <p style="margin-left: 2rem; margin-top: .8rem;" id="message"></p>
                             </div>
                         </div>
+                        Bro. Oswald,
+                        I went to your office a couple of days ago with questions regarding the Sprintax application and you forwarded me an email with more information and gave me
+                        links with slides for me to do the process. 
+                        The whole process with Sprintax has been really overwhelming and I don't know what else to do. I've contacted Kevin Solomon several times and was never successful on reaching out to him.
+                        I've been contacting Sprintax about twice a day on their chat for a week and they never have answers to my questions.
+                        My federal tax is affected because I have the form 1095-A for Premium Tax Credit. I followed all the steps on the email you forwarded.
+
                         <div class="container col cover-35 nice-overflow">
                             <label for="">Comments</label>
-                            <p id="fillCommentsIn">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente
-                                aut officia
-                                reprehenderit vitae fugiat. Explicabo, minus voluptatibus hic consectetur commodi
-                                voluptatem totam tenetur sunt exercitationem sit, dolore asperiores porro sequi?</p>
+                            <p id="fillCommentsIn"></p>
                         </div>
                     </div>
 

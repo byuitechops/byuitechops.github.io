@@ -35,6 +35,12 @@ async function submitTranscriptRequest() {
     // var videoLength = document.getElementById('requestLength').value;
     // var videoHeight = document.getElementById('requestHeight').value;
     // var softwareUsed = document.getElementById('requestExternalSoftware').checked;
+    if (course == 'Course Code') { 
+        message.innerHTML = 'You must fill in all inputs';
+        message.style.color = 'red';
+        resetMessage();
+        return;
+    }
     var comments = document.getElementById('requestComments').value;
 
     console.log("before");

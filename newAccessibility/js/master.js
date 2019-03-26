@@ -70,6 +70,7 @@ function displayUserInfo(userID) {
       // counts are being made throughout the whole process
       db.collection('users').doc(userID).get()
             .then(function (doc) {
+                  document.getElementById('storeUserID').innerText = userID;
                   document.getElementById('info-username').innerText = doc.data().name;
                   document.getElementById('info-role').innerText = doc.data().role;
                   document.getElementById('info-typing').innerText = doc.data().typing != undefined ? doc.data().typing : 0;
@@ -167,7 +168,7 @@ function displayTranscriptInfo(transcriptID) {
 
                   if (doc.data().returnToPrepNote != undefined) {
                         document.getElementById('transcript-returnNotes').innerText = 'Return to Prep Notes: ' + doc.data().returnToPrepNote;
-                  } else { 
+                  } else {
                         document.getElementById('transcript-returnNotes').innerText = 'Return to Prep Notes: --';
                   }
 
@@ -266,4 +267,24 @@ function getCourses() {
       };
       xhttp.open('GET', 'https://byui.kuali.co/api/v1/catalog/public/catalogs/current', true);
       xhttp.send();
+}
+
+function editItem(item) {
+      editModal.style.display = "block";
+      if (item == 'typing') {
+            var id = document.getElementById('storeUserID').innerText;
+            document.getElementById('newValue').placeholder = 'Typing Speed';
+            document.getElementById('editComplete').setAttribute('onclick', `editComplete('${id}', '${item}','${Number(document.getElementById('newValue').value)}')`);
+      }
+}
+
+function editComplete(id, item, value) { 
+      console.log(id);
+      console.log(item);
+      console.log(value);
+}
+
+var span = document.getElementsByClassName("close")[0];
+span.onclick = function () {
+      editModal.style.display = "none";
 }

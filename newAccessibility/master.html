@@ -119,10 +119,11 @@
                                 <i class="pd-left fas fa-user-check"></i>
                             </div>
                         </div>
+                        <p id="storeUserID" class="hide"></p>
                         <label for="role">Role</label>
                         <p id="info-role"></p>
                         <label for="role">Typing Speed</label>
-                        <p id="info-typing">97 wpm</p>
+                        <p id="info-typing" onclick="editItem('typing')">97 wpm</p>
                         <label for="tole">Transcripts Requested</label>
                         <p id="info-transcriptsRequested"></p>
                         <label for="">Transcripts Prepared</label>
@@ -141,6 +142,7 @@
                     <div id="transcript-info-box" class="transcript-info-box container hide">
                         <div class="real-half">
                             <h3>Transcript Info</h3>
+                            <p id="storeTranscriptID" class="hide"></p>
                             <p id="transcript-title">Transcript Title: McDonalds</p>
                             <p id="transcript-status">Stage: Ready for Transcription</p>
                             <p id="transcript-code">Course Code: STEAK101</p>
@@ -179,9 +181,21 @@
                 </div>
             </section>
         </div>
+
+        <div id="editModal" class="modal">
+
+            <div class="modal-content" id="editModal-content">
+                <span class="close">&times;</span>
+                <input type="text" id="newValue">
+                <button class="btn-hover bg-primary" id="editComplete">Update</button>
+            </div>
+        </div> 
+        
     </main>
 </body>
 <script src="js/main.js"></script>
 <script src="js/master.js"></script>
 
 </html>
+
+

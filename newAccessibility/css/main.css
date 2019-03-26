@@ -317,6 +317,28 @@ main {
   flex-direction: row;
 }
 
+.modal-content #newValue  {
+  height: 2rem;
+  margin-left: 4rem;
+  width: 30rem;
+}
+
+.modal-content #newValue::placeholder { 
+  color: gray
+}
+
+#editModal-content { 
+  width: 20%;
+  height: 8rem;
+}
+
+#editModal-content button { 
+  position: relative;
+  /* right: 1000rem; */
+  top:3rem;
+  left: -8rem;
+}
+
 .modal-content textarea {
   margin-left: 2rem;
   border: 1px dotted #888;
@@ -1183,7 +1205,7 @@ background: #D2D2D2
 #master-content #left-master .select-transcript-master {
    width: 13.5rem;
    position: relative;
-  left: 59.5%; 
+   left: 59.5%; 
 }
 
 .select-transcript-master select {
