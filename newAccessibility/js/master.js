@@ -183,7 +183,6 @@ function resetAction() {
 }
 
 
-
 //calculates the total amount of transcripts of each user
 function getTotals(userID) {
       return new Promise((resolve, reject) => {
@@ -271,6 +270,7 @@ function getCourses() {
 }
 
 function editItem(item) {
+      console.log(item);
       editModal.style.display = "block";
       if (item == 'typing') {
             var id = document.getElementById('storeUserID').innerText;
@@ -295,9 +295,9 @@ function editComplete(id, item) {
                         editModal.style.display = "none";
                         document.getElementById('user-info-box').classList.add('hide');
                   })
-      } else { 
-            var json = JSON.parse(`{"${item}" : "${newValue}"}`);
-           db.collection('accessibility').doc(id).update(json)
+      } else if (item == 'priority') { 
+            var json = JSON.parse(`{"${item}" : "${Number(newValue)}"}`);
+           db.collection('accessibility').doc(id).update({item: Number(newValue)})
            .then(solved=> { 
                  console.log('Document Changed Successfuly')
                  displayTranscriptInfo(id);
