@@ -113,11 +113,11 @@ function fillPrepTicket(transcriptID) {
                 document.getElementById('fillCommentsIn').innerText = 'No return comments have been posted.'
             }
 
-            if (doc.data().videoHeight != undefined) {
+            if (doc.data().height != undefined) {
                 document.getElementById('requestHeight').value = doc.data().videoHeight;
             }
 
-            if (doc.data().videoLength != undefined) {
+            if (doc.data().length != undefined) {
                 document.getElementById('requestLength').value = doc.data().videoLength;
             }
 
