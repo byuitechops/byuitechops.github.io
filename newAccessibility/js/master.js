@@ -1,4 +1,6 @@
 
+let transcriptObject = new TranscriptObject('1','1','1');
+console.log(transcriptObject);
 
 //checks if the user has actually finished a prep before starting another one + handles permission requirements
 firebase.auth().onAuthStateChanged(function (user) {
