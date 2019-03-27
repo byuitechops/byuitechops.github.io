@@ -1,3 +1,5 @@
+
+
 //checks if the user has actually finished a prep before starting another one + handles permission requirements
 firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
@@ -45,7 +47,7 @@ function fillTranscriptTable(courseCode) {
             db.collection("accessibility").orderBy('priority').get()
                   .then(function (querySnapshot) {
                         querySnapshot.forEach(function (doc) {
-                              var p = `<p> ${doc.data().priority}</p> <p>${doc.data().courseCode}</p> <p style="padding-right: .5rem;">${doc.data().title}</p>
+                              var p = `<p> ${doc.data().priority}</p> <p>${doc.data().courseCode}</p> <p style="padding-right: .5rem; overflow-x:hidden;">${doc.data().title}</p>
                     <p>${doc.data().status}</p>  <button onclick="displayTranscriptInfo('${doc.id}')" class="bg-primary btn-hover prepare-btn">
                     View / Edit</button>`;
                               document.getElementById('master-table-transcript').insertAdjacentHTML('beforeend', p);
@@ -276,7 +278,7 @@ function editItem(item) {
             var id = document.getElementById('storeUserID').innerText;
             document.getElementById('newValue').placeholder = 'New Typing Speed';
             document.getElementById('editComplete').setAttribute('onclick', `editComplete('${id}', '${item}')`);
-      } else { 
+      } else {
             var id = document.getElementById('storeTranscriptID').innerText;
             document.getElementById('newValue').placeholder = "New " + item;
             document.getElementById('editComplete').setAttribute('onclick', `editComplete('${id}', '${item}')`);
@@ -295,15 +297,23 @@ function editComplete(id, item) {
                         editModal.style.display = "none";
                         document.getElementById('user-info-box').classList.add('hide');
                   })
-      } else if (item == 'priority') { 
-            var json = JSON.parse(`{"${item}" : "${Number(newValue)}"}`);
-           db.collection('accessibility').doc(id).update({item: Number(newValue)})
-           .then(solved=> { 
-                 console.log('Document Changed Successfuly')
-                 displayTranscriptInfo(id);
-                 editModal.style.display = "none";
-                 document.getElementById('newValue').value = '';
-           })
+      } else {
+            var json
+            if (Number.isInteger(Number(newValue))) {
+                  json = JSON.parse(`{"${item}" : ${newValue}}`);
+                  console.log('int called;')
+            }
+            else {
+                  json = JSON.parse(`{"${item}" : "${newValue}"}`)
+                  console.log('string called;')
+            }
+            db.collection('accessibility').doc(id).update(json)
+                  .then(solved => {
+                        console.log('Document Changed Successfuly')
+                        displayTranscriptInfo(id);
+                        editModal.style.display = "none";
+                        document.getElementById('newValue').value = '';
+                  })
       }
 
 }
