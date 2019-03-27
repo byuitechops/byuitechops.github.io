@@ -9,7 +9,7 @@ firebase.auth().onAuthStateChanged(function (user) {
                 querySnapshot.forEach(function (doc) {
                     userID.push(doc.id);
                     userName.push(doc.data().name);
-                    if (doc.data().role == 'Copyedit' || doc.data().lead) {
+                    if (doc.data().role == 'Copyedit' || doc.data().name == 'Lucas Wargha') {
                         fillReviewStart();
                     } else {
                         window.location.assign('home.html');

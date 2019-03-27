@@ -127,7 +127,9 @@ function sendBackPrep(transcriptID) {
             .then(function () {
                 db.collection('accessibility').doc(transcriptID).update({
                     status: 'Ready for Prep',
-                    returnToPrepNote: document.getElementById('problem-description').value + ".  Note Submitted by: " + userName[0]
+                    returnToPrepNote: document.getElementById('problem-description').value + ".  Note Submitted by: " + userName[0],
+                    reviewer: '',
+                    transcriber: ''
                 })
             })
             .then(() => {
