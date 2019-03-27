@@ -21,29 +21,34 @@ db.settings({
 
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
+        console.log(user.displayName);
+        console.log('working?')
         if (window.location.pathname != '/index.html') {
             // User is signed in.
             db.collection('users').where('name', "==", user.displayName).get()
                 .then((querySnapshot) => {
                     querySnapshot.forEach((doc) => {
-                        console.log(doc.data());
+                        console.log(doc.data().name);
                         var userData = doc.data();
                         if (userData.lead) {
                             document.getElementById('master').classList.remove('hide');
+                            console.log('im a lead');
                         }
                         if (userData.role == "Copyedit") {
                             document.getElementById('copyEdit').classList.remove('hide');
                             document.getElementById('prepare').classList.add('hide');
                             document.getElementById('transcribe').classList.add('hide');
+                            console.log('im a copyedit');
                             if (userData.lead) {
                                 document.getElementById('copyEditCheck').classList.remove('hide');
                             }
                         }
                         if (userData.role == "Quality Assurance") {
+                            console.log('im a quality assurance');
                             document.getElementById('copyEdit').classList.add('hide');
                             document.getElementById('copyEditCheck').classList.add('hide');
                         }
-                        if(doc.data().name ='Lucas Wargha') { 
+                        if (doc.data().name == 'Lucas Wargha') { 
                             document.getElementById('master').classList.remove('hide');
                             document.getElementById('copyEdit').classList.remove('hide');
                             document.getElementById('copyEditCheck').classList.remove('hide');
