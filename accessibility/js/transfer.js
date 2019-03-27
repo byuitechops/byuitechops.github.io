@@ -312,7 +312,7 @@ function fillTranscriptTable(courseCode) {
                     }
                     document.getElementById('text').insertAdjacentElement('beforeend', item);
                 }
-                document.getElementById('text').insertAdjacentHTML('beforeend', `<button onclick="viewItem('${doc.id}')">View</button><button onclick="finishTransfer('${doc.id}')">Transfer Completed</button>`);
+                document.getElementById('text').insertAdjacentHTML('beforeend', `<button onclick="viewItem('${doc.id}')">View</button><button onclick="finishTransfer('${doc.id}', '${courseCode}')">Transfer Completed</button>`);
             })
             if (querySnapshot.size == 0) {
                 message.innerHTML = 'No documents found with that criteria';
@@ -325,10 +325,14 @@ function fillTranscriptTable(courseCode) {
         })
 }
 
-function finishTransfer(transcriptID) { 
+function finishTransfer(transcriptID, courseCode) { 
+    console.log(transcriptID);
     db.collection('accessibility').doc(transcriptID).update({transferCompleted: true})
     .then(() => { 
-        window.location.reload();
+        fillTranscriptTable(courseCode)
+    })
+    .then(()=> { 
+        console.log('it worked');
     })
 }
 
