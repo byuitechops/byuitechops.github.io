@@ -28,8 +28,8 @@ function fillReviewStart() {
     db.collection("accessibility").where('status', '==', 'Review Completed').orderBy('priority').get()
         .then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
-                var p = `<p> ${doc.data().priority}</p> <p>${doc.data().courseCode}</p> <p>${doc.data().type}</p>
-                    <p>${doc.data().title}</p>  <p> ${doc.data().reviewer}</p> <button onclick="concludeTranscript('${doc.id}')" class="bg-primary btn-hover prepare-btn">
+                var p = `<p>${doc.data().courseCode}</p> 
+                    <p>${doc.data().title}</p><p> <a href="${doc.data().srcURL}"target="_blank" >Media </a></p>   <p><a href="${doc.data().docEditURL}" target="_blank">Google Doc </a></p>  <p> ${doc.data().reviewer}</p> <button onclick="concludeTranscript('${doc.id}')" class="bg-primary btn-hover prepare-btn">
                     Approve Review</button>`;
                 document.getElementById('transcripts-table').insertAdjacentHTML('beforeend', p);
             })
@@ -43,8 +43,8 @@ function fillTranscribeTable(selectedCourseCode) {
         .then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
                 if (selectedCourseCode == doc.data().courseCode) {
-                    var p = `<p> ${doc.data().priority}</p> <p>${doc.data().courseCode}</p> <p>${doc.data().type}</p>
-                        <p>${doc.data().title}</p> <p> ${doc.data().reviewer}</p>  <button onclick="concludeTranscript('${doc.id}')" class="bg-primary btn-hover prepare-btn">
+                    var p = ` <p>${doc.data().courseCode}</p> 
+                        <p>${doc.data().title}</p><p> <a href="${doc.data().srcURL}"target="_blank" >Media </a></p> <p> <a href="${doc.data().docEditURL}"target="_blank" >Click Here </a></p> <p> ${doc.data().reviewer}</p>  <button onclick="concludeTranscript('${doc.id}')" class="bg-primary btn-hover prepare-btn">
                         Approve Review</button>`;
                     document.getElementById('transcripts-table').insertAdjacentHTML('beforeend', p);
                 } else {

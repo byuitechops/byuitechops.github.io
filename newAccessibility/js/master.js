@@ -115,6 +115,9 @@ function displayTranscriptInfo(transcriptID) {
                         document.getElementById('transcript-googlePubLink').setAttribute('href', doc.data().docPublishURL);
                   }
 
+                  if(doc.data().copied) { 
+                        document.getElementById('btn-delete-transcript').classList.remove('hide');
+                  }
 
                   document.getElementById('transcript-canvasLink').setAttribute('href', doc.data().lmsURL);
                   document.getElementById('transcript-mediaLink').setAttribute('href', doc.data().srcURL);
@@ -341,8 +344,8 @@ function buildUserObject(id) {
      
 }
 
-async function readNewObject() { 
-      var newObject = await buildUserObject('rbMXsDnlDEgC2NV7cvIC');
+async function readNewObject(id) { 
+      var newObject = await buildUserObject(id);
       console.log(newObject);
 }
 
