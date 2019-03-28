@@ -316,6 +316,16 @@ function editComplete(id, item) {
 
 }
 
+document.getElementById('btn-delete-transcript').addEventListener('click', () => {
+      var id = document.getElementById('storeTranscriptID').innerText;
+      db.collection('accessibility').doc(id).delete()
+      .then(()=> { 
+            console.log('transcript deleted');
+            document.getElementById('transcript-info-box').classList.add('hide');
+            fillTranscriptTable();
+      })
+})
+
 var span = document.getElementsByClassName("close")[0];
 span.onclick = function () {
       editModal.style.display = "none";
@@ -335,3 +345,4 @@ async function readNewObject() {
       var newObject = await buildUserObject('rbMXsDnlDEgC2NV7cvIC');
       console.log(newObject);
 }
+
