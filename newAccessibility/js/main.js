@@ -21,13 +21,11 @@ db.settings({
 
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
-        console.log(user.displayName);
         if (window.location.pathname != '/index.html') {
             // User is signed in.
             db.collection('users').where('name', "==", user.displayName).get()
                 .then((querySnapshot) => {
                     querySnapshot.forEach((doc) => {
-                        console.log(doc.data().name);
                         var userData = doc.data();
                         if (userData.lead) {
                             document.getElementById('master').classList.remove('hide');

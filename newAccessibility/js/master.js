@@ -1,7 +1,3 @@
-
-let transcriptObject = new TranscriptObject('1','1','1');
-console.log(transcriptObject);
-
 //checks if the user has actually finished a prep before starting another one + handles permission requirements
 firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
@@ -300,7 +296,7 @@ function editComplete(id, item) {
                         document.getElementById('user-info-box').classList.add('hide');
                   })
       } else {
-            var json
+            var json;
             if (Number.isInteger(Number(newValue))) {
                   json = JSON.parse(`{"${item}" : ${newValue}}`);
                   console.log('int called;')
@@ -323,4 +319,19 @@ function editComplete(id, item) {
 var span = document.getElementsByClassName("close")[0];
 span.onclick = function () {
       editModal.style.display = "none";
+}
+
+function buildUserObject(id) {
+      return new Promise((resolve, reject) => { 
+            db.collection('users').doc(id).get()
+            .then(function(doc) { 
+                  resolve(doc.data());
+            })
+      }) 
+     
+}
+
+async function readNewObject() { 
+      var newObject = await buildUserObject('rbMXsDnlDEgC2NV7cvIC');
+      console.log(newObject);
 }

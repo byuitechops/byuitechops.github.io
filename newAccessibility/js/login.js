@@ -133,6 +133,11 @@ function submitSignUp() {
         message.innerHTML = "Enter a byui email and try again";
         message.style.color = "red";
         resetMessage();
+    } 
+    else if (inputRole == 'Select Role' || inputRole == "" ) { 
+        message.innerHTML = "Enter a byui email and try again";
+        message.style.color = "red";
+        resetMessage();
     } else {
         firebase.auth().createUserWithEmailAndPassword(email, password)
             .then(function () {
