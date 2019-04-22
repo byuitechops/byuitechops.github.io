@@ -35,3 +35,10 @@ function plusSlides(n) {
     currentSlide(newslideIndex);
   }
 }
+var type = 'Activity Type';
+db.collection('teams').doc('canvas1').collection('logs').get()
+  .then(function (querySnapshot) {
+    querySnapshot.forEach((doc) => {
+      console.log(doc.data())
+    })
+  })
