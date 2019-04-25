@@ -24,7 +24,7 @@ function loadPage() {
                     }
                 })
             } else {
-                if (myData.team == "Canvas 1" || myData.team == "canvas1") {
+                if (myData.team == "lms") {
                     team.style.visibility = "visible";
                     iframe.src = ssCanvas1;
                     document.getElementById("newTab").href = ssCanvas1;

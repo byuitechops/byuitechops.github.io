@@ -12,12 +12,6 @@
     <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
     <!-- -->
-    <!-- Partials -->
-    <script type="module">
-        import {addHeader} from './partials/header.js';
-        addHeader();
-    </script>
-    <!-- -->
     <!-- CSS -->
     <!-- <link id="defaultCss" rel="stylesheet" type="text/css" href="css/profile/profile_light.css"> -->
     <!-- -->
@@ -27,6 +21,18 @@
 <body>
     <div id="body-image"></div>
     <header>
+        <a href="home.html"><img src="./assets/logo.png"></a>
+        <nav>
+            <ul><a href="applications.html">
+                    <li>Applications</li>
+                </a><a href="time.html">
+                    <li>Time</li>
+                </a><a href="store.html">
+                    <li>Store</li>
+                </a><a href="profile.html">
+                    <li>Profile</li>
+                </a></ul>
+        </nav>
     </header>
     <main>
         <section>
@@ -98,7 +104,8 @@
                     target="_blank">Work
                     Policies</a>
                 <!-- <p>Party Planning Comitee</p> -->
-                <a href="http://byu-idaho.screenstepslive.com/s/18626/m/70207" target="_blank">Screen-steps / Training</a>
+                <a href="http://byu-idaho.screenstepslive.com/s/18626/m/70207" target="_blank">Screen-steps /
+                    Training</a>
                 <!-- <p>Tech-Ops Help</p> -->
                 <a href="https://docs.google.com/document/d/1G_bc5LFy2V5TrO4riSLdPtsH2JvYIlvtGRxi1JYUjlk/edit?usp=sharing"
                     target="_blank">Employee
@@ -130,19 +137,23 @@
                 <p id="completeTeamActivities">Check Team Activity</p>
                 <span id="styleTeam">
                     <select name="" id="pointsOptions" class="hide">
-                        <option>Checked in on time(sharp)</option>
-                        <option>Checked with lead for a project</option>
-                        <option>Checked out with lead concerning your project</option>
-                        <option>Helped restock/organize store</option>
-                        <option>Giving Devotional</option>
-                        <option>First to react to Posts on General</option>
-                        <option>Cleaned the fridge</option>
-                        <option>Came to Thursday meeting</option>
-                        <option>Moved Trello cards on prep into dev. transition</option>
-                        <option>Won an office competition</option>
-                        <option>Beat Lucas on foosball (x100)</option>
-                        <option>Brought a treat to share with the office</option>
-                        <option>Went to the FTC for Thursday Mtg</option>
+                        <option>Contacting your lead, at least an hour before your scheduled shift, if you’re going to
+                            miss a shift or take time off</option>
+                        <option>Checking in on time</option>
+                        <option>Checked with a lead for a project</option>
+                        <option>Checked out with a lead</option>
+                        <option>Helping restock or shop for the store</option>
+                        <option> Giving Devotional</option>
+                        <option> First to react to a post on General or from your lead</option>
+                        <option> Fridge cleaning</option>
+                        <option> Coming to Thursday meetings</option>
+                        <option> Winning office competitions (foosball, other activities)</option>
+                        <option> Brought a treat to share with the office</option>
+                        <option> Leading a PD event</option>
+                        <option> May the Fourth best dressed</option>
+                        <option> May the Fourth</option>
+                        <option>Merica Day most patriotic cubicle</option>
+                        <option>Merica Day</option>
                     </select>
                     <button type="submit" id="submitPoints" class="hide" onclick="submitTeamPoints()">Submit</button>
                 </span>

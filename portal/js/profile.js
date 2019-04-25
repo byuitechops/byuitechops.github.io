@@ -277,17 +277,16 @@ document.getElementById("signOutBtn").addEventListener("click", () => {
 function updateTeamPoints(pointsToAdd, activityType, timeStamp) {
     db.collection("users").doc(userId).get()
         .then(function (doc) {
-            var team = doc.data().team.replace(" ", '').toLowerCase();
             var name = doc.data().nameDisplay;
-            db.collection("teams").doc(team).get()
+            db.collection("team").doc(points).get()
                 .then(function (doc) {
                     var newPoints = doc.data().points += pointsToAdd;
-                    db.collection("teams").doc(team).update({
+                    db.collection("team").doc(points).update({
                         points: newPoints
                     }).catch(function (error) {
                         alert('An error Ocurred, try updating the points again');
                     })
-                    db.collection("teams").doc(team).collection('logs').doc(timeStamp).set({
+                    db.collection("team").doc(points).collection('logs').doc(timeStamp).set({
                             "Activity Type": activityType,
                             "Points added": pointsToAdd,
                             "Date Added": timeStamp,
@@ -314,34 +313,39 @@ function submitTeamPoints() {
     var setDate = editDate(new Date());
     var points = 0;
     var activityType = document.getElementById("pointsOptions").value;
-    if (activityType == 'Checked in on time(sharp)') {
+    if (activityType == 'Contacting your lead, at least an hour before your scheduled shift, if you’re going to miss a shift or take time off') {
         points = 1;
-    } else if (activityType == 'Checked with lead for a project') {
+    } else if (activityType == 'Checking in on time') {
         points = 1;
-    } else if (activityType == 'Helped restock/organize store') {
+    } else if (activityType == 'Checked with a lead for a project') {
+        points = 1;
+    } else if (activityType == 'Checked out with a lead') {
+        points = 1;
+    } else if (activityType == 'Helping restock or shop for the store') {
         points = 1;
     } else if (activityType == 'Giving Devotional') {
         points = 1;
-    } else if (activityType == 'First to react to Posts on General') {
+    } else if (activityType == 'First to react to a post on General or from your lead') {
         points = 1;
-    } else if (activityType == 'Cleaned the fridge') {
-        points = 5;
-    } else if (activityType == 'Came to Thursday meeting') {
-        points = 5;
-    } else if (activityType == 'Moved Trello cards on prep into dev. transition') {
+    } else if (activityType == 'Fridge cleaning') {
         points = 1;
-    } else if (activityType == 'Won an office competition') {
+    } else if (activityType == 'Coming to Thursday meetings') {
+        points = 5;
+    } else if (activityType == 'Winning office competitions (foosball, other activities)') {
         points = 10;
-    } else if (activityType == 'Beat Lucas on foosball (x100)') {
-        points = 50;
     } else if (activityType == 'Brought a treat to share with the office') {
         points = 5;
-    } else if (activityType == 'Checked out with lead concerning your project') {
+    } else if (activityType == 'Leading a PD event') {
         points = 1;
-    }
-        else if (activityType == 'Went to the FTC for Thursday Mtg') {
-        points = 2;
-    }
+    } else if (activityType == 'May the Fourth best dressed') {
+        points = 50;
+    } else if (activityType == 'May the Fourth') {
+    points = 5;
+    } else if (activityType == '‘Merica Day most patriotic cubicle') {
+        points = 50;
+    } else if (activityType == '‘Merica Day') {
+        points = 5;
+    } 
 
     updateTeamPoints(points, activityType, setDate);
 }
