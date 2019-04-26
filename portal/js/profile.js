@@ -1,3 +1,92 @@
+/***********************************************************
+* Profile.js Table of Conttents
+* A. Team Points
+********************************************************** */
+
+/***********************************************************
+* A. Team Points
+************************************************************/
+// A function to update the points. This is currently set up that the teams are working together
+// There is a const written to shorten the code and make it more readable.
+
+const score = db.collection("team").doc('points');
+
+function updateTeamPoints(pointsToAdd, activityType, timeStamp) {
+    score.get()
+        .then(function (doc) {
+            var newPoints = doc.data().points += pointsToAdd;
+            score.update({
+                points: newPoints
+            }).catch(function (error) {
+                alert('An error Ocurred, try updating the points again');
+            })
+            score.collection('logs').doc(timeStamp).set({
+                    "Activity Type": activityType,
+                    "Points added": pointsToAdd,
+                    "Date Added": timeStamp,
+                    "Added by": name
+                })
+                .then(function () {
+                    console.log("Document successfully written!");
+                    alert("User Updated Successfully");
+                    window.location.reload();
+                }).catch(function (error) {
+                    // An error happened.
+                });
+        })
+}
+
+function submitTeamPoints() {
+    var setDate = editDate(new Date());
+    var points = 0;
+    var activityType = document.getElementById("pointsOptions").value;
+    if (activityType == 'Contacting your lead, at least an hour before your scheduled shift, if you’re going to miss a shift or take time off') {
+        points = 1;
+    } else if (activityType == 'Checking in on time') {
+        points = 1;
+    } else if (activityType == 'Checked with a lead for a project') {
+        points = 1;
+    } else if (activityType == 'Checked out with a lead') {
+        points = 1;
+    } else if (activityType == 'Helping restock or shop for the store') {
+        points = 1;
+    } else if (activityType == 'Giving Devotional') {
+        points = 1;
+    } else if (activityType == 'First to react to a post on General or from your lead') {
+        points = 1;
+    } else if (activityType == 'Fridge cleaning') {
+        points = 1;
+    } else if (activityType == 'Coming to Thursday meetings') {
+        points = 5;
+    } else if (activityType == 'Winning office competitions (foosball, other activities)') {
+        points = 10;
+    } else if (activityType == 'Brought a treat to share with the office') {
+        points = 5;
+    } else if (activityType == 'Leading a PD event') {
+        points = 1;
+    } else if (activityType == 'May the Fourth best dressed') {
+        points = 50;
+    } else if (activityType == 'May the Fourth') {
+        points = 5;
+    } else if (activityType == '‘Merica Day most patriotic cubicle') {
+        points = 50;
+    } else if (activityType == '‘Merica Day') {
+        points = 5;
+    }
+
+    updateTeamPoints(points, activityType, setDate);
+}
+
+//this function gets points and addes it to the html file previously created
+function showResults() {
+    console.log("Total = " + results[0]);
+}
+
+
+/***********************************************************
+* 
+************************************************************/
+
 // dropdown toggleView funcionality 
 
 function toggleView() {
@@ -193,14 +282,7 @@ var birthdayPopulate;
 var results = []; //will be used as part of the results for 
 function loadPage() {
 
-    db.collection("teams").doc('canvas1').get()
-        .then(function (doc) {
-            results.push(doc.data().points);
-            // console.log(results);
-        })
-
-
-    db.collection("teams").doc('canvas2').get()
+    db.collection("team").doc('points').get()
         .then(function (doc) {
             results.push(doc.data().points);
             // console.log(results);
@@ -274,81 +356,11 @@ document.getElementById("signOutBtn").addEventListener("click", () => {
     });
 })
 
-function updateTeamPoints(pointsToAdd, activityType, timeStamp) {
-    db.collection("users").doc(userId).get()
-        .then(function (doc) {
-            var name = doc.data().nameDisplay;
-            db.collection("team").doc(points).get()
-                .then(function (doc) {
-                    var newPoints = doc.data().points += pointsToAdd;
-                    db.collection("team").doc(points).update({
-                        points: newPoints
-                    }).catch(function (error) {
-                        alert('An error Ocurred, try updating the points again');
-                    })
-                    db.collection("team").doc(points).collection('logs').doc(timeStamp).set({
-                            "Activity Type": activityType,
-                            "Points added": pointsToAdd,
-                            "Date Added": timeStamp,
-                            "Added by": name
-                        })
-                        .then(function () {
-                            console.log("Document successfully written!");
-                            alert("User Updated Successfully");
-                            window.location.reload();
-                        }).catch(function (error) {
-                            // An error happened.
-                        });
-                })
-        })
-}
-
 
 document.getElementById("completeTeamActivities").addEventListener('click', () => {
     document.getElementById("pointsOptions").setAttribute("class", "visible");
     document.getElementById("submitPoints").setAttribute("class", "visible");
 })
-
-function submitTeamPoints() {
-    var setDate = editDate(new Date());
-    var points = 0;
-    var activityType = document.getElementById("pointsOptions").value;
-    if (activityType == 'Contacting your lead, at least an hour before your scheduled shift, if you’re going to miss a shift or take time off') {
-        points = 1;
-    } else if (activityType == 'Checking in on time') {
-        points = 1;
-    } else if (activityType == 'Checked with a lead for a project') {
-        points = 1;
-    } else if (activityType == 'Checked out with a lead') {
-        points = 1;
-    } else if (activityType == 'Helping restock or shop for the store') {
-        points = 1;
-    } else if (activityType == 'Giving Devotional') {
-        points = 1;
-    } else if (activityType == 'First to react to a post on General or from your lead') {
-        points = 1;
-    } else if (activityType == 'Fridge cleaning') {
-        points = 1;
-    } else if (activityType == 'Coming to Thursday meetings') {
-        points = 5;
-    } else if (activityType == 'Winning office competitions (foosball, other activities)') {
-        points = 10;
-    } else if (activityType == 'Brought a treat to share with the office') {
-        points = 5;
-    } else if (activityType == 'Leading a PD event') {
-        points = 1;
-    } else if (activityType == 'May the Fourth best dressed') {
-        points = 50;
-    } else if (activityType == 'May the Fourth') {
-    points = 5;
-    } else if (activityType == '‘Merica Day most patriotic cubicle') {
-        points = 50;
-    } else if (activityType == '‘Merica Day') {
-        points = 5;
-    } 
-
-    updateTeamPoints(points, activityType, setDate);
-}
 
 function editDate(date) {
     var month = ("0" + (date.getMonth() + 1)).slice(-2);
@@ -358,10 +370,4 @@ function editDate(date) {
     var minute = ("0" + date.getMinutes()).slice(-2);
     var setDate = `${year}-${month}-${day} ${hour}:${minute}`;
     return setDate;
-}
-
-//this function gets each team's points and addes it to the html file previously created
-function showResults() {
-    // document.getElementById("results").innerText = `Canvas 1 (Marvel) = ${results[0]} x Canvas 2 (DC) = ${results[1]} `
-    console.log("Canvas 1 = " + results[0] + " x Canvas 2 = " + results[1]);
 }
