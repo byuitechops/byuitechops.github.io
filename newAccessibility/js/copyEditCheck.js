@@ -82,6 +82,7 @@ function getCourses() {
         if (this.readyState == 4 && this.status === 200) {
             var res = JSON.parse(this.responseText);
             var id = res._id;
+            
             var newxhttp = new XMLHttpRequest();
             newxhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status === 200) {

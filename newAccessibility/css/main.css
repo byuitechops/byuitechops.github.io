@@ -403,15 +403,19 @@ main {
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 59%;
+  width: 65%;
   height: 13rem;
+}
+
+.modal-content2 input { 
+  height: 2rem;
 }
 
 .close2 {
   color: #aaaaaa;
   float: right;
   position: relative;
-  bottom: 11rem;
+  bottom: 10rem;
   right: -.5rem;
   font-size: 28px;
   font-weight: bold;
@@ -427,7 +431,7 @@ main {
   font-size: .8rem;
   position: relative;
   top: .5rem;
-  left: 53.3rem;
+  left: 65.3rem;
 }
 
 .close3 {

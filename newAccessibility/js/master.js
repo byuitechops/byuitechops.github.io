@@ -349,3 +349,7 @@ async function readNewObject(id) {
       console.log(newObject);
 }
 
+function displayAnnouncementEdit() { 
+      editModalAnnouncement.style.display = "block";
+}
+
