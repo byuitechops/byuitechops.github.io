@@ -45,7 +45,7 @@ trello.addEventListener("click", () => {
 })
 
 accessibility.addEventListener("click", () => {
-    window.open("https://byuitechops.github.io/accessibility/");
+    window.open("https://byuitechops.github.io/newAccessibility/home.html");
 })
 
 googleChat.addEventListener("click", () => {
