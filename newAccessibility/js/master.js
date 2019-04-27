@@ -353,3 +353,10 @@ function displayAnnouncementEdit() {
       editModalAnnouncement.style.display = "block";
 }
 
+function checkTransferProcess() { 
+      db.collection('accessibility').where('transferCompleted', '==', false).get()
+      .then(function(data) { 
+            console.log(data.size);
+      })
+}
+
