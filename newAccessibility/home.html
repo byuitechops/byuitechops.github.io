@@ -9,8 +9,8 @@
     <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-auth.js"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 </head>
 
 <body>
@@ -80,9 +80,17 @@
                     </a>
                 </div>
                 <h2>Announcements: </h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque mollitia omnis voluptatibus
-                    possimus amet labore! Illo corporis, aspernatur consequuntur commodi, fugiat, doloremque
-                    suscipit eius beatae doloribus cumque aut voluptatem ea.</p>
+                <p>Welcome to the Spring 2019 Semester! Below is a list of courses we need to work on in priority order.
+                    The BIO courses need to be completed in the next two weeks, so let’s stay focused on those. Please
+                    remember to check in with your lead everyday for more specific direction on what to work on.</p>
+                    <ol>
+                        <li>PC 101</li>
+                        <li>GE 103</li>
+                        <li>BIO 264</li>
+                        <li>BIO 264L</li>
+                        <li>BIO 265L</li>
+                        <li>ANTH 101</li>
+                    </ol>
             </section>
             <section id="transcript-not-found" class="container half col">
                 <h2>Claimed Requests</h2>
@@ -102,7 +110,8 @@
                         <a id="updateMediaLink" href="https://www.youtube.com/watch?v=Fdf5aTYRW0E" target="_blank">Media
                             Link</a>
                         <label for="transcript-title"></label>
-                        <a id="updateDocLink" href="https://docs.google.com/spreadsheets/d/1mhCCTU-3vR69KCsJbKkcHDnVU4ZMLbcmIU97txvhQd4/edit#gid=0"
+                        <a id="updateDocLink"
+                            href="https://docs.google.com/spreadsheets/d/1mhCCTU-3vR69KCsJbKkcHDnVU4ZMLbcmIU97txvhQd4/edit#gid=0"
                             target="_blank">Google
                             Document Link</a>
                         <label id="verbitLabel" for="">Verbit ID (if applicable)</label>
@@ -110,7 +119,8 @@
 
                         <div class="container-center" style="margin-top:.5rem;">
                             <button id="btn-report" value="" class="btn-hover red">Return to Prep</button>
-                            <button id="btn-finish" class="bg-primary btn-hover" value="" onclick="finalizeTranscript(value)">Complete</button>
+                            <button id="btn-finish" class="bg-primary btn-hover" value=""
+                                onclick="finalizeTranscript(value)">Complete</button>
                         </div>
                     </div>
                     <div id="if-copied" class="nice-overflow container real-half col" style="word-wrap: break-word;">
@@ -136,4 +146,3 @@
 <script src="js/home.js"></script>
 
 </html>
-

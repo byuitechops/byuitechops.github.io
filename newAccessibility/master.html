@@ -68,7 +68,7 @@
             <section id="left-master" class="half container col">
                 <h2>Lead Tools</h2>
                 <div class="group-boxes container row">
-                    <a class="bg-primary btn-hover">Announcements</a>
+                    <a onlclick="displayAnnouncementEdit()" class="bg-primary btn-hover">Announcements</a>
                     <a class="bg-primary btn-hover">Statistics</a>
                     <a class="bg-primary btn-hover">Training</a>
                 </div>
@@ -150,12 +150,17 @@
                             <p id="transcript-type">Type: Video</p>
                             <p id="transcript-length" onclick="editItem('length')">Length: 200</p>
                             <p id="transcript-height" onclick="editItem('height')"> Height: 315</p>
-                            <p onclick="editItem('docEditURL')">Google Doc Edit Link:  <a id="transcript-googleEditLink" href="#" target="_blank"> Click Here</a> </p>
-                            <p onclick="editItem('docPublishURL')">Google Doc Publish Link: <a id="transcript-googlePubLink" href="#" target="_blank">Click Here</a> </p>
-                            <p onclick="editItem('lmsURL')">LMS URL: <a id="transcript-canvasLink" href="#" target="_blank">Click Here</a></p>
-                            <p onclick="editItem('srcURL')">Media URL: <a id="transcript-mediaLink" href="#" target="_blank"> Click Here</a></p>
+                            <p onclick="editItem('docEditURL')">Google Doc Edit Link: <a id="transcript-googleEditLink"
+                                    href="#" target="_blank"> Click Here</a> </p>
+                            <p onclick="editItem('docPublishURL')">Google Doc Publish Link: <a
+                                    id="transcript-googlePubLink" href="#" target="_blank">Click Here</a> </p>
+                            <p onclick="editItem('lmsURL')">LMS URL: <a id="transcript-canvasLink" href="#"
+                                    target="_blank">Click Here</a></p>
+                            <p onclick="editItem('srcURL')">Media URL: <a id="transcript-mediaLink" href="#"
+                                    target="_blank"> Click Here</a></p>
                             <p id="transcript-verbit">Uses Verbit: Yes</p>
-                            <p onclick="editItem('verbitID')" id="transcript-verbitID">Verbit ID: 194lw_1234_294u8wkd</p>
+                            <p onclick="editItem('verbitID')" id="transcript-verbitID">Verbit ID: 194lw_1234_294u8wkd
+                            </p>
                             <p id="transcript-copied">Copied as duplicate: Yes</p>
                             <p id="transcript-copiedFrom">Copied from: </p>
                         </div>
@@ -170,13 +175,11 @@
                             <p id="transcript-reviewer"></p>
                             <p id="transcript-reviewDate"></p>
                             <h3>Notes</h3>
-                            <p onclick="editItem('requestNotes')" id="transcript-requestNotes"><b>Request Notes: </b> Lorem ipsum dolor sit amet
-                                consectetur adipisicing elit. Vel ipsa dolorum totam sapiente illo quo recusandae quasi
-                                vitae nam dolores! </p>
-                            <p onclick="editItem('returnToPrepNote')" id="transcript-returnNotes"><b>Return to prepare notes: </b> Lorem ipsum dolor sit amet
-                                consectetur adipisicing elit. Fugit doloremque possimus laborum inventore dolorem illum
-                                enim rerum eveniet quasi, vitae odio dolore ipsam ipsa explicabo! </p>
-                                <button id="btn-delete-transcript" class="hide btn-hover red">Delete Transcript</button>
+                            <p onclick="editItem('requestNotes')" id="transcript-requestNotes"><b>Request Notes: </b>
+                            </p>
+                            <p onclick="editItem('returnToPrepNote')" id="transcript-returnNotes"><b>Return to prepare
+                                    notes: </b> </p>
+                            <button id="btn-delete-transcript" class="hide btn-hover red">Delete Transcript</button>
                         </div>
                     </div>
                 </div>
@@ -189,15 +192,21 @@
                 <input type="text" id="newValue">
                 <button class="btn-hover bg-primary" id="editComplete">Update</button>
             </div>
-        </div> 
-        
+        </div>
+
+        <div id="editModalAnnouncement" class="modal7">
+            <div class="modal-content" id="editModal-content">
+                <span class="close">&times;</span>
+                <textarea name="" id="" cols="30" rows="10" readonly></textarea>
+                <textarea name="" id="" cols="30" rows="10"></textarea>
+                <button class="btn-hover bg-primary" id="editComplete">Update</button>
+            </div>
+        </div>
+
     </main>
 </body>
 <script src="js/objects.module.js"></script>
 <script src="js/main.js"></script>
 <script src="js/master.js"></script>
 
-
 </html>
-
-
