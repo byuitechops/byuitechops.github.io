@@ -491,7 +491,7 @@ function calculateTotal() {
         document.getElementById("minutes0").value = minutes;
         document.getElementById("hours0").value = hours;
     }
-    total = (hours * 60 * 60) + (minutes * 60) + (seconds * 1);
+    total = (hours * 60 * 60) + (minutes * 60) + seconds;
     if (total === 0) {
         total = "";
         document.getElementById("total0").value = total;
