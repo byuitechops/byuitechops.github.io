@@ -28,7 +28,7 @@ function loadPage() {
                     team.style.visibility = "visible";
                     iframe.src = ssCanvas1;
                     document.getElementById("newTab").href = ssCanvas1;
-                } else {
+                } else if (myData.team == "accessibility") {
                     team.style.visibility = "visible";
                     iframe.src = ssCanvas2;
                     document.getElementById("newTab").href = ssCanvas2;
