@@ -14,11 +14,14 @@ function generateList() {
         .then(function (documents) {
             var count = 1;
             documents.forEach(function (doc) {
-                if (count % 2) {
+                // This will filter out anyone who is not actively on our team
+                if (doc.data().team != "default") {
+                    console.log(doc.data().team)
                     var interpolate = "active"
+                    document.getElementById("generate").insertAdjacentHTML('beforeend', `<tr class='${interpolate}'> <td>${count}</td> <td>${doc.data().nameDisplay}</td><td id="${doc.id}"><span id="count${doc.id}" onclick="editTime('${doc.id}', '${doc.data().time.accumulatedTime}')">${doc.data().time.accumulatedTime}</span></td>`)
+                    count++;
                 }
-                document.getElementById("generate").insertAdjacentHTML('beforeend', `<tr class='${interpolate}'> <td>${count}</td> <td>${doc.data().nameDisplay}</td><td id="${doc.id}"><span id="count${doc.id}" onclick="editTime('${doc.id}', '${doc.data().time.accumulatedTime}')">${doc.data().time.accumulatedTime}</span></td>`)
-                count++;
+                
             })
         })
 }
