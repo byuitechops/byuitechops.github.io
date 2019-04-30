@@ -64,15 +64,7 @@ function submitTeamPoints() {
         points = 5;
     } else if (activityType == 'Leading a PD event') {
         points = 1;
-    } else if (activityType == 'May the Fourth best dressed') {
-        points = 50;
-    } else if (activityType == 'May the Fourth') {
-        points = 5;
-    } else if (activityType == '‘Merica Day most patriotic cubicle') {
-        points = 50;
-    } else if (activityType == '‘Merica Day') {
-        points = 5;
-    }
+    } 
 
     updateTeamPoints(points, activityType, setDate);
 }
@@ -319,11 +311,15 @@ function loadPage() {
                 document.getElementById("accumulated").innerText = myData.time.accumulatedTime + ":00";
                 document.getElementById("redeemTime").innerText = myData.time.accumulatedTime + ":00";
             }
-
-
+            
             //displays lead/admin tools only for the right people
             if (myData.admin || myData.title == "Project Lead") {
                 document.getElementById("leadAdmin").style.visibility = "visible";
+            }
+
+
+            if (myData.storeManager == "true") {
+                document.getElementById("storeInv").style.visibility = "visible";
             }
         })
 }
