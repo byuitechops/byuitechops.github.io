@@ -318,7 +318,8 @@ function loadPage() {
             }
 
 
-            if (myData.storeManager == "true") {
+            if (myData.storeManager == true) {
+                console.log(myData.storeManager);
                 document.getElementById("storeInv").style.visibility = "visible";
             }
         })
