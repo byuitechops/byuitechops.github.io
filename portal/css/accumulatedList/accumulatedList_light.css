@@ -2,6 +2,10 @@
 #body-image {
   display: none; }
 
+.small{
+  font-size: 14pt;
+}
+
 header {
   background-image: none; }
 

@@ -154,7 +154,7 @@ function submitInfoChanges(userId) {
                 "info.major": document.getElementById("editMajor").value,
                 "info.track": document.getElementById("editTrack").value,
                 "info.graduation": document.getElementById("editGradDate").value,
-                "team": document.getElementById("editTeam").value,
+                "team": document.getElementById("editTeam").value.toLowerCase(),
                 "info.email": document.getElementById("editEmail").value,
                 "title": document.getElementById("editJobTitle").value,
                 "info.speed": document.getElementById("editSpeed").value,
@@ -220,11 +220,12 @@ function populateInfoEdit(doc) {
                 document.getElementById("editJobTitle").selectedIndex = 6;
             }
 
-            if (doc.data().team == "Canvas 1") {
+            if (doc.data().team == "lms") {
                 document.getElementById("editTeam").selectedIndex = 0;
-            }
-            if (doc.data().team == "Canvas 2") {
+            } else if (doc.data().team == "accessibility") {
                 document.getElementById("editTeam").selectedIndex = 1;
+            } else {
+                document.getElementById("editTeam").selectedIndex = 2;
             }
             document.getElementById("editSpeed").setAttribute("value", `${doc.data().info.speed}`);
             document.getElementById("editAccumulatedTime").setAttribute("value", `${doc.data().time.accumulatedTime}`);

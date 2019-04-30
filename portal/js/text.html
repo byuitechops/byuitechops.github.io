@@ -1,0 +1,7 @@
+<tr class='${interpolate}'>
+    <td>${count}</td>
+    <td>${doc.data().nameDisplay}</td>
+    <td id="${doc.id}"><span id="count${doc.id}Time" onclick="editTime('${doc.id}', '${doc.data().time.accumulatedTime}')">${doc.data().time.accumulatedTime}</span></td>
+    <td><span id="count${doc.id}Team" onclick="editTeam('${doc.id}', '${doc.data().team}')">${doc.data().team}</span></td>
+    <td><span id="count${doc.id}Title" onclick="editTitle('${doc.id}', '${doc.data().title}')">${doc.data().title}</span></td>
+</tr>

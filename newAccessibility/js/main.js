@@ -1,6 +1,6 @@
 //***************************************************
 // This page has the purpose of integrating code 
-// in Js so all other pages can work more
+// in JS so all other pages can work more
 // Effectively and with clean code. 
 //****************************************************
 // Initialize Firebase
@@ -69,7 +69,6 @@ firebase.auth().onAuthStateChanged(function (user) {
 //logs out the user
 // Logout of firebase and website
 function userLogout() {
-    console.log("It's working");
     firebase.auth().signOut();
     window.location.reload();
 }

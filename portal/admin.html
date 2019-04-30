@@ -13,28 +13,34 @@
     <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-functions.js"></script>
     <!-- -->
-    <!-- Partials -->
-    <script type="module">
-        import {addHeader} from './partials/header.js';
-        addHeader();
-    </script>
-    <!-- -->
     <!-- CSS -->
     <link id="defaultCss" rel="stylesheet" type="text/css" href="css/editUser/editUser_light.css">
     <!-- -->
-    <title>Edit User | BYU-I Techops Portal</title>
+    <title>Admin Tools | BYU-I Techops Portal</title>
 </head>
 
 <body>
     <div id="main-body"></div>
     <header>
-    </header>
+            <a href="home.html"><img src="./assets/logo.png"></a>
+            <nav>
+                <ul><a href="applications.html">
+                        <li>Applications</li>
+                    </a><a href="time.html">
+                        <li>Time</li>
+                    </a><a href="store.html">
+                        <li>Store</li>
+                    </a><a href="profile.html">
+                        <li>Profile</li>
+                    </a></ul>
+            </nav>
+        </header>
     <main>
         <section>
             <!-- <img src="assets/logo3.png"> -->
             <div id="opacity">
             </div>
-            <h2>Edit User - Admin / Lead</h2>
+            <h2>Admin Tools</h2>
         </section>
         <section>
             <div id="zoe">
@@ -72,8 +78,9 @@
                 <p>
                     <span>Team:</span>
                     <select id="editTeam" name="team">
-                        <option id="Canvas 1">Canvas 1</option>
-                        <option id="Canvas 2">Canvas 2</option>
+                        <option id="lms">LMS</option>
+                        <option id="accessibility">Accessibility</option>
+                        <option id="inactive">Other</option>
                     </select>
                 </p>
                 <p>
@@ -105,33 +112,7 @@
             </div>
         </section>
     </main>
-    <!-- <div id="app">
-        <p>{{count}}</p>
-        <button @click="add"> + </button>
-        <button @click="subtract"> - </button>
-    </div> -->
 </body>
-<!-- Script -->
 <script src="js/main.js"></script>
-<script src="js/editUser.js"></script>
-<!-- <script src="https://unpkg.com/vue"></script>
-<script>
-    new Vue({
-        el: "#app",
-        data: {
-            count: 1,
-        },
-        methods:{
-            add(){
-                this.count++
-            },
-            subtract(){
-                this.count--
-            }
-        }
-    })
-</script> -->
-
-<!-- -->
-
+<script src="js/admin.js"></script>
 </html>
