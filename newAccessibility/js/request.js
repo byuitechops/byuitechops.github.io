@@ -32,28 +32,13 @@ async function submitTranscriptRequest() {
     var course = document.getElementById('requestCourse').value;
     var lmsURL = document.getElementById('requestLMSURL').value;
     var srcURL = document.getElementById('requestVideoURL').value;
+    var comments = document.getElementById('requestComments').value;
     // var videoLength = document.getElementById('requestLength').value;
     // var videoHeight = document.getElementById('requestHeight').value;
     // var softwareUsed = document.getElementById('requestExternalSoftware').checked;
-    if (course == 'Course Code') { 
-        message.innerHTML = 'You must fill in all inputs';
-        message.style.color = 'red';
-        resetMessage();
-        return;
-    }
-
-    if (requestType == 'Transcript Type') { 
-        message.innerHTML = 'You must fill in all inputs';
-        message.style.color = 'red';
-        resetMessage();
-        return;
-    }
-    var comments = document.getElementById('requestComments').value;
-
     console.log("before");
     try {
         var parentObject = await generateParentObject(srcURL);
-        var userObject = await getRequestsNumber();
     } catch (err) {
         console.error(err);
     }
@@ -61,7 +46,7 @@ async function submitTranscriptRequest() {
     console.log(userObject);
     console.log("After");
 
-    if (requestType === 'Request Type' || title === '' || priority === 'Priority' || course === 'Course' || lmsURL === '' || srcURL === '') {
+    if (course == 'Course Code' || requestType == 'Transcript Type' || requestType === 'Request Type' || title === '' || priority === 'Priority' || course === 'Course' || lmsURL === '' || srcURL === '') { 
         message.innerHTML = 'You must fill in all inputs';
         message.style.color = 'red';
         resetMessage();
@@ -110,8 +95,6 @@ async function submitTranscriptRequest() {
                     elms[i].innerText = '--';
                 }
                 //updates the side of the document
-            }).then(() => {
-                db.collection('users').doc(userObject.userID).update({requests: userObject.requests +=1})
             })
             .catch(function (error) {
                 console.error('Error adding document: ', error);
@@ -122,52 +105,12 @@ async function submitTranscriptRequest() {
     }
 }
 
-function getRequestsNumber() {
-    var user = firebase.auth().currentUser;
-    return new Promise((resolve, reject) => {
-        db.collection('users').where('name', "==", user.displayName).get()
-            .then(function (querySnapshot) {
-                querySnapshot.forEach(function (doc) {
-                    resolve({
-                        requests: doc.data().requests,
-                        userID: doc.id
-                    });
-                })
-            })
-    })
-
-
-}
 
 function resetMessage() {
     setTimeout(() => {
         message.innerHTML = '';
         message.style.color = 'black';
     }, 3000);
-}
-
-function getCourses() {
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status === 200) {
-            var res = JSON.parse(this.responseText);
-            var id = res._id;
-            var newxhttp = new XMLHttpRequest();
-            newxhttp.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status === 200) {
-                    var newres = JSON.parse(this.responseText);
-                    for (var i = 0; i < newres.length; i++) {
-                        var course = newres[i]['__catalogCourseId'];
-                        document.getElementById('requestCourse').insertAdjacentHTML('beforeend', '<option value=\'' + course + '\'>' + course + '</option>');
-                    }
-                }
-            };
-            newxhttp.open('GET', 'https://byui.kuali.co/api/v1/catalog/courses/' + id, true);
-            newxhttp.send();
-        }
-    };
-    xhttp.open('GET', 'https://byui.kuali.co/api/v1/catalog/public/catalogs/current', true);
-    xhttp.send();
 }
 
 //Calculates the total of time in seconds according 
@@ -205,4 +148,22 @@ function generateParentObject(videoURL) {
                 reject(err);
             });
     });
+}
+
+
+
+// Future Projects
+function getRequestsNumber() {
+    var user = firebase.auth().currentUser;
+    return new Promise((resolve, reject) => {
+        db.collection('users').where('name', "==", user.displayName).get()
+            .then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                    resolve({
+                        requests: doc.data().requests,
+                        userID: doc.id
+                    });
+                })
+            })
+    })
 }
