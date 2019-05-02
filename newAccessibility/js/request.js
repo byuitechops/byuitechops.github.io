@@ -43,7 +43,6 @@ async function submitTranscriptRequest() {
         console.error(err);
     }
     console.log(parentObject);
-    console.log(userObject);
     console.log("After");
 
     if (course == 'Course Code' || requestType == 'Transcript Type' || requestType === 'Request Type' || title === '' || priority === 'Priority' || course === 'Course' || lmsURL === '' || srcURL === '') { 
