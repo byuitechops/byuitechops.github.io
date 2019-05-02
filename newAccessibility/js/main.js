@@ -108,7 +108,7 @@ function getCourses() {
 
 function verifyEmail() {
     console.log(firebase.auth().currentUser.emailVerified);
-    if (!firebase.auth().currentUser.emailVerified) {
+    if (firebase.auth().currentUser.emailVerified == false) {
         user.sendEmailVerification().then(function () {
             // Email sent.
             alert("Email has been sent. Please check inbox")
