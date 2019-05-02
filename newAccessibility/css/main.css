@@ -647,6 +647,12 @@ main {
   border: none;
 }
 
+#verifyButton {
+  background-color: #c42b2b !important;
+  font-weight: bolder !important;
+  font-size: 1rem;
+}
+
 /***********************************************************
 * 4. Request page sections
 ************************************************************/

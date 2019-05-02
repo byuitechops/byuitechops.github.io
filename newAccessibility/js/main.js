@@ -21,6 +21,8 @@ db.settings({
     timestampsInSnapshots: true
 });
 
+var user = firebase.auth().currentUser;
+
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
         if (window.location.pathname != '/index.html') {
@@ -44,7 +46,7 @@ firebase.auth().onAuthStateChanged(function (user) {
                             document.getElementById('copyEdit').classList.add('hide');
                             document.getElementById('copyEditCheck').classList.add('hide');
                         }
-                        if (doc.data().name == 'Lucas Wargha') { 
+                        if (doc.data().name == 'Lucas Wargha') {
                             document.getElementById('master').classList.remove('hide');
                             document.getElementById('copyEdit').classList.remove('hide');
                             document.getElementById('copyEditCheck').classList.remove('hide');
@@ -102,4 +104,20 @@ function getCourses() {
     };
     xhttp.open('GET', 'https://byui.kuali.co/api/v1/catalog/public/catalogs/current', true);
     xhttp.send();
+}
+
+function verifyEmail() {
+    console.log(firebase.auth().currentUser.emailVerified);
+    if (!firebase.auth().currentUser.emailVerified) {
+        user.sendEmailVerification().then(function () {
+            // Email sent.
+            alert("Email has been sent. Please check inbox")
+
+        }).catch(function (error) {
+            // An error happened.
+        });
+    } else {
+
+    }
+
 }
