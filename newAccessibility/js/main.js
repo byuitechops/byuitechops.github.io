@@ -23,8 +23,12 @@ db.settings({
 
 var user = firebase.auth().currentUser;
 
+
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
+        if (user.emailVerified == true) {
+            document.getElementById("verifyButton").className = 'hide';
+        }
         if (window.location.pathname != '/index.html') {
             // User is signed in.
             db.collection('users').where('name', "==", user.displayName).get()
@@ -109,11 +113,15 @@ function getCourses() {
 function verifyEmail() {
     var user = firebase.auth().currentUser;
     console.log(user.emailVerified);
-    user.sendEmailVerification().then(function () {
-        // Email sent.
-        alert("Email has been sent. Please check inbox");
-    }).catch(function (error) {
-        // An error happened.
-    });
+    if (user.emailVerified == true) {
+        document.getElementById("verifyButton").className = 'hide';
+    } else {
+        user.sendEmailVerification().then(function () {
+            // Email sent.
+            alert("Email has been sent. Please check inbox");
+        }).catch(function (error) {
+            // An error happened.
+        });
+    }
 
 }
