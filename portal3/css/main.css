@@ -103,6 +103,11 @@ body {
 nav img {
     width: 100%;
     padding: 10%;
+    transition: transform .2s;
+}
+nav img:hover {
+    width: 100%;
+    transform: scale(1.1);
 }
 nav {
     background-color: var(--primary);
@@ -197,7 +202,7 @@ main {
     margin: 15px 0;
     box-shadow: 1px 1px 3px gray;
     background-color: var(--primary);
-    object-fit: cover;
+    overflow: hidden;
     transition: transform .2s;
 }
 .box-link:hover {
