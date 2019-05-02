@@ -1,11 +1,11 @@
 <!---------------------------------------------
-- TIME.HTML Tech-Ops Portal Home Page
+- HOME.HTML Tech-Ops Portal Time Page
 - 
 - 1. Head
 - 2. Body
 - 3. Header
 - 4. Main
-- 5. Scripts
+- 5. Footer
 ---------------------------------------------->
 
 
@@ -20,10 +20,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="shortcut icon" type="image/x-icon" href="/portal3/assets/byui_favicon.gif">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/byui_favicon.gif">
+    <!-- Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
+    <!-- -->
     <!-- CSS -->
-    <link rel="stylesheet" href="/portal3/css/main.css">
-    <title>Time | Quality Assurance Portal</title>
+    <link id="defaultCss" rel="stylesheet" type="text/css" href="scss_files/main.css">
+    <!-- -->
+    <title>Time | BYU-I Techops Portal</title>
 </head>
 
 <!---------------------------------------------
@@ -31,32 +37,31 @@
 ---------------------------------------------->
 
 <body>
+    <div id="body-image"></div>
 
     <!---------------------------------------------
     - 3. Header
     ---------------------------------------------->
-    
-    <nav class="col1">
-            <a href="home.html"><img src="/portal3/assets/logo.png"></a>
+
+    <header>
+        <a href="home.html"><img src="assets/logo.png"></a>
+        <nav class="nav flex-container">
             <ul>
-                <li><a class="nav-link" href="home.html">Home</a></li>
-                <li class="current-page"><a class="nav-link" href="#">Time</a></li>
-                <li><a class="nav-link" href="schedule.html">Schedule</a></li>
-                <li><a class="nav-link" href="store.html">Store</a></li>
-                <li><a class="nav-link" href="profile.html">Profile</a></li>
+                <li><a class="nav-link" href="home.html">HOME</a></li>
+                <li><a class="nav-link" href="apps.html">APPS</a></li>
+                <li><a class="nav-link" href="#">        TIME</a></li>
+                <li><a class="nav-link" href="store.html">STORE</a></li>
+                <li><a class="nav-link" href="profile.html">PROFILE</a></li>
             </ul>
         </nav>
+    </header>
 
     <!---------------------------------------------
     - 4. Main
     ---------------------------------------------->
 
-    <main class="flex-container col9">
-        
-        <header>
-            <h1 class="page-title">Time</h1>
-        </header>
-
+    <main>
+        <h1>Time</h1>
         <section>
 
             <div id="countdownContainer">
@@ -112,11 +117,5 @@
         </div>
     </main>
 </body>
-
-<!---------------------------------------------
-- 5. Scripts
----------------------------------------------->
-
-<script src="/portal3/js/main.js"></script>
 
 </html>

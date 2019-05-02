@@ -5,10 +5,9 @@
 * 1. Imports
 * 2. Color Variables
 * 3. General Style Rules
-* 3a. Navigation Styles
+* 3a. Header Styles
 * 3b. Main Styles
 * 4. Home.html
-* 5. Apps.html
 * 6. Time.html
 * 7. Store.html
 * 8. Profile.html
@@ -39,7 +38,6 @@
     --gray-dark: #343a40;
     --black: #000000;
     --primary: #0076c6;
-    --primary-opaque: rgba(0, 118, 198, .6);
     --secondary: #6c757d;
     --third: #7fc4fd;
     --accent1: #ffffff;
@@ -90,26 +88,37 @@
 
 body {
     margin: 0;
-    padding: 0;
     font-family: "Roboto";
     font-weight: 400;
-    flex-wrap: wrap;
+}
+main {
+    display: flex;
+}
+
+.hide {
+    display: none;
+}
+.primary {
+    background-color: var(--primary);
+}
+.secondary {
+    background-color: var(--secondary);
 }
 
 /***********************************************************
-* 3a. Navigation Styles
+* 3a. Header Styles
 ********************************************************** */
 
 nav img {
     width: 100%;
     padding: 10%;
 }
+.current-page {
+    border-left: 10px solid white;
+}
 nav {
-    background-color: var(--primary);
-    height: 100%;
-    position: fixed;
+    flex-flow: column nowrap;
     box-shadow: 5px 0 10px gray;
-    z-index: 100;
 }
 nav ul {
     margin-top: 100px;
@@ -119,10 +128,18 @@ nav ul {
 nav li {
     padding: 1em 2em;
     margin: 0;
-    transition: transform .2s;
 }
 nav li:hover {
     background-color: var(--secondary);
+
+    /* For Safari & IE */
+    -webkit-animation-name: slide-right;
+    -webkit-animation-duration: .5s;
+    -webkit-animation-duration: both;
+    /* For Chrome, Firefox, & Opera */
+    animation-name: slide-right;
+    animation-duration: .5s;
+    animation-fill-mode: both;
 }
 .nav-link {
     text-decoration: none;
@@ -140,82 +157,131 @@ nav li:hover {
     from {padding-left: 2em;}
     to   {padding-left: 3em;}
 }
-.current-page {
-    border-left: 10px solid white;
-}
 
 
-
-/**********************************************
-* 3b. Main Styles
-**********************************************/
+/***********************************************************
+* 3a. Header Styles
+********************************************************** */
 
 main {
     margin-left: 10%;
-    justify-content: row;
-}
-.page-title {
-    margin: 0;
-    padding: 50px 8% 30px;
-    font-size: 2em;
-    font-weight: 400;
+    width: 100%                
 }
 
 
 /**********************************************
 * 4. Home.html
 **********************************************/
-
-.slideshow-container {
-    width: 80%;
-    height: auto;
-    margin: 15px auto;
-    box-shadow: 5px 0 10px gray;
+section.welcome {
+    margin: 4%;
+    margin-bottom: 0;
+    justify-content: center;
+    flex-wrap: wrap;
+    /* Slideshow container */
+    /* Next & previous buttons */
+    /* Position the "next button" to the right */
+    /* On hover, add a black background color with a little bit see-through */
+    /* Caption text */
+    /* Number text (1/3 etc) */
+    /* The dots/bullets/indicators */
+    /* Fading animation */
+    /* On smaller screens, decrease text size */
 }
-.slideshow-container img {
+section.welcome .mySlides {
+    display: none;
+}
+main section.welcome img {
+    vertical-align: middle;
     width: 100%;
 }
-.slideshow-container .numbertext{
-    color: white;
-    position: absolute;
-    margin: 5px 0 0 8px;
-}
-.slideshow-container .slidebutton {
-    color: white;
-    position: absolute;
-    top: -50px;
-}
-.links-container {
+main section.welcome .slideshow-container {
+    height: 90%;
+    padding-left: 15%;
     width: 80%;
-    margin: 0px auto;
-    justify-content: space-between;
-    flex-flow: row wrap;
+    overflow: hidden;
+    position: relative;
+    margin: auto;
 }
-.box-link {
-    width: 200px;
-    height: 200px;
-    margin: 15px 0;
-    box-shadow: 1px 1px 3px gray;
-    background-color: var(--primary);
-    object-fit: cover;
-    transition: transform .2s;
-}
-.box-link:hover {
-    transform: scale(1.1);
-}
-.box-link img {
-    width: auto;
-    height: 100%;
-    z-index: -1;
-    opacity: 0.5;
-}
-.box-link p {
-    margin: 150px 10px 10px 30px;
-    font-size: 1.4em;
-    font-weight: 500;
-    z-index: 1;
-    color: white;
+main a {
+    cursor: pointer;
     position: absolute;
+    top: 50%;
+    height:
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+}
+main section.welcome .next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+main a:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+main section.welcome .text {
+    color: #f2f2f2;
+    font-size: 15px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
+}
+main section.welcome .numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+}
+main section.welcome .dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+main section.welcome .active,
+main section.welcome .dot:hover {
+    background-color: #717171;
+}
+main section.welcome .fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+@-webkit-keyframes fade {
+    from {opacity: 0.4;}
+    to   {opacity: 1;}
+}
+@keyframes fade {
+    from {opacity: 0.4;}
+    to   {opacity: 1;}
+}
+@media only screen and (max-width: 300px) {
+
+    main section.welcome .prev,
+    main section.welcome .next,
+    main section.welcome .text {
+        font-size: 11px;
+    }
+}
+
+.home-box-link {
+    width: 30%;
+
+}
+.home-box-link img{
+    width: 100%;
 }
 
 
@@ -224,22 +290,6 @@ main {
 * 6. Time.html
 **********************************************/
 
-
-
-/**********************************************
-* 5. Schedule.html
-**********************************************/
-
-.iframe-container {
-    width: 90%;
-    height: 1500px;
-    margin: auto;
-    border: 2px solid black;
-}
-.iframe-container iframe {
-    width: 100%;
-    height: 100%;
-}
 
 
 /**********************************************

@@ -1,0 +1,131 @@
+/**********************************************
+* MAIN.CSS Tech-Ops Portal Style Sheet
+* 
+* 1. General Styles
+* 2. Header
+* 3. Body
+* 4. Home.html
+* 5. Apps.html
+* 6. Time.html
+* 7. Store.html
+* 8. Profile.html
+**********************************************/
+
+
+/**********************************************
+* 1. General Styles
+**********************************************/
+
+@import url('https://fonts.googleapis.com/css?family=Rubik:300,400,700');
+
+.col1  {width: 8.33%;  }
+.col2  {width: 16.66%; }
+.col3  {width: 25%;    }
+.col4  {width: 33.33%; }
+.col5  {width: 41.66%; }
+.col6  {width: 50%;    }
+.col7  {width: 58.33%; }
+.col8  {width: 66.66%; }
+.col9  {width: 75%;    }
+.col10 {width: 83.33%; }
+.col11 {width: 91.66%; }
+.col12 {width: 100%;   }
+
+[class*="col"] {
+    float: left;
+    padding: 15px;
+    border: 1px solid black;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.flex-container {
+    display: flex;
+}
+
+body {
+    margin: 0;
+    font-family: "Rubik";
+    font-weight: 300;
+}
+
+
+/**********************************************
+* 2. Header
+**********************************************/
+
+header {
+    flex-flow: column wrap;
+    
+    border: 1px solid black;
+    background-color: #2699fb;
+    color: white;
+}
+header img {
+    width: 100%;
+    padding: 1.2em;
+}
+
+nav {
+}
+nav li {
+    padding-bottom: 15px;
+}
+.nav-link {
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.2em;
+}
+
+/**********************************************
+* 3. Body
+**********************************************/
+
+section {
+    width: 100%;
+}
+
+.box-link {
+    border: 1px solid blue;
+}
+.box-link img {
+    width: 100%;
+}
+
+
+/**********************************************
+* 4. Home.html
+**********************************************/
+
+
+
+/**********************************************
+* 5. Apps.html
+**********************************************/
+
+
+
+/**********************************************
+* 6. Time.html
+**********************************************/
+
+
+
+/**********************************************
+* 7. Store.html
+**********************************************/
+
+
+
+/**********************************************
+* 8. Profile.html
+**********************************************/
+
+@media only screen and (max-width: 600px) {
+  body {
+    background-color: lightblue;
+  }
+}

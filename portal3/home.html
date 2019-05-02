@@ -1,4 +1,21 @@
+<!---------------------------------------------
+- HOME.HTML Tech-Ops Portal Home Page
+- 
+- 1. Head
+- 2. Body
+- 3. Header
+- 4. Main
+- 5. Scripts
+---------------------------------------------->
+
+
 <!DOCTYPE html>
+<html lang="en">
+
+<!---------------------------------------------
+- 1. Head
+---------------------------------------------->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,39 +25,166 @@
     <link rel="stylesheet" href="/portal3/css/main.css">
     <title>Home | Quality Assurance Portal</title>
 </head>
+
+<!---------------------------------------------
+- 2. Body
+---------------------------------------------->
+
 <body>
-    <nav id="mainNav" class="primary">
-        <a href="home.html"><img src="/portal3/assets/logo.png"></a>
+
+    <!---------------------------------------------
+    - 3. Header
+    ---------------------------------------------->
+    
+    <nav class="col1">
+        <a href="#"><img src="/portal3/assets/logo.png"></a>
         <ul>
-            <a href="/portal3/apps.html">
-                <li>Apps</li>
-            </a><a href="/portal3/time.html">
-                <li>Time</li>
-            </a><a href="/portal3/store.html">
-                <li>Store</li>
-            </a><a href="/portal3/profile.html">
-                <li>Profile</li>
-            </a></ul>
+            <li class="current-page"><a class="nav-link" href="#">Home</a></li>
+            <li><a class="nav-link" href="time.html">Time</a></li>
+            <li><a class="nav-link" href="schedule.html">Schedule</a></li>
+            <li><a class="nav-link" href="store.html">Store</a></li>
+            <li><a class="nav-link" href="profile.html">Profile</a></li>
         </ul>
     </nav>
-    <main>
-        <section class="welcome">
-            <div class="slideshow-container">
-                <div class="mySlides fade">
-                    <div class="numbertext">1 / 2</div>
-                    <img src="/portal/assets/teamMeetingReminder.jpg" style="width:100%">
-                    <div class="text"></div>
+
+    <!---------------------------------------------
+    - 4. Main
+    ---------------------------------------------->
+
+    <main class="col9">
+
+        <header>
+            <h1 class="page-title">Home</h1>
+        </header>
+
+        <section class="center-section col8">
+
+            <section id="welcome">
+                <div class="slideshow-container">
+                    <div class="mySlides fade">
+                        <div class="numbertext">1 / 3</div>
+                        <img src="assets/teamMeetingReminder.jpg">
+                        <div class="text"></div>
+                    </div>
+
+                    <div class="mySlides fade">
+                        <div class="numbertext">2 / 3</div>
+                        <img src="assets/jediVersusSith.jpg">
+                        <div class="text"></div>
+                    </div>
+
+                    <div class="mySlides fade">
+                        <div class="numbertext">3 / 3</div>
+                        <img src="assets/space.jpg">
+                        <div class="text"></div>
+                    </div>
+
+
+                    <a class="slide-button prev" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="slide-button next" onclick="plusSlides(+1)">&#10095;</a>
+
                 </div>
-                <div class="mySlides fade">
-                    <div class="numbertext">2 / 2</div>
-                    <img src="/portal/assets/jediVersusSith.jpg" style="width:100%">
-                    <div class="text"></div>
+                <br>
+
+                <div style="text-align:center">
+                    <span class="dot" onclick="currentSlide(1)"></span>
+                    <span class="dot" onclick="currentSlide(2)"></span>
+                    <!-- <span class="dot" onclick="currentSlide(3)"></span>  -->
                 </div>
-                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                <a class="next" onclick="plusSlides(1)">&#10095;</a>
-            </div>
+            </section>
+
+            <section class="links-container flex-container">
+                    <div class="box-link" id="canvas">
+                        <a href="">
+                            <p>Canvas</p>
+                            <img src="./assets/canvas.png" alt=""/>
+                        </a>
+                    </div>
+                    <div class="box-link" id="pathway">
+                        <a href="">
+                            <p>Pathway</p>
+                            <img src="./assets/pathway.png" alt=""/>
+                        </a>
+                    </div>
+                    <div class="box-link" id="brightspace">
+                        <a href="">
+                            <p>Brightspace</p>
+                            <img src="./assets/brightspace.png" alt=""/>
+                        </a>
+                    </div>
+                    <div class="box-link" id="googledrive">
+                        <a href="">
+                            <p>Google Drive</p>
+                            <img src="./assets/drive.png" alt=""/>
+                        </a>
+                    </div>
+                    <div class="box-link" id="office365">
+                        <a href="">
+                            <p>Office 365</p>
+                            <img src="./assets/office365.png" alt=""/>
+                        </a>
+                    </div>
+                    <div class="box-link" id="katana">
+                        <a href="">
+                            <p>Katana</p>
+                            <img src="./assets/katana.png" alt=""/>
+                        </a>
+                    </div>
+                    <div class="box-link" id="equella">
+                        <a href="">
+                            <p>Equella</p>
+                            <img src="./assets/equella.png" alt=""/>
+                        </a>
+                    </div>
+                    <div class="box-link" id="trello">
+                        <a href="">
+                            <p>Trello</p>
+                            <img src="./assets/trello.png" alt=""/>
+                        </a>
+                    </div>
+                    <div class="box-link" id="accessibility">
+                        <a href="">
+                            <p>Accessibility</p>
+                            <img src="./assets/accessibility.png" alt=""/>
+                        </a>
+                    </div>
+                    <div class="box-link" id="googlechat">
+                        <a href="">
+                            <p>Google Chat</p>
+                            <img src="./assets/googleChat.png" alt=""/>
+                        </a>
+                    </div>
+            </section>
         </section>
+
+        <section class="right-sidebar col2">
+            <section class="personal-info flex-container">
+                <button>Take a Break</button>
+                <a href="profile.html">
+                    <img class="profile-pic" src="" alt="Profile Picture"/>
+                    <p>Me</p>
+                </a>
+            </section>
+
+            <section class="clock-in-container">
+                <h2>Clock In/Out</h2>
+                <button>
+                    Clock In
+                </button>
+                <button>
+                    Clock Out
+                </button>
+            </section>
+        </section>
+
     </main>
+
 </body>
+
+<!---------------------------------------------
+- 5. Scripts
+---------------------------------------------->
+
 <script src="/portal3/js/main.js"></script>
+
 </html>
