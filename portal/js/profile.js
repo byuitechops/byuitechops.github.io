@@ -64,7 +64,9 @@ function submitTeamPoints() {
         points = 5;
     } else if (activityType == 'Leading a PD event') {
         points = 1;
-    } 
+    } else if (activityType == 'Going to the FTC'){
+        points = 5;
+    }
 
     updateTeamPoints(points, activityType, setDate);
 }

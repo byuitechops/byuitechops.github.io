@@ -3,6 +3,8 @@
 // in JS so all other pages can work more
 // Effectively and with clean code. 
 //****************************************************
+
+
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyAIcGQ94aGJRMZihtoTcmMK7j3NavnPEOs",
@@ -19,8 +21,14 @@ db.settings({
     timestampsInSnapshots: true
 });
 
+var user = firebase.auth().currentUser;
+
+
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
+        if (user.emailVerified == true) {
+            document.getElementById("verifyButton").className = 'hide';
+        }
         if (window.location.pathname != '/index.html') {
             // User is signed in.
             db.collection('users').where('name', "==", user.displayName).get()
@@ -42,7 +50,7 @@ firebase.auth().onAuthStateChanged(function (user) {
                             document.getElementById('copyEdit').classList.add('hide');
                             document.getElementById('copyEditCheck').classList.add('hide');
                         }
-                        if (doc.data().name == 'Lucas Wargha') { 
+                        if (doc.data().name == 'Lucas Wargha') {
                             document.getElementById('master').classList.remove('hide');
                             document.getElementById('copyEdit').classList.remove('hide');
                             document.getElementById('copyEditCheck').classList.remove('hide');
@@ -73,3 +81,47 @@ function userLogout() {
     window.location.reload();
 }
 
+
+// Get information from the Univeristy Catalog
+
+// getCourses();
+//get courses for the dropdown through xmlh request
+function getCourses() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status === 200) {
+            var res = JSON.parse(this.responseText);
+            var id = res._id;
+            var newxhttp = new XMLHttpRequest();
+            newxhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status === 200) {
+                    var newres = JSON.parse(this.responseText);
+                    for (var i = 0; i < newres.length; i++) {
+                        var course = newres[i]['__catalogCourseId'];
+                        document.getElementById('requestCourse').insertAdjacentHTML('beforeend', '<option value=\'' + course + '\'>' + course + '</option>');
+                    }
+                }
+            };
+            newxhttp.open('GET', 'https://byui.kuali.co/api/v1/catalog/courses/' + id, true);
+            newxhttp.send();
+        }
+    };
+    xhttp.open('GET', 'https://byui.kuali.co/api/v1/catalog/public/catalogs/current', true);
+    xhttp.send();
+}
+
+function verifyEmail() {
+    var user = firebase.auth().currentUser;
+    console.log(user.emailVerified);
+    if (user.emailVerified == true) {
+        document.getElementById("verifyButton").className = 'hide';
+    } else {
+        user.sendEmailVerification().then(function () {
+            // Email sent.
+            alert("Email has been sent. Please check inbox");
+        }).catch(function (error) {
+            // An error happened.
+        });
+    }
+
+}

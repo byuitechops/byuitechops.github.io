@@ -1,3 +1,5 @@
+getCourses();
+
 //checks if the user has actually finished a prep before starting another one + handles permission requirements
 firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
@@ -243,33 +245,6 @@ function toggleTab(i) {
             document.getElementById('user-info-box').classList.add('hide');
             document.getElementById('requestCourse').classList.remove('hide');
       }
-}
-
-
-getCourses();
-
-function getCourses() {
-      var xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status === 200) {
-                  var res = JSON.parse(this.responseText);
-                  var id = res._id;
-                  var newxhttp = new XMLHttpRequest();
-                  newxhttp.onreadystatechange = function () {
-                        if (this.readyState == 4 && this.status === 200) {
-                              var newres = JSON.parse(this.responseText);
-                              for (var i = 0; i < newres.length; i++) {
-                                    var course = newres[i]['__catalogCourseId'];
-                                    document.getElementById('requestCourse').insertAdjacentHTML('beforeend', '<option value=\'' + course + '\'>' + course + '</option>');
-                              }
-                        }
-                  };
-                  newxhttp.open('GET', 'https://byui.kuali.co/api/v1/catalog/courses/' + id, true);
-                  newxhttp.send();
-            }
-      };
-      xhttp.open('GET', 'https://byui.kuali.co/api/v1/catalog/public/catalogs/current', true);
-      xhttp.send();
 }
 
 function editItem(item) {
