@@ -42,15 +42,16 @@ firebase.auth().onAuthStateChanged(function (user) {
                             document.getElementById('copyEdit').classList.remove('hide');
                             document.getElementById('prepare').classList.add('hide');
                             document.getElementById('transcribe').classList.add('hide');
+                            document.getElementById('copyEditCheck').classList.add('hide');
                             if (userData.lead) {
                                 document.getElementById('copyEditCheck').classList.remove('hide');
                             }
                         }
-                        if (userData.role == "Quality Assurance") {
+                        if (userData.role == "Quality Assurance" ^ (doc.data().name == 'Lucas Wargha' || doc.data().name == 'Calvin Smoot')) {
                             document.getElementById('copyEdit').classList.add('hide');
                             document.getElementById('copyEditCheck').classList.add('hide');
                         }
-                        if (doc.data().name == 'Lucas Wargha') {
+                        if (doc.data().name == 'Lucas Wargha' || doc.data().name == 'Calvin Smoot') {
                             document.getElementById('master').classList.remove('hide');
                             document.getElementById('copyEdit').classList.remove('hide');
                             document.getElementById('copyEditCheck').classList.remove('hide');
