@@ -24,6 +24,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" type="image/x-icon" href="/portal3/assets/byui_favicon.gif">
+
+    <!-- Scripts -->
+    
+    <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
     <!-- CSS -->
     <link rel="stylesheet" href="/portal3/css/main.css">
     <title>Home | Quality Assurance Portal</title>
@@ -171,7 +177,20 @@
             <a href="profile.html">
                 <img class="profile-pic" src="assets/misc/profPic.png" alt="Profile Picture"/>
             </a>
-
+            <section class="predefined-themes">
+                <button data-theme="light" style="background-color: var(--blue); border: 1px solid var(--white);">
+                    Light
+                </button>
+                <button data-theme="dark" style="background-color: var(--gray-dark); border: 1px solid var(--blue);">
+                    Dark
+                </button>
+                <button data-theme="jedi" style="background-image: linear-gradient(45deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);">
+                    Jedi
+                </button>
+                <button data-theme="sith" style="background-image: linear-gradient(45deg, rgba(36,0,0,1) 0%, rgba(121,9,9,1) 35%, rgba(255,0,0,1) 100%);">
+                    Sith
+                </button>
+            </section>
             <section class="clock-in-section">
                 <button class="btn1">
                     Clock In
@@ -188,6 +207,7 @@
                     <span id="secs">00</span>
                 </button>
             </section>
+            
         </section>
 
     </main>

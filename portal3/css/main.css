@@ -38,14 +38,18 @@
     --gray: #6c757d;
     --gray-dark: #343a40;
     --black: #000000;
-    --primary: #0076c6;
-    --primary-opaque: rgba(0, 118, 198, .6);
-    --secondary: #6c757d;
+    --first: #0076c6;
+    --first-opaque: rgba(0, 118, 198, .6);
+    --second: #6c757d;
     --third: #7fc4fd;
     --accent1: #ffffff;
     --accent2: #727272;
     --background: #ffffff;
     --backgroundLight: #f7f7f7;
+    --backgroundGrade: none;
+    --shadow: none;
+    --fontPrime: #ffffff;
+    --fontSecond: #ffffff;
     --success: #28a745;
     --info: #17a2b8;
     --warning: #ffc107;
@@ -83,6 +87,7 @@
 * {
     box-sizing: border-box;
     margin: 0;
+    color: var(--fontPrime);
 }
 .flex-container {
     display: flex;
@@ -94,6 +99,7 @@ body {
     font-family: "Roboto";
     font-weight: 400;
     flex-wrap: wrap;
+    background-color: var(--background);
 }
 
 /***********************************************************
@@ -112,10 +118,11 @@ nav img:hover {
     transform: scale(1.1);
 }
 nav {
-    background-color: var(--primary);
+    background-color: var(--first);
+    background-image: var(--backgroundGrade);
     height: 100%;
     position: fixed;
-    box-shadow: 5px 0 10px gray;
+    box-shadow: 5px 0 10px var(--shadow);
     z-index: 100;
 }
 .nav-links {
@@ -137,7 +144,7 @@ nav {
     transition: transform .15s;
 }
 .nav-links a:hover {
-    background-color: var(--secondary);
+    background-color: var(--second);
     transform: scale(1.05);
 }
 .current-page {
@@ -170,7 +177,7 @@ main {
     width: 85%;
     height: auto;
     margin: 15px auto 20px;
-    box-shadow: 5px 0 10px gray;
+    box-shadow: 5px 0 10px var(--shadow);
 }
 .slideshow-container img {
     width: 100%;
@@ -199,8 +206,8 @@ main {
     width: 200px;
     height: 200px;
     margin: 15px;
-    box-shadow: 1px 1px 3px gray;
-    background-color: var(--primary);
+    box-shadow: 1px 1px 3px var(--shadow);
+    background-color: var(--first);
     overflow: hidden;
     transition: transform .2s;
 }
@@ -247,11 +254,11 @@ button {
     font-weight: 500;
     color: white;
     outline: none;
-    background-color: var(--primary);
+    background-color: var(--first);
 
 }
 button:hover {
-    background-color: var(--secondary);
+    background-color: var(--second);
     transform: scale(1.1);
 }
 #break-button span {
