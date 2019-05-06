@@ -91,12 +91,16 @@ function plusSlides(n) {
  * and switch the files (which is complicated and just why) we are using CSS
  * variables and JS functions to change it.
  * 
-*********************************************************************/
+ *********************************************************************/
 
-// This const sets 
+// This const sets a var for all the buttons to change themes
 const dataThemeButtons = document.querySelectorAll('[data-theme]');
 
-
+// This is the main function for theme swapping
+// If you want to add a new theme(s) just copy one of the switches
+// and else if statements and edit away. Then you will need to add a new
+// button somewhere. There is NO NEED to copy and paste new css files.
+// Please and thank you
 function changeTheme(preferance) {
   db.collection("users").where("name", "==", userName)
     .onSnapshot(function (querySnapshot) {
@@ -162,7 +166,7 @@ function changeTheme(preferance) {
           });
           return;
 
-        case 'sith':
+        case 'sitha':
           setTheme({
             'first': 'rgba(121,9,9,1)',
             'second': '#0f0f0f',
@@ -174,11 +178,24 @@ function changeTheme(preferance) {
             'fontSecond': '#ffffff'
           });
           return;
+        case 'sith':
+          setTheme({
+            'first': '#0076c6',
+            'second': '#6c757d',
+            'third': '#7fc4fd',
+            'background': '#ffffff',
+            'backgroundGrade': 'linear-gradient(9deg, rgba(255,0,0,1) 0%, rgba(221,59,59,1) 16%, rgba(235,208,208,1) 32%, rgba(255,255,255,1) 39%, rgba(191,230,241,1) 45%, rgba(69,163,190,1) 64%, rgba(51,83,185,1) 80%)',
+            'shadow': 'var(--gray)',
+            'fontPrime': '#ffffff',
+            'fontSecond': '#000000'
+          });
+          return;
       }
     })
 
 }
 
+// This function draws from and saves to the database.
 function changeViewMode(newTheme) {
   db.collection('users').doc(userId).update({
       viewMode: newTheme
@@ -191,7 +208,13 @@ function changeViewMode(newTheme) {
 
 }
 
-function setTheme(options){
+
+// setTheme and setValue are interconnected. setTheme goes through the JSON
+// we created in the main function and passes each one to setValue. Then setValue
+// will replace the CSS var with a new value. Pretty nifty and got help thanks to 
+// Ashley and the internet. AN AVACADO, THANKS!
+
+function setTheme(options) {
   for (let option of Object.keys(options)) {
     const property = option;
     const value = options[option];
@@ -200,6 +223,7 @@ function setTheme(options){
     localStorage.setItem(property, value);
   }
 }
+
 function setValue(property, value) {
   if (value) {
     document.documentElement.style.setProperty(`--${property}`, value);
@@ -217,50 +241,4 @@ for (let i = 0; i < dataThemeButtons.length; i++) {
   dataThemeButtons[i].addEventListener('click', () => {
     changeTheme("" + i)
   })
-}
-
-
-
-
-// loads the page providing different information if the user is an admin/lead
-ssCanvas2 = "https://docs.google.com/spreadsheets/d/1jUFL2Dr-_MjAE7axb6rEZy0vSfH6y_8fOHSo1b0oLDo/edit?rm=minimal";
-ssCanvas1 = "https://docs.google.com/spreadsheets/d/1g53WojmX1wG7fTGU1Q1Hg93-QJ5GBadcCU7rbeyGWoc/edit?rm=minimal#gid=0";
-
-
-
-
-function loadPage() {
-    //gets and reads database, stores into a variable
-    db.collection("users").doc(userId).get()
-        .then(function (doc) {
-            const myData = doc.data();
-            var team = document.getElementById("teams");
-            var iframe = document.getElementById("spreadsheet");
-            //checks for permissions to see both teams' schedule
-            if (myData.admin || myData.lead) {
-                document.getElementById("admin").style.visibility = "visible";
-                team.style.visibility = "visible";
-                //clicked on team 1
-                document.getElementById("selectTeam").addEventListener("change", () => {
-                    if (document.getElementById("selectTeam").value == "canvas1") {
-                        iframe.src = ssCanvas1
-                        document.getElementById("newTab").href = ssCanvas1;
-                    } else {
-                        iframe.src = ssCanvas2
-                        document.getElementById("newTab").href = ssCanvas2;
-                    }
-                })
-            } else {
-                if (myData.team == "lms") {
-                    team.style.visibility = "visible";
-                    iframe.src = ssCanvas1;
-                    document.getElementById("newTab").href = ssCanvas1;
-                } else if (myData.team == "accessibility") {
-                    team.style.visibility = "visible";
-                    iframe.src = ssCanvas2;
-                    document.getElementById("newTab").href = ssCanvas2;
-
-                }
-            }
-        })
 }
