@@ -3,7 +3,7 @@
 - 
 - 1. Head
 - 2. Body
-- 3. Header
+- 3. Navigation Bar
 - 4. Main
 - 5. Scripts
 ---------------------------------------------->
@@ -33,19 +33,18 @@
 <body>
 
     <!---------------------------------------------
-    - 3. Header
+    - 3. Navigation Bar
     ---------------------------------------------->
     
     <nav class="col1">
-        <a href="home.html"><img src="/portal3/assets/logo.png"></a>
-        <ul>
-            <li><a class="nav-link" href="home.html">Home</a></li>
-            <li><a class="nav-link" href="time.html">Time</a></li>
-            <li class="current-page"><a class="nav-link" href="#">Schedule</a></li>
-            <li><a class="nav-link" href="store.html">Store</a></li>
-            <li><a class="nav-link" href="profile.html">Profile</a></li>
-        </ul>
-    </nav>
+            <a href="home.html"><img src="/portal3/assets/logos/logo.png"></a>
+            <div class="nav-links flex-container">
+                <a href="home.html">Home</a>
+                <a class="current-page" href="#">Schedule</a>
+                <a href="store.html">Store</a>
+                <a href="profile.html">Profile</a>
+            </ul>
+        </nav>
 
     <!---------------------------------------------
     - 4. Main
@@ -57,10 +56,8 @@
             <h1 class="page-title">Schedule</h1>
         </header>
 
-        <div class=".iframe-container">
-            <iframe 
-                src="https://docs.google.com/spreadsheets/d/13R8O15c_sZKZT2QRHom1z2SDA3E1O5chUvROnqHCkwE/pubhtml?widget=true&amp;headers=false">
-            </iframe>
+        <div class=".schedule-container col10">
+            
         </div>
 
 

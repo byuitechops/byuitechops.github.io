@@ -8,8 +8,8 @@
 * 3a. Navigation Styles
 * 3b. Main Styles
 * 4. Home.html
-* 5. Apps.html
-* 6. Time.html
+* 5. Schedule.html
+* 6. Apps.html
 * 7. Store.html
 * 8. Profile.html
 ********************************************************** */
@@ -102,11 +102,13 @@ body {
 
 nav img {
     width: 100%;
-    padding: 10%;
+    padding: 5%;
     transition: transform .2s;
 }
 nav img:hover {
     width: 100%;
+    -webkit-transform: scale(1.1); /* Safari 3-8 */
+    -ms-transform: scale(1.1); /* IE 9 */
     transform: scale(1.1);
 }
 nav {
@@ -116,34 +118,27 @@ nav {
     box-shadow: 5px 0 10px gray;
     z-index: 100;
 }
-nav ul {
-    margin-top: 100px;
+.nav-links {
+    width: 100%;
+    height: auto;
+    flex-flow: column wrap;
+    margin-top: 80px;
     list-style: none;
     padding: 0;
 }
-nav li {
-    padding: 1em 2em;
+.nav-links a {
+    padding: .7em 2em;
     margin: 0;
     transition: transform .2s;
-}
-nav li:hover {
-    background-color: var(--secondary);
-}
-.nav-link {
     text-decoration: none;
     font-weight: 200;
     font-size: 1.5em;
     color: white;
+    transition: transform .15s;
 }
-/* For Safari & IE */
-@-webkit-keyframes slide-right {
-    from {padding-left: 2em;}
-    to   {padding-left: 3em;}
-}
-/* For Chrome, Firefox, & Opera */
-@keyframes slide-right {
-    from {padding-left: 2em;}
-    to   {padding-left: 3em;}
+.nav-links a:hover {
+    background-color: var(--secondary);
+    transform: scale(1.05);
 }
 .current-page {
     border-left: 10px solid white;
@@ -161,7 +156,7 @@ main {
 }
 .page-title {
     margin: 0;
-    padding: 50px 8% 30px;
+    padding: 50px 9% 30px;
     font-size: 2em;
     font-weight: 400;
 }
@@ -172,9 +167,9 @@ main {
 **********************************************/
 
 .slideshow-container {
-    width: 80%;
+    width: 85%;
     height: auto;
-    margin: 15px auto;
+    margin: 15px auto 20px;
     box-shadow: 5px 0 10px gray;
 }
 .slideshow-container img {
@@ -185,21 +180,25 @@ main {
     position: absolute;
     margin: 5px 0 0 8px;
 }
-.slideshow-container .slidebutton {
+.mySlides {
+    z-index: -1;
+}
+.prev, .next {
     color: white;
     position: absolute;
-    top: -50px;
+    z-index: 1;
 }
+
 .links-container {
-    width: 80%;
+    width: 85%;
     margin: 0px auto;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-flow: row wrap;
 }
 .box-link {
     width: 200px;
     height: 200px;
-    margin: 15px 0;
+    margin: 15px;
     box-shadow: 1px 1px 3px gray;
     background-color: var(--primary);
     overflow: hidden;
@@ -223,11 +222,44 @@ main {
     position: absolute;
 }
 
+.right-sidebar {
+    justify-content: center;
+    flex-flow: column wrap;
+    padding-right: 5%;
+}
+.right-sidebar a {
+    margin: 60px 40px;
+    width: 50%;
+}
+.right-sidebar img {
+    width: 100%;
+}
+.clock-in-section {
+    margin-top: 20px;
+}
+button {
+    width: 200px;
+    height: 200px;
+    margin: 15px;
+    border-radius: 50%;
+    border-style: none;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: white;
+    outline: none;
+    background-color: var(--primary);
 
-
-/**********************************************
-* 6. Time.html
-**********************************************/
+}
+button:hover {
+    background-color: var(--secondary);
+    transform: scale(1.1);
+}
+#break-button span {
+    font-size: 1.8em;
+}
+.hiddenBtn {
+    display: none;
+}
 
 
 
