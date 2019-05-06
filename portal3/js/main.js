@@ -165,7 +165,7 @@ function changeTheme(preferance) {
         case 'sith':
           setTheme({
             'first': 'rgba(121,9,9,1)',
-            'second': '#1c1b1b',
+            'second': '#0f0f0f',
             'third': '',
             'background': '#1c1b1b',
             'backgroundGrade': 'linear-gradient(180deg, rgba(36,0,0,1) 0%, rgba(121,9,9,1) 35%, rgba(255,0,0,1) 100%)',

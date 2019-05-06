@@ -177,36 +177,28 @@
             <a href="profile.html">
                 <img class="profile-pic" src="assets/misc/profPic.png" alt="Profile Picture"/>
             </a>
-            <section class="predefined-themes">
-                <button data-theme="light" style="background-color: var(--blue); border: 1px solid var(--white);">
-                    Light
-                </button>
-                <button data-theme="dark" style="background-color: var(--gray-dark); border: 1px solid var(--blue);">
-                    Dark
-                </button>
-                <button data-theme="jedi" style="background-image: linear-gradient(45deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);">
-                    Jedi
-                </button>
-                <button data-theme="sith" style="background-image: linear-gradient(45deg, rgba(36,0,0,1) 0%, rgba(121,9,9,1) 35%, rgba(255,0,0,1) 100%);">
-                    Sith
-                </button>
+
+            <section class="themes">
+                <button class="btn1" id="light" data-theme="light"></button>
+                <button class="btn1" id="dark" data-theme="dark"></button>
+                <button class="btn1" id="jedi" data-theme="jedi"></button>
+                <button class="btn1" id="sith" data-theme="sith"></button>
             </section>
-            <section class="clock-in-section">
-                <button class="btn1">
-                    Clock In
-                </button>
-                <button class="btn1 hiddenBtn">
-                    Clock Out
-                </button>
-                
-                <button id="break-button">
-                    <p>Start Break</p>
-                    <br>
-                    <span id="mins">15</span>
-                    <span>:</span>
-                    <span id="secs">00</span>
-                </button>
-            </section>
+
+            <button class="clock btn2">
+                Clock In
+            </button>
+            <button class="clock btn2 hiddenBtn">
+                Clock Out
+            </button>
+            
+            <button class="btn2" id="break-button">
+                <p>Start Break</p>
+                <br>
+                <span id="mins">15</span>
+                <span>:</span>
+                <span id="secs">00</span>
+            </button>
             
         </section>
 
