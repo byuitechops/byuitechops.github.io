@@ -1,4 +1,6 @@
 // loads the page providing different information if the user is an admin/lead
+
+// These are the two 
 ssCanvas2 = "https://docs.google.com/spreadsheets/d/1jUFL2Dr-_MjAE7axb6rEZy0vSfH6y_8fOHSo1b0oLDo/edit?rm=minimal";
 ssCanvas1 = "https://docs.google.com/spreadsheets/d/1g53WojmX1wG7fTGU1Q1Hg93-QJ5GBadcCU7rbeyGWoc/edit?rm=minimal#gid=0";
 
