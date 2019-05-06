@@ -24,7 +24,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="/portal3/css/main.css">
     <!-- Scripts -->
-    
+
     <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
@@ -40,15 +40,15 @@
     <!---------------------------------------------
     - 3. Navigation Bar
     ---------------------------------------------->
-    
+
     <nav class="col1">
         <a href="#"><img src="/portal3/assets/logos/logo.png"></a>
         <div class="nav-links flex-container">
-            <a class="current-page" href="#">Home</a>
-            <a href="schedule.html">Schedule</a>
+            <a href="home.html">Home</a>
+            <a class="current-page" href="#">Schedule</a>
             <a href="store.html">Store</a>
             <a href="profile.html">Profile</a>
-        </ul>
+            </ul>
     </nav>
 
     <!---------------------------------------------
@@ -58,15 +58,17 @@
     <main id="scheduleSection" class="col9">
         <h1>Schedules</h1>
         <section id="admin">
-            <select id="selectTeam">
-                <option value="">Select Team</option>
-                <option id="canvas1" value="canvas1">LMS</option>
-                <option id="canvas2" value="canvas2">Accessibility</option>
-            </select>
-            <a id="newTab" target="_blank"
-                href="https://docs.google.com/spreadsheets/d/1g53WojmX1wG7fTGU1Q1Hg93-QJ5GBadcCU7rbeyGWoc/edit?rm=minimal#gid=0"><img
-                    src="assets/newTab.png"></a>
-            <div id="teams" class="col10"><iframe id="spreadsheet" class="col10 spreedsheet"
+            <div class="col10 teamSelector"> 
+                <select class="teamItem" id="selectTeam">
+                    <option value="0">Select Team</option>
+                    <option id="canvas1" value="1">LMS</option>
+                    <option id="canvas2" value="2">Accessibility</option>
+                </select>
+                <a class="teamItem" id="newTab" target="_blank"
+                    href="https://docs.google.com/spreadsheets/d/1g53WojmX1wG7fTGU1Q1Hg93-QJ5GBadcCU7rbeyGWoc/edit?rm=minimal#gid=0"><img
+                        src="assets/misc/newTab.png"></a>
+            </div>
+            <div id="teams" class="col10"><iframe id="spreadsheet" class="col10 spreadsheet"
                     src="https://docs.google.com/spreadsheets/d/1g53WojmX1wG7fTGU1Q1Hg93-QJ5GBadcCU7rbeyGWoc/edit?rm=minimal#gid=0"></iframe>
             </div>
         </section>
@@ -79,5 +81,6 @@
 ---------------------------------------------->
 
 <script src="/portal3/js/main.js"></script>
+<script src="/portal3/js/schedule.js"></script>
 
 </html>
