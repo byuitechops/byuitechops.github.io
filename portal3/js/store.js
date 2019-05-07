@@ -145,10 +145,10 @@ window.onclick = function (event) {
     }
 }
 
-db.collection("store").doc("inventory").collection("items").get().then(function (querySnapshot) {
-    querySnapshot.forEach(function (doc) {
+db.collection("store").doc("inventory").collection("items").get().then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
         if (doc.data().count > 0) {
-            firebase.storage().ref().child(`images/${doc.data().image}`).getDownloadURL().then(function (url) {
+            firebase.storage().ref().child(`images/${doc.data().image}`).getDownloadURL().then((url) => {
                 var html = `<div><img src="${url}" alt="${doc.id}"><div>
             <p>${doc.id}</p>
             <span>$${doc.data().price}</span>

@@ -183,18 +183,19 @@
                 <button class="btn1" id="dark" data-theme="dark"></button>
                 <button class="btn1" id="jedi" data-theme="jedi"></button>
                 <button class="btn1" id="sith" data-theme="sith"></button>
+                <button class="btn1" id="merica" data-theme="merica"></button>
             </section>
 
-            <button class="clock btn2">
+            <button class="clock btn2" id="checkInBtn">
                 Clock In
             </button>
-            <button class="clock btn2 hiddenBtn">
+            <button class="clock btn2 hiddenBtn" id="checkOutBtn">
                 Clock Out
             </button>
             <h3 id="last-checked">Last Checked In/Out: 10:02 am</h3>
             
             <button class="btn2" id="break-button">
-                <p>Start Break</p>
+                <p id="breakButtonText">Start Break</p>
                 <br>
                 <span id="mins">15</span>
                 <span>:</span>
@@ -212,6 +213,7 @@
 - 5. Scripts
 ---------------------------------------------->
 
-<script src="/portal3/js/main.js"></script>
+<script src="/portal3/js/main.js">showSlides();</script>
+<script src="/portal3/js/time.js"></script>
 
 </html>
