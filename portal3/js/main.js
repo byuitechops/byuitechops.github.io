@@ -28,46 +28,42 @@ db.settings({
   timestampsInSnapshots: true
 });
 
-firebase.auth().onAuthStateChanged(firebaseUser => {
-  //checks if the user is already logged in to the system
-  if (firebaseUser) {
-    userName = firebaseUser.displayName;
-    // if logged in, sends user to home page
-    if (window.location.href.includes("index.html") || window.location.href.includes("signup.html") || window.location.pathname == "/") {
-      window.location.replace("home.html");
+loadPage();
+async function loadPage(){
+  firebase.auth().onAuthStateChanged(async function (firebaseUser) {
+    //checks if the user is already logged in to the system
+    if (firebaseUser) {
+      userName = firebaseUser.displayName;
+      // if logged in, sends user to home page
+      if (window.location.href.includes("index.html") || window.location.href.includes("signup.html") || window.location.pathname == "/") {
+        window.location.replace("home.html");
+      }
+  
+  
+      data = await getData();
+      console.log(data);
+      changeTheme(theme);
+      //if user isn't logged in, sends back to sign in page
+    } else {
+      userName = null;
+      if (!window.location.href.includes("index.html") && !window.location.href.includes("signup.html") && !window.location.href.includes("store.html")) {
+        window.location.replace('index.html');
+      }
     }
-
-
-    getUser();
-    //if user isn't logged in, sends back to sign in page
-  } else {
-    userName = null;
-    if (!window.location.href.includes("index.html") && !window.location.href.includes("signup.html") && !window.location.href.includes("store.html")) {
-      window.location.replace('index.html');
+    if (window.location.href.includes("home.html")) {
+      loadTimer();
     }
-  }
-  if (window.location.href.includes("home.html")) {
-    loadTimer();
-  }
-});
+  });
+}
+
 
 function getData() {
   db.collection("users").where("name", "==", userName)
     .onSnapshot(function (querySnapshot) {
-      console.log(querySnapshot.docs[0].data());
+      userId = querySnapshot.docs[0].id;
+      theme = querySnapshot.docs[0].data().viewMode;
       return querySnapshot.docs[0].data();
     })
-}
-
-async function getUser() {
-  db.collection("users").where("name", "==", userName)
-    .onSnapshot(function (querySnapshot) {
-      userId = querySnapshot.docs[0].id;
-      data = querySnapshot.docs[0].data();
-      theme = querySnapshot.docs[0].data().viewMode;
-      changeTheme(theme);
-    })
-
 }
 
 function editDate(date) {
@@ -131,28 +127,23 @@ const dataThemeButtons = document.querySelectorAll('[data-theme]');
 // Please and thank you
 function changeTheme(preferance) {
   db.collection("users").where("name", "==", userName)
-    .onSnapshot(function (querySnapshot) {
+    .onSnapshot((querySnapshot) => {
       theme = querySnapshot.docs[0].data().viewMode;
       if (preferance == 0) {
         preferance = "light";
         changeViewMode(preferance);
-
       } else if (preferance == 1) {
         preferance = "dark";
         changeViewMode(preferance);
-
       } else if (preferance == 2) {
         preferance = "jedi";
         changeViewMode(preferance);
-
       } else if (preferance == 3) {
         preferance = "sith";
         changeViewMode(preferance);
-
       } else if (preferance == 4) {
         preferance = "merica";
         changeViewMode(preferance);
-
       }
       switch (preferance) {
         case 'light':
@@ -190,10 +181,9 @@ function changeTheme(preferance) {
             'backgroundGrade': 'linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)',
             'shadow': 'var(--gray-dark)',
             'fontPrime': '#ffffff',
-            'fontSecond': '#0000007'
+            'fontSecond': '#000000'
           });
           return;
-
         case 'sith':
           setTheme({
             'first': '#343a40',
@@ -267,6 +257,13 @@ function setValue(property, value) {
 
 for (let i = 0; i < dataThemeButtons.length; i++) {
   dataThemeButtons[i].addEventListener('click', () => {
-    changeTheme("" + i)
+    changeTheme(i);
   })
 }
+
+
+
+/**
+ * 
+ */
+
