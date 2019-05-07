@@ -318,6 +318,7 @@ main {
     font-size: 14px;
     font-weight: 500;
     border-radius: 20px;
+    color: var(--fontSecond);
 }
 
 
