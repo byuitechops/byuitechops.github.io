@@ -79,6 +79,7 @@ function editDate(date) {
   return setDate;
 }
 
+showSlides()
 function showSlides() {
   for (var i = 0; i < slides.length; i++) {
     slides[i].style.display = "none";
@@ -101,7 +102,10 @@ function currentSlide(no) {
 
 function plusSlides(n) {
   var newslideIndex = slideIndex + n;
-  if (newslideIndex < 4 && newslideIndex > 0) {
+  if (newslideIndex < 5 && newslideIndex > 0) {
+    currentSlide(newslideIndex);
+  } else if (newslideIndex > 5){
+    newslideIndex = 0
     currentSlide(newslideIndex);
   }
 }
