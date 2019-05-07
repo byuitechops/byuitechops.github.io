@@ -23,7 +23,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="shortcut icon" type="image/x-icon" href="/portal3/assets/byui_favicon.gif">
+    <link rel="shortcut icon" type="image/x-icon" href="/portal3/assets/misc/byui_favicon.gif">
 
     <!-- Scripts -->
     
@@ -61,9 +61,7 @@
 
     <main class="col9">
 
-        <header class="col7">
-            <h1 class="page-title">Home</h1>
-        </header>
+        <h1 class="page-title">Home</h1>
 
         <!---------------------------------------------
         - 4a. SLIDE SHOW
@@ -76,11 +74,26 @@
 
             <section id="welcome">
                 <div class="slideshow-container">
-                    <div class="mySlides fade">
-                        <div class="numbertext">1 / 1</div>
+                    <a class="mySlides fade" href="#" target="_blank">
+                        <div class="numbertext">1 / 4</div>
+                        <img src="assets/banners/jediVsSith.jpg">
+                        <div class="text"></div>
+                    </a>
+                    <a class="mySlides fade" href="https://docs.google.com/spreadsheets/d/1DetufZwdKE5uq7tZWAfLuKM6HNs3IxXC_zZ48quGS04/edit#gid=1426389316" target="_blank">
+                        <div class="numbertext">2 / 4</div>
+                        <img src="assets/banners/reminderDevotional.jpg">
+                        <div class="text"></div>
+                    </a>
+                    <a class="mySlides fade" href="https://docs.google.com/spreadsheets/d/18U2hkUafZ1EXmtze9BWI_1U4t6619uy4FZmPiQxfWss/edit#gid=590424193" target="_blank">
+                        <div class="numbertext">3 / 4</div>
+                        <img src="assets/banners/reminderFridgeCleaning.jpg">
+                        <div class="text"></div>
+                    </a>
+                    <a class="mySlides fade" href="https://docs.google.com/spreadsheets/d/1oXLNWu9sWyWhDwcTurzDvNF-Wo-B5SXeywuMD_hKfqM/edit#gid=0" target="_blank">
+                        <div class="numbertext">4 / 4</div>
                         <img src="assets/banners/space.jpg">
                         <div class="text"></div>
-                    </div>
+                    </a>
 
                     <a class="slide-button prev" onclick="plusSlides(-1)">&#10094;</a>
                     <a class="slide-button next" onclick="plusSlides(+1)">&#10095;</a>
@@ -186,17 +199,16 @@
                 <button class="btn1" id="merica" data-theme="merica"></button>
             </section>
 
-            <button class="clock btn2" id="checkInBtn">
+            <button class="clock btn2">
                 Clock In
             </button>
-            <button class="clock btn2 hiddenBtn" id="checkOutBtn">
+            <button class="clock btn2 hiddenBtn">
                 Clock Out
             </button>
             <h3 id="last-checked">Last Checked In/Out: 10:02 am</h3>
             
             <button class="btn2" id="break-button">
-                <p id="breakButtonText">Start Break</p>
-                <br>
+                <p>Start Break</p>
                 <span id="mins">15</span>
                 <span>:</span>
                 <span id="secs">00</span>
@@ -213,7 +225,6 @@
 - 5. Scripts
 ---------------------------------------------->
 
-<script src="/portal3/js/main.js">showSlides();</script>
-<script src="/portal3/js/time.js"></script>
+<script src="/portal3/js/main.js"></script>
 
 </html>
