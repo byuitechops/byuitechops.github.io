@@ -21,6 +21,7 @@ var theme;
 let root = document.documentElement;
 var slideIndex = 0;
 var slides = document.getElementsByClassName("mySlides");
+var timeOutHandler;
 
 
 db.settings({
@@ -89,7 +90,7 @@ function showSlides() {
     slideIndex = 1
   }
   slides[slideIndex - 1].style.display = "block";
-  setTimeout(showSlides, 8000); // Change image every 10 seconds
+  timeOutHandler = setTimeout(showSlides, 8000); // Change image every 10 seconds;
 }
 
 function currentSlide(no) {
@@ -100,13 +101,17 @@ function currentSlide(no) {
   slides[no - 1].style.display = "block";
 }
 
-function plusSlides(n) {
+function changeSlides(n) {
   var newslideIndex = slideIndex + n;
-  if (newslideIndex < 5 && newslideIndex > 0) {
+  if (newslideIndex >= slides.length + 1){
+    newslideIndex = 1
+  } else if (newslideIndex <= 0){
+    newslideIndex = slides.length;
+  }
+  if (newslideIndex <= (slides.length + 1) && newslideIndex > 0) {
     currentSlide(newslideIndex);
-  } else if (newslideIndex > 5){
-    newslideIndex = 0
-    currentSlide(newslideIndex);
+    clearTimeout(timeOutHandler);
+    timeOutHandler = setTimeout(showSlides, 8000); // Change image every 10 seconds;
   }
 }
 /******************************************************************** 
