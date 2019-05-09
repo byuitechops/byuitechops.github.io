@@ -49,6 +49,7 @@ firebase.auth().onAuthStateChanged((firebaseUser) => {
   }
   if (window.location.href.includes("home.html")) {
     loadTimer();
+    showSlides();
   }
 });
 
@@ -72,7 +73,6 @@ function editDate(date) {
   return setDate;
 }
 
-showSlides()
 
 function showSlides() {
   for (var i = 0; i < slides.length; i++) {
@@ -116,6 +116,11 @@ function changeSlides(n) {
 
 // This const sets a var for all the buttons to change themes
 const dataThemeButtons = document.querySelectorAll('[data-theme]');
+for (let i = 0; i < dataThemeButtons.length; i++) {
+  dataThemeButtons[i].addEventListener('click', () => {
+    changeTheme(i);
+  })
+}
 
 // This is the main function for theme swapping
 // If you want to add a new theme(s) just copy one of the switches
@@ -247,11 +252,4 @@ function setValue(property, value) {
       input.value = value;
     }
   }
-}
-
-
-for (let i = 0; i < dataThemeButtons.length; i++) {
-  dataThemeButtons[i].addEventListener('click', () => {
-    changeTheme(i);
-  })
 }
