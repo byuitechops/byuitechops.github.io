@@ -38,8 +38,8 @@ firebase.auth().onAuthStateChanged((firebaseUser) => {
     if (window.location.href.includes("index.html") || window.location.href.includes("signup.html") || window.location.pathname == "/") {
       window.location.replace("home.html");
     }
-    
-    
+
+
     //if user isn't logged in, sends back to sign in page
   } else {
     userName = null;
@@ -48,7 +48,6 @@ firebase.auth().onAuthStateChanged((firebaseUser) => {
     }
   }
   if (window.location.href.includes("home.html")) {
-    console.log(data);
     loadTimer();
   }
 });
@@ -60,8 +59,6 @@ function getData() {
       data = querySnapshot.docs[0].data();
       userId = querySnapshot.docs[0].id;
       preferance = data.viewMode;
-      console.log(data.time.check);
-      console.log(preferance);
     })
 }
 
@@ -76,6 +73,7 @@ function editDate(date) {
 }
 
 showSlides()
+
 function showSlides() {
   for (var i = 0; i < slides.length; i++) {
     slides[i].style.display = "none";
@@ -144,7 +142,6 @@ function changeTheme(preferance) {
   db.collection("users").where("name", "==", userName)
     .onSnapshot((querySnapshot) => {
       preferance = querySnapshot.docs[0].data().viewMode;
-      console.log(data);
       switch (preferance) {
         case 'light':
           setTheme({

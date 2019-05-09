@@ -319,6 +319,9 @@ main {
     border-radius: 20px;
     color: var(--fontSecond);
 }
+.over{
+    color: red;
+}
 
 
 
