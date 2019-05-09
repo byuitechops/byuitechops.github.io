@@ -10,7 +10,7 @@
 // section. If you change the IDs PLEASE change the IDs here. 
 var minutes = 15;
 var seconds = 00;
-var timer;
+var timerIsRunning = false;
 const clockInB = document.getElementById('checkInBtn');
 const clockOutB = document.getElementById('checkOutBtn');
 const clockInOut = document.getElementById('last-checked');
@@ -18,27 +18,45 @@ const mins = document.getElementById('mins');
 const secs = document.getElementById('secs');
 const breakB = document.getElementById("break-button");
 const breakTime = document.getElementById("last-break");
-var data;
-var moveOn;
-//This is for async functions. It will be true and then they the function will contenue
 
-async function loadTimer() {
-    localStorage.setItem("minutes", minutes);
-    localStorage.setItem("seconds", seconds);
-    await tidyTime();
-    data = await getData();
-    document.getElementById("mins").innerHTML = minutes;
-    document.getElementById("secs").innerHTML = seconds;
-    console.log(data);
+// Event listeners for the timer
+clockInB.addEventListener('click', function(){
+  clock('in');
+  clockOutB.classList.remove("hiddenBtn");
+  clockInB.classList.add("hiddenBtn");
+});
+clockOutB.addEventListener('click', function(){
+  clock('out');
+  clockOutB.classList.add("hiddenBtn");
+  clockInB.classList.remove("hiddenBtn");
+});
+breakB.addEventListener('click', timerBreak);
+
+
+function loadTimer() {
+  localStorage.setItem("minutes", minutes);
+  localStorage.setItem("seconds", seconds);
+  tidyTime();
+  mins.innerHTML = minutes;
+  secs.innerHTML = seconds;
+  if (data.time.check != null){
+    console.log("Hello there!");
   }
-  
-  
-  function tidyTime() {
-    if (minutes < 10) {
-        minutes = "0" + Number(minutes);
-    }
-    if (seconds < 10) {
-        seconds = "0" + Number(seconds);
-    }
-    return true;
+}
+
+function tidyTime() {
+  if (minutes < 10) {
+    minutes = "0" + Number(minutes);
   }
+  if (seconds < 10) {
+    seconds = "0" + Number(seconds);
+  }
+  return true;
+}
+
+function timerBreak() {
+}
+
+function clock(status) {
+
+}
