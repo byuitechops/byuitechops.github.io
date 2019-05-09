@@ -14,9 +14,11 @@ var timer;
 const clockInB = document.getElementById('checkInBtn');
 const clockOutB = document.getElementById('checkOutBtn');
 const clockInOut = document.getElementById('last-checked');
+const breakText = document.getElementById('last-break');
 const mins = document.getElementById('mins');
-const secs = document.getElementById('secs');
+const secs = document.getElementById('secs'); 
 const breakB = document.getElementById("break-button");
+const breakBText = document.getElementById("break-button-text");
 
 
 // Event listeners for the timer
@@ -25,8 +27,6 @@ clockInB.addEventListener('click', function () {
     clockOutB.classList.remove("hiddenBtn");
     clockInB.classList.add("hiddenBtn");
     if (!data.time.check) {
-        console.log(data.time.check);
-        console.log(userId);
         db.collection('users').doc(userId).update({
             "time.checkKey": setDate,
             "time.check": true,
@@ -42,8 +42,6 @@ clockInB.addEventListener('click', function () {
     }
     resetBreak();
 });
-
-
 clockOutB.addEventListener('click', function () {
     var setDate = editDate(new Date());
     clockOutB.classList.add("hiddenBtn");
@@ -67,9 +65,6 @@ clockOutB.addEventListener('click', function () {
     resetBreak();
 
 });
-
-
-
 breakB.addEventListener('click', function () {
     var setDate = editDate(new Date());
     if (data.time.break) {
@@ -80,6 +75,11 @@ breakB.addEventListener('click', function () {
         db.collection('users').doc(userId).collection('breaks').doc(data.time.breakKey).update({
             "end": setDate.slice(-5)
         })
+        mins.classList.remove("over");
+        secs.classList.remove("over");
+        localStorage.setItem('minutes', minutes);
+        localStorage.setItem('seconds', seconds);
+        clearInterval(timer);
     } else {
         if (!data.time.check) {
             alert("You are logged out. No breaks are allowed");
@@ -99,12 +99,11 @@ breakB.addEventListener('click', function () {
             timer = setInterval(countdown, 1000);
         }
     }
-})
-
-
+});
 function loadTimer() {
     db.collection("users").where("name", "==", userName)
         .onSnapshot((querySnapshot) => {
+            var setDate = editDate(new Date());
             data = querySnapshot.docs[0].data();
             userId = querySnapshot.docs[0].id;
             preferance = data.viewMode;
@@ -119,56 +118,67 @@ function loadTimer() {
                 if (data.time.check) {
                     clockOutB.classList.remove("hiddenBtn");
                     clockInB.classList.add("hiddenBtn");
+                    clockInOut.innerHTML = "Clocked in at " + prettyTime(data.time.checkKey.slice(-5));
+                } else{
+                    clockInOut.innerHTML = "Clocked out at " + prettyTime(data.time.checkKey.slice(-5));
+                }
+                if (data.time.break) {
+                    breakBText.innerHTML = "Stop Break"
+                    breakText.innerHTML = "Break Started: " + prettyTime(data.time.breakKey.slice(-5));
+                } else {
+                    breakBText.innerHTML = "Start Break"
+                    breakText.innerHTML = "Break Stopped: " + prettyTime(data.time.breakKey.slice(-5));
                 }
             }
-            printTime();
+            printTimer();
 
         })
 }
-
 function countdown() {
-    if (!data.time.break) {
-        localStorage.setItem('minutes', minutes);
-        localStorage.setItem('seconds', seconds);
-        clearInterval(timer);
+    if (data.time.break) {
+        if (seconds == 0) {
+            minutes -= 1;
+            seconds = 60;
+        }
+        seconds -= 1;
+
+        if (minutes == 0) {
+            localStorage.removeItem('minutes');
+            localStorage.removeItem('seconds');
+        }
+
+        if (minutes <= 0 && seconds <= 0) {
+            minutes = 15;
+            seconds = 00;
+            mins.classList.add("over");
+            secs.classList.add("over");
+            // clearInterval(timer);
+        }
+        printTimer()
     }
-    if (seconds == 0) {
-        minutes -= 1;
-        seconds = 60;
-    }
-    seconds -= 1;
-    if (minutes == 0) {
-        localStorage.removeItem('minutes');
-        localStorage.removeItem('seconds');
-    }
-    if (minutes <= 0 && seconds <= 0) {
-        minutes = 15;
-        seconds = 00;
-        mins.classList.add("over");
-        secs.classList.add("over");
-        // clearInterval(timer);
-    }
-    printTime()
 }
-
-
-function stopCount() {
-    mins.classList.remove("over");
-    secs.classList.remove("over");
-}
-
-function tidyTime() {
+function printTimer() {
     if (minutes < 10) {
         minutes = "0" + Number(minutes);
     }
     if (seconds < 10) {
         seconds = "0" + Number(seconds);
     }
-    return true;
-}
-
-function printTime() {
-    tidyTime();
     mins.innerHTML = minutes;
     secs.innerHTML = seconds;
+    return true;
 }
+function prettyTime(time){ 
+    var hour = time.split(":")[0];
+    var min = time.split(":")[1];
+    var mer = "am";
+    if (time.split(":")[0] > 12) {
+      hour = time.split(":")[0] - 12;
+      mer = "pm";
+    }
+    return hour + ":" + min + " " + mer;
+}
+function resetBreak() {
+    localStorage.setItem('minutes', 15);
+    localStorage.setItem('seconds', 0);
+  }
