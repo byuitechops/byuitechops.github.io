@@ -16,22 +16,22 @@
 
 <body>
     <section>
-        <img src="/portal/assets/byuiLogo.png">
-    </section>
-    <section>
+        <div id="logo">
+            <img id="school" src="/portal3/assets/misc/byuiLogo.png">
+            <img id="techops" src="/portal3/assets/logos/logo.png">
+        </div>
         <div id="lower">
-            <p>Sign In</p>
-            <label>
+            <label id="emailbox">
                 <span>Email</span>
                 <input id="login" type="Login" placeholder="E-mail">
             </label>
-            <label>
+            <label id="passwordbox">
                 <span> Password </span>
                 <input id="password" type="Password" placeholder="Password">
             </label>
-            <span>Your e-mail username is the provided account from your institution.</span>
 
-            <div>
+            <span id="detail">Your e-mail username is the provided<br> account from your institution.</span>
+            <div id="buttons">
                 <button class="button" id="btnLogin" onclick="login()" type="submit"><span>Login</span></button>
                 <button class="button" id="btnsignup" type="submit"><span>Sign Up</span></button>
             </div>
