@@ -107,7 +107,7 @@ body {
 
 nav img {
     width: 100%;
-    padding: 5%;
+    padding: 10%;
     transition: transform .2s;
 }
 nav img:hover {
@@ -128,7 +128,6 @@ nav {
     width: 100%;
     height: auto;
     flex-flow: column wrap;
-    margin-top: 80px;
     list-style: none;
     padding: 0;
 }
@@ -246,6 +245,7 @@ main {
 .right-sidebar {
     align-items: center;
     flex-flow: column wrap;
+    padding-top: 270px;
     padding-right: 5%;
     margin-left: -30px;
 }
