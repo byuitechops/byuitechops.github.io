@@ -245,7 +245,6 @@ main {
 .right-sidebar {
     align-items: center;
     flex-flow: column wrap;
-    padding-top: 270px;
     padding-right: 5%;
     margin-left: -30px;
 }
