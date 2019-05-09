@@ -80,7 +80,6 @@ breakB.addEventListener('click', function () {
         db.collection('users').doc(userId).collection('breaks').doc(data.time.breakKey).update({
             "end": setDate.slice(-5)
         })
-        stopCount();
     } else {
         if (!data.time.check) {
             alert("You are logged out. No breaks are allowed");
@@ -109,14 +108,13 @@ function loadTimer() {
             data = querySnapshot.docs[0].data();
             userId = querySnapshot.docs[0].id;
             preferance = data.viewMode;
-            console.log(data.time.break);
-            console.log(preferance);
             if (localStorage.getItem('minutes') != null) {
                 minutes = Number(localStorage.getItem("minutes"));
                 seconds = Number(localStorage.getItem("seconds"));
+            } else {
+                localStorage.setItem('minutes', minutes);
+                localStorage.setItem('seconds', seconds);
             }
-            localStorage.setItem("minutes", minutes);
-            localStorage.setItem("seconds", seconds);
             if (data.time.check != null) {
                 if (data.time.check) {
                     clockOutB.classList.remove("hiddenBtn");
@@ -139,13 +137,10 @@ function countdown() {
         seconds = 60;
     }
     seconds -= 1;
-
     if (minutes == 0) {
         localStorage.removeItem('minutes');
         localStorage.removeItem('seconds');
     }
-
-
     if (minutes <= 0 && seconds <= 0) {
         minutes = 15;
         seconds = 00;
@@ -176,9 +171,4 @@ function printTime() {
     tidyTime();
     mins.innerHTML = minutes;
     secs.innerHTML = seconds;
-}
-
-function resetBreak() {
-    localStorage.setItem('minutes', 15);
-    localStorage.setItem('seconds', 0);
 }
