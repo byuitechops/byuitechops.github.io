@@ -38,7 +38,6 @@
     --gray-dark: #343a40;
     --black: #000000;
     --first: #0076c6;
-    --first-opaque: rgba(0, 118, 198, .6);
     --second: #6c757d;
     --third: #7fc4fd;
     --accent1: #ffffff;
@@ -319,6 +318,9 @@ main {
     font-weight: 500;
     border-radius: 20px;
     color: var(--fontSecond);
+}
+.over{
+    color: red;
 }
 
 

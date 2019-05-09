@@ -14,55 +14,51 @@ var config = {
 firebase.initializeApp(config);
 // Initialize Cloud Firestore through Firebase
 var db = firebase.firestore();
-var userName = null;
-var userId = null;
-var data = null;
-var theme;
+db.settings({
+  timestampsInSnapshots: true
+});
+
+var userName;
+var userId;
+var data;
+var preferance = "light";
 let root = document.documentElement;
 var slideIndex = 0;
 var slides = document.getElementsByClassName("mySlides");
 var timeOutHandler;
 
 
-db.settings({
-  timestampsInSnapshots: true
-});
+firebase.auth().onAuthStateChanged((firebaseUser) => {
+  //checks if the user is already logged in to the system
+  if (firebaseUser) {
+    userName = firebaseUser.displayName;
+    changeTheme();
+    getData();
+    // if logged in, sends user to home page
+    if (window.location.href.includes("index.html") || window.location.href.includes("signup.html") || window.location.pathname == "/") {
+      window.location.replace("home.html");
+    }
 
-loadPage();
-async function loadPage(){
-  firebase.auth().onAuthStateChanged(async function (firebaseUser) {
-    //checks if the user is already logged in to the system
-    if (firebaseUser) {
-      userName = firebaseUser.displayName;
-      // if logged in, sends user to home page
-      if (window.location.href.includes("index.html") || window.location.href.includes("signup.html") || window.location.pathname == "/") {
-        window.location.replace("home.html");
-      }
-  
-  
-      data = await getData();
-      console.log(data);
-      changeTheme(theme);
-      //if user isn't logged in, sends back to sign in page
-    } else {
-      userName = null;
-      if (!window.location.href.includes("index.html") && !window.location.href.includes("signup.html") && !window.location.href.includes("store.html")) {
-        window.location.replace('index.html');
-      }
+
+    //if user isn't logged in, sends back to sign in page
+  } else {
+    userName = null;
+    if (!window.location.href.includes("index.html") && !window.location.href.includes("signup.html") && !window.location.href.includes("store.html")) {
+      window.location.replace('index.html');
     }
-    if (window.location.href.includes("home.html")) {
-      loadTimer();
-    }
-  });
-}
+  }
+  if (window.location.href.includes("home.html")) {
+    loadTimer();
+  }
+});
 
 
 function getData() {
   db.collection("users").where("name", "==", userName)
-    .onSnapshot(function (querySnapshot) {
+    .onSnapshot((querySnapshot) => {
+      data = querySnapshot.docs[0].data();
       userId = querySnapshot.docs[0].id;
-      theme = querySnapshot.docs[0].data().viewMode;
-      return querySnapshot.docs[0].data();
+      preferance = data.viewMode;
     })
 }
 
@@ -77,6 +73,7 @@ function editDate(date) {
 }
 
 showSlides()
+
 function showSlides() {
   for (var i = 0; i < slides.length; i++) {
     slides[i].style.display = "none";
@@ -99,9 +96,9 @@ function currentSlide(no) {
 
 function changeSlides(n) {
   var newslideIndex = slideIndex + n;
-  if (newslideIndex >= slides.length + 1){
+  if (newslideIndex >= slides.length + 1) {
     newslideIndex = 1
-  } else if (newslideIndex <= 0){
+  } else if (newslideIndex <= 0) {
     newslideIndex = slides.length;
   }
   if (newslideIndex <= (slides.length + 1) && newslideIndex > 0) {
@@ -126,25 +123,25 @@ const dataThemeButtons = document.querySelectorAll('[data-theme]');
 // button somewhere. There is NO NEED to copy and paste new css files.
 // Please and thank you
 function changeTheme(preferance) {
+  if (preferance == 0) {
+    preferance = "light";
+    changeViewMode(preferance);
+  } else if (preferance == 1) {
+    preferance = "dark";
+    changeViewMode(preferance);
+  } else if (preferance == 2) {
+    preferance = "jedi";
+    changeViewMode(preferance);
+  } else if (preferance == 3) {
+    preferance = "sith";
+    changeViewMode(preferance);
+  } else if (preferance == 4) {
+    preferance = "merica";
+    changeViewMode(preferance);
+  }
   db.collection("users").where("name", "==", userName)
     .onSnapshot((querySnapshot) => {
-      theme = querySnapshot.docs[0].data().viewMode;
-      if (preferance == 0) {
-        preferance = "light";
-        changeViewMode(preferance);
-      } else if (preferance == 1) {
-        preferance = "dark";
-        changeViewMode(preferance);
-      } else if (preferance == 2) {
-        preferance = "jedi";
-        changeViewMode(preferance);
-      } else if (preferance == 3) {
-        preferance = "sith";
-        changeViewMode(preferance);
-      } else if (preferance == 4) {
-        preferance = "merica";
-        changeViewMode(preferance);
-      }
+      preferance = querySnapshot.docs[0].data().viewMode;
       switch (preferance) {
         case 'light':
           setTheme({
@@ -158,7 +155,6 @@ function changeTheme(preferance) {
             'fontSecond': '#000000'
           });
           return;
-
         case 'dark':
           setTheme({
             'first': '#343a40',
@@ -171,7 +167,6 @@ function changeTheme(preferance) {
             'fontSecond': '#ffffff'
           });
           return;
-
         case 'jedi':
           setTheme({
             'first': '#06439F',
@@ -260,10 +255,3 @@ for (let i = 0; i < dataThemeButtons.length; i++) {
     changeTheme(i);
   })
 }
-
-
-
-/**
- * 
- */
-
