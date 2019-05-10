@@ -2,15 +2,20 @@
 * Profile.js Table of Conttents
 * A. Team Points
 ********************************************************** */
-
+const score = db.collection("team").doc('points');
+const toolTip = document.getElementById("clock");
+const toolTipBox = document.getElementById("toolTipBox");
+const submitChanges = document.getElementById("submitInfoChanges");
+var results = []; //will be used as part of the results for 
+var birthdayPopulate;
+var sameBirthday = true;
+var doneUser = false;
+var user = firebase.auth().currentUser;
 /***********************************************************
 * A. Team Points
 ************************************************************/
 // A function to update the points. This is currently set up that the teams are working together
 // There is a const written to shorten the code and make it more readable.
-
-const score = db.collection("team").doc('points');
-
 function updateTeamPoints(pointsToAdd, activityType, timeStamp) {
     score.get()
         .then(function (doc) {
@@ -35,7 +40,6 @@ function updateTeamPoints(pointsToAdd, activityType, timeStamp) {
                 });
         })
 }
-
 function submitTeamPoints() {
     var setDate = editDate(new Date());
     var points = 0;
@@ -66,17 +70,15 @@ function submitTeamPoints() {
         points = 1;
     } else if (activityType == 'Going to the FTC'){
         points = 5;
+    } else if (activityType == "Filling up one water bottle"){
+        points = 2;
     }
 
     updateTeamPoints(points, activityType, setDate);
 }
-
-//this function gets points and addes it to the html file previously created
 function showResults() {
     console.log("Total = " + results[0]);
 }
-
-
 /***********************************************************
 * 
 ************************************************************/
@@ -103,8 +105,6 @@ function toggleView() {
 
 //tool tip on click
 
-var toolTip = document.getElementById("clock");
-var toolTipBox = document.getElementById("toolTipBox");
 toolTip.addEventListener("click", () => {
 
     if (toolTipBox.style.visibility == "hidden") {
@@ -188,9 +188,6 @@ editBtn.addEventListener("click", () => {
 
 //sends to firebase info changes made by the user
 // Initialize Firebase
-var doneUser = false;
-var user = firebase.auth().currentUser;
-var submitChanges = document.getElementById("submitInfoChanges");
 submitChanges.addEventListener("click", () => {
     if (!doneUser) {
 
@@ -263,7 +260,7 @@ function populateInfoEdit() {
 
 //handles the event listener for the birthday call
 //if the birthday doesn't get changed, by the following event listener, then it will keep the same on firebase
-var sameBirthday = true;
+
 
 document.getElementById("displayBirthday").addEventListener("click", () => {
     document.getElementById("displayBirthday").style.visibility = "hidden";
@@ -272,17 +269,11 @@ document.getElementById("displayBirthday").addEventListener("click", () => {
     sameBirthday = false;
 })
 //Loads the page with all user's information
-var birthdayPopulate;
-var results = []; //will be used as part of the results for 
 function loadPage() {
-
     db.collection("team").doc('points').get()
         .then(function (doc) {
             results.push(doc.data().points);
-            // console.log(results);
         })
-
-    document.getElementById(theme).setAttribute('checked', true);
     var photo = data.info.photo;
     firebase.storage().ref().child(`profile/${photo}`).getDownloadURL().then(function (url) {
         document.getElementById(`profilePic`).setAttribute('src', url);
@@ -312,38 +303,13 @@ function loadPage() {
             } else {
                 document.getElementById("accumulated").innerText = myData.time.accumulatedTime + ":00";
                 document.getElementById("redeemTime").innerText = myData.time.accumulatedTime + ":00";
-            }
-            
+            }            
             //displays lead/admin tools only for the right people
             if (myData.admin || myData.title == "Project Lead") {
-                document.getElementById("leadAdmin").style.visibility = "visible";
             }
-
-
             if (myData.storeManager == true) {
-                console.log(myData.storeManager);
-                document.getElementById("storeInv").style.visibility = "visible";
             }
         })
-}
-
-var doneEdit = false;
-
-function changeViewMode(newTheme) {
-    if (!doneEdit) {
-        db.collection('users').doc(userId).update({
-                viewMode: newTheme
-            })
-            .then(function () {
-                console.log("Document successfully updated!");
-                alert("User Updated Successfully");
-                window.location.reload();
-            })
-            .catch(function (error) {
-                // The document probably doesn't exist.
-                console.error("Error updating document: ", error);
-            });
-    }
 }
 
 //handles the sign out button
@@ -354,19 +320,3 @@ document.getElementById("signOutBtn").addEventListener("click", () => {
         // An error happened.
     });
 })
-
-
-document.getElementById("completeTeamActivities").addEventListener('click', () => {
-    document.getElementById("pointsOptions").setAttribute("class", "visible");
-    document.getElementById("submitPoints").setAttribute("class", "visible");
-})
-
-function editDate(date) {
-    var month = ("0" + (date.getMonth() + 1)).slice(-2);
-    var day = ("0" + date.getDate()).slice(-2);
-    var year = date.getFullYear();
-    var hour = ("0" + date.getHours()).slice(-2);
-    var minute = ("0" + date.getMinutes()).slice(-2);
-    var setDate = `${year}-${month}-${day} ${hour}:${minute}`;
-    return setDate;
-}

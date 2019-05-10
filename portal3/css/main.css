@@ -43,6 +43,7 @@
     --accent1: #ffffff;
     --accent2: #727272;
     --background: #ffffff;
+    --backgroundSecondary: #ffffff;
     --backgroundLight: #f7f7f7;
     --backgroundGrade: none;
     --shadow: #000000;
@@ -91,6 +92,9 @@
     display: flex;
 }
 
+.flex-column{flex-direction: column;}
+.flex-row{flex-direction: row;}
+
 body {
     margin: 0;
     padding: 0;
@@ -121,7 +125,7 @@ nav {
     height: 100%;
     position: fixed;
     box-shadow: 5px 0 10px var(--shadow);
-    z-index: 100;
+    z-index: -1;
 }
 .nav-links {
     width: 100%;
@@ -526,3 +530,66 @@ main {
 /**********************************************
 * 7. Profile.html
 **********************************************/
+
+.profile-box{
+    padding: 20px;
+    height: auto;
+    width: auto;
+    margin: 20px -40px 20px 100px;
+    border: 5px solid var(--first);
+    border-radius: 10px;
+    box-shadow: 3px 0 5px var(--shadow);
+}
+.profile-box p,a,h3,span,option,select{color: var(--fontSecond);
+
+}.btn-profile {
+    width: 160px;
+    height: 40px;
+    margin: 5px;
+    border-radius: 10px;
+    border-style: none;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: var(--fontPrime);
+    outline: none;
+    background-color: var(--first);
+    transition: transform .2s;
+    box-shadow: 2px 1px 5px var(--shadow);
+}
+.btn-profile:hover {
+    background-color: var(--second);
+    transform: scale(1.05);
+}
+.profile-points{
+    border-radius: 10px;
+    border-style: solid;
+    border-color: var(--first);
+    border-width: 3px; 
+    font-size: 1.2em;
+    font-weight: 500;
+    color: var(--fontSecond);
+    background-color: var(--backgroundSecondary);
+}
+.profile-top-bar{
+    flex-direction: row;
+    justify-content: flex-start;
+    background: var(--first);
+    z-index: 20;
+    height: 8.5em;
+    margin-bottom: -.25em;
+
+}
+
+.profile-top-bar img{
+    margin-top: 1.5em;
+    width: auto;
+    height: 5em;
+}
+
+.page-title-profile{
+    margin: 0;
+    padding: 50px 6% 30px;
+    font-size: 2.5em;
+    font-weight: 400;
+    color: var(--fontPrime);
+}
