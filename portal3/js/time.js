@@ -184,10 +184,10 @@ function resetBreak() {
   }
 function startTime() {
     var time = new Date();
-    date = time.toLocaleString('en-US', {month: "long", day: "2-digit", year:"numeric"});
-    time = time.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
-    apm = time.slice(-2);
-    time = time.slice(0, -2);
+    var date = time.toLocaleString('en-US', {month: "long", day: "2-digit", year:"numeric"});
+    var time = time.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+    var apm = time.slice(-2);
+    var time = time.slice(0, -2);
     dateTime.innerHTML = time;
     dateTimeAPM.innerHTML = apm
     dateTimeDate.innerHTML = date;
