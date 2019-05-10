@@ -66,8 +66,6 @@ function submitTeamPoints() {
         points = 1;
     } else if (activityType == 'Going to the FTC'){
         points = 5;
-    } else if (activityType == "Filling up one water bottle"){
-        points = 2;
     }
 
     updateTeamPoints(points, activityType, setDate);

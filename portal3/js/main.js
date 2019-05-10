@@ -152,7 +152,7 @@ function changeTheme(preferance) {
           setTheme({
             'first': '#0076c6',
             'second': '#6c757d',
-            'third': '#7fc4fd',
+            'third': '#0076c6',
             'background': '#ffffff',
             'backgroundGrade': 'none',
             'shadow': 'var(--gray)',
@@ -164,7 +164,7 @@ function changeTheme(preferance) {
           setTheme({
             'first': '#343a40',
             'second': '#0076c6',
-            'third': '',
+            'third': '#0076c6',
             'background': '#1c1b1b',
             'backgroundGrade': 'none',
             'shadow': 'none',
@@ -176,7 +176,7 @@ function changeTheme(preferance) {
           setTheme({
             'first': '#06439F',
             'second': '#0076c6',
-            'third': '',
+            'third': '#06439F',
             'background': 'none',
             'backgroundGrade': 'linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)',
             'shadow': 'var(--gray-dark)',
@@ -188,7 +188,7 @@ function changeTheme(preferance) {
           setTheme({
             'first': '#343a40',
             'second': '#a30909',
-            'third': '',
+            'third': '#a30909',
             'background': '#1c1b1b',
             'backgroundGrade': 'linear-gradient(180deg, rgba(36,0,0,1) 0%, rgba(121,9,9,1) 35%, rgba(255,0,0,1) 100%)',
             'shadow': 'none',
@@ -200,7 +200,7 @@ function changeTheme(preferance) {
           setTheme({
             'first': '#0076c6',
             'second': '#6c757d',
-            'third': '#7fc4fd',
+            'third': '#0076c6',
             'background': '#ffffff',
             'backgroundGrade': 'linear-gradient(9deg, rgba(255,0,0,1) 0%, rgba(221,59,59,1) 16%, rgba(235,208,208,1) 32%, rgba(255,255,255,1) 39%, rgba(191,230,241,1) 45%, rgba(69,163,190,1) 64%, rgba(51,83,185,1) 80%)',
             'shadow': 'var(--gray)',

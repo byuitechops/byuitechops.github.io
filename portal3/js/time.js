@@ -19,6 +19,8 @@ const mins = document.getElementById('mins');
 const secs = document.getElementById('secs'); 
 const breakB = document.getElementById("break-button");
 const breakBText = document.getElementById("break-button-text");
+const dateTime = document.getElementById("time");
+const dateTimeAPM = document.getElementById("apm");
 
 
 // Event listeners for the timer
@@ -85,9 +87,6 @@ breakB.addEventListener('click', function () {
             alert("You are logged out. No breaks are allowed");
         } else {
             // Start Break
-            for (var i = 0; i < document.getElementsByTagName("a").length; i++) {
-                document.getElementsByTagName("a")[i].setAttribute("target", "_blank");
-            }
             db.collection('users').doc(userId).update({
                 "time.break": true,
                 "time.breakKey": setDate
@@ -181,4 +180,18 @@ function prettyTime(time){
 function resetBreak() {
     localStorage.setItem('minutes', 15);
     localStorage.setItem('seconds', 0);
+  }
+function startTime() {
+    var time = new Date();
+    time = time.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+    apm = time.slice(-2);
+    time = time.slice(0, -2);
+    
+    dateTime.innerHTML = time;
+    dateTimeAPM.innerHTML = apm
+    var t = setTimeout(startTime, 500);
+  }
+function checkTime(i) {
+    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+    return i;
   }

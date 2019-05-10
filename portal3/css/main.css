@@ -38,9 +38,8 @@
     --gray-dark: #343a40;
     --black: #000000;
     --first: #0076c6;
-    --first-opaque: rgba(0, 118, 198, .6);
     --second: #6c757d;
-    --third: #7fc4fd;
+    --third: #0076c6;
     --accent1: #ffffff;
     --accent2: #727272;
     --background: #ffffff;
@@ -302,6 +301,7 @@ main {
 }
 #break-button span {
     font-size: 1.8em;
+    color: var(--fontPrime);
 }
 .clock {
     font-size: 2em;
@@ -323,11 +323,12 @@ main {
 #time-n-date {
     padding: 30px;
     margin: 10px 0 50px;
-    border: 5px solid var(--first);
+    border: 5px solid var(--third);
+    color: var(--third);
     border-radius: 50px;
 }
 #time-n-date p, span {
-    color: var(--first);
+    color: var(--third);
     text-align: center;
 }
 #time {
