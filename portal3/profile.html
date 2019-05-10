@@ -58,12 +58,9 @@
     <main class="flex-container col9">
         <section>
             <!-- <img src="assets/logo3.png"> -->
-            <div id="opacity">
-            </div>
-            <h2>General Information</h2>
-            <img id="profilePic" src="assets/profPicture.png">
+            <h2 class="page-title">General Information</h2>
 
-            <div class="tooltip"><img id="clock" src="assets/clockWhite.png">
+            <div class="tooltip"><img id="clock" src="/portal/assets/clockWhite.png">
                 <span style="visibility: hidden;" class="toolTipBox" id="toolTipBox">
                     <p>Accumulated Time (hrs)</p>
                     <div id="box"></div>
@@ -136,18 +133,13 @@
                     Store Invoice</a>
 
                 <p>Viewing Mode
-                    <label class="container">
-                        <input type="radio" name="viewMode" id="light" onclick="changeViewMode('light')">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="container">
-                        <input type="radio" name="viewMode" id="dark" onclick="changeViewMode('dark')">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="container">
-                        <input type="radio" name="viewMode" id="holiday" onclick="changeViewMode('holiday')">
-                        <span class="checkmark"></span>
-                    </label>
+                    <section class="themes">
+                        <button class="btn1" id="light" data-theme="light"></button>
+                        <button class="btn1" id="dark" data-theme="dark"></button>
+                        <button class="btn1" id="jedi" data-theme="jedi"></button>
+                        <button class="btn1" id="sith" data-theme="sith"></button>
+                        <button class="btn1" id="merica" data-theme="merica"></button>
+                    </section>
                 </p>
                 <!-- <p>Steak(carne, mucha carne)</p> -->
                 <!-- <p>File a Complaint</p> -->

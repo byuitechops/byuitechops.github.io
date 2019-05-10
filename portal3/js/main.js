@@ -49,6 +49,7 @@ firebase.auth().onAuthStateChanged((firebaseUser) => {
   }
   if (window.location.href.includes("home.html")) {
     loadTimer();
+    startTime();
     showSlides();
   }
 });
