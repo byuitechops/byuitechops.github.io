@@ -51,7 +51,7 @@ firebase.auth().onAuthStateChanged((firebaseUser) => {
     loadTimer();
     startTime();
     showSlides();
-  } else if(window.location.href.includes("profile.html")){
+  } else if(window.location.href.includes("profile.html") || window.location.href.includes("store.html")){
     loadPage();
   }
 });

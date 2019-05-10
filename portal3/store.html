@@ -57,9 +57,11 @@
     - 4. Main
     ---------------------------------------------->
 
-    <main class="col9">
+    <main class="col9" id="shoppingPage">
 
         <h1 class="page-title">Store</h1>
+        <button class="btn2 hide" id="editStore">Edit Store</button>
+        <button class="btn2 hide" id="invoiceStore">Store Invoice</button>
 
         <!---------------------------------------------
         - 4a. 
@@ -158,7 +160,7 @@
 
             <!-- SNACK ADD -->
 
-            <section class="snack-manage col10" id="snack-add">
+            <section class="snack-manage col10 hide" id="snack-add">
                 <form>
                     <h2>Add Item</h2>
                     <p value="snack-name">Name: </p>
@@ -170,7 +172,7 @@
 
             <!-- SNACK EDIT -->
 
-            <section class="snack-manage col10" id="snack-edit">
+            <section class="snack-manage col10 hide" id="snack-edit">
                 <form >
                     <h2>Edit Item</h2>
                     <p value="snack-name">Name: </p>
@@ -183,6 +185,19 @@
         </section>
         
 
+    </main>
+    <main class="col9 hide" id="invoicePage">
+            <h1 class="page-title">Store</h1>
+            <section id="heading">
+                    <h1>Invoice - Store</h1>
+                    <div>
+                        <span><strong>Cash:&nbsp; </strong> <span id="cash"></span></span>
+                        <span><strong>Venmo:&nbsp; </strong> <span id="venmo"></span></span>
+                        <span><strong>Storage:&nbsp;</strong> <span id="storage"></span></span>
+                        <button onclick="submitMoney()">Submit</button>
+                    </div>
+                </section>
+                <section id="data"></section>
     </main>
 
 </body>

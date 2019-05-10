@@ -94,7 +94,7 @@
 
 .flex-column{flex-direction: column;}
 .flex-row{flex-direction: row;}
-.hide{display: none;}
+.hide{display: none !important;}
 
 body {
     margin: 0;
@@ -525,6 +525,29 @@ main {
     padding-bottom: 10px;
     font-size: 1.2em;
     font-weight: 300;
+}
+.btn2#editStore{
+    width: 200px;
+    height: 100px;
+    margin: 15px 15px 0;
+    border-radius: 30px;
+    background: var(--second);
+    border: solid;
+    border-color: var(--warning);
+    position: absolute;
+    top: 2%;
+    right: 20%;
+}
+.btn2#invoiceStore{
+    width: 200px;
+    height: 100px;
+    margin: 15px 15px 0;
+    background: var(--second);
+    border: solid;
+    border-color: var(--warning);
+    position: absolute;
+    top: 2%;
+    right: 5%;
 }
 
 
