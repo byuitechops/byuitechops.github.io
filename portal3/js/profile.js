@@ -6,6 +6,16 @@ const score = db.collection("team").doc('points');
 const toolTip = document.getElementById("clock");
 const toolTipBox = document.getElementById("toolTipBox");
 const submitChanges = document.getElementById("submitInfoChanges");
+const redeemConfirmBtn = document.getElementById("redeembtn");
+const okBtn = document.getElementById("close");
+const editBtn = document.getElementById("editContact");
+const editDiv = document.getElementById("editInfo");
+const redeemBtn = document.getElementById("redeem");
+const redeemTool = document.getElementById("usingRedeem");
+const cancelBtn = document.getElementById("cancel");
+const hoursRedeemed = document.getElementById("resultRedeem");
+const desiredTime = document.getElementById("timeDesired");
+const confirmRedeem = document.getElementById("confirmRedeem");
 var results = []; //will be used as part of the results for 
 var birthdayPopulate;
 var sameBirthday = true;
@@ -80,8 +90,83 @@ function showResults() {
     console.log("Total = " + results[0]);
 }
 /***********************************************************
-* 
+* B. Redeem Hours
 ************************************************************/
+toolTip.addEventListener("click", () => {
+    if (toolTipBox.style.visibility == "hidden") {
+        toolTipBox.style.visibility = "visible";
+    } else {
+        toolTipBox.style.visibility = "hidden";
+    }
+})
+
+//showing up the redeem tool
+redeemBtn.addEventListener("click", () => {
+    if (redeemTool.style.visibility == "hidden") {
+        redeemTool.style.visibility = "visible";
+        toolTipBox.style.visibility = "hidden";
+    } else {
+        redeemTool.style.visibility = "hidden";
+    }
+})
+
+//when the user presses the "cancel" button, goes back to the screen
+cancelBtn.addEventListener('click', () => {
+    redeemTool.style.visibility = "hidden";
+})
+
+// when the user clicks the "redeem" button, it shows the confirm
+redeemConfirmBtn.addEventListener('click', () => {
+    redeemTool.style.visibility = "hidden";
+    if (data.time.accumulatedTime < desiredTime.value) {
+        redeemTool.style.visibility = "hidden";
+        alert("You don't have enough accumulated hours to redeem the time desired");
+    } else {
+        db.collection("users").doc(userId).update({
+                "time.accumulatedTime": Number(data.time.accumulatedTime) - Math.round(Number(desiredTime.value)),
+            })
+            .then(function () {
+                console.log("Document successfully written!");
+                alert("User Updated Successfully");
+                window.location.reload();
+            }).catch(function (error) {
+                // An error happened.
+            });
+        if (data.time.accumulatedTime < 10) {
+            hoursRedeemed.innerText = "0" + desiredTime.value + ":00";
+        } else {
+            hoursRedeemed.innerText = desiredTime.value + ":00";
+        }
+        confirmRedeem.style.visibility = "visible";
+    }
+})
+
+// When the use clicks ok close confirm
+okBtn.addEventListener('click', () => {
+    confirmRedeem.style.visibility = "hidden";
+})
+
+
+//allows the user to edit his/her information
+editBtn.addEventListener("click", () => {
+    editDiv.style.visibility = "visible";
+    document.getElementById("displayBirthday").style.visibility = "visible";
+    document.getElementById("editBirthdayMonth").style.visibility = "hidden";
+    document.getElementById("editBirthdayDay").style.visibility = "hidden";
+    populateInfoEdit();
+})
+
+/***********************************************************
+* C. Sign Out
+************************************************************/
+//handles the sign out button
+document.getElementById("signOutBtn").addEventListener("click", () => {
+    firebase.auth().signOut().then(function () {
+        // Sign-out successful.
+    }).catch(function (error) {
+        // An error happened.
+    });
+})
 
 // dropdown toggleView funcionality 
 
@@ -103,101 +188,16 @@ function toggleView() {
     }
 }
 
-//tool tip on click
-
-toolTip.addEventListener("click", () => {
-
-    if (toolTipBox.style.visibility == "hidden") {
-        toolTipBox.style.visibility = "visible";
-    } else {
-        toolTipBox.style.visibility = "hidden";
-    }
-
-})
-
-//showing up the redeem tool
-var redeemBtn = document.getElementById("redeem");
-var redeemTool = document.getElementById("usingRedeem");
-redeemBtn.addEventListener("click", () => {
-
-    if (redeemTool.style.visibility == "hidden") {
-        redeemTool.style.visibility = "visible";
-        toolTipBox.style.visibility = "hidden";
-    } else {
-        redeemTool.style.visibility = "hidden";
-    }
-})
-
-//when the user presses the "cancel" button, goes back to the screen
-var cancelBtn = document.getElementById("cancel");
-cancelBtn.addEventListener('click', () => {
-    redeemTool.style.visibility = "hidden";
-})
-
-// when the user clicks the "redeem" button, it shows the confirm
-var redeemConfirmBtn = document.getElementById("redeembtn");
-redeemConfirmBtn.addEventListener('click', () => {
-    redeemTool.style.visibility = "hidden";
-    var hoursRedeemed = document.getElementById("resultRedeem");
-
-
-    if (data.time.accumulatedTime < document.getElementById("timeDesired").value) {
-        redeemTool.style.visibility = "hidden";
-        alert("You don't have enough accumulated hours to redeem the time desired");
-
-
-    } else {
-
-        db.collection("users").doc(userId).update({
-                "time.accumulatedTime": Number(data.time.accumulatedTime) - Math.round(Number(document.getElementById("timeDesired").value)),
-            })
-            .then(function () {
-                console.log("Document successfully written!");
-                alert("User Updated Successfully");
-                window.location.reload();
-            }).catch(function (error) {
-                // An error happened.
-            });
-        if (data.time.accumulatedTime < 10) {
-            hoursRedeemed.innerText = "0" + document.getElementById("timeDesired").value + ":00";
-        } else {
-            hoursRedeemed.innerText = document.getElementById("timeDesired").value + ":00";
-        }
-        document.getElementById("confirmRedeem").style.visibility = "visible";
-
-    }
-})
-
-// When the use clicks ok close confirm
-var okBtn = document.getElementById("close");
-okBtn.addEventListener('click', () => {
-    document.getElementById("confirmRedeem").style.visibility = "hidden";
-})
-
-
-//allows the user to edit his/her information
-var editBtn = document.getElementById("editContact");
-var editDiv = document.getElementById("editInfo");
-editBtn.addEventListener("click", () => {
-    editDiv.style.visibility = "visible";
-    document.getElementById("displayBirthday").style.visibility = "visible";
-    document.getElementById("editBirthdayMonth").style.visibility = "hidden";
-    document.getElementById("editBirthdayDay").style.visibility = "hidden";
-    populateInfoEdit();
-})
-
 //sends to firebase info changes made by the user
 // Initialize Firebase
 submitChanges.addEventListener("click", () => {
     if (!doneUser) {
-
         doneUser = true;
         if (!sameBirthday) {
             var birthday = `${document.getElementById("editBirthdayMonth").value} ${document.getElementById("editBirthdayDay").value}`;
         } else {
             var birthday = birthdayPopulate;
         }
-
         db.collection("users").doc(userId).update({
                 "nameDisplay": document.getElementById("editName").value,
                 "info.phoneNumber": document.getElementById("editPhone").value,
@@ -260,8 +260,6 @@ function populateInfoEdit() {
 
 //handles the event listener for the birthday call
 //if the birthday doesn't get changed, by the following event listener, then it will keep the same on firebase
-
-
 document.getElementById("displayBirthday").addEventListener("click", () => {
     document.getElementById("displayBirthday").style.visibility = "hidden";
     document.getElementById("editBirthdayMonth").style.visibility = "visible";
@@ -311,12 +309,3 @@ function loadPage() {
             }
         })
 }
-
-//handles the sign out button
-document.getElementById("signOutBtn").addEventListener("click", () => {
-    firebase.auth().signOut().then(function () {
-        // Sign-out successful.
-    }).catch(function (error) {
-        // An error happened.
-    });
-})
