@@ -100,31 +100,31 @@ function showResults() {
 /***********************************************************
  * B. Redeem Hours
  ************************************************************/
-redeemClock.addEventListener("click", () => {
-    if (toolTipBox.classList == "hide") {
-        toolTipBox.classList.remove("hide");
+$(redeemClock).click(() => {
+    if ($(toolTipBox).hasClass("hide")) {
+        $(toolTipBox).removeClass("hide");
     } else {
-        toolTipBox.classList.add("hide");
+        $(toolTipBox).addClass("hide");
     }
 })
 //showing up the redeem tool
-redeemBtn.addEventListener("click", () => {
-    if (redeemTool.classList == "hide") {
-        redeemTool.classList.remove("hide");
-        toolTipBox.classList.add("hide");
+$(redeemBtn).click(() => {
+    if ($(redeemTool).hasClass("hide")) {
+        $(redeemTool).removeClass("hide");
+        $(toolTipBox).addClass("hide");
     } else {
-        redeemTool.classList.add("hide");
+        $(redeemTool).addClass("hide");
     }
 })
 //when the user presses the "cancel" button, goes back to the screen
-cancelBtn.addEventListener('click', () => {
-    redeemTool.classList.add("hide");
+$(cancelBtn).click(() => {
+    $(redeemTool).addClass("hide");
 })
 // when the user clicks the "redeem" button, it shows the confirm
-redeemConfirmBtn.addEventListener('click', () => {
-    redeemTool.classList.remove("hide");
+$(redeemConfirmBtn).click(() => {
+    $(redeemTool).removeClass("hide");
     if (data.time.accumulatedTime < desiredTime.value) {
-        redeemTool.classList.remove("hide");
+        $(redeemTool).removeClass("hide");
         alert("You don't have enough accumulated hours to redeem the time desired");
     } else {
         db.collection("users").doc(userId).update({
@@ -142,12 +142,12 @@ redeemConfirmBtn.addEventListener('click', () => {
         } else {
             hoursRedeemed.innerHTML = desiredTime.value + ":00";
         }
-        confirmRedeem.classList.remove("hide");
+        $(confirmRedeem).removeClass("hide");
     }
 })
 // When the use clicks ok close confirm
-okBtn.addEventListener('click', () => {
-    confirmRedeem.classList.add("hide");
+$(okBtn).click(() => {
+    $(confirmRedeem).addClass("hide");
 })
 /***********************************************************
  * C. Profile
@@ -255,7 +255,6 @@ function loadPage() {
             preferance = data.viewMode;
             db.collection("users").doc(userId)
                 .onSnapshot((querrySnapshot) => {
-                    console.log(querrySnapshot.data());
                     const myData = querrySnapshot.data();
                     document.getElementById("dbName").innerHTML = myData.nameDisplay;
                     document.getElementById("dbTitle").innerHTML = "Title: " + myData.title;
