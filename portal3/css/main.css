@@ -632,7 +632,6 @@ main {
     z-index: 20;
     height: 8.5em;
     margin-bottom: -.25em;
-
 }
 .profile-top-bar #clock{
     position: absolute;
@@ -641,14 +640,12 @@ main {
     width: 3.5em;
     z-index: 1;
 }
-
 .profile-top-bar #signOutBtn{
     position: absolute;
     left: 88%;
     top: 5.5%;
     width: 10em;
     z-index: 1;
-
 }
 .page-title-profile{
     margin: 0;
