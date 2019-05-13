@@ -101,15 +101,6 @@
                 
             </section>
 
-            <div id="confirm-checkout">
-                <h2>Shopping Cart</h2>
-                <span>Total: </span>
-                <span id="confirm-total">$</span>
-
-                <input type="radio" id="cash">Cash</input>
-                <input type="radio" id="venmo">Venmo</input>
-            </div>
-
             <!-- SNACK ADD -->
 
             <section class="snack-manage col10 hide" id="snack-add">
@@ -151,6 +142,25 @@
                 </section>
                 <section id="data"></section>
     </main>
+
+    <div class="popup" id="confirm-checkout">
+        <div class="popup-content">
+            <h2>Shopping Cart</h2>
+            <div id="confirm-content">
+                <span>Total: </span>
+                <span id="confirm-total">$</span>
+
+                <input type="radio" name="radio" id="cash">Cash</input>
+                <input type="radio" name="radio" id="venmo">Venmo</input>
+            </div>
+        </div>
+    </div>
+
+    <div class="popup hide" id="enjoy-snacks">
+        <div class="popup-content" id="confirm-content">
+            <h2>Enjoy Your Snacks!</h2>
+        </div>
+    </div>
 
 </body>
 
