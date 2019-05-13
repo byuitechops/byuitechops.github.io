@@ -56,40 +56,40 @@
     ---------------------------------------------->
 
     <main class="flex-container flex-column col9">
-        <div class="col10">
-            <section class="flex-container profile-top-bar">
-                <h2 class="page-title-profile">Profile</h2>
-                <div class="flex-container flex-row">
-                    <h2 id="signOutBtn">Sign Out</h2>
-                    <img id="clock" src="/portal/assets/clockWhite.png">
-                    <span class="hide" id="toolTipBox">
-                        <p>Accumulated Time (hrs)</p>
-                        <div id="box"></div>
-                        <p id="redeemTime">##:##</p><button id="redeem">REDEEM</button>
-                    </span>
-                </div>
-                <div id="usingRedeem" class="hide">
-                    <h2>Redeem Confirmation</h2>
-                    <p>Accumulated Time</p>
-                    <h1 id="accumulated">00:00</h1>
-                    <p id="howMuch">How much time would you like to redeem? (Hours)</p>
 
-                    <input id="timeDesired" type="number" min="0"></input>
-                    <button id="cancel">Cancel</button>
-                    <button id="redeembtn">Redeem</button>
-                </div>
-                <div id="confirmRedeem" class="hide">
-                    <img src="assets/check-01.png">
-                    <h2>Redeemed Hours</h2>
-                    <p id="resultRedeem">00:00</p>
-                    <button id="close">Ok</button>
-                </div>
-                <span id="time"></span>
-            </section>
-        </div>
+        <section class="flex-container profile-top-bar col10">
+            <h2 class="page-title-profile">Profile</h2>
+            <div class="flex-container flex-row">
+                <h2 id="signOutBtn">Sign Out</h2>
+                <img id="clock" src="/portal/assets/clockWhite.png">
+                <span class="hide" id="toolTipBox">
+                    <p>Accumulated Time (hrs)</p>
+                    <div id="box"></div>
+                    <p id="redeemTime">##:##</p><button id="redeem">REDEEM</button>
+                </span>
+            </div>
+            <div id="usingRedeem" class="hide">
+                <h2>Redeem Confirmation</h2>
+                <p>Accumulated Time</p>
+                <h1 id="accumulated">00:00</h1>
+                <p id="howMuch">How much time would you like to redeem? (Hours)</p>
+
+                <input id="timeDesired" type="number" min="0"></input>
+                <button id="cancel">Cancel</button>
+                <button id="redeembtn">Redeem</button>
+            </div>
+            <div id="confirmRedeem" class="hide">
+                <img src="assets/check-01.png">
+                <h2>Redeemed Hours</h2>
+                <p id="resultRedeem">00:00</p>
+                <button id="close">Ok</button>
+            </div>
+            <span id="time"></span>
+        </section>
 
 
         <section class="col8 flex-container flex-row col9">
+
             <section class="profile-box-info col4">
                 <div>
                     <img id="editContact" src="/portal/assets/edit.png">
@@ -218,8 +218,11 @@
                     </div>
                 </section>
             </section>
+            
         </section>
+
     </main>
+
 </body>
 
 <!---------------------------------------------
