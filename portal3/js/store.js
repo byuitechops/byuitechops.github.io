@@ -436,54 +436,57 @@ const invoicePage = document.getElementById('invoicePage');
 const shoppingPage = document.getElementById('shoppingPage');
 const editStore = document.getElementById('editStore');
 const invoiceStore = document.getElementById('invoiceStore');
+const snack = document.getElementById("snack-in-cart");
 const snackEdit = document.getElementById('snack-edit');
 const snackAdd = document.getElementById('snack-add');
 const snackCart = document.getElementById('snack-cart');
 const snackList = document.getElementById("snack-container");
+const snackItemsInCart = document.getElementById("snack-shopping-list");
+const cartTotal = document.getElementById('shopping-list-total');
 var editingStore = false;
 
 function loadPage() {
     db.collection("users").where("name", "==", userName)
-    .onSnapshot((querySnapshot) => {
-      var data = querySnapshot.docs[0].data();
-      var userId = querySnapshot.docs[0].id;
-      var preferance = data.viewMode;
-      if (data.admin || data.storeManager) {
-        editStore.classList.remove('hide');
-        invoiceStore.classList.remove('hide');
-    }
-    })
+        .onSnapshot((querySnapshot) => {
+            var data = querySnapshot.docs[0].data();
+            var userId = querySnapshot.docs[0].id;
+            var preferance = data.viewMode;
+            if (data.admin || data.storeManager) {
+                editStore.classList.remove('hide');
+                invoiceStore.classList.remove('hide');
+            }
+        })
     loadSnacks();
 }
-editStore.addEventListener('click', () =>{
-    if (!editingStore){
-        editStore.innerHTML = "Save Changes";
-        snackEdit.classList.remove('hide');
-        snackAdd.classList.remove('hide');
-        invoiceStore.classList.add('hide');
-        snackCart.classList.add('hide');
+$(editStore).click(() => {
+    if (!editingStore) {
+        $(editStore).html("Save Store");
+        $(snackEdit, snackAdd).removeClass('hide');
+        $(snackCart, invoiceStore).addClass('hide');
+        $(snackList).empty();
         editingStore = true;
+        loadSnacks();
     } else {
-        editStore.innerHTML = "Edit Store";
-        snackEdit.classList.add('hide');
-        snackAdd.classList.add('hide');
-        invoiceStore.classList.remove('hide');
-        snackCart.classList.remove('hide');
+        $(editStore).html("Edit Store");
+        $(snackEdit, snackAdd).addClass('hide');
+        $(snackCart, invoiceStore).removeClass('hide');
+        $(snackList).empty();
         editingStore = false;
+        loadSnacks();
     }
-})
-invoiceStore.addEventListener('click', () =>{
-    if (!editingStore){
+});
+$(invoiceStore).click(() => {
+    if (!editingStore) {
         invoicePage.classList.remove('hide');
         shoppingPage.classList.add('hide');
     }
 })
 // Show items from firebase
-function loadSnacks(){
-    db.collection("store").doc("inventory").collection("items").get().then(function (querySnapshot) {
+function loadSnacks() {
+    db.collection("store").doc("inventory").collection("items").orderBy("price", "desc").get().then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
             firebase.storage().ref().child(`images/${doc.data().image}`).getDownloadURL().then(function (url) {
-                if (doc.data().count > 0 || editingStore){
+                if (doc.data().count > 0 || editingStore) {
                     var html = `<section class="snack col5 flex-container">
                     <div class="0snack-pic col5">
                         <img src="${url}" alt="${doc.id}"/>
@@ -491,16 +494,62 @@ function loadSnacks(){
                     <div class="snack-info col5">
                         <h3 class="snack-name">${doc.id}</h3>
                         <p class="snack-cost">$${doc.data().price}</p>
-                        <p class="snack-count" id="${(doc.id).replace(/ /g, '')}count">Count: ${doc.data().count}</p>
-                        <button class="add-to-cart-btn">Add to Cart</button>
+                        <p class="snack-count" id="${(doc.id).replace(/ /g, '')}Count">Count: ${doc.data().count}</p>
+                        <button class="add-to-cart-btn" onclick="addCart('${doc.id}', '${doc.data().price}', '${doc.data().count}')">Add to Cart</button>
                     </div>
-                </section>`; 
+                </section>`;
                     snackList.insertAdjacentHTML("beforeend", html);
                 }
             }).catch(function (error) {
                 console.log("There was an error retreiving " + image + " from firebase");
-    
+
             })
         })
+    });
+}
+
+function addCart(item, price, count) {
+    const snackCount = document.getElementById(`${item.replace(/ /g, '')}Count`);
+    if (count - 1 >= 0) {
+        var html = `<div class="snack-in-cart">
+        <span class="snack-name col7">${item}</span>
+        <span class="snack-cost col2">$${price}</span>
+        <button class="col1" id="snack-remove-btn" onclick="removeItem(event, '${item}', '${price}')">X</button>
+    </div>`
+        snackItemsInCart.insertAdjacentHTML("beforeend", html);
+        var count = snackCount.innerText.replace(/Count: /g, "");
+        snackCount.innerHTML = `Count: ${--count}`;
+        changeTotal(price);
+    }
+}
+
+function removeItem(e, item, price) {
+    const snackCount = document.getElementById(`${item.replace(/ /g, '')}Count`);
+    var count = snackCount.innerText.replace(/Count: /g, "");
+    snackCount.innerHTML = `Count: ${++count}`;
+    changeTotal(0 - price);
+    $(e.target).parent().remove();
+}
+
+function changeTotal(price) {
+    var total = cartTotal.innerText.replace(/\$/g, "");
+    var newTotal = (Number(total) + Number(price)).toFixed(2);
+    cartTotal.innerText = `$${newTotal}`;
+}
+
+function updateFirebase(name, change) {
+    db.collection('store').doc('inventory').collection('items').doc(`${name}`).get().then(function (doc) {
+        var count = doc.data().count;
+        db.collection('store').doc('inventory').collection('items').doc(name)
+            .update({
+                count: `${count += change}`
+            })
+            .then(function () {
+                console.log("Document successfully updated!");
+            })
+            .catch(function (error) {
+                // The document probably doesn't exist.
+                console.error("Error updating document: ", error);
+            });
     });
 }
