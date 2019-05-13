@@ -540,7 +540,7 @@ main {
     background-color: var(--fontPrime);
     color: var(--first);
 }
-#snack-cart-btns {
+.snack-cart-btns {
     display: flex;
     justify-content: flex-end;
 }
