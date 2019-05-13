@@ -26,21 +26,18 @@ let root = document.documentElement;
 var slideIndex = 0;
 var slides = document.getElementsByClassName("mySlides");
 var timeOutHandler;
+var auth = firebase.auth();
 
 
-firebase.auth().onAuthStateChanged((firebaseUser) => {
+auth.onAuthStateChanged((firebaseUser) => {
   //checks if the user is already logged in to the system
   if (firebaseUser) {
     userName = firebaseUser.displayName;
     changeTheme();
     getData();
-    // if logged in, sends user to home page
     if (window.location.href.includes("index.html") || window.location.href.includes("signup.html") || window.location.pathname == "/") {
       window.location.replace("home.html");
     }
-
-
-    //if user isn't logged in, sends back to sign in page
   } else {
     userName = null;
     if (!window.location.href.includes("index.html") && !window.location.href.includes("signup.html") && !window.location.href.includes("store.html")) {
@@ -51,7 +48,7 @@ firebase.auth().onAuthStateChanged((firebaseUser) => {
     loadTimer();
     startTime();
     showSlides();
-  } else if(window.location.href.includes("profile.html") || window.location.href.includes("store.html")){
+  } else{
     loadPage();
   }
 });

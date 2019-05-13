@@ -1,4 +1,7 @@
-var submitBtn = document.getElementById("btnsignup");
+const signupBtn = document.getElementById("btnsignup");
+const loginBtn = document.getElementById("btnlogin");
+function loadPage(){};
+
 function login() {
   var login = document.getElementById('login').value;
   var password = document.getElementById('password').value;
@@ -14,25 +17,24 @@ function login() {
       // ...
     });
 };
+$(loginBtn).click(() =>{
+  login();
+});
+$(signupBtn).click(() => {
+  window.location.replace('signup.html');
+});
 window.addEventListener('keyup', () => {
   event.preventDefault();
   if (event.keyCode === 13) {
     login();
   }
-})
-submitBtn.addEventListener('click', () => {
-  window.location.replace('signup.html');
 });
-
-//handles recover password
-document.getElementById("recover").addEventListener("click", () => {
+$("#recover").click(() => {
   var email = prompt("Please enter your email");
   if (email == null || email == "") {
     alert("Please, type a valid email first");
     return;
   } else {
-    var auth = firebase.auth();
-
     auth.sendPasswordResetEmail(email).then(function () {
       alert("An email has been sent. Check your email to change your password");
     }).catch(function (error) {
@@ -40,4 +42,4 @@ document.getElementById("recover").addEventListener("click", () => {
       alert("An error happened, please try again");
     });
   }
-})
+});
