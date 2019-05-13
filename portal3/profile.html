@@ -90,7 +90,7 @@
 
 
         <section class="col8 flex-container flex-row col9">
-            <section class="profile-box-info col3">
+            <section class="profile-box-info col4">
                 <div>
                     <img id="editContact" src="/portal/assets/edit.png">
                     <h3 id="dbName"></h3>
@@ -153,37 +153,35 @@
                     <button id="cancelInfoChanges">Cancel</button>
                 </div>
             </section>
-            <div class="flex-container flex-column col8">
-                <section class="profile-box flex-container flex-column col1" id="reasources">
-                    <h3>Resources</h3>
-                    <div class="flex-container flex-row">
-                        <div class="flex-container flex-column profile-links">
-                            <a target="_blank"
-                                href="https://byu-idaho.screenstepslive.com/admin/v2/sites/18626/manuals/70207/chapters/236350/articles">Screen
-                                Steps</a>
-                            <a href="https://docs.google.com/document/d/1BHM-fW4LRBSb73uvN8jLHU9_v9Q91R5aHdBM0Srj1SA/edit?usp=sharing"
-                                target="_blank">Work Policies</a>
-                            <a href="http://byu-idaho.screenstepslive.com/s/18626/m/70207"
-                                target="_blank">Screen-steps/Training</a>
-                            <a target="black" href="https://byuitechops.github.io/accessibility/home.html">Old
-                                Accessiblity</a>
-                            <a target="_blank"
-                                href="http://www.byui.edu/executive-strategy-and-planning/institutional-research/outcomes-and-assessments/course-level">Outcomes
-                                and Assessments</a>
-                        </div>
-                        <div class="flex-container flex-column profile-links">
-                            <a href="https://docs.google.com/document/d/1G_bc5LFy2V5TrO4riSLdPtsH2JvYIlvtGRxi1JYUjlk/edit?usp=sharing"
-                                target="_blank">Employee Handbook</a>
-                            <a target="_blank" href="https://canvas.instructure.com/styleguide">Canvas Style
-                                Guide</a>
-                            <a target="_blank"
-                                href="https://docs.google.com/spreadsheets/d/1755CupoDLtrpePFnj_Dd_Y-FZEH8_6QMX4gAVDNh_AQ/edit#gid=1437701904">Transcript
-                                Style Guide</a>
-                            <a href="/portal/timeAdmin.html" class="hide"> View/Edit Accumulated Time </a>
-                        </div>
+
+            <section class="profile-box flex-container flex-column col6" id="reasources">
+                <h3>Resources</h3>
+                <div class="flex-container flex-row">
+                    <div class="flex-container flex-column profile-links">
+                        <a href="https://docs.google.com/document/d/1BHM-fW4LRBSb73uvN8jLHU9_v9Q91R5aHdBM0Srj1SA/edit?usp=sharing"
+                            target="_blank">Work Policies</a>
+                        <a target="_blank"
+                            href="https://byu-idaho.screenstepslive.com/admin/v2/sites/18626/manuals/70207/chapters/236350/articles">Screen
+                            Steps</a>
+                        <a href="http://byu-idaho.screenstepslive.com/s/18626/m/70207"
+                            target="_blank">Screen-steps/Training</a>
+                        <a target="_blank"
+                            href="http://www.byui.edu/executive-strategy-and-planning/institutional-research/outcomes-and-assessments/course-level">Outcomes
+                            and Assessments</a>
                     </div>
-                    <br>
-                    <div class="flex-container">
+                    <div class="flex-container flex-column profile-links">
+                        <a href="https://docs.google.com/document/d/1G_bc5LFy2V5TrO4riSLdPtsH2JvYIlvtGRxi1JYUjlk/edit?usp=sharing"
+                            target="_blank">Employee Handbook</a>
+                        <a target="_blank" href="https://canvas.instructure.com/styleguide">Canvas Style
+                            Guide</a>
+                        <a target="_blank"
+                            href="https://docs.google.com/spreadsheets/d/1755CupoDLtrpePFnj_Dd_Y-FZEH8_6QMX4gAVDNh_AQ/edit#gid=1437701904">Transcript
+                            Style Guide</a>
+                        <a href="/portal/timeAdmin.html" class="hide"> View/Edit Accumulated Time </a>
+                        <a target="black" href="https://byuitechops.github.io/accessibility/home.html">Old
+                            Accessiblity</a>
+                    </div>
+                    <div class="flex-container flex-right">
                         <section class="themes">
                             <button class="btn1" id="light" data-theme="light"></button>
                             <button class="btn1" id="dark" data-theme="dark"></button>
@@ -192,35 +190,34 @@
                             <button class="btn1" id="merica" data-theme="merica"></button>
                         </section>
                     </div>
-                    <section class="flex-container flex-column">
-                        <h3>Team Points</h3>
-                        <br>
-                        <div class="flex-container col10">
-                            <select name="" id="pointsOptions" class="profile-points">
-                                <option>---</option>
-                                <option>Contacting your lead, at least an hour before your scheduled shift, if you’re
-                                    going
-                                    to
-                                    miss a shift or take time off</option>
-                                <option>Checking in on time</option>
-                                <option>Filling up one water bottle</option>
-                                <option>Checked with a lead for a project</option>
-                                <option>Checked out with a lead</option>
-                                <option>Helping restock or shop for the store</option>
-                                <option>Giving Devotional</option>
-                                <option>First to react to a post on General or from your lead</option>
-                                <option>Fridge cleaning</option>
-                                <option>Coming to Thursday meetings</option>
-                                <option>Winning office competitions (foosball, other activities)</option>
-                                <option>Brought a treat to share with the office</option>
-                                <option>Leading a PD event</option>
-                                <option>Going to the FTC</option>
-                            </select>
-                            <button type="submit" id="submitPoints" class="btn-profile"
-                                onclick="submitTeamPoints()">Submit</button>
-                        </div>
-                    </section>
-            </div>
+                </div>
+                <section class="flex-container flex-column">
+                    <h3>Team Points</h3>
+                    <br>
+                    <div class="flex-container col10">
+                        <select name="" id="pointsOptions" class="profile-points">
+                            <option>- - -</option>
+                            <option>Contacting your lead, at least an hour before your scheduled shift, if you’re
+                                going to miss a shift or take time off</option>
+                            <option>Checking in on time</option>
+                            <option>Filling up one water bottle</option>
+                            <option>Checked with a lead for a project</option>
+                            <option>Checked out with a lead</option>
+                            <option>Helping restock or shop for the store</option>
+                            <option>Giving Devotional</option>
+                            <option>First to react to a post on General or from your lead</option>
+                            <option>Fridge cleaning</option>
+                            <option>Coming to Thursday meetings</option>
+                            <option>Winning office competitions (foosball, other activities)</option>
+                            <option>Brought a treat to share with the office</option>
+                            <option>Leading a PD event</option>
+                            <option>Going to the FTC</option>
+                        </select>
+                        <button type="submit" id="submitPoints" class="btn-profile"
+                            onclick="submitTeamPoints()">Submit</button>
+                    </div>
+                </section>
+            </section>
         </section>
     </main>
 </body>

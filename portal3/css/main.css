@@ -587,8 +587,8 @@ main {
     box-shadow: 3px 0 5px var(--shadow);
     color: var(--fontSecond);
 }
-.profile-box p,a,h3,span,option,select,div,input,textarea{color: var(--fontSecond);}
-.profile-box-info p,a,h3,span,option,select,div,input,textarea{color: var(--fontSecond);}
+.profile-box p,a,h2, h3,span,option,select,div,input,textarea{color: var(--fontSecond);}
+.profile-box-info p,a,h2, h3,span,option,select,div,input,textarea{color: var(--fontSecond);}
 .btn-profile {
     width: 160px;
     height: 40px;
