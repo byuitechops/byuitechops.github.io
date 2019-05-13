@@ -470,10 +470,9 @@ editStore.addEventListener('click', () =>{
         invoiceStore.classList.remove('hide');
         snackCart.classList.remove('hide');
         editingStore = false;
-
     }
 })
-invoiceStore.addEventListener('click', ()=>{
+invoiceStore.addEventListener('click', () =>{
     if (!editingStore){
         invoicePage.classList.remove('hide');
         shoppingPage.classList.add('hide');
@@ -484,7 +483,7 @@ function loadSnacks(){
     db.collection("store").doc("inventory").collection("items").get().then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
             firebase.storage().ref().child(`images/${doc.data().image}`).getDownloadURL().then(function (url) {
-                if (doc.data().count != 0 || editingStore){
+                if (doc.data().count > 0 || editingStore){
                     var html = `<section class="snack col5 flex-container">
                     <div class="0snack-pic col5">
                         <img src="${url}" alt="${doc.id}"/>

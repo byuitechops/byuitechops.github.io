@@ -474,9 +474,8 @@ main {
 }
 .snack-manage {
     margin: 75px 75px -50px;
-    width: 80%;
-    /* position: fixed;
-    width: 30%; */
+    position: fixed;
+    width: 30%;
     padding: 15px 40px;
     background-color: var(--first);
     border-radius: 16px;
