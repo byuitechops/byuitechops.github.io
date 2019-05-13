@@ -439,6 +439,7 @@ const invoiceStore = document.getElementById('invoiceStore');
 const snackEdit = document.getElementById('snack-edit');
 const snackAdd = document.getElementById('snack-add');
 const snackCart = document.getElementById('snack-cart');
+const snackList = document.getElementById("snack-container");
 var editingStore = false;
 
 function loadPage() {
@@ -452,6 +453,7 @@ function loadPage() {
         invoiceStore.classList.remove('hide');
     }
     })
+    loadSnacks();
 }
 editStore.addEventListener('click', () =>{
     if (!editingStore){
@@ -477,3 +479,29 @@ invoiceStore.addEventListener('click', ()=>{
         shoppingPage.classList.add('hide');
     }
 })
+// Show items from firebase
+function loadSnacks(){
+    db.collection("store").doc("inventory").collection("items").get().then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+            firebase.storage().ref().child(`images/${doc.data().image}`).getDownloadURL().then(function (url) {
+                if (doc.data().count != 0 || editingStore){
+                    var html = `<section class="snack col5 flex-container">
+                    <div class="0snack-pic col5">
+                        <img src="${url}" alt="${doc.id}"/>
+                    </div>
+                    <div class="snack-info col5">
+                        <h3 class="snack-name">${doc.id}</h3>
+                        <p class="snack-cost">$${doc.data().price}</p>
+                        <p class="snack-count" id="${(doc.id).replace(/ /g, '')}count">Count: ${doc.data().count}</p>
+                        <button class="add-to-cart-btn">Add to Cart</button>
+                    </div>
+                </section>`; 
+                    snackList.insertAdjacentHTML("beforeend", html);
+                }
+            }).catch(function (error) {
+                console.log("There was an error retreiving " + image + " from firebase");
+    
+            })
+        })
+    });
+}
