@@ -556,6 +556,12 @@ main {
     font-size: 1.2em;
     font-weight: 300;
 }
+#confirm-checkout {
+    position: fixed;
+    z-index: 1;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
 
 
 
@@ -632,7 +638,6 @@ main {
     z-index: 20;
     height: 8.5em;
     margin-bottom: -.25em;
-
 }
 .profile-top-bar #clock{
     position: absolute;
@@ -641,14 +646,12 @@ main {
     width: 3.5em;
     z-index: 1;
 }
-
 .profile-top-bar #signOutBtn{
     position: absolute;
     left: 88%;
     top: 5.5%;
     width: 10em;
     z-index: 1;
-
 }
 .page-title-profile{
     margin: 0;
