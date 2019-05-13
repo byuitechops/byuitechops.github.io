@@ -24,7 +24,6 @@ const dateTimeAPM = document.getElementById("apm");
 const dateTimeDate = document.getElementById("date");
 
 
-// Event listeners for the timer
 clockInB.addEventListener('click', function () {
     var setDate = editDate(new Date());
     clockOutB.classList.remove("hiddenBtn");
