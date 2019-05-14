@@ -24,11 +24,69 @@ const info = document.getElementById('info');
 const aboutMe = document.getElementById('aboutMe');
 const img = document.getElementById('arrowImg');
 const cancelChanges = document.getElementById("cancelInfoChanges");
+const pointStart = document.getElementById("pointStart");
 var results = []; //will be used as part of the results for 
 var birthdayPopulate;
 var sameBirthday = true;
 var doneUser = false;
 var user = firebase.auth().currentUser;
+var whatEarnsPoints = [{
+        "title": 'Contacting your lead, at least an hour before your scheduled shift, if you’re going to miss a shift or take time off',
+        "points": 1
+    },
+    {
+        "title": 'Checking in on time',
+        "points": 1
+    },
+    {
+        "title": 'Checked out with a lead',
+        "points": 1
+    },
+    {
+        "title": 'Checked with a lead for a project',
+        "points": 1
+    },
+    {
+        "title": 'Helping restock or shop for the store',
+        "points": 1
+    },
+    {
+        "title": 'Giving Devotional',
+        "points": 1
+    },
+    {
+        "title": 'First to react to a post on General or from your lead',
+        "points": 1
+    },
+    {
+        "title": 'Fridge cleaning',
+        "points": 1
+    },
+    {
+        "title": 'Coming to Thursday meetings',
+        "points": 5
+    },
+    {
+        "title": 'Winning office competitions (foosball, other activities)',
+        "points": 10
+    },
+    {
+        "title": 'Brought a treat to share with the office',
+        "points": 5
+    },
+    {
+        "title": 'Leading a PD event',
+        "points": 1
+    },
+    {
+        "title": 'Going to the FTC',
+        "points": 5
+    },
+    {
+        "title": 'Filling up one water bottle',
+        "points": 2
+    }
+]
 /***********************************************************
  * A. Team Points
  ************************************************************/
@@ -52,47 +110,19 @@ function updateTeamPoints(pointsToAdd, activityType, timeStamp) {
                 .then(function () {
                     console.log("Document successfully written!");
                     alert("User Updated Successfully");
-                    window.location.reload();
                 }).catch(function (error) {
                     // An error happened.
                 });
         })
 }
 function submitTeamPoints() {
-    var setDate = editDate(new Date());
-    var points = 0;
-    var activityType = document.getElementById("pointsOptions").value;
-    if (activityType == 'Contacting your lead, at least an hour before your scheduled shift, if you’re going to miss a shift or take time off') {
-        points = 1;
-    } else if (activityType == 'Checking in on time') {
-        points = 1;
-    } else if (activityType == 'Checked with a lead for a project') {
-        points = 1;
-    } else if (activityType == 'Checked out with a lead') {
-        points = 1;
-    } else if (activityType == 'Helping restock or shop for the store') {
-        points = 1;
-    } else if (activityType == 'Giving Devotional') {
-        points = 1;
-    } else if (activityType == 'First to react to a post on General or from your lead') {
-        points = 1;
-    } else if (activityType == 'Fridge cleaning') {
-        points = 1;
-    } else if (activityType == 'Coming to Thursday meetings') {
-        points = 5;
-    } else if (activityType == 'Winning office competitions (foosball, other activities)') {
-        points = 10;
-    } else if (activityType == 'Brought a treat to share with the office') {
-        points = 5;
-    } else if (activityType == 'Leading a PD event') {
-        points = 1;
-    } else if (activityType == 'Going to the FTC') {
-        points = 5;
-    } else if (activityType == "Filling up one water bottle") {
-        points = 2;
-    }
-
-    updateTeamPoints(points, activityType, setDate);
+    let activityType = document.getElementById("pointsOptions").value;
+    let setDate = editDate(new Date());
+    whatEarnsPoints.forEach(item => {
+        if (item["title"] == activityType) {
+            updateTeamPoints(item["points"], activityType, setDate);
+        }
+    });
 }
 function showResults() {
     console.log("Total = " + results[0]);
@@ -278,9 +308,7 @@ function loadPage() {
                     }
                     //displays lead/admin tools only for the right people
                     if (myData.admin || myData.title == "Project Lead") {
-                        $.when($("#timeAdmin").removeClass('hide')).done(()=>{
-                            console.log("Hello there")
-                        })
+                        $.when($("#timeAdmin").removeClass('hide')).done(() => {})
                     }
                 })
         })
@@ -288,4 +316,7 @@ function loadPage() {
         .then(function (doc) {
             results.push(doc.data().points);
         })
+    whatEarnsPoints.forEach(item => {
+        pointStart.insertAdjacentHTML("afterend", `<option>${item["title"]}</option>`)
+    });
 }
