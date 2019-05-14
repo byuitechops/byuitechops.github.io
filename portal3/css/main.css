@@ -527,7 +527,7 @@ main {
 }
 .snack-manage button, .popup button {
     width: 25%;
-    margin: 5px;
+    margin: 25px 5px;
     padding: 10px;
     border: 2px solid var(--fontPrime);
     background-color: var(--first);
@@ -536,7 +536,7 @@ main {
     outline: none;
     transition: background-color .2s ease;
 }
-.snack-manage button:hover {
+.snack-manage button:hover, .popup button:hover {
     background-color: var(--fontPrime);
     color: var(--first);
 }
@@ -578,14 +578,22 @@ main {
 }
 .popup-content h2 {
     font-size: 3vw;
+    font-weight: 300;
     margin-bottom: 2vw;
 }
-.popup span, .popup input {
+.popup-content span {
+    font-size: 1.5vw;
+    font-weight: 400;
+}
+.popup input {
     font-size: 1.2vw;
     margin: 1vw;
 }
 .popup button {
     margin: 1vw;
+}
+#enjoy-snacks h2 {
+    font-size: 2.8vw;
 }
 
 
