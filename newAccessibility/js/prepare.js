@@ -1,10 +1,7 @@
 getCourses();
 
-var userID = [];
-var userName = [];
-var checkDuplicates = [];
-var userAction = [];
-var userPrepares = [];
+const searchPrepPage = document.getElementById('search-view');
+const doPrepPage = document.getElementById('prepare-view');
 //checks if the user has actually finished a prep before starting another one + handles permission requirements
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
@@ -41,8 +38,6 @@ firebase.auth().onAuthStateChanged(function (user) {
 })
 
 //This function handles the click on the prepare button for a certain transcript.
-var searchPrepPage = document.getElementById('search-view');
-var doPrepPage = document.getElementById('prepare-view');
 
 //the user selected a transcript to prepare, let's update the user's firestore to log that
 // and update page;
