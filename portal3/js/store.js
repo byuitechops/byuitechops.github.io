@@ -123,22 +123,22 @@ function changeTotal(price) {
     var newTotal = (Number(total) + Number(price)).toFixed(2);
     cartTotal.innerHTML = `$${newTotal}`;
 }
-function updateFirebase(name, change) {
+function updateFirebase(name, sub) {
     db.collection('store').doc('inventory').collection('items').doc(`${name}`).get().then(function (doc) {
-        var count = doc.data().count;
-        db.collection('store').doc('inventory').collection('items').doc(name)
-            .update({
-                count: `${count += change}`
-            })
-            .then(function () {
-                console.log("Document successfully updated!");
-            })
-            .catch(function (error) {
-                // The document probably doesn't exist.
-                console.error("Error updating document: ", error);
-            });
+      var count = doc.data().count;
+      db.collection('store').doc('inventory').collection('items').doc(name)
+        .update({
+          count: `${count -= sub}`
+        })
+        .then(function () {
+          console.log("Document successfully updated!");
+        })
+        .catch(function (error) {
+          // The document probably doesn't exist.
+          console.error("Error updating document: ", error);
+        });
     });
-}
+  }
 
 $(cartCheckout).click(() => {
     if ($(cartTotal).html() != "$0.00") {
@@ -150,28 +150,92 @@ $(cartCheckout).click(() => {
 $(cancelPurchase).on('click', function() {
     $(purchaseErr).text("");
     $(confirmCheckout).toggleClass('hide');
-    $(confirmCheckout).fadeOut(400);
 })
 $(confirmPurchase).on('click', function() {
     if ($(cash).prop('checked') || $(venmo).prop('checked')) {
         $(purchaseErr).text("");
+
+        /* This is a single line IF statement! It's DOPE */
+        $(cash).prop('checked') ? updateTotals("cash") : updateTotals("venmo");
+
         $(cash).prop('checked', false);
         $(venmo).prop('checked', false);
+        $(confirmCheckout).fadeOut(400);
         $(confirmCheckout).toggleClass('hide');
-        $(enjoySnacks).fadeIn(400);
-        $(enjoySnacks).toggleClass('hide');
-        $(enjoySnacks).delay(800);
-        $(enjoySnacks).fadeOut(400);
+        $.when( $(enjoySnacks).fadeIn(400), 
+                $(enjoySnacks).toggleClass('hide'),
+                $(enjoySnacks).delay(800), 
+                $(enjoySnacks).fadeOut(400)).done(() =>{
+            $(enjoySnacks).toggleClass('hide');
+        })
         $(snackItemsInCart).empty();
         $(cartTotal).text("$0.00");
-        /*********************
-        * Still need to update Firebase
-        *********************/
+
     } else {
         $(purchaseErr).text("Please select 'Cash' or 'Venmo'");
     }
 })
 
+function updateTotals(type) {
+    console.log(type);
+
+    let total = $(cartTotal).html().slice(1);
+    console.log(total);
+    var items = document.getElementById('snack-shopping-list').getElementsByTagName('span');
+  var array = [];
+  for (var i = 0; i < items.length; i++) {
+    if (i % 2 == 0) {
+      var item = items[i].innerText;
+      var arrayResult = searchArray(array, item);
+      if (typeof arrayResult == "number") {
+        array[arrayResult].count += 1;
+      } else {
+        array.push({
+          name: item,
+          count: 1
+        });
+      }
+    }
+  }
+  var itemsJson = `{"items": {`;
+  // Update the count
+  for (var i = 0; i < array.length; i++) {
+    updateFirebase(array[i].name, array[i].count);
+    itemsJson += `"${array[i].name}": "${array[i].count}",`;
+  }
+  itemsJson = `${itemsJson.slice(0, -1)}}, 
+      "payTotal": "${total}",
+      "payType": "${type}",
+      "user": "${data.nameDisplay}"}`;
+  // Push transaction record to firebase
+  var now = new Date();
+  var dateString = `${now.getFullYear()}-${("0" + (now.getMonth() + 1)).slice(-2)}-${("0" + now.getDate()).slice(-2)} ${("0" + now.getHours()).slice(-2)}:${("0" + now.getMinutes()).slice(-2)}`;
+  db.collection('store').doc('transactions').collection('receipts').doc(dateString).set(JSON.parse(itemsJson)).then(function() {
+    console.log("Document successfully written!");
+  });
+  // Update Money fields
+  db.collection('store').doc('inventory').get().then(function (doc) {
+    var newMoneyTotal = (Number(doc.data()[type]) + Number(total));
+    var moneyJson = `{"${type}": "${newMoneyTotal}"}`;
+    db.collection('store').doc('inventory').update(JSON.parse(moneyJson))
+      .then(function () {
+        console.log("Document successfully updated!");
+      })
+      .catch(function (error) {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
+      });
+  });
+}
+
+function searchArray(array, item) {
+    for (var i = 0; i < array.length; i++) {
+      if (array[i].name == item) {
+        return i;
+      }
+    }
+    return false;
+}
 
 
 /**
