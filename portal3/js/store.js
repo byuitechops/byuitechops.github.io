@@ -11,6 +11,17 @@ const snackItemsInCart = document.getElementById("snack-shopping-list");
 const cartTotal = document.getElementById('shopping-list-total');
 const cartCancel = document.getElementById("snack-cart-cancel");
 const cartCheckout = document.getElementById("snack-cart-checkout");
+const confirmCheckout = document.getElementById("confirm-checkout");
+const confirmTotal = document.getElementById("confirm-total");
+const confirmPurchase = document.getElementById("confirm-purchase");
+const cancelPurchase = document.getElementById("cancel-purchase");
+const enjoySnacks = document.getElementById("enjoy-snacks");
+const cash = document.getElementById("radioCash");
+const venmo = document.getElementById("radioVenmo");
+const purchaseErr = document.getElementById("error-purchase");
+
+
+
 var editingStore = false;
 
 function loadPage() {
@@ -129,24 +140,38 @@ function updateFirebase(name, change) {
     });
 }
 
+$(cartCheckout).click(() => {
+    if ($(cartTotal).html() != "$0.00") {
+        $(confirmCheckout).fadeIn(400);
+        $(confirmCheckout).toggleClass('hide');
+        $(confirmTotal).text($(cartTotal).html());
+    }
+})
+$(cancelPurchase).on('click', function() {
+    $(purchaseErr).text("");
+    $(confirmCheckout).toggleClass('hide');
+    $(confirmCheckout).fadeOut(400);
+})
+$(confirmPurchase).on('click', function() {
+    if ($(cash).prop('checked') || $(venmo).prop('checked')) {
+        $(purchaseErr).text("");
+        $(cash).prop('checked', false);
+        $(venmo).prop('checked', false);
+        $(confirmCheckout).toggleClass('hide');
+        $(enjoySnacks).fadeIn(400);
+        $(enjoySnacks).toggleClass('hide');
+        $(enjoySnacks).delay(800);
+        $(enjoySnacks).fadeOut(400);
+        $(snackItemsInCart).empty();
+        $(cartTotal).text("$0.00");
+        /*********************
+        * Still need to update Firebase
+        *********************/
+    } else {
+        $(purchaseErr).text("Please select 'Cash' or 'Venmo'");
+    }
+})
 
-var modal = document.getElementById("myModal");
-
-var btn = document.getElementById("myBtn");
-
-var span = document.getElementsByClassName("close")[0];
-
-btn.onclick = function() {
-  modal.style.display = "block";
-}
-span.onclick = function() {
-  modal.style.display = "none";
-}
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
 
 
 /**

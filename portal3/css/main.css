@@ -525,7 +525,7 @@ main {
 #snack-shopping-list span {
     text-align: left;
 }
-.snack-manage button {
+.snack-manage button, .popup button {
     width: 25%;
     margin: 5px;
     padding: 10px;
@@ -580,8 +580,15 @@ main {
     font-size: 3vw;
     margin-bottom: 2vw;
 }
-.popup-content span, .popup-content input {
-    font-size: 1.5vw;
+.popup span, .popup input {
+    font-size: 1.2vw;
+    margin: 1vw;
+}
+.popup button {
+    margin: 1vw;
+}
+#confirm-checkout, #enjoy-snacks {
+    display: none;
 }
 
 
