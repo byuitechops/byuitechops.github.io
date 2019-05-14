@@ -22,6 +22,11 @@ db.settings({
 });
 
 var user = firebase.auth().currentUser;
+var userID = [];
+var userName = [];
+var checkDuplicates = [];
+var userAction = [];
+var userPrepares = [];
 
 
 firebase.auth().onAuthStateChanged(function (user) {
