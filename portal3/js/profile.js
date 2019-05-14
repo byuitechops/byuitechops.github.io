@@ -277,8 +277,11 @@ function loadPage() {
                         document.getElementById("redeemTime").innerHTML = myData.time.accumulatedTime + ":00";
                     }
                     //displays lead/admin tools only for the right people
-                    if (myData.admin || myData.title == "Project Lead") {}
-                    if (myData.storeManager == true) {}
+                    if (myData.admin || myData.title == "Project Lead") {
+                        $.when($("#timeAdmin").removeClass('hide')).done(()=>{
+                            console.log("Hello there")
+                        })
+                    }
                 })
         })
     db.collection("team").doc('points').get()

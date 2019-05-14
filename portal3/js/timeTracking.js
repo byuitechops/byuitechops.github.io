@@ -1,40 +1,25 @@
-// Constants for shortcuts
 const users = db.collection('users');
 const admin = document.getElementById('admin');
 const generate = document.getElementById("generate");
-
-
-// loads the page providing different information if the user is an admin/lead
+const checkBox = document.getElementById("checkShow");
 function loadPage() {
-    db.collection("users").where("name", "==", userName)
+    users.where("name", "==", userName)
         .onSnapshot((querySnapshot) => {
             data = querySnapshot.docs[0].data();
-            userId = querySnapshot.docs[0].id;
-            preferance = data.viewMode;
-            //checks if the user has correct permissions first
             if (data.admin || data.lead) {
-                admin.style.visibility = "initial";
-                generateList();
+                generateList(false);
             } else {
                 window.location.replace("home.html");
             }
         })
-
 }
-
-// This section will pertain to showing the using, unlessed the checkbox is checked, we will only show people on the two main teams
-// The checkbox will show all the users that we have. 
-// 
-
-
-var count = 1;
-
-function generateList() {
+function generateList(all) {
     users.orderBy("nameDisplay", "asc").get()
         .then(function (documents) {
+            let count = 1
             documents.forEach(function (doc) {
                 // This will filter out anyone who is not actively on our team
-                if (doc.data().team != "default" && doc.data().nameDisplay != "Demo Student") {
+                if ((doc.data().team != "default" && doc.data().team != "other" && doc.data().nameDisplay != "Demo Student") || all){
                     if (count % 2 == 0) {
                         var interpolate = "active"
                     }
@@ -45,39 +30,20 @@ function generateList() {
             })
         })
 }
-
-function showAll() {
-    // Get the checkbox
-    var checkBox = document.getElementById("checkShow");
-
-    // If the checkbox is checked, display the output text
-    if (checkBox.checked == true) {
-        users.orderBy("nameDisplay", "asc").get()
-            .then(function (documents) {
-                documents.forEach(function (doc) {
-                    if (doc.data().team == "default") {
-                        if (count % 2 == 0) {
-                            var interpolate = "active"
-                        }
-                        generate.insertAdjacentHTML('beforeend', `<tr class='${interpolate}'> <td>${count}</td> <td>${doc.data().nameDisplay}</td><td id="${doc.id}"><span id="count${doc.id}" onclick="editTime('${doc.id}', '${doc.data().time.accumulatedTime}')">${doc.data().time.accumulatedTime}</span></td><td>${doc.data().team}</td><td>${doc.data().title}</td>`)
-                        count++;
-                    }
-
-                })
-            })
+$(checkBox).change(() => {
+    if ($(checkBox).is(':checked')) {
+        $(generate).empty();
+        generateList(true)
     } else {
-        location.reload();
+        $(generate).empty();
+        generateList(false);
     }
-}
-
+});
 function editTime(firestore, time) {
     if (document.getElementsByClassName('notUsed').length == 0) {
-        document.getElementById(firestore).insertAdjacentHTML('beforeend', `<span class="notUsed"><input id='value${firestore}' value="${time}" type="text"> <button onclick="updateDb('${firestore}', ${time}, ${'this'})" style="width:3em" type="submit"> Send </button> <button onclick="deleteSpan(${'this'})" style="width:3em" type="Text"> Close </button> </span>`);
-    } else {
-
-    }
+        document.getElementById(firestore).insertAdjacentHTML('beforeend', `<span class="notUsed"><input id='value${firestore}' value="${time}" type="text"> <button onclick="updateDb('${firestore}', ${time}, ${'this'})" type="submit"> Send </button> <button onclick="deleteSpan(${'this'})" type="Text"> Close </button> </span>`);
+    } 
 }
-
 function updateDb(accessId, timeToAdd, element) {
     console.log(timeToAdd);
     var id = "value" + accessId;
@@ -96,7 +62,6 @@ function updateDb(accessId, timeToAdd, element) {
     document.getElementById(updateHTML).innerText = value;
     element.parentNode.remove();
 }
-
 function deleteSpan(element) {
     element.parentNode.remove();
 }
