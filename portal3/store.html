@@ -143,18 +143,26 @@
                 <section id="data"></section>
     </main>
 
-    <div class="popup" id="confirm-checkout">
+    <div class="popup hide" id="confirm-checkout">
         <div class="popup-content">
             <h2>Shopping Cart</h2>
             <div id="confirm-content">
                 <span>Total: </span>
-                <span id="confirm-total">$</span>
-
-                <input type="radio" name="radio" id="cash">Cash</input>
-                <input type="radio" name="radio" id="venmo">Venmo</input>
-                
-                <button>Cancel</button>
-                <button>Purchase</button>
+                <span id="confirm-total"></span>
+                <br>
+                <div class="radio-box">
+                    <input type="radio" name="radio" id="radioCash" value="1">Cash</input>
+                    <span class="checkmark"></span>
+                </div>
+                <div class="radio-box">
+                    <input type="radio" name="radio" id="radioVenmo" value="2">Venmo</input>
+                    <span class="checkmark"></span>
+                </div>
+                <br>
+                <button id="cancel-purchase">Cancel</button>
+                <button id="confirm-purchase">Purchase</button>
+                <br>
+                <span id="error-purchase"></span>
             </div>
         </div>
     </div>
