@@ -114,7 +114,7 @@ function addCart(item, price, count) {
     }
 }
 function editStoreItem(item, price, count) {
-    
+
 }
 function removeItem(e, item, price) {
     const snackCount = document.getElementById(`${item.replace(/ /g, '')}Count`);
@@ -164,7 +164,7 @@ $(confirmPurchase).on('click', function() {
         $(purchaseErr).text("");
 
         /* This is a single line IF statement! It's DOPE */
-        //$(cash).prop('checked') ? updateTotals("cash") : updateTotals("venmo");
+        $(cash).prop('checked') ? updateTotals("cash") : updateTotals("venmo");
 
         $(cash).prop('checked', false);
         $(venmo).prop('checked', false);
