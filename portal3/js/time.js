@@ -70,6 +70,7 @@ clockOutB.addEventListener('click', function () {
 breakB.addEventListener('click', function () {
     var setDate = editDate(new Date());
     if (data.time.break) {
+        breakB.classList.remove('expanded');
         db.collection('users').doc(userId).update({
             "time.break": false,
             "time.breakKey": setDate
@@ -83,6 +84,7 @@ breakB.addEventListener('click', function () {
         localStorage.setItem('seconds', seconds);
         clearInterval(timer);
     } else {
+        breakB.classList.add('expanded');
         if (!data.time.check) {
             alert("You are logged out. No breaks are allowed");
         } else {

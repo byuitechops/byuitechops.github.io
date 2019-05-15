@@ -292,7 +292,7 @@ main {
 .btn2 {
     width: 260px;
     height: 160px;
-    margin: 15px 15px 0;
+    margin: 15px 15px;
     border-radius: 30px;
     border-style: none;
     font-size: 1.2em;
@@ -351,7 +351,35 @@ main {
     font-weight: 700;
     margin: .5vw 0 0;
     padding: 0;
+}
 
+#break-button {
+    z-index: 2;
+    position: fixed;
+    bottom: 85px;
+    right: 90px;
+    transition: all .5s,
+                right .25s 0s,
+                height .25s 0s,
+                font-size .25s 0s,
+                width .5s .25s;
+}
+#break-button.expanded {
+    position: fixed;
+    width: 1600px;
+    height: 700px;
+    bottom: 85px;
+    right: 50px;
+    font-size: 4vw;
+    transition: all .25s,
+                right .25s .25s,
+                height .25s .25s,
+                width .5s .5s,
+                font-size .5s .5s;
+
+}
+#break-button.expanded:hover {
+    transform: scale(1.01);
 }
 
 
@@ -455,6 +483,15 @@ main {
 }
 .snack:hover {
     transform: scale(1.05);
+}
+.snack {
+    animation: wiggle 1s;
+}
+@keyframes wiggle {
+    10%, 90%      { transform: rotate(-2deg); }
+    20%, 80%      { transform: rotate(4deg);  }
+    30%, 50%, 70% { transform: rotate(-7deg); }
+    40%, 60%      { transform: rotate(12deg); }
 }
 .snack-pic {
     height: 200px;

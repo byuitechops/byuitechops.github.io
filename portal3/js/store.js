@@ -76,7 +76,7 @@ function loadSnacks() {
         querySnapshot.forEach(function (doc) {
             firebase.storage().ref().child(`images/${doc.data().image}`).getDownloadURL().then(function (url) {
                 if (doc.data().count > 0 || editingStore) {
-                    var html = `<section id class="snack col5 flex-container" onclick="addCart('${doc.id}', '${doc.data().price}', '${doc.data().count}')">
+                    var html = `<section id class="snack col5 flex-container" onclick="isEditing('${doc.id}', '${doc.data().price}', '${doc.data().count}')">
                     <div class="snack-pic col10">
                         <img src="${url}" alt="${doc.id}"/>
                     </div>
@@ -95,6 +95,9 @@ function loadSnacks() {
         })
     })
 }
+function isEditing(item, price, count) {
+    (editingStore) ? editStoreItem(item, price, count) : addCart(item, price, count);
+}
 function addCart(item, price, count) {
     const snackCount = document.getElementById(`${item.replace(/ /g, '')}Count`);
     var count = snackCount.innerText.replace(/Count: /g, "");
@@ -110,10 +113,13 @@ function addCart(item, price, count) {
         changeTotal(price);
     }
 }
+function editStoreItem(item, price, count) {
+    
+}
 function removeItem(e, item, price) {
     const snackCount = document.getElementById(`${item.replace(/ /g, '')}Count`);
     var count = snackCount.innerText.replace(/Count: /g, "");
-    snackCount.innerHTML = `Count: ${++count}`;
+    snackCount.innerHTML = `${++count}`;
     changeTotal(0 - price);
     $(e.target).parent().remove();
 }
