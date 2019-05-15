@@ -890,7 +890,9 @@ main {
     height: 30px;
     margin-top: 0;
     padding: 5px 15px;
+    color: var(--fontPrime);
     border-style: none;
+    border-color: var(--third);
     border-radius: 5px;
     background-color: var(--third);
     font-size: 16px;
@@ -898,7 +900,7 @@ main {
 #editInfo select {
     margin-right: 19px;
     padding: 5px 10px;
-    color: var(--fontSecond);
+    color: var(--fontPrime);
 }
 #aboutMe {
     width: 100%;
@@ -913,6 +915,43 @@ main {
 #button-box
 {
     width: 100%;
+}
+.toolTipBox h2 {
+    text-align: center;
+}
+#box, #redeemTime {
+    margin-bottom: 50px;
+    font-size: 40px;
+    text-align: center;
+}
+#redeemBtn {
+    margin-left: 37%;
+}
+#usingRedeem h2 {
+    font-size: 2.4vw;
+}
+#usingRedeem input {
+    color: var(--fontSecond);
+    padding: 5px 15px;
+    border-style: none;
+    border-radius: 5px;
+}
+#usingRedeem p {
+    margin: 10px 18px;
+}
+#accumulated {
+    margin: 18px;
+}
+#confirmRedeem img {
+    width: 50%;
+    margin: 0 25%;
+}
+#close {
+    margin-left: 37%;
+}
+#resultRedeem {
+    margin-left: 42%;
+    font-size: 2vw;
 }
 
 

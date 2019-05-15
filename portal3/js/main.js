@@ -165,7 +165,7 @@ function changeTheme(preferance) {
           setTheme({
             'first': '#343a40',
             'second': '#1c1b1b',
-            'third': '#343a40',
+            'third': '#1c1b1b',
             'background': '#1c1b1b',
             'backgroundSecondary': '#777777',
             'backgroundGrade': 'none',
@@ -191,7 +191,7 @@ function changeTheme(preferance) {
           setTheme({
             'first': '#343a40',
             'second': '#343a40',
-            'third': '#a30909',
+            'third': '#890000',
             'background': '#1c1b1b',
             'backgroundSecondary': '#777777',
             'backgroundGrade': 'linear-gradient(180deg, rgba(36,0,0,1) 0%, rgba(121,9,9,1) 35%, rgba(255,0,0,1) 100%)',
