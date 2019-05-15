@@ -482,7 +482,7 @@ main {
 .snack:hover {
     transform: scale(1.05);
 }
-.snack {
+/* .snack {                  // Just an experimental animation.
     animation: wiggle 1s;
 }
 @keyframes wiggle {
@@ -490,7 +490,7 @@ main {
     20%, 80%      { transform: rotate(4deg);  }
     30%, 50%, 70% { transform: rotate(-7deg); }
     40%, 60%      { transform: rotate(12deg); }
-}
+} */
 .snack-pic {
     height: 200px;
     width: 200px;
