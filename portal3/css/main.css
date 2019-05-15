@@ -154,6 +154,9 @@ nav {
 .current-page {
     border-left: 10px solid white;
 }
+.wrap {
+    flex-wrap: wrap;
+}
 
 
 
@@ -447,37 +450,55 @@ main {
     border-radius: 10px;
     box-shadow: 3px 0 5px var(--shadow);
     transition: transform .2s;
+    display: flex;
+    flex-flow: column nowrap;
 }
 .snack:hover {
     transform: scale(1.05);
 }
 .snack-pic {
-    height: 150px;
-    width: 150px;
+    height: 200px;
+    width: 200px;
     overflow: hidden;
 }
 .snack img {
-    height: 150px;
-    width: 150px;
-    border-radius: 40px;
+    height: 200px;
+    width: 200px;
+    border-radius: 6px;
 }
 .snack-info {
     width: 200px;
     height: auto;
     position: relative;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: space-between;
 }
 .snack-info h3 {
-    padding: 5%;
-    font-size: 24px;
+    width: 100%;
+    margin: 20px 0 5px;
+    font-size: .8vw;
     font-weight: 500;
+    text-transform: uppercase;
     color: var(--fontSecond);
 }
 .snack-info p {
-    padding: 1% 5%;
-    font-size: 20px;
     font-weight: 300;
     color: var(--fontSecond);
 }
+.snack-count {
+    margin: 20px 0;
+    font-size: .8vw;
+}
+.snack-cost {
+    margin-left: 40%;
+    font-size: 2vw;
+}
+.snack-in-cart .snack-cost {
+    margin: 0;
+    font-size: 1vw;
+}
+
 .snack-info button {
     position: absolute;
     right: 0;
@@ -502,6 +523,7 @@ main {
     width: 30%;
     padding: 15px 40px;
     background-color: var(--first);
+    box-shadow: 5px 0 8px var(--shadow);
     border-radius: 16px;
 }
 #snack-cart {
@@ -544,15 +566,55 @@ main {
     display: flex;
     justify-content: flex-end;
 }
+.snack-manage form {
+    display: flex;
+    flex-flow: row wrap;
+}
 .snack-manage h2 {
-    margin: 20px 0;
-    font-size: 2em;
-    font-weight: 500;
+    width: 100%;
+    margin: 30px 0;
+    font-size: 3em;
+    font-weight: 300;
 }
 .snack-manage p {
     padding-bottom: 10px;
     font-size: 1.2em;
     font-weight: 300;
+}
+#snack-edit p, #snack-add p {
+    width: 30%;
+    margin: 5px;
+    font-size: 1vw;
+    font-weight: 500;
+}
+#snack-edit input, #snack-add input {
+    float: right;
+    width: 58%;
+    margin: 5px;
+    padding: 3px;
+    font-size: .9vw;
+    font-weight: 500;
+    text-align: right;
+    border: none;
+    border-radius: 3px;
+    color: var(--second);
+    transition: all .2s;
+    cursor: pointer;
+}
+#snack-edit input:hover, #snack-add input:hover {
+    width: 60%;
+}
+#add-img {
+    width: 25%;
+    margin: 25px 5px;
+    padding: 10px;
+    border: 2px solid var(--fontPrime);
+    background-color: var(--first);
+    color: var(--first);
+    font-weight: 600;
+    border-radius: 4px;
+    outline: none;
+    transition: background-color .2s ease;
 }
 .popup {
     position: fixed;
@@ -595,7 +657,6 @@ main {
 #enjoy-snacks h2 {
     font-size: 2.8vw;
 }
-
 
 
 

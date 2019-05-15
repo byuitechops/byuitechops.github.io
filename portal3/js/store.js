@@ -40,14 +40,14 @@ function loadPage() {
 $(editStore).click(() => {
     if (!editingStore) {
         $(editStore).html("Save Store");
-        $(snackEdit, snackAdd).removeClass('hide');
+        $(snackAdd).removeClass('hide');
         $(snackCart, invoiceStore).addClass('hide');
         $(snackList).empty();
         editingStore = true;
         loadSnacks();
     } else {
         $(editStore).html("Edit Store");
-        $(snackEdit, snackAdd).addClass('hide');
+        $(snackAdd).addClass('hide');
         $(snackCart, invoiceStore).removeClass('hide');
         $(snackList).empty();
         editingStore = false;
@@ -76,15 +76,14 @@ function loadSnacks() {
         querySnapshot.forEach(function (doc) {
             firebase.storage().ref().child(`images/${doc.data().image}`).getDownloadURL().then(function (url) {
                 if (doc.data().count > 0 || editingStore) {
-                    var html = `<section class="snack col5 flex-container">
-                    <div class="0snack-pic col5">
+                    var html = `<section id class="snack col5 flex-container" onclick="addCart('${doc.id}', '${doc.data().price}', '${doc.data().count}')">
+                    <div class="snack-pic col10">
                         <img src="${url}" alt="${doc.id}"/>
                     </div>
-                    <div class="snack-info col5">
+                    <div class="snack-info col10">
                         <h3 class="snack-name">${doc.id}</h3>
+                        <p class="snack-count" id="${(doc.id).replace(/ /g, '')}Count">${doc.data().count}</p>
                         <p class="snack-cost">$${doc.data().price}</p>
-                        <p class="snack-count" id="${(doc.id).replace(/ /g, '')}Count">Count: ${doc.data().count}</p>
-                        <button class="add-to-cart-btn" onclick="addCart('${doc.id}', '${doc.data().price}', '${doc.data().count}')">Add to Cart</button>
                     </div>
                 </section>`;
                     snackList.insertAdjacentHTML("beforeend", html);
@@ -94,7 +93,7 @@ function loadSnacks() {
 
             })
         })
-    });
+    })
 }
 function addCart(item, price, count) {
     const snackCount = document.getElementById(`${item.replace(/ /g, '')}Count`);
@@ -107,7 +106,7 @@ function addCart(item, price, count) {
     </div>`
         snackItemsInCart.insertAdjacentHTML("beforeend", html);
         var count = snackCount.innerText.replace(/Count: /g, "");
-        snackCount.innerHTML = `Count: ${--count}`;
+        snackCount.innerHTML = `${--count}`;
         changeTotal(price);
     }
 }
@@ -142,7 +141,7 @@ function updateFirebase(name, sub) {
 
 
 
-  
+
 $(cartCheckout).click(() => {
     if ($(cartTotal).html() != "$0.00") {
         $(confirmCheckout).fadeIn(400);
