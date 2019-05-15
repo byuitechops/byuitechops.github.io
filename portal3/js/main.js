@@ -152,7 +152,7 @@ function changeTheme(preferance) {
           setTheme({
             'first': '#0076c6',
             'second': '#6c757d',
-            'third': '#0076c6',
+            'third': '#343a40',
             'background': '#ffffff',
             'backgroundSecondary': '#ffffff',
             'backgroundGrade': 'none',
@@ -164,8 +164,8 @@ function changeTheme(preferance) {
         case 'dark':
           setTheme({
             'first': '#343a40',
-            'second': '#0076c6',
-            'third': '#0076c6',
+            'second': '#1c1b1b',
+            'third': '#343a40',
             'background': '#1c1b1b',
             'backgroundSecondary': '#777777',
             'backgroundGrade': 'none',
@@ -177,8 +177,8 @@ function changeTheme(preferance) {
         case 'jedi':
           setTheme({
             'first': '#06439F',
-            'second': '#0076c6',
-            'third': '#06439F',
+            'second': '#343a40',
+            'third': '#343a40',
             'background': 'none',
             'backgroundSecondary': '#ffffff',
             'backgroundGrade': 'linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)',
@@ -190,7 +190,7 @@ function changeTheme(preferance) {
         case 'sith':
           setTheme({
             'first': '#343a40',
-            'second': '#a30909',
+            'second': '#343a40',
             'third': '#a30909',
             'background': '#1c1b1b',
             'backgroundSecondary': '#777777',
@@ -203,8 +203,8 @@ function changeTheme(preferance) {
         case 'merica':
           setTheme({
             'first': '#0076c6',
-            'second': '#6c757d',
-            'third': '#0076c6',
+            'second': '#343a40',
+            'third': '#ed2525',
             'background': '#ffffff',
             'backgroundSecondary': '#ffffff',
             'backgroundGrade': 'linear-gradient(9deg, rgba(255,0,0,1) 0%, rgba(221,59,59,1) 16%, rgba(235,208,208,1) 32%, rgba(255,255,255,1) 39%, rgba(191,230,241,1) 45%, rgba(69,163,190,1) 64%, rgba(51,83,185,1) 80%)',

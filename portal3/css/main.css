@@ -564,6 +564,7 @@ main {
 #snack-cart {
     display: flex;
     flex-flow: column nowrap;
+    
 }
 .snack-in-cart {
     padding: 18px;
@@ -580,6 +581,7 @@ main {
 }
 #snack-cart-receipt span,
 #snack-shopping-list span {
+    color: var(--fontPrime);
     text-align: left;
 }
 .snack-manage button, .popup button {
@@ -716,23 +718,25 @@ main {
 #signOutBtn {
     margin: 0 50px;
     padding: 20px;
+    background-color: var(--second);
     transition: all .2s;
     border-radius: 50px;
 }
 #signOutBtn:hover {
     transform: scale(1.1);
-    background-color: var(--first);
+    background-color: var(--third);
 }
 #clock {
     width: 80px;
     height: 80px;
     padding: 15px;
+    background-color: var(--second);
     transition: all .2s;
     border-radius: 25%;
 }
 #clock:hover {
     transform: scale(1.2);
-    background-color: var(--first);
+    background-color: var(--third);
 }
 
 #profile-content {
@@ -744,6 +748,7 @@ main {
     margin: 3%;
     padding: 40px;
     flex-flow: row wrap;
+    box-shadow: 1px 1px 3px var(--shadow);
     border: 10px solid var(--first);
     border-radius: 20px;
 }
@@ -757,19 +762,23 @@ main {
 }
 #editContact:hover {
     transform: scale(1.25);
+    background-color: var(--third);
 }
 #dbName {
     font-size: 2.7vw;
     font-weight: 300;
     margin-bottom: 20px;
+    color: var(--fontSecond);
 }
 #profile-info h4 {
     margin: 20px 0 10px;
     font-size: 25px;
     font-weight: 300;
+    color: var(--fontSecond);
 }
 #profile-info p {
     margin: 3px 0;
+    color: var(--fontSecond);
 }
 #resources {
     flex-flow: row wrap;
@@ -782,9 +791,11 @@ main {
     font-family: "Roboto";
     font-weight: 300;
     text-align: center;
+    color: var(--fontSecond);
 }
 #links-box {
     width: 100%;
+    margin-bottom: 40px;
     justify-content: center;
 }
 .profile-links {
@@ -804,10 +815,14 @@ main {
 }
 .profile-links a:hover {
     transform: scale(1.1);
-    background-color: var(--second);
+    background-color: var(--third);
+}
+.themes-box {
+    display: flex;
+    flex-flow: column nowrap;
 }
 .themes {
-    margin: 50px auto;
+    margin: 10px auto 50px;
 }
 .themes button {
     margin: 2px;
@@ -817,6 +832,7 @@ main {
 #team-points h3 {
     width: 25%;
     margin: 5px 0;
+    color: var(--fontSecond);
 }
 #select-points select {
     width: 80%;
@@ -833,6 +849,7 @@ main {
 }
 #select-points select:hover {
     height: 90%;
+    background-color: var(--first);
 }
 #select-points button[type="submit"] {
     width: 20%;
@@ -849,6 +866,7 @@ main {
 }
 #select-points button[type="submit"]:hover {
     transform: scale(1.2);
+    background-color: var(--third);
 }
 
 
@@ -857,7 +875,7 @@ main {
     flex-flow: row wrap;
     justify-content: space-between;
 }
-#editInfo h2 {
+#editInfo h2, #usingRedeem h2, #toolTipBox h2 {
     font-size: 2.5vw;
 }
 #editInfo span {
@@ -870,7 +888,8 @@ main {
 #editInfo input,select,textarea {
     width: 50%;
     height: 30px;
-    padding: 5px;
+    margin-top: 0;
+    padding: 5px 15px;
     border-style: none;
     border-radius: 5px;
     background-color: var(--third);
@@ -878,17 +897,23 @@ main {
 }
 #editInfo select {
     margin-right: 19px;
+    padding: 5px 10px;
     color: var(--fontSecond);
+}
+#aboutMe {
+    width: 100%;
 }
 #editInfo textarea {
     width: 100%;
     height: 100px;
+    padding: 5px 15px;
+    font-family: "Roboto";
+    font-weight: 300;
 }
 #button-box
 {
     width: 100%;
 }
-
 
 
 /***************************************
@@ -897,7 +922,6 @@ main {
 *   This is just for reference.
 *
 ****************************************
-
 .popup {
     position: fixed;
     z-index: 4;
