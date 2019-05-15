@@ -127,6 +127,8 @@ function submitTeamPoints() {
 function showResults() {
     console.log("Total = " + results[0]);
 }
+
+
 /***********************************************************
  * B. Redeem Hours
  ************************************************************/
