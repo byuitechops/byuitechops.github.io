@@ -263,9 +263,6 @@ main {
 .right-sidebar img {
     width: 100%;
 }
-.themes {
-    margin-bottom: 70px;
-}
 .btn1 {
     width: 30px;
     height: 30px;
@@ -719,9 +716,7 @@ main {
 #clock {
     width: 70px;
     height: 70px;
-    
 }
-
 
 #profile-content {
     padding: 2.5%;
@@ -741,8 +736,83 @@ main {
     padding: 10px;
     background-color: white;
     border-radius: 50%;
+    transition: all .2s;
+}
+#editContact:hover {
+    transform: scale(1.25);
 }
 #dbName {
     font-size: 2.7vw;
     font-weight: 300;
+    margin-bottom: 20px;
+}
+#profile-info h4 {
+    margin-top: 20px;
+    font-size: 20px;
+}
+#profile-info p {
+    margin: 3px 0;
+}
+#resources {
+    flex-flow: row wrap;
+    font-family: "Roboto";
+    font-weight: 300;
+}
+#resources h3 {
+    font-family: "Roboto";
+    font-weight: 300;
+}
+.profile-links {
+    flex-flow: column wrap;
+    margin: auto;
+}
+.profile-links a {
+    width: 80%;
+    margin: 10px 5%;
+    padding: 5px;
+    background-color: var(--first);
+    border-radius: 40px;
+    text-decoration: none;
+    text-align: center;
+    font-size: .75vw;
+    transition: all .2s;
+}
+.profile-links a:hover {
+    transform: scale(1.1);
+    background-color: var(--second);
+}
+.themes {
+    margin: 50px auto;
+}
+.themes button {
+    margin: 2px;
+    width: 40px;
+    height: 40px;
+}
+#team-points h3 {
+    width: 25%;
+    margin: 5px 0;
+}
+#select-points select {
+    width: 80%;
+    height: 30px;
+    margin: 5px;
+    color: var(--fontPrime);
+    font-family: "Roboto";
+    font-size: 15px;
+    background-color: var(--first);
+    border: none;
+    border-radius: 5px;
+}
+#select-points button[type="submit"] {
+    width: 20%;
+    height: 30px;
+    margin: 5px;
+    color: var(--fontPrime);
+    font-family: "Roboto";
+    font-size: 14px;
+    font-weight: 500;
+    background-color: var(--first);
+    border: none;
+    border-radius: 5px;
 }
