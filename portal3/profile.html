@@ -55,43 +55,21 @@
     - 4. Main
     ---------------------------------------------->
 
-    <main class="flex-container flex-column col9">
+    <main class="flex-container col9" id="profile-main">
 
         <section class="flex-container profile-top-bar col10">
-            <h2 class="page-title-profile">Profile</h2>
-            <div class="flex-container flex-row">
+            <h2 class="page-title-profile page-title">Profile</h2>
+            <div class="flex-container" id="clock-box">
                 <h2 id="signOutBtn">Sign Out</h2>
                 <img id="clock" src="/portal/assets/clockWhite.png">
-                <span class="hide" id="toolTipBox">
-                    <p>Accumulated Time (hrs)</p>
-                    <div id="box"></div>
-                    <p id="redeemTime">##:##</p><button id="redeem">REDEEM</button>
-                </span>
             </div>
-            <div id="usingRedeem" class="hide">
-                <h2>Redeem Confirmation</h2>
-                <p>Accumulated Time</p>
-                <h1 id="accumulated">00:00</h1>
-                <p id="howMuch">How much time would you like to redeem? (Hours)</p>
-
-                <input id="timeDesired" type="number" min="0"></input>
-                <button id="cancel">Cancel</button>
-                <button id="redeembtn">Redeem</button>
-            </div>
-            <div id="confirmRedeem" class="hide">
-                <img src="/portal/assets/check-01.png">
-                <h2>Redeemed Hours</h2>
-                <p id="resultRedeem">00:00</p>
-                <button id="close">Ok</button>
-            </div>
-            <span id="time"></span>
         </section>
 
 
-        <section class="col8 flex-container flex-row col9">
+        <section class="col10 flex-container" id="profile-content">
 
-            <section class="profile-box-info col4">
-                <div>
+            <section class="profile-box-info col4" id="profile-info">
+                <div class="col10">
                     <img id="editContact" src="/portal/assets/edit.png">
                     <h3 id="dbName"></h3>
                     <p id="dbTitle"></p>
@@ -99,18 +77,18 @@
                     <p id="dbPhone"></p>
                     <p id="dbEmail"></p>
                 </div>
-                <div id="info">
+                <div class="col10" id="info">
                     <h4>Info</h4>
                     <p id="dbBirth"></p>
                     <p id="dbMajor"></p>
                     <p id="dbTrack"></p>
                     <p id="dbGradDate"></p>
                 </div>
-                <div id="aboutMe">
+                <div class="col10" id="aboutMe">
                     <h4>About Me</h4>
                     <p id="dbAboutMe"></p>
                 </div>
-                <div id="editInfo" class="hide">
+                <div id="editInfo" class="col10 hide">
                     <h2>Edit your Information</h2>
                     <p>Name: </p>
                     <input id="editName" type="text" placeholder="Name + Last Name">
@@ -154,10 +132,10 @@
                 </div>
             </section>
 
-            <section class="profile-box flex-container flex-column col6" id="reasources">
+            <section class="profile-box flex-container col4" id="resources">
                 <h3>Resources</h3>
-                <div class="flex-container flex-row">
-                    <div class="flex-container flex-column profile-links">
+                <div class="flex-container col10">
+                    <div class="flex-container  profile-links">
                         <a href="https://docs.google.com/document/d/1BHM-fW4LRBSb73uvN8jLHU9_v9Q91R5aHdBM0Srj1SA/edit?usp=sharing"
                             target="_blank">Work Policies</a>
                         <a target="_blank"
@@ -169,7 +147,7 @@
                             href="http://www.byui.edu/executive-strategy-and-planning/institutional-research/outcomes-and-assessments/course-level">Outcomes
                             and Assessments</a>
                     </div>
-                    <div class="flex-container flex-column profile-links">
+                    <div class="flex-container  profile-links">
                         <a href="https://docs.google.com/document/d/1G_bc5LFy2V5TrO4riSLdPtsH2JvYIlvtGRxi1JYUjlk/edit?usp=sharing"
                             target="_blank">Employee Handbook</a>
                         <a target="_blank" href="https://canvas.instructure.com/styleguide">Canvas Style
@@ -189,7 +167,7 @@
                         </section>
                     </div>
                 </div>
-                <section class="flex-container flex-column">
+                <section class="flex-container col10">
                     <h3>Team Points</h3>
                     <br>
                     <div class="flex-container col10">
@@ -205,6 +183,34 @@
         </section>
 
     </main>
+
+
+    <div class="hide" id="toolTipBox">
+        <p>Accumulated Time (hrs)</p>
+        <div id="box"></div>
+        <p id="redeemTime">##:##</p><button id="redeem">REDEEM</button>
+    </div>
+
+    <div id="usingRedeem" class="hide">
+        <div id="usingRedeemBox">
+            <h2>Redeem Confirmation</h2>
+            <p>Accumulated Time</p>
+            <h1 id="accumulated">00:00</h1>
+            <p id="howMuch">How much time would you like to redeem? (Hours)</p>
+
+            <input id="timeDesired" type="number" min="0"></input>
+            <button id="cancel">Cancel</button>
+            <button id="redeembtn">Redeem</button>
+        </div>
+    </div>
+
+    <div id="confirmRedeem" class="hide">
+        <img src="/portal/assets/check-01.png">
+        <h2>Redeemed Hours</h2>
+        <p id="resultRedeem">00:00</p>
+        <button id="close">Ok</button>
+    </div>
+    <span id="time"></span>
 
 </body>
 

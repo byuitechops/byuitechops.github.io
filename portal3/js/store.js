@@ -96,7 +96,7 @@ function loadSnacks() {
     })
 }
 function isEditing(item, price, count) {
-    (editingStore) ? editStoreItem(item, price, count) : addCart(item, price, count);
+    (!editingStore) ? addCart(item, price, count) : editStoreItem(item, price, count);
 }
 function addCart(item, price, count) {
     const snackCount = document.getElementById(`${item.replace(/ /g, '')}Count`);
@@ -114,7 +114,7 @@ function addCart(item, price, count) {
     }
 }
 function editStoreItem(item, price, count) {
-
+    
 }
 function removeItem(e, item, price) {
     const snackCount = document.getElementById(`${item.replace(/ /g, '')}Count`);

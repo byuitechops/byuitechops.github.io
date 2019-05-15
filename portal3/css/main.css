@@ -83,6 +83,7 @@
 [class*="col"] {
     float: left;
 }
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -126,7 +127,7 @@ nav {
     height: 100%;
     position: fixed;
     box-shadow: 5px 0 10px var(--shadow);
-    z-index: -1;
+    z-index: 3;
 }
 .nav-links {
     width: 100%;
@@ -366,9 +367,9 @@ main {
 }
 #break-button.expanded {
     position: fixed;
-    width: 1600px;
-    height: 700px;
-    bottom: 85px;
+    width: 83%;
+    height: 80%;
+    bottom: 65px;
     right: 50px;
     font-size: 4vw;
     transition: all .25s,
@@ -499,7 +500,7 @@ main {
     overflow: hidden;
 }
 .snack img {
-    height: 200px;
+    height: auto;
     width: 200px;
     border-radius: 6px;
 }
@@ -696,106 +697,52 @@ main {
 }
 
 
-
 /**********************************************
 * 7. Profile.html
 **********************************************/
 
-.profile-box{
-    padding: 20px;
-    height: auto;
-    margin: 20px -40px 20px 50px;
-    border: 5px solid var(--first);
-    border-radius: 10px;
-    box-shadow: 3px 0 5px var(--shadow);
-    color: var(--fontSecond);
+#profile-main {
+    flex-flow: row wrap;
 }
-.profile-box#reasources{
-    padding: 20px;
-    height: 30em;
-    width: auto;
-    margin: 20px -40px 20px 50px;
-    border: 5px solid var(--first);
-    border-radius: 10px;
-    box-shadow: 3px 0 5px var(--shadow);
-    color: var(--fontSecond);
+.profile-top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px 0 0;
+    width: 100%;
 }
-.profile-box #pointsOptions{
-    width: 80%;
+#clock-box {
+    display: flex;
+    align-items: center;
+    padding: ;
 }
-.profile-box-info{
-    padding: 20px;
-    height: 30em;
-    margin: 20px -40px 20px 50px;
-    border: 5px solid var(--first);
-    border-radius: 10px;
-    box-shadow: 3px 0 5px var(--shadow);
-    color: var(--fontSecond);
-}
-.profile-box p,a,h2, h3,span,option,select,div,input,textarea{color: var(--fontSecond);}
-.profile-box-info p,a,h2, h3,span,option,select,div,input,textarea{color: var(--fontSecond);}
-.btn-profile {
-    width: 160px;
-    height: 40px;
-    margin: 5px;
-    border-radius: 10px;
-    border-style: none;
-    font-size: 1.2em;
-    font-weight: 500;
-    color: var(--fontPrime);
-    outline: none;
-    background-color: var(--first);
-    transition: transform .2s;
-    box-shadow: 2px 1px 5px var(--shadow);
-    overflow-x: hidden;
-}
-.btn-profile:hover {
-    background-color: var(--second);
-    transform: scale(1.05);
-}
-.profile-points{
-    border-radius: 10px;
-    border-style: solid;
-    border-color: var(--first);
-    border-width: 3px; 
-    font-size: 1.2em;
-    font-weight: 500;
-    color: var(--fontSecond);
-    background-color: var(--backgroundSecondary);
-}
-.profile-top-bar{
-    flex-direction: row;
-    justify-content: flex-start;
-    background: var(--first);
-    z-index: 20;
-    height: 8.5em;
-    margin-bottom: -.25em;
-}
-.profile-top-bar #clock{
-    position: absolute;
-    left: 95%;
-    top: 4%;
-    width: 3.5em;
-    z-index: 1;
-}
-.profile-top-bar #signOutBtn{
-    position: absolute;
-    left: 88%;
-    top: 5.5%;
-    width: 10em;
-    z-index: 1;
-}
-.page-title-profile{
-    margin: 0;
-    padding: 50px 6% 30px;
-    font-size: 2.5em;
-    font-weight: 400;
-    color: var(--fontPrime);
-}
-.profile-links{
-    margin: 1em;
+#clock {
+    width: 70px;
+    height: 70px;
+    
 }
 
-.themes {
-    margin-left: 5vw;
+
+#profile-content {
+    padding: 2.5%;
+    flex-flow: row wrap;
+    color: var(--fontSecond);
+}
+
+#profile-info, #resources {
+    margin: 3%;
+    padding: 40px;
+    flex-flow: row wrap;
+    border: 10px solid var(--first);
+    border-radius: 20px;
+}
+#editContact {
+    float: right;
+    padding: 10px;
+    background-color: white;
+    border-radius: 50%;
+}
+#dbName {
+    font-size: 2.7vw;
+    font-weight: 300;
 }

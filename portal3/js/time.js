@@ -84,11 +84,11 @@ breakB.addEventListener('click', function () {
         localStorage.setItem('seconds', seconds);
         clearInterval(timer);
     } else {
-        breakB.classList.add('expanded');
         if (!data.time.check) {
             alert("You are logged out. No breaks are allowed");
         } else {
             // Start Break
+            breakB.classList.add('expanded');
             db.collection('users').doc(userId).update({
                 "time.break": true,
                 "time.breakKey": setDate
