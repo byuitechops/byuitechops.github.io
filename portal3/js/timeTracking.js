@@ -23,7 +23,7 @@ function generateList(all) {
                     if (count % 2 == 0) {
                         var interpolate = "active"
                     }
-                    generate.insertAdjacentHTML('beforeend', `<tr class='${interpolate}'> <td>${count}</td> <td>${doc.data().nameDisplay}</td><td id="${doc.id}"><span id="count${doc.id}" onclick="editTime('${doc.id}', '${doc.data().time.accumulatedTime}')">${doc.data().time.accumulatedTime}</span></td><td>${doc.data().team}</td><td>${doc.data().title}</td>`)
+                    generate.insertAdjacentHTML('beforeend', `<tr class='${interpolate}'> <td class="admin-count">${count}</td> <td>${doc.data().nameDisplay}</td><td id="${doc.id}"><span id="count${doc.id}" onclick="editTime('${doc.id}', '${doc.data().time.accumulatedTime}')">${doc.data().time.accumulatedTime}</span></td><td>${doc.data().team}</td><td>${doc.data().title}</td>`)
                     count++;
                 }
 

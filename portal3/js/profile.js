@@ -25,6 +25,8 @@ const aboutMe = document.getElementById('aboutMe');
 const img = document.getElementById('arrowImg');
 const cancelChanges = document.getElementById("cancelInfoChanges");
 const pointStart = document.getElementById("pointStart");
+const yayPoints = document.getElementById("yay-points");
+
 var results = []; //will be used as part of the results for 
 var birthdayPopulate;
 var sameBirthday = true;
@@ -109,11 +111,16 @@ function updateTeamPoints(pointsToAdd, activityType, timeStamp) {
                 })
                 .then(function () {
                     console.log("Document successfully written!");
-                    alert("User Updated Successfully");
+                    $.when( $(yayPoints).fadeIn(400), 
+                            $(yayPoints).toggleClass('hide'),
+                            $(yayPoints).delay(1200), 
+                            $(yayPoints).fadeOut(400)).done(() =>{
+                        $(yayPoints).toggleClass('hide');
                 }).catch(function (error) {
                     // An error happened.
                 });
-        })
+        });
+    });
 }
 function submitTeamPoints() {
     let activityType = document.getElementById("pointsOptions").value;
