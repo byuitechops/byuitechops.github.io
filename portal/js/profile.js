@@ -323,6 +323,10 @@ function loadPage() {
                     if (myData.admin || myData.title == "Project Lead") {
                         $.when($("#timeAdmin").removeClass('hide')).done(() => {})
                     }
+
+                    if (myData.storeManager || myData.admin || myData.webMaster) {
+                        $.when($("#storeAdmin").removeClass('hide').done(() =>{}))
+                    }
                 })
         })
     db.collection("team").doc('points').get()
