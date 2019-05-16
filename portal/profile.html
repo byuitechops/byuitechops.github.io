@@ -104,6 +104,8 @@
                         <a target="_blank"
                             href="http://www.byui.edu/executive-strategy-and-planning/institutional-research/outcomes-and-assessments/course-level">Outcomes
                             and Assessments</a>
+                        <a target="_blank"
+                            href="https://www.myworkday.com/byuhi/d/home.htmld">Workday</a>
                     </div>
                     <div class="flex-container profile-links col5">
                         <a href="https://docs.google.com/document/d/1G_bc5LFy2V5TrO4riSLdPtsH2JvYIlvtGRxi1JYUjlk/edit?usp=sharing"
@@ -183,7 +185,7 @@
             <span class="hide">Team: </span>
             <span id="aboutMe">About You:</span>
             <textarea id="editAboutMe" type="text"> Tell us more about yourself </textarea>
-            <div id="button-box">
+            <div class="button-box">
                 <button id="submitInfoChanges">Submit</button>
                 <button id="cancelInfoChanges">Cancel</button>
             </div>
@@ -195,7 +197,10 @@
             <h2>Accumulated Time</h2>
             <div id="box"></div>
             <p id="redeemTime">##:##</p>
-            <button id="redeemBtn">Redeem</button>
+            <div class="button-box">
+                <button id="redeemBtn">Redeem</button>
+                <button id="cancelRedeemBtn">Cancel</button>
+            </div>
         </div>
     </div>
 
@@ -207,8 +212,10 @@
             <p id="howMuch">How much time would you like to redeem? (Hours)</p>
 
             <input id="timeDesired" type="number" min="0"></input>
-            <button id="cancel">Cancel</button>
-            <button id="redeemBtn2">Redeem</button>
+            <div class="button-box">
+                <button id="redeemBtn2">Redeem</button>
+                <button id="cancel">Cancel</button>
+            </div>
         </div>
     </div>
 
