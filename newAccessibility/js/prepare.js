@@ -365,7 +365,7 @@ function showCodeLink() {
 
             if (link.includes("youtube")) {
                 var id = link.slice(link.indexOf("watch?v=") + 8, (link.indexOf("watch?v=") + 9) + 11);
-                var html = `<p><a href="https://www.youtube-nocookie.com/embed/${id}?rel=0&amp;showinfo=0" target="_blank">${title}</a>(${time} mins, <a href="${setlink}" target="_blank">${title} Transcript</a></p>`;
+                var html = `<p><a href="https://www.youtube-nocookie.com/embed/${id}?rel=0&amp;showinfo=0" target="_blank">${title}</a>(${time} mins, <a href="${setlink}" target="_blank">${title} Transcript</a>)</p>`;
                 document.getElementById('codehtml').innerText = html;
             } else if (link.includes("youtu.be")) {
                 var id = link.slice(link.indexOf(".be/") + 4, (link.indexOf(".be/") + 4) + 11);
@@ -461,7 +461,7 @@ function calculateTotal() {
         document.getElementById("minutes0").value = minutes;
         document.getElementById("hours0").value = hours;
     }
-    total = (hours * 60 * 60) + (minutes * 60) + seconds;
+    total = Number(hours * 60 * 60) + Number(minutes * 60) + Number(seconds);
     if (total === 0) {
         total = "";
         document.getElementById("total0").value = total;
