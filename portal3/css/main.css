@@ -931,7 +931,7 @@ main {
     font-size: 2.4vw;
 }
 #usingRedeem input {
-    color: var(--fontSecond);
+    color: black;
     padding: 5px 15px;
     border-style: none;
     border-radius: 5px;
