@@ -238,7 +238,6 @@ function fillPrepTableStart() {
     db.collection("accessibility").where('status', '==', 'Ready for Prep').orderBy('priority').limit(25).get()
         .then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
-                console.log(doc.id);
                 var classRed = '';
                 var flaggedStr = '';
                 if (doc.data().returnToPrepNote != '' && doc.data().returnToPrepNote != undefined) {
@@ -258,6 +257,7 @@ function fillPrepTable(selectedCourseCode) {
     db.collection("accessibility").where('status', '==', 'Ready for Prep').orderBy('priority').get()
         .then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
+                console.log(doc.id);
                 if (selectedCourseCode == doc.data().courseCode) {
                     var p = `<p> ${doc.data().priority}</p> <p>${doc.data().courseCode}</p> <p>${doc.data().type}</p>
                         <p>${doc.data().title}</p>  <button onclick="displayPrepareModal('${doc.id}')" class="bg-primary btn-hover prepare-btn">
