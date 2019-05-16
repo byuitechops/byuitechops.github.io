@@ -31,9 +31,6 @@ var userPrepares = [];
 
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
-        if (user.emailVerified == true &&  window.location.pathname == '/home.html') {
-            document.getElementById("verifyButton").className = 'hide';
-        }
         if (window.location.pathname != '/index.html') {
             // User is signed in.
             db.collection('users').where('name', "==", user.displayName).get()
