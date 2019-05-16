@@ -10,7 +10,7 @@ firebase.auth().onAuthStateChanged(function (user) {
                               if (!doc.data().lead) {
                                     window.location.assign('/home.html');
                               } else {
-                                    fillUserTable();
+                                    fillUserTable(user.displayName);
                                     fillTranscriptTable();
                               }
                         })
@@ -20,8 +20,8 @@ firebase.auth().onAuthStateChanged(function (user) {
       }
 })
 
-function fillUserTable() {
-      document.getElementById('master-table-user').innerHTML = '';
+function fillUserTable(name) {
+      document.getElementById('master-table-user').where("name", "==", name).innerHTML = '';
       db.collection('users').orderBy("name").get()
             .then(function (querySnapshot) {
                   querySnapshot.forEach(function (doc) {
@@ -44,7 +44,7 @@ function fillUserTable() {
 function fillTranscriptTable(courseCode) {
       document.getElementById('master-table-transcript').innerHTML = '';
       if (courseCode == undefined) {
-            db.collection("accessibility").orderBy('priority').get()
+            db.collection("accessibility").orderBy('priority').limit(30).get()
                   .then(function (querySnapshot) {
                         querySnapshot.forEach(function (doc) {
                               var p = `<p> ${doc.data().priority}</p> <p>${doc.data().courseCode}</p> <p style="padding-right: .5rem; overflow-x:hidden;">${doc.data().title}</p>
@@ -54,7 +54,7 @@ function fillTranscriptTable(courseCode) {
                         })
                   })
       } else {
-            db.collection("accessibility").orderBy('priority').where('courseCode', '==', courseCode).get()
+            db.collection("accessibility").orderBy('priority').where('courseCode', '==', courseCode).limit(30).get()
                   .then(function (querySnapshot) {
                         querySnapshot.forEach(function (doc) {
                               var p = `<p> ${doc.data().priority}</p> <p>${doc.data().courseCode}</p> <p style="padding-right: .5rem;">${doc.data().title}</p>
