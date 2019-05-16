@@ -16,23 +16,22 @@
 
 <body>
     <section>
-        <img src="assets/byuiLogo.png">
-        <img src="assets/logo2.png">
-    </section>
-    <section>
+        <div id="logo">
+            <img id="school" src="/portal/assets/misc/byuiLogo.png">
+            <img id="techops" src="/portal/assets/logos/logo.png">
+        </div>
         <div id="lower">
-            <p>Sign In</p>
-            <label>
+            <label id="emailbox">
                 <span>Email</span>
                 <input id="login" type="Login" placeholder="E-mail">
             </label>
-            <label>
+            <label id="passwordbox">
                 <span> Password </span>
                 <input id="password" type="Password" placeholder="Password">
             </label>
-            <span>Your e-mail username is the provided account from your institution.</span>
 
-            <div>
+            <span id="detail">Your e-mail username is the provided<br> account from your institution.</span>
+            <div id="buttons">
                 <button class="button" id="btnLogin" onclick="login()" type="submit"><span>Login</span></button>
                 <button class="button" id="btnsignup" type="submit"><span>Sign Up</span></button>
             </div>
@@ -41,6 +40,10 @@
     </section>
 
 </body>
+<script
+    src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script> 
 <script src="js/main.js"></script>
 <script src="js/index.js"></script>
 

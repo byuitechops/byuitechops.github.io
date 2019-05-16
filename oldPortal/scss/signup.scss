@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  color: white;
+}
+
+body {
+  background-repeat: no-repeat;
+  background-image: url("../assets/bannerPic.png");
+  background-size: 100vw;
+
+  section {
+      background-color: rgba(11, 109, 172, 0.7);
+
+
+      &:nth-of-type(1) {
+          padding: 4em;
+          width: 35%;
+          display: flex;
+          justify-content: space-between;
+
+          img {
+              height: 6em;
+          }
+      }
+
+      &:nth-of-type(2) {
+          position: absolute;
+          width: 35%;
+          right: 0;
+          top: 0;
+          height: 100vh;
+
+          #lower {
+              display: flex;
+              flex-flow: column nowrap;
+              width: 50%;
+              margin: 0 auto;
+              margin-top: 18em;
+
+              p {
+                  font-size: 2em;
+                  text-align: center;
+              }
+
+              label {
+                  padding-top: 1em;
+
+                  span {
+                      display: block;
+                  }
+
+                  input {
+                      color: black;
+                      height: 2.5em;
+                      border: 1px rgb(0, 0, 0);
+                      border-radius: 0.3em;
+                      padding: 0 1em;
+                      width: 100%
+                  }
+
+                  select {
+                    color: black;
+                    height: 2.5em;
+                    border: 1px rgb(0, 0, 0);
+                    border-radius: 0.3em;
+                    padding: 0 1em;
+                    width: 100%
+                }
+              }
+
+              &>span {
+                  text-align: center;
+                  padding: 1em 0;
+              }
+
+              div {
+                  display: flex;
+                  justify-content: space-around;
+
+                  .button {
+                      border-radius: 4px;
+                      background-color: #0076c6;
+                      border: none;
+                      color: #FFFFFF;
+                      text-align: center;
+                      font-size: 26px;
+                      padding: 15px;
+                      width: 45%;
+                      transition: all 0.5s;
+                      cursor: pointer;
+                      margin: 6% 1%;
+
+                      span {
+                          cursor: pointer;
+                          display: inline-block;
+                          position: relative;
+                          transition: 0.5s;
+
+                          &:after {
+                              content: '\00bb';
+                              position: absolute;
+                              opacity: 0;
+                              top: 0;
+                              right: -20px;
+                              transition: 0.5s;
+                          }
+                      }
+
+                      &:hover span {
+                          padding-right: 25px;
+                      }
+
+                      &:hover span:after {
+                          opacity: 1;
+                          right: 0;
+                      }
+                  }
+
+              }
+              #recover{
+                  text-decoration: underline;
+
+              }
+
+          }
+      }
+
+  }
+}

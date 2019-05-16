@@ -1,0 +1,101 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+#body-image {
+  display: none; }
+
+header {
+  background-image: none; }
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: 'Open Sans', sans-serif; }
+
+body {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-areas: "a b b b b b b b b b" "a b b b b b b b b b" "a b b b b b b b b b" "a b b b b b b b b b" "a b b b b b b b b b";
+  height: 100vh;
+  width: 100%; }
+
+header {
+  grid-area: a;
+  background-color: #535353;
+  padding: 2em; }
+  header img {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%; }
+  header nav {
+    margin-top: 7em; }
+    header nav ul a {
+      color: #ffffff;
+      text-decoration: none; }
+      header nav ul a li {
+        list-style: none;
+        margin: 2em 0;
+        text-transform: uppercase; }
+
+main {
+  display: grid;
+  grid-area: b;
+  grid-template-rows: 20% 80%; }
+  main h1 {
+    padding: 2em;
+    grid-column: 1 /span 2;
+    font-size: 2.7em;
+    color: #727272;
+    font-weight: bold;
+    padding-left: 2.1em; }
+
+.hide {
+  display: none; }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+main {
+  padding: 3rem 7rem;
+  width: 100%;
+  overflow: auto; }
+  main h1 {
+    text-align: left; }
+
+#admin {
+  display: flex;
+  border: auto;
+  width: 100%;
+  padding: 4em 6em; }
+  #admin table {
+    width: 100vh; }
+    #admin table th,
+    #admin table td {
+      text-align: left; }
+      #admin table th span,
+      #admin table td span {
+        padding: 1em; }
+        #admin table th span button,
+        #admin table th span input,
+        #admin table th span optgroup,
+        #admin table th span select,
+        #admin table th span textarea,
+        #admin table td span button,
+        #admin table td span input,
+        #admin table td span optgroup,
+        #admin table td span select,
+        #admin table td span textarea {
+          margin-right: .5rem;
+          width: 2em; }
+      #admin table th button:hover,
+      #admin table td button:hover {
+        opacity: 0.7;
+        color: gray; }
+
+.hide {
+  display: none; }
+
+/*# sourceMappingURL=accumulatedList_dark.css.map */

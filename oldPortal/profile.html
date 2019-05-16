@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/byui_favicon.gif">
+    <!-- Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
+    <!-- -->
+    <!-- CSS -->
+    <<link id="defaultCss" rel="stylesheet" type="text/css" href="css/profile/profile_light.css">
+    <!-- -->
+    <title>Profile | BYU-I Techops Portal</title>
+</head>
+
+<body>
+    <div id="body-image"></div>
+    <header>
+        <a href="home.html"><img src="./assets/logo.png"></a>
+        <nav>
+            <ul><a href="applications.html">
+                    <li>Applications</li>
+                </a><a href="time.html">
+                    <li>Time</li>
+                </a><a href="store.html">
+                    <li>Store</li>
+                </a><a href="profile.html">
+                    <li>Profile</li>
+                </a></ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <!-- <img src="assets/logo3.png"> -->
+            <div id="opacity">
+            </div>
+            <h2>General Information</h2>
+            <img id="profilePic" src="assets/profPicture.png">
+
+            <div class="tooltip"><img id="clock" src="assets/clockWhite.png">
+                <span style="visibility: hidden;" class="toolTipBox" id="toolTipBox">
+                    <p>Accumulated Time (hrs)</p>
+                    <div id="box"></div>
+                    <p id="redeemTime">##:##</p><button id="redeem">REDEEM</button>
+                </span>
+            </div>
+            <div style="visibility: hidden;" id="usingRedeem">
+                <h2>Redeem Confirmation</h2>
+                <p>Accumulated Time</p>
+                <h1 id="accumulated">00:00</h1>
+                <p id="howMuch">How much time would you like to redeem? (Hours)</p>
+
+                <input id="timeDesired" type="number" min="0"></input>
+                <button id="cancel">Cancel</button>
+                <button id="redeembtn">Redeem</button>
+            </div>
+
+            <div style="visibility: hidden;" id="confirmRedeem">
+                <img src="assets/check-01.png">
+                <h2>Redeemed Hours</h2>
+                <p id="resultRedeem">00:00</p>
+                <button id="close">Ok</button>
+            </div>
+
+            <p id="signOutBtn">Sign Out</p>
+            <span id="time"></span>
+        </section>
+        <section>
+            <div>
+                <img id="editContact" src="assets/edit.png">
+                <h3 id="dbName"></h3>
+                <p id="dbTitle"></p>
+                <p id="dbTeam"></p>
+                <p id="dbPhone"></p>
+                <p id="dbEmail"></p>
+            </div>
+            <div id="info">
+                <h4>Info</h4>
+                <p id="dbBirth"></p>
+                <p id="dbMajor"></p>
+                <p id="dbTrack"></p>
+                <p id="dbGradDate"></p>
+
+
+            </div>
+            <button onclick="toggleView()"><img id="arrowImg" src="assets/arrow.png"></button>
+            <div id="aboutMe">
+                <h4>About Me</h4>
+                <p id="dbAboutMe"></p>
+            </div>
+        </section>
+        <section>
+
+            <div>
+                <h3>Employee Resources</h3>
+                <!-- <p>Request Time Off</p> -->
+                <!-- <p>Mandatory Meetings</p> -->
+                <a href="https://docs.google.com/document/d/1BHM-fW4LRBSb73uvN8jLHU9_v9Q91R5aHdBM0Srj1SA/edit?usp=sharing"
+                    target="_blank">Work
+                    Policies</a>
+                <!-- <p>Party Planning Comitee</p> -->
+                <a href="http://byu-idaho.screenstepslive.com/s/18626/m/70207" target="_blank">Screen-steps /
+                    Training</a>
+                <!-- <p>Tech-Ops Help</p> -->
+                <a href="https://docs.google.com/document/d/1G_bc5LFy2V5TrO4riSLdPtsH2JvYIlvtGRxi1JYUjlk/edit?usp=sharing"
+                    target="_blank">Employee
+                    Handbook</a>
+
+                <a href="invoice.html">
+                    Store Invoice</a>
+
+                <a href="inventory.html" id="storeInv" style="visibility: hidden;">
+                    Store Inventory</a>
+
+                <p>Viewing Mode
+                    <label class="container">
+                        <input type="radio" name="viewMode" id="light" onclick="changeViewMode('light')">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">
+                        <input type="radio" name="viewMode" id="dark" onclick="changeViewMode('dark')">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">
+                        <input type="radio" name="viewMode" id="holiday" onclick="changeViewMode('holiday')">
+                        <span class="checkmark"></span>
+                    </label>
+                </p>
+                <!-- <p>Steak(carne, mucha carne)</p> -->
+                <!-- <p>File a Complaint</p> -->
+            </div>
+
+            <div>
+                <h3>Team Points</h3>
+                <p id="completeTeamActivities">Check Team Activity - </p>
+                <span id="styleTeam">
+                    <select name="" id="pointsOptions" class="hide">
+                        <option>Contacting your lead, at least an hour before your scheduled shift, if you’re going to
+                            miss a shift or take time off</option>
+                        <option>Checking in on time</option>
+                        <option>Filling up one water bottle</option>
+                        <option>Checked with a lead for a project</option>
+                        <option>Checked out with a lead</option>
+                        <option>Helping restock or shop for the store</option>
+                        <option>Giving Devotional</option>
+                        <option>First to react to a post on General or from your lead</option>
+                        <option>Fridge cleaning</option>
+                        <option>Coming to Thursday meetings</option>
+                        <option>Winning office competitions (foosball, other activities)</option>
+                        <option>Brought a treat to share with the office</option>
+                        <option>Leading a PD event</option>
+                        <option>Going to the FTC</option>
+                    </select>
+                    <button type="submit" id="submitPoints" class="hide" onclick="submitTeamPoints()">Submit</button>
+                </span>
+            </div>
+
+            <div id="leadAdmin">
+                <h3>Admin/Lead Resources</h3>
+                <!-- <a href="editUser.html"> Edit Users </a> -->
+                <a href="timeAdmin.html"> Time Report </a>
+                <a href="timeAdmin.html"> View/Edit Accumulated Time </a>
+                <a href="admin.html">Admin Tools</a>
+                <a href="inventory.html"> Edit Store</a>
+            </div>
+
+            <div id="editInfo">
+                <h2>Edit your Information</h2>
+                <p>Name: </p>
+                <input id="editName" type="text" placeholder="Name + Last Name">
+                <p>Phone Number: </p>
+                <input id="editPhone" type="tel" placeholder="####-###-####">
+                <p>Major: </p>
+                <input id="editMajor" type="text" placeholder="Course of Study">
+                <p>Track: </p>
+                <!-- <input id="editTrack" type="text" list="tracks" placeholder="Season/Season"> -->
+                <select id="editTrack">
+                    <option id="Winter/Spring">Winter/Spring</option>
+                    <option id="Spring/Fall">Spring/Fall</option>
+                    <option id="Fall/Winter">Fall/Winter</option>
+                    <option id="Year Round">Year Round (Overwrite)"</option>
+                </select>
+                <p>Graduation Date: </p>
+                <input id="editGradDate" type="text" placeholder="Year and Semester">
+                <p>Birthday Date: </p>
+                <input id="displayBirthday" type="text">
+                <select id="editBirthdayMonth" name="birthdayMonth">
+                    <option id="Jan">Jan</option>
+                    <option id="Fev">Fev</option>
+                    <option id="Mar">Mar</option>
+                    <option id="Apr">Apr</option>
+                    <option id="May">May</option>
+                    <option id="Jun">Jun</option>
+                    <option id="Jul">Jul</option>
+                    <option id="Aug">Aug</option>
+                    <option id="Sep">Sep</option>
+                    <option id="Oct">Oct</option>
+                    <option id="Nov">Nov</option>
+                    <option id="Dec">Dec</option>
+                </select>
+                <input id="editBirthdayDay" type="number" min="0" max="31">
+                <!-- <input id="editBirthday" type="text" placeholder="Ex: 01/01"> -->
+                <p class="hide">Team: </p>
+                <p id="aboutMe">About you</p>
+                <textarea id="editAboutMe" type="text"> Tell us more about yourself </textarea>
+                <button id="submitInfoChanges">Submit</button>
+                <button id="cancelInfoChanges">Cancel</button>
+            </div>
+        </section>
+        <section>
+
+
+        </section>
+    </main>
+</body>
+<!-- Script -->
+<script src="js/main.js"></script>
+<script src="js/profile.js"></script>
+
+</html>

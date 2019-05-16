@@ -1,0 +1,88 @@
+<!---------------------------------------------
+- SCHEDULE.HTML Tech-Ops Portal Home Page
+- 
+- 1. Head
+- 2. Body
+- 3. Header
+- 4. Main
+- 5. Scripts
+---------------------------------------------->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<!---------------------------------------------
+- 1. Head
+---------------------------------------------->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" type="image/x-icon" href="/portal/assets/misc/byui_favicon.gif">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/portal/css/main.css">
+    <!-- Scripts -->
+
+    <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
+    <title>Schedule | Quality Assurance Portal</title>
+</head>
+
+<!---------------------------------------------
+- 2. Body
+---------------------------------------------->
+
+<body>
+
+    <!---------------------------------------------
+    - 3. Navigation Bar
+    ---------------------------------------------->
+
+    <nav class="col1">
+        <a href="home.html"><img src="/portal/assets/logos/logo.png"></a>
+        <div class="nav-links flex-container">
+            <a class="current-page" href="#">Schedule</a>
+            <a href="store.html">Store</a>
+            <a href="profile.html">Profile</a>
+            </ul>
+    </nav>
+
+    <!---------------------------------------------
+    - 4. Main
+    ---------------------------------------------->
+
+    <main id="scheduleSection" class="col9">
+        
+        <section>
+            <div class="col10 teamSelector">
+                <select class="teamItem" id="selectTeam">
+                    <option value="0">Select Team</option>
+                    <option id="canvas1" value="1">LMS</option>
+                    <option id="canvas2" value="2">Accessibility</option>
+                </select>
+                <a class="teamItem" id="newTab" target="_blank"
+                    href="https://docs.google.com/spreadsheets/d/1g53WojmX1wG7fTGU1Q1Hg93-QJ5GBadcCU7rbeyGWoc/edit?rm=minimal"><img
+                        src="assets/misc/newTab.png"></a>
+            </div>
+            <div id="teams" class="col10"><iframe id="spreadsheet" class="col10 spreadsheet"
+                    src="https://docs.google.com/spreadsheets/d/1g53WojmX1wG7fTGU1Q1Hg93-QJ5GBadcCU7rbeyGWoc/edit?rm=minimal"></iframe>
+            </div>
+        </section>
+    </main>
+
+</body>
+
+<!---------------------------------------------
+- 5. Scripts
+---------------------------------------------->
+<script
+    src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script> 
+<script src="/portal/js/main.js"></script>
+<script src="/portal/js/schedule.js"></script>
+
+</html>

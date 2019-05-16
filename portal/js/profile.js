@@ -1,16 +1,99 @@
 /***********************************************************
-* Profile.js Table of Conttents
-* A. Team Points
-********************************************************** */
+ * Profile.js Table of Conttents
+ * A. Team Points
+ * B. Redeem Hours
+ * C. Profile
+ * D. Sign Out
+ * E. Page Loader
+ ********************************************************** */
+const score = db.collection("team").doc('points');
+const redeemClock = document.getElementById("clock");
+const toolTipBox = document.getElementById("toolTipBox");
+const submitChanges = document.getElementById("submitInfoChanges");
+const redeemConfirmBtn = document.getElementById("redeemBtn2");
+const okBtn = document.getElementById("close");
+const editBtn = document.getElementById("editContact");
+const editDiv = document.getElementById("editInfo");
+const redeemBtn = document.getElementById("redeemBtn");
+const redeemTool = document.getElementById("usingRedeem");
+const cancelBtn = document.getElementById("cancel");
+const hoursRedeemed = document.getElementById("resultRedeem");
+const desiredTime = document.getElementById("timeDesired");
+const confirmRedeem = document.getElementById("confirmRedeem");
+const info = document.getElementById('info');
+const aboutMe = document.getElementById('aboutMe');
+const img = document.getElementById('arrowImg');
+const cancelChanges = document.getElementById("cancelInfoChanges");
+const pointStart = document.getElementById("pointStart");
+const yayPoints = document.getElementById("yay-points");
 
+var results = []; //will be used as part of the results for 
+var birthdayPopulate;
+var sameBirthday = true;
+var doneUser = false;
+var user = firebase.auth().currentUser;
+var whatEarnsPoints = [{
+        "title": 'Contacting your lead, at least an hour before your scheduled shift, if you’re going to miss a shift or take time off',
+        "points": 1
+    },
+    {
+        "title": 'Checking in on time',
+        "points": 1
+    },
+    {
+        "title": 'Checked out with a lead',
+        "points": 1
+    },
+    {
+        "title": 'Checked with a lead for a project',
+        "points": 1
+    },
+    {
+        "title": 'Helping restock or shop for the store',
+        "points": 1
+    },
+    {
+        "title": 'Giving Devotional',
+        "points": 1
+    },
+    {
+        "title": 'First to react to a post on General or from your lead',
+        "points": 1
+    },
+    {
+        "title": 'Fridge cleaning',
+        "points": 1
+    },
+    {
+        "title": 'Coming to Thursday meetings',
+        "points": 5
+    },
+    {
+        "title": 'Winning office competitions (foosball, other activities)',
+        "points": 10
+    },
+    {
+        "title": 'Brought a treat to share with the office',
+        "points": 5
+    },
+    {
+        "title": 'Leading a PD event',
+        "points": 1
+    },
+    {
+        "title": 'Going to the FTC',
+        "points": 5
+    },
+    {
+        "title": 'Filling up one water bottle',
+        "points": 2
+    }
+]
 /***********************************************************
-* A. Team Points
-************************************************************/
+ * A. Team Points
+ ************************************************************/
 // A function to update the points. This is currently set up that the teams are working together
 // There is a const written to shorten the code and make it more readable.
-
-const score = db.collection("team").doc('points');
-
 function updateTeamPoints(pointsToAdd, activityType, timeStamp) {
     score.get()
         .then(function (doc) {
@@ -28,130 +111,63 @@ function updateTeamPoints(pointsToAdd, activityType, timeStamp) {
                 })
                 .then(function () {
                     console.log("Document successfully written!");
-                    alert("User Updated Successfully");
-                    window.location.reload();
+                    $.when( $(yayPoints).fadeIn(400), 
+                            $(yayPoints).toggleClass('hide'),
+                            $(yayPoints).delay(1200), 
+                            $(yayPoints).fadeOut(400)).done(() =>{
+                        $(yayPoints).toggleClass('hide');
                 }).catch(function (error) {
                     // An error happened.
                 });
-        })
+        });
+    });
 }
-
 function submitTeamPoints() {
-    var setDate = editDate(new Date());
-    var points = 0;
-    var activityType = document.getElementById("pointsOptions").value;
-    if (activityType == 'Contacting your lead, at least an hour before your scheduled shift, if you’re going to miss a shift or take time off') {
-        points = 1;
-    } else if (activityType == 'Checking in on time') {
-        points = 1;
-    } else if (activityType == 'Checked with a lead for a project') {
-        points = 1;
-    } else if (activityType == 'Checked out with a lead') {
-        points = 1;
-    } else if (activityType == 'Helping restock or shop for the store') {
-        points = 1;
-    } else if (activityType == 'Giving Devotional') {
-        points = 1;
-    } else if (activityType == 'First to react to a post on General or from your lead') {
-        points = 1;
-    } else if (activityType == 'Fridge cleaning') {
-        points = 1;
-    } else if (activityType == 'Coming to Thursday meetings') {
-        points = 5;
-    } else if (activityType == 'Winning office competitions (foosball, other activities)') {
-        points = 10;
-    } else if (activityType == 'Brought a treat to share with the office') {
-        points = 5;
-    } else if (activityType == 'Leading a PD event') {
-        points = 1;
-    } else if (activityType == 'Going to the FTC'){
-        points = 5;
-    } else if (activityType == "Filling up one water bottle"){
-        points = 2;
-    }
-
-    updateTeamPoints(points, activityType, setDate);
+    let activityType = document.getElementById("pointsOptions").value;
+    let setDate = editDate(new Date());
+    whatEarnsPoints.forEach(item => {
+        if (item["title"] == activityType) {
+            updateTeamPoints(item["points"], activityType, setDate);
+        }
+    });
 }
-
-//this function gets points and addes it to the html file previously created
 function showResults() {
     console.log("Total = " + results[0]);
 }
 
 
 /***********************************************************
-* 
-************************************************************/
-
-// dropdown toggleView funcionality 
-
-function toggleView() {
-    var info = document.getElementById('info');
-    var aboutMe = document.getElementById('aboutMe');
-    var img = document.getElementById('arrowImg');
-    // If info is shown
-    if (info.style.height == "20%") {
-        info.style.height = "0%";
-        aboutMe.style.height = "60%";
-        aboutMe.style.overflow = "auto";
-        img.style.transform = "rotate(0deg)";
+ * B. Redeem Hours
+ ************************************************************/
+$(redeemClock).click(() => {
+    if ($(toolTipBox).hasClass("hide")) {
+        $(toolTipBox).removeClass("hide");
     } else {
-        info.style.height = "20%";
-        aboutMe.style.height = "40%";
-        aboutMe.style.overflow = "hidden";
-        img.style.transform = "rotate(180deg)";
+        $(toolTipBox).addClass("hide");
     }
-}
-
-//tool tip on click
-
-var toolTip = document.getElementById("clock");
-var toolTipBox = document.getElementById("toolTipBox");
-toolTip.addEventListener("click", () => {
-
-    if (toolTipBox.style.visibility == "hidden") {
-        toolTipBox.style.visibility = "visible";
-    } else {
-        toolTipBox.style.visibility = "hidden";
-    }
-
 })
-
 //showing up the redeem tool
-var redeemBtn = document.getElementById("redeem");
-var redeemTool = document.getElementById("usingRedeem");
-redeemBtn.addEventListener("click", () => {
-
-    if (redeemTool.style.visibility == "hidden") {
-        redeemTool.style.visibility = "visible";
-        toolTipBox.style.visibility = "hidden";
+$(redeemBtn).click(() => {
+    if ($(redeemTool).hasClass("hide")) {
+        $(redeemTool).removeClass("hide");
+        $(toolTipBox).addClass("hide");
     } else {
-        redeemTool.style.visibility = "hidden";
+        $(redeemTool).addClass("hide");
     }
 })
-
 //when the user presses the "cancel" button, goes back to the screen
-var cancelBtn = document.getElementById("cancel");
-cancelBtn.addEventListener('click', () => {
-    redeemTool.style.visibility = "hidden";
+$(cancelBtn).click(() => {
+    $(redeemTool).addClass("hide");
 })
-
 // when the user clicks the "redeem" button, it shows the confirm
-var redeemConfirmBtn = document.getElementById("redeembtn");
-redeemConfirmBtn.addEventListener('click', () => {
-    redeemTool.style.visibility = "hidden";
-    var hoursRedeemed = document.getElementById("resultRedeem");
-
-
-    if (data.time.accumulatedTime < document.getElementById("timeDesired").value) {
-        redeemTool.style.visibility = "hidden";
+$(redeemConfirmBtn).click(() => {
+    $(redeemTool).removeClass("hide");
+    if (data.time.accumulatedTime < desiredTime.value) {
+        $(redeemTool).removeClass("hide");
         alert("You don't have enough accumulated hours to redeem the time desired");
-
-
     } else {
-
         db.collection("users").doc(userId).update({
-                "time.accumulatedTime": Number(data.time.accumulatedTime) - Math.round(Number(document.getElementById("timeDesired").value)),
+                "time.accumulatedTime": Number(data.time.accumulatedTime) - Math.round(Number(desiredTime.value)),
             })
             .then(function () {
                 console.log("Document successfully written!");
@@ -161,48 +177,38 @@ redeemConfirmBtn.addEventListener('click', () => {
                 // An error happened.
             });
         if (data.time.accumulatedTime < 10) {
-            hoursRedeemed.innerText = "0" + document.getElementById("timeDesired").value + ":00";
+            hoursRedeemed.innerHTML = "0" + desiredTime.value + ":00";
         } else {
-            hoursRedeemed.innerText = document.getElementById("timeDesired").value + ":00";
+            hoursRedeemed.innerHTML = desiredTime.value + ":00";
         }
-        document.getElementById("confirmRedeem").style.visibility = "visible";
-
+        $(confirmRedeem).removeClass("hide");
     }
 })
-
 // When the use clicks ok close confirm
-var okBtn = document.getElementById("close");
-okBtn.addEventListener('click', () => {
-    document.getElementById("confirmRedeem").style.visibility = "hidden";
+$(okBtn).click(() => {
+    $(confirmRedeem).addClass("hide");
 })
-
-
+/***********************************************************
+ * C. Profile
+ ************************************************************/
 //allows the user to edit his/her information
-var editBtn = document.getElementById("editContact");
-var editDiv = document.getElementById("editInfo");
 editBtn.addEventListener("click", () => {
-    editDiv.style.visibility = "visible";
-    document.getElementById("displayBirthday").style.visibility = "visible";
-    document.getElementById("editBirthdayMonth").style.visibility = "hidden";
-    document.getElementById("editBirthdayDay").style.visibility = "hidden";
+    editDiv.classList.remove("hide");
+    document.getElementById("displayBirthday").classList.remove("hide");
+    document.getElementById("editBirthdayMonth").classList.add("hide");
+    document.getElementById("editBirthdayDay").classList.add("hide");
     populateInfoEdit();
 })
-
 //sends to firebase info changes made by the user
 // Initialize Firebase
-var doneUser = false;
-var user = firebase.auth().currentUser;
-var submitChanges = document.getElementById("submitInfoChanges");
 submitChanges.addEventListener("click", () => {
     if (!doneUser) {
-
         doneUser = true;
         if (!sameBirthday) {
             var birthday = `${document.getElementById("editBirthdayMonth").value} ${document.getElementById("editBirthdayDay").value}`;
         } else {
             var birthday = birthdayPopulate;
         }
-
         db.collection("users").doc(userId).update({
                 "nameDisplay": document.getElementById("editName").value,
                 "info.phoneNumber": document.getElementById("editPhone").value,
@@ -219,20 +225,16 @@ submitChanges.addEventListener("click", () => {
             }).catch(function (error) {
                 // An error happened.
             });
-        editDiv.style.visibility = "hidden";
+        editDiv.classList.add("hide");
     }
 })
-
-
-var cancelChanges = document.getElementById("cancelInfoChanges");
 cancelChanges.addEventListener("click", () => {
-    editDiv.style.visibility = "hidden";
-    document.getElementById('editTrack').style.visibility = "hidden";
-    document.getElementById("displayBirthday").style.visibility = "hidden";
-    document.getElementById("editBirthdayMonth").style.visibility = "hidden";
-    document.getElementById("editBirthdayDay").style.visibility = "hidden";
+    editDiv.classList.add("hide");
+    document.getElementById('editTrack').classList.add("hide");
+    document.getElementById("displayBirthday").classList.add("hide");
+    document.getElementById("editBirthdayMonth").classList.add("hide");
+    document.getElementById("editBirthdayDay").classList.add("hide");
 })
-
 //populates de input boxes with what we already have from the user
 function populateInfoEdit() {
     db.collection("users").doc(userId).get()
@@ -243,7 +245,7 @@ function populateInfoEdit() {
             document.getElementById("editPhone").setAttribute("value", `${doc.data().info.phoneNumber}`);
             document.getElementById("editMajor").setAttribute("value", `${doc.data().info.major}`);
             //document.getElementById(idTrack).setAttribute("selected", "selected");
-            document.getElementById("editTrack").style.visibility = "visible";
+            document.getElementById("editTrack").classList.remove("hide");
             if (idTrack == 'Winter/Spring') {
                 document.getElementById("editTrack").selectedIndex = 0;
             } else if (idTrack == 'Spring/Fall') {
@@ -258,96 +260,21 @@ function populateInfoEdit() {
 
             // document.getElementById("editTrack").setAttribute("value", `${doc.data().info.track}`);
             document.getElementById("editGradDate").setAttribute("value", `${doc.data().info.graduation}`);
-            document.getElementById("editAboutMe").innerText = doc.data().info.aboutMe;
+            document.getElementById("editAboutMe").innerHTML = doc.data().info.aboutMe;
             document.getElementById("displayBirthday").setAttribute("value", `${doc.data().info.birthday}`);
         })
 }
-
 //handles the event listener for the birthday call
 //if the birthday doesn't get changed, by the following event listener, then it will keep the same on firebase
-var sameBirthday = true;
-
 document.getElementById("displayBirthday").addEventListener("click", () => {
-    document.getElementById("displayBirthday").style.visibility = "hidden";
-    document.getElementById("editBirthdayMonth").style.visibility = "visible";
-    document.getElementById("editBirthdayDay").style.visibility = "visible";
+    document.getElementById("displayBirthday").classList.add("hide");
+    document.getElementById("editBirthdayMonth").classList.remove("hide");
+    document.getElementById("editBirthdayDay").classList.remove("hide");
     sameBirthday = false;
 })
-//Loads the page with all user's information
-var birthdayPopulate;
-var results = []; //will be used as part of the results for 
-function loadPage() {
-
-    db.collection("team").doc('points').get()
-        .then(function (doc) {
-            results.push(doc.data().points);
-            // console.log(results);
-        })
-
-    document.getElementById(theme).setAttribute('checked', true);
-    var photo = data.info.photo;
-    firebase.storage().ref().child(`profile/${photo}`).getDownloadURL().then(function (url) {
-        document.getElementById(`profilePic`).setAttribute('src', url);
-        //return;
-    }).catch(function (error) {
-        return error;
-    });
-    db.collection("users").doc(userId).get()
-        .then(function (doc) {
-            const myData = doc.data();
-            document.getElementById("dbName").innerText = myData.nameDisplay;
-            document.getElementById("dbTitle").innerText = "Title: " + myData.title;
-            document.getElementById("dbTeam").innerText = "Team: " + myData.team;
-            document.getElementById("dbPhone").innerText = "T: " + myData.info.phoneNumber;
-            document.getElementById("dbEmail").innerText = "E-mail: " + myData.info.email;
-            document.getElementById("dbMajor").innerText = "Major: " + myData.info.major;
-            document.getElementById("dbTrack").innerText = "Track: " + myData.info.track;
-            document.getElementById("dbGradDate").innerText = "Graduation Date: " + myData.info.graduation;
-            //document.getElementById("dbTyping").innerText = "Typing Speed: " + myData.info.speed;
-            document.getElementById("dbAboutMe").innerText = myData.info.aboutMe;
-            document.getElementById("dbBirth").innerText = `Birthday: ` + myData.info.birthday;
-            birthdayPopulate = myData.info.birthday;
-            //fills in accumulated time
-            if (data.time.accumulatedTime < 10) {
-                document.getElementById("accumulated").innerText = "0" + myData.time.accumulatedTime + ":00";
-                document.getElementById("redeemTime").innerText = "0" + myData.time.accumulatedTime + ":00";
-            } else {
-                document.getElementById("accumulated").innerText = myData.time.accumulatedTime + ":00";
-                document.getElementById("redeemTime").innerText = myData.time.accumulatedTime + ":00";
-            }
-            
-            //displays lead/admin tools only for the right people
-            if (myData.admin || myData.title == "Project Lead") {
-                document.getElementById("leadAdmin").style.visibility = "visible";
-            }
-
-
-            if (myData.storeManager == true) {
-                console.log(myData.storeManager);
-                document.getElementById("storeInv").style.visibility = "visible";
-            }
-        })
-}
-
-var doneEdit = false;
-
-function changeViewMode(newTheme) {
-    if (!doneEdit) {
-        db.collection('users').doc(userId).update({
-                viewMode: newTheme
-            })
-            .then(function () {
-                console.log("Document successfully updated!");
-                alert("User Updated Successfully");
-                window.location.reload();
-            })
-            .catch(function (error) {
-                // The document probably doesn't exist.
-                console.error("Error updating document: ", error);
-            });
-    }
-}
-
+/***********************************************************
+ * D. Sign Out
+ ************************************************************/
 //handles the sign out button
 document.getElementById("signOutBtn").addEventListener("click", () => {
     firebase.auth().signOut().then(function () {
@@ -356,19 +283,49 @@ document.getElementById("signOutBtn").addEventListener("click", () => {
         // An error happened.
     });
 })
-
-
-document.getElementById("completeTeamActivities").addEventListener('click', () => {
-    document.getElementById("pointsOptions").setAttribute("class", "visible");
-    document.getElementById("submitPoints").setAttribute("class", "visible");
-})
-
-function editDate(date) {
-    var month = ("0" + (date.getMonth() + 1)).slice(-2);
-    var day = ("0" + date.getDate()).slice(-2);
-    var year = date.getFullYear();
-    var hour = ("0" + date.getHours()).slice(-2);
-    var minute = ("0" + date.getMinutes()).slice(-2);
-    var setDate = `${year}-${month}-${day} ${hour}:${minute}`;
-    return setDate;
+/***********************************************************
+ * E. Page Loader
+ ************************************************************/
+function loadPage() {
+    db.collection("users").where("name", "==", userName)
+        .onSnapshot((querySnapshot) => {
+            data = querySnapshot.docs[0].data();
+            userId = querySnapshot.docs[0].id;
+            preferance = data.viewMode;
+            db.collection("users").doc(userId)
+                .onSnapshot((querrySnapshot) => {
+                    const myData = querrySnapshot.data();
+                    document.getElementById("dbName").innerHTML = myData.nameDisplay;
+                    document.getElementById("dbTitle").innerHTML = "Title: " + myData.title;
+                    document.getElementById("dbTeam").innerHTML = "Team: " + myData.team;
+                    document.getElementById("dbPhone").innerHTML = "T: " + myData.info.phoneNumber;
+                    document.getElementById("dbEmail").innerHTML = "E-mail: " + myData.info.email;
+                    document.getElementById("dbMajor").innerHTML = "Major: " + myData.info.major;
+                    document.getElementById("dbTrack").innerHTML = "Track: " + myData.info.track;
+                    document.getElementById("dbGradDate").innerHTML = "Graduation Date: " + myData.info.graduation;
+                    //document.getElementById("dbTyping").innerHTML = "Typing Speed: " + myData.info.speed;
+                    document.getElementById("dbAboutMe").innerHTML = myData.info.aboutMe;
+                    document.getElementById("dbBirth").innerHTML = `Birthday: ` + myData.info.birthday;
+                    birthdayPopulate = myData.info.birthday;
+                    //fills in accumulated time
+                    if (data.time.accumulatedTime < 10) {
+                        document.getElementById("accumulated").innerHTML = "0" + myData.time.accumulatedTime + ":00";
+                        document.getElementById("redeemTime").innerHTML = "0" + myData.time.accumulatedTime + ":00";
+                    } else {
+                        document.getElementById("accumulated").innerHTML = myData.time.accumulatedTime + ":00";
+                        document.getElementById("redeemTime").innerHTML = myData.time.accumulatedTime + ":00";
+                    }
+                    //displays lead/admin tools only for the right people
+                    if (myData.admin || myData.title == "Project Lead") {
+                        $.when($("#timeAdmin").removeClass('hide')).done(() => {})
+                    }
+                })
+        })
+    db.collection("team").doc('points').get()
+        .then(function (doc) {
+            results.push(doc.data().points);
+        })
+    whatEarnsPoints.forEach(item => {
+        pointStart.insertAdjacentHTML("afterend", `<option>${item["title"]}</option>`)
+    });
 }

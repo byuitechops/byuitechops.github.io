@@ -1,0 +1,86 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  color: white; }
+
+body {
+  background-repeat: no-repeat;
+  background-image: url("../assets/bannerPic.png");
+  background-size: 100vw; }
+  body section {
+    background-color: rgba(11, 109, 172, 0.7); }
+    body section:nth-of-type(1) {
+      padding: 4em;
+      width: 35%;
+      display: flex;
+      justify-content: space-between; }
+      body section:nth-of-type(1) img {
+        height: 6em; }
+    body section:nth-of-type(2) {
+      position: absolute;
+      width: 35%;
+      right: 0;
+      top: 0;
+      height: 100vh; }
+      body section:nth-of-type(2) #lower {
+        display: flex;
+        flex-flow: column nowrap;
+        width: 50%;
+        margin: 0 auto;
+        margin-top: 18em; }
+        body section:nth-of-type(2) #lower p {
+          font-size: 2em;
+          text-align: center; }
+        body section:nth-of-type(2) #lower label {
+          padding-top: 1em; }
+          body section:nth-of-type(2) #lower label span {
+            display: block; }
+          body section:nth-of-type(2) #lower label input {
+            color: black;
+            height: 2.5em;
+            border: 1px black;
+            border-radius: 0.3em;
+            padding: 0 1em;
+            width: 100%; }
+        body section:nth-of-type(2) #lower > span {
+          text-align: center;
+          padding: 1em 0; }
+        body section:nth-of-type(2) #lower div {
+          display: flex;
+          justify-content: space-around; }
+          body section:nth-of-type(2) #lower div .button {
+            border-radius: 4px;
+            background-color: #0076c6;
+            border: none;
+            color: #FFFFFF;
+            text-align: center;
+            font-size: 26px;
+            padding: 15px;
+            width: 45%;
+            transition: all 0.5s;
+            cursor: pointer;
+            margin: 1%; }
+            body section:nth-of-type(2) #lower div .button span {
+              cursor: pointer;
+              display: inline-block;
+              position: relative;
+              transition: 0.5s; }
+              body section:nth-of-type(2) #lower div .button span:after {
+                content: '\00bb';
+                position: absolute;
+                opacity: 0;
+                top: 0;
+                right: -20px;
+                transition: 0.5s; }
+            body section:nth-of-type(2) #lower div .button:hover span {
+              padding-right: 25px; }
+            body section:nth-of-type(2) #lower div .button:hover span:after {
+              opacity: 1;
+              right: 0; }
+        body section:nth-of-type(2) #lower #recover {
+          text-decoration: underline; }
+
+/*# sourceMappingURL=index.css.map */

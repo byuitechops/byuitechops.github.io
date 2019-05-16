@@ -1,0 +1,42 @@
+@import "../partials/main.scss";
+
+main {
+    display: grid;
+    grid-template-rows: 10% 10% 80%;
+    h1 {
+        padding: 0.5em;
+        grid-column: 1 /span 2;
+    }
+    section {
+        grid-column: 1 /span 2;
+        grid-row: 2;
+        overflow-y: scroll;
+        height: 90vh;
+        padding: 2rem 3rem;
+        div{
+            padding-left: 2em;
+            // pading-botom: 2em;
+        }
+        input[type=date] {
+            position: absolute;
+            right: 15.85em;
+            top: 7.5%;
+        }
+        select {
+            visibility: hidden;
+            display: block;
+            position: absolute;
+            right: 1.85em;
+            top: 7%;
+            font-size: 1.25em;
+            padding: 0 0.5em;
+            color: $accent1;
+            background-color: $primary;
+            border: 0;
+            border-radius: 20px;
+            option{
+                border-radius: 20px;
+            }
+        }
+    }
+}
