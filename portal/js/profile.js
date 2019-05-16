@@ -15,6 +15,7 @@ const okBtn = document.getElementById("close");
 const editBtn = document.getElementById("editContact");
 const editDiv = document.getElementById("editInfo");
 const redeemBtn = document.getElementById("redeemBtn");
+const cancelRedeemBtn = document.getElementById("cancelRedeemBtn");
 const redeemTool = document.getElementById("usingRedeem");
 const cancelBtn = document.getElementById("cancel");
 const hoursRedeemed = document.getElementById("resultRedeem");
@@ -154,6 +155,9 @@ $(redeemBtn).click(() => {
     } else {
         $(redeemTool).addClass("hide");
     }
+})
+$(cancelRedeemBtn).click(() => {
+    $(toolTipBox).toggleClass('hide');
 })
 //when the user presses the "cancel" button, goes back to the screen
 $(cancelBtn).click(() => {

@@ -71,6 +71,8 @@ breakB.addEventListener('click', function () {
     var setDate = editDate(new Date());
     if (data.time.break) {
         breakB.classList.remove('expanded');
+        breakB.classList.remove("break-warning");
+        breakB.classList.remove("break-overtime");
         db.collection('users').doc(userId).update({
             "time.break": false,
             "time.breakKey": setDate
@@ -148,11 +150,15 @@ function countdown() {
             localStorage.removeItem('seconds');
         }
 
+        if (minutes <= 1 && seconds <= 30) {
+            breakB.classList.add("break-warning");
+            // clearInterval(timer);
+        }
         if (minutes <= 0 && seconds <= 0) {
             minutes = 15;
             seconds = 00;
-            mins.classList.add("over");
-            secs.classList.add("over");
+            breakB.classList.remove("break-warning");
+            breakB.classList.add("break-overtime");
             // clearInterval(timer);
         }
         printTimer()
