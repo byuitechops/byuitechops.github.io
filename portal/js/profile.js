@@ -103,22 +103,22 @@ function updateTeamPoints(pointsToAdd, activityType, timeStamp) {
                 points: newPoints
             }).catch(function (error) {
                 alert('An error Ocurred, try updating the points again');
-            })
+            });
             score.collection('logs').doc(timeStamp).set({
                     "Activity Type": activityType,
                     "Points added": pointsToAdd,
                     "Date Added": timeStamp,
                     "Added by": name
-                })
-                .then(function () {
-                    console.log("Document successfully written!");
-                    $.when( $(yayPoints).fadeIn(400), 
+                }).then(() => {
+                    $.when( $(yayPoints).fadeIn(400),
                             $(yayPoints).toggleClass('hide'),
-                            $(yayPoints).delay(1200), 
+                            $(yayPoints).delay(1200),
                             $(yayPoints).fadeOut(400)).done(() =>{
                         $(yayPoints).toggleClass('hide');
-                }).catch(function (error) {
-                    // An error happened.
+                        let activityType = document.getElementById("pointsOptions");
+                        activityType.value = "start";
+                }).catch((error) => {
+                    console.log(error);
                 });
         });
     });
