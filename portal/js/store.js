@@ -307,11 +307,13 @@ function loadInvoice() {
                 querySnapshot.forEach((doc) => {
                     var docData = `<div class="snack snack-info col4"><h3>${doc.id}</h3>`;
                     var items = doc.data().items;
-                    docData += `<p><b>Items:</b><br> `;
+                    docData += `<p><span>Items: </span<br> `;
                     for (var key in items) {
-                        docData += `<span>Amount of ${key}s: ${items[key]}<br></span>`;
+                        docData += `<p><span>Amount of ${key}s: </span>${items[key]}</p>`;
                     }
-                    docData += `</p><p><b>Total Paid:</b> $${Number(doc.data().payTotal).toFixed(2)} </p> <p><b>Payment Type:</b> ${(doc.data().payType)[0].toUpperCase()}${doc.data().payType.slice(1)} </p><p><b>User:</b> ${doc.data().user}</p></div>`;
+                    docData += `</p><p><span>Total Paid:</span> $${Number(doc.data().payTotal).toFixed(2)}</p> 
+                                    <p><span>Payment Type:</span> ${(doc.data().payType)[0].toUpperCase()}${doc.data().payType.slice(1)}</p>
+                                    <p><span>User:</span> ${doc.data().user}</p></div>`;
                     html = `${docData}${html}`;
                 })
                 document.getElementById('data').insertAdjacentHTML('beforeend', html);
