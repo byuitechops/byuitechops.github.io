@@ -1,4 +1,4 @@
-var data = {};
+var data = [];
 var count = 0;
 // 
 db.collection("users").get().then((querySnapshot) => {

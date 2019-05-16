@@ -255,7 +255,7 @@ function fillPrepTableStart() {
 
 function fillPrepTable(selectedCourseCode) {
     document.getElementById('prep-table').innerHTML = '';
-    db.collection("accessibility").where('status', '==', 'Ready for Prep').orderBy('priority').limit(25).get()
+    db.collection("accessibility").where('status', '==', 'Ready for Prep').orderBy('priority').get()
         .then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
                 if (selectedCourseCode == doc.data().courseCode) {
