@@ -56,10 +56,12 @@ firebase.auth().onAuthStateChanged(function (user) {
                             document.getElementById('copyEdit').classList.add('hide');
                             document.getElementById('copyEditCheck').classList.add('hide');
                         }
-                        if (doc.data().name == 'Lucas Wargha' || doc.data().name == 'Calvin Smoot') {
-                            document.getElementById('master').classList.remove('hide');
-                            document.getElementById('copyEdit').classList.remove('hide');
-                            document.getElementById('copyEditCheck').classList.remove('hide');
+                        if (doc.data().webMaster != null){
+                            if (doc.data().webMaster) {
+                                document.getElementById('master').classList.remove('hide');
+                                document.getElementById('copyEdit').classList.remove('hide');
+                                document.getElementById('copyEditCheck').classList.remove('hide');
+                            }
                         }
                     })
                 })

@@ -36,7 +36,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 
 //fill the transcript table according to its status on firestore
 function fillTranscribeTableStart() {
-    db.collection("accessibility").where('status', '==', 'Ready for Transcription').orderBy('priority').get()
+    db.collection("accessibility").where('status', '==', 'Ready for Transcription').orderBy('priority').limit(25).get()
         .then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
                 var length;
@@ -56,7 +56,7 @@ function fillTranscribeTableStart() {
 
 function fillTranscribeTable(selectedCourseCode) {
     document.getElementById('transcripts-table').innerHTML = '';
-    db.collection("accessibility").where('status', '==', 'Ready for Transcription').orderBy('priority').get()
+    db.collection("accessibility").where('status', '==', 'Ready for Transcription').orderBy('priority').limit(25).get()
         .then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
                 var length;

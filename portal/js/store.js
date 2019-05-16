@@ -4,6 +4,9 @@ const editStore = document.getElementById('editStore');
 const invoiceStore = document.getElementById('invoiceStore');
 const snack = document.getElementById("snack-in-cart");
 const snackEdit = document.getElementById('snack-edit');
+const editName = document.getElementById('editName');
+const editCost = document.getElementById('editCost');
+const editCount = document.getElementById('editCount');
 const snackAdd = document.getElementById('snack-add');
 const snackCart = document.getElementById('snack-cart');
 const snackList = document.getElementById("snack-container");
@@ -60,17 +63,22 @@ $(invoiceStore).click(() => {
         $(shoppingPage).addClass('hide');
         loadInvoice();
     }
-})
+});
 $(cartCancel).click(() => {
     $(cartTotal).html("$0.00");
     $(snackItemsInCart).empty();
     $(snackList).empty();
     loadSnacks();
 
-})
+});
 $(cartCheckout).click(() => {
+    if ($(cartTotal).html() != "$0.00") {
+        $(confirmCheckout).fadeIn(400);
+        $(confirmCheckout).toggleClass('hide');
+        $(confirmTotal).text($(cartTotal).html());
+    }
+});
 
-})
 function loadSnacks() {
     db.collection("store").doc("inventory").collection("items").orderBy("price", "desc").get().then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
@@ -95,9 +103,11 @@ function loadSnacks() {
         })
     })
 }
+
 function isEditing(item, price, count) {
-    (!editingStore) ? addCart(item, price, count) : editStoreItem(item, price, count);
+    (!editingStore) ? addCart(item, price, count): editStoreItem(item, price, count);
 }
+
 function addCart(item, price, count) {
     const snackCount = document.getElementById(`${item.replace(/ /g, '')}Count`);
     var count = snackCount.innerText.replace(/Count: /g, "");
@@ -113,9 +123,7 @@ function addCart(item, price, count) {
         changeTotal(price);
     }
 }
-function editStoreItem(item, price, count) {
-    
-}
+
 function removeItem(e, item, price) {
     const snackCount = document.getElementById(`${item.replace(/ /g, '')}Count`);
     var count = snackCount.innerText.replace(/Count: /g, "");
@@ -123,43 +131,71 @@ function removeItem(e, item, price) {
     changeTotal(0 - price);
     $(e.target).parent().remove();
 }
+
 function changeTotal(price) {
     var total = cartTotal.innerText.replace(/\$/g, "");
     var newTotal = (Number(total) + Number(price)).toFixed(2);
     cartTotal.innerHTML = `$${newTotal}`;
 }
+
 function updateFirebase(name, sub) {
     db.collection('store').doc('inventory').collection('items').doc(`${name}`).get().then(function (doc) {
-      var count = doc.data().count;
-      db.collection('store').doc('inventory').collection('items').doc(name)
-        .update({
-          count: `${count -= sub}`
+        var count = doc.data().count;
+        db.collection('store').doc('inventory').collection('items').doc(name)
+            .update({
+                count: `${count -= sub}`
+            })
+            .then(function () {
+                console.log("Document successfully updated!");
+            })
+            .catch(function (error) {
+                // The document probably doesn't exist.
+                console.error("Error updating document: ", error);
+            });
+    });
+}
+
+function editStoreItem(item, price, count) {
+    $(snackAdd).addClass('hide');
+    $(snackEdit).removeClass('hide');
+    $(editName).val(item);
+    $(editCost).val(price);
+    $(editCount).val(count);
+}
+$("#confirm-edit").click(() => {
+    console.log("hello there");
+    if ($(editCost).val() != "" || $(editCount).val() != "") {
+
+    } else {
+
+        name = $(editName).val();
+        price = $(editCost).val();
+        count = $(editCount).val();
+        confirmStoreEdit(name, count, price);
+    }
+});
+
+function confirmStoreEdit(name, count, price) {
+    console.log(price);
+    db.collection('store').doc('inventory').collection('items').doc(name).update({
+            count: count,
+            price: price
         })
         .then(function () {
-          console.log("Document successfully updated!");
+            console.log("Document successfully updated!");
         })
         .catch(function (error) {
-          // The document probably doesn't exist.
-          console.error("Error updating document: ", error);
+            // The document probably doesn't exist.
+            console.error("Error updating document: ", error);
         });
-    });
-  }
+}
 
 
-
-
-$(cartCheckout).click(() => {
-    if ($(cartTotal).html() != "$0.00") {
-        $(confirmCheckout).fadeIn(400);
-        $(confirmCheckout).toggleClass('hide');
-        $(confirmTotal).text($(cartTotal).html());
-    }
-})
-$(cancelPurchase).on('click', function() {
+$(cancelPurchase).on('click', function () {
     $(purchaseErr).text("");
     $(confirmCheckout).toggleClass('hide');
 })
-$(confirmPurchase).on('click', function() {
+$(confirmPurchase).on('click', function () {
     if ($(cash).prop('checked') || $(venmo).prop('checked')) {
         $(purchaseErr).text("");
 
@@ -170,10 +206,10 @@ $(confirmPurchase).on('click', function() {
         $(venmo).prop('checked', false);
         $(confirmCheckout).fadeOut(400);
         $(confirmCheckout).toggleClass('hide');
-        $.when( $(enjoySnacks).fadeIn(400), 
-                $(enjoySnacks).toggleClass('hide'),
-                $(enjoySnacks).delay(800), 
-                $(enjoySnacks).fadeOut(400)).done(() =>{
+        $.when($(enjoySnacks).fadeIn(400),
+            $(enjoySnacks).toggleClass('hide'),
+            $(enjoySnacks).delay(800),
+            $(enjoySnacks).fadeOut(400)).done(() => {
             $(enjoySnacks).toggleClass('hide');
         })
         $(snackItemsInCart).empty();
@@ -193,16 +229,16 @@ function updateTotals(type) {
     var array = [];
     for (var i = 0; i < items.length; i++) {
         if (i % 2 == 0) {
-        var item = items[i].innerText;
-        var arrayResult = searchArray(array, item);
-        if (typeof arrayResult == "number") {
-            array[arrayResult].count += 1;
-        } else {
-            array.push({
-            name: item,
-            count: 1
-            });
-        }
+            var item = items[i].innerText;
+            var arrayResult = searchArray(array, item);
+            if (typeof arrayResult == "number") {
+                array[arrayResult].count += 1;
+            } else {
+                array.push({
+                    name: item,
+                    count: 1
+                });
+            }
         }
     }
     var itemsJson = `{"items": {`;
@@ -218,7 +254,7 @@ function updateTotals(type) {
     // Push transaction record to firebase
     var now = new Date();
     var dateString = `${now.getFullYear()}-${("0" + (now.getMonth() + 1)).slice(-2)}-${("0" + now.getDate()).slice(-2)} ${("0" + now.getHours()).slice(-2)}:${("0" + now.getMinutes()).slice(-2)}`;
-    db.collection('store').doc('transactions').collection('receipts').doc(dateString).set(JSON.parse(itemsJson)).then(function() {
+    db.collection('store').doc('transactions').collection('receipts').doc(dateString).set(JSON.parse(itemsJson)).then(function () {
         console.log("Document successfully written!");
     });
     // Update Money fields
@@ -226,26 +262,24 @@ function updateTotals(type) {
         var newMoneyTotal = (Number(doc.data()[type]) + Number(total));
         var moneyJson = `{"${type}": "${newMoneyTotal}"}`;
         db.collection('store').doc('inventory').update(JSON.parse(moneyJson))
-        .then(function () {
-            console.log("Document successfully updated!");
-        })
-        .catch(function (error) {
-            // The document probably doesn't exist.
-            console.error("Error updating document: ", error);
-        });
+            .then(function () {
+                console.log("Document successfully updated!");
+            })
+            .catch(function (error) {
+                // The document probably doesn't exist.
+                console.error("Error updating document: ", error);
+            });
     });
 }
 
 function searchArray(array, item) {
     for (var i = 0; i < array.length; i++) {
-      if (array[i].name == item) {
-        return i;
-      }
+        if (array[i].name == item) {
+            return i;
+        }
     }
     return false;
 }
-
-
 /**
  * Invoice section
  */
@@ -260,34 +294,34 @@ function loadInvoice() {
     //checks if the user has correct permissions first
     if ((data.admin || data.storeManager)) {
         db.collection('store').doc('inventory').get()
-        .then(function (doc) {
-            cashTotal.innerHTML = `${doc.data().cash}`;
-            venmoTotal.innerHTML = `${doc.data().venmo}`;
-            storageTotal.innerHTML = `${doc.data().storage}`;
-        });
+            .then(function (doc) {
+                cashTotal.innerHTML = `${doc.data().cash}`;
+                venmoTotal.innerHTML = `${doc.data().venmo}`;
+                storageTotal.innerHTML = `${doc.data().storage}`;
+            });
 
-    db.collection("store").doc("transactions").collection("receipts").get()
-        .then(function (querySnapshot) {
-            console.log
-            var html = ``;
-            querySnapshot.forEach((doc) => {
-                var docData = `<div class="snack snack-info col4"><h3>${doc.id}</h3>`;
-                var items = doc.data().items;
-                docData += `<p><b>Items:</b><br> `;
-                for (var key in items) {
-                    docData += `<span>Amount of ${key}s: ${items[key]}<br></span>`;
-                }
-                docData += `</p><p><b>Total Paid:</b> $${Number(doc.data().payTotal).toFixed(2)} </p> <p><b>Payment Type:</b> ${(doc.data().payType)[0].toUpperCase()}${doc.data().payType.slice(1)} </p><p><b>User:</b> ${doc.data().user}</p></div>`;
-                html = `${docData}${html}`;
-            })
-            document.getElementById('data').insertAdjacentHTML('beforeend', html);
-        });
+        db.collection("store").doc("transactions").collection("receipts").get()
+            .then(function (querySnapshot) {
+                console.log
+                var html = ``;
+                querySnapshot.forEach((doc) => {
+                    var docData = `<div class="snack snack-info col4"><h3>${doc.id}</h3>`;
+                    var items = doc.data().items;
+                    docData += `<p><b>Items:</b><br> `;
+                    for (var key in items) {
+                        docData += `<span>Amount of ${key}s: ${items[key]}<br></span>`;
+                    }
+                    docData += `</p><p><b>Total Paid:</b> $${Number(doc.data().payTotal).toFixed(2)} </p> <p><b>Payment Type:</b> ${(doc.data().payType)[0].toUpperCase()}${doc.data().payType.slice(1)} </p><p><b>User:</b> ${doc.data().user}</p></div>`;
+                    html = `${docData}${html}`;
+                })
+                document.getElementById('data').insertAdjacentHTML('beforeend', html);
+            });
     } else {
-        
+
     }
 }
-$(cashTotal, venmoTotal, storageTotal).click(() =>{
-    if (event.target.id == 'cash'){
+$(cashTotal, venmoTotal, storageTotal).click(() => {
+    if (event.target.id == 'cash') {
         if (!doneCash) {
             var input = document.createElement('input');
             input.id = "cashInput";
@@ -298,7 +332,7 @@ $(cashTotal, venmoTotal, storageTotal).click(() =>{
             cashTotal.removeChild(cashTotal.lastChild);
             doneCash = true;
         }
-    } else if (event.target.id == 'venmo'){
+    } else if (event.target.id == 'venmo') {
         if (!doneVenmo) {
             var input = document.createElement('input');
             input.id = "venmoInput";
@@ -309,7 +343,7 @@ $(cashTotal, venmoTotal, storageTotal).click(() =>{
             venmoTotal.removeChild(venmoTotal.lastChild);
             doneVenmo = true;
         }
-    } else if (event.target.id == 'storage'){
+    } else if (event.target.id == 'storage') {
         if (!doneStorage) {
             var input = document.createElement('input');
             input.id = "storageInput";
@@ -322,6 +356,7 @@ $(cashTotal, venmoTotal, storageTotal).click(() =>{
         }
     }
 })
+
 function submitMoney() {
     var cash, storage, venmo;
     if (document.getElementById('cashInput') != undefined) {

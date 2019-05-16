@@ -235,7 +235,7 @@ document.getElementById('requestSubmit').addEventListener('click', () => {
 
 function fillPrepTableStart() {
     document.getElementById('prep-table').innerHTML = '';
-    db.collection("accessibility").where('status', '==', 'Ready for Prep').orderBy('priority').get()
+    db.collection("accessibility").where('status', '==', 'Ready for Prep').orderBy('priority').limit(25).get()
         .then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
                 console.log(doc.id);
@@ -255,7 +255,7 @@ function fillPrepTableStart() {
 
 function fillPrepTable(selectedCourseCode) {
     document.getElementById('prep-table').innerHTML = '';
-    db.collection("accessibility").where('status', '==', 'Ready for Prep').orderBy('priority').get()
+    db.collection("accessibility").where('status', '==', 'Ready for Prep').orderBy('priority').limit(25).get()
         .then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
                 if (selectedCourseCode == doc.data().courseCode) {
