@@ -164,8 +164,8 @@ function changeTheme(preferance) {
         case 'dark':
           setTheme({
             'first': '#343a40',
-            'second': '#1c1b1b',
-            'third': '#1c1b1b',
+            'second': '#06439F',
+            'third': '#06439F',
             'background': '#1c1b1b',
             'backgroundSecondary': '#777777',
             'backgroundGrade': 'none',
