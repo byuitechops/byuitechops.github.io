@@ -49,7 +49,7 @@
     --backgroundGrade: none;
     --shadow: #000000;
     --fontPrime: #ffffff;
-    --fontSecond: #0f0f0f;
+    --fontPrime: #0f0f0f;
     --success: #28a745;
     --info: #17a2b8;
     --warning: #ffc107;
@@ -146,7 +146,7 @@ nav {
     text-decoration: none;
     font-weight: 200;
     font-size: 1.5em;
-    color: var(--fontPrime);
+    color: var(--white);
     transition: transform .15s;
 }
 .nav-links a:hover {
@@ -175,7 +175,7 @@ main {
     padding: 50px 6% 30px;
     font-size: 2.5em;
     font-weight: 400;
-    color: var(--fontSecond);
+    color: var(--fontPrime);
 }
 
 
@@ -196,7 +196,7 @@ main {
     width: 100%;
 }
 .slideshow-container .numbertext{
-    color: var(--fontPrime);
+    color: var(--white);
     position: absolute;
     margin: 5px 0 0 8px;
 }
@@ -204,7 +204,7 @@ main {
     z-index: -1;
 }
 .prev, .next {
-    color: var(--fontPrime);
+    color: var(--white);
     position: absolute;
     z-index: 1;
     margin-top: -8em;
@@ -247,7 +247,7 @@ main {
     font-size: 1.4em;
     font-weight: 500;
     z-index: 1;
-    color: var(--fontPrime);
+    color: var(--white);
     position: absolute;
 }
 
@@ -296,7 +296,7 @@ main {
     border-style: none;
     font-size: 1.2em;
     font-weight: 500;
-    color: var(--fontPrime);
+    color: var(--white);
     outline: none;
     background-color: var(--first);
     transition: transform .2s;
@@ -306,9 +306,12 @@ main {
     background-color: var(--second);
     transform: scale(1.05);
 }
+#break-button p {
+    color: var(--white);
+}
 #break-button span {
     font-size: 1.8em;
-    color: var(--fontPrime);
+    color: var(--white);
 }
 .break-warning {
     background-color: var(--warning);
@@ -334,7 +337,7 @@ main {
     font-size: 14px;
     font-weight: 500;
     border-radius: 20px;
-    color: var(--fontSecond);
+    color: var(--fontPrime);
 }
 #workday-link {
     width: 100%;
@@ -446,6 +449,7 @@ main {
     padding: 5px;
     float: left;
     transition: .2s;
+    color: var(--white);
 }
 #selectTeam:hover {
     width: 16.5em;
@@ -482,7 +486,7 @@ main {
     border-style: none;
     font-size: 1.2em;
     font-weight: 500;
-    color: var(--fontPrime);
+    color: var(--white);
     outline: none;
     background-color: var(--first);
     transition: transform .2s;
@@ -550,11 +554,11 @@ main {
     font-size: .8vw;
     font-weight: 500;
     text-transform: uppercase;
-    color: var(--fontSecond);
+    color: var(--fontPrime);
 }
 .snack-info p {
     font-weight: 300;
-    color: var(--fontSecond);
+    color: var(--fontPrime);
 }
 .snack-count {
     margin: 20px 0;
@@ -616,22 +620,23 @@ main {
 }
 #snack-cart-receipt span,
 #snack-shopping-list span {
-    color: var(--fontPrime);
+    color: var(--white);
     text-align: left;
 }
 .snack-manage button, .popup button {
     width: 25%;
     margin: 25px 5px;
     padding: 10px;
-    border: 2px solid var(--fontPrime);
+    border: 2px solid var(--white);
     background-color: var(--first);
+    color: white;
     font-weight: 600;
     border-radius: 24px;
     outline: none;
     transition: background-color .2s ease;
 }
 .snack-manage button:hover, .popup button:hover {
-    background-color: var(--fontPrime);
+    background-color: var(--white);
     color: var(--first);
 }
 .snack-cart-btns {
@@ -647,6 +652,7 @@ main {
     margin: 30px 0;
     font-size: 3em;
     font-weight: 300;
+    color: white;
 }
 .snack-manage p {
     padding-bottom: 10px;
@@ -744,23 +750,25 @@ main {
     font-size: 40px;
     font-weight: 300;
     padding: 0px 0 10px;
+    color: white;
 }
 #heading span {
     margin: 10px;
-    color: var(--fontPrime);
+    color: var(--white);
     font-size: 20px;
 }
 #heading button {
     margin-left: 30px;
     padding: 4px 16px;
     font-size: 12px;
-    border: 3px solid var(--fontPrime);
+    border: 3px solid var(--white);
     border-radius: 20px;
-    background-color: var(--first);
+    background-color: var(--white);
+    transition: .2s;
 }
 #heading button:hover {
-    color: var(--first);
-    background-color: var(--fontPrime);
+    color: var(--white);
+    background-color: var(--first);
 }
 #data {
     display: flex;
@@ -768,7 +776,7 @@ main {
 }
 #data th {
     background-color: white;
-    color: var(--third);
+    color: var(--fontPrime);
     font-weight:700;
     margin: 0 0 30px;
     padding: 5px 10px 2px;
@@ -776,9 +784,10 @@ main {
 }
 #data span {
     font-weight: 500;
+    color: var(--fontPrime);
 }
 #data p {
-    color: var(--fontSecond);
+    color: var(--fontPrime);
 }
 
 
@@ -805,6 +814,7 @@ main {
 #signOutBtn {
     margin: 0 50px;
     padding: 20px;
+    color: var(--white);
     background-color: var(--second);
     transition: all .2s;
     border-radius: 50px;
@@ -829,7 +839,7 @@ main {
 #profile-content {
     padding: 2.5%;
     flex-flow: row wrap;
-    color: var(--fontSecond);
+    color: var(--fontPrime);
 }
 #profile-info, #resources {
     margin: 3%;
@@ -855,17 +865,17 @@ main {
     font-size: 2.7vw;
     font-weight: 300;
     margin-bottom: 20px;
-    color: var(--fontSecond);
+    color: var(--fontPrime);
 }
 #profile-info h4 {
     margin: 20px 0 10px;
     font-size: 25px;
     font-weight: 300;
-    color: var(--fontSecond);
+    color: var(--fontPrime);
 }
 #profile-info p {
     margin: 3px 0;
-    color: var(--fontSecond);
+    color: var(--fontPrime);
 }
 #resources {
     flex-flow: row wrap;
@@ -878,7 +888,7 @@ main {
     font-family: "Roboto";
     font-weight: 300;
     text-align: center;
-    color: var(--fontSecond);
+    color: var(--fontPrime);
 }
 #links-box {
     width: 100%;
@@ -894,6 +904,7 @@ main {
     margin: 5px auto;
     padding: 5px;
     background-color: var(--first);
+    color: var(--white);
     border-radius: 40px;
     text-decoration: none;
     text-align: center;
@@ -919,13 +930,13 @@ main {
 #team-points h3 {
     width: 25%;
     margin: 5px 0;
-    color: var(--fontSecond);
+    color: var(--fontPrime);
 }
 #select-points select {
     width: 80%;
     height: 30px;
     margin: 5px;
-    color: var(--fontPrime);
+    color: var(--white);
     font-family: "Roboto";
     font-size: 15px;
     background-color: var(--first);
@@ -942,7 +953,7 @@ main {
     width: 20%;
     height: 30px;
     margin: 5px;
-    color: var(--fontPrime);
+    color: var(--white);
     font-family: "Roboto";
     font-size: 14px;
     font-weight: 500;
@@ -1053,7 +1064,7 @@ main {
     margin: 40px auto;
     font-size: 50px;
     font-weight: 300;
-    color: var(--fontSecond);
+    color: var(--fontPrime);
     text-align: center;
 }
 #showAll {
@@ -1065,7 +1076,7 @@ main {
 }
 #showAll span {
     margin: 5px auto;
-    color: var(--fontSecond);
+    color: var(--fontPrime);
     font-size: 20px;
     text-align: center;
 }
@@ -1097,7 +1108,7 @@ main {
     width: 50px;
     margin: 0 10px;
     padding: 5px;
-    color: var(--fontSecond);
+    color: var(--fontPrime);
     font-size: 16px;
     border: 2px solid var(--first);
     border-radius: 24px;
