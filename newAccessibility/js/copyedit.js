@@ -26,7 +26,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 //fill the transcript table according to its status on firestore
 function fillReviewStart() {
 
-    db.collection("accessibility").where('status', '==', 'Ready for Review').orderBy('priority').limit(25).get()
+    db.collection("accessibility").where('status', '==', 'Ready for Review').orderBy('priority').limit(10).get()
         .then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
                 var length;

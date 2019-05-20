@@ -235,7 +235,7 @@ document.getElementById('requestSubmit').addEventListener('click', () => {
 
 function fillPrepTableStart() {
     document.getElementById('prep-table').innerHTML = '';
-    db.collection("accessibility").where('status', '==', 'Ready for Prep').orderBy('priority').limit(25).get()
+    db.collection("accessibility").where('status', '==', 'Ready for Prep').orderBy('priority').limit(10).get()
         .then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
                 var classRed = '';
