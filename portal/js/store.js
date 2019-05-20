@@ -85,7 +85,7 @@ function loadSnacks() {
         querySnapshot.forEach(function (doc) {
             firebase.storage().ref().child(`images/${doc.data().image}`).getDownloadURL().then(function (url) {
                 if (doc.data().count > 0 || editingStore) {
-                    var html = `<section id class="snack col5 flex-container" onclick="isEditing('${doc.id}', '${doc.data().price}', '${doc.data().count}')">
+                    var html = `<section id class="snack col5 flex-container" onclick="selectSnack('${doc.id}', '${doc.data().price}', '${doc.data().count}')">
                     <div class="snack-pic col10">
                         <img src="${url}" alt="${doc.id}"/>
                     </div>
@@ -105,38 +105,46 @@ function loadSnacks() {
     })
 }
 
-function isEditing(item, price, count) {
-    (!editingStore) ? addCart(item, price, count): editStoreItem(item, price, count);
-}
-
-function addCart(item, price, count) {
-    const snackCount = document.getElementById(`${item.replace(/ /g, '')}Count`);
-    var count = snackCount.innerText.replace(/Count: /g, "");
-    if (count - 1 >= 0) {
-        var html = `<div class="snack-in-cart">
-        <span class="snack-name col7">${item}</span>
-        <span class="snack-cost col2">$${price}</span>
-        <button class="col1" id="snack-remove-btn" onclick="removeItem(event, '${item}', '${price}')">X</button>
-    </div>`
-        snackItemsInCart.insertAdjacentHTML("beforeend", html);
+function selectSnack(item, price, count) {
+    if (!editingStore) {
+        const snackCount = document.getElementById(`${item.replace(/ /g, '')}Count`);
         var count = snackCount.innerText.replace(/Count: /g, "");
-        snackCount.innerHTML = `${--count}`;
-        changeTotal(price);
+        if (count - 1 >= 0) {
+            var html = `<div class="snack-in-cart">
+            <span class="snack-name col7">${item}</span>
+            <span class="snack-cost col2">$${price}</span>
+            <button class="col1" id="snack-remove-btn" onclick="removeItem(event, '${item}', '${price}')">X</button>
+        </div>`
+            snackItemsInCart.insertAdjacentHTML("beforeend", html);
+            var count = snackCount.innerText.replace(/Count: /g, "");
+            snackCount.innerHTML = `${--count}`;
+            changeTotal(price);
+        }
+    } else if (editingStore) {
+        $(snackAdd).addClass('hide');
+        $(snackEdit).removeClass('hide');
+        $(editName).val(item);
+        $(editCost).val(price);
+        $(editCount).val(count);
     }
 }
 
 function removeItem(e, item, price) {
-    const snackCount = document.getElementById(`${item.replace(/ /g, '')}Count`);
-    var count = snackCount.innerText.replace(/Count: /g, "");
-    snackCount.innerHTML = `${++count}`;
-    changeTotal(0 - price);
-    $(e.target).parent().remove();
+    if (!editingStore) {
+        const snackCount = document.getElementById(`${item.replace(/ /g, '')}Count`);
+        var count = snackCount.innerText.replace(/Count: /g, "");
+        snackCount.innerHTML = `${++count}`;
+        changeTotal(0 - price);
+        $(e.target).parent().remove();
+    }
 }
 
 function changeTotal(price) {
-    var total = cartTotal.innerText.replace(/\$/g, "");
-    var newTotal = (Number(total) + Number(price)).toFixed(2);
-    cartTotal.innerHTML = `$${newTotal}`;
+    if (!editingStore) {
+        var total = cartTotal.innerText.replace(/\$/g, "");
+        var newTotal = (Number(total) + Number(price)).toFixed(2);
+        cartTotal.innerHTML = `$${newTotal}`;
+    }
 }
 
 function updateFirebase(name, sub) {
@@ -156,35 +164,13 @@ function updateFirebase(name, sub) {
     });
 }
 
-function editStoreItem(item, price, count) {
-    $(snackAdd).addClass('hide');
-    $(snackEdit).removeClass('hide');
-    $(editName).val(item);
-    $(editCost).val(price);
-    $(editCount).val(count);
-}
-$(confirmEdit).click(() => {
-    name = $(editName).val();
-    price = $(editCost).val();
-    count = $(editCount).val();
-    db.collection('store').doc('inventory').collection('items').doc(name).update({
-        count: count,
-        price: price
-    }).then(function () {
-        console.log("Document successfully updated!");
-    }).catch(function (error) {
-        // The document probably doesn't exist.
-        console.error("Error updating document: ", error);
-    });
-});
 
-
-$(cancelPurchase).on('click', function () {
+$(cancelPurchase).on('click', () => {
     $(purchaseErr).text("");
     $(confirmCheckout).toggleClass('hide');
 })
-$(confirmPurchase).on('click', function () {
-    if ($(cash).prop('checked') || $(venmo).prop('checked')) {
+$(confirmPurchase).on('click', () => {
+    if (($(cash).prop('checked') || $(venmo).prop('checked')) && !editingStore) {
         $(purchaseErr).text("");
 
         /* This is a single line IF statement! It's DOPE */
@@ -209,55 +195,54 @@ $(confirmPurchase).on('click', function () {
 })
 
 function updateTotals(type) {
-    console.log(type);
-
-    let total = $(cartTotal).html().slice(1);
-    console.log(total);
-    var items = document.getElementById('snack-shopping-list').getElementsByTagName('span');
-    var array = [];
-    for (var i = 0; i < items.length; i++) {
-        if (i % 2 == 0) {
-            var item = items[i].innerText;
-            var arrayResult = searchArray(array, item);
-            if (typeof arrayResult == "number") {
-                array[arrayResult].count += 1;
-            } else {
-                array.push({
-                    name: item,
-                    count: 1
-                });
+    if (!editingStore) {
+        let total = $(cartTotal).html().slice(1);
+        var items = document.getElementById('snack-shopping-list').getElementsByTagName('span');
+        var array = [];
+        for (var i = 0; i < items.length; i++) {
+            if (i % 2 == 0) {
+                var item = items[i].innerText;
+                var arrayResult = searchArray(array, item);
+                if (typeof arrayResult == "number") {
+                    array[arrayResult].count += 1;
+                } else {
+                    array.push({
+                        name: item,
+                        count: 1
+                    });
+                }
             }
         }
-    }
-    var itemsJson = `{"items": {`;
-    // Update the count
-    for (var i = 0; i < array.length; i++) {
-        updateFirebase(array[i].name, array[i].count);
-        itemsJson += `"${array[i].name}": "${array[i].count}",`;
-    }
-    itemsJson = `${itemsJson.slice(0, -1)}}, 
+        var itemsJson = `{"items": {`;
+        // Update the count
+        for (var i = 0; i < array.length; i++) {
+            updateFirebase(array[i].name, array[i].count);
+            itemsJson += `"${array[i].name}": "${array[i].count}",`;
+        }
+        itemsJson = `${itemsJson.slice(0, -1)}}, 
         "payTotal": "${total}",
         "payType": "${type}",
         "user": "${data.nameDisplay}"}`;
-    // Push transaction record to firebase
-    var now = new Date();
-    var dateString = `${now.getFullYear()}-${("0" + (now.getMonth() + 1)).slice(-2)}-${("0" + now.getDate()).slice(-2)} ${("0" + now.getHours()).slice(-2)}:${("0" + now.getMinutes()).slice(-2)}`;
-    db.collection('store').doc('transactions').collection('receipts').doc(dateString).set(JSON.parse(itemsJson)).then(function () {
-        console.log("Document successfully written!");
-    });
-    // Update Money fields
-    db.collection('store').doc('inventory').get().then(function (doc) {
-        var newMoneyTotal = (Number(doc.data()[type]) + Number(total));
-        var moneyJson = `{"${type}": "${newMoneyTotal}"}`;
-        db.collection('store').doc('inventory').update(JSON.parse(moneyJson))
-            .then(function () {
-                console.log("Document successfully updated!");
-            })
-            .catch(function (error) {
-                // The document probably doesn't exist.
-                console.error("Error updating document: ", error);
-            });
-    });
+        // Push transaction record to firebase
+        var now = new Date();
+        var dateString = `${now.getFullYear()}-${("0" + (now.getMonth() + 1)).slice(-2)}-${("0" + now.getDate()).slice(-2)} ${("0" + now.getHours()).slice(-2)}:${("0" + now.getMinutes()).slice(-2)}`;
+        db.collection('store').doc('transactions').collection('receipts').doc(dateString).set(JSON.parse(itemsJson)).then(function () {
+            console.log("Document successfully written!");
+        });
+        // Update Money fields
+        db.collection('store').doc('inventory').get().then(function (doc) {
+            var newMoneyTotal = (Number(doc.data()[type]) + Number(total));
+            var moneyJson = `{"${type}": "${newMoneyTotal}"}`;
+            db.collection('store').doc('inventory').update(JSON.parse(moneyJson))
+                .then(function () {
+                    console.log("Document successfully updated!");
+                })
+                .catch(function (error) {
+                    // The document probably doesn't exist.
+                    console.error("Error updating document: ", error);
+                });
+        });
+    }
 }
 /**
  * Invoice section
@@ -265,9 +250,6 @@ function updateTotals(type) {
 const cashTotal = document.getElementById('cash');
 const venmoTotal = document.getElementById('venmo');
 const storageTotal = document.getElementById('storage');
-var doneCash = false;
-var doneVenmo = false;
-var doneStorage = false;
 
 function loadInvoice() {
     //checks if the user has correct permissions first
@@ -301,40 +283,38 @@ function loadInvoice() {
 
     }
 }
-$(cashTotal, venmoTotal, storageTotal).click(() => {
+$(cashTotal).click(() => {
     if (event.target.id == 'cash') {
-        if (!doneCash) {
-            var input = document.createElement('input');
-            input.id = "cashInput";
-            input.type = "number";
-            input.min = "0";
-            input.value = cashTotal.innerHTML;
-            cashTotal.insertAdjacentElement('afterbegin', input);
-            cashTotal.removeChild(cashTotal.lastChild);
-            doneCash = true;
-        }
-    } else if (event.target.id == 'venmo') {
-        if (!doneVenmo) {
-            var input = document.createElement('input');
-            input.id = "venmoInput";
-            input.type = "number";
-            input.min = "0";
-            input.value = venmoTotal.innerHTML;
-            venmoTotal.insertAdjacentElement('afterbegin', input);
-            venmoTotal.removeChild(venmoTotal.lastChild);
-            doneVenmo = true;
-        }
-    } else if (event.target.id == 'storage') {
-        if (!doneStorage) {
-            var input = document.createElement('input');
-            input.id = "storageInput";
-            input.type = "number";
-            input.min = "0";
-            input.value = storageTotal.innerHTML;
-            storageTotal.insertAdjacentElement('afterbegin', input);
-            storageTotal.removeChild(storageTotal.lastChild);
-            doneStorage = true;
-        }
+        var input = document.createElement('input');
+        input.id = "cashInput";
+        input.type = "number";
+        input.min = "0";
+        input.value = cashTotal.innerHTML;
+        cashTotal.insertAdjacentElement('afterbegin', input);
+        cashTotal.removeChild(cashTotal.lastChild);
+
+    }
+});
+$(venmoTotal).click(() => {
+    if (event.target.id == 'venmo') {
+        var input = document.createElement('input');
+        input.id = "venmoInput";
+        input.type = "number";
+        input.min = "0";
+        input.value = venmoTotal.innerHTML;
+        venmoTotal.insertAdjacentElement('afterbegin', input);
+        venmoTotal.removeChild(venmoTotal.lastChild);
+    }
+});
+$(storageTotal).click(() => {
+    if (event.target.id == 'storage') {
+        var input = document.createElement('input');
+        input.id = "storageInput";
+        input.type = "number";
+        input.min = "0";
+        input.value = storageTotal.innerHTML;
+        storageTotal.insertAdjacentElement('afterbegin', input);
+        storageTotal.removeChild(storageTotal.lastChild);
     }
 });
 
