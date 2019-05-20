@@ -56,7 +56,7 @@ function fillTranscribeTableStart() {
 
 function fillTranscribeTable(selectedCourseCode) {
     document.getElementById('transcripts-table').innerHTML = '';
-    db.collection("accessibility").where('status', '==', 'Ready for Transcription').orderBy('priority').get()
+    db.collection("accessibility").where('status', '==', 'Ready for Transcription').where("courseCode", "==", selectedCourseCode).orderBy('priority').get()
         .then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
                 var length;

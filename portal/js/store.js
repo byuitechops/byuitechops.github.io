@@ -22,6 +22,7 @@ const enjoySnacks = document.getElementById("enjoy-snacks");
 const cash = document.getElementById("radioCash");
 const venmo = document.getElementById("radioVenmo");
 const purchaseErr = document.getElementById("error-purchase");
+const confirmEdit = document.getElementById("confirm-edit");
 
 
 
@@ -162,33 +163,20 @@ function editStoreItem(item, price, count) {
     $(editCost).val(price);
     $(editCount).val(count);
 }
-$("#confirm-edit").click(() => {
-    console.log("hello there");
-    if ($(editCost).val() != "" || $(editCount).val() != "") {
-
-    } else {
-
-        name = $(editName).val();
-        price = $(editCost).val();
-        count = $(editCount).val();
-        confirmStoreEdit(name, count, price);
-    }
-});
-
-function confirmStoreEdit(name, count, price) {
-    console.log(price);
+$(confirmEdit).click(() => {
+    name = $(editName).val();
+    price = $(editCost).val();
+    count = $(editCount).val();
     db.collection('store').doc('inventory').collection('items').doc(name).update({
-            count: count,
-            price: price
-        })
-        .then(function () {
-            console.log("Document successfully updated!");
-        })
-        .catch(function (error) {
-            // The document probably doesn't exist.
-            console.error("Error updating document: ", error);
-        });
-}
+        count: count,
+        price: price
+    }).then(function () {
+        console.log("Document successfully updated!");
+    }).catch(function (error) {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
+    });
+});
 
 
 $(cancelPurchase).on('click', function () {
@@ -271,15 +259,6 @@ function updateTotals(type) {
             });
     });
 }
-
-function searchArray(array, item) {
-    for (var i = 0; i < array.length; i++) {
-        if (array[i].name == item) {
-            return i;
-        }
-    }
-    return false;
-}
 /**
  * Invoice section
  */
@@ -357,7 +336,7 @@ $(cashTotal, venmoTotal, storageTotal).click(() => {
             doneStorage = true;
         }
     }
-})
+});
 
 function submitMoney() {
     var cash, storage, venmo;

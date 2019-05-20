@@ -73,6 +73,15 @@ function editDate(date) {
   return setDate;
 }
 
+function searchArray(array, item) {
+  for (var i = 0; i < array.length; i++) {
+      if (array[i].name == item) {
+          return i;
+      }
+  }
+  return false;
+}
+
 
 function showSlides() {
   for (var i = 0; i < slides.length; i++) {

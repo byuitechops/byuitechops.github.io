@@ -46,7 +46,7 @@ function fillReviewStart() {
 
 function fillTranscribeTable(selectedCourseCode) {
     document.getElementById('transcripts-table').innerHTML = '';
-    db.collection("accessibility").where('status', '==', 'Ready for Review').orderBy('priority').get()
+    db.collection("accessibility").where('status', '==', 'Ready for Review').where("courseCode", "==", selectedCourseCode).orderBy('priority').limit(10).get()
         .then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
                 var length;
