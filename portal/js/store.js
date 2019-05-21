@@ -32,8 +32,6 @@ function loadPage() {
     db.collection("users").where("name", "==", userName)
         .onSnapshot((querySnapshot) => {
             var data = querySnapshot.docs[0].data();
-            var userId = querySnapshot.docs[0].id;
-            var preferance = data.viewMode;
             if (data.admin || data.storeManager) {
                 editStore.classList.remove('hide');
                 invoiceStore.classList.remove('hide');
@@ -79,30 +77,85 @@ $(cartCheckout).click(() => {
         $(confirmTotal).text($(cartTotal).html());
     }
 });
+$(cancelPurchase).on('click', () => {
+    $(purchaseErr).text("");
+    $(confirmCheckout).toggleClass('hide');
+});
+$(confirmPurchase).on('click', () => {
+    if (($(cash).prop('checked') || $(venmo).prop('checked')) && !editingStore) {
+        $(purchaseErr).text("");
+
+        /* This is a single line IF statement! It's DOPE */
+        $(cash).prop('checked') ? updateTotals("cash") : updateTotals("venmo");
+
+        $(cash).prop('checked', false);
+        $(venmo).prop('checked', false);
+        $(confirmCheckout).fadeOut(400);
+        $(confirmCheckout).toggleClass('hide');
+        $.when($(enjoySnacks).fadeIn(400),
+            $(enjoySnacks).toggleClass('hide'),
+            $(enjoySnacks).delay(800),
+            $(enjoySnacks).fadeOut(400)).done(() => {
+            $(enjoySnacks).toggleClass('hide');
+        })
+        $(snackItemsInCart).empty();
+        $(cartTotal).text("$0.00");
+
+    } else {
+        $(purchaseErr).text("Please select 'Cash' or 'Venmo'");
+    }
+});
 
 function loadSnacks() {
-    db.collection("store").doc("inventory").collection("items").orderBy("price", "desc").get().then(function (querySnapshot) {
-        querySnapshot.forEach(function (doc) {
-            firebase.storage().ref().child(`images/${doc.data().image}`).getDownloadURL().then(function (url) {
-                if (doc.data().count > 0 || editingStore) {
-                    var html = `<section id class="snack col5 flex-container" onclick="selectSnack('${doc.id}', '${doc.data().price}', '${doc.data().count}')">
-                    <div class="snack-pic col10">
-                        <img src="${url}" alt="${doc.id}"/>
-                    </div>
-                    <div class="snack-info col10">
-                        <h3 class="snack-name">${doc.id}</h3>
-                        <p class="snack-count" id="${(doc.id).replace(/ /g, '')}Count">${doc.data().count}</p>
-                        <p class="snack-cost">$${doc.data().price}</p>
-                    </div>
-                </section>`;
-                    snackList.insertAdjacentHTML("beforeend", html);
-                }
-            }).catch(function (error) {
-                console.log("There was an error retreiving " + image + " from firebase");
+    if (editingStore) {
+        db.collection("store").doc("inventory").collection("items").orderBy("price", "desc").get().then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+                firebase.storage().ref().child(`images/${doc.data().image}`).getDownloadURL().then(function (url) {
+                    if (doc.data().count > 0 || editingStore) {
+                        var html = `<section id class="snack col5 flex-container" onclick="selectSnack('${doc.id}', '${doc.data().price}', '${doc.data().count}')">
+                        <div class="snack-pic col10">
+                            <img src="${url}" alt="${doc.id}"/>
+                        </div>
+                        <div class="snack-info col10">
+                            <h3 class="snack-name">${doc.id}</h3>
+                            <p class="snack-count" id="${(doc.id).replace(/ /g, '')}Count">${doc.data().count}</p>
+                            <p class="snack-cost">$${doc.data().price}</p>
+                            <button type="button" class="btnPlusMinus" id="plus" onclick="changeCount(event, '${doc.id}')">+</button>
+                            <button type="button" class="btnPlusMinus" id="minus" onclick="changeCount(event, '${doc.id}')">-</button>
+                        </div>
+                    </section>`;
+                        snackList.insertAdjacentHTML("beforeend", html);
+                    }
+                }).catch(function (error) {
+                    console.log("There was an error retreiving " + image + " from firebase");
 
-            })
-        })
-    })
+                });
+            });
+        });
+    } else {
+        db.collection("store").doc("inventory").collection("items").orderBy("price", "desc").get().then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+                firebase.storage().ref().child(`images/${doc.data().image}`).getDownloadURL().then(function (url) {
+                    if (doc.data().count > 0 || editingStore) {
+                        var html = `<section id class="snack col5 flex-container" onclick="selectSnack('${doc.id}', '${doc.data().price}', '${doc.data().count}')">
+                        <div class="snack-pic col10">
+                            <img src="${url}" alt="${doc.id}"/>
+                        </div>
+                        <div class="snack-info col10">
+                            <h3 class="snack-name">${doc.id}</h3>
+                            <p class="snack-count" id="${(doc.id).replace(/ /g, '')}Count">${doc.data().count}</p>
+                            <p class="snack-cost">$${doc.data().price}</p>
+                        </div>
+                    </section>`;
+                        snackList.insertAdjacentHTML("beforeend", html);
+                    }
+                }).catch(function (error) {
+                    console.log("There was an error retreiving " + image + " from firebase");
+
+                });
+            });
+        });
+    }
 }
 
 function selectSnack(item, price, count) {
@@ -164,35 +217,41 @@ function updateFirebase(name, sub) {
     });
 }
 
+function changeCount(e, name) {
+    db.collection('store').doc('inventory').collection('items').doc(`${name}`).get().then(function (doc) {
+        let total = ($('#' + `${(doc.id).replace(/ /g, '')}` + "Count").html());
+        if (total > 0 && e.target.id == 'minus') {
+            total --
+            db.collection('store').doc('inventory').collection('items').doc(name)
+                .update({
+                    count: `${total}`
+                })
+                .then(function () {
+                    $('#' + `${(doc.id).replace(/ /g, '')}` + "Count").html(total);
+                })
+                .catch(function (error) {
+                    // The document probably doesn't exist.
+                    console.error("Error updating document: ", error);
+                });
+        } else if (total >= -1 && e.target.id == 'plus') {
+            total ++
+            db.collection('store').doc('inventory').collection('items').doc(name)
+                .update({
+                    count: `${total}`
+                })
+                .then(function () {
+                    $('#' + `${(doc.id).replace(/ /g, '')}` + "Count").html(total);
+                })
+                .catch(function (error) {
+                    // The document probably doesn't exist.
+                    console.error("Error updating document: ", error);
+                });
+        } else {
+            alert("You can't go below 0");
+        }
+    });
 
-$(cancelPurchase).on('click', () => {
-    $(purchaseErr).text("");
-    $(confirmCheckout).toggleClass('hide');
-})
-$(confirmPurchase).on('click', () => {
-    if (($(cash).prop('checked') || $(venmo).prop('checked')) && !editingStore) {
-        $(purchaseErr).text("");
-
-        /* This is a single line IF statement! It's DOPE */
-        $(cash).prop('checked') ? updateTotals("cash") : updateTotals("venmo");
-
-        $(cash).prop('checked', false);
-        $(venmo).prop('checked', false);
-        $(confirmCheckout).fadeOut(400);
-        $(confirmCheckout).toggleClass('hide');
-        $.when($(enjoySnacks).fadeIn(400),
-            $(enjoySnacks).toggleClass('hide'),
-            $(enjoySnacks).delay(800),
-            $(enjoySnacks).fadeOut(400)).done(() => {
-            $(enjoySnacks).toggleClass('hide');
-        })
-        $(snackItemsInCart).empty();
-        $(cartTotal).text("$0.00");
-
-    } else {
-        $(purchaseErr).text("Please select 'Cash' or 'Venmo'");
-    }
-})
+}
 
 function updateTotals(type) {
     if (!editingStore) {
@@ -244,9 +303,9 @@ function updateTotals(type) {
         });
     }
 }
-/**
- * Invoice section
- */
+/*****************************************************
+ * Invoice section                                   *
+ *****************************************************/
 const cashTotal = document.getElementById('cash');
 const venmoTotal = document.getElementById('venmo');
 const storageTotal = document.getElementById('storage');
