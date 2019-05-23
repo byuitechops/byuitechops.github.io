@@ -246,7 +246,6 @@ function selectSnack(item, price, count) {
         $(editCount).val(count);
     }
 }
-
 function removeItem(e, item, price) {
     if (!editingStore) {
         const snackCount = document.getElementById(`${item.replace(/ /g, '')}Count`);
@@ -256,7 +255,6 @@ function removeItem(e, item, price) {
         $(e.target).parent().remove();
     }
 }
-
 function updateFirebase(name, sub) {
     db.collection('store').doc('inventory').collection('items').doc(`${name}`).get().then(function (doc) {
         var count = doc.data().count;
@@ -273,7 +271,6 @@ function updateFirebase(name, sub) {
             });
     });
 }
-
 function changeTotal(price) {
     if (!editingStore) {
         var total = cartTotal.innerText.replace(/\$/g, "");
@@ -281,7 +278,6 @@ function changeTotal(price) {
         cartTotal.innerHTML = `$${newTotal}`;
     }
 }
-
 function changeCount(e, name) {
     db.collection('store').doc('inventory').collection('items').doc(`${name}`).get().then(function (doc) {
         let total = ($('#' + `${(doc.id).replace(/ /g, '')}` + "Count").html());
@@ -317,7 +313,6 @@ function changeCount(e, name) {
     });
 
 }
-
 function updateTotals(type) {
     if (!editingStore) {
         let total = $(cartTotal).html().slice(1);
@@ -441,7 +436,6 @@ $(storageTotal).click(() => {
         storageTotal.removeChild(storageTotal.lastChild);
     }
 });
-
 function submitMoney() {
     var cash, storage, venmo;
     if (document.getElementById('cashInput') != undefined) {
