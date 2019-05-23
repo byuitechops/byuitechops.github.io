@@ -303,6 +303,9 @@ main {
   padding-right: 5rem;
 }
 
+.hide {
+  display: none;
+}
 #dup {
     position: fixed;
     z-index: 4;
