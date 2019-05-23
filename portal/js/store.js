@@ -178,6 +178,8 @@ $(confirmEdit).click(async (event) => {
     }
     $(snackAdd).removeClass('hide');
     $(snackEdit).addClass('hide');
+    $(snackList).empty();
+    loadSnacks();
 });
 $(confirmAdd).click(async (event) => {
     event.preventDefault();
@@ -240,7 +242,6 @@ function selectSnack(item, price, count) {
         $(snackAdd).addClass('hide');
         $(snackEdit).removeClass('hide');
         $(oldName).val(item);
-        $(newName).val("");
         $(newName).val(item);
         $(editCost).val(price);
         $(editCount).val(count);
