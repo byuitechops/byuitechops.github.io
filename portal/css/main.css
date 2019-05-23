@@ -49,7 +49,6 @@
     --backgroundGrade: none;
     --shadow: #000000;
     --fontPrime: #ffffff;
-    --fontPrime: #0f0f0f;
     --success: #28a745;
     --info: #17a2b8;
     --warning: #ffc107;
@@ -106,6 +105,11 @@ body {
     flex-wrap: wrap;
     background-color: var(--background);
 }
+
+.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
 
 /***********************************************************
 * 3a. Navigation Styles
@@ -561,11 +565,14 @@ main {
     color: var(--fontPrime);
 }
 .snack-count {
-    margin: 20px 0;
+    margin: 15px 0;
     font-size: .8vw;
+    border: 2px solid var(--white);
+    padding: 1px 5.5px;
+    border-radius: 20px;
 }
 .snack-cost {
-    margin-left: 40%;
+    margin-left: 35%;
     font-size: 2vw;
 }
 .snack-in-cart .snack-cost {
@@ -757,13 +764,21 @@ main {
     color: var(--white);
     font-size: 20px;
 }
+#heading input {
+    color: var(--black);
+    font-size: 16px;
+    border: 3px solid var(--white);
+    border-radius: 5px;
+    background-color: var(--white);
+}
 #heading button {
     margin-left: 30px;
     padding: 4px 16px;
     font-size: 12px;
+    color: var(--fontPrime);
     border: 3px solid var(--white);
-    border-radius: 20px;
-    background-color: var(--white);
+    border-radius: 5px;
+    background-color: var(--second);
     transition: .2s;
 }
 #heading button:hover {
@@ -789,7 +804,27 @@ main {
 #data p {
     color: var(--fontPrime);
 }
-
+.snack-info .btnPlusMinus{
+    position: absolute;
+    right: 70%;
+    padding: 5px;
+    background-color: var(--first);
+    border-radius: 4px;
+    border-style: none;
+    outline: none;
+    transition: background-color .2s ease;
+}
+.snack-info .btnPlusMinus:hover {
+    background-color: var(--second);
+}
+.snack-info .btnPlusMinus#plus {
+    bottom: 25%;
+    padding: 3px 5.75px;
+}
+.snack-info .btnPlusMinus#minus {
+    bottom: 7%;
+    padding: 3px 7.5px;
+}
 
 
 /**********************************************
@@ -930,7 +965,10 @@ main {
 #team-points h3 {
     width: 25%;
     margin: 5px 0;
-    color: var(--fontPrime);
+    color: var(--white);
+}
+#select-points option{
+    color: var(--white);
 }
 #select-points select {
     width: 80%;
@@ -1052,6 +1090,9 @@ main {
 }
 #yay-points div {
     width: 35%;
+}
+#yay-points h2 {
+    color: var(--white);
 }
 
 /**********************************************

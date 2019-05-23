@@ -127,7 +127,7 @@ function fillPrepTicket(transcriptID) {
             }
 
             document.getElementById('typeSide').innerText = doc.data().type;
-            document.getElementById('codeSide').innerText = doc.data().courseCode;
+            document.getElementById('codeSide').innerText = doc.data().backupCode;
             document.getElementById('titleSide').innerText = doc.data().title;
             document.getElementById('locationSide').setAttribute('href', doc.data().lmsURL);
             document.getElementById('mediaSide').setAttribute('href', doc.data().srcURL);
@@ -244,7 +244,7 @@ function fillPrepTableStart() {
                     var classRed = 'red';
                     var flaggedStr = ' (Returned)';
                 }
-                var p = `<p> ${doc.data().priority}</p> <p>${doc.data().courseCode}</p> <p>${doc.data().type}</p>
+                var p = `<p> ${doc.data().priority}</p> <p>${doc.data().backupCode}</p> <p>${doc.data().type}</p>
                     <p>${doc.data().title}</p>  <button onclick="displayPrepareModal('${doc.id}')" class="bg-primary btn-hover prepare-btn ${classRed}">
                     Prepare${flaggedStr}</button>`;
                 document.getElementById('prep-table').insertAdjacentHTML('beforeend', p);
@@ -254,12 +254,12 @@ function fillPrepTableStart() {
 
 function fillPrepTable(selectedCourseCode) {
     document.getElementById('prep-table').innerHTML = '';
-    db.collection("accessibility").where('status', '==', 'Ready for Prep').orderBy('priority').get()
+    db.collection("accessibility").where('status', '==', 'Ready for Prep').where("backupCode", "==", selectedCourseCode).orderBy('priority').get()
         .then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
                 console.log(doc.id);
-                if (selectedCourseCode == doc.data().courseCode) {
-                    var p = `<p> ${doc.data().priority}</p> <p>${doc.data().courseCode}</p> <p>${doc.data().type}</p>
+                if (selectedCourseCode == doc.data().backupCode) {
+                    var p = `<p> ${doc.data().priority}</p> <p>${doc.data().backupCode}</p> <p>${doc.data().type}</p>
                         <p>${doc.data().title}</p>  <button onclick="displayPrepareModal('${doc.id}')" class="bg-primary btn-hover prepare-btn">
                         Prepare</button>`;
                     document.getElementById('prep-table').insertAdjacentHTML('beforeend', p);

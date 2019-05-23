@@ -45,7 +45,7 @@ function fillTranscribeTableStart() {
                 } else { 
                     length = 'Not Applicable'
                 }
-                var p = `<p> ${doc.data().priority}</p> <p>${doc.data().courseCode}</p> <p>${doc.data().type}</p>
+                var p = `<p> ${doc.data().priority}</p> <p>${doc.data().backupCode}</p> <p>${doc.data().type}</p>
                     <p>${doc.data().title}</p>  <p>${length}</p> <button onclick="claimTranscription('${doc.id}')" class="bg-primary btn-hover prepare-btn">
                     Transcribe</button>`;
                 document.getElementById('transcripts-table').insertAdjacentHTML('beforeend', p);
@@ -56,7 +56,7 @@ function fillTranscribeTableStart() {
 
 function fillTranscribeTable(selectedCourseCode) {
     document.getElementById('transcripts-table').innerHTML = '';
-    db.collection("accessibility").where('status', '==', 'Ready for Transcription').orderBy('priority').get()
+    db.collection("accessibility").where('status', '==', 'Ready for Transcription').where("backupCode", "==", selectedCourseCode).orderBy('priority').get()
         .then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
                 var length;
@@ -65,8 +65,8 @@ function fillTranscribeTable(selectedCourseCode) {
                 } else { 
                     length = 'Not Applicable'
                 }
-                if (selectedCourseCode == doc.data().courseCode) {
-                    var p = `<p> ${doc.data().priority}</p> <p>${doc.data().courseCode}</p> <p>${doc.data().type}</p>
+                if (selectedCourseCode == doc.data().backupCode) {
+                    var p = `<p> ${doc.data().priority}</p> <p>${doc.data().backupCode}</p> <p>${doc.data().type}</p>
                         <p>${doc.data().title}</p>  <p>${length}</p> <button onclick="claimTranscription('${doc.id}')" class="bg-primary btn-hover prepare-btn">
                         Transcribe</button>`;
                     document.getElementById('transcripts-table').insertAdjacentHTML('beforeend', p);
