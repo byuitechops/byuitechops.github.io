@@ -172,7 +172,7 @@ document.getElementById("addNewItem").addEventListener("click", () =>{
   } else {
     location.reload();
   }
-})
+});
 
 
 //handles the item's count editing call

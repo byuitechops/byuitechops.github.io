@@ -1,10 +1,13 @@
+'use strict';
+
 const invoicePage = document.getElementById('invoicePage');
 const shoppingPage = document.getElementById('shoppingPage');
 const editStore = document.getElementById('editStore');
 const invoiceStore = document.getElementById('invoiceStore');
 const snack = document.getElementById("snack-in-cart");
 const snackEdit = document.getElementById('snack-edit');
-const editName = document.getElementById('editName');
+const oldName = document.getElementById('oldName');
+const newName = document.getElementById('newName');
 const editCost = document.getElementById('editCost');
 const editCount = document.getElementById('editCount');
 const snackAdd = document.getElementById('snack-add');
@@ -23,10 +26,52 @@ const cash = document.getElementById("radioCash");
 const venmo = document.getElementById("radioVenmo");
 const purchaseErr = document.getElementById("error-purchase");
 const confirmEdit = document.getElementById("confirm-edit");
+const confirmAdd = document.getElementById("confirm-add");
+const nameEdit = document.getElementById("nameEdit");
+const priceEdit = document.getElementById("priceEdit");
+const countEdit = document.getElementById("countEdit");
+const oldName = document.getElementById("oldName");
+const newName = document.getElementById("newName");
+const editCost = document.getElementById("editCost");
+const editCount = document.getElementById("editCount");
 
 
 
 var editingStore = false;
+
+class storeItem {
+    constructor(name, price, count, img) {
+        this.name = name;
+        this.price = price;
+        this.count = count;
+        this.img = img;
+    }
+    addToFirebase() {
+        var storage = firebase.storage().ref().child(`images/${this.img.name}`);
+        storage.put(this.img).then(function (snapshot) {
+            console.log('Uploaded a blob or file!');
+            console.log(snapshot);
+        });
+        db.collection("store").doc("inventory").collection("items").doc(`${this.name}`).set({
+            name: this.name,
+            price: this.price,
+            count: this.count,
+            image: this.img.name
+        }).then((doc) => {
+            console.log(doc);
+        });
+    }
+    updateFirebase(newName) {
+        if
+        db.collection("store").doc("inventory").collection("items").where("name", "==" `${this.name}`).update({
+            name: this.name,
+            price: this.price,
+            count: this.count
+        }).then((doc) => {
+            console.log(doc);
+        });
+    }
+}
 
 function loadPage() {
     db.collection("users").where("name", "==", userName)
@@ -50,6 +95,7 @@ $(editStore).click(() => {
     } else {
         $(editStore).html("Edit Store");
         $(snackAdd).addClass('hide');
+        $(snackEdit).addClass('hide');
         $(snackCart, invoiceStore).removeClass('hide');
         $(snackList).empty();
         editingStore = false;
@@ -77,11 +123,11 @@ $(cartCheckout).click(() => {
         $(confirmTotal).text($(cartTotal).html());
     }
 });
-$(cancelPurchase).on('click', () => {
+$(cancelPurchase).click(() => {
     $(purchaseErr).text("");
     $(confirmCheckout).toggleClass('hide');
 });
-$(confirmPurchase).on('click', () => {
+$(confirmPurchase).click(() => {
     if (($(cash).prop('checked') || $(venmo).prop('checked')) && !editingStore) {
         $(purchaseErr).text("");
 
@@ -105,57 +151,65 @@ $(confirmPurchase).on('click', () => {
         $(purchaseErr).text("Please select 'Cash' or 'Venmo'");
     }
 });
+$(confirmEdit).click(async (event) => {
+    event.preventDefault();
+    if ($(newName).val() != ""){
+        if ($(nameEdit).val() != "" && $(priceEdit).val() != "" && $(countEdit).val() != "" && $(`#add-img`).val() != undefined) {
+            let newItem = await new storeItem($(nameEdit).val(), $(priceEdit).val(), $(countEdit).val(), $(`#add-img`).prop('files')[0]);
+            // newItem.addToFirebase();
+            console.log(newItem);
+        } else {
+            alert("Please fill all fields");
+        }
+    } else {
+        if ($(nameEdit).val() != "" && $(priceEdit).val() != "" && $(countEdit).val() != "" && $(`#add-img`).val() != undefined) {
+            let newItem = await new storeItem($(nameEdit).val(), $(priceEdit).val(), $(countEdit).val(), $(`#add-img`).prop('files')[0]);
+            // newItem.addToFirebase();
+            console.log(newItem);
+        } else {
+            alert("Please fill all fields");
+        }
+    }
+    
+});
+$(confirmAdd).click(async (event) => {
+    event.preventDefault();
+    
+    if ($(nameEdit).val() != "" && $(priceEdit).val() != "" && $(countEdit).val() != "" && $(`#add-img`).val() != undefined) {
+        let newItem = await new storeItem($(nameEdit).val(), $(priceEdit).val(), $(countEdit).val(), $(`#add-img`).prop('files')[0]);
+        newItem.addToFirebase();
+    } else {
+        alert("Please fill all fields");
+    }
+});
 
 function loadSnacks() {
-    if (editingStore) {
-        db.collection("store").doc("inventory").collection("items").orderBy("price", "desc").get().then(function (querySnapshot) {
-            querySnapshot.forEach(function (doc) {
-                firebase.storage().ref().child(`images/${doc.data().image}`).getDownloadURL().then(function (url) {
-                    if (doc.data().count > 0 || editingStore) {
-                        var html = `<section id class="snack col5 flex-container" onclick="selectSnack('${doc.id}', '${doc.data().price}', '${doc.data().count}')">
+    db.collection("store").doc("inventory").collection("items").orderBy("count").get().then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+            firebase.storage().ref().child(`images/${doc.data().image}`).getDownloadURL().then(function (url) {
+                if (doc.data().count > 0 || editingStore) {
+                    var html = `<section id class="snack col5 flex-container" onclick="selectSnack('${doc.id}', '${doc.data().price}', '${doc.data().count}')">
                         <div class="snack-pic col10">
                             <img src="${url}" alt="${doc.id}"/>
                         </div>
                         <div class="snack-info col10">
                             <h3 class="snack-name">${doc.id}</h3>
                             <p class="snack-count" id="${(doc.id).replace(/ /g, '')}Count">${doc.data().count}</p>
-                            <p class="snack-cost">$${doc.data().price}</p>
-                            <button type="button" class="btnPlusMinus" id="plus" onclick="changeCount(event, '${doc.id}')">+</button>
-                            <button type="button" class="btnPlusMinus" id="minus" onclick="changeCount(event, '${doc.id}')">-</button>
-                        </div>
-                    </section>`;
-                        snackList.insertAdjacentHTML("beforeend", html);
+                            <p class="snack-cost">$${doc.data().price}</p>`
+                    if (editingStore) {
+                        html += `<button type="button" class="btnPlusMinus" id="plus" onclick="changeCount(event, '${doc.id}')">+</button>
+                                <button type="button" class="btnPlusMinus" id="minus" onclick="changeCount(event, '${doc.id}')">-</button>`
                     }
-                }).catch(function (error) {
-                    console.log("There was an error retreiving " + image + " from firebase");
+                    html += `</div></section>`;
+                    snackList.insertAdjacentHTML("beforeend", html);
+                }
+            }).catch(function (error) {
+                console.log("There was an error retreiving " + image + " from firebase");
 
-                });
             });
         });
-    } else {
-        db.collection("store").doc("inventory").collection("items").orderBy("price", "desc").get().then(function (querySnapshot) {
-            querySnapshot.forEach(function (doc) {
-                firebase.storage().ref().child(`images/${doc.data().image}`).getDownloadURL().then(function (url) {
-                    if (doc.data().count > 0 || editingStore) {
-                        var html = `<section id class="snack col5 flex-container" onclick="selectSnack('${doc.id}', '${doc.data().price}', '${doc.data().count}')">
-                        <div class="snack-pic col10">
-                            <img src="${url}" alt="${doc.id}"/>
-                        </div>
-                        <div class="snack-info col10">
-                            <h3 class="snack-name">${doc.id}</h3>
-                            <p class="snack-count" id="${(doc.id).replace(/ /g, '')}Count">${doc.data().count}</p>
-                            <p class="snack-cost">$${doc.data().price}</p>
-                        </div>
-                    </section>`;
-                        snackList.insertAdjacentHTML("beforeend", html);
-                    }
-                }).catch(function (error) {
-                    console.log("There was an error retreiving " + image + " from firebase");
+    });
 
-                });
-            });
-        });
-    }
 }
 
 function selectSnack(item, price, count) {
@@ -176,7 +230,9 @@ function selectSnack(item, price, count) {
     } else if (editingStore) {
         $(snackAdd).addClass('hide');
         $(snackEdit).removeClass('hide');
-        $(editName).val(item);
+        $(oldName).val(item);
+        $(newName).val("");
+        $(newName).attr("placeholder", "If misspelled");
         $(editCost).val(price);
         $(editCount).val(count);
     }
@@ -189,14 +245,6 @@ function removeItem(e, item, price) {
         snackCount.innerHTML = `${++count}`;
         changeTotal(0 - price);
         $(e.target).parent().remove();
-    }
-}
-
-function changeTotal(price) {
-    if (!editingStore) {
-        var total = cartTotal.innerText.replace(/\$/g, "");
-        var newTotal = (Number(total) + Number(price)).toFixed(2);
-        cartTotal.innerHTML = `$${newTotal}`;
     }
 }
 
@@ -217,11 +265,19 @@ function updateFirebase(name, sub) {
     });
 }
 
+function changeTotal(price) {
+    if (!editingStore) {
+        var total = cartTotal.innerText.replace(/\$/g, "");
+        var newTotal = (Number(total) + Number(price)).toFixed(2);
+        cartTotal.innerHTML = `$${newTotal}`;
+    }
+}
+
 function changeCount(e, name) {
     db.collection('store').doc('inventory').collection('items').doc(`${name}`).get().then(function (doc) {
         let total = ($('#' + `${(doc.id).replace(/ /g, '')}` + "Count").html());
         if (total > 0 && e.target.id == 'minus') {
-            total --
+            total--
             db.collection('store').doc('inventory').collection('items').doc(name)
                 .update({
                     count: `${total}`
@@ -234,7 +290,7 @@ function changeCount(e, name) {
                     console.error("Error updating document: ", error);
                 });
         } else if (total >= -1 && e.target.id == 'plus') {
-            total ++
+            total++
             db.collection('store').doc('inventory').collection('items').doc(name)
                 .update({
                     count: `${total}`

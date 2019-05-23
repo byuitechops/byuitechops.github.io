@@ -41,23 +41,23 @@ function fillUserTable(name) {
 }
 
 
-function fillTranscriptTable(courseCode) {
+function fillTranscriptTable(backupCode) {
       document.getElementById('master-table-transcript').innerHTML = '';
-      if (courseCode == undefined) {
+      if (backupCode == undefined) {
             db.collection("accessibility").orderBy('priority').limit(10).get()
                   .then(function (querySnapshot) {
                         querySnapshot.forEach(function (doc) {
-                              var p = `<p> ${doc.data().priority}</p> <p>${doc.data().courseCode}</p> <p style="padding-right: .5rem; overflow-x:hidden;">${doc.data().title}</p>
+                              var p = `<p> ${doc.data().priority}</p> <p>${doc.data().backupCode}</p> <p style="padding-right: .5rem; overflow-x:hidden;">${doc.data().title}</p>
                     <p>${doc.data().status}</p>  <button onclick="displayTranscriptInfo('${doc.id}')" class="bg-primary btn-hover prepare-btn">
                     View / Edit</button>`;
                               document.getElementById('master-table-transcript').insertAdjacentHTML('beforeend', p);
                         })
                   })
       } else {
-            db.collection("accessibility").orderBy('priority').where('courseCode', '==', courseCode).limit(10).get()
+            db.collection("accessibility").orderBy('priority').where('backupCode', '==', backupCode).limit(10).get()
                   .then(function (querySnapshot) {
                         querySnapshot.forEach(function (doc) {
-                              var p = `<p> ${doc.data().priority}</p> <p>${doc.data().courseCode}</p> <p style="padding-right: .5rem;">${doc.data().title}</p>
+                              var p = `<p> ${doc.data().priority}</p> <p>${doc.data().backupCode}</p> <p style="padding-right: .5rem;">${doc.data().title}</p>
                     <p>${doc.data().status}</p>  <button onclick="displayTranscriptInfo('${doc.id}')" class="bg-primary btn-hover prepare-btn">
                     View / Edit</button>`;
                               document.getElementById('master-table-transcript').insertAdjacentHTML('beforeend', p);
@@ -94,7 +94,7 @@ function displayTranscriptInfo(transcriptID) {
                   document.getElementById('storeTranscriptID').innerText = doc.id;
                   document.getElementById('transcript-title').innerText = 'Transcript Title: ' + doc.data().title;
                   document.getElementById('transcript-status').innerText = 'Stage: ' + doc.data().status;
-                  document.getElementById('transcript-code').innerText = 'Course Code: ' + doc.data().courseCode;
+                  document.getElementById('transcript-code').innerText = 'Course Code: ' + doc.data().backupCode;
                   document.getElementById('transcript-priority').innerText = 'Priority: ' + doc.data().priority;
                   document.getElementById('transcript-type').innerText = 'Type: ' + doc.data().type;
                   if (doc.data().length != undefined) {

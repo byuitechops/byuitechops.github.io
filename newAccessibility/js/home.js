@@ -35,7 +35,7 @@ function fillTranscriptBox(transcriptID, role) {
     db.collection('accessibility').doc(transcriptID).get()
         .then(function (doc) {
             document.getElementById('updateTitle').innerText = doc.data().title;
-            document.getElementById('updateCode').innerText = doc.data().courseCode;
+            document.getElementById('updateCode').innerText = doc.data().backupCode;
             document.getElementById('updateTitle').innerText = doc.data().title;
             document.getElementById('updateDocLink').href = doc.data().docEditURL;
             document.getElementById('updateMediaLink').href = doc.data().srcURL;

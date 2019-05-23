@@ -106,10 +106,10 @@
             <section class="snack-manage col10 hide" id="snack-add">
                 <form class="flex-container col10 wrap">
                     <h2>Add Item</h2>
-                    <p>Name:  </p><input type="text" placeholder="Double Stuff Oreos"></input>
-                    <p>Cost:  </p><input type="text" placeholder="0.00"></input>
-                    <p>Count: </p><input type="text" placeholder="12"></input>
-                    <p>Image: </p><input id="add-img" type="file"></input>
+                    <p>Name:  </p><input type="text" placeholder="Double Stuff Oreos" id="nameEdit"></input>
+                    <p>Cost:  </p><input type="text" placeholder="0.00" id="priceEdit"></input>
+                    <p>Count: </p><input type="text" placeholder="12" id="countEdit"></input>
+                    <p>Image: </p><input id="add-img" type="file" id="imgFile"></input>
                     <button id="cancel-add">Cancel Add</button>
                     <button id="confirm-add">Confirm Add</button>
                 </form>
@@ -120,7 +120,8 @@
             <section class="snack-manage col10 hide" id="snack-edit">
                 <form class="flex-container col10 wrap">
                     <h2>Edit Item</h2>
-                    <p>Name:  </p><input type="text" id="editName" readonly></input>
+                    <p>Name:  </p><input type="text" id="oldName" readonly></input>
+                    <p>New Name:  </p><input type="text" id="newName"></input>
                     <p>Cost:  </p><input type="text" id="editCost"></input>
                     <p>Count: </p><input type="text"  id="editCount"></input>
                     <button id="cancel-edit">Cancel Edit</button>
