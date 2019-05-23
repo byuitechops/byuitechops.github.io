@@ -40,24 +40,27 @@ class storeItem {
         this.name = name;
         this.price = price;
         this.count = count;
-        this.img = img;
+        this.img = img  || "default-image.png";
     }
-    addToFirebase() {
-        var storage = firebase.storage().ref().child(`images/${this.img.name}`);
-        storage.put(this.img).then(function (snapshot) {
-            console.log('Uploaded a blob or file!');
-            console.log(snapshot);
-        });
-        db.collection("store").doc("inventory").collection("items").doc(`${this.name}`).set({
-            name: this.name,
-            price: this.price,
-            count: this.count,
-            image: this.img.name
-        });
-        db.collection("store").doc("inventory").collection("items").doc(`${this.name}`).get()
-        .then((doc)=>{
-            snackHTML(doc);
-        })
+    async addToFirebase() {
+        $.when(() => {
+            var storage = firebase.storage().ref().child(`images/${this.img.name}`);
+            storage.put(this.img).then(function (snapshot) {
+                console.log('Uploaded a blob or file!');
+                console.log(snapshot);
+            });
+            db.collection("store").doc("inventory").collection("items").doc(`${this.name}`).set({
+                name: this.name,
+                price: this.price,
+                count: this.count,
+                image: this.img.name
+            });
+        }).done(()=>{
+            db.collection("store").doc("inventory").collection("items").doc(`${this.name}`).get()
+            .then((document) => {
+                snackHTML(document);
+            });
+        }); 
     }
     updateFirebase(newName) {
         if (newName == this.name) {
@@ -67,18 +70,24 @@ class storeItem {
                 count: this.count
             });
         } else if (newName != this.name) {
-            db.collection("store").doc("inventory").collection("items").doc(`${this.name}`).get().then((doc) => {
-                if (doc && doc.exists) {
-                    var data = doc.data();
-                    // saves the data to 'name'
-                    db.collection("store").doc("inventory").collection("items").doc(`${newName}`).set(data).then(() => {
-                        // deletes the old document
-                        db.collection("store").doc("inventory").collection("items").doc(`${this.name}`).delete();
-                        db.collection("store").doc("inventory").collection("items").doc(`${newName}`).update({
-                            name: newName,
-                            price: this.price,
-                            count: this.count
+            $.when(()=>{
+                db.collection("store").doc("inventory").collection("items").doc(`${this.name}`).get().then((doc) => {
+                    if (doc && doc.exists) {
+                        var data = doc.data();
+                        // saves the data to 'name'
+                        db.collection("store").doc("inventory").collection("items").doc(`${newName}`).set(data).then(() => {
+                            // deletes the old document
+                            db.collection("store").doc("inventory").collection("items").doc(`${this.name}`).delete();
+                            
                         });
+            }).done(()=>{
+
+            });
+            
+                    db.collection("store").doc("inventory").collection("items").doc(`${newName}`).update({
+                        name: newName,
+                        price: this.price,
+                        count: this.count
                     });
                 }
             });
@@ -168,18 +177,22 @@ $(confirmPurchase).click(() => {
     }
 });
 $(confirmEdit).click(async (event) => {
-    event.preventDefault();
-    if ($(editCost).val() != "" && $(editCount).val() != "" && $(newName).val() != "") {
-        let newItem = await new storeItem($(oldName).val(), $(editCost).val(), $(editCount).val(), null);
-        newItem.updateFirebase($(newName).val());
-        console.log(newItem);
-    } else {
-        alert("Please fill all fields")
-    }
-    $(snackAdd).removeClass('hide');
-    $(snackEdit).addClass('hide');
-    $(snackList).empty();
-    loadSnacks();
+    $.when(async ()=>{
+        event.preventDefault();
+        if ($(editCost).val() != "" && $(editCount).val() != "" && $(newName).val() != "") {
+            let newItem = await new storeItem($(oldName).val(), $(editCost).val(), $(editCount).val(), null);
+            newItem.updateFirebase($(newName).val());
+            console.log(newItem);
+        } else {
+            alert("Please fill all fields")
+        }
+    }).done(()=>{
+        $(snackAdd).removeClass('hide');
+        $(snackEdit).addClass('hide');
+        $(snackList).empty();
+        loadSnacks();
+    });
+    
 });
 $(confirmAdd).click(async (event) => {
     event.preventDefault();
