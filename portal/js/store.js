@@ -30,10 +30,6 @@ const confirmAdd = document.getElementById("confirm-add");
 const nameEdit = document.getElementById("nameEdit");
 const priceEdit = document.getElementById("priceEdit");
 const countEdit = document.getElementById("countEdit");
-const oldName = document.getElementById("oldName");
-const newName = document.getElementById("newName");
-const editCost = document.getElementById("editCost");
-const editCount = document.getElementById("editCount");
 
 
 
@@ -57,19 +53,39 @@ class storeItem {
             price: this.price,
             count: this.count,
             image: this.img.name
-        }).then((doc) => {
-            console.log(doc);
         });
+        db.collection("store").doc("inventory").collection("items").doc(`${this.name}`).get()
+        .then((doc)=>{
+            snackHTML(doc);
+        })
     }
     updateFirebase(newName) {
-        if
-        db.collection("store").doc("inventory").collection("items").where("name", "==" `${this.name}`).update({
-            name: this.name,
-            price: this.price,
-            count: this.count
-        }).then((doc) => {
-            console.log(doc);
-        });
+        if (newName == this.name) {
+            db.collection("store").doc("inventory").collection("items").doc(`${this.name}`).update({
+                name: newName,
+                price: this.price,
+                count: this.count
+            });
+        } else if (newName != this.name) {
+            db.collection("store").doc("inventory").collection("items").doc(`${this.name}`).get().then((doc) => {
+                if (doc && doc.exists) {
+                    var data = doc.data();
+                    // saves the data to 'name'
+                    db.collection("store").doc("inventory").collection("items").doc(`${newName}`).set(data).then(() => {
+                        // deletes the old document
+                        db.collection("store").doc("inventory").collection("items").doc(`${this.name}`).delete();
+                        db.collection("store").doc("inventory").collection("items").doc(`${newName}`).update({
+                            name: newName,
+                            price: this.price,
+                            count: this.count
+                        });
+                    });
+                }
+            });
+
+        }
+
+
     }
 }
 
@@ -153,65 +169,58 @@ $(confirmPurchase).click(() => {
 });
 $(confirmEdit).click(async (event) => {
     event.preventDefault();
-    if ($(newName).val() != ""){
-        if ($(nameEdit).val() != "" && $(priceEdit).val() != "" && $(countEdit).val() != "" && $(`#add-img`).val() != undefined) {
-            let newItem = await new storeItem($(nameEdit).val(), $(priceEdit).val(), $(countEdit).val(), $(`#add-img`).prop('files')[0]);
-            // newItem.addToFirebase();
-            console.log(newItem);
-        } else {
-            alert("Please fill all fields");
-        }
+    if ($(editCost).val() != "" && $(editCount).val() != "" && $(newName).val() != "") {
+        let newItem = await new storeItem($(oldName).val(), $(editCost).val(), $(editCount).val(), null);
+        newItem.updateFirebase($(newName).val());
+        console.log(newItem);
     } else {
-        if ($(nameEdit).val() != "" && $(priceEdit).val() != "" && $(countEdit).val() != "" && $(`#add-img`).val() != undefined) {
-            let newItem = await new storeItem($(nameEdit).val(), $(priceEdit).val(), $(countEdit).val(), $(`#add-img`).prop('files')[0]);
-            // newItem.addToFirebase();
-            console.log(newItem);
-        } else {
-            alert("Please fill all fields");
-        }
+        alert("Please fill all fields")
     }
-    
+    $(snackAdd).removeClass('hide');
+    $(snackEdit).addClass('hide');
 });
 $(confirmAdd).click(async (event) => {
     event.preventDefault();
-    
+
     if ($(nameEdit).val() != "" && $(priceEdit).val() != "" && $(countEdit).val() != "" && $(`#add-img`).val() != undefined) {
         let newItem = await new storeItem($(nameEdit).val(), $(priceEdit).val(), $(countEdit).val(), $(`#add-img`).prop('files')[0]);
         newItem.addToFirebase();
+
     } else {
         alert("Please fill all fields");
     }
 });
-
-function loadSnacks() {
-    db.collection("store").doc("inventory").collection("items").orderBy("count").get().then(function (querySnapshot) {
-        querySnapshot.forEach(function (doc) {
-            firebase.storage().ref().child(`images/${doc.data().image}`).getDownloadURL().then(function (url) {
-                if (doc.data().count > 0 || editingStore) {
-                    var html = `<section id class="snack col5 flex-container" onclick="selectSnack('${doc.id}', '${doc.data().price}', '${doc.data().count}')">
+function snackHTML(doc) {
+    firebase.storage().ref().child(`images/${doc.data().image}`).getDownloadURL().then(function (url) {
+        if (doc.data().count > 0 || editingStore) {
+            var html = `<section id class="snack col5 flex-container" onclick="selectSnack('${doc.id}', '${doc.data().price}', '${doc.data().count}')">
                         <div class="snack-pic col10">
                             <img src="${url}" alt="${doc.id}"/>
                         </div>
                         <div class="snack-info col10">
                             <h3 class="snack-name">${doc.id}</h3>
                             <p class="snack-count" id="${(doc.id).replace(/ /g, '')}Count">${doc.data().count}</p>
-                            <p class="snack-cost">$${doc.data().price}</p>`
-                    if (editingStore) {
-                        html += `<button type="button" class="btnPlusMinus" id="plus" onclick="changeCount(event, '${doc.id}')">+</button>
+                            <p class="snack-cost">${doc.data().price}</p>`
+            if (editingStore) {
+                html += `<button type="button" class="btnPlusMinus" id="plus" onclick="changeCount(event, '${doc.id}')">+</button>
                                 <button type="button" class="btnPlusMinus" id="minus" onclick="changeCount(event, '${doc.id}')">-</button>`
-                    }
-                    html += `</div></section>`;
-                    snackList.insertAdjacentHTML("beforeend", html);
-                }
-            }).catch(function (error) {
-                console.log("There was an error retreiving " + image + " from firebase");
+            }
+            html += `</div></section>`;
+            snackList.insertAdjacentHTML("beforeend", html);
+        }
+    }).catch(function (error) {
+        console.log("There was an error retreiving " + image + " from firebase");
 
-            });
-        });
+    });
+}
+function loadSnacks() {
+    db.collection("store").doc("inventory").collection("items").orderBy("count").get().then(function (querySnapshot) {
+        querySnapshot.forEach((doc) => {
+            snackHTML(doc);
+        })
     });
 
 }
-
 function selectSnack(item, price, count) {
     if (!editingStore) {
         const snackCount = document.getElementById(`${item.replace(/ /g, '')}Count`);
@@ -232,7 +241,7 @@ function selectSnack(item, price, count) {
         $(snackEdit).removeClass('hide');
         $(oldName).val(item);
         $(newName).val("");
-        $(newName).attr("placeholder", "If misspelled");
+        $(newName).val(item);
         $(editCost).val(price);
         $(editCount).val(count);
     }
