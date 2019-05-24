@@ -40,7 +40,7 @@ class storeItem {
         this.name = name;
         this.price = price;
         this.count = count;
-        this.img = img  || "default-image.png";
+        this.img = img || "default-image.png";
     }
     async addToFirebase() {
         $.when(() => {
@@ -55,46 +55,27 @@ class storeItem {
                 count: this.count,
                 image: this.img.name
             });
-        }).done(()=>{
+        }).done(() => {
             db.collection("store").doc("inventory").collection("items").doc(`${this.name}`).get()
-            .then((document) => {
-                snackHTML(document);
-            });
-        }); 
+                .then((document) => {
+                    snackHTML(document);
+                });
+        });
     }
     updateFirebase(newName) {
-        if (newName == this.name) {
-            db.collection("store").doc("inventory").collection("items").doc(`${this.name}`).update({
-                name: newName,
-                price: this.price,
-                count: this.count
-            });
-        } else if (newName != this.name) {
-            $.when(()=>{
-                db.collection("store").doc("inventory").collection("items").doc(`${this.name}`).get().then((doc) => {
-                    if (doc && doc.exists) {
-                        var data = doc.data();
-                        // saves the data to 'name'
-                        db.collection("store").doc("inventory").collection("items").doc(`${newName}`).set(data).then(() => {
-                            // deletes the old document
-                            db.collection("store").doc("inventory").collection("items").doc(`${this.name}`).delete();
-                            
-                        });
-            }).done(()=>{
-
-            });
-            
+        db.collection("store").doc("inventory").collection("items").doc(`${this.name}`).get().then((doc) => {
+            if (doc && doc.exists) {
+                var data = doc.data();
+                db.collection("store").doc("inventory").collection("items").doc(`${newName}`).set(data).then(() => {
+                    db.collection("store").doc("inventory").collection("items").doc(`${this.name}`).delete();
                     db.collection("store").doc("inventory").collection("items").doc(`${newName}`).update({
                         name: newName,
                         price: this.price,
                         count: this.count
                     });
-                }
-            });
-
-        }
-
-
+                });
+            }
+        });
     }
 }
 
@@ -177,7 +158,7 @@ $(confirmPurchase).click(() => {
     }
 });
 $(confirmEdit).click(async (event) => {
-    $.when(async ()=>{
+    $.when(async () => {
         event.preventDefault();
         if ($(editCost).val() != "" && $(editCount).val() != "" && $(newName).val() != "") {
             let newItem = await new storeItem($(oldName).val(), $(editCost).val(), $(editCount).val(), null);
@@ -186,13 +167,13 @@ $(confirmEdit).click(async (event) => {
         } else {
             alert("Please fill all fields")
         }
-    }).done(()=>{
+    }).done(() => {
         $(snackAdd).removeClass('hide');
         $(snackEdit).addClass('hide');
         $(snackList).empty();
         loadSnacks();
     });
-    
+
 });
 $(confirmAdd).click(async (event) => {
     event.preventDefault();
@@ -205,6 +186,7 @@ $(confirmAdd).click(async (event) => {
         alert("Please fill all fields");
     }
 });
+
 function snackHTML(doc) {
     firebase.storage().ref().child(`images/${doc.data().image}`).getDownloadURL().then(function (url) {
         if (doc.data().count > 0 || editingStore) {
@@ -228,6 +210,7 @@ function snackHTML(doc) {
 
     });
 }
+
 function loadSnacks() {
     db.collection("store").doc("inventory").collection("items").orderBy("count").get().then(function (querySnapshot) {
         querySnapshot.forEach((doc) => {
@@ -236,6 +219,7 @@ function loadSnacks() {
     });
 
 }
+
 function selectSnack(item, price, count) {
     if (!editingStore) {
         const snackCount = document.getElementById(`${item.replace(/ /g, '')}Count`);
@@ -260,6 +244,7 @@ function selectSnack(item, price, count) {
         $(editCount).val(count);
     }
 }
+
 function removeItem(e, item, price) {
     if (!editingStore) {
         const snackCount = document.getElementById(`${item.replace(/ /g, '')}Count`);
@@ -269,6 +254,7 @@ function removeItem(e, item, price) {
         $(e.target).parent().remove();
     }
 }
+
 function updateFirebase(name, sub) {
     db.collection('store').doc('inventory').collection('items').doc(`${name}`).get().then(function (doc) {
         var count = doc.data().count;
@@ -285,6 +271,7 @@ function updateFirebase(name, sub) {
             });
     });
 }
+
 function changeTotal(price) {
     if (!editingStore) {
         var total = cartTotal.innerText.replace(/\$/g, "");
@@ -292,6 +279,7 @@ function changeTotal(price) {
         cartTotal.innerHTML = `$${newTotal}`;
     }
 }
+
 function changeCount(e, name) {
     db.collection('store').doc('inventory').collection('items').doc(`${name}`).get().then(function (doc) {
         let total = ($('#' + `${(doc.id).replace(/ /g, '')}` + "Count").html());
@@ -327,6 +315,7 @@ function changeCount(e, name) {
     });
 
 }
+
 function updateTotals(type) {
     if (!editingStore) {
         let total = $(cartTotal).html().slice(1);
@@ -450,6 +439,7 @@ $(storageTotal).click(() => {
         storageTotal.removeChild(storageTotal.lastChild);
     }
 });
+
 function submitMoney() {
     var cash, storage, venmo;
     if (document.getElementById('cashInput') != undefined) {
