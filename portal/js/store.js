@@ -87,7 +87,7 @@ function loadPage() {
                 editStore.classList.remove('hide');
                 invoiceStore.classList.remove('hide');
             }
-        })
+        });
     loadSnacks();
 }
 $(editStore).click(() => {

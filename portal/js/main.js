@@ -85,22 +85,21 @@ function searchArray(array, item) {
 
 function showSlides() {
   for (var i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
+    slides[i].classList.add("hide");
   }
   slideIndex++;
   if (slideIndex > slides.length) {
     slideIndex = 1
   }
-  slides[slideIndex - 1].style.display = "block";
-  timeOutHandler = setTimeout(showSlides, 8000); // Change image every 10 seconds;
+  currentSlide(1);
 }
 
 function currentSlide(no) {
   for (var i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
+    slides[i].classList.add("hide");
   }
   slideIndex = no;
-  slides[no - 1].style.display = "block";
+  slides[no - 1].classList.remove("hide");
 }
 
 function changeSlides(n) {
