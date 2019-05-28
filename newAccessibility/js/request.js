@@ -88,26 +88,7 @@ async function submitTranscriptRequest() {
         if (override) {
             createRecord(parentObject, docData);
         } else if (parentObject.parentTranscript) {
-            let titleNew = docData.title.replace(/\s/g, '');;
-            let titleOld = parentObject.title.replace(/\s/g, '');;
-            let matching = 0;
-            for (var i = 0; i < titleNew.length; i++) {
-                if (titleNew.charAt(i) === titleOld.charAt(i)) {
-                    matching++
-                }
-            }
-            for (var i = titleNew.length - 1; i >= 0; i--) {
-                if (titleNew.charAt(i) === titleOld.charAt(i)) {
-                    matching++
-                }
-            }
-            if (docData.type === parentObject.type) {
-                if ((matching / 2) / (titleOld.length) >= .8) {
-                    foundDup(parentObject, docData);
-                }
-            } else {
-                createRecord(parentObject, docData);
-            }
+            createRecord(parentObject, docData);
         } else {
             if (docData.type === parentObject.type) {
                 foundDup(parentObject, docData);
@@ -172,20 +153,19 @@ function foundDup(dup) {
     $(newInfoMedia).html(`<a href=${srcURL}>${srcURL}</a>`);
 }
 
-$(dupBtn).click((event) =>{
-    event.preventDefault();
+$(dupBtn).click(() => {
     let newCode = $(newInfoCode).html();
     let src = $(dupInfoMedia).html();
     db.collection('accessibility').where('srcURL', '==', src).where('parentTranscript', "==", true).get()
-    .then((querySnapshot) => {
-        if (querySnapshot.size == 1){
-            querySnapshot.forEach((doc) =>{
-                db.collection('accessibility').doc(doc.id).update({
-                    courseCode: firebase.firestore.FieldValue.arrayUnion(newCode)
+        .then((querySnapshot) => {
+            if (querySnapshot.size == 1) {
+                querySnapshot.forEach((doc) => {
+                    db.collection('accessibility').doc(doc.id).update({
+                        courseCode: firebase.firestore.FieldValue.arrayUnion("" + newCode)
+                    });
                 });
-            });
-        }
-    });
+            }
+        });
 });
 
 function resetMessage() {
@@ -223,7 +203,7 @@ function generateParentObject(videoURL) {
                         resolve(object);
                     });
                 } else if (querySnapshot.size == 0) {
-                    
+
                     object = {
                         parentTranscript: true,
                         copied: false
