@@ -1,5 +1,22 @@
 getCourses();
 
+var dupInfoTitle = document.getElementById("dup-info-title");
+var dupInfoCode = document.getElementById("dup-info-code");
+var dupInfoType = document.getElementById("dup-info-type");
+var dupInfoPriority = document.getElementById("dup-info-priority");
+var dupInfoTranscript = document.getElementById("dup-info-transcript");
+var dupInfoMedia = document.getElementById("dup-info-media");
+var newInfoTitle = document.getElementById("new-info-title");
+var newInfoCode = document.getElementById("new-info-code");
+var newInfoType = document.getElementById("new-info-type");
+var newInfoPriority = document.getElementById("new-info-priority");
+var newInfoTranscript = document.getElementById("new-info-transcript");
+var newInfoMedia = document.getElementById("new-info-media");
+var dupField = document.getElementById("dup");
+var dupBtn = document.getElementById("dupBtn");
+var override = false;
+
+
 //the following functions are triggered on a onchange basis, to update the right side of the screen
 // with the ticket information
 function updateTitle(newTitle) {
@@ -26,26 +43,17 @@ function updateLocation(newLocation) {
 //once the user requests a transcript, this makes sure that the transcript is filled out correctly and thoroughly
 //it also checks if the transcript is a duplicate. if it is, brings necessary information over.
 async function submitTranscriptRequest() {
-    var requestType = document.getElementById('requestType').value;
-    var title = document.getElementById('requestTitle').value;
-    var priority = document.getElementById('requestPriority').value;
-    var course = document.getElementById('requestCourse').value;
-    var lmsURL = document.getElementById('requestLMSURL').value;
-    var srcURL = document.getElementById('requestVideoURL').value;
-    var comments = document.getElementById('requestComments').value;
+    let requestType = document.getElementById('requestType').value;
+    let title = document.getElementById('requestTitle').value;
+    let priority = document.getElementById('requestPriority').value;
+    let course = document.getElementById('requestCourse').value;
+    let lmsURL = document.getElementById('requestLMSURL').value;
+    let srcURL = document.getElementById('requestVideoURL').value;
+    let comments = document.getElementById('requestComments').value;
     // var videoLength = document.getElementById('requestLength').value;
     // var videoHeight = document.getElementById('requestHeight').value;
     // var softwareUsed = document.getElementById('requestExternalSoftware').checked;
-    console.log("before");
-    try {
-        var parentObject = await generateParentObject(srcURL);
-    } catch (err) {
-        console.error(err);
-    }
-    console.log(parentObject);
-    console.log("After");
-
-    if (course == 'Course Code' || requestType == 'Transcript Type' || requestType === 'Request Type' || title === '' || priority === 'Priority' || course === 'Course' || lmsURL === '' || srcURL === '') { 
+    if (course == 'Course Code' || requestType == 'Transcript Type' || requestType === 'Request Type' || title === '' || priority === 'Priority' || course === 'Course' || lmsURL === '' || srcURL === '') {
         message.innerHTML = 'You must fill in all inputs';
         message.style.color = 'red';
         resetMessage();
@@ -72,6 +80,25 @@ async function submitTranscriptRequest() {
             status: String('Ready for Prep'),
             requestNotes: comments + `. Comment made by: ${user.displayName}`,
         }
+        try {
+            var parentObject = await generateParentObject(srcURL);
+        } catch (err) {
+            console.error(err);
+        }
+        if (override) {
+            createRecord(parentObject, docData);
+        } else if (parentObject.parentTranscript) {
+            createRecord(parentObject, docData);
+        } else {
+            if (docData.type === parentObject.type) {
+                foundDup(parentObject, docData);
+
+            }
+        }
+    }
+
+
+    function createRecord(parentObject, docData) {
         // Add a new document in collection "accessibility"
         var finalObject = Object.assign(docData, parentObject);
         console.log(finalObject);
@@ -105,6 +132,41 @@ async function submitTranscriptRequest() {
     }
 }
 
+function foundDup(dup) {
+    $(dupField).removeClass("hide");
+    let type = document.getElementById('requestType').value;
+    let title = document.getElementById('requestTitle').value;
+    let priority = document.getElementById('requestPriority').value;
+    let course = document.getElementById('requestCourse').value;
+    let srcURL = document.getElementById('requestVideoURL').value;
+    $(dupInfoTitle).html(dup.title);
+    $(dupInfoCode).html(dup.courseCode);
+    $(dupInfoType).html(dup.type);
+    $(dupInfoPriority).html(dup.priority);
+    $(dupInfoTranscript).html(`<a href=${dup.docEditURL}>${dup.docEditURL}</a>`);
+    $(dupInfoMedia).html(`<a href=${dup.srcURL}>${dup.srcURL}</a>`);
+    $(newInfoTitle).html(title);
+    $(newInfoCode).html(course);
+    $(newInfoType).html(type);
+    $(newInfoPriority).html(priority);
+    $(newInfoTranscript).html("None yet");
+    $(newInfoMedia).html(`<a href=${srcURL}>${srcURL}</a>`);
+}
+
+$(dupBtn).click(() => {
+    let newCode = $(newInfoCode).html();
+    let src = $(dupInfoMedia).html();
+    db.collection('accessibility').where('srcURL', '==', src).where('parentTranscript', "==", true).get()
+        .then((querySnapshot) => {
+            if (querySnapshot.size == 1) {
+                querySnapshot.forEach((doc) => {
+                    db.collection('accessibility').doc(doc.id).update({
+                        courseCode: firebase.firestore.FieldValue.arrayUnion("" + newCode)
+                    });
+                });
+            }
+        });
+});
 
 function resetMessage() {
     setTimeout(() => {
@@ -123,9 +185,12 @@ function generateParentObject(videoURL) {
                     querySnapshot.forEach(doc => {
                         object = {
                             title: doc.data().title,
+                            courseCode: doc.data().courseCode,
+                            srcURL: doc.data().srcURL,
                             type: doc.data().type,
                             docEditURL: doc.data().docEditURL,
                             docPublishURL: doc.data().docPublishURL,
+                            priority: doc.data().priority,
                             height: doc.data().height,
                             length: doc.data().length,
                             verbit: doc.data().verbit,
@@ -138,6 +203,7 @@ function generateParentObject(videoURL) {
                         resolve(object);
                     });
                 } else if (querySnapshot.size == 0) {
+
                     object = {
                         parentTranscript: true,
                         copied: false
