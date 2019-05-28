@@ -13,6 +13,7 @@ var newInfoPriority = document.getElementById("new-info-priority");
 var newInfoTranscript = document.getElementById("new-info-transcript");
 var newInfoMedia = document.getElementById("new-info-media");
 var dupField = document.getElementById("dup");
+var dupBtn = document.getElementById("dupBtn");
 var override = false;
 
 
@@ -169,8 +170,23 @@ function foundDup(dup) {
     $(newInfoPriority).html(priority);
     $(newInfoTranscript).html("None yet");
     $(newInfoMedia).html(`<a href=${srcURL}>${srcURL}</a>`);
-
 }
+
+$(dupBtn).click((event) =>{
+    event.preventDefault();
+    let newCode = $(newInfoCode).html();
+    let src = $(dupInfoMedia).html();
+    db.collection('accessibility').where('srcURL', '==', src).where('parentTranscript', "==", true).get()
+    .then((querySnapshot) => {
+        if (querySnapshot.size == 1){
+            querySnapshot.forEach((doc) =>{
+                db.collection('accessibility').doc(doc.id).update({
+                    courseCode: firebase.firestore.FieldValue.arrayUnion(newCode)
+                });
+            });
+        }
+    });
+});
 
 function resetMessage() {
     setTimeout(() => {
@@ -207,6 +223,7 @@ function generateParentObject(videoURL) {
                         resolve(object);
                     });
                 } else if (querySnapshot.size == 0) {
+                    
                     object = {
                         parentTranscript: true,
                         copied: false
