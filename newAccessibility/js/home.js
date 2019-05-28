@@ -177,6 +177,11 @@ function resetMessage() {
 }
 
 
+/************************************
+ * This is used for the Announcements on the Home tab.
+ * If the user has the correct permissions, they can 
+ * click on the announcement and edit it whenever needed.
+ ************************************/
 const ancmt = document.getElementById("announcement-displayed");
 const ancmtEditBox = document.getElementById("announcements-box-edit")
 const ancmtEdit = document.getElementById("announcement-edit");
@@ -193,7 +198,7 @@ function editAnnouncementCancel() {
     ancmt.classList.remove("hide");
 }
 function editAnnouncementSubmit() {
-    ancmt.innerHTML = ancmtEdit.innerHTML;
+    ancmt.textContent = ancmtEdit.textContent;
     ancmtEditBox.classList.add("hide");
     ancmt.classList.remove("hide");
 }
