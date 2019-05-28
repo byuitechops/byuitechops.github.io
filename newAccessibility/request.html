@@ -119,7 +119,7 @@
     -   This is window pops up whenever the user tries to request a transcript
     -   and the program has found a potential duplicate.
     --------------------------------------->
-    <div class="dup hide">
+    <div id="dup" class="dup hide">
         <div class="dup-content">
             <div class="dup-header">
                 <h2>Duplicate Found</h2>
@@ -166,19 +166,20 @@
     -   provides the user with the needed links for inserting the link
     -   into Canvas, whether it's an embeded video or an external link.
     --------------------------------------->
-    <div class="dup hide">
+    <div id="dupLinks" class="dup hide">
         <div class="dup-content" id="place-transcript-window">
             <div class="dup-header">
                 <h2>Links for Canvas</h2>
             </div>
             <div id="place-transcript-box">
                 <h3>Embeded Video</h3>
-                <a id="place-transcript-embeded"></a>
+                <textarea id="place-transcript-embeded" readonly
+                ></textarea>
                 <h3>Direct Link</h3>
-                <a id="place-direct-link"></a>
+                <textarea id="place-direct-link" readonly></textarea>
             </div>
-            <div class="btn-box">
-                <button>Finished</button>
+            <div id="btn-box">
+                <button id="dupFinishedBtn">Finished</button>
             </div>
         </div>
     </div>

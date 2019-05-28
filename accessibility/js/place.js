@@ -189,20 +189,6 @@ function displayLinkCode(link, seconds, title, pubLink) {
     }
 }
 
-function secondsToHms(d) {
-    d = Number(d);
-
-    var h = Math.floor(d / 3600);
-    var m = Math.floor(d % 3600 / 60);
-    var s = Math.floor(d % 3600 % 60);
-
-    if (h == 0) {
-        return ('0' + m).slice(-2) + ":" + ('0' + s).slice(-2);
-    } else {
-        return ('0' + h).slice(-2) + ":" + ('0' + m).slice(-2) + ":" + ('0' + s).slice(-2);
-    }
-}
-
 function placeCheck(docId) {
     modal.style.display = "block";
     document.getElementById('modal-heading').innerHTML = "Place Check";
