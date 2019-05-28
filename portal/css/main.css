@@ -207,6 +207,7 @@ main {
 .mySlides {
     z-index: -1;
 }
+
 .prev, .next {
     color: var(--white);
     position: absolute;
