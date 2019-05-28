@@ -80,38 +80,26 @@
                     </a>
                     <a id="verifyButton" onclick="verifyEmail()" class="" target="blank">Verify Email</a>
                 </div>
+
                 <h2>Announcements: </h2>
-                <h3 style="color:red">Please be sure that your email is verified. You will not be able to read or write any data without it!</h3>
-                <p>Welcome to the Spring 2019 Semester! Below is a list of courses we need to work on in priority order.
-                    The BIO courses need to be completed in the next two weeks, so let’s stay focused on those. Please
-                    remember to check in with your lead everyday for more specific direction on what to work on.</p>
-                <ol>
-                    <li>
-                        <p>PC 101</p>
-                    </li>
-                    <li>
-                        <p>GE 103</p>
-                    </li>
-                    <li>
-                        <p>BIO 264</p>
-                    </li>
-                    <li>
-                        <p>BIO 264L</p>
-                    </li>
-                    <li>
-                        <p>BIO 265L</p>
-                    </li>
-                    <li>
-                        <p>ANTH 101</p>
-                    </li>
-                </ol>
+                <p id="announcement-displayed" onclick="editAnnouncement()">Announcements are waiting to be added...</p>
+                <div class="hide" id="announcements-box-edit">
+                    <textarea id="announcement-edit">Now editing the announcement...</textarea>
+                    <div class="btn-box">
+                        <button onclick="editAnnouncementCancel()">Cancel</button>
+                        <button onclick="editAnnouncementSubmit()">Submit</button>
+                    </div>
+                </div>
+
             </section>
+
             <section id="transcript-not-found" class="container half col">
                 <h2>Claimed Requests</h2>
                 <div id="transcript-box" class="container col">
                     <h3>No Transcript Claimed</h3>
                 </div>
             </section>
+
             <section id="transcript-found" class="container half col hide">
                 <h2>Claimed Requests</h2>
                 <div id="transcript-box" class="container row wobble-hor-bottom">

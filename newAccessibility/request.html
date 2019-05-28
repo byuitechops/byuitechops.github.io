@@ -61,6 +61,7 @@
             </div>
         </ul>
     </nav>
+
     <main>
         <div id="content">
             <section id="requestForm" class="container half col">
@@ -114,9 +115,13 @@
         </div>
     </main>
 
-    <div class="hide" id="dup">
-        <div id="dup-content">
-            <div id="dup-header">
+    <!--------------------------------------
+    -   This is window pops up whenever the user tries to request a transcript
+    -   and the program has found a potential duplicate.
+    --------------------------------------->
+    <div class="dup hide">
+        <div class="dup-content">
+            <div class="dup-header">
                 <h2>Duplicate Found</h2>
             </div>
             <div id="new-info-field">
@@ -149,14 +154,50 @@
                 <p>Media URL</p>
                 <a id="dup-info-media"></a>
             </div>
-            <div id="btn-box">
+            <div class="btn-box">
                 <button>Use Duplicate</button>
                 <button>Create New Transcript</button>
             </div>
         </div>
     </div>
 
+    <!--------------------------------------
+    -   This is window pops up after the user submits a transcript and 
+    -   provides the user with the needed links for inserting the link
+    -   into Canvas, whether it's an embeded video or an external link.
+    --------------------------------------->
+    <div class="dup hide">
+        <div class="dup-content" id="place-transcript-window">
+            <div class="dup-header">
+                <h2>Links for Canvas</h2>
+            </div>
+            <div id="place-transcript-box">
+                <h3>Embeded Video</h3>
+                <a id="place-transcript-embeded"></a>
+                <h3>Direct Link</h3>
+                <a id="place-direct-link"></a>
+            </div>
+            <div class="btn-box">
+                <button>Finished</button>
+            </div>
+        </div>
+    </div>
+
+    <!--------------------------------------
+    -   This is window pops up after the user clicks 'Finished' on the
+    -   window above. 
+    --------------------------------------->
+    <div class="dup hide">
+        <div class="dup-content" id="dupUsed">
+            <div class="dup-header">
+                <h2>Duplicate Used</h2>
+            </div>
+        </div>
+    </div>
+
 </body>
+
+
 <script src="js/main.js"></script>
 <script src="js/request.js"></script>
 

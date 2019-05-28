@@ -177,3 +177,23 @@ function resetMessage() {
 }
 
 
+const ancmt = document.getElementById("announcement-displayed");
+const ancmtEditBox = document.getElementById("announcements-box-edit")
+const ancmtEdit = document.getElementById("announcement-edit");
+
+function editAnnouncement() {
+    if (/* user is an admin*/true) {
+        ancmt.classList.add("hide");
+        ancmtEditBox.classList.remove("hide");
+        ancmtEdit.innerHTML = ancmt.innerHTML;
+    }
+}
+function editAnnouncementCancel() {
+    ancmtEditBox.classList.add("hide");
+    ancmt.classList.remove("hide");
+}
+function editAnnouncementSubmit() {
+    ancmt.innerHTML = ancmtEdit.innerHTML;
+    ancmtEditBox.classList.add("hide");
+    ancmt.classList.remove("hide");
+}
