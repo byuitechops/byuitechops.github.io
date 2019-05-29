@@ -1,5 +1,4 @@
 'use strict';
-
 getCourses();
 
 var dupInfoTitle = document.getElementById("dup-info-title");
@@ -89,7 +88,7 @@ async function submitTranscriptRequest() {
             requestNotes: comments + `. Comment made by: ${user.displayName}`,
         }
         try {
-            var parentObject = await generateParentObject(srcURL);
+            var parentObject = await generateParentObject(srcURL, docData.type);
         } catch (err) {
             console.error(err);
         }
@@ -99,10 +98,7 @@ async function submitTranscriptRequest() {
         } else if (parentObject.parentTranscript) {
             createRecord(parentObject, docData);
         } else {
-            if (docData.type === parentObject.type) {
-                foundDup(parentObject);
-
-            }
+            foundDup(parentObject);
         }
     }
 }
@@ -199,9 +195,9 @@ function resetMessage() {
 
 //Calculates the total of time in seconds according 
 //to user's input for the transcript selected
-function generateParentObject(videoURL) {
+function generateParentObject(videoURL, type) {
     return new Promise((resolve, reject) => {
-        db.collection('accessibility').where('srcURL', '==', videoURL).where('parentTranscript', "==", true).get()
+        db.collection('accessibility').where('srcURL', '==', videoURL).where('type', '==', type).where('parentTranscript', "==", true).get()
             .then(function (querySnapshot) {
                 if (querySnapshot.size == 1) {
                     querySnapshot.forEach(doc => {
@@ -227,7 +223,7 @@ function generateParentObject(videoURL) {
                     });
                 } else if (querySnapshot.size == 0) {
 
-                    object = {
+                    let object = {
                         parentTranscript: true,
                         copied: false
                     }
@@ -244,13 +240,13 @@ function generateParentObject(videoURL) {
 function showCodeEmbedded() {
     db.collection('accessibility').doc(docID[0]).get()
         .then(function (doc) {
-            
+
             var link, height, seconds, title, title;
             title = doc.data().title
             link = doc.data().srcURL;
             height = 315;
             seconds = Number(doc.data().length);
-            
+
 
             var setlink = doc.data().docPublishURL;
             var time = secondsToHms(seconds);
@@ -292,12 +288,12 @@ function showCodeEmbedded() {
 function showCodeLink() {
     db.collection('accessibility').doc(docID[0]).get()
         .then(function (doc) {
-           
+
             var link, seconds, title, title;
             title = doc.data().title
             link = doc.data().srcURL;
             seconds = Number(doc.data().length);
-            
+
 
             var setlink = doc.data().docPublishURL;
             var time = secondsToHms(seconds);
