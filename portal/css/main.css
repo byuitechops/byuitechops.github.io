@@ -138,7 +138,7 @@ nav {
     transition: transform .2s;
     text-decoration: none;
     font-weight: 200;
-    font-size: 1.5em;
+    font-size: 1.3vw;
     color: var(--white);
     transition: transform .15s;
 }
@@ -166,7 +166,7 @@ main {
 .page-title {
     margin: 0;
     padding: 50px 6% 30px;
-    font-size: 2.5em;
+    font-size: 2.25vw;
     font-weight: 400;
     color: var(--fontPrime);
 }
@@ -178,7 +178,7 @@ main {
 
 .slideshow-container {
     width: 85%;
-    height: 13em;
+    height: auto;
     margin: 15px auto 20px;
     padding: 0;
     border-radius: 14px;
@@ -192,17 +192,19 @@ main {
     color: var(--white);
     position: absolute;
     margin: 5px 0 0 8px;
+    font-size: 1vw;
 }
 .mySlides {
+    display: none;
     z-index: -1;
 }
-
 .prev, .next {
     color: var(--white);
     position: absolute;
     z-index: 1;
-    margin-top: -8em;
+    margin-top: -8vw;
     padding: 10px 8px;
+    cursor: pointer;
 }
 .prev:hover, .next:hover {
     background-color: var(--second);
@@ -210,6 +212,28 @@ main {
 .next {
     margin-left: 60%
 }
+#dots-box {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: -10px 0 20px;
+}
+.dot {
+    width: 20px;
+    height: 20px;
+    margin: 0 5px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color .5s;
+}
+.dot.active, .dot:hover {
+    background-color: #717171;
+}
+
+
+/*************************************************/
+
 
 .links-container {
     width: 85%;
@@ -295,6 +319,7 @@ main {
     background-color: var(--first);
     transition: transform .2s;
     box-shadow: 2px 1px 5px var(--shadow);
+    cursor: pointer;
 }
 .btn2:hover {
     background-color: var(--second);
