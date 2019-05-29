@@ -345,17 +345,28 @@ main {
 #new-info-field, #dup-info-field {
   width: 50%;
   margin: auto;
+  display: flex;
+  flex-flow: row wrap;
 }
 .dup h3 {
   padding: 25px 0;
+  font-size: 20px;
+  font-weight: 300;
 }
 .dup p {
-  width: 20%;
+  width: 30%;
   padding: 5px 0;
   font-size: 1.3em;
+  font-weight: 600;
+}
+.dup span {
+  width: 70%;
+}
+.dup a,h3 {
+  width: 100%;
 }
 .dup span, .dup a {
-  width: 80%;
+  font-size: 16px;
 }
 #btn-box button {
   width: 200px;
@@ -406,6 +417,16 @@ main {
 }
 #place-transcript-box {
   width: 100%;
+}
+
+#continue-guest-window {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+#continue-guest-window #btn-box {
+  padding: 50px;
 }
 
 /***********************************************************
