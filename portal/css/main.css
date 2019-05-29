@@ -176,7 +176,11 @@ main {
 * 4. Home.html
 **********************************************/
 
+#welcome {
+    position: relative;
+}
 .slideshow-container {
+    position: relative;
     width: 85%;
     height: 11.30vw;
     margin: 15px auto 20px;
@@ -184,24 +188,22 @@ main {
     border-radius: 14px;
     overflow: hidden;
     box-shadow: 2px 1px 5px var(--shadow);
-    position: relative;
-    display: flex;
 }
 .slideshow-container img {
     width: 100%;
 }
 .mySlides {
-    z-index: -1;
     position: absolute;
+    z-index: 1;
 }
 .prev, .next {
     position: absolute;
     z-index: 1;
     width: 20%;
     height: 110%;
-    padding: 100px 8px;
+    padding: 4.8vw 8px;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 1vw;
     font-weight: 600;
     vertical-align: middle;
     color: var(--white);
@@ -209,18 +211,18 @@ main {
     background-image: none;
 }
 .next {
-    margin-left: 80%;
     text-align: right;
+    right: 0;
 }
 .prev:hover {
     background: linear-gradient(90deg, rgba(31,31,31,1) 0%, rgba(9,9,121,0) 100%);
     font-size: 1.5vw;
-    padding-top: 90px;
+    padding-top: 4.5vw;
 }
 .next:hover {
     background: linear-gradient(90deg, rgba(2,0,36,0) 0%, rgba(31,31,31,1) 100%);
     font-size: 1.5vw;
-    padding-top: 90px;
+    padding-top: 4.5vw;
 }
 #dots-box {
     width: 100%;
