@@ -93,19 +93,23 @@ async function submitTranscriptRequest() {
             console.error(err);
         }
         if (override) {
-            createRecord(parentObject, docData);
+            createRecord(docData);
             override = false;
         } else if (parentObject.parentTranscript) {
-            createRecord(parentObject, docData);
+            createRecord(docData);
         } else {
             foundDup(parentObject);
         }
     }
 }
 
-function createRecord(parentObject, docData) {
+function createRecord(docData) {
     // Add a new document in collection "accessibility"
-    var finalObject = Object.assign(docData, parentObject);
+    let object = {
+        parentTranscript: true,
+        copied: false
+    }
+    var finalObject = Object.assign(docData, object);
     db.collection('accessibility').add(finalObject)
         .then(() => {
             resetFields();
