@@ -173,17 +173,14 @@ $(dupBtn).click(async () => {
 
 $(overrideBtn).click(async () => {
     override = true;
-    // submitTranscriptRequest();
+    submitTranscriptRequest();
     $(dupField).addClass("hide");
-    console.log("Hello There");
-    docID = [];
 });
 
 $(dupFinishedBtn).click(() => {
     $(dupLinks).addClass("hide");
     dupLinks
     resetFields();
-    docID = [];
 });
 
 function resetMessage() {
@@ -201,6 +198,7 @@ function generateParentObject(videoURL, type) {
             .then(function (querySnapshot) {
                 if (querySnapshot.size == 1) {
                     querySnapshot.forEach(doc => {
+                        docID = [];
                         docID.push(doc.id);
                         let object = {
                             title: doc.data().title,
@@ -239,17 +237,12 @@ function generateParentObject(videoURL, type) {
 //generates the code to the user, according to the media url received
 function showCodeEmbedded() {
     db.collection('accessibility').doc(docID[0]).get()
-        .then(function (doc) {
-
-            var link, height, seconds, title, title;
-            title = doc.data().title
-            link = doc.data().srcURL;
-            height = 315;
-            seconds = Number(doc.data().length);
-
-
+        .then((doc) =>{ 
+            let title = doc.data().title
+            let link = doc.data().srcURL;
+            let height = 315;
             var setlink = doc.data().docPublishURL;
-            var time = secondsToHms(seconds);
+            var time = secondsToHms(Number(doc.data().length));
 
             if (link.includes("youtube")) {
                 var id = link.slice(link.indexOf("watch?v=") + 8, (link.indexOf("watch?v=") + 9) + 11);
@@ -287,16 +280,12 @@ function showCodeEmbedded() {
 
 function showCodeLink() {
     db.collection('accessibility').doc(docID[0]).get()
-        .then(function (doc) {
+        .then((doc) =>{
 
-            var link, seconds, title, title;
-            title = doc.data().title
-            link = doc.data().srcURL;
-            seconds = Number(doc.data().length);
-
-
+            let title = doc.data().title
+            let link = doc.data().srcURL;
             var setlink = doc.data().docPublishURL;
-            var time = secondsToHms(seconds);
+            var time = secondsToHms(Number(doc.data().length));
 
             if (link.includes("youtube")) {
                 var id = link.slice(link.indexOf("watch?v=") + 8, (link.indexOf("watch?v=") + 9) + 11);
@@ -322,7 +311,7 @@ function showCodeLink() {
                 var html = `<p><a href='${link}' target="_blank">${title}</a>(${time} mins, <a href="${setlink}" target="_blank">${title} Transcript</a>)</p>`;
                 $(placeLink).html(String(html));
             }
-        })
+        });
 }
 
 
@@ -337,7 +326,7 @@ function getRequestsNumber() {
                         requests: doc.data().requests,
                         userID: doc.id
                     });
-                })
-            })
-    })
-}
+                });
+            });
+    });
+};

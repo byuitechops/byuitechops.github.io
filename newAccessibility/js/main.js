@@ -4,22 +4,24 @@
 // Effectively and with clean code. 
 //****************************************************
 
-
-// Initialize Firebase
-var config = {
-    apiKey: "AIzaSyAIcGQ94aGJRMZihtoTcmMK7j3NavnPEOs",
-    authDomain: "byui-accessibility-redemption.firebaseapp.com",
-    databaseURL: "https://byui-accessibility-redemption.firebaseio.com",
-    projectId: "byui-accessibility-redemption",
-    storageBucket: "byui-accessibility-redemption.appspot.com",
-    messagingSenderId: "630332651011"
-};
-firebase.initializeApp(config);
-// Initialize Cloud Firestore through Firebase
-var db = firebase.firestore();
-db.settings({
-    timestampsInSnapshots: true
+(() => {
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyAIcGQ94aGJRMZihtoTcmMK7j3NavnPEOs",
+        authDomain: "byui-accessibility-redemption.firebaseapp.com",
+        databaseURL: "https://byui-accessibility-redemption.firebaseio.com",
+        projectId: "byui-accessibility-redemption",
+        storageBucket: "byui-accessibility-redemption.appspot.com",
+        messagingSenderId: "630332651011"
+    };
+    firebase.initializeApp(config);
+    // Initialize Cloud Firestore through Firebase
+    var db = firebase.firestore();
+    db.settings({
+        timestampsInSnapshots: true
+    });
 });
+
 
 var user = firebase.auth().currentUser;
 var userID = [];
@@ -29,7 +31,7 @@ var userAction = [];
 var userPrepares = [];
 
 
-firebase.auth().onAuthStateChanged(function (user) {
+firebase.auth().onAuthStateChanged((user) => {
     if (user) {
         if (window.location.pathname != '/index.html') {
             // User is signed in.
@@ -37,46 +39,35 @@ firebase.auth().onAuthStateChanged(function (user) {
                 .then((querySnapshot) => {
                     querySnapshot.forEach((doc) => {
                         var userData = doc.data();
-                        if (userData.lead) {
-                            document.getElementById('master').classList.remove('hide');
-                        }
+
                         if (userData.role == "Copyedit") {
-                            document.getElementById('copyEdit').classList.remove('hide');
-                            document.getElementById('prepare').classList.add('hide');
-                            document.getElementById('transcribe').classList.add('hide');
-                            document.getElementById('copyEditCheck').classList.add('hide');
+                            document.getElementById('copyEdit').classList.remove('hide')
                             if (userData.lead) {
                                 document.getElementById('copyEditCheck').classList.remove('hide');
-                            }
-                        }
-                        if (userData.role == "Quality Assurance" ^ (doc.data().name == 'Lucas Wargha' || doc.data().name == 'Calvin Smoot')) {
-                            document.getElementById('copyEdit').classList.add('hide');
-                            document.getElementById('copyEditCheck').classList.add('hide');
-                        }
-                        if (doc.data().webMaster != null){
+                                document.getElementById('master').classList.remove('hide');
+                            };
+                        } else if (userData.lead) {
+                            document.getElementById('master').classList.remove('hide');
+                        };
+                        if (doc.data().webMaster != null) {
                             if (doc.data().webMaster) {
                                 document.getElementById('master').classList.remove('hide');
                                 document.getElementById('copyEdit').classList.remove('hide');
                                 document.getElementById('copyEditCheck').classList.remove('hide');
-                            }
-                        }
-                    })
-                })
+                            };
+                        };
+                    });
+                });
         } else {
             if (window.location.pathname != '/home.html') {
                 window.location.assign('home.html');
-            } else {
-
-            }
-        }
+            };
+        };
     } else {
         if (window.location.pathname != '/index.html') {
             window.location.assign('index.html');
-        } else {
-
-        }
-
-    }
+        };
+    };
 });
 
 //logs out the user
@@ -117,11 +108,9 @@ function getCourses() {
 
 function secondsToHms(d) {
     d = Number(d);
-
     var h = Math.floor(d / 3600);
     var m = Math.floor(d % 3600 / 60);
     var s = Math.floor(d % 3600 % 60);
-
     if (h == 0) {
         return ('0' + m).slice(-2) + ":" + ('0' + s).slice(-2);
     } else {
