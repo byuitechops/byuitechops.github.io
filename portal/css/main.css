@@ -178,12 +178,14 @@ main {
 
 .slideshow-container {
     width: 85%;
-    height: auto;
+    height: 11.30vw;
     margin: 15px auto 20px;
     padding: 0;
     border-radius: 14px;
     overflow: hidden;
     box-shadow: 2px 1px 5px var(--shadow);
+    position: relative;
+    display: flex;
 }
 .slideshow-container img {
     width: 100%;
@@ -199,18 +201,26 @@ main {
     z-index: -1;
 }
 .prev, .next {
-    color: var(--white);
     position: absolute;
     z-index: 1;
-    margin-top: -7vw;
-    padding: 10px 8px;
+    width: 20%;
+    height: 100%;
+    padding: 100px 8px;
     cursor: pointer;
-}
-.prev:hover, .next:hover {
-    background-color: var(--second);
+    font-size: 20px;
+    font-weight: 600;
+    vertical-align: middle;
+    color: var(--white);
+    transition: all .5s;
 }
 .next {
-    margin-left: 60%
+    margin-left: 80%;
+    text-align: right;
+}
+.prev:hover {
+    background-image: linear-gradient(90deg, rgba(2,0,36,0) 0%, rgba(31,31,31,1) 0%, rgba(9,9,121,0) 100%);}
+.next:hover {
+    background-image: linear-gradient(90deg, rgba(2,0,36,0) 0%, rgba(31,31,31,1) 100%);
 }
 #dots-box {
     width: 100%;
@@ -225,14 +235,11 @@ main {
     background-color: #bbb;
     border-radius: 50%;
     display: inline-block;
-    transition: background-color .5s;
+    transition: background-color .25s;
 }
 .dot.active, .dot:hover {
-    background-color: #717171;
+    background-color: #333;
 }
-
-
-/*************************************************/
 
 
 .links-container {
