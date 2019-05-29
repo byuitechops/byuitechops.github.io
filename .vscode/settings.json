@@ -1,5 +1,4 @@
 {
     "diffEditor.ignoreTrimWhitespace": false,
-    "editor.tabSize": 1,
     "editor.cursorStyle": "line-thin"
 }

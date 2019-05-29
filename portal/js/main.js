@@ -2,6 +2,7 @@
  * MAIN.JS | Quality Assurance Javascript File 
  * 
  *********************************************/
+'use strict';
 // Initialize Firebase
 var config = {
   apiKey: "AIzaSyA_I75-CU5_GlNP1QSKvvH8nbYVkaAUgNA",
@@ -47,7 +48,7 @@ auth.onAuthStateChanged((firebaseUser) => {
   if (window.location.href.includes("home.html")) {
     loadTimer();
     startTime();
-    showSlides();
+    slideshow(1);
   } else{
     loadPage();
   }
@@ -82,40 +83,39 @@ function searchArray(array, item) {
   return false;
 }
 
+var slidesIndex = 1;
 
-function showSlides() {
+function plusSlides(n) {
+  slideshow(slidesIndex += n);
+}
+function currentSlide(n) {
+  slideshow(slidesIndex = n);
+}
+
+function slideshow(n) {
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+
+  if (n > slides.length) {
+    slidesIndex = 1;
+  }
+  if (n < 1) {
+    slidesIndex = slides.length;
+  }
+
+  for (var i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+
   for (var i = 0; i < slides.length; i++) {
-    slides[i].classList.add("hide");
+    slides[i].style.display = "none";
   }
-  slideIndex++;
-  if (slideIndex > slides.length) {
-    slideIndex = 1
-  }
-  currentSlide(1);
+  slides[slidesIndex - 1].style.display = "block";
+  dots[slidesIndex - 1].className += " active";
 }
 
-function currentSlide(no) {
-  for (var i = 0; i < slides.length; i++) {
-    slides[i].classList.add("hide");
-  }
-  slideIndex = no;
-  slides[no - 1].classList.remove("hide");
-}
 
-function changeSlides(n) {
-  var newslideIndex = slideIndex + n;
-  if (newslideIndex >= slides.length + 1) {
-    newslideIndex = 1
-  } else if (newslideIndex <= 0) {
-    newslideIndex = slides.length;
-  }
-  if (newslideIndex <= (slides.length + 1) && newslideIndex > 0) {
-    currentSlide(newslideIndex);
-    clearTimeout(timeOutHandler);
-    timeOutHandler = setTimeout(showSlides, 8000); // Change image every 10 seconds;
-  }
-}
-/******************************************************************** 
+/********************************************************************
  *  This Section is for the theme changer. Instead of have multiple css files
  * and switch the files (which is complicated and just why) we are using CSS
  * variables and JS functions to change it.

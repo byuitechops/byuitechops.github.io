@@ -138,7 +138,7 @@ nav {
     transition: transform .2s;
     text-decoration: none;
     font-weight: 200;
-    font-size: 1.5em;
+    font-size: 1.3vw;
     color: var(--white);
     transition: transform .15s;
 }
@@ -166,7 +166,7 @@ main {
 .page-title {
     margin: 0;
     padding: 50px 6% 30px;
-    font-size: 2.5em;
+    font-size: 2.25vw;
     font-weight: 400;
     color: var(--fontPrime);
 }
@@ -176,9 +176,13 @@ main {
 * 4. Home.html
 **********************************************/
 
+#welcome {
+    position: relative;
+}
 .slideshow-container {
+    position: relative;
     width: 85%;
-    height: 13em;
+    height: 11.30vw;
     margin: 15px auto 20px;
     padding: 0;
     border-radius: 14px;
@@ -188,28 +192,57 @@ main {
 .slideshow-container img {
     width: 100%;
 }
-.slideshow-container .numbertext{
-    color: var(--white);
-    position: absolute;
-    margin: 5px 0 0 8px;
-}
 .mySlides {
-    z-index: -1;
-}
-
-.prev, .next {
-    color: var(--white);
     position: absolute;
     z-index: 1;
-    margin-top: -8em;
-    padding: 10px 8px;
 }
-.prev:hover, .next:hover {
-    background-color: var(--second);
+.prev, .next {
+    position: absolute;
+    z-index: 1;
+    width: 20%;
+    height: 110%;
+    padding: 4.8vw 8px;
+    cursor: pointer;
+    font-size: 1vw;
+    font-weight: 600;
+    vertical-align: middle;
+    color: var(--white);
+    transition: all .25s;
+    background-image: none;
 }
 .next {
-    margin-left: 60%
+    text-align: right;
+    right: 0;
 }
+.prev:hover {
+    background: linear-gradient(90deg, rgba(31,31,31,1) 0%, rgba(9,9,121,0) 100%);
+    font-size: 1.5vw;
+    padding-top: 4.5vw;
+}
+.next:hover {
+    background: linear-gradient(90deg, rgba(2,0,36,0) 0%, rgba(31,31,31,1) 100%);
+    font-size: 1.5vw;
+    padding-top: 4.5vw;
+}
+#dots-box {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: -10px 0 20px;
+}
+.dot {
+    width: 20px;
+    height: 20px;
+    margin: 0 5px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color .25s;
+}
+.dot.active, .dot:hover {
+    background-color: #333;
+}
+
 
 .links-container {
     width: 85%;
@@ -275,13 +308,6 @@ main {
     transform: scale(1.2);
 }
 
-
-#light {background-color: var(--blue); border: 1px solid var(--white);}
-#dark {background-color: var(--gray-dark); border: 1px solid var(--blue);}
-#jedi {background-image: linear-gradient(45deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);}
-#sith {background-image: linear-gradient(45deg, rgba(36, 0, 0, 1) 0%, rgba(121, 9, 9, 1) 35%, rgba(255, 0, 0, 1) 100%);}
-#merica {background-image: linear-gradient(9deg, rgba(255, 0, 0, 1) 0%, rgba(221, 59, 59, 1) 16%, rgba(235, 208, 208, 1) 32%, rgba(255, 255, 255, 1) 39%, rgba(191, 230, 241, 1) 45%, rgba(69, 163, 190, 1) 64%, rgba(51, 83, 185, 1) 80%)}
-
 .btn2 {
     width: 260px;
     height: 160px;
@@ -295,6 +321,7 @@ main {
     background-color: var(--first);
     transition: transform .2s;
     box-shadow: 2px 1px 5px var(--shadow);
+    cursor: pointer;
 }
 .btn2:hover {
     background-color: var(--second);
@@ -342,7 +369,7 @@ main {
 }
 
 #time-n-date {
-    padding: 30px;
+    padding: 40px;
     margin: 10px 0 50px;
     color: var(--third);
 }
@@ -369,7 +396,7 @@ main {
 #break-button {
     z-index: 2;
     position: fixed;
-    bottom: 85px;
+    bottom: 65px;
     right: 80px;
     transition: all .5s,
                 right .25s 0s,
@@ -381,7 +408,7 @@ main {
     position: fixed;
     width: 83%;
     height: 80%;
-    bottom: 65px;
+    bottom: 50px;
     right: 50px;
     font-size: 4vw;
     transition: all .25s,
@@ -1084,6 +1111,11 @@ main {
 #yay-points h2 {
     color: var(--white);
 }
+#light {background-color: var(--blue)}
+#dark {background-color: var(--gray-dark)}
+#jedi {background-image: linear-gradient(45deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);}
+#sith {background-image: linear-gradient(45deg, rgba(36, 0, 0, 1) 0%, rgba(121, 9, 9, 1) 35%, rgba(255, 0, 0, 1) 100%);}
+#merica {background-image: linear-gradient(9deg, rgba(255, 0, 0, 1) 0%, rgba(221, 59, 59, 1) 16%, rgba(235, 208, 208, 1) 32%, rgba(255, 255, 255, 1) 39%, rgba(191, 230, 241, 1) 45%, rgba(69, 163, 190, 1) 64%, rgba(51, 83, 185, 1) 80%)}
 
 /**********************************************
 * 8. TimeTracker.html
