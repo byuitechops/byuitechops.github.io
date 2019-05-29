@@ -413,7 +413,7 @@ main {
     position: fixed;
     width: 83%;
     height: 80%;
-    bottom: 65px;
+    bottom: 50px;
     right: 50px;
     font-size: 4vw;
     transition: all .25s,
