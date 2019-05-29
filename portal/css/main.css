@@ -202,7 +202,7 @@ main {
     color: var(--white);
     position: absolute;
     z-index: 1;
-    margin-top: -8vw;
+    margin-top: -7vw;
     padding: 10px 8px;
     cursor: pointer;
 }
@@ -367,7 +367,7 @@ main {
 }
 
 #time-n-date {
-    padding: 30px;
+    padding: 40px;
     margin: 10px 0 50px;
     color: var(--third);
 }
@@ -394,7 +394,7 @@ main {
 #break-button {
     z-index: 2;
     position: fixed;
-    bottom: 85px;
+    bottom: 65px;
     right: 80px;
     transition: all .5s,
                 right .25s 0s,
