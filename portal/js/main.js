@@ -87,7 +87,7 @@ function searchArray(array, item) {
 /*******************************************************
  * This section is for the slideshow on the home page
  *******************************************************/
-var slidesIndex = 1;        // Index of which slide is currently active
+var slidesIndex = 0;        // Index of which slide is currently active
 var myTimer;                // Automatic timer for the slideshow
 const slideTimer = 8000;    // Each slide appears for 8 seconds.
 
