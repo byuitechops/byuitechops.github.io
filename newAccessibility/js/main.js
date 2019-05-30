@@ -4,7 +4,6 @@
 // Effectively and with clean code. 
 //****************************************************
 
-(() => {
     // Initialize Firebase
     var config = {
         apiKey: "AIzaSyAIcGQ94aGJRMZihtoTcmMK7j3NavnPEOs",
@@ -20,7 +19,6 @@
     db.settings({
         timestampsInSnapshots: true
     });
-});
 
 
 var user = firebase.auth().currentUser;
