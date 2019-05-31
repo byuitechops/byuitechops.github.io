@@ -3,22 +3,23 @@
 // in JS so all other pages can work more
 // Effectively and with clean code. 
 //****************************************************
-
-    // Initialize Firebase
-    var config = {
-        apiKey: "AIzaSyAIcGQ94aGJRMZihtoTcmMK7j3NavnPEOs",
-        authDomain: "byui-accessibility-redemption.firebaseapp.com",
-        databaseURL: "https://byui-accessibility-redemption.firebaseio.com",
-        projectId: "byui-accessibility-redemption",
-        storageBucket: "byui-accessibility-redemption.appspot.com",
-        messagingSenderId: "630332651011"
-    };
-    firebase.initializeApp(config);
-    // Initialize Cloud Firestore through Firebase
-    var db = firebase.firestore();
-    db.settings({
-        timestampsInSnapshots: true
-    });
+'use strict';
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyAIcGQ94aGJRMZihtoTcmMK7j3NavnPEOs",
+    authDomain: "byui-accessibility-redemption.firebaseapp.com",
+    databaseURL: "https://byui-accessibility-redemption.firebaseio.com",
+    projectId: "byui-accessibility-redemption",
+    storageBucket: "byui-accessibility-redemption.appspot.com",
+    messagingSenderId: "630332651011",
+    appId: "1:630332651011:web:c8806a3115d91b70"
+};
+firebase.initializeApp(config);
+// Initialize Cloud Firestore through Firebase
+var db = firebase.firestore();
+db.settings({
+    timestampsInSnapshots: true
+});
 
 
 var user = firebase.auth().currentUser;
@@ -62,9 +63,7 @@ firebase.auth().onAuthStateChanged((user) => {
             };
         };
     } else {
-        if (window.location.pathname != '/index.html') {
-            window.location.assign('index.html');
-        };
+        notLoggedIn();
     };
 });
 
@@ -75,6 +74,44 @@ function userLogout() {
     window.location.reload();
 }
 
+
+function notLoggedIn() {
+    var z = document.createElement('div');
+    var data =
+        `<div class="dup-content" id="continue-guest-window">
+            <div class="dup-header">
+                    <h2>Continue As Guest</h2>
+            </div>
+            <div id="btn-box">
+                <button id="dupFinishedBtn" onclick="redirect()">Sign In</button>
+                <button id="dupFinishedBtn" onclick="guestLogin(event)">Continue As Guest</button>
+            </div>
+        </div>`;
+    z.innerHTML = data
+    z.setAttribute('id', 'continue-guest');
+    z.setAttribute('class', 'dup');
+    document.body.appendChild(z);
+}
+
+function guestLogin(e) {
+    console.log("Hello there")
+    firebase.auth().signInAnonymously()
+    .catch(function (error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log(errorMessage);
+        // ...
+    });
+    var x = document.getElementById("continue-guest");
+    $(x).remove();
+}
+
+function redirect() {
+    if (window.location.pathname != '/index.html') {
+        window.location.assign('index.html');
+    };
+}
 
 // Get information from the Univeristy Catalog
 
