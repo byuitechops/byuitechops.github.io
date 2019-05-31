@@ -57,6 +57,7 @@ async function submitTranscriptRequest() {
     let lmsURL = document.getElementById('requestLMSURL').value;
     let srcURL = document.getElementById('requestVideoURL').value;
     let comments = document.getElementById('requestComments').value;
+    let requestorName = document.getElementById('guestName').value;
     // var videoLength = document.getElementById('requestLength').value;
     // var videoHeight = document.getElementById('requestHeight').value;
     // var softwareUsed = document.getElementById('requestExternalSoftware').checked;
@@ -67,26 +68,48 @@ async function submitTranscriptRequest() {
         return;
     } else {
         var user = firebase.auth().currentUser;
-
-        var docData = {
-            title: String(title),
-            docPublishURL: String(''),
-            docEditURL: String(''),
-            type: String(requestType),
-            priority: Number(priority),
-            backupCode: String(course),
-            courseCode: [String(course)],
-            lmsURL: String(lmsURL),
-            height: Number(''),
-            length: Number(''),
-            srcURL: String(srcURL),
-            requestor: String(user.displayName),
-            requestDate: new Date(),
-            verbit: Boolean(''),
-            verbitID: String(''),
-            status: String('Ready for Prep'),
-            requestNotes: comments + `. Comment made by: ${user.displayName}`,
+        if (user.isAnonymous){
+            var docData = {
+                title: String(title),
+                docPublishURL: String(''),
+                docEditURL: String(''),
+                type: String(requestType),
+                priority: Number(priority),
+                backupCode: String(course),
+                courseCode: [String(course)],
+                lmsURL: String(lmsURL),
+                height: Number(''),
+                length: Number(''),
+                srcURL: String(srcURL),
+                requestor: String(requestorName),
+                requestDate: new Date(),
+                verbit: Boolean(''),
+                verbitID: String(''),
+                status: String('Ready for Prep'),
+                requestNotes: comments + `. Comment made by: ${requestorName}`,
+            }
+        } else {
+            var docData = {
+                title: String(title),
+                docPublishURL: String(''),
+                docEditURL: String(''),
+                type: String(requestType),
+                priority: Number(priority),
+                backupCode: String(course),
+                courseCode: [String(course)],
+                lmsURL: String(lmsURL),
+                height: Number(''),
+                length: Number(''),
+                srcURL: String(srcURL),
+                requestor: String(user.displayName),
+                requestDate: new Date(),
+                verbit: Boolean(''),
+                verbitID: String(''),
+                status: String('Ready for Prep'),
+                requestNotes: comments + `. Comment made by: ${user.displayName}`,
+            }
         }
+        
         try {
             var parentObject = await generateParentObject(srcURL, docData.type);
         } catch (err) {
@@ -241,7 +264,7 @@ function generateParentObject(videoURL, type) {
 //generates the code to the user, according to the media url received
 function showCodeEmbedded() {
     db.collection('accessibility').doc(docID[0]).get()
-        .then((doc) =>{ 
+        .then((doc) => {
             let title = doc.data().title
             let link = doc.data().srcURL;
             let height = 315;
@@ -284,7 +307,7 @@ function showCodeEmbedded() {
 
 function showCodeLink() {
     db.collection('accessibility').doc(docID[0]).get()
-        .then((doc) =>{
+        .then((doc) => {
 
             let title = doc.data().title
             let link = doc.data().srcURL;
@@ -317,6 +340,15 @@ function showCodeLink() {
             }
         });
 }
+var checkIfGuest = (async () => {
+    console.log(firebase.auth().currentUser.isAnonymous);
+    var isAnonymous = await firebase.auth().currentUser.isAnonymous;
+    if (isAnonymous) {
+        var guestName = document.getElementById("guestName");
+        $(guestName).removeClass('hide');
+    }
+});
+
 
 
 // Future Projects

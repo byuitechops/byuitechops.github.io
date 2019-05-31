@@ -33,6 +33,10 @@ var userPrepares = [];
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
         if (window.location.pathname != '/index.html') {
+            if (user.isAnonymous){
+                checkIfGuest();
+            }
+            
             // User is signed in.
             db.collection('users').where('name', "==", user.displayName).get()
                 .then((querySnapshot) => {
