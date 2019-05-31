@@ -54,7 +54,7 @@ function fillTranscriptBox(transcriptID, role) {
                                 document.getElementById('if-copied').innerHTML = `<h3>Comments: </h3> <p> This video is a copy of a previous transcription which has been finished or has passed the prepare process. At this stage, do not make any changes on the google document for the video. 
                             Please, review it and add correct tags to the google document file. Fill this input box with your name once you have done so.
                             </p> <input type="text">`
-                            } else { 
+                            } else {
                                 document.getElementById('if-copied').innerHTML = `<h3>Comments: </h3> <p> This video is a copy of a previous transcription that has not been yet passed the prepare stage. 
                                 Please, work on this transcript normally, and add correct tags to the google document file. Fill this input box with your name once you have done so.
                                 </p> <input type="text"> <hr> <p> Request Notes: ${doc.data().requestNotes} </p>`;
@@ -176,6 +176,7 @@ function resetMessage() {
     }, 10000);
 }
 
+var checkIfGuest = (() => {});
 
 /************************************
  * This is used for the Announcements on the Home tab.
@@ -185,21 +186,47 @@ function resetMessage() {
 const ancmt = document.getElementById("announcement-displayed");
 const ancmtEditBox = document.getElementById("announcements-box-edit");
 const ancmtEdit = document.getElementById("announcement-edit");
+var text;
 
 function editAnnouncement() {
-    if (/* user is an admin*/true) {
+    var user = firebase.auth().currentUser;
+    if (!user.isAnonymous) {
         ancmt.classList.add("hide");
         ancmtEditBox.classList.remove("hide");
         ancmtEdit.innerHTML = ancmt.innerHTML;
     }
 }
+
 function editAnnouncementCancel() {
     ancmtEditBox.classList.add("hide");
     ancmt.classList.remove("hide");
-    
+
 }
+
 function editAnnouncementSubmit() {
-    ancmt.textContent = ancmtEdit.textContent;
+    console.log(text);
     ancmtEditBox.classList.add("hide");
     ancmt.classList.remove("hide");
+    db.collection("announcements").doc('announcement').update({
+        content: text,
+        date: new Date()
+    });
+    getAnnoucement();
 }
+
+function getAnnoucement() {
+    db.collection("announcements").doc('announcement').get()
+        .then((doc) => {
+            console.log(doc.data());
+            let content = doc.data().content;
+            let date = doc.data().date;
+            ancmt.innerHTML = content;
+            text = content;
+        });
+}
+
+function updateText(value) {
+    text = value;
+}
+
+getAnnoucement();

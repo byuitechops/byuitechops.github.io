@@ -84,7 +84,7 @@
                 <h2>Announcements: </h2>
                 <p id="announcement-displayed" onclick="editAnnouncement()">Announcements are waiting to be added...</p>
                 <div class="hide" id="announcements-box-edit">
-                    <textarea id="announcement-edit">Now editing the announcement...</textarea>
+                    <textarea id="announcement-edit" onkeyup="updateText(value)">Now editing the announcement...</textarea>
                     <div class="btn-box">
                         <button onclick="editAnnouncementCancel()">Cancel</button>
                         <button onclick="editAnnouncementSubmit()">Submit</button>
