@@ -204,7 +204,6 @@ function editAnnouncementCancel() {
 }
 
 function editAnnouncementSubmit() {
-    console.log(text);
     ancmtEditBox.classList.add("hide");
     ancmt.classList.remove("hide");
     db.collection("announcements").doc('announcement').update({
@@ -217,7 +216,6 @@ function editAnnouncementSubmit() {
 function getAnnoucement() {
     db.collection("announcements").doc('announcement').get()
         .then((doc) => {
-            console.log(doc.data());
             let content = doc.data().content;
             let date = doc.data().date;
             ancmt.innerHTML = content;
