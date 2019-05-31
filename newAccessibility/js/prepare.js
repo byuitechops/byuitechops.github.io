@@ -493,4 +493,6 @@ function showCodeEmbedded() {
                 document.getElementById('codehtml').innerText = html;
             }
         })
-} 	 
+} 	
+
+var checkIfGuest =(()=>{});
