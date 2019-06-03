@@ -87,6 +87,7 @@ async function submitTranscriptRequest() {
                 verbitID: String(''),
                 status: String('Ready for Prep'),
                 requestNotes: comments + `. Comment made by: ${requestorName}`,
+                guestCreated: true
             }
         } else {
             var docData = {
@@ -107,6 +108,7 @@ async function submitTranscriptRequest() {
                 verbitID: String(''),
                 status: String('Ready for Prep'),
                 requestNotes: comments + `. Comment made by: ${user.displayName}`,
+                guestCreated: false
             }
         }
         

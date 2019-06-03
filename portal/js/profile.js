@@ -27,6 +27,7 @@ const img = document.getElementById('arrowImg');
 const cancelChanges = document.getElementById("cancelInfoChanges");
 const pointStart = document.getElementById("pointStart");
 const yayPoints = document.getElementById("yay-points");
+const yayText = document.getElementById("yayText");
 
 var results = []; //will be used as part of the results for 
 var birthdayPopulate;
@@ -35,59 +36,73 @@ var doneUser = false;
 var user = firebase.auth().currentUser;
 var whatEarnsPoints = [{
         "title": 'Contacting your lead, at least an hour before your scheduled shift, if you’re going to miss a shift or take time off',
-        "points": 1
+        "points": 1,
+        "congrats": "Enjoy time off!"
     },
     {
         "title": 'Checking in on time',
-        "points": 1
+        "points": 1,
+        "congrats": "So Responsable!"
     },
     {
         "title": 'Checked out with a lead',
-        "points": 1
+        "points": 1,
+        "congrats": "So Responsable!"
     },
     {
         "title": 'Checked with a lead for a project',
-        "points": 1
+        "points": 1,
+        "congrats": "So Efficient!"
     },
     {
         "title": 'Helping restock or shop for the store',
-        "points": 1
+        "points": 1,
+        "congrats": "What a Helper!"
     },
     {
         "title": 'Giving Devotional',
-        "points": 1
+        "points": 1,
+        "congrats": "So Spiritual!"
     },
     {
         "title": 'First to react to a post on General or from your lead',
-        "points": 1
+        "points": 1,
+        "congrats": "So Speedy Gonzales!"
     },
     {
         "title": 'Fridge cleaning',
-        "points": 1
+        "points": 1,
+        "congrats": "Oh so Tidy!"
     },
     {
         "title": 'Coming to Thursday meetings',
-        "points": 5
+        "points": 5,
+        "congrats": "The Boss's Happy"
     },
     {
         "title": 'Winning office competitions (foosball, other activities)',
-        "points": 10
+        "points": 10,
+        "congrats": "You're a Champ!"
     },
     {
         "title": 'Brought a treat to share with the office',
-        "points": 5
+        "points": 5,
+        "congrats": "Mmmh So Good!"
     },
     {
         "title": 'Leading a PD event',
-        "points": 1
+        "points": 1,
+        "congrats": "Teaching the Children"
     },
     {
         "title": 'Going to the FTC',
-        "points": 5
+        "points": 5,
+        "congrats": "Volunteer!"
     },
     {
         "title": 'Filling up one water bottle',
-        "points": 2
+        "points": 2,
+        "congrats": "Stay Hydradated!"
     }
 ]
 /***********************************************************
@@ -95,25 +110,28 @@ var whatEarnsPoints = [{
  ************************************************************/
 // A function to update the points. This is currently set up that the teams are working together
 // There is a const written to shorten the code and make it more readable.
-function updateTeamPoints(pointsToAdd, activityType, timeStamp) {
+function updateTeamPoints(data, timeStamp) {
     score.get()
         .then(function (doc) {
-            var newPoints = doc.data().points += pointsToAdd;
+            var newPoints = doc.data().points += data.points;
             score.update({
                 points: newPoints
             }).catch(function (error) {
                 alert('An error Ocurred, try updating the points again');
             });
             score.collection('logs').doc(timeStamp).set({
-                    "Activity Type": activityType,
-                    "Points added": pointsToAdd,
+                    "Activity Type": data.title,
+                    "Points added": data.points,
                     "Date Added": timeStamp,
                     "Added by": name
                 }).then(() => {
-                    $.when( $(yayPoints).fadeIn(400),
-                            $(yayPoints).toggleClass('hide'),
-                            $(yayPoints).delay(1200),
-                            $(yayPoints).fadeOut(400)).done(() =>{
+                    $(yayText).html("" + data.congrats);
+                    $.when(
+                        $(yayPoints).fadeIn(400),
+                        $(yayPoints).toggleClass('hide'),
+                        $(yayPoints).delay(1200),
+                        $(yayPoints).fadeOut(400)
+                    ).done(() =>{
                         $(yayPoints).toggleClass('hide');
                         let activityType = document.getElementById("pointsOptions");
                         activityType.value = "start";
@@ -128,7 +146,7 @@ function submitTeamPoints() {
     let setDate = editDate(new Date());
     whatEarnsPoints.forEach(item => {
         if (item["title"] == activityType) {
-            updateTeamPoints(item["points"], activityType, setDate);
+            updateTeamPoints(item, setDate);
         }
     });
 }
@@ -324,9 +342,9 @@ function loadPage() {
                         $.when($("#timeAdmin").removeClass('hide')).done(() => {})
                     }
 
-                    if (myData.storeManager || myData.admin || myData.webMaster) {
-                        $.when($("#storeAdmin").removeClass('hide').done(() =>{}))
-                    }
+                    // if (myData.storeManager || myData.admin || myData.webMaster) {
+                    //     $.when($("#storeAdmin").removeClass('hide').done(() =>{}))
+                    // }
                 })
         })
     db.collection("team").doc('points').get()

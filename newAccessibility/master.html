@@ -77,6 +77,8 @@
                         class="toggle-box container center btn-hover option-selected">Users</div>
                     <div id="tab-transcripts" onclick="toggleTab(2)" class="toggle-box container center btn-hover ">
                         Transcripts</div>
+                    <div id="tab-guest" onclick="toggleTab(3)" class="toggle-box container center btn-hover ">
+                            Request</div>
                     <div class="container row select-transcript-master">
                         <select onchange="fillTranscriptTable(value)" id="requestCourse" class="hide dropdown-toggle">
                             <option disabled selected hidden>Course Code</option>
@@ -104,6 +106,18 @@
                             <h3>Edit</h3>
                         </div>
                         <div id="master-table-transcript" class="grid master-table-transcript">
+
+                        </div>
+                    </section>
+                    <section id="guest-table" class="container col table hide">
+                        <div class="grid container row bg-gray master-grid-guest">
+                            <h3>Priority</h3>
+                            <h3>Requestor</h3>
+                            <h3>Course Code</h3>
+                            <h3>Title</h3>
+                            <h3>Edit</h3>
+                        </div>
+                        <div id="master-table-guest" class="grid master-table-guest">
 
                         </div>
                     </section>
@@ -140,6 +154,49 @@
                             Current Action </button>
                     </div>
                     <div id="transcript-info-box" class="transcript-info-box container hide">
+                        <div class="real-half">
+                            <h3>Transcript Info</h3>
+                            <p id="storeTranscriptID" class="hide"></p>
+                            <p id="transcript-title" onclick="editItem('title')">Transcript Title: McDonalds</p>
+                            <p id="transcript-status">Stage: Ready for Transcription</p>
+                            <p id="transcript-code">Course Code: STEAK101</p>
+                            <p id="transcript-priority">Priority: 1</p>
+                            <p id="transcript-type">Type: Video</p>
+                            <p id="transcript-length" onclick="editItem('length')">Length: 200</p>
+                            <p id="transcript-height" onclick="editItem('height')"> Height: 315</p>
+                            <p onclick="editItem('docEditURL')">Google Doc Edit Link: <a id="transcript-googleEditLink"
+                                    href="#" target="_blank"> Click Here</a> </p>
+                            <p onclick="editItem('docPublishURL')">Google Doc Publish Link: <a
+                                    id="transcript-googlePubLink" href="#" target="_blank">Click Here</a> </p>
+                            <p onclick="editItem('lmsURL')">LMS URL: <a id="transcript-canvasLink" href="#"
+                                    target="_blank">Click Here</a></p>
+                            <p onclick="editItem('srcURL')">Media URL: <a id="transcript-mediaLink" href="#"
+                                    target="_blank"> Click Here</a></p>
+                            <p id="transcript-verbit">Uses Verbit: Yes</p>
+                            <p onclick="editItem('verbitID')" id="transcript-verbitID">Verbit ID: 194lw_1234_294u8wkd
+                            </p>
+                            <p id="transcript-copied">Copied as duplicate: Yes</p>
+                            <p id="transcript-copiedFrom">Copied from: </p>
+                        </div>
+                        <div class="real-half">
+                            <h3>Participating Users</h3>
+                            <p id="transcript-requestor"></p>
+                            <p id="transcript-requestDate"></p>
+                            <p id="transcript-preparer"></p>
+                            <p id="transcript-prepareDate"></p>
+                            <p id="transcript-transcriber"></p>
+                            <p id="transcript-transcriptionDate"></p>
+                            <p id="transcript-reviewer"></p>
+                            <p id="transcript-reviewDate"></p>
+                            <h3>Notes</h3>
+                            <p onclick="editItem('requestNotes')" id="transcript-requestNotes"><b>Request Notes: </b>
+                            </p>
+                            <p onclick="editItem('returnToPrepNote')" id="transcript-returnNotes"><b>Return to prepare
+                                    notes: </b> </p>
+                            <button id="btn-delete-transcript" class="hide btn-hover red">Delete Transcript</button>
+                        </div>
+                    </div>
+                    <div id="guest-info-box" class="transcript-info-box container hide">
                         <div class="real-half">
                             <h3>Transcript Info</h3>
                             <p id="storeTranscriptID" class="hide"></p>

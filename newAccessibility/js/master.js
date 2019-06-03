@@ -21,8 +21,8 @@ firebase.auth().onAuthStateChanged(function (user) {
 })
 
 function fillUserTable(name) {
-      document.getElementById('master-table-user').where("name", "==", name).innerHTML = '';
-      db.collection('users').orderBy("name").get()
+      document.getElementById('master-table-user').innerHTML = '';
+      db.collection('users').where("name", "==", name).get()
             .then(function (querySnapshot) {
                   querySnapshot.forEach(function (doc) {
                         var currentAction;
@@ -64,7 +64,20 @@ function fillTranscriptTable(backupCode) {
                         })
                   })
       }
+}
 
+function fillGuestTable() {
+      let table = document.getElementById('master-table-guest');
+      $(table).empty();
+      db.collection("accessibility").where("guestCreated", "==", true).get()
+            .then(function (querySnapshot) {
+                  querySnapshot.forEach(function (doc) {
+                        var p = `<p> ${doc.data().priority}</p><p> ${doc.data().requestor}</p> <p>${doc.data().backupCode}</p> <p style="padding-right: .5rem;">${doc.data().title}</p>
+                                <button onclick="displayTranscriptInfo('${doc.id}')" class="bg-primary btn-hover prepare-btn">
+                              View / Edit</button>`;
+                        table.insertAdjacentHTML('beforeend', p);
+                  });
+            });
 }
 
 function displayUserInfo(userID) {
@@ -117,7 +130,7 @@ function displayTranscriptInfo(transcriptID) {
                         document.getElementById('transcript-googlePubLink').setAttribute('href', doc.data().docPublishURL);
                   }
 
-                  if(doc.data().copied) { 
+                  if (doc.data().copied) {
                         document.getElementById('btn-delete-transcript').classList.remove('hide');
                   }
 
@@ -233,17 +246,34 @@ function toggleTab(i) {
       if (i == 1) {
             document.getElementById('tab-users').classList.add('option-selected');
             document.getElementById('tab-transcripts').classList.remove('option-selected');
+            document.getElementById('tab-guest').classList.remove('option-selected');
             document.getElementById('users-table').classList.remove('hide');
             document.getElementById('transcripts-table').classList.add('hide');
+            document.getElementById('guest-table').classList.add('hide');
             document.getElementById('requestCourse').classList.add('hide');
             document.getElementById('transcript-info-box').classList.add('hide');
-      } else { //switches to the transcript tab
+            document.getElementById('guest-info-box').classList.add('hide');
+      } else if (i == 2) { //switches to the transcript tab
             document.getElementById('tab-users').classList.remove('option-selected');
             document.getElementById('tab-transcripts').classList.add('option-selected');
+            document.getElementById('tab-guest').classList.remove('option-selected');
             document.getElementById('users-table').classList.add('hide');
             document.getElementById('transcripts-table').classList.remove('hide');
+            document.getElementById('guest-table').classList.add('hide');
             document.getElementById('user-info-box').classList.add('hide');
             document.getElementById('requestCourse').classList.remove('hide');
+            document.getElementById('guest-info-box').classList.add('hide');
+      } else if (i == 3) {
+            document.getElementById('tab-users').classList.remove('option-selected');
+            document.getElementById('tab-transcripts').classList.remove('option-selected');
+            document.getElementById('tab-guest').classList.add('option-selected');
+            document.getElementById('users-table').classList.add('hide');
+            document.getElementById('transcripts-table').classList.add('hide');
+            document.getElementById('guest-table').classList.remove('hide');
+            document.getElementById('user-info-box').classList.add('hide');
+            document.getElementById('requestCourse').classList.add('hide');
+            document.getElementById('guest-info-box').classList.remove('hide');
+            fillGuestTable();
       }
 }
 
@@ -278,8 +308,7 @@ function editComplete(id, item) {
             if (Number.isInteger(Number(newValue))) {
                   json = JSON.parse(`{"${item}" : ${newValue}}`);
                   console.log('int called;')
-            }
-            else {
+            } else {
                   json = JSON.parse(`{"${item}" : "${newValue}"}`)
                   console.log('string called;')
             }
@@ -297,11 +326,11 @@ function editComplete(id, item) {
 document.getElementById('btn-delete-transcript').addEventListener('click', () => {
       var id = document.getElementById('storeTranscriptID').innerText;
       db.collection('accessibility').doc(id).delete()
-      .then(()=> { 
-            console.log('transcript deleted');
-            document.getElementById('transcript-info-box').classList.add('hide');
-            fillTranscriptTable();
-      })
+            .then(() => {
+                  console.log('transcript deleted');
+                  document.getElementById('transcript-info-box').classList.add('hide');
+                  fillTranscriptTable();
+            })
 })
 
 var span = document.getElementsByClassName("close")[0];
@@ -310,28 +339,27 @@ span.onclick = function () {
 }
 
 function buildUserObject(id) {
-      return new Promise((resolve, reject) => { 
+      return new Promise((resolve, reject) => {
             db.collection('users').doc(id).get()
-            .then(function(doc) { 
-                  resolve(doc.data());
-            })
-      }) 
-     
+                  .then(function (doc) {
+                        resolve(doc.data());
+                  })
+      })
+
 }
 
-async function readNewObject(id) { 
+async function readNewObject(id) {
       var newObject = await buildUserObject(id);
       console.log(newObject);
 }
 
-function displayAnnouncementEdit() { 
+function displayAnnouncementEdit() {
       editModalAnnouncement.style.display = "block";
 }
 
-function checkTransferProcess() { 
+function checkTransferProcess() {
       db.collection('accessibility').where('transferCompleted', '==', false).get()
-      .then(function(data) { 
-            console.log(data.size);
-      })
+            .then(function (data) {
+                  console.log(data.size);
+            })
 }
-
