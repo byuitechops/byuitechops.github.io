@@ -987,6 +987,26 @@ main {
 #select-points option{
     color: var(--white);
 }
+.edit-profile-points{
+    width: 20%;
+    height: 30px;
+    margin: 5px;
+    color: var(--white);
+    font-family: "Roboto";
+    font-size: 14px;
+    font-weight: 500;
+    background-color: var(--danger);
+    border: none;
+    border-radius: 5px;
+    transition: all .2s;
+}
+.edit-profile-points:hover{
+    transform: scale(1.2);
+    background-color: var(--third);
+}
+#edit-team-points{
+    justify-content: flex-end;
+}
 #select-points select {
     width: 80%;
     height: 30px;

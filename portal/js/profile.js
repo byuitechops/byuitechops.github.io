@@ -42,12 +42,12 @@ var whatEarnsPoints = [{
     {
         "title": 'Checking in on time',
         "points": 1,
-        "congrats": "So Responsable!"
+        "congrats": "So Responsible!"
     },
     {
         "title": 'Checked out with a lead',
         "points": 1,
-        "congrats": "So Responsable!"
+        "congrats": "So Responsible!"
     },
     {
         "title": 'Checked with a lead for a project',
@@ -120,27 +120,28 @@ function updateTeamPoints(data, timeStamp) {
                 alert('An error Ocurred, try updating the points again');
             });
             score.collection('logs').doc(timeStamp).set({
-                    "Activity Type": data.title,
-                    "Points added": data.points,
-                    "Date Added": timeStamp,
-                    "Added by": name
-                }).then(() => {
-                    $(yayText).html("" + data.congrats);
-                    $.when(
-                        $(yayPoints).fadeIn(400),
-                        $(yayPoints).toggleClass('hide'),
-                        $(yayPoints).delay(1200),
-                        $(yayPoints).fadeOut(400)
-                    ).done(() =>{
-                        $(yayPoints).toggleClass('hide');
-                        let activityType = document.getElementById("pointsOptions");
-                        activityType.value = "start";
+                "Activity Type": data.title,
+                "Points added": data.points,
+                "Date Added": timeStamp,
+                "Added by": name
+            }).then(() => {
+                $(yayText).html("" + data.congrats);
+                $.when(
+                    $(yayPoints).fadeIn(400),
+                    $(yayPoints).toggleClass('hide'),
+                    $(yayPoints).delay(1200),
+                    $(yayPoints).fadeOut(400)
+                ).done(() => {
+                    $(yayPoints).toggleClass('hide');
+                    let activityType = document.getElementById("pointsOptions");
+                    activityType.value = "start";
                 }).catch((error) => {
                     console.log(error);
                 });
+            });
         });
-    });
 }
+
 function submitTeamPoints() {
     let activityType = document.getElementById("pointsOptions").value;
     let setDate = editDate(new Date());
@@ -150,6 +151,7 @@ function submitTeamPoints() {
         }
     });
 }
+
 function showResults() {
     console.log("Total = " + results[0]);
 }
@@ -355,3 +357,72 @@ function loadPage() {
         pointStart.insertAdjacentHTML("afterend", `<option>${item["title"]}</option>`)
     });
 }
+
+
+/*****************************************************
+ * Editing Points section section                                   *
+ *****************************************************/
+const mainDiv = document.getElementById('main-profile');
+const pointsDiv = document.getElementById('admin-tool-points');
+var pointItem;
+const dbPoints = db.collection("team").doc("points").collection("pointItems");
+
+function editTeamPoints() {
+    //checks if the user has correct permissions first
+    if (data.admin) {
+        $(mainDiv).addClass('hide');
+        $(pointsDiv).removeClass('hide');
+        dbPoints.get()
+            .then(function (querySnapshot) {
+                let html = '';
+                querySnapshot.forEach((doc) => {
+                    var docData = `<div class="snack snack-info col4" id="${doc.id}"><h3>${doc.data().title}</h3>`;
+                    docData += `<p><span>Points: ${doc.data().points} </span></p>`;
+                    docData += `</p><p><span>Congratulations:</span> ${doc.data().congrats}</p></div>`;
+                    html += `${docData}`;
+                })
+                document.getElementById('data').insertAdjacentHTML('beforeend', html);
+            });
+        pointItem = document.getElementsByClassName('snack');
+        
+    }
+}
+$(document).on('click', pointItem, (event) => {
+    let item = event.target.id;
+    console.log(item);
+    dbPoints.doc(item).get()
+        .then((doc) => {
+            if (doc.exists) {
+                console.log(doc.data());
+            }
+        });
+});
+
+$(pointSubmit).click(()=>{
+    let newPoint;
+    let newCongo;
+    let newTitle;
+    dbPoints.doc(item).update({
+        points: Number(newPoint),
+        congrats: newCongo,
+        title: newTitle
+    });
+});
+$(pointCancel).click(()=>{
+
+});
+$(returnProfile).click(()=>{
+    $(pointsDiv).addClass('hide');
+    $(mainDiv).removeClass('hide');
+});
+$(addPointItem).click(()=>{
+    let item = "Something";
+    let newPoint;
+    let newCongo;
+    let newTitle;
+    dbPoints.doc(item).set({
+        points: Number(newPoint),
+        congrats: newCongo,
+        title: newTitle
+    });
+});

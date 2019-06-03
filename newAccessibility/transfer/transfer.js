@@ -33,3 +33,12 @@ db.collection("accessibility").get().then((querySnapshot) => {
     });
   });
 });
+
+db.collection("team").doc("points").collection("pointItems").get().then((querySnapshot) => {
+  querySnapshot.forEach((documentSnapshot) => {
+    console.log(`${documentSnapshot.id}`);
+    db.collection("team").doc("points").collection("pointItems").doc(`${documentSnapshot.id}`).update({
+      title: `${documentSnapshot.id}`
+    });
+  });
+});
