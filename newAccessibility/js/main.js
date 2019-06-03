@@ -33,10 +33,16 @@ var userPrepares = [];
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
         if (window.location.pathname != '/index.html') {
-            if (user.isAnonymous){
+            if (user.isAnonymous) {
                 checkIfGuest();
             }
-            
+            if (window.location.pathname == '/newAccessibility/home.html') {
+                if (user.emailVerified){
+                    let verifyButton = document.getElementById('verifyButton');
+                    $(verifyButton).addClass('hide');
+                }
+            }
+
             // User is signed in.
             db.collection('users').where('name', "==", user.displayName).get()
                 .then((querySnapshot) => {
@@ -64,7 +70,7 @@ firebase.auth().onAuthStateChanged((user) => {
         } else {
             if (window.location.pathname != '/home.html') {
                 window.location.assign('home.html');
-            };
+            } 
         };
     } else {
         notLoggedIn();
@@ -100,6 +106,11 @@ function notLoggedIn() {
 function guestLogin(e) {
     console.log("Hello there")
     firebase.auth().signInAnonymously()
+    .then(()=>{
+        var x = document.getElementById("continue-guest");
+        $(x).remove();
+        location.reload(true);
+    })
     .catch(function (error) {
         // Handle Errors here.
         var errorCode = error.code;
@@ -107,8 +118,7 @@ function guestLogin(e) {
         console.log(errorMessage);
         // ...
     });
-    var x = document.getElementById("continue-guest");
-    $(x).remove();
+
 }
 
 function redirect() {

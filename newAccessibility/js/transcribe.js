@@ -97,3 +97,5 @@ function claimTranscription(transcriptID) {
                 })
         })
 }
+
+var checkIfGuest =(()=>{});

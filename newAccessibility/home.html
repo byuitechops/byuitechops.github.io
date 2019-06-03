@@ -36,18 +36,18 @@
                     Transcribe
                 </li>
             </a>
-            <a id="copyEdit" href="copyedit.html">
-                <li class="container col center"> <i class="fas fa-clipboard-check fa-2x hide"></i>
+            <a id="copyEdit" href="copyedit.html"  class="hide">
+                <li class="container col center"> <i class="fas fa-clipboard-check fa-2x"></i>
                     Copyedit
                 </li>
             </a>
-            <a id="copyEditCheck" href="copyEditCheck.html">
-                <li class="container col center"> <i class="fas fa-check-double fa-2x hide"></i>
+            <a id="copyEditCheck" href="copyEditCheck.html" class="hide">
+                <li class="container col center"> <i class="fas fa-check-double fa-2x "></i>
                     Copyedit Check
                 </li>
             </a>
             <a id="master" class="hide" href="master.html">
-                <li class="container col center"> <i class="fas fa-user-shield fa-2x hide"></i>
+                <li class="container col center"> <i class="fas fa-user-shield fa-2x"></i>
                     Master
                 </li>
             </a>
@@ -84,7 +84,7 @@
                 <h2>Announcements: </h2>
                 <p id="announcement-displayed" onclick="editAnnouncement()">Announcements are waiting to be added...</p>
                 <div class="hide" id="announcements-box-edit">
-                    <textarea id="announcement-edit">Now editing the announcement...</textarea>
+                    <textarea id="announcement-edit" onkeyup="updateText(value)">Now editing the announcement...</textarea>
                     <div class="btn-box">
                         <button onclick="editAnnouncementCancel()">Cancel</button>
                         <button onclick="editAnnouncementSubmit()">Submit</button>
