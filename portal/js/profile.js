@@ -374,23 +374,19 @@ function editTeamPoints() {
         $(pointsDiv).removeClass('hide');
         dbPoints.get()
             .then(function (querySnapshot) {
-                let html = `<thead>
-                                <tr>  
-                                    <th id="criteria">Criteria</th>
-                                    <th id="points">Points</th>
-                                    <th id="message">Message</th>
-                                </tr>
-                            </thead>
-                        <tbody>`;
+                let html = `<tr>  
+                                <th class="criteria">Criteria</th>
+                                <th class="points">Points</th>
+                                <th class="message">Message</th>
+                            </tr>`;
                 var grayRow = "grayYes";
                 querySnapshot.forEach((doc) => {
-                    var docData = `<tr class="goal" id="${row} ${doc.id}"><td>${doc.data().title}</td>
-                                   <td>${doc.data().points}</td>
-                                   <td>${doc.data().congrats}</td></tr>`;
+                    var docData = `<tr class="criteria ${grayRow}" id="${doc.id}"><td>${doc.data().title}</td>
+                                   <td class="points">${doc.data().points}</td>
+                                   <td class="message">${doc.data().congrats}</td></tr>`;
                     html += `${docData}`;
                     (grayRow === "grayYes") ? (grayRow = "grayNo") : (grayRow = "grayYes");
                 })
-                html += `</tbody>`;
                 document.getElementById('points-generate').insertAdjacentHTML('beforeend', html);
             });
         pointItem = document.getElementsByClassName('goal');
