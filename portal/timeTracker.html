@@ -30,30 +30,25 @@
                 </ul>
         </nav>
     <main>
-            <h1 class="col9" id="adminTools">
-                Admin Tools  |  List of Users
-            </h1>
-            <label class="container" id="showAll">
-                <div>
-                    <span>Show All </span><input type="checkbox" id="checkShow">
-                </div>
-            </label>
     
-            <section id="admin" class="col9">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Accumulated Time </th>
-                            <th>Team</th>
-                            <th>Title</th>
-                            <th>Admin</th>
-                            <th>Store Manger</th>
-                        </tr>
-                    </thead>
-                    <tbody id="generate">
-                    </tbody>
+            <section id="admin" class="table-box">
+                <div>
+                    <h2>List of Users</h2>
+                    <span>Show All </span><input type="checkbox" id="checkShow">
+                    <a class="back-to-profile" href="/portal/profile.html">
+                        <img src="/portal/assets/misc/backArrow.png" alt="Back to Profile"/>
+                    </a>
+                </div>
+                <table class="table-generate" id="users-list-generate">
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Accumulated Time </th>
+                        <th>Team</th>
+                        <th>Title</th>
+                        <th>Admin</th>
+                        <th>Store Manger</th>
+                    </tr>
                 </table>
             </section>
         </main>

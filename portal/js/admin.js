@@ -1,6 +1,6 @@
 const users = db.collection('users');
 const admin = document.getElementById('admin');
-const generate = document.getElementById("generate");
+const generate = document.getElementById("users-list-generate");
 const checkShow = document.getElementById("checkShow");
 
 function loadPage() {
@@ -65,40 +65,39 @@ function generateList(all) {
                 // This will filter out anyone who is not actively on our team
                 if ((doc.data().team != "default" && doc.data().team != "other" && doc.data().nameDisplay != "Demo Student") || all) {
                     if (count % 2 == 0) {
-                        var interpolate = "active"
+                        var interpolate = "grayYes"
                     }
 
 
-                    let row = `<tr class='${interpolate} table' id=${doc.id}>
-                                <td class="admin-count">${count}</td>
-                                <td>${doc.data().nameDisplay}</td>
-                                <td class="hours">
-                                    <span id="count${doc.id}" onclick="editTime('${doc.id}', '${doc.data().time.accumulatedTime}')">${doc.data().time.accumulatedTime}</span></td>
-                                <td>
-                                    <select onchange="teamChange('${doc.id}')" class="table-select teamSelect">
-                                        <option>Default</option>
-                                        <option>lms</option>
-                                        <option>accessibility</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <select onchange="titleChange('${doc.id}')" class = "table-select roleSelect">
-                                        <option>Team Member</option>
-                                        <option>Project Lead</option>
-                                        <option>Assistant Lead</option>
-                                        <option>Student Lead</option>
-                                        <option>Trainer</option>
-                                    </select>
-                                </td>`
+                    let row = `<tr class='${interpolate}' id=${doc.id}>
+                                    <td class="admin-count">${count}</td>
+                                    <td>${doc.data().nameDisplay}</td>
+                                    <td class="hours"><span id="count${doc.id}" onclick="editTime('${doc.id}', '${doc.data().time.accumulatedTime}')">${doc.data().time.accumulatedTime}</span></td>
+                                    <td>
+                                        <select onchange="teamChange('${doc.id}')" class="table-select teamSelect">
+                                            <option>Default</option>
+                                            <option>lms</option>
+                                            <option>accessibility</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select onchange="titleChange('${doc.id}')" class = "table-select roleSelect">
+                                            <option>Team Member</option>
+                                            <option>Project Lead</option>
+                                            <option>Assistant Lead</option>
+                                            <option>Student Lead</option>
+                                            <option>Trainer</option>
+                                        </select>
+                                    </td>`
                     if (doc.data().admin) {
                         row += `<td><input onchange="adminChange('${doc.id}')" class="admin" type="checkbox" checked/></td>`
                     } else {
                         row += `<td><input onchange="adminChange('${doc.id}')" class="admin" type="checkbox"/></td>`
                     }
                     if (doc.data().storeManager) {
-                        row += `<td><input onchange="storeChange('${doc.id}')" class="manager" type="checkbox" checked/></td></tr>`
+                        row += `<td><input onchange="storeChange('${doc.id}')" class="manager" type="checkbox" checked/></td>`
                     } else {
-                        row += `<td><input onchange="storeChange('${doc.id}')" class="manager" type="checkbox"/></td></tr>`
+                        row += `<td><input onchange="storeChange('${doc.id}')" class="manager" type="checkbox"/></td>`
                     }
                     generate.insertAdjacentHTML('beforeend', row);
 
