@@ -1161,7 +1161,7 @@ main {
     border-top-right-radius: 20px;
 }
 #points-generate {
-    padding: 0 40px;
+    padding: 20px 40px;
 }
 #points-generate th {
     padding: 10px 0px;
