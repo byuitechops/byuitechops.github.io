@@ -1199,7 +1199,7 @@ main {
 .table-generate td {
     margin: 5px;
     padding: 5px 10px;
-    font-size: .vw;
+    font-size: .7vw;
     border-radius: 50px;
 }
 .criteria {
