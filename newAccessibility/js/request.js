@@ -225,7 +225,7 @@ function generateParentObject(videoURL, type) {
     return new Promise((resolve, reject) => {
         db.collection('accessibility').where('srcURL', '==', videoURL).where('type', '==', type).where('parentTranscript', "==", true).get()
             .then(function (querySnapshot) {
-                if (querySnapshot.size == 1) {
+                if (querySnapshot.size >= 1) {
                     querySnapshot.forEach(doc => {
                         docID = [];
                         docID.push(doc.id);
