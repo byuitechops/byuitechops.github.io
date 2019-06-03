@@ -34,77 +34,8 @@ var birthdayPopulate;
 var sameBirthday = true;
 var doneUser = false;
 var user = firebase.auth().currentUser;
-var whatEarnsPoints = [{
-        "title": 'Contacting your lead, at least an hour before your scheduled shift, if you’re going to miss a shift or take time off',
-        "points": 1,
-        "congrats": "Enjoy time off!"
-    },
-    {
-        "title": 'Checking in on time',
-        "points": 1,
-        "congrats": "So Responsible!"
-    },
-    {
-        "title": 'Checked out with a lead',
-        "points": 1,
-        "congrats": "So Responsible!"
-    },
-    {
-        "title": 'Checked with a lead for a project',
-        "points": 1,
-        "congrats": "So Efficient!"
-    },
-    {
-        "title": 'Helping restock or shop for the store',
-        "points": 1,
-        "congrats": "What a Helper!"
-    },
-    {
-        "title": 'Giving Devotional',
-        "points": 1,
-        "congrats": "So Spiritual!"
-    },
-    {
-        "title": 'First to react to a post on General or from your lead',
-        "points": 1,
-        "congrats": "So Speedy Gonzales!"
-    },
-    {
-        "title": 'Fridge cleaning',
-        "points": 1,
-        "congrats": "Oh so Tidy!"
-    },
-    {
-        "title": 'Coming to Thursday meetings',
-        "points": 5,
-        "congrats": "The Boss's Happy"
-    },
-    {
-        "title": 'Winning office competitions (foosball, other activities)',
-        "points": 10,
-        "congrats": "You're a Champ!"
-    },
-    {
-        "title": 'Brought a treat to share with the office',
-        "points": 5,
-        "congrats": "Mmmh So Good!"
-    },
-    {
-        "title": 'Leading a PD event',
-        "points": 1,
-        "congrats": "Teaching the Children"
-    },
-    {
-        "title": 'Going to the FTC',
-        "points": 5,
-        "congrats": "Volunteer!"
-    },
-    {
-        "title": 'Filling up one water bottle',
-        "points": 2,
-        "congrats": "Stay Hydradated!"
-    }
-]
+const dbPoints = db.collection("team").doc("points").collection("pointItems");
+
 /***********************************************************
  * A. Team Points
  ************************************************************/
@@ -145,10 +76,12 @@ function updateTeamPoints(data, timeStamp) {
 function submitTeamPoints() {
     let activityType = document.getElementById("pointsOptions").value;
     let setDate = editDate(new Date());
-    whatEarnsPoints.forEach(item => {
-        if (item["title"] == activityType) {
-            updateTeamPoints(item, setDate);
-        }
+    dbPoints.get().then((stuff) => {
+        stuff.forEach(item => {
+            if (item.data().title == activityType) {
+                updateTeamPoints(item.data(), setDate);
+            }
+        });
     });
 }
 
@@ -353,8 +286,10 @@ function loadPage() {
         .then(function (doc) {
             results.push(doc.data().points);
         })
-    whatEarnsPoints.forEach(item => {
-        pointStart.insertAdjacentHTML("afterend", `<option>${item["title"]}</option>`)
+    dbPoints.get().then((stuff) => {
+        stuff.forEach(item => {
+            pointStart.insertAdjacentHTML("afterend", `<option>${item.data().title}</option>`)
+        });
     });
 }
 
@@ -365,7 +300,7 @@ function loadPage() {
 const mainDiv = document.getElementById('main-profile');
 const pointsDiv = document.getElementById('admin-tool-points');
 var pointItem;
-const dbPoints = db.collection("team").doc("points").collection("pointItems");
+
 
 function editTeamPoints() {
     //checks if the user has correct permissions first
@@ -381,7 +316,7 @@ function editTeamPoints() {
                             </tr>`;
                 var grayRow = "grayYes";
                 querySnapshot.forEach((doc) => {
-                    var docData = `<tr class="${grayRow}" id="${doc.id}"><td class="criteria">${doc.data().title}</td>
+                    var docData = `<tr class="${grayRow} goal" id="${doc.id}"><td class="criteria">${doc.data().title}</td>
                                    <td class="points">${doc.data().points}</td>
                                    <td class="message">${doc.data().congrats}</td></tr>`;
                     html += `${docData}`;
@@ -390,13 +325,13 @@ function editTeamPoints() {
                 document.getElementById('points-generate').insertAdjacentHTML('beforeend', html);
             });
         pointItem = document.getElementsByClassName('goal');
-        
+
     }
 }
 $(document).on('click', pointItem, (event) => {
-    let item = event.target.id;
-    console.log(item);
-    dbPoints.doc(item).get()
+    let item = event.target;
+    item = item.parentElement;
+    dbPoints.doc(item.id).get()
         .then((doc) => {
             if (doc.exists) {
                 console.log(doc.data());
@@ -404,31 +339,31 @@ $(document).on('click', pointItem, (event) => {
         });
 });
 
-$(pointSubmit).click(()=>{
-    let newPoint;
-    let newCongo;
-    let newTitle;
-    dbPoints.doc(item).update({
-        points: Number(newPoint),
-        congrats: newCongo,
-        title: newTitle
-    });
-});
-$(pointCancel).click(()=>{
+// $(pointSubmit).click(() => {
+//     let newPoint;
+//     let newCongo;
+//     let newTitle;
+//     dbPoints.doc(item).update({
+//         points: Number(newPoint),
+//         congrats: newCongo,
+//         title: newTitle
+//     });
+// });
+// $(pointCancel).click(() => {
 
-});
-$(returnProfile).click(()=>{
-    $(pointsDiv).addClass('hide');
-    $(mainDiv).removeClass('hide');
-});
-$(addPointItem).click(()=>{
-    let item = "Something";
-    let newPoint;
-    let newCongo;
-    let newTitle;
-    dbPoints.doc(item).set({
-        points: Number(newPoint),
-        congrats: newCongo,
-        title: newTitle
-    });
-});
+// });
+// $(returnProfile).click(() => {
+//     $(pointsDiv).addClass('hide');
+//     $(mainDiv).removeClass('hide');
+// });
+// $(addPointItem).click(() => {
+//     let item = "Something";
+//     let newPoint;
+//     let newCongo;
+//     let newTitle;
+//     dbPoints.doc(item).set({
+//         points: Number(newPoint),
+//         congrats: newCongo,
+//         title: newTitle
+//     });
+// });
