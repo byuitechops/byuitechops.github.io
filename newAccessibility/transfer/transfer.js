@@ -42,3 +42,10 @@ db.collection("team").doc("points").collection("pointItems").get().then((querySn
     });
   });
 });
+db.collection("users").get().then((querySnapshot) => {
+  querySnapshot.forEach((documentSnapshot) => {
+      db.collection("users").doc(documentSnapshot.id).update({
+        storeManager: false
+      });
+  });
+});
