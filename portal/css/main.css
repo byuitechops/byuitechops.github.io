@@ -1137,10 +1137,45 @@ main {
 #sith {background-image: linear-gradient(45deg, rgba(36, 0, 0, 1) 0%, rgba(121, 9, 9, 1) 35%, rgba(255, 0, 0, 1) 100%);}
 #merica {background-image: linear-gradient(9deg, rgba(255, 0, 0, 1) 0%, rgba(221, 59, 59, 1) 16%, rgba(235, 208, 208, 1) 32%, rgba(255, 255, 255, 1) 39%, rgba(191, 230, 241, 1) 45%, rgba(69, 163, 190, 1) 64%, rgba(51, 83, 185, 1) 80%)}
 
+
+/**************** Points ****************/
+#admin-tool-points {
+    width: 1000px;
+    margin: auto;
+    color: black;
+    background-color: white;
+}
+#points-generate tr {
+    padding: 10px;
+}
+#points-generate th {
+    padding: 10px 0;
+    text-align: left;
+    color: black;
+    font-family: "Roboto";
+    font-weight: 300;
+    font-size: 24px;
+}
+#criteria {
+    width: 70%;
+}
+#points {
+    width: 10%;
+}
+#message {
+    width: 20%;
+}
+#grayYes {
+    background-color: lightgray;
+}
+#grayNo {
+    background-color: white;
+}
+
+
 /**********************************************
 * 8. TimeTracker.html
 **********************************************/
-
 
 #adminTools {
     width: 100%;

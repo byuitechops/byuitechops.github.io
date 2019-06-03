@@ -360,30 +360,40 @@ function loadPage() {
 
 
 /*****************************************************
- * Editing Points section section                                   *
+ * Editing Points section section
  *****************************************************/
 const mainDiv = document.getElementById('main-profile');
 const pointsDiv = document.getElementById('admin-tool-points');
 var pointItem;
 const dbPoints = db.collection("team").doc("points").collection("pointItems");
 
-function editTeamPoints() {
+$(document).on('click', editPoints, (event) => {
     //checks if the user has correct permissions first
     if (data.admin) {
         $(mainDiv).addClass('hide');
         $(pointsDiv).removeClass('hide');
         dbPoints.get()
             .then(function (querySnapshot) {
-                let html = '';
+                let html = `<thead>
+                                <tr>  
+                                    <th id="criteria">Criteria</th>
+                                    <th id="points">Points</th>
+                                    <th id="message">Message</th>
+                                </tr>
+                            </thead>
+                        <tbody>`;
+                var grayRow = "grayYes";
                 querySnapshot.forEach((doc) => {
-                    var docData = `<div class="snack snack-info col4" id="${doc.id}"><h3>${doc.data().title}</h3>`;
-                    docData += `<p><span>Points: ${doc.data().points} </span></p>`;
-                    docData += `</p><p><span>Congratulations:</span> ${doc.data().congrats}</p></div>`;
+                    var docData = `<tr class="goal" id="${row} ${doc.id}"><td>${doc.data().title}</td>
+                                   <td>${doc.data().points}</td>
+                                   <td>${doc.data().congrats}</td></tr>`;
                     html += `${docData}`;
+                    (grayRow === "grayYes") ? (grayRow = "grayNo") : (grayRow = "grayYes");
                 })
-                document.getElementById('data').insertAdjacentHTML('beforeend', html);
+                html += `</tbody>`;
+                document.getElementById('points-generate').insertAdjacentHTML('beforeend', html);
             });
-        pointItem = document.getElementsByClassName('snack');
+        pointItem = document.getElementsByClassName('goal');
         
     }
 }
