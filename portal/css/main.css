@@ -1139,7 +1139,7 @@ main {
 
 
 
-/**************** Points ****************/
+/**************** Tables ****************/
 
 #admin-tool-points {
     width: 90%;
@@ -1151,19 +1151,41 @@ main {
     border: 5px solid var(--first);
     border-radius: 20px;
 }
-#admin-tool-points h2{
-    padding: 10px 20px;
-    color: black;
-    font-weight: 300;
-    font-size: 2.5vw;
+.table-box div {
+    width: 100%;
+    display: flex;
     background-color: #dddddd;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
 }
-#points-generate {
+.table-box h2{
+    width: 90%;
+    padding: 10px 20px;
+    color: black;
+    font-weight: 300;
+    font-size: 2.5vw;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+.table-box a {
+    width: 10%;
+    height: auto;
+    padding: 20px;
+    float: right;
+    cursor: pointer;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    background-color: #f7f7f7;
+}
+#back-to-profile img {
+    width: 60%;
+    height: auto;
+    margin: 20% 25%;
+}
+.table-generate {
     padding: 20px 40px;
 }
-#points-generate th {
+.table-generate th {
     padding: 10px 0px;
     text-align: left;
     color: black;
@@ -1171,13 +1193,13 @@ main {
     font-weight: 300;
     font-size: 1.2vw;
 }
-#points-generate tr {
+.table-generate tr {
     padding: 3px 20px;
 }
-#points-generate td {
+.table-generate td {
     margin: 5px;
     padding: 5px 10px;
-    font-size: .8vw;
+    font-size: .vw;
     border-radius: 50px;
 }
 .criteria {

@@ -381,7 +381,7 @@ function editTeamPoints() {
                             </tr>`;
                 var grayRow = "grayYes";
                 querySnapshot.forEach((doc) => {
-                    var docData = `<tr class="criteria ${grayRow}" id="${doc.id}"><td>${doc.data().title}</td>
+                    var docData = `<tr class="${grayRow}" id="${doc.id}"><td class="criteria">${doc.data().title}</td>
                                    <td class="points">${doc.data().points}</td>
                                    <td class="message">${doc.data().congrats}</td></tr>`;
                     html += `${docData}`;
