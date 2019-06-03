@@ -69,18 +69,36 @@ function generateList(all) {
                     }
 
 
-                    let row = `<tr class='${interpolate}' id=${doc.id}> <td class="admin-count">${count}</td> <td>${doc.data().nameDisplay}</td><td class="hours"><span id="count${doc.id}" onclick="editTime('${doc.id}', '${doc.data().time.accumulatedTime}')">${doc.data().time.accumulatedTime}</span></td>` +
-                        `<td><select onchange="teamChange('${doc.id}')" class="table-select teamSelect"><option>Default</option><option>lms</option><option>accessibility</option></select></td>` +
-                        `<td><select onchange="titleChange('${doc.id}')" class = "table-select roleSelect"> <option>Team Member</option><option>Project Lead</option><option>Assistant Lead</option><option>Student Lead</option><option>Trainer</option></select></td>`
+                    let row = `<tr class='${interpolate} table' id=${doc.id}>
+                                <td class="admin-count">${count}</td>
+                                <td>${doc.data().nameDisplay}</td>
+                                <td class="hours">
+                                    <span id="count${doc.id}" onclick="editTime('${doc.id}', '${doc.data().time.accumulatedTime}')">${doc.data().time.accumulatedTime}</span></td>
+                                <td>
+                                    <select onchange="teamChange('${doc.id}')" class="table-select teamSelect">
+                                        <option>Default</option>
+                                        <option>lms</option>
+                                        <option>accessibility</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select onchange="titleChange('${doc.id}')" class = "table-select roleSelect">
+                                        <option>Team Member</option>
+                                        <option>Project Lead</option>
+                                        <option>Assistant Lead</option>
+                                        <option>Student Lead</option>
+                                        <option>Trainer</option>
+                                    </select>
+                                </td>`
                     if (doc.data().admin) {
                         row += `<td><input onchange="adminChange('${doc.id}')" class="admin" type="checkbox" checked/></td>`
                     } else {
                         row += `<td><input onchange="adminChange('${doc.id}')" class="admin" type="checkbox"/></td>`
                     }
                     if (doc.data().storeManager) {
-                        row += `<td><input onchange="storeChange('${doc.id}')" class="manager" type="checkbox" checked/></td>`
+                        row += `<td><input onchange="storeChange('${doc.id}')" class="manager" type="checkbox" checked/></td></tr>`
                     } else {
-                        row += `<td><input onchange="storeChange('${doc.id}')" class="manager" type="checkbox"/></td>`
+                        row += `<td><input onchange="storeChange('${doc.id}')" class="manager" type="checkbox"/></td></tr>`
                     }
                     generate.insertAdjacentHTML('beforeend', row);
 

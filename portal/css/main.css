@@ -1161,7 +1161,8 @@ main {
     border-top-right-radius: 20px;
 }
 .table-box h2{
-    width: 90%;
+    width: 80%;
+    margin: 20px 20px 0px;
     padding: 10px 20px;
     color: black;
     font-weight: 300;
@@ -1171,15 +1172,22 @@ main {
 }
 .table-box a {
     width: 10%;
-    height: auto;
+    height: 80px;
+    margin: 30px 20px 0 0;
     padding: 20px;
     float: right;
     cursor: pointer;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     background-color: #f7f7f7;
+    transition: all .2s;
 }
-#back-to-profile img {
+.table-box a:hover {
+    margin-top: 10px;
+    height: 100px;
+    background-color: var(--second);
+}
+#admin-tool-points img {
     width: 60%;
     height: auto;
     margin: 20% 25%;
@@ -1201,7 +1209,7 @@ main {
 .table-generate td {
     margin: 5px;
     padding: 5px 10px;
-    font-size: .7vw;
+    font-size: .8vw;
     border-radius: 50px;
 }
 .criteria {
