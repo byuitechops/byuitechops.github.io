@@ -68,7 +68,7 @@ async function submitTranscriptRequest() {
         return;
     } else {
         var user = firebase.auth().currentUser;
-        if (user.isAnonymous){
+        if (user.isAnonymous) {
             var docData = {
                 title: String(title),
                 docPublishURL: String(''),
@@ -109,9 +109,8 @@ async function submitTranscriptRequest() {
                 status: String('Ready for Prep'),
                 requestNotes: comments + `. Comment made by: ${user.displayName}`,
                 guestCreated: false
-            }
+            } 
         }
-        
         try {
             var parentObject = await generateParentObject(srcURL, docData.type);
         } catch (err) {
@@ -120,11 +119,13 @@ async function submitTranscriptRequest() {
         if (override) {
             createRecord(docData);
             override = false;
-        } else if (parentObject.parentTranscript) {
-            createRecord(docData);
-        } else {
+            return;
+        } else if (!parentObject.parentTranscript) {
             foundDup(parentObject);
-        }
+            return;
+        } 
+        createRecord(docData);
+
     }
 }
 
@@ -225,7 +226,7 @@ function generateParentObject(videoURL, type) {
     return new Promise((resolve, reject) => {
         db.collection('accessibility').where('srcURL', '==', videoURL).where('type', '==', type).where('parentTranscript', "==", true).get()
             .then(function (querySnapshot) {
-                if (querySnapshot.size == 1) {
+                if (querySnapshot.size >= 1) {
                     querySnapshot.forEach(doc => {
                         docID = [];
                         docID.push(doc.id);

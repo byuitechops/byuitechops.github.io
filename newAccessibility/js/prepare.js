@@ -80,7 +80,7 @@ function fillPrepTicket(transcriptID) {
                 document.getElementById('getVerbitId').classList.add('hide');
             }
 
-            if (doc.data().type == 'Alt Text') { 
+            if (doc.data().type == 'Alt Text' || doc.data().type == 'Slide') { 
                 document.getElementById('hide-row-alt').classList.add('hide');
                 document.getElementById('requestHeight').value = 0;
                 document.getElementById('requestLength').value = 0;
