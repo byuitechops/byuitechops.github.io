@@ -367,7 +367,7 @@ const pointsDiv = document.getElementById('admin-tool-points');
 var pointItem;
 const dbPoints = db.collection("team").doc("points").collection("pointItems");
 
-$(document).on('click', editPoints, (event) => {
+function editTeamPoints() {
     //checks if the user has correct permissions first
     if (data.admin) {
         $(mainDiv).addClass('hide');
