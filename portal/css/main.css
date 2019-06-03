@@ -988,7 +988,7 @@ main {
     color: var(--white);
 }
 .edit-profile-points{
-    width: 20%;
+    width: 15%;
     height: 30px;
     margin: 5px;
     color: var(--white);
@@ -1137,10 +1137,90 @@ main {
 #sith {background-image: linear-gradient(45deg, rgba(36, 0, 0, 1) 0%, rgba(121, 9, 9, 1) 35%, rgba(255, 0, 0, 1) 100%);}
 #merica {background-image: linear-gradient(9deg, rgba(255, 0, 0, 1) 0%, rgba(221, 59, 59, 1) 16%, rgba(235, 208, 208, 1) 32%, rgba(255, 255, 255, 1) 39%, rgba(191, 230, 241, 1) 45%, rgba(69, 163, 190, 1) 64%, rgba(51, 83, 185, 1) 80%)}
 
+
+
+/**************** Tables ****************/
+
+#admin-tool-points {
+    width: 90%;
+    max-width: 1000px;
+    margin: auto;
+    padding: 0;
+    color: black;
+    background-color: #f7f7f7;
+    border: 5px solid var(--first);
+    border-radius: 20px;
+}
+.table-box div {
+    width: 100%;
+    display: flex;
+    background-color: #dddddd;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+.table-box h2{
+    width: 90%;
+    padding: 10px 20px;
+    color: black;
+    font-weight: 300;
+    font-size: 2.5vw;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+.table-box a {
+    width: 10%;
+    height: auto;
+    padding: 20px;
+    float: right;
+    cursor: pointer;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    background-color: #f7f7f7;
+}
+#back-to-profile img {
+    width: 60%;
+    height: auto;
+    margin: 20% 25%;
+}
+.table-generate {
+    padding: 20px 40px;
+}
+.table-generate th {
+    padding: 10px 0px;
+    text-align: left;
+    color: black;
+    font-family: "Roboto";
+    font-weight: 300;
+    font-size: 1.2vw;
+}
+.table-generate tr {
+    padding: 3px 20px;
+}
+.table-generate td {
+    margin: 5px;
+    padding: 5px 10px;
+    font-size: .vw;
+    border-radius: 50px;
+}
+.criteria {
+    width: 60%;
+    margin-left: 20px;
+}
+.points {
+    width: 15%;
+    text-align: center;
+}
+.message {
+    width: 25%;
+}
+.grayYes {
+    background-color: #dddddd;
+}
+
+
 /**********************************************
 * 8. TimeTracker.html
 **********************************************/
-
 
 #adminTools {
     width: 100%;
@@ -1191,7 +1271,7 @@ main {
     width: 50px;
     margin: 0 10px;
     padding: 5px;
-    color: var(--fontPrime);
+    color: black;
     font-size: 16px;
     border: 2px solid var(--first);
     border-radius: 24px;

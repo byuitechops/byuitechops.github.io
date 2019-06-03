@@ -360,7 +360,7 @@ function loadPage() {
 
 
 /*****************************************************
- * Editing Points section section                                   *
+ * Editing Points section section
  *****************************************************/
 const mainDiv = document.getElementById('main-profile');
 const pointsDiv = document.getElementById('admin-tool-points');
@@ -374,16 +374,22 @@ function editTeamPoints() {
         $(pointsDiv).removeClass('hide');
         dbPoints.get()
             .then(function (querySnapshot) {
-                let html = '';
+                let html = `<tr>  
+                                <th class="criteria">Criteria</th>
+                                <th class="points">Points</th>
+                                <th class="message">Message</th>
+                            </tr>`;
+                var grayRow = "grayYes";
                 querySnapshot.forEach((doc) => {
-                    var docData = `<div class="snack snack-info col4" id="${doc.id}"><h3>${doc.data().title}</h3>`;
-                    docData += `<p><span>Points: ${doc.data().points} </span></p>`;
-                    docData += `</p><p><span>Congratulations:</span> ${doc.data().congrats}</p></div>`;
+                    var docData = `<tr class="${grayRow}" id="${doc.id}"><td class="criteria">${doc.data().title}</td>
+                                   <td class="points">${doc.data().points}</td>
+                                   <td class="message">${doc.data().congrats}</td></tr>`;
                     html += `${docData}`;
+                    (grayRow === "grayYes") ? (grayRow = "grayNo") : (grayRow = "grayYes");
                 })
-                document.getElementById('data').insertAdjacentHTML('beforeend', html);
+                document.getElementById('points-generate').insertAdjacentHTML('beforeend', html);
             });
-        pointItem = document.getElementsByClassName('snack');
+        pointItem = document.getElementsByClassName('goal');
         
     }
 }
