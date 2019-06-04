@@ -274,7 +274,9 @@ function loadPage() {
                     }
                     //displays lead/admin tools only for the right people
                     if (myData.admin || myData.title == "Project Lead") {
-                        $.when($("#timeAdmin").removeClass('hide')).done(() => {})
+                        $.when($("#timeAdmin").removeClass('hide')).done(() => {
+                            $("#editPoints").removeClass('hide');
+                        })
                     }
 
                     // if (myData.storeManager || myData.admin || myData.webMaster) {
