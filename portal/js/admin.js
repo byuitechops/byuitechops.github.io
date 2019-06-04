@@ -68,7 +68,6 @@ function generateList(all) {
                         var interpolate = "grayYes"
                     }
 
-
                     let row = `<tr class='${interpolate}' id=${doc.id}>
                                     <td class="usernum admin-count">${count}</td>
                                     <td class="username">${doc.data().nameDisplay}</td>
