@@ -133,19 +133,34 @@
         
     </main>
 
-    
-    <main class="col9 hide" id="invoicePage">
-            <h1 class="page-title">Store</h1>
-            <section id="heading">
-                <h1>Invoice - Store</h1>
-                <div>
-                    <span>Cash:&nbsp; <span id="cash"></span></span>
-                    <span>Venmo:&nbsp; <span id="venmo"></span></span>
-                    <span>Storage:&nbsp;<span id="storage"></span></span>
-                    <button onclick="submitMoney()">Submit</button>
-                </div>
-            </section>
-            <section id="data"></section>
+
+    <main class="hide" id="invoicePage">
+        <h1 class="page-title">Store</h1>
+        <section id="heading">
+            <aside id="invoice-sum">
+                <span>Cash:&nbsp; <span id="cash"></span></span>
+                <span>Venmo:&nbsp; <span id="venmo"></span></span>
+                <span>Storage:&nbsp;<span id="storage"></span></span>
+                <button onclick="submitMoney()">Submit</button>
+            </aside>
+        </section>
+        <section class="table-box">
+            <div>
+                <h2>Invoice - Store</h2>
+                <a class="back-to-profile" href="/portal/store.html">
+                    <img src="/portal/assets/misc/backArrow.png" alt="Back to Profile"/>
+                </a>
+            </div>
+            <table class="table-generate" id="invoice-table">
+                <tr>
+                    <th>Date</th>
+                    <th>Items</th>
+                    <th>Total Paid</th>
+                    <th>Payment</th>
+                    <th>User</th>
+                </tr>
+            </table>
+        </section>
     </main>
 
     <div class="popup hide" id="confirm-checkout">

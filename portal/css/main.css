@@ -1175,6 +1175,9 @@ main {
     height: 20px;
     margin: 50px 50px 0 0;
 }
+#invoice-table span {
+    float: right;
+}
 .table-box a {
     width: 10%;
     height: 80px;
