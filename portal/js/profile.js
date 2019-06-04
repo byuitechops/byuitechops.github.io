@@ -299,7 +299,11 @@ function loadPage() {
  *****************************************************/
 const mainDiv = document.getElementById('main-profile');
 const pointsDiv = document.getElementById('admin-tool-points');
-var pointItem;
+const addPointItem = document.getElementById('add-point-criteria')
+const pointTable = document.getElementById('points-generate')
+var submitNew,
+    pointCancel,
+    pointItem;
 
 
 function editTeamPoints() {
@@ -316,54 +320,74 @@ function editTeamPoints() {
                             </tr>`;
                 var grayRow = "grayYes";
                 querySnapshot.forEach((doc) => {
-                    var docData = `<tr class="${grayRow}" id="${doc.id}"><td class="criteria">${doc.data().title}</td>
+                    var docData = `<tr class="${grayRow} goal" id="${doc.id}"><td class="criteria">${doc.data().title}</td>
                                    <td class="points">${doc.data().points}</td>
                                    <td class="message">${doc.data().congrats}</td></tr>`;
                     html += `${docData}`;
                     (grayRow === "grayYes") ? (grayRow = "grayNo") : (grayRow = "grayYes");
                 })
-                document.getElementById('points-generate').insertAdjacentHTML('beforeend', html);
+                pointTable.insertAdjacentHTML('beforeend', html);
             });
         pointItem = document.getElementsByClassName('goal');
 
     }
 }
-$(document).on('click', pointItem, (event) => {
-    let item = event.target;
-    item = item.parentElement;
-    dbPoints.doc(item.id).get()
-        .then((doc) => {
-            if (doc.exists) {
-                console.log(doc.data());
-            }
-        });
+function pointAddItem(){
+    let adding = `<div id="adding-point-item">
+                    <input type="text" id="newTitle" placeholder="Title">
+                    <input type="text" id="newCongrat" placeholder="Congrats">
+                    <input type="text" id="newPoints" placeholder="points">
+                    <button type="button" id="submitNew">Add Item</button>
+                    <button type="button" id="cancel">Cancel</button>
+                  </div>`
+    submitNew = document.getElementById('submitNew');
+    pointCancel = document.getElementById('cancel');
+    pointTable.insertAdjacentHTML('beforebegin', adding)
+}
+$(addPointItem).click(() => {
+    pointAddItem();
 });
+$(document).on("click", "button", (event) => {
+    if (event.target.id == "submitNew") {
+        let item = document.getElementById('newTitle');
+        item = $(item).val();
+        console.log(item);
+        let newPoint = document.getElementById('newPoints');
+        newPoint = $(newPoint).val();
+        console.log(newPoint);
+        let newCongo = document.getElementById('newCongrat');
+        newCongo = $(newCongo).val();
+        console.log(newCongo);
+        if (item != "" && newPoint != "" && newCongo != "") {
+            dbPoints.doc(item).set({
+                points: Number(newPoint),
+                congrats: newCongo,
+                title: item
+            });
+            let remove = document.getElementById('adding-point-item');
+        $(pointTable).empty();
+        $(remove).remove();
+        editTeamPoints()
+        }
+    } else if (event.target.id == "cancel") {
+        let remove = document.getElementById('adding-point-item');
+        $(remove).remove();
+        $(pointTable).empty();
+        editTeamPoints()
 
-// $(pointSubmit).click(() => {
-//     let newPoint;
-//     let newCongo;
-//     let newTitle;
-//     dbPoints.doc(item).update({
-//         points: Number(newPoint),
-//         congrats: newCongo,
-//         title: newTitle
-//     });
-// });
-// $(pointCancel).click(() => {
+    }
 
-// });
-// $(returnProfile).click(() => {
-//     $(pointsDiv).addClass('hide');
-//     $(mainDiv).removeClass('hide');
-// });
-// $(addPointItem).click(() => {
-//     let item = "Something";
-//     let newPoint;
-//     let newCongo;
-//     let newTitle;
-//     dbPoints.doc(item).set({
-//         points: Number(newPoint),
-//         congrats: newCongo,
-//         title: newTitle
-//     });
-// });
+});
+$(document).on("click", "tr", (event) => {
+    pointAddItem();
+    let id = event.target.parentElement.id;
+    console.log(id)
+    let item = document.getElementById('newTitle');
+    let newCongo = document.getElementById('newCongrat');
+    let newPoint = document.getElementById('newPoints');
+    dbPoints.doc(id).get().then((doc) =>{
+        $(item).val(doc.data().title);
+        $(newPoint).val(doc.data().points);
+        $(newCongo).val(doc.data().congrats);
+    });
+});
