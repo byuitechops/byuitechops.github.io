@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" type="image/x-icon" href="/portal/assets/misc/byui_favicon.gif">
-    
+
     <!-- Scripts -->
-    
+
     <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
@@ -14,22 +15,51 @@
     <link rel="stylesheet" href="/portal/css/main.css">
     <title>Home | Quality Assurance Portal</title>
 </head>
+
 <body>
     <!---------------------------------------------
     - 3. Navigation Bar
     ---------------------------------------------->
-    
-    <nav class="col1">
-        <a href="#"><img src="/portal/assets/logos/logo.png"></a>
-        <div class="nav-links flex-container">
-            <a class="current-page" href="#">Home</a>
-            <a href="schedule.html">Schedule</a>
-            <a href="store.html">Store</a>
-            <a href="profile.html">Profile</a>
-        </ul>
-    </nav>
-    <main>
 
-    </main>
+    <nav class="col1">
+            <a href="home.html"><img src="/portal/assets/logos/logo.png"></a>
+            <div class="nav-links flex-container">
+                <a href="schedule.html">Schedule</a>
+                <a href="store.html">Store</a>
+                <a class="current-page" href="profile.html">Profile</a>
+                </ul>
+        </nav>
+    <main>
+        
+        <h1 class="page-title">Profile</h1>
+    
+            <section id="admin" class="table-box">
+                <div>
+                    <h2>List of Users</h2>
+                    <span id="show-all">Show All </span><input type="checkbox" id="checkShow">
+                    <a class="back-to-profile" href="/portal/profile.html">
+                        <img src="/portal/assets/misc/backArrow.png" alt="Back to Profile"/>
+                    </a>
+                </div>
+                <table class="table-generate" id="users-list-generate">
+                    <tr>
+                        <th class="usernum">#</th>
+                        <th class="username">Name</th>
+                        <th class="usertime">Accumulated Time </th>
+                        <th class="userteam">Team</th>
+                        <th class="usertitle">Title</th>
+                        <th class="useradmin">Admin</th>
+                        <th class="userstore">Store</th>
+                    </tr>
+                </table>
+            </section>
+        </main>
 </body>
+<script
+    src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script> 
+<script src="/portal/js/main.js"></script>
+<script src="/portal/js/admin.js"></script>
+
 </html>

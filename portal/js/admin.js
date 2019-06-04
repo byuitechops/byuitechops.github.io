@@ -16,14 +16,14 @@ function loadPage() {
 }
 
 function teamChange(id){
-    console.log("Hello There");
+    let selection = document.getElementById(id);
     let newTeam = $(selection).find('select.teamSelect').val()
     users.doc(id).update({
         team: newTeam
     });
 }
 function titleChange(id) {
-    console.log("Hello There");
+    let selection = document.getElementById(id);
     let newTitle = $(selection).find('select.roleSelect').val()
     users.doc(id).update({
         title: newTitle
@@ -31,7 +31,6 @@ function titleChange(id) {
 }
 function adminChange(id) {
     let selection = document.getElementById(id);
-    console.log("Hello There " + String(id) + $(selection).find('input.admin').prop('checked'));
     if ($(selection).find('input.admin').prop('checked')){
         users.doc(id).update({
             admin: true
@@ -43,7 +42,6 @@ function adminChange(id) {
     }
 }
 function storeChange(id) {
-    console.log("Hello There");
     let selection = document.getElementById(id);
     if ($(selection).find('input.manager').prop('checked')){
         users.doc(id).update({
@@ -74,7 +72,7 @@ function generateList(all) {
                                     <td class="usertime hours"><span id="count${doc.id}" onclick="editTime('${doc.id}', '${doc.data().time.accumulatedTime}')">${doc.data().time.accumulatedTime}</span></td>
                                     <td class="userteam">
                                         <select onchange="teamChange('${doc.id}')" class="table-select teamSelect">
-                                            <option>Default</option>
+                                            <option>default</option>
                                             <option>lms</option>
                                             <option>accessibility</option>
                                         </select>
