@@ -301,8 +301,9 @@ function loadPage() {
  *****************************************************/
 const mainDiv = document.getElementById('main-profile');
 const pointsDiv = document.getElementById('admin-tool-points');
-const addPointItem = document.getElementById('add-point-criteria')
-const pointTable = document.getElementById('points-generate')
+const addPointItem = document.getElementById('add-point-criteria');
+const pointTable = document.getElementById('points-generate');
+const pointsAside = document.getElementById('add-points-aside');
 var submitNew,
     pointCancel,
     pointItem;
@@ -330,7 +331,6 @@ function editTeamPoints() {
                 })
                 pointTable.insertAdjacentHTML('beforeend', html);
             });
-        pointItem = document.getElementsByClassName('goal');
 
     }
 }
@@ -343,10 +343,11 @@ function pointAddItem() {
                     <input type="text" id="newPoints" placeholder="points">
                     <button type="button" id="submitNew">Add Item</button>
                     <button type="button" id="cancel">Cancel</button>
+                    <button type="button" id="delete">Delete</button>
                   </div>`
     submitNew = document.getElementById('submitNew');
     pointCancel = document.getElementById('cancel');
-    pointTable.insertAdjacentHTML('beforebegin', adding)
+    pointsAside.insertAdjacentHTML('afterbegin', adding);
 }
 $(addPointItem).click(() => {
     let noDupe = document.getElementsByClassName("adding-point-item");
@@ -363,7 +364,7 @@ $(document).on("click", "button", (event) => {
         let item = document.getElementById('newTitle');
         item = $(item).val();
         let id;
-        ($("#theID").val() == "") ? (id = item) : (id = $("#theID").val());
+        ($(theID).val() == "") ? (id = item) : (id = $(theID).val());
         let newPoint = document.getElementById('newPoints');
         newPoint = $(newPoint).val();
         let newCongo = document.getElementById('newCongrat');
@@ -384,22 +385,23 @@ $(document).on("click", "button", (event) => {
                             title: item
                         });
                     } else {
-                    dbPoints.doc(id).delete().then(()=>{
+                        dbPoints.doc(id).delete();
                         dbPoints.doc(item).set({
                             points: Number(newPoint),
                             congrats: newCongo,
                             title: item
                         });
-                    });
                     }
                     
                 }
+            }).then(() => {
+                let remove = document.getElementById('adding-point-item');
+                $(pointTable).empty();
+                $(remove).remove();
+                editTeamPoints();
             });
+                
 
-            let remove = document.getElementById('adding-point-item');
-            $(pointTable).empty();
-            $(remove).remove();
-            editTeamPoints()
         }
     } else if (event.target.id == "cancel") {
         let remove = document.getElementById('adding-point-item');
@@ -407,20 +409,51 @@ $(document).on("click", "button", (event) => {
         $(pointTable).empty();
         editTeamPoints()
 
+    } else if (event.target.id == "delete") {
+        let item = document.getElementById('newTitle');
+        item = $(item).val();
+        let id;
+        ($(theID).val() == "") ? (id = item) : (id = $(theID).val());
+        dbPoints.doc(id).delete().then(() => {
+            let remove = document.getElementById('adding-point-item');
+            $(pointTable).empty();
+            $(remove).remove();
+            editTeamPoints();
+        });
     }
-
 });
+
 $(document).on("click", "tr", (event) => {
-    pointAddItem();
-    let id = event.target.parentElement.id;
-    console.log(id)
-    let item = document.getElementById('newTitle');
-    let newCongo = document.getElementById('newCongrat');
-    let newPoint = document.getElementById('newPoints');
-    dbPoints.doc(id).get().then((doc) => {
-        $(item).val(doc.data().title);
-        $(newPoint).val(doc.data().points);
-        $(newCongo).val(doc.data().congrats);
-        $("theID").val(id);
-    });
+    let noDupe = document.getElementsByClassName("adding-point-item");
+    if (noDupe.length == 0) {
+        pointAddItem();
+        let id = event.target.parentElement.id;
+        console.log(id)
+        let item = document.getElementById('newTitle');
+        let newCongo = document.getElementById('newCongrat');
+        let newPoint = document.getElementById('newPoints');
+        let theID = document.getElementById('theID');
+        dbPoints.doc(id).get().then((doc) => {
+            $(item).val(doc.data().title);
+            $(newPoint).val(doc.data().points);
+            $(newCongo).val(doc.data().congrats);
+            $(theID).val(doc.id);
+        });
+    } else {
+        let remove = document.getElementById('adding-point-item');
+        $(remove).remove();
+        pointAddItem();
+        let id = event.target.parentElement.id;
+        console.log(id)
+        let item = document.getElementById('newTitle');
+        let newCongo = document.getElementById('newCongrat');
+        let newPoint = document.getElementById('newPoints');
+        let theID = document.getElementById('theID');
+        dbPoints.doc(id).get().then((doc) => {
+            $(item).val(doc.data().title);
+            $(newPoint).val(doc.data().points);
+            $(newCongo).val(doc.data().congrats);
+            $(theID).val(doc.id);
+        });
+    }
 });
