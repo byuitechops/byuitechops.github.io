@@ -387,19 +387,21 @@ function loadInvoice() {
             .then(function (querySnapshot) {
                 console.log
                 var html = ``;
+                var grayRow = "grayYes";
                 querySnapshot.forEach((doc) => {
-                    var docData = `<div class="snack snack-info col4"><h3>${doc.id}</h3>`;
+                    var docData = `<tr class="${grayRow}"><td>${doc.id}</td>`;
                     var items = doc.data().items;
-                    docData += `<p><span>Items: </span<br> `;
+                    docData += `<td>`;
                     for (var key in items) {
-                        docData += `<p><span>Amount of ${key}s: </span>${items[key]}</p>`;
+                        docData += `${key} <span>x${items[key]}</span><br>`;
                     }
-                    docData += `</p><p><span>Total Paid:</span> $${Number(doc.data().payTotal).toFixed(2)}</p> 
-                                    <p><span>Payment Type:</span> ${(doc.data().payType)[0].toUpperCase()}${doc.data().payType.slice(1)}</p>
-                                    <p><span>User:</span> ${doc.data().user}</p></div>`;
+                    docData += `</td><td>${Number(doc.data().payTotal).toFixed(2)}</td> 
+                                    <td>${(doc.data().payType)[0].toUpperCase()}${doc.data().payType.slice(1)}</td>
+                                    <td>${doc.data().user}</td></tr>`;
                     html = `${docData}${html}`;
+                    (grayRow === "grayYes") ? (grayRow = "grayNo") : (grayRow = "grayYes");
                 })
-                document.getElementById('data').insertAdjacentHTML('beforeend', html);
+                document.getElementById('invoice-table').insertAdjacentHTML('beforeend', html);
             });
     } else {
 
