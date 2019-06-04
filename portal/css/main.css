@@ -1149,7 +1149,7 @@ main {
 .table-box {
     width: 90%;
     max-width: 1000px;
-    margin: auto;
+    margin: 30px auto;
     padding: 0;
     color: black;
     background-color: #f7f7f7;
@@ -1173,6 +1173,15 @@ main {
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
 }
+#show-all {
+    width: 100px;
+    margin: 50px 0 0;
+}
+#checkShow {
+    width: 20px;
+    height: 20px;
+    margin: 50px 50px 0 0;
+}
 .table-box a {
     width: 10%;
     height: 80px;
@@ -1190,7 +1199,7 @@ main {
     height: 100px;
     background-color: var(--second);
 }
-#admin-tool-points img {
+.table-box img {
     width: 60%;
     height: auto;
     margin: 20% 25%;
@@ -1213,8 +1222,11 @@ main {
     margin: 5px;
     padding: 5px 10px;
     font-size: .8vw;
-    border-radius: 50px;
+    border-radius: 3px;
     color: black;
+}
+.table-generate select {
+    width: 100%;
 }
 .criteria {
     width: 60%;
@@ -1231,11 +1243,11 @@ main {
     background-color: #dddddd;
 }
 
-#checkShow {
-    margin: 3px 10px;
-    width: 20px;
-    height: 20px;
+.useradmin, .userstore {
+    width: 5%;
+    text-align: center;
 }
+
 .notUsed input {
     width: 50px;
     margin: 0 10px;
