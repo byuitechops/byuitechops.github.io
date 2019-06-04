@@ -16,6 +16,7 @@ function loadPage() {
 }
 
 function teamChange(id){
+    let selection = document.getElementById(id);
     console.log("Hello There");
     let newTeam = $(selection).find('select.teamSelect').val()
     users.doc(id).update({
@@ -23,6 +24,7 @@ function teamChange(id){
     });
 }
 function titleChange(id) {
+    let selection = document.getElementById(id);
     console.log("Hello There");
     let newTitle = $(selection).find('select.roleSelect').val()
     users.doc(id).update({
