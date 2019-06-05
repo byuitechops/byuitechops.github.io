@@ -130,6 +130,8 @@ function changeSlide(n) {
  * 
  *********************************************************************/
 
+const navbarImage = document.getElementById("nav-img");
+
 // This const sets a var for all the buttons to change themes
 const dataThemeButtons = document.querySelectorAll('[data-theme]');
 for (let i = 0; i < dataThemeButtons.length; i++) {
@@ -176,6 +178,7 @@ function changeTheme(preferance) {
                         'shadow': 'var(--gray)',
                         'fontPrime': '#000000'
                     });
+                    navbarImage.src="";
                     break;
                 case 'dark':
                     setTheme({
@@ -188,6 +191,7 @@ function changeTheme(preferance) {
                         'shadow': 'none',
                         'fontPrime': '#ffffff'
                     });
+                    navbarImage.src="";
                     break;
                 case 'jedi':
                     setTheme({
@@ -200,6 +204,7 @@ function changeTheme(preferance) {
                         'shadow': 'var(--gray-dark)',
                         'fontPrime': '#000000'
                     });
+                    navbarImage.src="./assets/logos/jediLogo.png";
                     break;
                 case 'sith':
                     setTheme({
@@ -212,6 +217,7 @@ function changeTheme(preferance) {
                         'shadow': 'none',
                         'fontPrime': '#ffffff'
                     });
+                    navbarImage.src="./assets/logos/sithLogo.png";
                     break;
                 case 'merica':
                     setTheme({
@@ -224,6 +230,7 @@ function changeTheme(preferance) {
                         'shadow': 'var(--gray)',
                         'fontPrime': '#000000'
                     });
+                    navbarImage.src="";
                     break;
             }
         })

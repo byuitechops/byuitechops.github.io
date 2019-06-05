@@ -110,7 +110,7 @@ nav img {
     padding: 10%;
     transition: transform .2s;
 }
-nav img:hover {
+nav #logo:hover {
     width: 100%;
     -webkit-transform: scale(1.1); /* Safari 3-8 */
     -ms-transform: scale(1.1); /* IE 9 */
@@ -152,6 +152,14 @@ nav {
 }
 .wrap {
     flex-wrap: wrap;
+}
+#nav-img-box {
+    width: 250%;
+    display: fixed;
+    margin-top: 130px;
+    margin-left: -230px;
+    opacity: .65;
+    overflow: hidden;
 }
 
 

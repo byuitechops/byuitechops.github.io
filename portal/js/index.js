@@ -25,6 +25,7 @@ $(loginBtn).click(() =>{
 
 function signup() {
     nameBox.classList.remove("hide");
+    loginBtn.classList.add("hide");
 }
 
 window.addEventListener('keyup', () => {
