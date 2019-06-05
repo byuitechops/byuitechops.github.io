@@ -1,6 +1,8 @@
 const signupBtn = document.getElementById("btnsignup");
 const loginBtn = document.getElementById("btnlogin");
 const nameBox = document.getElementById("namebox");
+var signingIn = false;
+
 function loadPage(){};
 
 function login() {
@@ -24,8 +26,81 @@ $(loginBtn).click(() =>{
 });
 
 function signup() {
-    nameBox.classList.remove("hide");
-    loginBtn.classList.add("hide");
+    if(!signingIn) {
+        nameBox.classList.remove("hide");
+        loginBtn.classList.add("hide");
+        signingIn = true;
+    } else if (signingIn) {
+        const displayName = document.getElementById('displayName').value;
+        const email = document.getElementById('login').value;
+        const password = document.getElementById('password').value;
+        
+        console.log(displayName + " " + email + " " + password);
+        if (displayName == "" || email == "" || password == "") {
+            alert('Please make sure all fields are filled');
+            return;
+        }
+    
+        firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then(() => {
+                var docData = {
+                    admin: false,
+                    nameDisplay: `${displayName}`,
+                    name: `${displayName}`,
+                    team: "default",
+                    lead: false,
+                    info:  {
+                        "email": `${email}`,
+                        "photo": "default-image.png",
+                        "phoneNumber": "000-000-0000",
+                        "major": "",
+                        "track": "",
+                        "graduation": "",
+                        "speed": "",
+                        "birthday": "00/00"
+                    },
+                    title: "Team Member",
+                    viewMode: "light",
+                    storeManager: false,
+                    time: {
+                        "break": false,
+                        "check": false,
+                        "breakKey":"",
+                        "checkKey":"",
+                        "accumulatedTime": 4
+                    }
+                
+                }
+                try {
+                    // Send to firebase
+                    firebase.auth().currentUser.updateProfile({
+                        displayName: `${displayName}`
+                    }).then(function () {
+                        // Update successful.
+                        window.location.replace('home.html');
+                    }).catch(function (error) {
+                        // An error happened.
+                    });
+                    console.log(docData);
+                    db.collection('users').doc().set(docData).then(function () {
+                        console.log("Written");
+                        console.log(firebase.auth().currentUser);
+                        
+                        // window.replace('home.html')
+                    })
+                } catch (err) {
+                    // If it did not work alert user
+                    alert(err);
+                }
+            })
+            .catch(function (error) {
+                // Handle Errors here.   
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                alert(errorMessage);
+                alert("Check the information input and try again");
+            });
+    }
 }
 
 window.addEventListener('keyup', () => {

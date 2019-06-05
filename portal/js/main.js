@@ -37,7 +37,7 @@ auth.onAuthStateChanged((firebaseUser) => {
         changeTheme();
         getData();
         if (window.location.href.includes("index.html") || window.location.href.includes("signup.html") || window.location.pathname == "/") {
-        window.location.replace("home.html");
+        // window.location.replace("home.html");
         }
     } else {
         userName = null;
@@ -230,7 +230,7 @@ function changeTheme(preferance) {
                         'shadow': 'var(--gray)',
                         'fontPrime': '#000000'
                     });
-                    navbarImage.src="";
+                    navbarImage.src="./assets/logos/eagleLogo.png";
                     break;
             }
         })
