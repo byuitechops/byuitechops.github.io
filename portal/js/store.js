@@ -90,6 +90,7 @@ function loadPage() {
         });
     loadSnacks();
 }
+
 $(editStore).click(() => {
     if (!editingStore) {
         $(editStore).html("Save Store");
@@ -108,6 +109,7 @@ $(editStore).click(() => {
         loadSnacks();
     }
 });
+
 $(invoiceStore).click(() => {
     if (!editingStore) {
         $(invoicePage).removeClass('hide');
@@ -115,6 +117,7 @@ $(invoiceStore).click(() => {
         loadInvoice();
     }
 });
+
 $(cartCancel).click(() => {
     $(cartTotal).html("$0.00");
     $(snackItemsInCart).empty();
@@ -122,6 +125,7 @@ $(cartCancel).click(() => {
     loadSnacks();
 
 });
+
 $(cartCheckout).click(() => {
     if ($(cartTotal).html() != "$0.00") {
         $(confirmCheckout).fadeIn(400);
@@ -129,10 +133,12 @@ $(cartCheckout).click(() => {
         $(confirmTotal).text($(cartTotal).html());
     }
 });
+
 $(cancelPurchase).click(() => {
     $(purchaseErr).text("");
     $(confirmCheckout).toggleClass('hide');
 });
+
 $(confirmPurchase).click(() => {
     if (($(cash).prop('checked') || $(venmo).prop('checked')) && !editingStore) {
         $(purchaseErr).text("");
@@ -157,6 +163,7 @@ $(confirmPurchase).click(() => {
         $(purchaseErr).text("Please select 'Cash' or 'Venmo'");
     }
 });
+
 $(confirmEdit).click(async (event) => {
     $.when(async () => {
         event.preventDefault();
@@ -173,8 +180,8 @@ $(confirmEdit).click(async (event) => {
         $(snackList).empty();
         loadSnacks();
     });
-
 });
+
 $(confirmAdd).click(async (event) => {
     event.preventDefault();
 
@@ -207,17 +214,15 @@ function snackHTML(doc) {
         }
     }).catch(function (error) {
         console.log("There was an error retreiving " + image + " from firebase");
-
     });
 }
 
 function loadSnacks() {
-    db.collection("store").doc("inventory").collection("items").orderBy("count").get().then(function (querySnapshot) {
+    db.collection("store").doc("inventory").collection("items").orderBy("count", "asc").get().then(function (querySnapshot) {
         querySnapshot.forEach((doc) => {
             snackHTML(doc);
         })
     });
-
 }
 
 function selectSnack(item, price, count) {

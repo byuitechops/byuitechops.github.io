@@ -1,3 +1,5 @@
+
+
 const users = db.collection('users');
 const admin = document.getElementById('admin');
 const generate = document.getElementById("users-list-generate");
@@ -58,8 +60,8 @@ function generateList(all) {
     users.orderBy("nameDisplay", "asc").get()
         .then(function (documents) {
             let count = 1
-            documents.forEach(function (doc) {
 
+            documents.forEach(function (doc) {
                 // This will filter out anyone who is not actively on our team
                 if ((doc.data().team != "default" && doc.data().team != "other" && doc.data().nameDisplay != "Demo Student") || all) {
                     if (count % 2 == 0) {
@@ -100,6 +102,7 @@ function generateList(all) {
 
                     count++;
                 }
+                
                 let selection = document.getElementById(`${doc.id}`);
                 $(function () {
                     $(selection).find('select.teamSelect').val(doc.data().team);
