@@ -1,19 +1,38 @@
 import * as functions from 'firebase-functions';
-import * as admin from 'firebase-admin'
+import * as admin from 'firebase-admin';
+import algoliasearch from 'algoliasearch';
 
+admin.initializeApp();
 
-// Algolia Search Functionality
+const env = functions.config();
+const client = algoliasearch(env.algolia.appid, env.algolia.apikey);
+const index = client.initIndex('transcripts');
+const db = admin.firestore();
 
-// import * as algoliasearch from 'algoliasearch';
+exports.algoliaCreate = functions.firestore
+.document('accessibility/{docID}')
+    .onCreate((snap, context) => {
+        const data = snap.data();
+        const objectID = snap.id;
 
-// const env = functions.config();
-// const client = algoliasearch(env.algolia.appid, env.algolia.apikey);
-// const index = client.initIndex('transcripts');
+        return index.addObject({
+            objectID,
+            ...data
+        });
+    });
 
-// export const algoliaCreate = functions.firestore.document('accessibility/{docID}')
-//     .onCreate((snap, context) => {
-//         let data = snap.data();
-//         let objectID = snap.id;
+exports.algoliaDelete = functions
+    .firestore.document('accessibility/{docID}')
+    .onDelete((snap, context) => {
+        const objectID = snap.id;
+
+        return index.deleteObject(objectID);
+    });
+
+// export const algoliaUpdate = functions.firestore.document('accessibility/{docID}')
+//     .onWrite((snap, context) =>{
+//         const data = snap.data();
+//         const objectID = snap.id;
 
 //         return index.addObject({
 //             objectID,
@@ -21,9 +40,23 @@ import * as admin from 'firebase-admin'
 //         });
 //     });
 
-// export const algoliaDelete = functions.firestore.document('accessibility/{docID}')
-//     .onDelete((snap, context) => {
-//         let objectID = snap.id;
+// Export all content is being exported from algolia from firebase /accessibility
+exports.addFirestoreData = functions.https.onRequest((req, res) =>{
+    const list = new Array();
+    db.collection("accessibility").get()
+    .then((docs) =>{
+        docs.forEach((doc) =>{
+            const transcript = doc.data()
+            transcript.objectID = doc.id;
 
-//         return index.deleteObject(objectID);
-//     });
+            list.push(transcript);
+
+        });
+
+        index.saveObject(list, function (err, content){
+            res.status(200).send(content);
+        });
+    }).catch((err)=>{
+        console.log(err);
+    })
+});
