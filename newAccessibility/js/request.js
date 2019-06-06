@@ -16,6 +16,7 @@ var newInfoMedia = document.getElementById("new-info-media");
 var dupField = document.getElementById("dup");
 var dupBtn = document.getElementById("dupBtn");
 var overrideBtn = document.getElementById("overrideBtn");
+var cancelBtn = document.getElementById("cancelBtn");
 var placeEmbeded = document.getElementById("place-transcript-embeded");
 var placeLink = document.getElementById("place-direct-link");
 var dupFinishedBtn = document.getElementById("dupFinishedBtn");
@@ -204,6 +205,10 @@ $(dupBtn).click(async () => {
 $(overrideBtn).click(async () => {
     override = true;
     submitTranscriptRequest();
+    $(dupField).addClass("hide");
+});
+
+$(cancelBtn).click(async () => {
     $(dupField).addClass("hide");
 });
 

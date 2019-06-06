@@ -110,7 +110,7 @@ nav img {
     padding: 10%;
     transition: transform .2s;
 }
-nav img:hover {
+nav #logo:hover {
     width: 100%;
     -webkit-transform: scale(1.1); /* Safari 3-8 */
     -ms-transform: scale(1.1); /* IE 9 */
@@ -152,6 +152,14 @@ nav {
 }
 .wrap {
     flex-wrap: wrap;
+}
+#nav-img-box {
+    width: 250%;
+    display: fixed;
+    margin-top: 130px;
+    margin-left: -230px;
+    opacity: .65;
+    overflow: hidden;
 }
 
 
@@ -976,7 +984,6 @@ main {
 #team-points h3 {
     width: 25%;
     margin: 5px 0;
-    color: var(--white);
 }
 #select-points option{
     color: var(--white);
@@ -1213,6 +1220,7 @@ main {
 }
 .table-generate tr {
     padding: 3px 20px;
+    cursor: pointer;
 }
 .table-generate td {
     margin: 5px;
@@ -1242,6 +1250,43 @@ main {
 .useradmin, .userstore {
     width: 5%;
     text-align: center;
+}
+
+#adding-point-item {
+    width: 100%;
+    padding: 30px 40px 0;
+    background-color: #f7f7f7;
+}
+#adding-point-item input {
+    margin: 5px;
+    padding: 5px;
+    font-family: "Roboto";
+    font-size: 16px;
+    border: 2px solid #dddddd;
+    background-color: #f7f7f7;
+    border-radius: 3px;
+}
+#adding-point-item button {
+    width: 10%;
+    margin: 5px;
+    padding: 5px;
+    font-family: "Roboto";
+    font-size: 12px;
+    border: 3px solid #dddddd;
+    background-color: #f7f7f7;
+    border-radius: 50px;
+    transition: all .2s;
+    cursor: pointer;
+}
+#adding-point-item button:hover {
+    transform: scale(1.1);
+    background-color: #dddddd;
+}
+#newTitle {
+    width: 50%;
+}
+#newPoints {
+    width: 5%;
 }
 
 .notUsed input {

@@ -43,12 +43,15 @@
     ---------------------------------------------->
 
     <nav class="col1">
-        <a href="home.html"><img src="/portal/assets/logos/logo.png"></a>
+        <a href="home.html"><img id="logo" src="/portal/assets/logos/logo.png"></a>
         <div class="nav-links flex-container">
             <a href="schedule.html">Schedule</a>
             <a href="store.html">Store</a>
             <a class="current-page" href="profile.html">Profile</a>
-            </ul>
+        </div>
+        <div id="nav-img-box">
+            <img id="nav-img" src="" alt="">
+        </div>
     </nav>
 
     <!---------------------------------------------
@@ -117,7 +120,7 @@
                             <a href="/oldPortal/timeAdmin.html" class="hide"> View/Edit Accumulated Time </a>
                             <a target="black" href="https://byuitechops.github.io/accessibility/home.html">Old
                                 Accessiblity</a>
-                            <a class="hide" id="timeAdmin" target="_blank" href="/portal/admin.html">Admin
+                            <a class="hide" id="timeAdmin" href="/portal/admin.html">Admin
                                 Tools</a>
                         </div>
                     </div>
@@ -161,7 +164,10 @@
                     <img src="/portal/assets/misc/backArrow.png" alt="Back to Profile"/>
                 </a>
             </div>
-            <table class="table-generate" id="points-generate"></table>
+            
+            <table class="table-generate" id="points-generate">
+                <aside id="add-points-aside"></aside>
+            </table>
         </section>
 
     </main>
