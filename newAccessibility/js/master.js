@@ -370,27 +370,7 @@ function checkTransferProcess() {
  */
 
 function fillEdit(id) {
-      var xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status === 200) {
-                  var res = JSON.parse(this.responseText);
-                  var id = res._id;
-                  var newxhttp = new XMLHttpRequest();
-                  newxhttp.onreadystatechange = function () {
-                        if (this.readyState == 4 && this.status === 200) {
-                              var newres = JSON.parse(this.responseText);
-                              for (var i = 0; i < newres.length; i++) {
-                                    var course = newres[i]['__catalogCourseId'];
-                                    document.getElementById('edit-info-courses').insertAdjacentHTML('beforeend', '<option value=\'' + course + '\'>' + course + '</option>');
-                              }
-                        }
-                  };
-                  newxhttp.open('GET', 'https://byui.kuali.co/api/v1/catalog/courses/' + id, true);
-                  newxhttp.send();
-            }
-      };
-      xhttp.open('GET', 'https://byui.kuali.co/api/v1/catalog/public/catalogs/current', true);
-      xhttp.send();
+      getCourses("edit-info-courses");
       db.collection('accessibility').doc(id).get()
             .then(function (doc) {
                   var x = doc.data();
@@ -407,6 +387,9 @@ function fillEdit(id) {
                   if (x.verbit) {
                         $('#edit-info-verbitid').val("" + x.verbitID);
                   }
+                  (x.courseCode).forEach(code => {
+                        console.log(code);
+                  });
             });
 }
 

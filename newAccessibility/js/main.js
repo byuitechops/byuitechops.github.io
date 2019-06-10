@@ -131,7 +131,8 @@ function redirect() {
 
 // getCourses();
 //get courses for the dropdown through xmlh request
-function getCourses() {
+function getCourses(docID) {
+    (docID == undefined) ? docID = requestCourse : docID = docID;
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status === 200) {
@@ -143,7 +144,7 @@ function getCourses() {
                     var newres = JSON.parse(this.responseText);
                     for (var i = 0; i < newres.length; i++) {
                         var course = newres[i]['__catalogCourseId'];
-                        document.getElementById('requestCourse').insertAdjacentHTML('beforeend', '<option value=\'' + course + '\'>' + course + '</option>');
+                        document.getElementById(docID).insertAdjacentHTML('beforeend', '<option value=\'' + course + '\'>' + course + '</option>');
                     }
                 }
             };
