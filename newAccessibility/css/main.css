@@ -348,6 +348,9 @@ main {
   display: flex;
   flex-flow: row wrap;
 }
+#edit-info-field {
+    width: 5
+}
 .dup h3 {
   padding: 25px 0;
   font-size: 20px;
@@ -368,7 +371,7 @@ main {
 .dup span, .dup a {
   font-size: 16px;
 }
-#btn-box button {
+.btn-box button {
   width: 200px;
   height: 40px;
   margin: 2vw .5vw;
@@ -379,12 +382,12 @@ main {
   color: var(--terciary-color);
   outline: none;
 }
-#btn-box button:hover {
+.btn-box button:hover {
   border: 2px solid var(--primary-color);
   color: var(--primary-color);
   background-color: var(--terciary-color)
 }
-#btn-box button:active {
+.btn-box button:active {
   border: 2px solid var(--active-color);
   color: var(--terciary-color);
   background-color: var(--active-color);

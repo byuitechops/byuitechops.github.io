@@ -44,7 +44,7 @@ function fillUserTable(name) {
 function fillTranscriptTable(backupCode) {
       document.getElementById('master-table-transcript').innerHTML = '';
       if (backupCode == undefined) {
-            db.collection("accessibility").orderBy('priority').limit(10).get()
+            db.collection("accessibility").orderBy('priority').limit(1).get()
                   .then(function (querySnapshot) {
                         querySnapshot.forEach(function (doc) {
                               var p = `<p> ${doc.data().priority}</p> <p>${doc.data().backupCode}</p> <p style="padding-right: .5rem; overflow-x:hidden;">${doc.data().title}</p>

@@ -126,6 +126,7 @@
             <section id="right-master" class="half container col">
                 <h2>Information</h2>
                 <div class="box">
+
                     <div id="user-info-box" class="user-info container col hide">
                         <div class="container row badges">
                             <h3 id="info-username"></h3>
@@ -153,6 +154,7 @@
                         <button onclick="resetAction()" id="reset-action" class="bg-primary btn-hover" disabled>Reset
                             Current Action </button>
                     </div>
+
                     <div id="transcript-info-box" class="transcript-info-box container hide">
                         <div class="real-half">
                             <h3>Transcript Info</h3>
@@ -192,10 +194,13 @@
                             <p onclick="editItem('requestNotes')" id="transcript-requestNotes"><b>Request Notes: </b>
                             </p>
                             <p onclick="editItem('returnToPrepNote')" id="transcript-returnNotes"><b>Return to prepare
-                                    notes: </b> </p>
+                                    notes: </b>
+                            </p>
+                            <button id="btn-edit-transcript" class="btn-hover" onclick="editTranscript()">Edit</button>
                             <button id="btn-delete-transcript" class="hide btn-hover red">Delete Transcript</button>
                         </div>
                     </div>
+
                     <div id="guest-info-box" class="transcript-info-box container hide">
                         <div class="real-half">
                             <h3>Transcript Info</h3>
@@ -239,29 +244,85 @@
                             <button id="btn-delete-transcript" class="hide btn-hover red">Delete Transcript</button>
                         </div>
                     </div>
+
                 </div>
             </section>
-        </div>
 
-        <div id="editModal" class="modal">
-            <div class="modal-content" id="editModal-content">
-                <span class="close">&times;</span>
-                <input type="text" id="newValue">
-                <button class="btn-hover bg-primary" id="editComplete">Update</button>
-            </div>
-        </div>
-
-        <div id="editModalAnnouncement" class="modal7">
-            <div class="modal-content" id="editModal-content">
-                <span class="close">&times;</span>
-                <textarea name="" id="" cols="30" rows="10" readonly></textarea>
-                <textarea name="" id="" cols="30" rows="10"></textarea>
-                <button class="btn-hover bg-primary" id="editComplete">Update</button>
-            </div>
         </div>
 
     </main>
+
+    <section class="dup hide">
+        <div class="dup-content">
+
+            <div class="dup-header">
+                <h2>Edit Information</h2>
+            </div>
+
+            <div id="edit-info-field">
+                <h3>Transcript Info</h3>
+                <p>Title</p>
+                <input id="edit-info-title" type="text"></input>
+                <p>Stage</p>
+                <input id="edit-info-stage" type="text"></input>
+                <p>Course Code(s)</p><a onclick="addCourseCodeSelect()">+</a>
+                <select id="requestCourse" type="text"></select>
+                <p>Priority</p>
+                <select id="edit-info-priority">
+                    <option>1 ADA Emergency of Special Request</option>
+                    <option>2 Improvement Project for Live Course</option>
+                    <option>3 New/Redevelopment Project</option>
+                    <option>4 Transcript Project</option>
+                </select>
+                <p>Type</p>
+                <select id="edit-info-type">
+                    <option>Video</option>
+                    <option>Audio</option>
+                    <option>Alt Text</option>
+                    <option>Slide Show</option>
+                </select>
+                <p>Length</p>
+                <input id="edit-info-length" type="text"></input>
+                <p>Height</p>
+                <input id="edit-info-" type="text"></input>
+                <p>Google Doc Edit Link</p>
+                <input id="edit-info-docedit" type="text"></input>
+                <p>Google Doc Publish Link</p>
+                <input id="edit-info-docpub" type="text"></input>
+                <p>LMS URL</p>
+                <input id="edit-info-lms" type="text"></input>
+                <p>Media URL</p>
+                <input id="edit-info-media" type="text"></input>
+                <p>Verbit Used?</p>
+                <select id="edit-info-isverbit">
+                    <option>Yes</option>
+                    <option>No</option>
+                </select>
+                <p>Verbit ID</p>
+                <input id="edit-info-verbitid" type="text"></input>
+                <p>Copied as Duplicate?</p>
+                <select id="edit-info-isdup">
+                    <option>Yes</option>
+                    <option>No</option>
+                </select>
+                <p>Copied From</p>
+                <input id="edit-info-copyfrom" type="text"></input>
+            </div>
+
+            <div id="edit-info-field">
+                <p></p>
+                <input></input>
+            </div>
+
+            <div class="btn-box">
+                <button id="confirmEditBtn">Confirm</button>
+                <button id="cancelEditBtn">Cancel</button>
+            </div>
+        </div>
+    </section>
+
 </body>
+
 <script src="js/objects.module.js"></script>
 <script src="js/main.js"></script>
 <script src="js/master.js"></script>
