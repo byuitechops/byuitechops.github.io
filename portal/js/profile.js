@@ -87,6 +87,7 @@ function submitTeamPoints() {
 
 function showResults() {
     console.log("Total = " + results[0]);
+    $('#total').html(" Points: " + results[0]);
 }
 
 
@@ -310,6 +311,7 @@ var submitNew,
 
 
 function editTeamPoints() {
+    showResults();
     //checks if the user has correct permissions first
     if (data.admin) {
         $(mainDiv).addClass('hide');

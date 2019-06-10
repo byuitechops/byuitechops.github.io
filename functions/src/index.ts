@@ -1,6 +1,7 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import algoliasearch from 'algoliasearch';
+const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 admin.initializeApp();
 
@@ -60,3 +61,4 @@ exports.addFirestoreData = functions.https.onRequest((req, res) =>{
         console.log(err);
     })
 });
+
