@@ -383,9 +383,11 @@ function fillEdit(id) {
                   $('#edit-info-docpub').val("" + x.docPublishURL);
                   $('#edit-info-lms').val("" + x.lmsURL);
                   $('#edit-info-media').val("" + x.srcURL);
-                  $('#edit-info-isverbit').val("" + x.verbit);
                   if (x.verbit) {
+                        $('#edit-info-isverbit').val("True");
                         $('#edit-info-verbitid').val("" + x.verbitID);
+                  } else {
+                        $('#edit-info-isverbit').val("False");
                   }
                   (x.courseCode).forEach(code => {
                         console.log(code);
