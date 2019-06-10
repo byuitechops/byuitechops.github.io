@@ -80,15 +80,20 @@ class storeItem {
 }
 
 function loadPage() {
+    if (userName == null){
+        loadSnacks();
+    } else {
     db.collection("users").where("name", "==", userName)
         .onSnapshot((querySnapshot) => {
-            var data = querySnapshot.docs[0].data();
-            if (data.admin || data.storeManager) {
-                editStore.classList.remove('hide');
-                invoiceStore.classList.remove('hide');
-            }
+                var data = querySnapshot.docs[0].data();
+                if (data.admin || data.storeManager) {
+                    editStore.classList.remove('hide');
+                    invoiceStore.classList.remove('hide');
+                }
         });
-    loadSnacks();
+        loadSnacks();
+    }
+    
 }
 
 $(editStore).click(() => {
@@ -346,10 +351,18 @@ function updateTotals(type) {
             updateFirebase(array[i].name, array[i].count);
             itemsJson += `"${array[i].name}": "${array[i].count}",`;
         }
-        itemsJson = `${itemsJson.slice(0, -1)}}, 
-        "payTotal": "${total}",
-        "payType": "${type}",
-        "user": "${data.nameDisplay}"}`;
+        if (data == null){
+            itemsJson = `${itemsJson.slice(0, -1)}}, 
+            "payTotal": "${total}",
+            "payType": "${type}",
+            "user": "Guest"}`;
+        } else {
+            itemsJson = `${itemsJson.slice(0, -1)}}, 
+            "payTotal": "${total}",
+            "payType": "${type}",
+            "user": "${data.nameDisplay}"}`;
+        }
+        
         // Push transaction record to firebase
         var now = new Date();
         var dateString = `${now.getFullYear()}-${("0" + (now.getMonth() + 1)).slice(-2)}-${("0" + now.getDate()).slice(-2)} ${("0" + now.getHours()).slice(-2)}:${("0" + now.getMinutes()).slice(-2)}`;
@@ -358,7 +371,7 @@ function updateTotals(type) {
         });
         // Update Money fields
         db.collection('store').doc('inventory').get().then(function (doc) {
-            var newMoneyTotal = (Number(doc.data()[type]) + Number(total));
+            var newMoneyTotal = Math.round(100 * (Number(doc.data()[`${type}`]) + Number(total))) / 100;
             var moneyJson = `{"${type}": "${newMoneyTotal}"}`;
             db.collection('store').doc('inventory').update(JSON.parse(moneyJson))
                 .then(function () {
