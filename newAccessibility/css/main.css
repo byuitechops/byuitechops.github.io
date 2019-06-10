@@ -108,8 +108,12 @@ input::placeholder {
 }
 
 .red {
-  background-color: #AD0C20;
+  background-color: #AD0C20 !important;
   color: white;
+}
+.red:hover {
+    color: white !important;
+    border: none !important;
 }
 
 .container-start {
@@ -431,6 +435,40 @@ main {
 #continue-guest-window #btn-box {
   padding: 50px;
 }
+
+
+/********************************************
+*   EDIT/DELETE TRANSCRIPT WINDOW   
+********************************************/
+
+#edit-info-field, #notes-info-field {
+    width: 50%;
+    display: flex;
+    flex-flow: row wrap;
+}
+#edit-info-field div, #notes-info-field div {
+    width: 100%;
+    margin: 5px;
+}
+#edit-info-field div div, #notes-info-field div div {
+    padding: 0;
+}
+#edit-info-field div p, #notes-info-field div p {
+    width: 35%;
+    margin: 5px;
+}
+#edit-info-field div input,select, #notes-info-field div p {
+    width: 50%;
+    margin: 5px;
+}
+#edit-info-field a:hover {
+    background-color: lightgray;
+}
+
+#btn-delete-transcript {
+    float: right;
+}
+
 
 /***********************************************************
 * 2.1 Modal Boxes

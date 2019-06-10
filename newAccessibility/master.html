@@ -197,7 +197,6 @@
                                     notes: </b>
                             </p>
                             <button id="btn-edit-transcript" class="btn-hover" onclick="editTranscript()">Edit</button>
-                            <button id="btn-delete-transcript" class="hide btn-hover red">Delete Transcript</button>
                         </div>
                     </div>
 
@@ -241,7 +240,7 @@
                             </p>
                             <p onclick="editItem('returnToPrepNote')" id="transcript-returnNotes"><b>Return to prepare
                                     notes: </b> </p>
-                            <button id="btn-delete-transcript" class="hide btn-hover red">Delete Transcript</button>
+                            <button id="btn-edit-transcript" class="btn-hover" onclick="editTranscript()">Edit</button>
                         </div>
                     </div>
 
@@ -252,7 +251,7 @@
 
     </main>
 
-    <section class="dup hide">
+    <section class="dup">
         <div class="dup-content">
 
             <div class="dup-header">
@@ -261,48 +260,105 @@
 
             <div id="edit-info-field">
                 <h3>Transcript Info</h3>
-                <p>Title</p>
-                <input id="edit-info-title" type="text"></input>
-                <p>Stage</p>
-                <input id="edit-info-stage" type="text"></input>
-                <p>Course Code(s)</p><a onclick="addCourseCodeSelect()">+</a>
-                <select id="edit-info-courses" type="text"></select>
-                <p>Priority</p>
-                <select id="edit-info-priority">
-                    <option>1 ADA Emergency of Special Request</option>
-                    <option>2 Improvement Project for Live Course</option>
-                    <option>3 New/Redevelopment Project</option>
-                    <option>4 Transcript Project</option>
-                </select>
-                <p>Type</p>
-                <select id="edit-info-type">
-                    <option>Video</option>
-                    <option>Audio</option>
-                    <option>Alt Text</option>
-                    <option>Slide Show</option>
-                </select>
-                <p>Length</p>
-                <input id="edit-info-length" type="text"></input>
-                <p>Google Doc Edit Link</p>
-                <input id="edit-info-docedit" type="text"></input>
-                <p>Google Doc Publish Link</p>
-                <input id="edit-info-docpub" type="text"></input>
-                <p>LMS URL</p>
-                <input id="edit-info-lms" type="text"></input>
-                <p>Media URL</p>
-                <input id="edit-info-media" type="text"></input>
-                <p>Verbit Used?</p>
-                <select id="edit-info-isverbit">
-                    <option>True</option>
-                    <option>False</option>
-                </select>
-                <p>Verbit ID</p>
-                <input id="edit-info-verbitid" type="text"></input>
+                <div>
+                    <p>Title</p>
+                    <input id="edit-info-title" type="text"></input>
+                </div>
+                <div>
+                    <p>Stage</p>
+                    <select id="edit-info-stage">
+                        <option>Ready for Prep</option>
+                        <option>In Prep</option>
+                        <option>Ready for Transcription</option>
+                        <option>Ready for Review</option>
+                        <option>In Review</option>
+                        <option>Review Complete</option>
+                        <option>Finished</option>
+                    </select>
+                </div>
+                <div>
+                    <p>Course Code(s)</p>
+                    <a onclick="addCourseCodeSelect()">+</a>
+                    <select id="edit-info-courses" type="text"></select>
+                </div>
+                <div>
+                    <p>Priority</p>
+                    <select id="edit-info-priority">
+                        <option>1 ADA Emergency of Special Request</option>
+                        <option>2 Improvement Project for Live Course</option>
+                        <option>3 New/Redevelopment Project</option>
+                        <option>4 Transcript Project</option>
+                    </select>
+                </div>
+                <div>
+                    <p>Type</p>
+                    <select id="edit-info-type">
+                        <option>Video</option>
+                        <option>Audio</option>
+                        <option>Alt Text</option>
+                        <option>Slide Show</option>
+                    </select>
+                </div>
+                <div>
+                    <p>Length</p>
+                    <input id="edit-info-length" type="text"></input>
+                </div>
+                <div>
+                    <p>Google Doc Edit Link</p>
+                    <input id="edit-info-docedit" type="text"></input>
+                </div>
+                <div>
+                    <p>Google Doc Publish Link</p>
+                    <input id="edit-info-docpub" type="text"></input>
+                </div>
+                <div>
+                    <p>LMS URL</p>
+                    <input id="edit-info-lms" type="text"></input>
+                </div>
+                <div>
+                    <p>Media URL</p>
+                    <input id="edit-info-media" type="text"></input>
+                </div>
+                <div>
+                    <p>Verbit Used?</p>
+                    <select id="edit-info-isverbit">
+                        <option>True</option>
+                        <option>False</option>
+                    </select>
+                </div>
+                <div>
+                    <p>Verbit ID</p>
+                    <input id="edit-info-verbitid" type="text"></input>
+                </div>
+            </div>
+
+            <div id="notes-info-field">
+                <h3>Participating Users</h3>
+                <p>Requested by</p>
+                <span id="edit-info-requested-by"></span>
+                <p>Requested on</p>
+                <span id="edit-info-requested-on"></span>
+                <p>Prepared by</p>
+                <span id="edit-info-prepared-by"></span>
+                <p>Prepared Completed on</p>
+                <span id="edit-info-prepared-on"></span>
+                <p>Transcribed by</p>
+                <span id="edit-info-transcribe-by"></span>
+                <p>Transcription Completed on</p>
+                <span id="edit-info-transcribe-on"></span>
+                <p>Reviewed by</p>
+                <span id="edit-info-review-by"></span>
+                <p>Review Completed on</p>
+                <span id="edit-info-review-on"></span>
+
+                <h3>Comments</h3>
+                <span id="edit-info-comment"></span>
             </div>
 
             <div class="btn-box">
                 <button id="confirmEditBtn">Confirm</button>
                 <button id="cancelEditBtn">Cancel</button>
+                <button id="btn-delete-transcript" class="btn-hover red">Delete Transcript</button>
             </div>
         </div>
     </section>
