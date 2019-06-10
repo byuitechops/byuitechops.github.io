@@ -54,7 +54,7 @@ function fillTranscriptTable(backupCode) {
                         })
                   })
       } else {
-            db.collection("accessibility").orderBy('priority').where('backupCode', '==', backupCode).limit(10).get()
+            db.collection("accessibility").orderBy('priority').where('backupCode', '==', backupCode).get()
                   .then(function (querySnapshot) {
                         querySnapshot.forEach(function (doc) {
                               var p = `<p> ${doc.data().priority}</p> <p>${doc.data().backupCode}</p> <p style="padding-right: .5rem;">${doc.data().title}</p>
@@ -362,4 +362,54 @@ function checkTransferProcess() {
             .then(function (data) {
                   console.log(data.size);
             })
+}
+
+
+/**
+ * Edit Info 06/10/2019
+ */
+
+function fillEdit(id) {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status === 200) {
+                  var res = JSON.parse(this.responseText);
+                  var id = res._id;
+                  var newxhttp = new XMLHttpRequest();
+                  newxhttp.onreadystatechange = function () {
+                        if (this.readyState == 4 && this.status === 200) {
+                              var newres = JSON.parse(this.responseText);
+                              for (var i = 0; i < newres.length; i++) {
+                                    var course = newres[i]['__catalogCourseId'];
+                                    document.getElementById('edit-info-courses').insertAdjacentHTML('beforeend', '<option value=\'' + course + '\'>' + course + '</option>');
+                              }
+                        }
+                  };
+                  newxhttp.open('GET', 'https://byui.kuali.co/api/v1/catalog/courses/' + id, true);
+                  newxhttp.send();
+            }
+      };
+      xhttp.open('GET', 'https://byui.kuali.co/api/v1/catalog/public/catalogs/current', true);
+      xhttp.send();
+      db.collection('accessibility').doc(id).get()
+            .then(function (doc) {
+                  var x = doc.data();
+                  $('#edit-info-title').val("" + x.title);
+                  $('#edit-info-stage').val("" + x.status);
+                  $('#edit-info-priority').val("" + x.priority);
+                  $('#edit-info-type').val("" + x.type);
+                  $('#edit-info-length').val("" + x.length);
+                  $('#edit-info-docedit').val("" + x.docEditURL);
+                  $('#edit-info-docpub').val("" + x.docPublishURL);
+                  $('#edit-info-lms').val("" + x.lmsURL);
+                  $('#edit-info-media').val("" + x.srcURL);
+                  $('#edit-info-isverbit').val("" + x.verbit);
+                  if (x.verbit) {
+                        $('#edit-info-verbitid').val("" + x.verbitID);
+                  }
+            });
+}
+
+function addCourseCodeSelect() {
+
 }
