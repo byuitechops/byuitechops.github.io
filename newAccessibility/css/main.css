@@ -371,6 +371,7 @@ main {
 }
 .dup a,h3 {
   width: 100%;
+  overflow: hidden;
 }
 .dup span, .dup a {
   font-size: 16px;
@@ -443,30 +444,46 @@ main {
 
 #edit-info-field, #notes-info-field {
     width: 50%;
-    display: flex;
-    flex-flow: row wrap;
 }
 #edit-info-field div, #notes-info-field div {
     width: 100%;
-    margin: 5px;
+    display: flex;
+    margin: 0;
+    padding: 3px;
 }
-#edit-info-field div div, #notes-info-field div div {
-    padding: 0;
+#edit-info-field p, #notes-info-field p {
+    width: 200px;
+    cursor: default;
 }
-#edit-info-field div p, #notes-info-field div p {
-    width: 35%;
-    margin: 5px;
+#edit-info-field input,select, #notes-info-field span {
+    width: 400px;
+    height: 25px;
 }
-#edit-info-field div input,select, #notes-info-field div p {
-    width: 50%;
-    margin: 5px;
+#edit-info-field input,select {
+    padding: 3px 10px;
+    border: 1px solid #888;
+    border-radius: 3px;
+    outline: none;
 }
-#edit-info-field a:hover {
-    background-color: lightgray;
+#edit-info-field input:focus,select:focus {
+    box-shadow: 0 3px 5px 0 #aaa;
 }
-
 #btn-delete-transcript {
     float: right;
+}
+#add-course-code {
+    width: 25px;
+    height: 25px;
+    margin: 0 10px 0 -35px;
+    padding: 0 7px;
+    font-size: 18px;
+    border-radius: 50%;
+    transition: all .2s;
+    cursor: pointer;
+}
+#edit-info-field select {
+    width: 250px;
+    margin: 0;
 }
 
 

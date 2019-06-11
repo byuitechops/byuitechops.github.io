@@ -3,7 +3,7 @@
  *
  *********************************************/
 
-
+const editWindow = document.getElementById("edit-window");
 const editTranscriptBtn = document.getElementById("btn-edit-transcript");
 const main = document.getElementsByTagName("main");
 
@@ -12,10 +12,14 @@ function editTranscript() {
 }
 
 function createEditTranscriptWindow() {
-    var editWindow = ``;
-    main.insertAdjacentHTML("beforeend", html);
+    var editWindowHTML = ``;
+    main.insertAdjacentHTML("beforeend", editWindowHTML);
 }
 
 function addCourseCodeSelect() {
     
+}
+
+function closeEditWindow() {
+    editWindow.classList.add("hide");
 }
