@@ -1,3 +1,78 @@
-<p>
-  home works!
-</p>
+<div id="content">
+  <section id="links" class="container half col">
+    <h2>Get Started</h2>
+
+    <div id="group-links">
+      <a href="https://drive.google.com/drive/folders/0AJzE0BZcnVJpUk9PVA" target="_blank">
+        Google Drive
+      </a>
+      <a href="https://docs.google.com/spreadsheets/d/1755CupoDLtrpePFnj_Dd_Y-FZEH8_6QMX4gAVDNh_AQ/edit#gid=1437701904"
+        target="_blank">
+        Training </a>
+
+
+      <a href="https://platform.verbit.co/" target="_blank">
+        Verbit
+      </a>
+      <div *ngIf="ja;then verify"></div>
+      <ng-template #verify><a id="verifyButton" class="" target="blank">Verify Email</a></ng-template>
+    </div>
+    <h2>Announcements: </h2>
+    <p id="announcement-displayed">Announcements are waiting to be added...</p>
+    <div class="hide" id="announcements-box-edit">
+      <textarea id="announcement-edit">Now editing the announcement...</textarea>
+      <div class="btn-box">
+        <button>Cancel</button>
+        <button>Submit</button>
+      </div>
+    </div>
+  </section>
+  <section id="transcript-not-found" class="container half col">
+    <h2>Claimed Requests</h2>
+    <div id="transcript-box" class="container col">
+      <h3>No Transcript Claimed</h3>
+    </div>
+  </section>
+
+  <section id="transcript-found" class="container half col hide">
+    <h2>Claimed Requests</h2>
+    <div id="transcript-box" class="container row wobble-hor-bottom">
+      <div class="container real-half col">
+        <h3>Video</h3>
+        <label for="transcript-title">Course</label>
+        <p id="updateCode"> Lorem, ipsum dolor.</p>
+        <label for="transcript-title">Title</label>
+        <p style="overflow-y:hidden" id="updateTitle">MATH 999</p>
+        <a id="updateMediaLink" href="https://www.youtube.com/watch?v=Fdf5aTYRW0E" target="_blank">Media
+          Link</a>
+        <label for="transcript-title"></label>
+        <a id="updateDocLink"
+          href="https://docs.google.com/spreadsheets/d/1mhCCTU-3vR69KCsJbKkcHDnVU4ZMLbcmIU97txvhQd4/edit#gid=0"
+          target="_blank">Google
+          Document Link</a>
+        <label id="verbitLabel" for="">Verbit ID (if applicable)</label>
+        <p id="verbitID-display">0_c27e0l3x_0_3f5jgkzb_2-0_c27e0l3x_0_3f5jgkzb_2.mp4</p>
+
+        <div class="container-center" style="margin-top:.5rem;">
+          <button id="btn-report" value="" class="btn-hover red">Return to Prep</button>
+          <button id="btn-finish" class="bg-primary btn-hover" value="">Complete</button>
+        </div>
+      </div>
+      <div id="if-copied" class="nice-overflow container real-half col" style="word-wrap: break-word;">
+        <h3>Comments: </h3>
+        <p id="get-comments" style="overflow: auto; font-size: 1rem;"></p>
+      </div>
+    </div>
+  </section>
+  <div id="myModal" class="modal">
+    <button id="submit-report" class="bg-primary btn-hover" value="">Submit
+      Report</button>
+    <!-- Modal content -->
+    <div class="modal-content">
+      <p> Please, describe the issue and why the transcript needs to be returned to the prepare
+        stage.</p>
+      <textarea name="" id="problem-description" cols="30" rows="10"></textarea>
+      <span class="close">&times;</span>
+    </div>
+  </div>
+</div>
