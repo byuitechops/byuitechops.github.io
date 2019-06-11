@@ -251,7 +251,7 @@
 
     </main>
 
-    <section class="dup hide">
+    <section class="dup hide" id="edit-window">
         <div class="dup-content">
 
             <div class="dup-header">
@@ -267,6 +267,7 @@
                 <div>
                     <p>Stage</p>
                     <select id="edit-info-stage">
+                        <option>- - -</option>
                         <option>Ready for Prep</option>
                         <option>In Prep</option>
                         <option>Ready for Transcription</option>
@@ -278,7 +279,7 @@
                 </div>
                 <div>
                     <p>Course Code(s)</p>
-                    <a onclick="addCourseCodeSelect()">+</a>
+                    <a id="add-course-code" onclick="addCourseCodeSelect()">+</a>
                     <select id="edit-info-courses" type="text"></select>
                 </div>
                 <div>
@@ -293,6 +294,7 @@
                 <div>
                     <p>Type</p>
                     <select id="edit-info-type">
+                        <option>- - -</option>
                         <option>Video</option>
                         <option>Audio</option>
                         <option>Alt Text</option>
@@ -322,6 +324,7 @@
                 <div>
                     <p>Verbit Used?</p>
                     <select id="edit-info-isverbit">
+                        <option>- - -</option>
                         <option>True</option>
                         <option>False</option>
                     </select>
@@ -357,7 +360,7 @@
 
             <div class="btn-box">
                 <button id="confirmEditBtn">Confirm</button>
-                <button id="cancelEditBtn">Cancel</button>
+                <button id="cancelEditBtn" onclick="closeEditWindow()">Cancel</button>
                 <button id="btn-delete-transcript" class="btn-hover red">Delete Transcript</button>
             </div>
         </div>
@@ -368,5 +371,6 @@
 <script src="js/objects.module.js"></script>
 <script src="js/main.js"></script>
 <script src="js/master.js"></script>
+<script src="js/injectible.js"></script>
 
 </html>
