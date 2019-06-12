@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../core/auth.service';
 import { DatabaseService } from '../core/database.service';
-import { not } from '@angular/compiler/src/output/output_ast';
+import {  } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-home',

@@ -7,6 +7,6 @@ import { AngularFirestore } from '@angular/fire/firestore';
 export class DatabaseService {
   annouce;
   constructor(public db: AngularFirestore) {
-    this.annouce = db.collection('announcements').doc('announcement').get();
+    // this.annouce = db.collection('announcements').doc('announcement').get();
   }
 }
