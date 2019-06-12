@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { getCiphers } from 'tls';
 
 @Component({
   selector: 'app-request',
@@ -8,6 +6,8 @@ import { getCiphers } from 'tls';
   styleUrls: ['./request.component.css']
 })
 export class RequestComponent implements OnInit {
+  selectUndefinedOptionValue: any;
+  name: string;
   lms: string;
   title: string;
   priority: string;
@@ -25,31 +25,33 @@ export class RequestComponent implements OnInit {
     'Slide'
   ];
   course: string;
-  courseList;
-  constructor(private http: HttpClient) { }
+  comments: string;
+  constructor() { }
 
-  ngOnInit() {
-    this.courseList = this.getCourse();
-    console.log(this.courseList);
+  ngOnInit(){
+    this.getCourse();
   }
 
   getCourse() {
-    var courses = [];
+    const courses = [];
     const xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
-            let x = [];
+            const x = [];
             const res = JSON.parse(this.responseText);
             const id = res._id;
             const newxhttp = new XMLHttpRequest();
             newxhttp.onreadystatechange = function() {
                 if (this.readyState === 4 && this.status === 200) {
                     const newres = JSON.parse(this.responseText);
+                    let html = '';
                     newres.forEach((doc) => {
-                      const course = doc['__catalogCourseId'];
+                      const course = doc.__catalogCourseId;
+                      html += `<option>${course}</option>`;
                       courses.push(course);
                     });
                     console.log(courses);
+                    document.getElementById('requestCourse').insertAdjacentHTML('afterend', html);
                     return courses;
                 }
             };

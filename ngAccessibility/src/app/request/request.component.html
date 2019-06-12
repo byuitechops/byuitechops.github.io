@@ -2,17 +2,19 @@
   <div id="content">
     <section id="requestForm" class="container half col">
       <h2>Request</h2>
-      <input id="guestName" placeholder="Name" class="hide">
-      <select [(ngModel)]="type">
-          <option *ngFor="let y of types" [ngValue]="y">{{ y }}</option>
-        </select>
+      <input [(ngModel)]="name" id="guestName" placeholder="Name" class="">
 
-      <select [(ngModel)]="course" id="requestCourse">
-        <option disabled selected hidden>Course Code</option>
-        <option *ngFor="let t of courseList" [ngValue]="t">{{ t }}</option>
+      <select [(ngModel)]="type" placeholder="Select Type">
+          <option disabled hidden [value]="selectUndefinedOptionValue">Select Type</option>
+        <option *ngFor="let y of types" [ngValue]="y">{{ y }}</option>
+      </select>
+      <select [(ngModel)]="course">
+        <option [ngValue]="null" hidden>Select Course</option>
+        <option id="requestCourse" hidden></option>
       </select>
       <input [(ngModel)]="title" type="text" placeholder="Transcript Title">
       <select [(ngModel)]="priority">
+          <option disabled hidden [value]="selectUndefinedOptionValue">Select Priority</option>
         <option *ngFor="let i of priorities" [ngValue]="i">{{ i }}</option>
       </select>
       <input [(ngModel)]="lms" type="url" placeholder="Canvas URL">
@@ -20,7 +22,7 @@
       <label id="requestCommentsLabel">
         <h3>Comments</h3>
       </label>
-      <input type="text" id="requestComments">
+      <input [(ngModel)]="comments" type="text">
     </section>
     <section id="transcript-box-info" class="container half col">
       <h2>Ticket Information</h2>
@@ -28,7 +30,7 @@
         <label>Media Type:</label>
         <p class="description"> {{ type }} </p>
         <label>Course Code:</label>
-        <p class="description" id="codeSide"> -- </p>
+        <p class="description"> {{ course }} </p>
         <label>Title:</label>
         <p class="description"> {{ title }} </p>
         <label>Priority:</label>
