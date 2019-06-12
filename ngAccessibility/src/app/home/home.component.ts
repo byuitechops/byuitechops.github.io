@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../core/auth.service';
+import { DatabaseService } from '../core/database.service';
+import { not } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-home',
@@ -6,11 +9,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  ja = false;
-  constructor() { }
+    ja = false;
+    announce: string; 
 
-  ngOnInit() {
-  }
+    constructor(public auth:AuthService, public db:DatabaseService) {
+        this.announce = db.annouce.content;
+        console.log(this.announce);
+    }
+
+    ngOnInit() {
+    }
 
 
 
