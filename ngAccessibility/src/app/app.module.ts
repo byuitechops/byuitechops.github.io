@@ -11,6 +11,9 @@ import { RequestComponent } from './request/request.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { HomeComponent } from './home/home.component';
 import { AngularFireModule } from '@angular/fire';
+import { AngularFirestore } from '@angular/fire/firestore/firestore';
+
+
 import { environment } from 'src/environments/environment';
 import { TranscribeComponent } from './transcribe/transcribe.component';
 import { PrepareComponent } from './prepare/prepare.component';
@@ -78,7 +81,7 @@ import { EditBoxComponent } from './edit-box/edit-box.component';
       },
     ])
   ],
-  providers: [],
-  bootstrap: [AppComponent, RequestComponent]
+  providers: [ AngularFirestore ],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
