@@ -10,7 +10,7 @@ import { not } from '@angular/compiler/src/output/output_ast';
 })
 export class HomeComponent implements OnInit {
     ja = false;
-    announce; 
+    announce: string; 
 
     constructor(public auth:AuthService, public db:DatabaseService) {
         this.announce = db.annouce.content;
