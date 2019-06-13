@@ -14,9 +14,7 @@
  * 
  *********************************************/
 
-const main = document.getElementById("main");
-
-/********      Transcript Info Box     *******/
+const main               = document.getElementById("main");
 
 const infoField          = document.getElementById("transcript-info-field");
 
@@ -46,17 +44,16 @@ const currentTranOn      = document.getElementById("transcript-transcriptionDate
 const currentRevBy       = document.getElementById("transcript-reviewer");
 const currentRevOn       = document.getElementById("transcript-reviewDate");
 
-/********    Edit Transcript Window    *******/
-
 
 
 /*********************************************
  * 
- *      FUNCTIONS
+ *      FUNCTIONS & EVENT LISTENERS
  * 
  *      -   Edit Transcript
  *      -   Create Edit Transcript Window
  *      -   Fill Edit Fields
+ *      -   Fill Is Verbit On Change
  *      -   Clear Edit Window Fields
  *      -   Add Course Code Select
  *      -   Confirm Edit
@@ -67,12 +64,12 @@ const currentRevOn       = document.getElementById("transcript-reviewDate");
  * 
  *********************************************/
 
+
 /*********************************************
  *  Edit Transcript
  *      The function that is called when the button 
  *      'Edit Transcript' on the Master page is clicked.
  *********************************************/
-
 function editTranscript() {
     createEditTranscriptWindow();
     fillEditFields();
@@ -160,13 +157,13 @@ function createEditTranscriptWindow() {
                         </div>
                         <div>
                             <p>Verbit Used?</p>
-                            <select id="edit-info-isverbit">
+                            <select id="edit-info-isverbit" onchange="displayVerbitBox()">
                                 <option value="0">- - -</option>
                                 <option value="1">True</option>
                                 <option value="2">False</option>
                             </select>
                         </div>
-                        <div>
+                        <div id="verbit-id-box">
                             <p>Verbit ID</p>
                             <input id="edit-info-verbitid" type="text"></input>
                         </div>
@@ -214,8 +211,6 @@ function createEditTranscriptWindow() {
  *********************************************/
 function fillEditFields() {
 
-    const editInfoField   = document.getElementById("edit-info-field");
-        
     const fillTitle       = document.getElementById("edit-info-title");
     const fillStage       = document.getElementById("edit-info-stage");
     const fillCourses     = document.getElementById("edit-info-courses");
@@ -227,9 +222,6 @@ function fillEditFields() {
     const fillLMS         = document.getElementById("edit-info-lms");
     const fillMedia       = document.getElementById("edit-info-media");
     const fillIsVerbit    = document.getElementById("edit-info-isverbit");
-    const fillVerbitID    = document.getElementById("edit-info-verbitid");
-        
-    const editNotesField  = document.getElementById("notes-info-field");
         
     const fillReqBy       = document.getElementById("edit-info-requested-by");
     const fillReqOn       = document.getElementById("edit-info-requested-on");
@@ -271,7 +263,53 @@ function fillEditFields() {
         case "Slide Show": fillType.value = 4; break;
         default:           fillType.value = 0; break;
     }
+    if (currentLength.innerHTML) {
+        fillLength.value = currentLength.innerHTML;
+    }
+    if (currentDocEdit.href) {
+        fillDocEdit.value = currentDocEdit.href;
+    }
+    if (currentDocPub.href) {
+        fillDocPub.value = currentDocPub.href;
+    }
+    if (currentLMS.href) {
+        fillLMS.value = currentLMS.href;
+    }
+    if (currentDocEdit.href) {
+        fillMedia.value = currentMedia.href;
+    }
+    switch (currentIsVerbit.innerHTML) {
+        case "true":  fillIsVerbit.value = 1; break;
+        case "false": fillIsVerbit.value = 2; break;
+        default:      fillIsVerbit.value = 0; break;
+    }
+    displayVerbitBox();
+
+    
 }
+
+
+
+/*********************************************
+ *  Display Verbit Box
+ *      Determines if the Verbit Link input box should appear
+ *      based on whether or not the Verbit Used is true.
+ *********************************************/
+function displayVerbitBox() {
+    const fillIsVerbit    = document.getElementById("edit-info-isverbit");
+    const fillVerbitID = document.getElementById("edit-info-verbitid");
+    const fillVIDbox   = document.getElementById("verbit-id-box");
+
+    if (fillIsVerbit.value == "1") {
+        fillVIDbox.classList.remove("hide");
+        if (currentVerbitID.innerHTML) {
+            fillVerbitID.value = currentVerbitID.innerHTML;
+        }
+    } else {
+        fillVIDbox.classList.add("hide");
+    }
+}
+
 
 
 /*********************************************

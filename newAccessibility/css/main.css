@@ -316,6 +316,9 @@ main {
     margin: 0;
     padding: 0;
 }
+.real-half div {
+    width: 100%;
+}
 .real-half p {
     width: 40%;
     margin: 0;
