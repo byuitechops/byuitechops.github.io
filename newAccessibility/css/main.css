@@ -185,10 +185,6 @@ input::placeholder {
   width: 35%;
 }
 
-.real-half {
-  width: 50%;
-}
-
 .nice-overflow {
   overflow: auto;
 }
@@ -311,6 +307,25 @@ main {
 .text-center { 
   padding-right: 5rem;
 }
+
+
+.real-half {
+    width: 50%;
+    display: flex;
+    flex-flow: row wrap;
+    margin: 0;
+    padding: 0;
+}
+.real-half p {
+    width: 40%;
+    margin: 0;
+    padding: 0;
+}
+.real-half span {
+    width: 60%;
+    margin: 5px 0 0;
+}
+
 
 .hide {
   display: none;
@@ -1375,7 +1390,7 @@ background: #D2D2D2
 
 #master-content #right-master .box { 
   background-color: var(--content-color);
-  height: 70vh;
+  height: 75vh;
   width: 100%;
 }
 
@@ -1464,7 +1479,7 @@ background: #D2D2D2
 }
 
 #master-content #right-master .transcript-info-box { 
-  padding: 4rem;
+  padding: 3rem;
 }
 
 #master-content #right-master .transcript-info-box p {

@@ -103,39 +103,39 @@ function createEditTranscriptWindow() {
                         <div>
                             <p>Stage</p>
                             <select id="edit-info-stage">
-                                <option>- - -</option>
-                                <option>Ready for Prep</option>
-                                <option>In Prep</option>
-                                <option>Ready for Transcription</option>
-                                <option>Ready for Review</option>
-                                <option>In Review</option>
-                                <option>Review Completed</option>
-                                <option>Finished</option>
+                                <option value="0">- - -</option>
+                                <option value="1">Ready for Prep</option>
+                                <option value="2">In Prep</option>
+                                <option value="3">Ready for Transcription</option>
+                                <option value="4">Ready for Review</option>
+                                <option value="5">In Review</option>
+                                <option value="6">Review Completed</option>
+                                <option value="7">Finished</option>
                             </select>
                         </div>
                         <div>
                             <p>Course Code(s)</p>
                             <a id="add-course-code" onclick="addCourseCodeSelect()">+</a>
-                            <select id="edit-info-courses" type="text"></select>
+                            <input id="edit-info-courses" type="text"></input>
                         </div>
                         <div>
                             <p>Priority</p>
                             <select id="edit-info-priority">
-                                <option>- - -</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
+                                <option value="0">- - -</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
                             </select>
                         </div>
                         <div>
                             <p>Type</p>
                             <select id="edit-info-type">
-                                <option>- - -</option>
-                                <option>Video</option>
-                                <option>Audio</option>
-                                <option>Alt Text</option>
-                                <option>Slide Show</option>
+                                <option value="0">- - -</option>
+                                <option value="1">Video</option>
+                                <option value="2">Audio</option>
+                                <option value="3">Alt Text</option>
+                                <option value="4">Slide Show</option>
                             </select>
                         </div>
                         <div>
@@ -161,9 +161,9 @@ function createEditTranscriptWindow() {
                         <div>
                             <p>Verbit Used?</p>
                             <select id="edit-info-isverbit">
-                                <option>- - -</option>
-                                <option>True</option>
-                                <option>False</option>
+                                <option value="0">- - -</option>
+                                <option value="1">True</option>
+                                <option value="2">False</option>
                             </select>
                         </div>
                         <div>
@@ -241,7 +241,36 @@ function fillEditFields() {
     const fillRevOn       = document.getElementById("edit-info-review-on");
 
     
-    fillTitle.value = currentTitle.innerHTML;
+    if (currentTitle.innerHTML) {
+        fillTitle.value = currentTitle.innerHTML;
+    }
+    switch (currentStage.innerHTML) {
+        case "Ready for Prep":          fillStage.value = 1; break;
+        case "In Prep":                 fillStage.value = 2; break;
+        case "Ready for Transcription": fillStage.value = 3; break;
+        case "Ready for Review":        fillStage.value = 4; break;
+        case "In Review":               fillStage.value = 5; break;
+        case "Review Completed":        fillStage.value = 6; break;
+        case "Finished":                fillStage.value = 7; break;
+        default:                        fillStage.value = 0; break;
+    }
+    if (currentCourses.innerHTML) {
+        fillCourses.value = currentCourses.innerHTML
+    }
+    switch (currentPriority.innerHTML) {
+        case "1":  fillPriority.value = 1; break;
+        case "2":  fillPriority.value = 2; break;
+        case "3":  fillPriority.value = 3; break;
+        case "4":  fillPriority.value = 4; break;
+        default:   fillPriority.value = 0; break;
+    }
+    switch (currentType.innerHTML) {
+        case "Video":      fillType.value = 1; break;
+        case "Audio":      fillType.value = 2; break;
+        case "Alt Text":   fillType.value = 3; break;
+        case "Slide Show": fillType.value = 4; break;
+        default:           fillType.value = 0; break;
+    }
 }
 
 

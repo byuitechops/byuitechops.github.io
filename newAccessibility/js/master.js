@@ -164,8 +164,8 @@ function displayTranscriptInfo(transcriptID) {
                   }
 
                   if (doc.data().transcriber != undefined && doc.data().dateTranscriptionFinished != undefined) {
-                        document.getElementById('transcript-transcriber').innerText = 'Transcribed by: ' + doc.data().transcriber;
-                        document.getElementById('transcript-transcriptionDate').innerText = 'Transcription Completed on: ' + doc.data().dateTranscriptionFinished.toDate().toString().slice(4, 15);
+                        document.getElementById('transcript-transcriber').innerText = doc.data().transcriber;
+                        document.getElementById('transcript-transcriptionDate').innerText = doc.data().dateTranscriptionFinished.toDate().toString().slice(4, 15);
                   } else {
                         document.getElementById('transcript-transcriber').innerText = ' -- ';
                         document.getElementById('transcript-transcriptionDate').innerText = ' -- ';
