@@ -211,26 +211,26 @@ function createEditTranscriptWindow() {
  *********************************************/
 function fillEditFields() {
 
-    const fillTitle       = document.getElementById("edit-info-title");
-    const fillStage       = document.getElementById("edit-info-stage");
-    const fillCourses     = document.getElementById("edit-info-courses");
-    const fillPriority    = document.getElementById("edit-info-priority");
-    const fillType        = document.getElementById("edit-info-type");
-    const fillLength      = document.getElementById("edit-info-length");
-    const fillDocEdit     = document.getElementById("edit-info-docedit");
-    const fillDocPub      = document.getElementById("edit-info-docpub");
-    const fillLMS         = document.getElementById("edit-info-lms");
-    const fillMedia       = document.getElementById("edit-info-media");
-    const fillIsVerbit    = document.getElementById("edit-info-isverbit");
-        
-    const fillReqBy       = document.getElementById("edit-info-requested-by");
-    const fillReqOn       = document.getElementById("edit-info-requested-on");
-    const fillPrepBy      = document.getElementById("edit-info-prepared-by");
-    const fillPrepOn      = document.getElementById("edit-info-prepared-on");
-    const fillTranBy      = document.getElementById("edit-info-transcribe-by");
-    const fillTranOn      = document.getElementById("edit-info-transcribe-on");
-    const fillRevBy       = document.getElementById("edit-info-review-by");
-    const fillRevOn       = document.getElementById("edit-info-review-on");
+    const fillTitle     = document.getElementById("edit-info-title");
+    const fillStage     = document.getElementById("edit-info-stage");
+    const fillCourses   = document.getElementById("edit-info-courses");
+    const fillPriority  = document.getElementById("edit-info-priority");
+    const fillType      = document.getElementById("edit-info-type");
+    const fillLength    = document.getElementById("edit-info-length");
+    const fillDocEdit   = document.getElementById("edit-info-docedit");
+    const fillDocPub    = document.getElementById("edit-info-docpub");
+    const fillLMS       = document.getElementById("edit-info-lms");
+    const fillMedia     = document.getElementById("edit-info-media");
+    const fillIsVerbit  = document.getElementById("edit-info-isverbit");
+
+    const fillReqBy     = document.getElementById("edit-info-requested-by");
+    const fillReqOn     = document.getElementById("edit-info-requested-on");
+    const fillPrepBy    = document.getElementById("edit-info-prepared-by");
+    const fillPrepOn    = document.getElementById("edit-info-prepared-on");
+    const fillTranBy    = document.getElementById("edit-info-transcribe-by");
+    const fillTranOn    = document.getElementById("edit-info-transcribe-on");
+    const fillRevBy     = document.getElementById("edit-info-review-by");
+    const fillRevOn     = document.getElementById("edit-info-review-on");
 
     
     if (currentTitle.innerHTML) {
@@ -285,7 +285,30 @@ function fillEditFields() {
     }
     displayVerbitBox();
 
-    
+    if (currentReqBy) {
+        fillReqBy.innerHTML = currentReqBy.innerHTML;
+    }
+    if (currentReqOn) {
+        fillReqOn.innerHTML = currentReqOn.innerHTML;
+    }
+    if (currentPrepBy) {
+        fillPrepBy.innerHTML = currentPrepBy.innerHTML;
+    }
+    if (currentPrepOn) {
+        fillPrepOn.innerHTML = currentPrepOn.innerHTML;
+    }
+    if (currentTranBy) {
+        fillTranBy.innerHTML = currentTranBy.innerHTML;
+    }
+    if (currentTranOn) {
+        fillTranOn.innerHTML = currentTranOn.innerHTML;
+    }
+    if (currentRevBy) {
+        fillRevBy.innerHTML = currentRevBy.innerHTML;
+    }
+    if (currentRevOn) {
+        fillRevOn.innerHTML = currentRevOn.innerHTML;
+    }
 }
 
 

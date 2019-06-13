@@ -471,6 +471,7 @@ main {
 #edit-info-field div, #notes-info-field div {
     width: 100%;
     display: flex;
+    flex-flow: row wrap;
     margin: 0;
     padding: 3px;
 }
@@ -479,8 +480,11 @@ main {
     cursor: default;
 }
 #edit-info-field input,select, #notes-info-field span {
-    width: 400px;
+    width: 350px;
     height: 25px;
+}
+#notes-info-field span {
+    width: 400px;
 }
 #edit-info-field input,select {
     padding: 3px 10px;
@@ -505,7 +509,7 @@ main {
     cursor: pointer;
 }
 #edit-info-field select {
-    width: 250px;
+    width: 200px;
     margin: 0;
 }
 
