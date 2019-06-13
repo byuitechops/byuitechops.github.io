@@ -115,6 +115,11 @@ input::placeholder {
     color: white !important;
     border: none !important;
 }
+.red:active {
+    border: 2px solid red !important;
+    color: var(--terciary-color) !important;
+    background-color: #AD0C20 !important;
+}
 
 .container-start {
   display: flex;

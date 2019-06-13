@@ -105,21 +105,21 @@ function displayTranscriptInfo(transcriptID) {
             .then(function (doc) {
                   console.log(doc.data());
                   document.getElementById('storeTranscriptID').innerText = doc.id;
-                  document.getElementById('transcript-title').innerText = 'Transcript Title: ' + doc.data().title;
-                  document.getElementById('transcript-status').innerText = 'Stage: ' + doc.data().status;
-                  document.getElementById('transcript-code').innerText = 'Course Code: ' + doc.data().backupCode;
-                  document.getElementById('transcript-priority').innerText = 'Priority: ' + doc.data().priority;
-                  document.getElementById('transcript-type').innerText = 'Type: ' + doc.data().type;
+                  document.getElementById('transcript-title').innerText = doc.data().title;
+                  document.getElementById('transcript-status').innerText = doc.data().status;
+                  document.getElementById('transcript-code').innerText = doc.data().backupCode;
+                  document.getElementById('transcript-priority').innerText = doc.data().priority;
+                  document.getElementById('transcript-type').innerText = doc.data().type;
                   if (doc.data().length != undefined) {
-                        document.getElementById('transcript-length').innerText = 'Length: ' + doc.data().length;
+                        document.getElementById('transcript-length').innerText = doc.data().length;
                   } else {
-                        document.getElementById('transcript-length').innerText = 'Length: -- ';
+                        document.getElementById('transcript-length').innerText = ' -- ';
                   }
 
                   if (doc.data().height != undefined) {
-                        document.getElementById('transcript-height').innerText = 'Height: ' + doc.data().height;
+                        document.getElementById('transcript-height').innerText = doc.data().height;
                   } else {
-                        document.getElementById('transcript-height').innerText = 'Height: -- '
+                        document.getElementById('transcript-height').innerText = ' -- '
                   }
 
                   if (doc.data().docEditURL != undefined) {
@@ -138,57 +138,57 @@ function displayTranscriptInfo(transcriptID) {
                   document.getElementById('transcript-mediaLink').setAttribute('href', doc.data().srcURL);
 
                   if (doc.data().verbit != undefined) {
-                        document.getElementById('transcript-verbit').innerText = 'Verbit Used: ' + doc.data().verbit;
+                        document.getElementById('transcript-verbit').innerText = doc.data().verbit;
                   } else {
-                        document.getElementById('transcript-verbit').innerText = 'Verbit Used: Not yet set'
+                        document.getElementById('transcript-verbit').innerText = 'Not yet set';
                   }
 
-                  document.getElementById('transcript-verbitID').innerText = 'Verbit ID: ' + doc.data().verbitID;
-                  document.getElementById('transcript-copied').innerText = 'Copied as duplicate: ' + doc.data().copied;
-                  document.getElementById('transcript-copiedFrom').innerText = 'Copied from: -- ';
+                  document.getElementById('transcript-verbitID').innerText = doc.data().verbitID;
+                  document.getElementById('transcript-copied').innerText = doc.data().copied;
+                  document.getElementById('transcript-copiedFrom').innerText = ' -- ';
                   //right half of the transcript info box starts here
                   if (doc.data().requestor != undefined && doc.data().requestDate != undefined) {
-                        document.getElementById('transcript-requestor').innerText = 'Requested by: ' + doc.data().requestor;
-                        document.getElementById('transcript-requestDate').innerText = 'Requested on: ' + doc.data().requestDate.toDate().toString().slice(4, 15);
+                        document.getElementById('transcript-requestor').innerText = doc.data().requestor;
+                        document.getElementById('transcript-requestDate').innerText = doc.data().requestDate.toDate().toString().slice(4, 15);
                   } else {
-                        document.getElementById('transcript-requestor').innerText = 'Requested by: -- ';
-                        document.getElementById('transcript-requestDate').innerText = 'Requested on: --'
+                        document.getElementById('transcript-requestor').innerText = ' -- ';
+                        document.getElementById('transcript-requestDate').innerText = ' --';
                   }
 
                   if (doc.data().preparer != undefined && doc.data().datePrepareFinished != undefined) {
-                        document.getElementById('transcript-preparer').innerText = 'Prepared by: ' + doc.data().preparer;
-                        document.getElementById('transcript-prepareDate').innerText = 'Prepared Completed on:  ' + doc.data().datePrepareFinished.toDate().toString().slice(4, 15);
+                        document.getElementById('transcript-preparer').innerText = doc.data().preparer;
+                        document.getElementById('transcript-prepareDate').innerText = doc.data().datePrepareFinished.toDate().toString().slice(4, 15);
                   } else {
-                        document.getElementById('transcript-preparer').innerText = 'Prepared by: --';
-                        document.getElementById('transcript-prepareDate').innerText = 'Prepared Completed on: --';
+                        document.getElementById('transcript-preparer').innerText = ' --';
+                        document.getElementById('transcript-prepareDate').innerText = ' --';
                   }
 
                   if (doc.data().transcriber != undefined && doc.data().dateTranscriptionFinished != undefined) {
                         document.getElementById('transcript-transcriber').innerText = 'Transcribed by: ' + doc.data().transcriber;
                         document.getElementById('transcript-transcriptionDate').innerText = 'Transcription Completed on: ' + doc.data().dateTranscriptionFinished.toDate().toString().slice(4, 15);
                   } else {
-                        document.getElementById('transcript-transcriber').innerText = 'Transcribed by: --';
-                        document.getElementById('transcript-transcriptionDate').innerText = 'Transcription Completed on: --';
+                        document.getElementById('transcript-transcriber').innerText = ' -- ';
+                        document.getElementById('transcript-transcriptionDate').innerText = ' -- ';
                   }
 
                   if (doc.data().reviewer != undefined && doc.data().dateReviewFinished != undefined) {
-                        document.getElementById('transcript-reviewer').innerText = 'Reviewed by: ' + doc.data().reviewer;
-                        document.getElementById('transcript-reviewDate').innerText = 'Review Completed on: ' + doc.data().dateReviewFinished.toDate().toString().slice(4, 15);
+                        document.getElementById('transcript-reviewer').innerText = doc.data().reviewer;
+                        document.getElementById('transcript-reviewDate').innerText = doc.data().dateReviewFinished.toDate().toString().slice(4, 15);
                   } else {
-                        document.getElementById('transcript-reviewer').innerText = 'Reviewed by: --';
-                        document.getElementById('transcript-reviewDate').innerText = 'Review Completed on: --';
+                        document.getElementById('transcript-reviewer').innerText = ' -- ';
+                        document.getElementById('transcript-reviewDate').innerText = ' -- ';
                   }
 
                   if (doc.data().requestNotes != undefined) {
-                        document.getElementById('transcript-requestNotes').innerText = 'Request Notes: ' + doc.data().requestNotes;
+                        document.getElementById('transcript-requestNotes').innerText = doc.data().requestNotes;
                   } else {
-                        document.getElementById('transcript-requestNotes').innerText = 'Request Notes: -- '
+                        document.getElementById('transcript-requestNotes').innerText = ' -- '
                   }
 
                   if (doc.data().returnToPrepNote != undefined) {
-                        document.getElementById('transcript-returnNotes').innerText = 'Return to Prep Notes: ' + doc.data().returnToPrepNote;
+                        document.getElementById('transcript-returnNotes').innerText = doc.data().returnToPrepNote;
                   } else {
-                        document.getElementById('transcript-returnNotes').innerText = 'Return to Prep Notes: --';
+                        document.getElementById('transcript-returnNotes').innerText = ' -- ';
                   }
 
                   document.getElementById('transcript-info-box').classList.remove('hide');
@@ -323,20 +323,22 @@ function editComplete(id, item) {
 
 }
 
-document.getElementById('btn-delete-transcript').addEventListener('click', () => {
-      var id = document.getElementById('storeTranscriptID').innerText;
-      db.collection('accessibility').doc(id).delete()
-            .then(() => {
-                  console.log('transcript deleted');
-                  document.getElementById('transcript-info-box').classList.add('hide');
-                  fillTranscriptTable();
-            })
-})
+// To Be Moved to Injectible.js
 
-var span = document.getElementsByClassName("close")[0];
-span.onclick = function () {
-      editModal.style.display = "none";
-}
+// document.getElementById('btn-delete-transcript').addEventListener('click', () => {
+//       var id = document.getElementById('storeTranscriptID').innerText;
+//       db.collection('accessibility').doc(id).delete()
+//             .then(() => {
+//                   console.log('transcript deleted');
+//                   document.getElementById('transcript-info-box').classList.add('hide');
+//                   fillTranscriptTable();
+//             })
+// })
+
+// var span = document.getElementsByClassName("close")[0];
+// span.onclick = function () {
+//       editModal.style.display = "none";
+// }
 
 function buildUserObject(id) {
       return new Promise((resolve, reject) => {

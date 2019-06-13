@@ -63,7 +63,7 @@
             </div>
         </ul>
     </nav>
-    <main>
+    <main id="main">
         <div id="master-content" class="container row">
             <section id="left-master" class="half container col">
                 <h2>Lead Tools</h2>
@@ -156,46 +156,71 @@
                     </div>
 
                     <div id="transcript-info-box" class="transcript-info-box container hide">
-                        <div class="real-half">
+                        <div class="real-half" id="transcript-info-field">
                             <h3>Transcript Info</h3>
-                            <p id="storeTranscriptID" class="hide"></p>
-                            <p id="transcript-title" onclick="editItem('title')">Transcript Title: McDonalds</p>
-                            <p id="transcript-status">Stage: Ready for Transcription</p>
-                            <p id="transcript-code">Course Code: STEAK101</p>
-                            <p id="transcript-priority">Priority: 1</p>
-                            <p id="transcript-type">Type: Video</p>
-                            <p id="transcript-length" onclick="editItem('length')">Length: 200</p>
-                            <p id="transcript-height" onclick="editItem('height')"> Height: 315</p>
-                            <p onclick="editItem('docEditURL')">Google Doc Edit Link: <a id="transcript-googleEditLink"
-                                    href="#" target="_blank"> Click Here</a> </p>
-                            <p onclick="editItem('docPublishURL')">Google Doc Publish Link: <a
-                                    id="transcript-googlePubLink" href="#" target="_blank">Click Here</a> </p>
-                            <p onclick="editItem('lmsURL')">LMS URL: <a id="transcript-canvasLink" href="#"
-                                    target="_blank">Click Here</a></p>
-                            <p onclick="editItem('srcURL')">Media URL: <a id="transcript-mediaLink" href="#"
-                                    target="_blank"> Click Here</a></p>
-                            <p id="transcript-verbit">Uses Verbit: Yes</p>
-                            <p onclick="editItem('verbitID')" id="transcript-verbitID">Verbit ID: 194lw_1234_294u8wkd
-                            </p>
-                            <p id="transcript-copied">Copied as duplicate: Yes</p>
-                            <p id="transcript-copiedFrom">Copied from: </p>
+                            <p class="hide">ID: </p>
+                            <span id="storeTranscriptID" class="hide"></span>
+                            <p>Title: </p>
+                            <span id="transcript-title" onclick="editItem('title')"></span>
+                            <p>Stage: </p>
+                            <span id="transcript-status"></span>
+                            <p>Course Code: </p>
+                            <span id="transcript-code"></span>
+                            <p>Priority: </p>
+                            <span id="transcript-priority"></span>
+                            <p>Type: </p>
+                            <span id="transcript-type">Type: Video</span>
+                            <p>Video Length: </p>
+                            <span id="transcript-length" onclick="editItem('length')"></span>
+                            <p>Height: </p>
+                            <span id="transcript-height" onclick="editItem('height')"> </span>
+                            <p>Google Doc Edit Link: </p>
+                            <span onclick="editItem('docEditURL')"><a id="transcript-googleEditLink"
+                                    href="#" target="_blank"></a> </span>
+                            <p>Google Doc Publish Link: </p>
+                            <span onclick="editItem('docPublishURL')"><a
+                                    id="transcript-googlePubLink" href="#" target="_blank">Click Here</a> </span> 
+                            <p>LMS Link: </p>
+                            <span onclick="editItem('lmsURL')">LMS URL: <a id="transcript-canvasLink" href="#"
+                                    target="_blank">Click Here</a></span>
+                            <p>Media Link: </p>
+                            <span onclick="editItem('srcURL')">Media URL: <a id="transcript-mediaLink" href="#"
+                                    target="_blank"> Click Here</a></span>
+                            <p>Verbit Used: </p>
+                            <span id="transcript-verbit"></span>
+                            <p>Verbit ID: </p>
+                            <span onclick="editItem('verbitID')" id="transcript-verbitID"></span>
+                            <p>Copied as Duplicate: </p>
+                            <span id="transcript-copied"></span>
+                            <p>Copied from: </p>
+                            <span id="transcript-copiedFrom"></span>
                         </div>
-                        <div class="real-half">
+                        <div class="real-half" id="transcript-notes-field">
                             <h3>Participating Users</h3>
-                            <p id="transcript-requestor"></p>
-                            <p id="transcript-requestDate"></p>
-                            <p id="transcript-preparer"></p>
-                            <p id="transcript-prepareDate"></p>
-                            <p id="transcript-transcriber"></p>
-                            <p id="transcript-transcriptionDate"></p>
-                            <p id="transcript-reviewer"></p>
-                            <p id="transcript-reviewDate"></p>
+                            <p>Requested by: </p>
+                            <span id="transcript-requestor"></span>
+                            <p>Requested on: </p>
+                            <span id="transcript-requestDate"></span>
+                            <p>Prepared by: </p>
+                            <span id="transcript-preparer"></span>
+                            <p>Prepared Completed on: </p>
+                            <span id="transcript-prepareDate"></span>
+                            <p>Transcribed by: </p>
+                            <span id="transcript-transcriber"></span>
+                            <p>Transcription Completed on: </p>
+                            <span id="transcript-transcriptionDate"></span>
+                            <p>Reviewed by: </p>
+                            <span id="transcript-reviewer"></span>
+                            <p>Review Completed on: </p>
+                            <span id="transcript-reviewDate"></span>
                             <h3>Notes</h3>
-                            <p onclick="editItem('requestNotes')" id="transcript-requestNotes"><b>Request Notes: </b>
-                            </p>
-                            <p onclick="editItem('returnToPrepNote')" id="transcript-returnNotes"><b>Return to prepare
+                            <p>Request Notes: </p>
+                            <span onclick="editItem('requestNotes')" id="transcript-requestNotes"><b>Request Notes: </b>
+                            </span>
+                            <p>Return to Prep Notes: </p>
+                            <span onclick="editItem('returnToPrepNote')" id="transcript-returnNotes"><b>Return to prepare
                                     notes: </b>
-                            </p>
+                            </span>
                             <button id="btn-edit-transcript" class="btn-hover" onclick="editTranscript()">Edit</button>
                         </div>
                     </div>
@@ -250,121 +275,6 @@
         </div>
 
     </main>
-
-    <section class="dup hide" id="edit-window">
-        <div class="dup-content">
-
-            <div class="dup-header">
-                <h2>Edit Information</h2>
-            </div>
-
-            <div id="edit-info-field">
-                <h3>Transcript Info</h3>
-                <div>
-                    <p>Title</p>
-                    <input id="edit-info-title" type="text"></input>
-                </div>
-                <div>
-                    <p>Stage</p>
-                    <select id="edit-info-stage">
-                        <option>- - -</option>
-                        <option>Ready for Prep</option>
-                        <option>In Prep</option>
-                        <option>Ready for Transcription</option>
-                        <option>Ready for Review</option>
-                        <option>In Review</option>
-                        <option>Review Completed</option>
-                        <option>Finished</option>
-                    </select>
-                </div>
-                <div>
-                    <p>Course Code(s)</p>
-                    <a id="add-course-code" onclick="addCourseCodeSelect()">+</a>
-                    <select id="edit-info-courses" type="text"></select>
-                </div>
-                <div>
-                    <p>Priority</p>
-                    <select id="edit-info-priority">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                    </select>
-                </div>
-                <div>
-                    <p>Type</p>
-                    <select id="edit-info-type">
-                        <option>- - -</option>
-                        <option>Video</option>
-                        <option>Audio</option>
-                        <option>Alt Text</option>
-                        <option>Slide Show</option>
-                    </select>
-                </div>
-                <div>
-                    <p>Length</p>
-                    <input id="edit-info-length" type="text"></input>
-                </div>
-                <div>
-                    <p>Google Doc Edit Link</p>
-                    <input id="edit-info-docedit" type="text"></input>
-                </div>
-                <div>
-                    <p>Google Doc Publish Link</p>
-                    <input id="edit-info-docpub" type="text"></input>
-                </div>
-                <div>
-                    <p>LMS URL</p>
-                    <input id="edit-info-lms" type="text"></input>
-                </div>
-                <div>
-                    <p>Media URL</p>
-                    <input id="edit-info-media" type="text"></input>
-                </div>
-                <div>
-                    <p>Verbit Used?</p>
-                    <select id="edit-info-isverbit">
-                        <option>- - -</option>
-                        <option>True</option>
-                        <option>False</option>
-                    </select>
-                </div>
-                <div>
-                    <p>Verbit ID</p>
-                    <input id="edit-info-verbitid" type="text"></input>
-                </div>
-            </div>
-
-            <div id="notes-info-field">
-                <h3>Participating Users</h3>
-                <p>Requested by</p>
-                <span id="edit-info-requested-by"></span>
-                <p>Requested on</p>
-                <span id="edit-info-requested-on"></span>
-                <p>Prepared by</p>
-                <span id="edit-info-prepared-by"></span>
-                <p>Prepared Completed on</p>
-                <span id="edit-info-prepared-on"></span>
-                <p>Transcribed by</p>
-                <span id="edit-info-transcribe-by"></span>
-                <p>Transcription Completed on</p>
-                <span id="edit-info-transcribe-on"></span>
-                <p>Reviewed by</p>
-                <span id="edit-info-review-by"></span>
-                <p>Review Completed on</p>
-                <span id="edit-info-review-on"></span>
-
-                <h3>Comments</h3>
-                <span id="edit-info-comment"></span>
-            </div>
-
-            <div class="btn-box">
-                <button id="confirmEditBtn">Confirm</button>
-                <button id="cancelEditBtn" onclick="closeEditWindow()">Cancel</button>
-                <button id="btn-delete-transcript" class="btn-hover red">Delete Transcript</button>
-            </div>
-        </div>
-    </section>
 
 </body>
 
