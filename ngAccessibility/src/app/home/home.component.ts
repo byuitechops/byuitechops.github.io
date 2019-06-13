@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
     ja = false;
     announce: string;
 
-    constructor(public auth:AuthService, public db:DatabaseService) {
+    constructor(public auth: AuthService, public db: DatabaseService) {
         this.announce = db.annouce.content;
         console.log(this.announce);
     }
