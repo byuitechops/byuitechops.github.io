@@ -7,9 +7,10 @@ import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { fillProperties } from '@angular/core/src/util/property';
 import { RouterModule } from '@angular/router';
-import { RequestComponent } from './request/request.component';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { HomeComponent } from './home/home.component';
+
+
+import { NgAisModule } from 'angular-instantsearch';
+
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestore } from '@angular/fire/firestore/firestore';
 
@@ -23,6 +24,9 @@ import { MasterComponent } from './master/master.component';
 import { LoginComponent } from './login/login.component';
 import { NotLoggedComponent } from './not-logged/not-logged.component';
 import { EditBoxComponent } from './edit-box/edit-box.component';
+import { RequestComponent } from './request/request.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +41,7 @@ import { EditBoxComponent } from './edit-box/edit-box.component';
     MasterComponent,
     LoginComponent,
     NotLoggedComponent,
-    EditBoxComponent
+    EditBoxComponent,
   ],
   imports: [
     BrowserModule,
@@ -79,7 +83,8 @@ import { EditBoxComponent } from './edit-box/edit-box.component';
         path: '**',
         component: HomeComponent
       },
-    ])
+    ]),
+    NgAisModule.forRoot()
   ],
   providers: [ AngularFirestore ],
   bootstrap: [AppComponent]

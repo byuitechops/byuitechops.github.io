@@ -1,8 +1,6 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import algoliasearch from 'algoliasearch';
-const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-
 admin.initializeApp();
 
 const env = functions.config();
@@ -30,35 +28,26 @@ exports.algoliaDelete = functions
         return index.deleteObject(objectID);
     });
 
-// export const algoliaUpdate = functions.firestore.document('accessibility/{docID}')
-//     .onWrite((snap, context) =>{
-//         const data = snap.data();
-//         const objectID = snap.id;
+exports.firestoreOnWrite = functions.firestore.document('accessibility/{docID}')
+    .onWrite((change, context) => {
+        if(change.after.exists){
+            console.log('Copying to Algolia');
 
-//         return index.addObject({
-//             objectID,
-//             ...data
-//         });
-//     });
+            const newDataObject = change.after.data();
+            const objectID = change.after.id;
 
-// Export all content is being exported from algolia from firebase /accessibility
-exports.addFirestoreData = functions.https.onRequest((req, res) =>{
-    const list = new Array();
-    db.collection("accessibility").get()
-    .then((docs) =>{
-        docs.forEach((doc) =>{
-            const transcript = doc.data()
-            transcript.objectID = doc.id;
-
-            list.push(transcript);
-
-        });
-
-        index.saveObject(list, function (err, content){
-            res.status(200).send(content);
-        });
-    }).catch((err)=>{
-        console.log(err);
-    })
-});
-
+            return index.saveObject({
+                objectID,
+                ...newDataObject
+            })
+            .then((success) => {
+                console.log(success);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        } else {
+            const objectID = change.before.id;
+            return index.deleteObject(objectID);
+        }
+    });

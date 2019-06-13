@@ -9,9 +9,12 @@ db.collection("users").get().then((querySnapshot) => {
 });
 db.collection("accessibility").get().then((querySnapshot) => {
   querySnapshot.forEach((documentSnapshot) => {
-    count++;
-    data += JSON.stringify(documentSnapshot.data());
-    console.log(count);
+    db.collection('accessibility').doc(documentSnapshot.id).update({
+      height: 315
+    });
+    // count++;
+    // data += JSON.stringify(documentSnapshot.data());
+    // console.log(count);
   });
 });
 
@@ -44,8 +47,21 @@ db.collection("team").doc("points").collection("pointItems").get().then((querySn
 });
 db.collection("users").get().then((querySnapshot) => {
   querySnapshot.forEach((documentSnapshot) => {
-      db.collection("users").doc(documentSnapshot.id).update({
-        storeManager: false
-      });
+    db.collection("users").doc(documentSnapshot.id).update({
+      storeManager: false
+    });
+  });
+});
+
+
+
+db.collection("accessibility").get().then((querySnapshot) => {
+  querySnapshot.forEach((documentSnapshot) => {
+    if (documentSnapshot && documentSnapshot.exists) {
+      var data = documentSnapshot.data();
+      console.log(documentSnapshot.id);
+      db.collection('accessibility').doc(documentSnapshot.id).delete();
+      db.collection('accessibility').doc(documentSnapshot.id).set(data);
+    }
   });
 });

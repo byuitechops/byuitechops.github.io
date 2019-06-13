@@ -9,4 +9,12 @@ export class DatabaseService {
   constructor(public db: AngularFirestore) {
     this.annouce = db.collection('announcements').doc('announcement').get();
   }
+
+  async newTranscript(data) {
+    const dup = await this.dupCheck();
+    this.db.collection('accessibility').doc().set(data);
+  }
+  dupCheck() {
+
+  }
 }
