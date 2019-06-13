@@ -350,7 +350,7 @@ function addCourseCodeSelect() {
  *      writing over the old data.
  *********************************************/
 function confirmEdit() {
-    document.getElementById("")
+    document.getElementById("");
 }
 
 
