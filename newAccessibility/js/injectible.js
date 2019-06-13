@@ -311,11 +311,6 @@ function fillEditFields() {
     }
 }
 
-db.collection("accessibility").doc("OTlqN0dmAvbGD1lJrnwX").update({
-    backupCode: "AAA100",
-    
-});
-
 
 /*********************************************
  *  Display Verbit Box
