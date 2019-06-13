@@ -54,7 +54,6 @@ const currentRevOn       = document.getElementById("transcript-reviewDate");
  *      -   Create Edit Transcript Window
  *      -   Fill Edit Fields
  *      -   Fill Is Verbit On Change
- *      -   Clear Edit Window Fields
  *      -   Add Course Code Select
  *      -   Confirm Edit
  *      -   Save New Value
@@ -335,22 +334,12 @@ function displayVerbitBox() {
 
 
 /*********************************************
- *  Clear Edit Window Fields
- *      Erases the values in the fields of the editing
- *      transcript window
- *********************************************/
-function clearEditWindowFields() {
-    
-}
-
-
-/*********************************************
  *  Add Course Code Select
  *      Adds a drop down select for the user which shows
  *      every course on the course catalog as an option.
  *********************************************/
 function addCourseCodeSelect() {
-    
+    // To be created
 }
 
 
@@ -361,7 +350,7 @@ function addCourseCodeSelect() {
  *      writing over the old data.
  *********************************************/
 function confirmEdit() {
-
+    document.getElementById("")
 }
 
 
@@ -370,8 +359,16 @@ function confirmEdit() {
  *      Saves an individual value for the variable that
  *      is passed to the database.
  *********************************************/
-function saveNewValue() {
+function saveNewValue(docID, fieldName, fieldValue) {
+    var db = firebase.database();
 
+    if (docID) {
+        if (fieldName) {
+            db.collection("accessibility").document(docID).update({
+                fieldName : fieldValue
+            })
+        }
+    }
 }
 
 
@@ -391,7 +388,8 @@ function deleteTranscript() {
  *      window from the current HTML page.
  *********************************************/
 function closeEditWindow() {
-    const editWindow     = document.getElementById("edit-window");
+    const editWindow = document.getElementById("edit-window");
+    
     if (editWindow) {
         editWindow.remove();
     }
