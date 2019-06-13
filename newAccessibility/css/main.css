@@ -115,6 +115,11 @@ input::placeholder {
     color: white !important;
     border: none !important;
 }
+.red:active {
+    border: 2px solid red !important;
+    color: var(--terciary-color) !important;
+    background-color: #AD0C20 !important;
+}
 
 .container-start {
   display: flex;
@@ -178,10 +183,6 @@ input::placeholder {
 
 .cover-35 {
   width: 35%;
-}
-
-.real-half {
-  width: 50%;
 }
 
 .nice-overflow {
@@ -306,6 +307,28 @@ main {
 .text-center { 
   padding-right: 5rem;
 }
+
+
+.real-half {
+    width: 50%;
+    display: flex;
+    flex-flow: row wrap;
+    margin: 0;
+    padding: 0;
+}
+.real-half div {
+    width: 100%;
+}
+.real-half p {
+    width: 40%;
+    margin: 0;
+    padding: 0;
+}
+.real-half span {
+    width: 60%;
+    margin: 5px 0 0;
+}
+
 
 .hide {
   display: none;
@@ -448,6 +471,7 @@ main {
 #edit-info-field div, #notes-info-field div {
     width: 100%;
     display: flex;
+    flex-flow: row wrap;
     margin: 0;
     padding: 3px;
 }
@@ -456,8 +480,11 @@ main {
     cursor: default;
 }
 #edit-info-field input,select, #notes-info-field span {
-    width: 400px;
+    width: 350px;
     height: 25px;
+}
+#notes-info-field span {
+    width: 400px;
 }
 #edit-info-field input,select {
     padding: 3px 10px;
@@ -482,7 +509,7 @@ main {
     cursor: pointer;
 }
 #edit-info-field select {
-    width: 250px;
+    width: 200px;
     margin: 0;
 }
 
@@ -1370,7 +1397,7 @@ background: #D2D2D2
 
 #master-content #right-master .box { 
   background-color: var(--content-color);
-  height: 70vh;
+  height: 75vh;
   width: 100%;
 }
 
@@ -1459,7 +1486,7 @@ background: #D2D2D2
 }
 
 #master-content #right-master .transcript-info-box { 
-  padding: 4rem;
+  padding: 3rem;
 }
 
 #master-content #right-master .transcript-info-box p {
