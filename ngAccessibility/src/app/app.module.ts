@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { fillProperties } from '@angular/core/src/util/property';
 import { RouterModule } from '@angular/router';
 
 
@@ -27,6 +26,7 @@ import { EditBoxComponent } from './edit-box/edit-box.component';
 import { RequestComponent } from './request/request.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { HomeComponent } from './home/home.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -42,8 +42,10 @@ import { HomeComponent } from './home/home.component';
     LoginComponent,
     NotLoggedComponent,
     EditBoxComponent,
+    SearchComponent,
   ],
   imports: [
+    NgAisModule.forRoot(),
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
@@ -84,7 +86,6 @@ import { HomeComponent } from './home/home.component';
         component: HomeComponent
       },
     ]),
-    NgAisModule.forRoot()
   ],
   providers: [ AngularFirestore ],
   bootstrap: [AppComponent]
