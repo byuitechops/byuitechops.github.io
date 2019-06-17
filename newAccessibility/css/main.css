@@ -484,7 +484,8 @@ main {
     height: 25px;
 }
 #notes-info-field span {
-    width: 400px;
+    width: 300px;
+    margin: 4px 0 0 20px;
 }
 #edit-info-field input,select {
     padding: 3px 10px;

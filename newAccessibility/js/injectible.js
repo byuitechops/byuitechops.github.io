@@ -176,22 +176,38 @@ function createEditTranscriptWindow() {
 
                     <div id="notes-info-field">
                         <h3>Participating Users</h3>
-                        <p>Requested by</p>
-                        <span id="edit-info-requested-by"></span>
-                        <p>Requested on</p>
-                        <span id="edit-info-requested-on"></span>
-                        <p>Prepared by</p>
-                        <span id="edit-info-prepared-by"></span>
-                        <p>Prepared Completed on</p>
-                        <span id="edit-info-prepared-on"></span>
-                        <p>Transcribed by</p>
-                        <span id="edit-info-transcribe-by"></span>
-                        <p>Transcription Completed on</p>
-                        <span id="edit-info-transcribe-on"></span>
-                        <p>Reviewed by</p>
-                        <span id="edit-info-review-by"></span>
-                        <p>Review Completed on</p>
-                        <span id="edit-info-review-on"></span>
+                        <div>
+                            <p>Requested by</p>
+                            <span id="edit-info-requested-by"></span>
+                        </div>
+                        <div>
+                            <p>Requested on</p>
+                            <span id="edit-info-requested-on"></span>
+                        </div>
+                        <div>
+                            <p>Prepared by</p>
+                            <span id="edit-info-prepared-by"></span>
+                        </div>
+                        <div>
+                            <p>Prepared Completed on</p>
+                            <span id="edit-info-prepared-on"></span>
+                        </div>
+                        <div>
+                            <p>Transcribed by</p>
+                            <span id="edit-info-transcribe-by"></span>
+                        </div>
+                        <div>
+                            <p>Transcription Completed on</p>
+                            <span id="edit-info-transcribe-on"></span>
+                        </div>
+                        <div>
+                            <p>Reviewed by</p>
+                            <span id="edit-info-review-by"></span>
+                        </div>
+                        <div>
+                            <p>Review Completed on</p>
+                            <span id="edit-info-review-on"></span>
+                        </div>
 
                         <h3>Comments</h3>
                         <span id="edit-info-comment"></span>
