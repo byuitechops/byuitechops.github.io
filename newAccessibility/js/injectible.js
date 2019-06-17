@@ -93,7 +93,7 @@ function createEditTranscriptWindow() {
 
                     <div id="edit-info-field">
                         <h3>Transcript Info</h3>
-                        <div class="">
+                        <div class="hide">
                             <p>ID</p>
                             <p id="edit-info-id"></p>
                         </div>
