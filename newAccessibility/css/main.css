@@ -484,13 +484,15 @@ main {
     height: 25px;
 }
 #notes-info-field span {
-    width: 400px;
+    width: 300px;
+    margin: 4px 0 0 20px;
 }
 #edit-info-field input,select {
     padding: 3px 10px;
     border: 1px solid #888;
     border-radius: 3px;
     outline: none;
+    transition: all .2s;
 }
 #edit-info-field input:focus,select:focus {
     box-shadow: 0 3px 5px 0 #aaa;

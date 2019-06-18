@@ -18,6 +18,7 @@ const main               = document.getElementById("main");
 
 const infoField          = document.getElementById("transcript-info-field");
 
+var currentID            = document.getElementById("storeTranscriptID");
 const currentTitle       = document.getElementById("transcript-title");
 const currentStage       = document.getElementById("transcript-status");
 const currentCourses     = document.getElementById("transcript-code");
@@ -87,11 +88,15 @@ function createEditTranscriptWindow() {
                 <div class="dup-content">
 
                     <div class="dup-header">
-                        <h2>Edit Information: - ! Under Construction ! -</h2>
+                        <h2>Edit Information:</h2>
                     </div>
 
                     <div id="edit-info-field">
                         <h3>Transcript Info</h3>
+                        <div class="hide">
+                            <p>ID</p>
+                            <p id="edit-info-id"></p>
+                        </div>
                         <div>
                             <p>Title</p>
                             <input id="edit-info-title" type="text"></input>
@@ -100,18 +105,19 @@ function createEditTranscriptWindow() {
                             <p>Stage</p>
                             <select id="edit-info-stage">
                                 <option value="0">- - -</option>
-                                <option value="1">Ready for Prep</option>
-                                <option value="2">In Prep</option>
-                                <option value="3">Ready for Transcription</option>
-                                <option value="4">Ready for Review</option>
-                                <option value="5">In Review</option>
-                                <option value="6">Review Completed</option>
-                                <option value="7">Finished</option>
+                                <option value="Ready for Prep">Ready for Prep</option>
+                                <option value="In Prep">In Prep</option>
+                                <option value="Ready for Transcription">Ready for Transcription</option>
+                                <option value="In Transcription">In Transcription</option>
+                                <option value="Ready for Review">Ready for Review</option>
+                                <option value="In Review">In Review</option>
+                                <option value="Review Completed">Review Completed</option>
+                                <option value="Finished">Finished</option>
                             </select>
                         </div>
                         <div>
                             <p>Course Code(s)</p>
-                            <a id="add-course-code" onclick="addCourseCodeSelect()">+</a>
+                            <a class="hide" id="add-course-code" onclick="addCourseCodeSelect()">+</a>
                             <input id="edit-info-courses" type="text"></input>
                         </div>
                         <div>
@@ -128,10 +134,10 @@ function createEditTranscriptWindow() {
                             <p>Type</p>
                             <select id="edit-info-type">
                                 <option value="0">- - -</option>
-                                <option value="1">Video</option>
-                                <option value="2">Audio</option>
-                                <option value="3">Alt Text</option>
-                                <option value="4">Slide Show</option>
+                                <option value="Video">Video</option>
+                                <option value="Audio">Audio</option>
+                                <option value="Alt Text">Alt Text</option>
+                                <option value="Slide Show">Slide Show</option>
                             </select>
                         </div>
                         <div>
@@ -158,8 +164,8 @@ function createEditTranscriptWindow() {
                             <p>Verbit Used?</p>
                             <select id="edit-info-isverbit" onchange="displayVerbitBox()">
                                 <option value="0">- - -</option>
-                                <option value="1">True</option>
-                                <option value="2">False</option>
+                                <option value="true">True</option>
+                                <option value="false">False</option>
                             </select>
                         </div>
                         <div id="verbit-id-box">
@@ -170,22 +176,38 @@ function createEditTranscriptWindow() {
 
                     <div id="notes-info-field">
                         <h3>Participating Users</h3>
-                        <p>Requested by</p>
-                        <span id="edit-info-requested-by"></span>
-                        <p>Requested on</p>
-                        <span id="edit-info-requested-on"></span>
-                        <p>Prepared by</p>
-                        <span id="edit-info-prepared-by"></span>
-                        <p>Prepared Completed on</p>
-                        <span id="edit-info-prepared-on"></span>
-                        <p>Transcribed by</p>
-                        <span id="edit-info-transcribe-by"></span>
-                        <p>Transcription Completed on</p>
-                        <span id="edit-info-transcribe-on"></span>
-                        <p>Reviewed by</p>
-                        <span id="edit-info-review-by"></span>
-                        <p>Review Completed on</p>
-                        <span id="edit-info-review-on"></span>
+                        <div>
+                            <p>Requested by</p>
+                            <span id="edit-info-requested-by"></span>
+                        </div>
+                        <div>
+                            <p>Requested on</p>
+                            <span id="edit-info-requested-on"></span>
+                        </div>
+                        <div>
+                            <p>Prepared by</p>
+                            <span id="edit-info-prepared-by"></span>
+                        </div>
+                        <div>
+                            <p>Prepared Completed on</p>
+                            <span id="edit-info-prepared-on"></span>
+                        </div>
+                        <div>
+                            <p>Transcribed by</p>
+                            <span id="edit-info-transcribe-by"></span>
+                        </div>
+                        <div>
+                            <p>Transcription Completed on</p>
+                            <span id="edit-info-transcribe-on"></span>
+                        </div>
+                        <div>
+                            <p>Reviewed by</p>
+                            <span id="edit-info-review-by"></span>
+                        </div>
+                        <div>
+                            <p>Review Completed on</p>
+                            <span id="edit-info-review-on"></span>
+                        </div>
 
                         <h3>Comments</h3>
                         <span id="edit-info-comment"></span>
@@ -194,7 +216,7 @@ function createEditTranscriptWindow() {
                     <div class="btn-box">
                         <button id="confirmEditBtn" onclick="confirmEdit()">Confirm</button>
                         <button id="cancelEditBtn" onclick="closeEditWindow()">Cancel</button>
-                        <button id="btn-delete-transcript" class="btn-hover red" onclick="deleteTranscript()">Delete Transcript</button>
+                        <button class="hide" id="btn-delete-transcript" class="btn-hover red" onclick="deleteTranscript()">Delete Transcript</button>
                     </div>
                 </div>
             </section>
@@ -210,6 +232,7 @@ function createEditTranscriptWindow() {
  *********************************************/
 function fillEditFields() {
 
+    const fillID        = document.getElementById("edit-info-id");
     const fillTitle     = document.getElementById("edit-info-title");
     const fillStage     = document.getElementById("edit-info-stage");
     const fillCourses   = document.getElementById("edit-info-courses");
@@ -231,19 +254,22 @@ function fillEditFields() {
     const fillRevBy     = document.getElementById("edit-info-review-by");
     const fillRevOn     = document.getElementById("edit-info-review-on");
 
-    
+    if (currentID) {
+        fillID.innerHTML = currentID.innerHTML;
+    }
     if (currentTitle.innerHTML) {
         fillTitle.value = currentTitle.innerHTML;
     }
     switch (currentStage.innerHTML) {
-        case "Ready for Prep":          fillStage.value = 1; break;
-        case "In Prep":                 fillStage.value = 2; break;
-        case "Ready for Transcription": fillStage.value = 3; break;
-        case "Ready for Review":        fillStage.value = 4; break;
-        case "In Review":               fillStage.value = 5; break;
-        case "Review Completed":        fillStage.value = 6; break;
-        case "Finished":                fillStage.value = 7; break;
-        default:                        fillStage.value = 0; break;
+        case "Ready for Prep":          fillStage.value = "Ready for Prep";          break;
+        case "In Prep":                 fillStage.value = "In Prep";                 break;
+        case "Ready for Transcription": fillStage.value = "Ready for Transcription"; break;
+        case "In Transcription":        fillStage.value = "In Transcription";        break;
+        case "Ready for Review":        fillStage.value = "Ready for Review";        break;
+        case "In Review":               fillStage.value = "In Review";               break;
+        case "Review Completed":        fillStage.value = "Review Completed";        break;
+        case "Finished":                fillStage.value = "Finished";                break;
+        default:                        fillStage.value = 0;                         break;
     }
     if (currentCourses.innerHTML) {
         fillCourses.value = currentCourses.innerHTML
@@ -256,10 +282,10 @@ function fillEditFields() {
         default:   fillPriority.value = 0; break;
     }
     switch (currentType.innerHTML) {
-        case "Video":      fillType.value = 1; break;
-        case "Audio":      fillType.value = 2; break;
-        case "Alt Text":   fillType.value = 3; break;
-        case "Slide Show": fillType.value = 4; break;
+        case "Video":      fillType.value = "Video"; break;
+        case "Audio":      fillType.value = "Audio"; break;
+        case "Alt Text":   fillType.value = "Alt Text"; break;
+        case "Slide Show": fillType.value = "Slide Show"; break;
         default:           fillType.value = 0; break;
     }
     if (currentLength.innerHTML) {
@@ -278,9 +304,9 @@ function fillEditFields() {
         fillMedia.value = currentMedia.href;
     }
     switch (currentIsVerbit.innerHTML) {
-        case "true":  fillIsVerbit.value = 1; break;
-        case "false": fillIsVerbit.value = 2; break;
-        default:      fillIsVerbit.value = 0; break;
+        case "true":  fillIsVerbit.value = "true";  break;
+        case "false": fillIsVerbit.value = "false"; break;
+        default:      fillIsVerbit.value = 0;       break;
     }
     displayVerbitBox();
 
@@ -321,7 +347,7 @@ function displayVerbitBox() {
     const fillVerbitID = document.getElementById("edit-info-verbitid");
     const fillVIDbox   = document.getElementById("verbit-id-box");
 
-    if (fillIsVerbit.value == "1") {
+    if (fillIsVerbit.value == "true") {
         fillVIDbox.classList.remove("hide");
         if (currentVerbitID.innerHTML) {
             fillVerbitID.value = currentVerbitID.innerHTML;
@@ -350,25 +376,43 @@ function addCourseCodeSelect() {
  *      writing over the old data.
  *********************************************/
 function confirmEdit() {
-    document.getElementById("");
-}
 
+    const fillTitle     = document.getElementById("edit-info-title").value;
+    const fillStage     = document.getElementById("edit-info-stage").value;
+    const fillCourses   = document.getElementById("edit-info-courses").value;
+    const fillPriority  = document.getElementById("edit-info-priority").value;
+    const fillType      = document.getElementById("edit-info-type").value;
+    const fillLength    = document.getElementById("edit-info-length").value;
+    const fillDocEdit   = document.getElementById("edit-info-docedit").value;
+    const fillDocPub    = document.getElementById("edit-info-docpub").value;
+    const fillLMS       = document.getElementById("edit-info-lms").value;
+    const fillMedia     = document.getElementById("edit-info-media").value;
+    const fillIsVerbit  = document.getElementById("edit-info-isverbit").value;
+    const fillVerbitID  = document.getElementById("edit-info-verbitid").value;
+    
+    currentID           = document.getElementById("storeTranscriptID").innerHTML;
 
-/*********************************************
- *  Save New Value
- *      Saves an individual value for the variable that
- *      is passed to the database.
- *********************************************/
-function saveNewValue(docID, fieldName, fieldValue) {
-    var db = firebase.database();
+    db.collection("accessibility").doc(currentID).update({
+        "title":         fillTitle,
+        "status":        fillStage,
+        "courseCode":    fillCourses,
+        "priority":      fillPriority,
+        "type":          fillType,
+        "length":        fillLength,
+        "docEditURL":    fillDocEdit,
+        "docPublishURL": fillDocPub,
+        "lmsURL":        fillLMS,
+        "srcURL":        fillMedia,
+        "verbit":        fillIsVerbit,
+        "verbitID":      fillVerbitID
+    }).then(() => {
+        console.log("success");
+    }).catch((error) => {
+        console.log(error);
+    })
 
-    if (docID) {
-        if (fieldName) {
-            db.collection("accessibility").document(docID).update({
-                fieldName : fieldValue
-            })
-        }
-    }
+    closeEditWindow();
+    displayTranscriptInfo(currentID);
 }
 
 
