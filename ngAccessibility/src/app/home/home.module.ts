@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home/home.component';
-import { LogsComponent } from './logs/logs.component';
+import { StatsComponent } from './stats/stats.component';
 
 @NgModule({
-  declarations: [HomeComponent, LogsComponent],
+  declarations: [
+    HomeComponent,
+    StatsComponent,
+  ],
   imports: [
     CommonModule
   ]
