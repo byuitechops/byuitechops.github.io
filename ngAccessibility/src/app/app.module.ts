@@ -14,9 +14,10 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { auth } from 'firebase/app';
 
-import { MatButtonModule,  MatCardModule, MatFormFieldModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from './core/auth.service';
+import { DatabaseService } from './core/database.service';
+
 import { environment } from 'src/environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -35,12 +36,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatButtonModule,
-    MatCardModule,
-    MatFormFieldModule,
   ],
   providers: [
     AuthService,
+    DatabaseService,
     AngularFireAuth,
     AngularFirestore
   ],

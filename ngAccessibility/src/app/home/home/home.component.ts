@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DatabaseService } from 'src/app/core/database.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  announce = 'Loading....';
 
-  ngOnInit() {
+  constructor(public db: DatabaseService) {
+
+  }
+
+  async ngOnInit() {
+    this.announce = await this.db.announcement;
+    console.log(this.db.announcement);
   }
 
 }

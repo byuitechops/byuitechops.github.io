@@ -28,7 +28,9 @@ export class AuthService {
         db.collection('users', ref => {
           // querry statement
           return ref.where('name', '==', this.userName);
-        });
+        })
+      } else {
+        this.authenticated = false;
       }
     });
   }
@@ -70,6 +72,8 @@ export class AuthService {
 
   logout() {
     this.af.auth
-      .signOut();
+      .signOut().then(() => {
+        this.authenticated = false;
+      });
   }
 }
