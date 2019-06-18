@@ -7,6 +7,18 @@ import { RequestComponent } from './request/request.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { HomeComponent } from './home/home/home.component';
 import { SearchComponent } from './transcription/search/search.component';
+import { AuthPageComponent } from './auth-page/auth-page.component';
+
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { auth } from 'firebase/app';
+
+import { MatButtonModule,  MatCardModule, MatFormFieldModule } from '@angular/material';
+import { FormsModule } from '@angular/forms';
+import { AuthService } from './core/auth.service';
+import { environment } from 'src/environments/environment';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -14,14 +26,27 @@ import { SearchComponent } from './transcription/search/search.component';
     RequestComponent,
     NavBarComponent,
     HomeComponent,
-    SearchComponent
+    SearchComponent,
+    AuthPageComponent
   ],
   imports: [
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatCardModule,
+    MatFormFieldModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    AuthService,
+    AngularFireAuth,
+    AngularFirestore
+  ],
+  bootstrap: [
+    AppComponent,
+  ]
 })
 
 export class AppModule { }

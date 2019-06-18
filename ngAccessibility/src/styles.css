@@ -1450,3 +1450,6 @@ background: #D2D2D2
 #master-content #right-master .transcript-info-box p {
   padding: .5rem 0;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: 'Roboto', sans-serif; }
