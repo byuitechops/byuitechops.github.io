@@ -47,12 +47,34 @@ a {
     transition: .2s;
 }
 .icon:hover {
-    box-shadow: 0 0 5px 0px #000000;
+    box-shadow: 0 0 5px 0px var(--black);
 }
 .icon:active {
     box-shadow: none;
 }
 
-button {
+input {
+    width: 250px;
+    margin: 5px;
+    padding: 4px 10px;
 
+    border: none;
+    border-style: none;
+    border-radius: 50px;
+    outline: none;
+}
+button {
+    width: auto;
+    margin: 2px;
+    padding: 10px 15px;
+
+    color: var(--white);
+    background-color: var(--primary);
+    border: ;
+    border-style: none;
+    border-radius: 3px;
+    outline: none;
+}
+input:hover, input:active {
+    box-shadow: 0 0 5px 0px var(--black);
 }
