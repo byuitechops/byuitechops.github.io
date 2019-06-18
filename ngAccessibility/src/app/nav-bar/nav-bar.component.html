@@ -1,4 +1,7 @@
 <nav id="main-nav">
+
+    <img class="icon" src="../../assets/icons/menuIcon.png" alt="Menu">
+
     <ul>
         <a id="home-tab" routerLink="./home" routerLinkActive="active">
             <li><i class="fas fa-home fa-2x"></i>
@@ -16,7 +19,7 @@
             </li>
         </a>
         <a id="transcribe-tab" routerLink="" routerLinkActive="active">
-            <li><i class="far fa-edit fa-2x"></i>
+            <li> <i class="far fa-edit fa-2x"></i>
                 Transcribe
             </li>
         </a>
@@ -30,18 +33,19 @@
                 Copyedit Check
             </li>
         </a>
-        <a id="master-tab" routerLink="" routerLinkActive="active">
-            <li> <i class="fas fa-user-shield fa-2x"></i>
-                Master
-            </li>
-        </a>
-
-        <div class="container row center byuiLogo">
-            <h2>Accessibility</h2>
-            <img src="../assets/byuiLogo.png" alt="">
-            </div>
-        <div class="container row center logout btn-hover">
-            <p> Log Out </p>
-        </div>
     </ul>
+
+    <div id="logo-box">
+        <img src="../assets/byuiLogo.png" alt="">
+        <h2>Accessibility</h2>
+    </div>
+
+    <div id="search-box">
+        <img class="icon" src="../../assets/icons/searchIcon.png" alt="Search">
+    </div>
+
+    <div id="logout-box">
+        <img class="icon" src="../../assets/icons/logoutIcon.png" alt="Log Out">
+    </div>
+
 </nav>
