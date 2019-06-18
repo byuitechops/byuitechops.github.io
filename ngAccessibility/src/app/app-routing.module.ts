@@ -29,6 +29,10 @@ const routes: Routes = [
     {
         path: 'transcription/:step',
         component: SearchComponent
+    },
+    {
+        path: '**',
+        component: HomeComponent
     }
 ];
 
