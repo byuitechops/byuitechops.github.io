@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../core/auth.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { MatButtonModule,  MatCardModule, MatFormFieldModule } from '@angular/material';
 
 import { auth } from 'firebase/app';
 
