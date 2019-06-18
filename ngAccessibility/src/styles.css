@@ -4,6 +4,13 @@
 *
 ******************************************************/
 
+
+:root {
+    --primary: #0076C6;
+    --white: #ffffff;
+    --black: #000000;
+}
+
 @import url('https://fonts.googleapis.com/css?family=Merriweather:300,400,700|Open+Sans:300,400,700&display=swap');
 
 
@@ -44,4 +51,8 @@ a {
 }
 .icon:active {
     box-shadow: none;
+}
+
+button {
+
 }
