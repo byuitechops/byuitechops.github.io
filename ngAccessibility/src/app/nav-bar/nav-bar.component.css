@@ -73,7 +73,7 @@
 #logo-box h2 {
     font-size: 16px;
 }
-#nav-search-icon {
+.ais-SearchBox-submit {
     display: none;
 }
 ais-hits {
