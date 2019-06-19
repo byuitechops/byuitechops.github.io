@@ -63,9 +63,9 @@ input {
     margin: 5px;
     padding: 4px 10px;
 
-    border: none;
+    border: 2px solid var(--primary);
     border-style: none;
-    border-radius: 50px;
+    border-radius: 5px;
     outline: none;
 }
 input:hover, input:active {
@@ -80,7 +80,7 @@ button {
     color: var(--white);
     background-color: var(--primary);
     border-style: none;
-    border-radius: 3px;
+    border-radius: 5px;
     outline: none;
 }
 

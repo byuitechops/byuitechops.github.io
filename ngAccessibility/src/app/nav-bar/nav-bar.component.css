@@ -29,7 +29,7 @@
 #main-nav ul {
     position: absolute;
     bottom: 0;
-    left: 25px;
+    left: 50px;
     width: auto;
     display: flex;
     flex-flow: row wrap;
@@ -77,13 +77,18 @@
 .ais-SearchBox-submit {
     display: none;
 }
+#nav-search-icon {
+    display: none;
+}
 ais-instantsearch {
     margin-left: auto;
+}
+.ais-SearchBox-input {
+    margin: 10px 10px 0 auto;
 }
 ais-hits {
     z-index: 1;
     position: relative;
-    top: 20px;
     width: 600px;
     display: flex;
 
@@ -122,7 +127,7 @@ ais-hits {
 
 
 
-@media only screen and (max-width: 1100px) {
+@media only screen and (max-width: 1000px) {
     ais-search-box {
         display: none;
     }
@@ -131,7 +136,7 @@ ais-hits {
     }
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 700px) {
     #menu-icon {
         display: initial;
     }
