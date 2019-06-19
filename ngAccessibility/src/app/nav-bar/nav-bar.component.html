@@ -41,20 +41,19 @@
   </div>
 
   <ais-instantsearch [config]="search.config">
-    <ais-search-box>
+    <ais-search-box (change)="searchChanged($event)">
       <img class="icon" src="../../assets/icons/searchIcon.png" alt="Search">
     </ais-search-box>
+    <ais-configure [searchParameters]="{ hitsPerPage: 10 }"></ais-configure>
 
-    <ais-hits>
-        <ais-hits>
-            <ng-template let-hits="hits">
-              <ol class="ais-Hits-list">
-                <tr *ngFor="let hit of hits" class="ais-Hits-item">
-                  <p>{{ hit.type }} {{ hit.title }} {{ hit.courseCode }} </p>
-                </tr>
-              </ol>
-            </ng-template>
-          </ais-hits>
+    <ais-hits *ngIf="showResults">
+      <ng-template let-hits="hits">
+        <ol class="ais-Hits-list">
+          <tr *ngFor="let hit of hits" class="ais-Hits-item">
+            <p>{{ hit.type }} {{ hit.title }} {{ hit.courseCode }} </p>
+          </tr>
+        </ol>
+      </ng-template>
     </ais-hits>
   </ais-instantsearch>
 
