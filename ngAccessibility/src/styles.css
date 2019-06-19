@@ -66,6 +66,9 @@ input {
     border-radius: 50px;
     outline: none;
 }
+input:hover, input:active {
+    box-shadow: 0 0 5px 0px var(--black);
+}
 button {
     width: auto;
     margin: 2px;
@@ -78,9 +81,6 @@ button {
     border-radius: 3px;
     outline: none;
 }
-input:hover, input:active {
-    box-shadow: 0 0 5px 0px var(--black);
-}
 
 dialog {
     margin: 50px auto;
@@ -88,16 +88,4 @@ dialog {
     border: none;
     border-radius: 10px;
     box-shadow: 0 0 10px 0px var(--black);
-}
-
-
-@media only screen and (max-width: 1100px) {
-    body {
-        background-color: pink;
-    }
-}
-@media only screen and (max-width: 600px) {
-    body {
-        background-color: lightblue;
-    }
 }

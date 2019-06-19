@@ -59,11 +59,13 @@
     font-size: 16px;
 }
 #nav-search-bar {
-    display: fixed;
-    margin: 10px;
+    margin: 10px 100px 0 0;
     padding: 10px;
     
-    transition: .3s;
+    background: url(../../assets/icons/algoliaBlueMark.png) no-repeat scroll 210px 7.5px;
+    background-size: 25px 25px;
+    background-color: var(--white);
+    transition: all .3s;
 }
 #search-box img {
     display: none;
@@ -71,12 +73,6 @@
 
 
 @media only screen and (max-width: 1100px) {
-    #menu-icon {
-        display: initial;
-    }
-    #nav-links {
-        display: none !important;
-    }
     #search-box input {
         display: none;
     }
@@ -85,8 +81,13 @@
     }
 }
 
-@media only screen and (max-width: 600px) {
-
+@media only screen and (max-width: 900px) {
+    #menu-icon {
+        display: initial;
+    }
+    #nav-links {
+        display: none !important;
+    }
 }
 
 @media only screen and (max-width: 300px) {
