@@ -10,7 +10,7 @@
     --white: #ffffff;
     --black: #000000;
     --darkgray: #444444;
-    --lightgray: #dddddd;
+    --lightgray: #eeeeee;
 }
 
 
@@ -60,8 +60,9 @@
 }
 
 #logo-box {
-    width: 80px;
     display: flex;
+    position: initial;
+    width: 80px;
     margin: 5px auto;
     flex-flow: column nowrap;
     align-items: center;
@@ -75,6 +76,9 @@
 }
 .ais-SearchBox-submit {
     display: none;
+}
+ais-instantsearch {
+    margin-left: auto;
 }
 ais-hits {
     z-index: 1;
