@@ -14,6 +14,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { auth } from 'firebase/app';
 
+import { NgAisModule } from 'angular-instantsearch';
+
 import { FormsModule } from '@angular/forms';
 import { AuthService } from './core/auth.service';
 import { DatabaseService } from './core/database.service';
@@ -31,11 +33,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AuthPageComponent
   ],
   imports: [
+    NgAisModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
+    NgAisModule
   ],
   providers: [
     AuthService,

@@ -31,6 +31,11 @@ const routes: Routes = [
         component: SearchComponent
     },
     {
+      path: '',
+      redirectTo: 'home',
+      pathMatch: 'full'
+    },
+    {
         path: '**',
         component: HomeComponent
     }

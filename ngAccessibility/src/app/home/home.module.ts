@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home/home.component';
 import { StatsComponent } from './stats/stats.component';
+import { NgAisModule } from 'angular-instantsearch';
 
 @NgModule({
   declarations: [
@@ -9,7 +10,8 @@ import { StatsComponent } from './stats/stats.component';
     StatsComponent,
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    NgAisModule,
   ]
 })
 export class HomeModule { }

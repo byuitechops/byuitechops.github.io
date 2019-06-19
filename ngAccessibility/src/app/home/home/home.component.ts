@@ -11,12 +11,14 @@ export class HomeComponent implements OnInit {
   announce = 'Loading....';
 
   constructor(public db: DatabaseService) {
-
+    db.afs.collection('announcements').doc('announcement').get()
+    .forEach(doc => {
+      this.announce = doc.data().content;
+    });
   }
 
   async ngOnInit() {
-    this.announce = await this.db.announcement;
-    console.log(this.db.announcement);
+
   }
 
 }
