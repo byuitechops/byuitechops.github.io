@@ -19,7 +19,8 @@ export class DatabaseService {
   }
 
   createTranscript(data) {
-    this.afs.collection('accessibility').doc().set({
+
+    this.afs.collection('accessibility').doc(this.afs.createId()).set({
       ...data
     })
     .then(doc => {
