@@ -1,10 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore } from '@angular/fire/firestore';
-import * as firebase from 'firebase/app';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { FirebaseAuth } from '@angular/fire';
 
 
 @Injectable({
@@ -16,19 +11,13 @@ export class AuthService {
   user: any;
   authenticated = false;
 
-  constructor(private af: AngularFireAuth,
-              private db: AngularFirestore,
-              private router: Router) {
+  constructor(private af: AngularFireAuth) {
 
     this.af.auth.onAuthStateChanged(user => {
       if (user) {
         this.userName = user.displayName;
         this.user = user;
         this.authenticated = true;
-        db.collection('users', ref => {
-          // querry statement
-          return ref.where('name', '==', this.userName);
-        })
       } else {
         this.authenticated = false;
       }

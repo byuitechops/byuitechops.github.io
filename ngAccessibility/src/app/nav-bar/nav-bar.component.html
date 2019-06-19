@@ -13,22 +13,22 @@
         Request
       </li>
     </a>
-    <a id="prepare-tab" routerLink="" routerLinkActive="active">
+    <a id="prepare-tab" [routerLink]="['/transcription', 'p']" routerLinkActive="active">
       <li> <i class="far fa-file-alt fa-2x"></i>
         Prepare
       </li>
     </a>
-    <a id="transcribe-tab" routerLink="" routerLinkActive="active">
+    <a id="transcribe-tab" [routerLink]="['/transcription', 't']" routerLinkActive="active">
       <li> <i class="far fa-edit fa-2x"></i>
         Transcribe
       </li>
     </a>
-    <a id="copyEdit-tab" routerLink="" routerLinkActive="active">
+    <a id="copyEdit-tab" [routerLink]="['/transcription', 'ce']" routerLinkActive="active">
       <li> <i class="fas fa-clipboard-check fa-2x"></i>
         Copyedit
       </li>
     </a>
-    <a id="copyEditCheck-tab" routerLink="" routerLinkActive="active">
+    <a id="copyEditCheck-tab" [routerLink]="['/transcription', 'cc']" routerLinkActive="active">
       <li> <i class="fas fa-check-double fa-2x "></i>
         Copyedit Check
       </li>
