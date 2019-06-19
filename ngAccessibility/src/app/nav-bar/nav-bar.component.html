@@ -35,27 +35,32 @@
     </a>
   </ul>
 
-  <div id="logo-box">
+    <div id="logo-box">
     <img src="../assets/byuiLogo.png" alt="">
     <h2>Accessibility</h2>
-  </div>
+</div>
 
-  <ais-instantsearch [config]="search.config">
-    <ais-search-box (change)="searchChanged($event)">
-      <img class="icon" id="nav-search-icon" src="../../assets/icons/searchIcon.png" alt="Search">
-    </ais-search-box>
+<ais-instantsearch [config]="search.config">
+    <ais-search-box (change)="searchChanged($event)"></ais-search-box>
+    <img class="icon" id="nav-search-icon" src="../../assets/icons/searchIcon.png" alt="Search">
     <ais-configure [searchParameters]="{ hitsPerPage: 10 }"></ais-configure>
 
     <ais-hits *ngIf="showResults">
-      <ng-template let-hits="hits">
-        <ol class="ais-Hits-list">
-          <tr *ngFor="let hit of hits" class="ais-Hits-item">
-            <p>{{ hit.type }} {{ hit.title }} {{ hit.courseCode }} </p>
-          </tr>
-        </ol>
-      </ng-template>
+        <ng-template let-hits="hits">
+            <ol class="ais-Hits-list">
+            <div *ngFor="let hit of hits" class="ais-Hits-item">
+                <p class="hit-type">{{ hit.type }}</p>
+                <div class="hit-code">
+                    <div *ngFor="let code of hit.courseCode">
+                        <p> {{ code }} </p>
+                    </div>
+                </div>
+                <p class="hit-title">{{ hit.title }}</p>
+            </div>
+            </ol>
+        </ng-template>
     </ais-hits>
-  </ais-instantsearch>
+    </ais-instantsearch>
 
 
   <div id="logout-box">

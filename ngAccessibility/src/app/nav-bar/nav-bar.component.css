@@ -4,8 +4,20 @@
 *
 ******************************************************/
 
+
+:root {
+    --primary: #0076C6;
+    --white: #ffffff;
+    --black: #000000;
+    --darkgray: #444444;
+    --lightgray: #dddddd;
+}
+
+
 #main-nav {
+    position: relative;
     width: 100%;
+    height: 80px;
     display: flex;
     flex-flow: row wrap;
     padding: 10px 10px 0px;
@@ -15,6 +27,9 @@
     box-shadow: inset 1px -10px 15px -10px rgba(0,0,0,0.5);
 }
 #main-nav ul {
+    position: absolute;
+    bottom: 0;
+    left: 25px;
     width: auto;
     display: flex;
     flex-flow: row wrap;
@@ -58,22 +73,53 @@
 #logo-box h2 {
     font-size: 16px;
 }
-#nav-search-bar {
-    margin: 10px 100px 0 0;
-    padding: 10px;
-    
-    background: url(../../assets/icons/algoliaBlueMark.png) no-repeat scroll 210px 7.5px;
-    background-size: 25px 25px;
-    background-color: var(--white);
-    transition: all .3s;
-}
 #nav-search-icon {
     display: none;
 }
+ais-hits {
+    z-index: 1;
+    position: relative;
+    top: 20px;
+    width: 600px;
+    display: flex;
+
+    color: var(--black);
+    border-left: 4px solid var(--primary);
+    border-radius: 15px;
+    box-shadow: 0 0 5px 0px var(--darkgray);
+    overflow: auto;
+}
+.ais-Hits-item {
+    display: flex;
+    flex-flow: row wrap;
+    width: 585px;
+    margin: 5px;
+    padding: 5px;
+
+    font-size: 14px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all .1s;
+}
+.ais-Hits-item:hover {
+    background-color: var(--lightgray);
+}
+.hit-type {
+    width: 15%;
+    padding-left: 10px;
+}
+.hit-code {
+    width:  15%;
+    word-wrap: break-word;
+}
+.hit-title {
+    width: 70%;
+}
+
 
 
 @media only screen and (max-width: 1100px) {
-    #nav-search-bar {
+    ais-search-box {
         display: none;
     }
     #nav-search-icon {
