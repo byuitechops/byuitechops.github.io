@@ -67,16 +67,16 @@
     background-color: var(--white);
     transition: all .3s;
 }
-#search-box img {
+#nav-search-icon {
     display: none;
 }
 
 
 @media only screen and (max-width: 1100px) {
-    #search-box input {
+    #nav-search-bar {
         display: none;
     }
-    #search-box img {
+    #nav-search-icon {
         display: initial;
     }
 }

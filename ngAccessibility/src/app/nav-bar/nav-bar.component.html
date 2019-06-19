@@ -42,7 +42,7 @@
 
   <ais-instantsearch [config]="search.config">
     <ais-search-box (change)="searchChanged($event)">
-      <img class="icon" src="../../assets/icons/searchIcon.png" alt="Search">
+      <img class="icon" id="nav-search-icon" src="../../assets/icons/searchIcon.png" alt="Search">
     </ais-search-box>
     <ais-configure [searchParameters]="{ hitsPerPage: 10 }"></ais-configure>
 
