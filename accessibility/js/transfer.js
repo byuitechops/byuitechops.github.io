@@ -15,6 +15,25 @@ const settings = { /* your settings... */
 };
 db.settings(settings);
 
+// Logout of firebase and website
+document.getElementById('btnLogout').addEventListener('click', function () {
+    firebase.auth().signOut();
+});
+// Check if Logged In
+firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+        // User is signed in.
+        db.collection('users').where('name', "==", user.displayName).get()
+            .then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    var userData = doc.data();
+                })
+            })
+    } else {
+        // No user is signed in.
+        window.location.assign('index.html');
+    }
+});
 function getCourses() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {

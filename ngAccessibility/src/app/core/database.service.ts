@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,6 @@ export class DatabaseService {
   }
 
   createTranscript(data) {
-
     this.afs.collection('accessibility').doc(this.afs.createId()).set({
       ...data
     })
@@ -40,6 +40,18 @@ export class DatabaseService {
     })
     .catch(err => {
       console.log('Huston, we have a problem: ' + err);
+    });
+  }
+
+
+
+
+  findUser(name) {
+    this.afs.collection('users', ref => {
+      return ref.where('name', '==', name);
+    }).get()
+    .subscribe(doc => {
+
     });
   }
 }
