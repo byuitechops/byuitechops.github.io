@@ -13,6 +13,7 @@
     --white: #ffffff;
     --black: #000000;
     --darkgray: #444444;
+    --medgray: #777777;
     --lightgray: #eeeeee;
     --verylightgray: #f7f7f7;
 }
@@ -145,4 +146,20 @@ button:hover {
 }
 .blur {
     filter: blur(5px);
+}
+
+
+::-webkit-scrollbar {
+    width: 20px;
+}
+::-webkit-scrollbar-track {
+    background: var(--lightgray);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--medgray);
+    border-radius: 10px;
+    transition: all .2s;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary); 
 }

@@ -8,7 +8,7 @@ import { AuthService } from '../core/auth.service';
 })
 export class AuthPageComponent implements OnInit {
 
-    isOpen = false;
+    signingUp: false;
     email: string;
     password: string;
 
@@ -20,11 +20,11 @@ export class AuthPageComponent implements OnInit {
     }
 
     signIn() {
-      this.openCloseModal();
+      this.openModal();
       this.afAuth.login(this.email, this.password);
     }
     guest() {
-      this.openCloseModal();
+      this.closeModal();
       this.afAuth.guestMode();
     }
 
@@ -33,32 +33,45 @@ export class AuthPageComponent implements OnInit {
         this.afAuth.logout();
         console.log('Goodbye');
       } else {
-        this.openCloseModal();
+        this.openModal();
       }
     }
-    openCloseModal() {
+    openModal() {
         const modal = document.getElementById('signin-modal');
         const navbar = document.getElementById('main-nav');
         const content = document.getElementsByTagName('main');
 
-        if (this.isOpen) {
-          console.log("Opening");
-          modal.classList.remove('hide');
-          navbar.classList.add('blur');
-          for (let i = 0; content[i]; i++) {
-              content[i].classList.add('blur');
-              console.log('added class blur from ' + content[i]);
-          }
-        } else if (!this.isOpen) {
-          modal.classList.add('hide');
-          navbar.classList.remove('blur');
-          for (let i = 0; i < content.length; i++) {
-              content[i].classList.remove('blur');
-              console.log('removed class blur from ' + content[i]);
-          }
+        modal.classList.remove("hide");
+        navbar.classList.add("blur");
+        for (let i = 0; i < content.length; i++) {
+            content[i].classList.add("blur");
         }
-        this.isOpen = !this.isOpen;
 
+    }
+    closeModal() {
+        const modal = document.getElementById('signin-modal');
+        const navbar = document.getElementById('main-nav');
+        const content = document.getElementsByTagName('main');
+
+        modal.classList.add("hide");
+        navbar.classList.remove("blur");
+        for (let i = 0; i < content.length; i++) {
+            content[i].classList.remove("blur");
+        }
+
+    }
+    signUp() {
+        const name = document.getElementById("name-box");
+        const loginBtn = document.getElementById("signin-btn");
+
+        console.log(name);
+
+        if (!this.signingUp) {
+            name.classList.remove("hide");
+            loginBtn.classList.add("hide");
+        } else {
+
+        }
     }
 
 }
