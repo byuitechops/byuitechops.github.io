@@ -1,0 +1,47 @@
+/*****************************************************
+*
+*   HOME COMPONENT CSS
+*
+******************************************************/
+
+
+:root {
+    --primary: #0076C6;
+    --white: #ffffff;
+    --black: #000000;
+    --darkgray: #444444;
+    --lightgray: #eeeeee;
+}
+
+.modal {
+    z-index: 10;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(3px);
+}
+.modal-content {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    max-width: 750px;
+    height: auto;
+    margin: 150px auto;
+    padding: 25px;
+
+    background-color: var(--white);
+    border-radius: 10px;
+    border-left: 10px solid var(--primary);
+    box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.75);
+}
+.modal-header, .modal-body, .modal-body h2 {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    padding: 15px 0;
+}
+.left-col, .right-col {
+    display: flex;
+    flex-flow: row wrap;
+    width: 345px;
+}

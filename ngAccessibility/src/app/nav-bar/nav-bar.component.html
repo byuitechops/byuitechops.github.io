@@ -1,70 +1,66 @@
 <nav id="main-nav">
 
-  <img class="icon hide" id="menu-icon" src="../../assets/icons/menuIcon.png" alt="Menu">
+    <img class="icon hide" id="menu-icon" src="../../assets/icons/menuIcon.png" alt="Menu">
 
-  <ul id="nav-links">
-    <a id="home-tab" routerLink="./home" routerLinkActive="active">
-      <li><i class="fas fa-home fa-2x"></i>
-        Home
-      </li>
-    </a>
-    <a id="request-tab" routerLink="./request" routerLinkActive="active">
-      <li> <i class="fas fa-concierge-bell fa-2x bg-white"></i>
-        Request
-      </li>
-    </a>
-    <a id="prepare-tab" [routerLink]="['/transcription', 'p']" routerLinkActive="active">
-      <li> <i class="far fa-file-alt fa-2x"></i>
-        Prepare
-      </li>
-    </a>
-    <a id="transcribe-tab" [routerLink]="['/transcription', 't']" routerLinkActive="active">
-      <li> <i class="far fa-edit fa-2x"></i>
-        Transcribe
-      </li>
-    </a>
-    <a id="copyEdit-tab" [routerLink]="['/transcription', 'ce']" routerLinkActive="active">
-      <li> <i class="fas fa-clipboard-check fa-2x"></i>
-        Copyedit
-      </li>
-    </a>
-    <a id="copyEditCheck-tab" [routerLink]="['/transcription', 'cc']" routerLinkActive="active">
-      <li> <i class="fas fa-check-double fa-2x "></i>
-        Copyedit Check
-      </li>
-    </a>
-  </ul>
+    <ul id="nav-links">
+        <a id="home-tab" routerLink="./home" routerLinkActive="active">
+        <li><i class="fas fa-home fa-2x"></i>
+            Home
+        </li>
+        </a>
+        <a id="request-tab" routerLink="./request" routerLinkActive="active">
+        <li> <i class="fas fa-concierge-bell fa-2x bg-white"></i>
+            Request
+        </li>
+        </a>
+        <a id="prepare-tab" [routerLink]="['/transcription', 'p']" routerLinkActive="active">
+        <li> <i class="far fa-file-alt fa-2x"></i>
+            Prepare
+        </li>
+        </a>
+        <a id="transcribe-tab" [routerLink]="['/transcription', 't']" routerLinkActive="active">
+        <li> <i class="far fa-edit fa-2x"></i>
+            Transcribe
+        </li>
+        </a>
+        <a id="copyEdit-tab" [routerLink]="['/transcription', 'ce']" routerLinkActive="active">
+        <li> <i class="fas fa-clipboard-check fa-2x"></i>
+            Copyedit
+        </li>
+        </a>
+        <a id="copyEditCheck-tab" [routerLink]="['/transcription', 'cc']" routerLinkActive="active">
+        <li> <i class="fas fa-check-double fa-2x "></i>
+            Copyedit Check
+        </li>
+        </a>
+    </ul>
 
-    <div id="logo-box">
-    <img src="../assets/byuiLogo.png" alt="">
-    <h2>Accessibility</h2>
-</div>
 
-<ais-instantsearch [config]="search.config">
-    <ais-search-box (change)="searchChanged($event)"></ais-search-box>
-    <img class="icon" id="nav-search-icon" src="../../assets/icons/searchIcon.png" alt="Search">
-    <ais-configure [searchParameters]="{ hitsPerPage: 10 }"></ais-configure>
+    <ais-instantsearch [config]="search.config">
+        <ais-search-box (change)="searchChanged($event)"></ais-search-box>
+        <img class="icon" id="nav-search-icon" src="../../assets/icons/searchIcon.png" alt="Search">
+        <ais-configure [searchParameters]="{ hitsPerPage: 10 }"></ais-configure>
 
-    <ais-hits *ngIf="showResults">
-        <ng-template let-hits="hits">
-            <ol class="ais-Hits-list">
-            <div *ngFor="let hit of hits" class="ais-Hits-item">
-                <p class="hit-type">{{ hit.type }}</p>
-                <div class="hit-code">
-                    <div *ngFor="let code of hit.courseCode">
-                        <p> {{ code }} </p>
+        <ais-hits *ngIf="showResults">
+            <ng-template let-hits="hits">
+                <ol class="ais-Hits-list">
+                <div *ngFor="let hit of hits" class="ais-Hits-item">
+                    <p class="hit-type">{{ hit.type }}</p>
+                    <div class="hit-code">
+                        <div *ngFor="let code of hit.courseCode">
+                            <p> {{ code }} </p>
+                        </div>
                     </div>
+                    <p class="hit-title">{{ hit.title }}</p>
                 </div>
-                <p class="hit-title">{{ hit.title }}</p>
-            </div>
-            </ol>
-        </ng-template>
-    </ais-hits>
+                </ol>
+            </ng-template>
+        </ais-hits>
     </ais-instantsearch>
 
 
-  <div id="logout-box">
-    <img class="icon" src="../../assets/icons/logoutIcon.png" alt="Log Out">
-  </div>
+    <div id="logout-box">
+        <img class="icon" src="../../assets/icons/logoutIcon.png" alt="Log Out" (click)="auth.openCloseModal()">
+    </div>
 
 </nav>

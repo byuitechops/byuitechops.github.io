@@ -46,11 +46,13 @@ import { ViewEditComponent } from './view-edit/view-edit.component';
     AuthService,
     DatabaseService,
     AngularFireAuth,
-    AngularFirestore
+    AngularFirestore,
+    AuthPageComponent
   ],
   bootstrap: [
     AppComponent
-  ]
+  ],
+  
 })
 
 export class AppModule { }
