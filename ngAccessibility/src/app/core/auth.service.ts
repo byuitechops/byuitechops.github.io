@@ -14,12 +14,12 @@ export class AuthService {
 
   constructor(private af: AngularFireAuth, private db: DatabaseService) {
 
-    this.af.auth.onAuthStateChanged(user => {
+    this.af.auth.onAuthStateChanged(async user => {
       if (user) {
         this.userName = user.displayName;
         this.authenticated = true;
         this.db.findUser(this.userName);
-        this.user = this.db.user;
+        this.user = await this.db.user;
         console.log(this.user);
       } else {
         this.authenticated = false;

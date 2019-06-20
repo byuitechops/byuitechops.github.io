@@ -55,19 +55,13 @@ export class DatabaseService {
     dName = 'Calvin Smoot';
     this.afs.collection('users', ref => {
       return ref.where('name', '==', dName);
-    }).get().subscribe(users => {
-      if (users.size >= 1) {
-        users.forEach(doc => {
-          this.user = doc.data();
-        });
-      }
-      this.storeUserInfo(this.user);
+    }).get()
+    .forEach(users => {
+      users.forEach(doc => {
+        this.user = doc.data();
+      });
     });
-  }
-  storeUserInfo(data) {
-    this.user = data;
     console.log(this.user);
-    return;
   }
 
   createUser(dName, contact, position) {
@@ -82,3 +76,12 @@ export class DatabaseService {
     return;
   }
 }
+
+// .subscribe(users => {
+//   if (users.size >= 1) {
+//     users.forEach(doc => {
+//       this.user = doc.data();
+//     });
+//   }
+//   this.storeUserInfo(this.user);
+// });
