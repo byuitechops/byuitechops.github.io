@@ -210,7 +210,6 @@ $(cancelBtn).click(async () => {
 
 $(dupFinishedBtn).click(() => {
     $(dupLinks).addClass("hide");
-    dupLinks
     resetFields();
 });
 
