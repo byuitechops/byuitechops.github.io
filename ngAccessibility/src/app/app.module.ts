@@ -21,13 +21,15 @@ import { environment } from 'src/environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeModule } from './home/home.module';
 import { TranscriptionModule } from './transcription/transcription.module';
+import { ViewEditComponent } from './view-edit/view-edit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RequestComponent,
     NavBarComponent,
-    AuthPageComponent
+    AuthPageComponent,
+    ViewEditComponent
   ],
   imports: [
     NgAisModule.forRoot(),

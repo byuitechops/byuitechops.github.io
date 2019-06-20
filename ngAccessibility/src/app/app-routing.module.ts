@@ -3,7 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home/home/home.component';
 import { RequestComponent } from './request/request.component';
-import { SearchComponent } from './transcription/search/search.component';
+import { PrepareComponent } from './transcription/prepare/prepare.component';
+import { TranscribeComponent } from './transcription/transcribe/transcribe.component';
+import { CopyeditComponent } from './transcription/copyedit/copyedit.component';
+import { CopycheckComponent } from './transcription/copycheck/copycheck.component';
 
 const routes: Routes = [
     {
@@ -15,20 +18,20 @@ const routes: Routes = [
         component: RequestComponent
     },
     {
-        path: 'transcription/:step',
-        component: SearchComponent
+        path: 'prepare',
+        component: PrepareComponent
     },
     {
-        path: 'transcription/:step',
-        component: SearchComponent
+        path: 'transcibe',
+        component: TranscribeComponent
     },
     {
-        path: 'transcription/:step',
-        component: SearchComponent
+        path: 'copyedit',
+        component: CopyeditComponent
     },
     {
-        path: 'transcription/:step',
-        component: SearchComponent
+        path: 'copycheck',
+        component: CopycheckComponent
     },
     {
       path: '',
