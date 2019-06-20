@@ -13,22 +13,22 @@
             Request
         </li>
         </a>
-        <a id="prepare-tab" [routerLink]="['/transcription', 'p']" routerLinkActive="active">
+        <a id="prepare-tab" [routerLink]="['/prepare']" routerLinkActive="router-link-active"  routerLinkActive="active">
         <li> <i class="far fa-file-alt fa-2x"></i>
             Prepare
         </li>
         </a>
-        <a id="transcribe-tab" [routerLink]="['/transcription', 't']" routerLinkActive="active">
+        <a id="transcribe-tab" routerLink="/transcibe" routerLinkActive="active">
         <li> <i class="far fa-edit fa-2x"></i>
             Transcribe
         </li>
         </a>
-        <a id="copyEdit-tab" [routerLink]="['/transcription', 'ce']" routerLinkActive="active">
+        <a id="copyEdit-tab" routerLink="./copyedit" routerLinkActive="active">
         <li> <i class="fas fa-clipboard-check fa-2x"></i>
             Copyedit
         </li>
         </a>
-        <a id="copyEditCheck-tab" [routerLink]="['/transcription', 'cc']" routerLinkActive="active">
+        <a id="copyEditCheck-tab" routerLink="./copycheck" routerLinkActive="active">
         <li> <i class="fas fa-check-double fa-2x "></i>
             Copyedit Check
         </li>
@@ -38,7 +38,6 @@
 
     <ais-instantsearch [config]="search.config">
         <ais-search-box (change)="searchChanged($event)"></ais-search-box>
-        <img class="icon" id="nav-search-icon" src="../../assets/icons/searchIcon.png" alt="Search">
         <ais-configure [searchParameters]="{ hitsPerPage: 10 }"></ais-configure>
 
         <ais-hits *ngIf="showResults">
@@ -57,10 +56,10 @@
             </ng-template>
         </ais-hits>
     </ais-instantsearch>
-
+    <img class="icon" id="nav-search-icon" src="../../assets/icons/searchIcon.png" alt="Search">
 
     <div id="logout-box">
-        <img class="icon" src="../../assets/icons/logoutIcon.png" alt="Log Out" (click)="auth.openCloseModal()">
+        <img class="icon" src="../../assets/icons/logoutIcon.png" alt="Log Out" (click)="auth.userStatus()">
     </div>
 
 </nav>

@@ -8,12 +8,12 @@
                 <h2>Log In</h2>
                 <div class="modal-inputs">
                     <p>BYU-I Email</p>
-                    <input type="text" id="signin-email" placeholder="*******@byui.edu">
+                    <input type="text" id="signin-email" placeholder="*******@byui.edu" [(ngModel)]="email" />
                     <p>Password</p>
-                    <input type="text" id="signin-password" placeholder="********">
+                    <input type="password" id="signin-password" placeholder="********" [(ngModel)]="password" />
                 </div>
                 <div class="btn-box">
-                    <button id="signin-btn">Log In</button>
+                    <button id="signin-btn" (click)="signIn()">Log In</button>
                     <button id="cancel-btn">Sign Up</button>
                 </div>
             </div>
@@ -21,7 +21,7 @@
             <div class="right-col">
                 <h2>Continue As Guest</h2>
                 <div class="btn-box">
-                    <button (click)="openCloseModal()" id="guest-btn">Guest</button>
+                    <button (click)="guest()" id="guest-btn">Guest</button>
                 </div>
             </div>
         </div>
