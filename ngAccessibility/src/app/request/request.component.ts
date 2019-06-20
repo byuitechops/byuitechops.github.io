@@ -69,7 +69,7 @@ export class RequestComponent implements OnInit {
 
   newRequest() {
     let displayName = this.db.user.name;
-    if (displayName === ''){
+    if (displayName === '') {
       displayName = "";
     }
     const data = {
