@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewEditComponent implements OnInit {
 
-  constructor() { }
+    constructor() { }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
+
+    showDetails() {
+
+    }
+    hideDetails() {
+
+    }
 
 }

@@ -11,7 +11,8 @@ export class NavBarComponent implements OnInit {
 
   showResults = false;
 
-  constructor(public search: SearchService, public auth: AuthPageComponent) { }
+  constructor(public search: SearchService, 
+              public auth: AuthPageComponent) { }
 
   ngOnInit() {
   }

@@ -2,23 +2,24 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { SearchService } from '../../core/search.service';
 import { ActivatedRoute } from '@angular/router';
+import { ViewEditComponent } from '../../view-edit/view-edit.component';
 
 @Component({
-  selector: 'app-prepare',
-  templateUrl: './prepare.component.html',
-  styleUrls: ['./prepare.component.css']
+    selector: 'app-prepare',
+    templateUrl: './prepare.component.html',
+    styleUrls: ['./prepare.component.css']
 })
 export class PrepareComponent implements OnInit {
 
-  type: string;
-  constructor(public db: AngularFirestore,
-              public search: SearchService,
-              private route: ActivatedRoute) {
+    type: string;
+    constructor(public db: AngularFirestore,
+                public search: SearchService,
+                private route: ActivatedRoute) {
 
     route.params.subscribe(rParam => {
-      this.filterSearch();
+    this.filterSearch();
     });
-  }
+}
 
 
 
@@ -26,21 +27,21 @@ export class PrepareComponent implements OnInit {
   }
 
   filterSearch() {
-    const x = this.route.snapshot.paramMap.get('step');
-    switch (x) {
-      case 'p':
-        this.type = `\'Ready for Prep\'`;
-        break;
-      case 't':
-        this.type = `\'Ready for Transcription\'`;
-        break;
-      case 'ce':
-        this.type = `\'Ready for Review\'`;
-        break;
-      case 'cc':
-        this.type = `\'Review Completed\'`;
-        break;
+        const x = this.route.snapshot.paramMap.get('step');
+        switch (x) {
+        case 'p':
+            this.type = `\'Ready for Prep\'`;
+            break;
+        case 't':
+            this.type = `\'Ready for Transcription\'`;
+            break;
+        case 'ce':
+            this.type = `\'Ready for Review\'`;
+            break;
+        case 'cc':
+            this.type = `\'Review Completed\'`;
+            break;
+        }
+        console.log(this.type);
     }
-    console.log(this.type);
-  }
 }

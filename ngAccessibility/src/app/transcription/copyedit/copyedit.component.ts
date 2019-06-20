@@ -2,23 +2,24 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { SearchService } from '../../core/search.service';
 import { ActivatedRoute } from '@angular/router';
+import { ViewEditComponent } from '../../view-edit/view-edit.component';
 
 @Component({
-  selector: 'app-copyedit',
-  templateUrl: './copyedit.component.html',
-  styleUrls: ['./copyedit.component.css']
+    selector: 'app-copyedit',
+    templateUrl: './copyedit.component.html',
+    styleUrls: ['./copyedit.component.css']
 })
 export class CopyeditComponent implements OnInit {
 
-  type: string;
-  constructor(public db: AngularFirestore,
-              public search: SearchService,
-              private route: ActivatedRoute) {
+    type: string;
+    constructor(public db: AngularFirestore,
+                public search: SearchService,
+                private route: ActivatedRoute) {
 
     route.params.subscribe(rParam => {
-      this.filterSearch();
+    this.filterSearch();
     });
-  }
+}
 
 
 
