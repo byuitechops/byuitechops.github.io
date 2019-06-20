@@ -47,13 +47,11 @@ export class DatabaseService {
 
 
   findUser(name) {
-    name.pipe(
-      switchMap(name => {
-      this.afs.collection('users', ref => {
-        return ref.where('name', '==', name);
-        })
-      })
-    )
+    this.afs.collection('users', ref => {
+      return ref.where('name', '==', name);
     }).get()
+    .subscribe(doc => {
+
+    });
   }
 }
