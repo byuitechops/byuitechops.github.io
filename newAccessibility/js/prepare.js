@@ -173,7 +173,8 @@ document.getElementById("requestCancelPrep").addEventListener('click', () => {
         })
         .then(()=> { 
             console.log('Success');
-            window.location.reload();
+            searchPrepPage.classList.remove('hide');
+            doPrepPage.classList.add('hide');
         })
     })
 })
@@ -224,9 +225,12 @@ document.getElementById('requestSubmit').addEventListener('click', () => {
                         prepares: userPrepares[0] + 1
                     })
                     .then(() => {
-                        searchPrepPage.classList.remove('hide');
-                        doPrepPage.classList.add('hide');
-                        window.location.reload();
+                        db.collection('accessibility').doc(transcriptID).get().then(doc => {
+                            var course = doc.data().backupCode;
+                            searchPrepPage.classList.remove('hide');
+                            doPrepPage.classList.add('hide');
+                            fillPrepTable(course)
+                        })
                     })
             })
     }
