@@ -82,17 +82,22 @@
 }
 ais-instantsearch {
     margin-left: auto;
+    position: relative;
+    top: 12px;
+    right: 20px;
 }
 .ais-SearchBox-input {
-    margin: 10px 10px 0 auto;
+    margin: 20px 10px 0 auto;
 }
 ais-hits {
     z-index: 1;
     position: relative;
     width: 600px;
     display: flex;
+    padding: 15px;
 
     color: var(--black);
+    background-color: var(--white);
     border-left: 4px solid var(--primary);
     border-radius: 15px;
     box-shadow: 0 0 5px 0px var(--darkgray);

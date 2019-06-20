@@ -1,48 +1,51 @@
+<h1>Copy Edit</h1>
+
 <div class="table-box center">
     <ais-instantsearch [config]="search.config">
         <ais-configure [searchParameters]="{filters: 'status:\'Ready for Review\''}"></ais-configure>
-      <div class="search-panel">
-        <div class="search-panel__results">
-          <table>
-            <thead class="table-head">
-              <tr id="tran-search-headrow">
-                <td class="priority-col" id="priority-col-head">Priority</td>
-                <td class="course-col" id="course-col-head">Course</td>
-                <td class="type-col" id="type-col-head">Type</td>
-                <td class="title-col" id="title-col-head">Title</td>
-                <td class="length-col" id="length-col-head">Length</td>
-                <td class="right-col">
-                  <div class="searchbox">
-                    <ais-search-box placeholder=""></ais-search-box>
-                  </div>
-                </td>
-              </tr>
-            </thead>
-            <tbody>
-              <ais-hits>
-                <ng-template let-hits="hits">
-                  <ol class="ais-Hits-list">
-                    <tr *ngFor="let hit of hits" class="ais-Hits-item">
-                          <td> {{ hit.priority }} </td>
-                          <td> {{ hit.title }} </td>
-                          <td> {{ hit.courseCode }} </td>
-                          <td> {{ hit.type }} </td>
-                          <td> {{ hit.length }} seconds </td>
-                          <td> <button type="button">View</button></td>
-                          <td> <button type="button">Claim</button></td>
+        <div class="search-panel">
+            <div class="search-panel__results">
+
+                <table>
+                    <tr class="table-headers">
+                        <th class="priority-col" id="priority-col-head">Priority</th>
+                        <th class="course-col" id="course-col-head">Course</th>
+                        <th class="type-col" id="type-col-head">Type</th>
+                        <th class="title-col" id="title-col-head">Title</th>
+                        <th class="length-col" id="length-col-head">Length</th>
+                        <th class="last-col">
+                            <div class="searchbox">
+                                <ais-search-box placeholder=""></ais-search-box>
+                            </div>
+                        </th>
                     </tr>
-                  </ol>
-                </ng-template>
-              </ais-hits>
-            </tbody>
-          </table>
+                </table>
+                <table>
+                    <ais-hits>
+                        <ng-template let-hits="hits">
+                            <ol class="ais-Hits-list">
+                                <tr *ngFor="let hit of hits" class="ais-Hits-item">
+                                    <td class="priority-col"> {{ hit.priority }} </td>
+                                    <td class="course-col"> {{ hit.courseCode }} </td>
+                                    <td class="type-col"> {{ hit.type }} </td>
+                                    <td class="title-col"> {{ hit.title }} </td>
+                                    <td class="length-col"> {{ hit.length }} seconds </td>
+                                    <td class="last-col">
+                                        <button type="button">View</button>
+                                        <button type="button">Claim</button>
+                                    </td>
+                                </tr>
+                            </ol>
+                        </ng-template>
+                    </ais-hits>
+                </table>
 
 
-          <div class="pagination">
-            <ais-pagination></ais-pagination>
-          </div>
+                <div class="pagination">
+                    <ais-pagination></ais-pagination>
+                </div>
+            </div>
+
         </div>
-
-      </div>
     </ais-instantsearch>
-  </div>
+</div>
