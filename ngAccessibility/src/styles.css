@@ -187,7 +187,8 @@ table {
 }
 .table-headers {
     position: relative;
-    left: -40px;
+    margin-left: -40px;
+    text-align: left;
 }
 th {
     text-align: left;
