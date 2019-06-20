@@ -17,9 +17,10 @@ export class AuthService {
     this.af.auth.onAuthStateChanged(user => {
       if (user) {
         this.userName = user.displayName;
-        this.user = user;
         this.authenticated = true;
         this.db.findUser(this.userName);
+        this.user = this.db.user;
+        console.log(this.user);
       } else {
         this.authenticated = false;
       }

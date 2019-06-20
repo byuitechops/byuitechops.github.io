@@ -68,7 +68,10 @@ export class RequestComponent implements OnInit {
 
 
   newRequest() {
-
+    let displayName = this.db.user.name;
+    if (displayName === ''){
+      displayName = "";
+    }
     const data = {
       backupCode: this.course,
       copied: false,
@@ -82,8 +85,8 @@ export class RequestComponent implements OnInit {
       preparer: '',
       priority: this.priority,
       requestDate: new Date(),
-      requestNotes: this.comments + 'Made by ',
-      requestor: '',
+      requestNotes: this.comments + 'Made by ' + displayName,
+      requestor: displayName,
       srcURL: this.media,
       status: 'Ready for Prep',
       title: this.title,
