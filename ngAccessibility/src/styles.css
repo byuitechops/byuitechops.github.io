@@ -185,10 +185,11 @@ table {
     width: 100%;
     padding: 10px 80px;
 }
-.table-headers {
-    position: relative;
-    margin-left: -40px;
-    text-align: left;
+.table-headers .priority-col{
+    width: 70px;
+}
+.table-headers .length-col{
+    padding-right: 15px;
 }
 th {
     text-align: left;
