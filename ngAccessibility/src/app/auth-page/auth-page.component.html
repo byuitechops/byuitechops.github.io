@@ -7,14 +7,18 @@
             <div class="left-col">
                 <h2>Log In</h2>
                 <div class="modal-inputs">
+                    <div class="hide" id="name-box">
+                        <p class="hide">Name</p>
+                        <input type="text" class="hide" placeholder="John Doe" [(ngModel)]="name" />
+                    </div>
                     <p>BYU-I Email</p>
                     <input type="text" id="signin-email" placeholder="*******@byui.edu" [(ngModel)]="email" />
                     <p>Password</p>
                     <input type="password" id="signin-password" placeholder="********" [(ngModel)]="password" />
                 </div>
                 <div class="btn-box">
-                    <button id="signin-btn" (click)="signIn()">Log In</button>
-                    <button id="cancel-btn">Sign Up</button>
+                    <button class="" id="login-btn" (click)="signIn()">Log In</button>
+                    <button id="singup-btn" (click)="signUp()">Sign Up</button>
                 </div>
             </div>
 
