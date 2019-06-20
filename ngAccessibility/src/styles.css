@@ -3,6 +3,8 @@
 *   GENERAL STYLES CSS
 *
 ******************************************************/
+
+
 @import url('https://fonts.googleapis.com/css?family=Merriweather:300,400,700|Open+Sans:300,400,700&display=swap');
 
 
@@ -115,6 +117,7 @@ input:hover, input:active, select:hover, select:active {
 .btn-box {
     align-self: flex-end;
     width: 100%;
+    margin-top: 20px;
     padding: 0;
 }
 button {
