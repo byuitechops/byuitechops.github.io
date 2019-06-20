@@ -1,13 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import * as algoliasearch from 'algoliasearch';
-import { SearchService } from 'src/app/core/search.service';
-
-
-const searchClient = algoliasearch(
-  '6VK394JGGI',
-  'dcec0491e3d9c5748090a98d77a31cc6'
-);
+import { SearchService } from '../../core/search.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -16,14 +10,14 @@ const searchClient = algoliasearch(
 })
 export class SearchComponent implements OnInit {
 
-  config = {
-    indexName: 'transcripts',
-    searchClient,
-  };
-  showResults = true;
+  type: string;
+  constructor(public db: AngularFirestore,
+              public search: SearchService,
+              private route: ActivatedRoute) {
 
-  constructor(public db: AngularFirestore, public search: SearchService) {
-
+    // route.params.subscribe(rParam => {
+    //   this.filterSearch();
+    // });
   }
 
 
@@ -31,4 +25,22 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
   }
 
+  // filterSearch() {
+  //   const x = this.route.snapshot.paramMap.get('step');
+  //   switch (x) {
+  //     case 'p':
+  //       this.type = `\'Ready for Prep\'`;
+  //       break;
+  //     case 't':
+  //       this.type = `\'Ready for Transcription\'`;
+  //       break;
+  //     case 'ce':
+  //       this.type = `\'Ready for Review\'`;
+  //       break;
+  //     case 'cc':
+  //       this.type = `\'Review Completed\'`;
+  //       break;
+  //   }
+  //   console.log(this.type);
+  // }
 }
