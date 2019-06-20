@@ -36,8 +36,9 @@ main {
     display: flex;
     flex-flow: row wrap;
     align-self: flex-start;
-    width: 800px;
+    width: 600px;
     max-width: 50%;
+    margin: auto;
     padding: 25px;
 
     border-radius: 10px;
@@ -89,9 +90,9 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 150px;
-    height: 150px;
-    margin: 10px;
+    width: 120px;
+    height: 100px;
+    margin: 5px;
 
     text-align: center;
     color: var(--white);
