@@ -44,11 +44,13 @@ import { TranscriptionModule } from './transcription/transcription.module';
     AuthService,
     DatabaseService,
     AngularFireAuth,
-    AngularFirestore
+    AngularFirestore,
+    AuthPageComponent
   ],
   bootstrap: [
     AppComponent
-  ]
+  ],
+  
 })
 
 export class AppModule { }

@@ -1,25 +1,27 @@
-<section class="modal">
+<section class="modal hide" id="signin-modal">
 
-    <div class="modal-content">
-        <h1 class="modal-header">Sign In Required</h1>
+    <div class="modal-content" id="signin-modal-content">
+        <h1 class="modal-header">Log In Required</h1>
 
         <div class="modal-body">
             <div class="left-col">
-                <h2>Sign In</h2>
+                <h2>Log In</h2>
                 <div class="modal-inputs">
-                    <input type="text" id="signin-email">
-                    <input type="text" id="signin-password">
+                    <p>BYU-I Email</p>
+                    <input type="text" id="signin-email" placeholder="*******@byui.edu">
+                    <p>Password</p>
+                    <input type="text" id="signin-password" placeholder="********">
                 </div>
                 <div class="btn-box">
-                    <button id="signin-btn">Sign In</button>
-                    <button id="cancel-btn">Cancel</button>
+                    <button id="signin-btn">Log In</button>
+                    <button id="cancel-btn">Sign Up</button>
                 </div>
             </div>
 
             <div class="right-col">
                 <h2>Continue As Guest</h2>
                 <div class="btn-box">
-                    <button id="guest-btn">Guest</button>
+                    <button (click)="openCloseModal()" id="guest-btn">Guest</button>
                 </div>
             </div>
         </div>

@@ -1,54 +1,67 @@
-<h1>Home</h1>
+<main id="home-content">
+    <h1>Home</h1>
 
-<section class="right-col">
-    <div id="banner-box">
-        <img class="banner" src="" alt="">
-    </div>
+    <section class="left-col">
 
-    <div id="announcement-box">
-        <h2>Announcements</h2>
-        <div>{{ announce }}</div>
-    </div>
-
-    <div class="links-box">
-        <a href="https://drive.google.com/drive/u/0/folders/0AJzE0BZcnVJpUk9PVA" target="_blank">
-            Google Drive
-        </a>
-        <a href="https://platform.verbit.co/users/sign_in" target="_blank">
-            Verbit
-        </a>
-        <a href="" target="_blank">
-            Transcript Guide
-        </a>
-        <a href="https://docs.google.com/spreadsheets/d/1755CupoDLtrpePFnj_Dd_Y-FZEH8_6QMX4gAVDNh_AQ/edit#gid=1437701904" target="_blank">
-            Training
-        </a>
-    </div>
-</section>
-
-
-<section class="left-col">
-    <h2>In Progress</h2>
-
-    <div id="claimed-transcript-box">
-        <h3>Video</h3>
-        <span>The Example Video</span>
-        <h3>Course</h3>
-        <span>AAA 100</span>
-        <h3>Priority</h3>
-        <span>1</span>
-        <h3>Course Link</h3>
-        <a href="" target="_blank">
-            <img src="" alt="">
-        </a>
-        <h3>Media URL</h3>
-        <a href="" target="_blank">
-            <img src="" alt="">
-        </a>
-        <div class="btn-box">
-            <button id="return-prep-btn">Return to Prep</button>
-            <button id="complete-tran-btn">Complete</button>
+        <div id="announcement-box">
+            <h2>Announcements</h2>
+            <div>{{ announce }}</div>
         </div>
-        <img id="comments-expander" src="" alt="">
-    </div>
-</section>
+        
+        <div id="banner-box">
+            <img class="banner" src="" alt="">
+        </div>
+
+        <div class="links-box">
+            <a href="https://drive.google.com/drive/u/0/folders/0AJzE0BZcnVJpUk9PVA" target="_blank">
+                <p>Google Drive</p>
+            </a>
+            <a href="https://platform.verbit.co/users/sign_in" target="_blank">
+                <p>Verbit</p>
+            </a>
+            <a href="" target="_blank">
+                <p>Transcript Guide</p>
+            </a>
+            <a href="https://docs.google.com/spreadsheets/d/1755CupoDLtrpePFnj_Dd_Y-FZEH8_6QMX4gAVDNh_AQ/edit#gid=1437701904" target="_blank">
+                <p>Training</p>
+            </a>
+        </div>
+    </section>
+
+
+    <section class="right-col">
+        <h2>In Progress</h2>
+
+            <div id="claimed-transcript-box">
+            <div>
+                <h4>Video</h4>
+                <span>The Example Video</span>
+            </div>
+            <div>
+                <h4>Course</h4>
+                <span>AAA 100</span>
+            </div>
+            <div>
+                <h4>Priority</h4>
+                <span>1</span>
+            </div>
+            <div>
+                <h4>Course Link</h4>
+                <a href="" target="_blank">
+                    <img src="" alt="">
+                </a>
+            </div>
+            <div>
+                <h4>Media URL</h4>
+                <a href="" target="_blank">
+                    <img src="" alt="">
+                </a>
+            </div>
+            <div class="btn-box">
+                <button id="return-prep-btn">Return to Prep</button>
+                <button id="complete-tran-btn">Complete</button>
+            </div>
+            <img id="comments-expander" src="" alt="">
+        </div>
+    </section>
+</main>

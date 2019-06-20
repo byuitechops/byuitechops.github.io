@@ -1,48 +1,64 @@
 <main>
-  <div id="content">
-    <section id="requestForm" class="container half col">
-      <h2>Request</h2>
-      <input [(ngModel)]="name" id="guestName" placeholder="Name" class="">
+    
+    <h1>Request</h1>
+    
+    <section id="requestForm" class="left-col">
+        <input [(ngModel)]="name" id="guestName" placeholder="Name" class="">
 
-      <select [(ngModel)]="type" placeholder="Select Type">
-          <option disabled hidden [value]="selectUndefinedOptionValue">Select Type</option>
-        <option *ngFor="let y of types" [ngValue]="y">{{ y }}</option>
-      </select>
-      <select [(ngModel)]="course">
-        <option [ngValue]="null" hidden>Select Course</option>
-        <option id="requestCourse" hidden></option>
-      </select>
-      <input [(ngModel)]="title" type="text" placeholder="Transcript Title">
-      <select [(ngModel)]="priority">
-          <option disabled hidden [value]="selectUndefinedOptionValue">Select Priority</option>
-        <option *ngFor="let i of priorities" [ngValue]="i">{{ i }}</option>
-      </select>
-      <input [(ngModel)]="lms" type="url" placeholder="Canvas URL">
-      <input type="url" placeholder="Media URL">
-      <label id="requestCommentsLabel">
-        <h3>Comments</h3>
-      </label>
-      <input [(ngModel)]="comments" type="text">
+        <select [(ngModel)]="type" placeholder="Select Type">
+            <option disabled hidden [value]="selectUndefinedOptionValue">Select Type</option>
+            <option *ngFor="let y of types" [ngValue]="y">{{ y }}</option>
+        </select>
+
+        <select [(ngModel)]="course">
+            <option [ngValue]="null" hidden>Select Course</option>
+            <option id="requestCourse" hidden></option>
+        </select>
+
+        <input [(ngModel)]="title" type="text" placeholder="Transcript Title">
+
+        <select [(ngModel)]="priority">
+            <option disabled hidden [value]="selectUndefinedOptionValue">Select Priority</option>
+            <option *ngFor="let i of priorities" [ngValue]="i">{{ i }}</option>
+        </select>
+
+        <input [(ngModel)]="lms" type="url" placeholder="Canvas URL">
+        <input type="url" placeholder="Media URL">
+        <label id="requestCommentsLabel">
+            <h3>Comments</h3>
+        </label>
+        <input [(ngModel)]="comments" type="text">
     </section>
-    <section id="transcript-box-info" class="container half col">
-      <h2>Ticket Information</h2>
-      <div class="ticketbox container col">
-        <label>Media Type:</label>
-        <p class="description"> {{ type }} </p>
-        <label>Course Code:</label>
-        <p class="description"> {{ course }} </p>
-        <label>Title:</label>
-        <p class="description"> {{ title }} </p>
-        <label>Priority:</label>
-        <p class="description">{{ priority }} </p>
-        <label>Location in Course:</label>
-        <p class="description"> {{ lms }}</p>
-        <div class="container row">
-          <button type="submit" class="bg-primary btn-hover" id="requestSubmit">
-            Submit </button>
-          <p style="margin-left: 2rem; margin-top: .8rem; font-weight: bolder;" id="message"></p>
+
+    <section id="transcript-box-info" class="right-col">
+        <h2>Ticket Information</h2>
+        <div class="ticketbox  col">
+            <div>
+                <label>Media Type:</label>
+                <p class="description"> {{ type }} </p>
+            </div>
+            <div>
+                <label>Course Code:</label>
+                <p class="description"> {{ course }} </p>
+            </div>
+            <div>
+                <label>Title:</label>
+                <p class="description"> {{ title }} </p>
+            </div>
+            <div>
+                <label>Priority:</label>
+                <p class="description">{{ priority }} </p>
+            </div>
+            <div>
+                <label>Location in Course:</label>
+                <p class="description"> {{ lms }}</p>
+            </div>
+            <div>
+                <button type="submit" id="requestSubmit">
+                    Submit </button>
+                <p style="margin-left: 2rem; margin-top: .8rem; font-weight: bolder;" id="message"></p>
+            </div>
         </div>
-      </div>
     </section>
-  </div>
+
 </main>

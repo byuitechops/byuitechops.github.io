@@ -4,8 +4,28 @@
 *
 ******************************************************/
 
+.left-col, .right-col {
+    margin-left: 50px;
+}
+.right-col {
+    background-color: var(--verylightgray);
+    box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
+}
+h1 {
+    margin: 25px 50px;
+}
 
-
+#claimed-transcript-box {
+    width: 100%;
+}
+#claimed-transcript-box div {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+}
+#claimed-transcript-box h4 {
+    width: 150px;
+}
 
 
 @media only screen and (max-width: 1100px) {

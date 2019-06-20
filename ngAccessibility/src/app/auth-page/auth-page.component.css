@@ -13,7 +13,6 @@
     --lightgray: #eeeeee;
 }
 
-
 .modal {
     z-index: 10;
     position: fixed;
@@ -21,13 +20,13 @@
     height: 100%;
     backdrop-filter: blur(3px);
 }
-
 .modal-content {
     display: flex;
     flex-flow: row wrap;
-    width: 750px;
+    width: 100%;
+    max-width: 750px;
     height: auto;
-    margin: 100px auto;
+    margin: 150px auto;
     padding: 25px;
 
     background-color: var(--white);
@@ -35,9 +34,14 @@
     border-left: 10px solid var(--primary);
     box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.75);
 }
-.modal-header, .modal-body {
+.modal-header, .modal-body, .modal-body h2 {
+    display: flex;
+    flex-flow: row wrap;
     width: 100%;
+    padding: 15px 0;
 }
 .left-col, .right-col {
-    width: 50%;
+    display: flex;
+    flex-flow: row wrap;
+    width: 345px;
 }
