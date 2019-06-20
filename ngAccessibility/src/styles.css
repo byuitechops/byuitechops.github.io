@@ -90,9 +90,9 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 150px;
-    height: 150px;
-    margin: 10px;
+    width: 120px;
+    height: 100px;
+    margin: 5px;
 
     text-align: center;
     color: var(--white);
