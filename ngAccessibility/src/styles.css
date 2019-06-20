@@ -78,6 +78,7 @@ a {
     padding: 10px;
 
     border-radius: 50%;
+    cursor: pointer;
     transition: .2s;
 }
 .icon:hover {
@@ -106,6 +107,7 @@ a {
     background-color: var(--primary);
     border-radius: 10px;
     box-shadow: 0 0 3px 0px var(--black);
+    cursor: pointer;
 }
 
 input, select {
@@ -117,6 +119,7 @@ input, select {
     border: 1px solid var(--primary);
     border-radius: 5px;
     outline: none;
+    cursor: pointer;
 }
 input:hover, input:active, select:hover, select:active {
     box-shadow: 0 0 5px 0px var(--black);
@@ -139,6 +142,7 @@ button {
     border: 3px solid var(--white);
     border-radius: 5px;
     outline: none;
+    cursor: pointer;
     transition: all .2s;
 }
 button:hover {
