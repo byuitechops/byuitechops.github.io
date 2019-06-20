@@ -44,11 +44,17 @@ main {
 
     border-radius: 10px;
 }
-h1, h2 {
+h1 {
     width: 100%;
     font-family: "Merriweather";
     font-size: 32px;
-    padding: 15px 0 ;
+    padding: 50px 80px 20px;
+}
+h2 {
+    width: 100%;
+    font-family: "Merriweather";
+    font-size: 32px;
+    padding: 15px 0;
 }
 h3, h4, h5, h6 {
     width: 50%;
@@ -72,6 +78,7 @@ a {
     padding: 10px;
 
     border-radius: 50%;
+    cursor: pointer;
     transition: .2s;
 }
 .icon:hover {
@@ -100,6 +107,7 @@ a {
     background-color: var(--primary);
     border-radius: 10px;
     box-shadow: 0 0 3px 0px var(--black);
+    cursor: pointer;
 }
 
 input, select {
@@ -111,6 +119,7 @@ input, select {
     border: 1px solid var(--primary);
     border-radius: 5px;
     outline: none;
+    cursor: pointer;
 }
 input:hover, input:active, select:hover, select:active {
     box-shadow: 0 0 5px 0px var(--black);
@@ -133,6 +142,7 @@ button {
     border: 3px solid var(--white);
     border-radius: 5px;
     outline: none;
+    cursor: pointer;
     transition: all .2s;
 }
 button:hover {
@@ -150,10 +160,11 @@ button:hover {
 
 
 ::-webkit-scrollbar {
-    width: 20px;
+    width: 15px;
 }
 ::-webkit-scrollbar-track {
     background: var(--lightgray);
+    padding: 4px;
 }
 ::-webkit-scrollbar-thumb {
     background: var(--medgray);
@@ -162,4 +173,51 @@ button:hover {
 }
 ::-webkit-scrollbar-thumb:hover {
     background: var(--primary); 
+}
+
+.search-panel {
+    width: 100%;
+}
+.search-panel__results {
+    width: 100%;
+}
+table {
+    width: 100%;
+    padding: 10px 80px;
+}
+.table-headers {
+    position: relative;
+    left: -40px;
+}
+th {
+    text-align: left;
+}
+tr {
+    width: 100%;
+}
+.priority-col {
+    width: 100px;
+    text-align: center;
+}
+.course-col {
+    width: 100px;
+}
+.type-col {
+    width: 100px;
+}
+.title-col {
+    width: 800px;
+}
+.length-col {
+    width: 100px;
+    text-align: right;
+}
+.last-col {
+    width: 400px;
+}
+.pagination {
+    margin: 50px auto 100px;
+}
+.search-box {
+    position: relative;
 }
