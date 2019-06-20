@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { DatabaseService } from './database.service';
 
 
 @Injectable({
@@ -11,13 +12,14 @@ export class AuthService {
   user: any;
   authenticated = false;
 
-  constructor(private af: AngularFireAuth) {
+  constructor(private af: AngularFireAuth, private db: DatabaseService) {
 
     this.af.auth.onAuthStateChanged(user => {
       if (user) {
         this.userName = user.displayName;
         this.user = user;
         this.authenticated = true;
+        this.db.findUser(this.userName);
       } else {
         this.authenticated = false;
       }

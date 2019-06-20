@@ -1,7 +1,7 @@
 <main>
-    
+
     <h1>Request</h1>
-    
+
     <section id="requestForm" class="left-col">
         <input [(ngModel)]="name" id="guestName" placeholder="Name" class="">
 
@@ -23,7 +23,7 @@
         </select>
 
         <input [(ngModel)]="lms" type="url" placeholder="Canvas URL">
-        <input type="url" placeholder="Media URL">
+        <input  [(ngModel)]="media" type="url" placeholder="Media URL">
         <label id="requestCommentsLabel">
             <h3>Comments</h3>
         </label>
@@ -54,7 +54,7 @@
                 <p class="description"> {{ lms }}</p>
             </div>
             <div>
-                <button type="submit" id="requestSubmit">
+                <button type="submit" id="requestSubmit" (click)="newRequest()">
                     Submit </button>
                 <p style="margin-left: 2rem; margin-top: .8rem; font-weight: bolder;" id="message"></p>
             </div>

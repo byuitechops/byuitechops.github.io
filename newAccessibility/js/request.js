@@ -156,10 +156,7 @@ function resetFields() {
     document.getElementById('transcript-box-info').classList.add('wobble-hor-bottom');
     resetMessage();
     document.getElementById('requestType').options[0].selected = 'selected';
-    document.getElementById('requestCourse').options[0].selected = 'selected';
     document.getElementById('requestTitle').value = '';
-    document.getElementById('requestPriority').options[0].selected = 'selected';
-    document.getElementById('requestLMSURL').value = '';
     document.getElementById('requestVideoURL').value = '';
     document.getElementById('requestComments').value = '';
     var elms = document.getElementsByClassName('description');

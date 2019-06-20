@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DatabaseService } from '../core/database.service';
 
 @Component({
   selector: 'app-request',
@@ -9,6 +10,7 @@ export class RequestComponent implements OnInit {
   selectUndefinedOptionValue: any;
   name: string;
   lms: string;
+  media: string;
   title: string;
   priority: string;
   priorities = [
@@ -26,7 +28,7 @@ export class RequestComponent implements OnInit {
   ];
   course: string;
   comments: string;
-  constructor() { }
+  constructor(private db: DatabaseService) { }
 
   ngOnInit() {
     this.getCourse();
@@ -50,7 +52,6 @@ export class RequestComponent implements OnInit {
                       html += `<option>${course}</option>`;
                       courses.push(course);
                     });
-                    console.log(courses);
                     document.getElementById('requestCourse').insertAdjacentHTML('afterend', html);
                     return courses;
                 }
@@ -61,6 +62,37 @@ export class RequestComponent implements OnInit {
     };
     xhttp.open('GET', 'https://byui.kuali.co/api/v1/catalog/public/catalogs/current', true);
     xhttp.send();
+  }
+
+
+
+
+  newRequest() {
+
+    const data = {
+      backupCode: this.course,
+      copied: false,
+      courseCode: [this.course],
+      datePrepareFinished: '',
+      docEditURL: '',
+      docPublishURL: '',
+      length: '',
+      lmsURL: this.lms,
+      parentTranscript: true,
+      preparer: '',
+      priority: this.priority,
+      requestDate: new Date(),
+      requestNotes: this.comments + 'Made by ',
+      requestor: '',
+      srcURL: this.media,
+      status: 'Ready for Prep',
+      title: this.title,
+      type: this.type,
+      verbit: false,
+      verbitID: ''
+    };
+    console.log(data);
+    this.db.createTranscript(data);
   }
 }
 
