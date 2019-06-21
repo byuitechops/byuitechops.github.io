@@ -44,7 +44,7 @@ function fillUserTable(name) {
 function fillTranscriptTable(backupCode) {
       document.getElementById('master-table-transcript').innerHTML = '';
       if (backupCode == undefined) {
-            db.collection("accessibility").orderBy('priority').limit(1).get()
+            db.collection("accessibility").orderBy('title').limit(1).get()
                   .then(function (querySnapshot) {
                         querySnapshot.forEach(function (doc) {
                               var p = `<p> ${doc.data().priority}</p> <p>${doc.data().backupCode}</p> <p style="padding-right: .5rem; overflow-x:hidden;">${doc.data().title}</p>
@@ -54,7 +54,7 @@ function fillTranscriptTable(backupCode) {
                         })
                   })
       } else {
-            db.collection("accessibility").orderBy('priority').where('backupCode', '==', backupCode).get()
+            db.collection("accessibility").orderBy('title').where('backupCode', '==', backupCode).get()
                   .then(function (querySnapshot) {
                         querySnapshot.forEach(function (doc) {
                               var p = `<p> ${doc.data().priority}</p> <p>${doc.data().backupCode}</p> <p style="padding-right: .5rem;">${doc.data().title}</p>
