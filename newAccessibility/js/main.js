@@ -37,7 +37,7 @@ firebase.auth().onAuthStateChanged((user) => {
                 checkIfGuest();
             }
             if (window.location.pathname == '/newAccessibility/home.html') {
-                if (user.emailVerified){
+                if (user.emailVerified) {
                     let verifyButton = document.getElementById('verifyButton');
                     $(verifyButton).addClass('hide');
                 }
@@ -70,7 +70,7 @@ firebase.auth().onAuthStateChanged((user) => {
         } else {
             if (window.location.pathname != '/home.html') {
                 window.location.assign('home.html');
-            } 
+            }
         };
     } else {
         notLoggedIn();
@@ -106,18 +106,18 @@ function notLoggedIn() {
 function guestLogin(e) {
     console.log("Hello there")
     firebase.auth().signInAnonymously()
-    .then(()=>{
-        var x = document.getElementById("continue-guest");
-        $(x).remove();
-        location.reload(true);
-    })
-    .catch(function (error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        console.log(errorMessage);
-        // ...
-    });
+        .then(() => {
+            var x = document.getElementById("continue-guest");
+            $(x).remove();
+            location.reload(true);
+        })
+        .catch(function (error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            console.log(errorMessage);
+            // ...
+        });
 
 }
 
@@ -152,10 +152,26 @@ function getCourses(docID) {
             };
             newxhttp.open('GET', 'https://byui.kuali.co/api/v1/catalog/courses/' + id, true);
             newxhttp.send();
+
+
         }
     };
     xhttp.open('GET', 'https://byui.kuali.co/api/v1/catalog/public/catalogs/current', true);
     xhttp.send();
+    let html = `<option value="ENG106">ENG106</option>
+                        <option value="ENG106L">ENG106L</option>
+                        <option value="GSPC120L">GSPC120L</option>
+                        <option value="MATH100G">MATH100G</option>
+                        <option value="MATH100L">MATH100L</option>
+                        <option value="PC101">PC101</option>
+                        <option value="PC101L">PC101L</option>
+                        <option value="PC102">PC102</option>
+                        <option value="PC102L">PC102L</option>
+                        <option value="PC103">PC103</option>
+                        <option value="RELPC121">RELPC121</option>
+                        <option value="RELPC122">RELPC122</option>
+                        <option value="FDREL250">FDREL250</option>`;
+    document.getElementById(docID).insertAdjacentHTML('beforeend', html);
 }
 
 function secondsToHms(d) {

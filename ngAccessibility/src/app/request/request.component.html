@@ -3,7 +3,7 @@
     <h1>Request</h1>
 
     <section id="requestForm" class="left-col">
-        <input [(ngModel)]="name" id="guestName" placeholder="Name" class="">
+        <input [(ngModel)]="name" id="guestName" placeholder="Name" [class.hide]="!auth.user.isAnonymous">
 
         <select [(ngModel)]="type" placeholder="Select Type">
             <option disabled hidden [value]="selectUndefinedOptionValue">Select Type</option>

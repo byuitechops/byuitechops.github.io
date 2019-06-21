@@ -19,7 +19,7 @@ export class AuthService {
         this.userName = user.displayName;
         this.authenticated = true;
         this.db.findUser(this.userName);
-        this.user = await this.db.user;
+        this.user = user;
         console.log(this.user);
       } else {
         this.authenticated = false;

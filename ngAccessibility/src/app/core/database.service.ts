@@ -11,15 +11,12 @@ export class DatabaseService {
   user: any;
 
   constructor(public afs: AngularFirestore) {
-    this.getTranscript('01JxJ1BxZooxilIQwgP7');
+
   }
 
   getTranscript(id) {
-    this.afs.collection('accessibility').doc(id).ref.get()
-    .then(doc => {
-      console.log(doc.data());
-    });
-    return;
+    const transcript = this.afs.collection('accessibility').doc(id).ref.get()
+    return transcript;
   }
 
   createTranscript(data) {
@@ -52,7 +49,6 @@ export class DatabaseService {
 
 
   findUser(dName) {
-    dName = 'Calvin Smoot';
     this.afs.collection('users', ref => {
       return ref.where('name', '==', dName);
     }).get()

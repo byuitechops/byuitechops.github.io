@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DatabaseService } from '../core/database.service';
+import { AuthService } from '../core/auth.service';
+import { element } from '@angular/core/src/render3/instructions';
 
 @Component({
   selector: 'app-request',
@@ -28,7 +30,9 @@ export class RequestComponent implements OnInit {
   ];
   course: string;
   comments: string;
-  constructor(private db: DatabaseService) { }
+  constructor(private db: DatabaseService, public auth: AuthService) {
+
+   }
 
   ngOnInit() {
     this.getCourse();
@@ -68,9 +72,28 @@ export class RequestComponent implements OnInit {
 
 
   newRequest() {
-    let displayName = this.db.user.name;
-    if (displayName === '') {
-      displayName = "";
+    if (this.course === undefined && this.type === undefined) {
+      if ((this.lms === '' || this.lms === undefined) && (this.media === '' || this.media === undefined)) {
+        if ((this.title === '' || this.title === undefined) && this.priority === undefined) {
+
+          console.log('uh oh 1');
+        }
+        console.log('uh oh 2');
+        alert('Please fill in all fields');
+      }
+      console.log('uh oh 3');
+      alert('Please fill in all fields');
+    }
+    let displayName: string;
+    if (this.auth.user.isAnonymous) {
+      displayName = this.name;
+    } else {
+      displayName = this.db.user.name;
+    }
+    if (this.comments === undefined || this.comments === ''){
+      this.comments = '';
+    } else {
+      this.comments = this.comments + 'Made by ' + displayName;
     }
     const data = {
       backupCode: this.course,
@@ -85,7 +108,7 @@ export class RequestComponent implements OnInit {
       preparer: '',
       priority: this.priority,
       requestDate: new Date(),
-      requestNotes: this.comments + 'Made by ' + displayName,
+      requestNotes: this.comments,
       requestor: displayName,
       srcURL: this.media,
       status: 'Ready for Prep',
@@ -95,7 +118,10 @@ export class RequestComponent implements OnInit {
       verbitID: ''
     };
     console.log(data);
-    this.db.createTranscript(data);
+    // this.db.createTranscript(data);
+    this.comments = '';
+    this.media = '';
+    this.type = undefined;
   }
 }
 

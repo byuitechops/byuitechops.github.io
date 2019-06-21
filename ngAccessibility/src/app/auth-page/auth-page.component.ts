@@ -11,16 +11,16 @@ export class AuthPageComponent implements OnInit {
     signingUp: false;
     email: string;
     password: string;
+    name: string;
 
     constructor(public afAuth: AuthService) {
-        console.log(afAuth.user);
     }
 
     ngOnInit() {
     }
 
     signIn() {
-      this.openModal();
+      this.closeModal();
       this.afAuth.login(this.email, this.password);
     }
     guest() {
@@ -41,10 +41,10 @@ export class AuthPageComponent implements OnInit {
         const navbar = document.getElementById('main-nav');
         const content = document.getElementsByTagName('main');
 
-        modal.classList.remove("hide");
-        navbar.classList.add("blur");
+        modal.classList.remove('hide');
+        navbar.classList.add('blur');
         for (let i = 0; i < content.length; i++) {
-            content[i].classList.add("blur");
+            content[i].classList.add('blur');
         }
 
     }
@@ -53,22 +53,20 @@ export class AuthPageComponent implements OnInit {
         const navbar = document.getElementById('main-nav');
         const content = document.getElementsByTagName('main');
 
-        modal.classList.add("hide");
-        navbar.classList.remove("blur");
+        modal.classList.add('hide');
+        navbar.classList.remove('blur');
         for (let i = 0; i < content.length; i++) {
-            content[i].classList.remove("blur");
+            content[i].classList.remove('blur');
         }
 
     }
     signUp() {
-        const name = document.getElementById("name-box");
-        const loginBtn = document.getElementById("signin-btn");
-
+        const name = document.getElementById('name-box');
+        const loginBtn = document.getElementById('signin-btn');
         console.log(name);
-
         if (!this.signingUp) {
-            name.classList.remove("hide");
-            loginBtn.classList.add("hide");
+            name.classList.remove('hide');
+            loginBtn.classList.add('hide');
         } else {
 
         }
