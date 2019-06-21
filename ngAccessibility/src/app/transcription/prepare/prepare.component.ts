@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchService } from '../../core/search.service';
 import { ViewEditComponent } from '../../view-edit/view-edit.component';
-import { AuthService } from 'src/app/core/auth.service';
 import { DatabaseService } from 'src/app/core/database.service';
 
 @Component({
@@ -12,7 +11,7 @@ import { DatabaseService } from 'src/app/core/database.service';
 export class PrepareComponent implements OnInit {
 
     type: string;
-    constructor(public search: SearchService, private auth: AuthService, private db: DatabaseService) {
+    constructor(public search: SearchService, private db: DatabaseService, private view: ViewEditComponent) {
     this.showDetails('01JxJ1BxZooxilIQwgP7');
 }
 
@@ -25,6 +24,7 @@ export class PrepareComponent implements OnInit {
     const data = this.db.getTranscript(id);
     data.then(doc => {
       console.log(doc.data());
+      this.view.openModal(doc.data());
     });
   }
 }

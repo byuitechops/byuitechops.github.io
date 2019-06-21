@@ -216,7 +216,7 @@ function createEditTranscriptWindow() {
                     <div class="btn-box">
                         <button id="confirmEditBtn" onclick="confirmEdit()">Confirm</button>
                         <button id="cancelEditBtn" onclick="closeEditWindow()">Cancel</button>
-                        <button class="hide" id="btn-delete-transcript" class="btn-hover red" onclick="deleteTranscript()">Delete Transcript</button>
+                        <button class="" id="btn-delete-transcript" class="btn-hover red" onclick="deleteTranscript()">Delete Transcript</button>
                     </div>
                 </div>
             </section>
@@ -422,7 +422,9 @@ function confirmEdit() {
  *      window from the database entirely.
  *********************************************/
 function deleteTranscript() {
-
+    currentID = document.getElementById("storeTranscriptID").innerHTML;
+    db.collection("accessibility").doc(currentID).delete();
+    closeEditWindow();
 }
 
 

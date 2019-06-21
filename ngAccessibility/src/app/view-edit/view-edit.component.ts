@@ -6,17 +6,36 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./view-edit.component.css']
 })
 export class ViewEditComponent implements OnInit {
+  viewOpen: boolean;
+  copied: boolean;
+  courseCode;
+  datePrepareFinished;
+  docEditURL: string;
+  docPublishURL: string;
+  length: number;
+  lmsURL: string;
+  parentTranscript: boolean;
+  preparer: string;
+  priority: number;
+  requestDate: string;
+  requestNotes: string;
+  requestor: string;
+  srcURL: string;
+  status: string;
+  title: string;
+  type: string;
+  verbit: boolean;
+  verbitID: string;
 
-    constructor() { }
+  constructor() { }
 
-    ngOnInit() {
-    }
-
-    showDetails() {
-
-    }
-    hideDetails() {
-
-    }
+  ngOnInit() {
+  }
+  async openModal(data) {
+    this.viewOpen = true;
+  }
+  closeModal() {
+    this.viewOpen = false;
+  }
 
 }

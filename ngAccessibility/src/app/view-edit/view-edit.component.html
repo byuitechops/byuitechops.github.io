@@ -1,4 +1,4 @@
-<section class="dup hide" id="edit-window">
+<section class="dup" id="edit-window" [class.hide]='viewOpen'>
   <div class="dup-content">
 
       <div class="dup-header">
@@ -31,7 +31,7 @@
           </div>
           <div>
               <p>Course Code(s)</p>
-              <a class="hide" id="add-course-code" onclick="addCourseCodeSelect()">+</a>
+              <a class="hide" id="add-course-code">+</a>
               <input id="edit-info-courses" type="text"\>
           </div>
           <div>
@@ -76,7 +76,7 @@
           </div>
           <div>
               <p>Verbit Used?</p>
-              <select id="edit-info-isverbit" onchange="displayVerbitBox()">
+              <select id="edit-info-isverbit">
                   <option value="0">- - -</option>
                   <option value="true">True</option>
                   <option value="false">False</option>
@@ -128,9 +128,9 @@
       </div>
 
       <div class="btn-box">
-          <button id="confirmEditBtn" onclick="confirmEdit()">Confirm</button>
-          <button id="cancelEditBtn" onclick="closeEditWindow()">Cancel</button>
-          <button class="hide" id="btn-delete-transcript" class="btn-hover red" onclick="deleteTranscript()">Delete Transcript</button>
+          <button id="confirmEditBtn">Confirm</button>
+          <button id="cancelEditBtn">Cancel</button>
+          <button class="hide" id="btn-delete-transcript" class="btn-hover red">Delete Transcript</button>
       </div>
   </div>
 </section>
