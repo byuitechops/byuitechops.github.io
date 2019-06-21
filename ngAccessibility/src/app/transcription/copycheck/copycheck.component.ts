@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { SearchService } from '../../core/search.service';
-import { ActivatedRoute } from '@angular/router';
 import { ViewEditComponent } from '../../view-edit/view-edit.component';
+import { DatabaseService } from 'src/app/core/database.service';
 
 @Component({
     selector: 'app-copycheck',
@@ -11,37 +10,26 @@ import { ViewEditComponent } from '../../view-edit/view-edit.component';
 })
 export class CopycheckComponent implements OnInit {
 
-    type: string;
-    constructor(public db: AngularFirestore,
-                public search: SearchService,
-                private route: ActivatedRoute) {
-
-    route.params.subscribe(rParam => {
-    this.filterSearch();
-    });
-}
+  constructor(public search: SearchService, private db: DatabaseService, private view: ViewEditComponent) {}
 
 
 
   ngOnInit() {
   }
 
-  filterSearch() {
-    const x = this.route.snapshot.paramMap.get('step');
-    switch (x) {
-      case 'p':
-        this.type = `\'Ready for Prep\'`;
-        break;
-      case 't':
-        this.type = `\'Ready for Transcription\'`;
-        break;
-      case 'ce':
-        this.type = `\'Ready for Review\'`;
-        break;
-      case 'cc':
-        this.type = `\'Review Completed\'`;
-        break;
-    }
-    console.log(this.type);
+  showDetails(id) {
+    const data = this.db.getTranscript(id);
+    data.then(doc => {
+      console.log(doc.data());
+      this.view.openModal(doc.data());
+    });
+  }
+
+  claimTranscript(id) {
+    const userData = {
+      actionID: id,
+      currentAction: 'reviewing'
+    };
+    this.db.updateUser(userData);
   }
 }

@@ -21,6 +21,7 @@ export class AuthService {
         this.db.findUser(this.userName);
         this.user = user;
         console.log(this.user);
+        this.db.checkAction();
       } else {
         this.authenticated = false;
       }

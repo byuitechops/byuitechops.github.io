@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SearchComponent } from './search/search.component';
 import { SearchService } from '../core/search.service';
 import { NgAisModule } from 'angular-instantsearch';
 import { PrepareComponent } from './prepare/prepare.component';
@@ -16,7 +15,6 @@ import { AuthPageComponent } from '../auth-page/auth-page.component';
 
 @NgModule({
   declarations: [
-  SearchComponent,
   PrepareComponent,
   TranscribeComponent,
   CopyeditComponent,

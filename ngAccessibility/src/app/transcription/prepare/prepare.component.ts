@@ -12,7 +12,7 @@ export class PrepareComponent implements OnInit {
 
     type: string;
     constructor(public search: SearchService, private db: DatabaseService, private view: ViewEditComponent) {
-    this.showDetails('01JxJ1BxZooxilIQwgP7');
+    this.showDetails('Xcob9Md829TdPO0y6DUP');
 }
 
 
@@ -26,5 +26,13 @@ export class PrepareComponent implements OnInit {
       console.log(doc.data());
       this.view.openModal(doc.data());
     });
+  }
+
+  claimTranscript(id) {
+    const userData = {
+      actionID: id,
+      currentAction: 'preparing'
+    };
+    this.db.updateUser(userData);
   }
 }

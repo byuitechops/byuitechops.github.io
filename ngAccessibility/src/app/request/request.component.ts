@@ -132,7 +132,7 @@ export class RequestComponent implements OnInit {
       verbitID: ''
     };
     console.log(data);
-    // this.db.createTranscript(data);
+    this.db.createTranscript(data);
     this.comments = '';
     this.media = '';
     this.type = undefined;

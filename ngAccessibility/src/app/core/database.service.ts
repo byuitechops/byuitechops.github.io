@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { switchMap } from 'rxjs/operators';
 import { AuthService } from './auth.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,12 +11,10 @@ export class DatabaseService {
 
   user: any;
 
-  constructor(public afs: AngularFirestore) {
-
-  }
+  constructor(public afs: AngularFirestore, private router: Router) {}
 
   getTranscript(id) {
-    const transcript = this.afs.collection('accessibility').doc(id).ref.get()
+    const transcript = this.afs.collection('accessibility').doc(id).ref.get();
     return transcript;
   }
 
@@ -71,13 +70,19 @@ export class DatabaseService {
     });
     return;
   }
+
+  updateUser(data) {
+    this.afs.collection('users').doc(this.user.id).update({
+      ...data
+    });
+  }
+
+  checkAction() {
+    if (this.user.currentAction !== '') {
+
+    } else {
+      this.router.navigate(['/']);
+    }
+  }
 }
 
-// .subscribe(users => {
-//   if (users.size >= 1) {
-//     users.forEach(doc => {
-//       this.user = doc.data();
-//     });
-//   }
-//   this.storeUserInfo(this.user);
-// });
