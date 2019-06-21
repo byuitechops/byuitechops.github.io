@@ -34,7 +34,7 @@ const currentVerbitID    = document.getElementById("transcript-verbitID");
 const currentIsCopied    = document.getElementById("transcript-copied");
 const currentCopiedFrom  = document.getElementById("transcript-copiedFrom");
 
-const notesField         = document.getElementById("transcript-notes-field");
+const notesField         = document.getElementById("transcript-requestNotes");
 
 const currentReqBy       = document.getElementById("transcript-requestor");
 const currentReqOn       = document.getElementById("transcript-requestDate");
@@ -210,7 +210,7 @@ function createEditTranscriptWindow() {
                         </div>
 
                         <h3>Comments</h3>
-                        <span id="edit-info-comment"></span>
+                        <textarea rows="4" cols="70" id="edit-info-comment"></textarea >
                     </div>
 
                     <div class="btn-box">
@@ -253,6 +253,7 @@ function fillEditFields() {
     const fillTranOn    = document.getElementById("edit-info-transcribe-on");
     const fillRevBy     = document.getElementById("edit-info-review-by");
     const fillRevOn     = document.getElementById("edit-info-review-on");
+    const editComment   = document.getElementById("edit-info-comment");
 
     if (currentID) {
         fillID.innerHTML = currentID.innerHTML;
@@ -334,6 +335,7 @@ function fillEditFields() {
     if (currentRevOn) {
         fillRevOn.innerHTML = currentRevOn.innerHTML;
     }
+    editComment.value = notesField.innerHTML;
 }
 
 
@@ -389,6 +391,7 @@ function confirmEdit() {
     const fillMedia     = document.getElementById("edit-info-media").value;
     const fillIsVerbit  = document.getElementById("edit-info-isverbit").value;
     const fillVerbitID  = document.getElementById("edit-info-verbitid").value;
+    const editComment  = document.getElementById("edit-info-comment").value;
     
     currentID           = document.getElementById("storeTranscriptID").innerHTML;
 
@@ -404,7 +407,8 @@ function confirmEdit() {
         "lmsURL":        fillLMS,
         "srcURL":        fillMedia,
         "verbit":        fillIsVerbit,
-        "verbitID":      fillVerbitID
+        "verbitID":      fillVerbitID,
+        "requestNotes":  editComment
     }).then(() => {
         console.log("success");
     }).catch((error) => {
