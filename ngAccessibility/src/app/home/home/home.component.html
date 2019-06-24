@@ -58,8 +58,8 @@
               <a [href]="data.doc" target="_blank">{{ data.doc }}</a>
           </div>
             <div class="btn-box">
-                <button id="return-prep-btn">Return to Prep</button>
-                <button id="complete-tran-btn">Complete</button>
+                <button id="return-prep-btn" (click)="return()">Return to Prep</button>
+                <button id="complete-tran-btn" (click)="forward()">Complete</button>
             </div>
             <img id="comments-expander" src="" alt="">
         </div>
