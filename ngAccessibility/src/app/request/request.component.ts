@@ -36,6 +36,7 @@ export class RequestComponent implements OnInit {
 
   ngOnInit() {
     this.getCourse();
+    this.db.checkAction();
   }
 
   getCourse() {
@@ -43,7 +44,6 @@ export class RequestComponent implements OnInit {
     const xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
-            const x = [];
             const res = JSON.parse(this.responseText);
             const id = res._id;
             const newxhttp = new XMLHttpRequest();

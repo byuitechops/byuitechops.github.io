@@ -15,6 +15,7 @@ export class TranscribeComponent implements OnInit {
 
 
   ngOnInit() {
+    this.db.checkAction();
   }
 
   showDetails(id) {
@@ -25,11 +26,14 @@ export class TranscribeComponent implements OnInit {
     });
   }
 
-  claimTranscript(id) {
+  claimTranscript(id: string) {
+    console.log(id);
     const userData = {
       actionID: id,
       currentAction: 'transcribing'
     };
     this.db.updateUser(userData);
+    // this.db.changeTranscriptStep('In ', this.db.user.name);
+    console.log(this.db.userID);
   }
 }

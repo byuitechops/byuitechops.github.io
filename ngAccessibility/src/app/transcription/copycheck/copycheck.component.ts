@@ -15,6 +15,7 @@ export class CopycheckComponent implements OnInit {
 
 
   ngOnInit() {
+    this.db.checkAction();
   }
 
   showDetails(id) {

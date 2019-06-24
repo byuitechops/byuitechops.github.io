@@ -14,9 +14,15 @@ export class AuthPageComponent implements OnInit {
     name: string;
 
     constructor(public afAuth: AuthService) {
+
     }
 
     ngOnInit() {
+      setTimeout(() => {
+        if (!this.afAuth.authenticated) {
+          this.openModal();
+        }
+      }, 1000);
     }
 
     signIn() {
@@ -29,7 +35,7 @@ export class AuthPageComponent implements OnInit {
     }
 
     userStatus() {
-      if (this.afAuth.authenticated){
+      if (this.afAuth.authenticated) {
         this.afAuth.logout();
         console.log('Goodbye');
       } else {

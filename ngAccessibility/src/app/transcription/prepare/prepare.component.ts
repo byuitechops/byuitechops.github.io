@@ -18,6 +18,7 @@ export class PrepareComponent implements OnInit {
 
 
   ngOnInit() {
+    this.db.checkAction();
   }
 
   showDetails(id) {

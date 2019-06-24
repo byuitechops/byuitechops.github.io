@@ -33,7 +33,7 @@
                                     <td class="length-col"> {{ hit.length }} sec </td>
                                     <td class="last-col">
                                         <button type="button" (click)="showDetails()">View</button>
-                                        <button type="button">Claim</button>
+                                        <button type="button" (click)="claimTranscript(hit.objectID)">Claim</button>
                                     </td>
                                 </tr>
                             </ol>

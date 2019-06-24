@@ -15,6 +15,7 @@ export class CopyeditComponent implements OnInit {
 
 
   ngOnInit() {
+    this.db.checkAction();
   }
 
   showDetails(id) {
