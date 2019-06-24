@@ -1421,82 +1421,82 @@ Tints Section
     padding: 10px;
     margin: 10px;
 }
-    #t1 {
+#t1 {
     background-color: #6B9D41;
     color: white;
-    }
-    #t2 {
+}
+#t2 {
     background-color: #B3D68A;
-    }
-    #t3 {
+}
+#t3 {
     background-color: #CBE3AE;
-    }
-    #t4 {
+}
+#t4 {
     background-color: #63174E;
-    color: white;
-    }
-    #t5 {
+color: white;
+}
+#t5 {
     background-color: #B94F8C;
     color: white;
-    }
-    #t6 {
+}
+#t6 {
     background-color: #C879A9;
-    }
-    #t7 {
+}
+#t7 {
     background-color: #AD0C20;
     color: white;
-    }
-    #t8 {
+}
+#t8 {
     background-color: #E85156;
     color: white;
-    }
-    #t9 {
+}
+#t9 {
     background-color: #EB7B7E;
-    }
-    #t10 {
+}
+#t10 {
     background-color: #CB6028;
     color: white;
-    }
-    #t11 {
+}
+#t11 {
     background-color: #F59B42;
     color: white;
-    }
-    #t12 {
+}
+#t12 {
     background-color: #F6B46C;
-    }
-    #t13 {
+}
+#t13 {
     background-color: #FFCC00;
-    }
-    #t14 {
+}
+#t14 {
     background-color: #FBE68C;
-    }
-    #t15 {
+}
+#t15 {
     background-color: #FBEBA6;
-    }
-    #t16 {
+}
+#t16 {
     background-color: #525252;
     color: white;
-    }
-    #t17 {
+}
+#t17 {
     background-color: #D2D2D2;
-    }
-    #t18 {
+}
+#t18 {
     background-color: #EBEBEB;
-    }
-    #t19 {
+}
+#t19 {
     background-color: #0C4496;
     color: white;
-    }
-    #t20 {
+}
+#t20 {
     background-color: #1D9CD4;
     color: white;
-    }
-    #t21 {
+}
+#t21 {
     background-color: #8DD6F0;
-    }
-    #t22 {
+}
+#t22 {
     background-color: #D2D2D2;
-    }
+}
 
 /**********************************************
 Fonts and Rescources
@@ -1520,7 +1520,7 @@ Fonts and Rescources
     padding-left: 0em;
 }
 .aboutfonts {
-padding-bottom: 1em;
+    padding-bottom: 1em;
 }
 
 #rescources {
@@ -1578,11 +1578,11 @@ logos section
     padding-bottom: 4em;
 }
 #logo-section p {
-margin: auto;
+    margin: auto;
 }
 #default {
-justify-content: center;
-padding-right: 2em;
+    justify-content: center;
+    padding-right: 2em;
 }
 #accent {
     justify-content: center;
@@ -1688,7 +1688,7 @@ Themes section
     width: 100%; /*or whatever you choose*/
     margin: auto;
 }
-    .imgwrap img {
+.imgwrap img {
     display: block;
     width: 100%;
     max-width: 500px; /*actual image width*/
