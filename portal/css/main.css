@@ -12,6 +12,8 @@
 * 6. Store.html
 * 7. Profile.html
 * 8. TimeTracker.html
+* 9. Tables Styling
+* 10. Style Guide Page
 ********************************************************** */
 
 /***********************************************************
@@ -1311,4 +1313,385 @@ main {
 }
 .notUsed button:hover {
     background-color: var(--fontPrime);
+}
+
+
+/**********************************************
+* 10. Style Guide Page
+**********************************************/
+#mainColorsSection {
+    width: 40%;
+    margin-left: 0em;
+}
+
+.mainColorBoxes {
+    display:flex;
+    flex-flow:column wrap;
+    width: 100%;
+    padding-top: 1em;
+}
+
+.mainColorBox {
+    padding: 10px;
+    padding-right: 5em;
+    width: 40%;
+    Height: 150px;
+    display:flex;
+    flex-flow:column wrap;
+}
+
+.pmain {
+    line-height: 2em;
+}
+
+.box {
+    width: 300px;
+    height: 100px;
+    Margin-bottom: 1em;
+    margin-right: 1em;
+    box-shadow: 3px 1px 5px #888888;   
+}
+
+#m1 {
+    background-color: #0076C6;
+}
+#m2 {
+    background-color: #000000;
+}
+#m3 {
+    background-color: #FFFFFF;
+}
+/**********************************************
+accents Section
+**********************************************/
+#aboutaccents {
+    padding-top: 1em;
+    padding-right:8em;
+}
+#accentColorsSection {
+    width: 60%;
+}
+
+#accentColorBoxes {
+    display:flex;
+    flex-flow: row wrap;
+    padding-top: 2em;
+}
+.accentColorBox {
+    padding: 1em;
+    width: 30%;
+    padding-left: 0em;
+}
+.boxac {
+    width: 200px;
+    height: 100px;
+    box-shadow: 3px 3px 5px #888888;
+    margin-bottom: 1em;
+}
+
+#ac1 {
+    background-color: #82C242;
+}
+#ac2 {
+    background-color: #F58300;
+}
+#ac3 {
+    background-color: #A5216F;
+}
+#ac4 {
+    background-color: #FEE060;
+}
+#ac5 {
+    background-color: #E42226;
+}
+#ac6 {
+    background-color: #ADADAD;
+}
+/**********************************************
+Tints Section
+**********************************************/
+#tintsShades{
+    display:flex;
+    flex-flow: row wrap;
+    align-items: center;
+    width:100%;
+    padding-top: 3em;
+}
+.tintsBox {
+    padding: 10px;
+    margin: 10px;
+}
+    #t1 {
+    background-color: #6B9D41;
+    color: white;
+    }
+    #t2 {
+    background-color: #B3D68A;
+    }
+    #t3 {
+    background-color: #CBE3AE;
+    }
+    #t4 {
+    background-color: #63174E;
+    color: white;
+    }
+    #t5 {
+    background-color: #B94F8C;
+    color: white;
+    }
+    #t6 {
+    background-color: #C879A9;
+    }
+    #t7 {
+    background-color: #AD0C20;
+    color: white;
+    }
+    #t8 {
+    background-color: #E85156;
+    color: white;
+    }
+    #t9 {
+    background-color: #EB7B7E;
+    }
+    #t10 {
+    background-color: #CB6028;
+    color: white;
+    }
+    #t11 {
+    background-color: #F59B42;
+    color: white;
+    }
+    #t12 {
+    background-color: #F6B46C;
+    }
+    #t13 {
+    background-color: #FFCC00;
+    }
+    #t14 {
+    background-color: #FBE68C;
+    }
+    #t15 {
+    background-color: #FBEBA6;
+    }
+    #t16 {
+    background-color: #525252;
+    color: white;
+    }
+    #t17 {
+    background-color: #D2D2D2;
+    }
+    #t18 {
+    background-color: #EBEBEB;
+    }
+    #t19 {
+    background-color: #0C4496;
+    color: white;
+    }
+    #t20 {
+    background-color: #1D9CD4;
+    color: white;
+    }
+    #t21 {
+    background-color: #8DD6F0;
+    }
+    #t22 {
+    background-color: #D2D2D2;
+    }
+
+/**********************************************
+Fonts and Rescources
+**********************************************/
+#fonts {
+    width: 75%;
+    padding-top: 3em;
+}
+#aboutfonts {
+    padding-top: 1em;
+}
+#font-types{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1em;
+    padding-left: 0em;
+    padding-bottom: 2em;
+}
+#images {
+    padding-bottom: 2em;
+    padding-left: 0em;
+}
+.aboutfonts {
+padding-bottom: 1em;
+}
+
+#rescources {
+    padding-left: 1em;
+}
+
+a {
+    text-decoration: underline;
+    color: #1D9CD4;
+}
+a:hover, a:active {
+    text-decoration: none;
+}
+ul {
+    list-style-position: inside;
+}
+
+#images {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    margin-bottom: 2em;
+}
+
+#university {
+    padding-right: 40.3em;
+}
+/*********************************************
+Banners section
+*********************************************/
+#banners {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    line-height: 25px;
+    margin-bottom: 3em;
+}
+#bannerinfo {
+    width: 35%;
+    margin-top: 1em
+}
+.bannerimg {
+    width: auto;
+    padding-right: 5em;
+    margin-top: 1.5em;
+}
+
+/*********************************************
+logos section
+*********************************************/
+#logos-section {
+    display: flex;
+    flex-flow: row wrap;;
+    width: 100%;
+    padding-bottom: 4em;
+}
+#logo-section p {
+margin: auto;
+}
+#default {
+justify-content: center;
+padding-right: 2em;
+}
+#accent {
+    justify-content: center;
+    padding-right: 2em;
+}
+#dark {
+    justify-content: center;
+    padding-right: 2em;
+}
+#logonote {
+    font-size: .7em; 
+    padding-top: 2em;
+}
+
+/*********************************************
+Themes section
+*********************************************/
+#theme1 {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    margin-bottom: 7em;
+}
+#themeinfo {
+    width: 100%;
+    margin-right: 30%;
+    padding-bottom: 2em;
+    padding-top: 1em;
+}
+#th1 {
+    background-color: #0076C6;
+}
+#th2 {
+    background-color: #6c757d;
+}
+.themebox {
+    width: 100px;
+    height: 50px;
+    Margin-bottom: 1em;
+    margin-right: 1em;
+    margin-top: 1em;
+    box-shadow: 3px 1px 5px #888888;   
+}
+#template1 {
+    width: 70%;
+}
+#template2 {
+    width: 70%;
+}
+#primary1 {
+    width: 30%;
+    padding-bottom: 2em;
+}
+#theme2 {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    margin-bottom: 5em;
+    margin-top: 1em
+}
+#primary2 {
+    width: 30%;
+    padding-bottom: 2em;
+}
+#theme2 {
+    width: 100%;
+}
+#template2 {
+    width: 70%;
+}
+#dark1 {
+    width: 30%;
+    padding-bottom: 2em;
+}
+#dark2 {
+    width: 30%;
+    padding-bottom: 2em;
+}
+#theme2 {
+
+    width: 100%;
+}
+#colors1 {
+    padding-right: 18em;
+    margin-top: 1em;
+}
+#colors2 {
+    padding-right: 17em;
+}
+
+#dt1 {
+    background-color: #777777;
+}
+#dt2 {
+    background-color: #343a40;
+}
+#dt3 {
+    background-color: #06439F;
+}
+
+
+.imgwrap {
+    width: 100%; /*or whatever you choose*/
+    margin: auto;
+}
+    .imgwrap img {
+    display: block;
+    width: 100%;
+    max-width: 500px; /*actual image width*/
+    height: auto; /* maintain aspect ratio*/
+    margin: auto; /*optional centering of image*/
 }

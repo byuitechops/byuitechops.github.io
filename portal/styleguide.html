@@ -1,0 +1,319 @@
+<!---------------------------------------------
+- PROFILE.HTML Tech-Ops Portal Home Page
+- 
+- 1. Head
+- 2. Body
+- 3. Navigation Bar
+- 4. Main
+- 5. Scripts
+---------------------------------------------->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<!---------------------------------------------
+- 1. Head
+---------------------------------------------->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" type="image/x-icon" href="/portal/assets/byui_favicon.gif">
+
+    <!-- Scripts -->
+
+    <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/main.css">
+    <title>Profile | Quality Assurance Portal</title>
+</head>
+
+<!---------------------------------------------
+- 2. Body
+---------------------------------------------->
+
+<body>
+
+    <!---------------------------------------------
+    - 3. Navigation Bar
+    ---------------------------------------------->
+
+    <nav class="col1">
+        <a href="home.html"><img id="logo" src="/portal/assets/logos/logo.png"></a>
+        <div class="nav-links flex-container">
+            <a href="schedule.html">Schedule</a>
+            <a href="store.html">Store</a>
+            <a class="current-page" href="profile.html">Profile</a>
+        </div>
+        <div id="nav-img-box">
+            <img id="nav-img" src="" alt="">
+        </div>
+    </nav>
+
+    <!---------------------------------------------
+    - 4. Main
+    ---------------------------------------------->
+
+    <main class="col9" id="profile-main">
+    <header class="headerbody">
+
+        <h1 id="h1"><a name="colors"></a>Colors</h1>
+    </header>
+
+        <section id="mainColorsSection">
+            <h3>Main colors</h3>
+            <div class="mainColorBoxes">
+                <div class="mainColorBox">
+                    <div class="box" id="m1"></div>
+                    <p class="pmain"> CMYK: 100, 51, 2, 0</p>
+                    <p class="pmain">RGB 0, 118, 198</p>
+                    <p class="pmain">HEX: #0076C6</p>
+                </div>
+                <div class="mainColorBox">
+                    <div class="box" id="m2"></div>
+                    <p class="pmain"> CMYK: 0, 0, 0, 100</p>
+                    <p class="pmain">RGB 1, 1, 1</p>
+                    <p class="pmain">HEX: #000000</p>
+                </div>
+                <div class="mainColorBox">
+                    <div class="box" id="m3"></div>
+                    <p class="pmain"> CMYK: 0, 0, 0, 0</p>
+                    <p class="pmain">RGB 255, 255, 255</p>
+                    <p class="pmain">HEX: #FFFFFF</p>
+                </div>
+            <div>
+        </section>
+
+        
+        <section id="accentColorsSection">
+            <h3>Accent Colors</h3>
+            <div id="aboutaccents">
+            <p>Accent colors have been developed and are available to be used sparingly. Remember that these colors are only meant to support our brand color. Overuse of the accent colors would detract from our visual identity. Only use accent colors on approximately 20% of your off-campus design (See full color swatches below). </p>
+            </div>
+            <div id="accentColorBoxes">
+                <div class="accentColorBox">
+                    <div class="boxac" id="ac1"></div>
+                    <p>HEX: #82C242</p>
+                </div>
+                <div class="accentColorBox">
+                    <div class="boxac" id="ac2"></div>
+                    <p>HEX: #F58300</p>
+                </div>
+                <div class="accentColorBox">
+                    <div class="boxac" id="ac3"></div>
+                    <p>HEX: #A5216F</p>
+                </div>
+                <div class="accentColorBox">
+                    <div class="boxac" id="ac4"></div>
+                    <p>HEX: #FEE060</p>
+                </div>
+                <div class="accentColorBox">
+                    <div class="boxac" id="ac6"></div>
+                    <p>HEX: #E42226</p>
+                </div>
+                <div class="accentColorBox">
+                    <div class="boxac" id="ac7"></div>
+                    <p>HEX: #ADADAD</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="tintsShades">
+            <h3>Tints and Shades</h3>
+            <div class="tintsBox" id="t1">HEX: #6B9D41</div>
+            <div class="tintsBox" id="t2">
+                <p>HEX: #B3D68A</p>
+            </div>
+            <div class="tintsBox" id="t3">
+                <p>HEX: #CBE3AE</p>
+            </div>
+            <div class="tintsBox" id="t4">
+                <p>HEX: #63174E</p>
+            </div>
+            <div class="tintsBox" id="t5">
+                <p>HEX: #B94F8C</p>
+            </div>
+            <div class="tintsBox" id="t6">
+                <p>HEX: #C879A9</p>
+            </div>
+            <div class="tintsBox" id="t7">
+                <p>HEX: #AD0C20</p>
+            </div>
+            <div class="tintsBox" id="t8">
+                <p>HEX: #E85156</p>
+            </div>
+            <div class="tintsBox" id="t9">
+                <p>HEX: #EB7B7E</p>
+            </div>
+            <div class="tintsBox" id="t10">
+                <p>HEX: #CB6028</p>
+            </div>
+            <div class="tintsBox" id="t11">
+                <p>HEX: #F59B42</p>
+            </div>
+            <div class="tintsBox" id="t12">
+                <p>HEX: #F6B46C</p>
+            </div>
+            <div class="tintsBox" id="t13">
+                <p>HEX: #FFCC00</p>
+            </div>
+            <div class="tintsBox" id="t14">
+                <p>HEX: #FBE68C</p>
+            </div>
+            <div class="tintsBox" id="t15">
+                <p>HEX: #FBEBA6</p>
+            </div>
+            <div class="tintsBox" id="t16">
+                <p>HEX: #525252</p>
+            </div>
+            <div class="tintsBox" id="t17">
+                <p>HEX: #D2D2D2</p>
+            </div>
+            <div class="tintsBox" id="t18">
+                <p>HEX: #EBEBEB</p>
+            </div>
+            <div class="tintsBox" id="t19">
+                <p>HEX: #0C4496</p>
+            </div>
+            <div class="tintsBox" id="t20">
+                <p>HEX: #1D9CD4</p>  
+            </div>
+            <div class="tintsBox" id="t21">
+                <p>HEX: #8DD6F0</p>  
+            </div>
+            <div class="tintsBox">
+                <p> <b>*Note: Regularly check BYU-Idaho Style guides for styling updates.</b></p>
+            </div>
+            
+        </section>
+            
+
+        <section id="fonts">
+                <h3>Fonts and Rescources</h3>
+                <div id="aboutfonts">Text must be a common font found on most computers or accessable through google. e.If a google Font is used, Please include a link to the page it was retrieved from
+                        to the web developer. Display typefaces May be used if converted to a vector before export. <em>[Previously created assets can be found in the <a href="https://drive.google.com/drive/folders/1qQvACIK549Tad6iXqpFM4GIpQQcOeH7-">QA Graphic Design </a>folder.]</em>
+                </div>
+
+                <div id="font-types">
+                <ul class="sansserif"><h4><b>Sans-serif:</b></h4>
+                    <li>Open Sans</li>
+                    <li>Arial</li>
+                </ul>
+
+                <ul class="serif"><h4><b>Serif:</b></h4>
+                    <li>Merriweather</li>
+                    <li>Bodoni MT</li>
+                </ul>
+
+                <ul><h4><b>Display Fonts:</b></h4>
+                    <li>please make sure that display fonts reflect a professional and uplifting experience.</li>
+                    <li>Specialized display fonts are required to be vectorized to ensure they are unchanged.</li>
+                </ul>
+            </div>
+            <div id="images">
+            <div id="royaltyfree">
+                <ul> <h4><b>Royalty Free Images</b></h4>
+                    <li><a href="https://unsplash.com/">Unsplash</a></li>
+                    <li><a href="https://pixabay.com/">pixabay</a></li>
+                    <li><a href="https://www.istockphoto.com/">iStock</a></li>
+                </ul>
+            </div>
+            <br>
+            <div id="university">
+                <ul><h4><b>University rescources</b></h4>
+                    <li><a href="https://www.byui.edu/branding">BYU-I Branding</a></li>
+                    <li><a href="https://www.byui.edu/branding/writing-guide">Writing Guide</a></li>
+                    <li><a href="https://www.byui.edu/branding/photography-guide">BYU-I Photography Guide</a></li>
+
+                </ul>
+            </div>
+            </div>
+        </section>
+        <section id="banners">
+            <h1 id="h1"><a name="colors"></a>Banners</h1>
+            <div id="bannerinfo">
+                <h4><b>Portal Banners</b></h4>
+                <p> Default dimensions for the QA portal: <em>6625px X 1225px.</em></p>
+                <p>Additional web assets will be provided by the web developer. If any additional assets are created, please provide them in the QA Graphic Design Folder.</p>
+                <br>
+                <h4><b>Standard Web Banner Sizes:</b></h4>
+                <ul>
+                    <li>Full Banner: <em>468px X 60px</em></li>
+                    <li>Square: <em>336px X 280px</em></li>
+                </ul>
+            </div>
+            <img class="bannerimg" src="Assets/Untitled-1-01.png" height="170px">
+        </section>   
+
+
+        <section id="logos-section">
+            <h1>Logos</h1>
+            <div id="default"> 
+            <img src="assets/logos/logo.png" height="300px" width="300px">
+            <p>default</p>
+            </div>
+            <div>
+            <img src="assets/logos/logoWBAccent.png" height="300px" width="300px">
+            <p>Accent</p>
+            </div>
+            <div>
+            <img src="assets/logos/logoDark.png" height="300px" width="300px">
+            <p>Dark</p>
+            </div>
+            <div id="logonote">
+            <p><b><em>*Please use the standard Logo. Logo variations are given in the case it is needed in certain scenarios.Scource files can be found in the QA: Graphic Design Rescources folder in Google Drive.</b></em></p>
+            </div>
+        </section>
+
+
+        <section id="theme1">
+                <h1>Themes</h1>
+                <div id="themeinfo"><p>These are the standard themes. When creating new themes, limit colors to no more than 3.</p></div>
+                <h3>Light Theme</h3>
+                <div id="colors1">
+                <div id="primary1">
+                    <h4>main</h4>
+                    <div class="themebox" id="th1"></div>
+                    <p>HEX: #0076C6</p>
+                <div id="primary2"></div>
+                <h4>accent</h4>
+                    <div class="themebox" id="th2"></div>
+                    <p>HEX: #6c757d</p>
+                </div>
+            </div>
+                <div id="template1">
+                <img src="Assets\theming templates-02.png" width="90%" height=>
+                </div>
+            
+        </section>
+        <h3>Dark Theme</h3>
+        <section id="theme2">
+            <div id="colors2">
+                <div id="dark1">
+                        <h4>main</h4>
+                    <div class="themebox" id="dt1"></div>
+                    <p>HEX: #777777</p>
+                <div id="dark2"></div>
+                <h4>accent</h4>
+                    <div class="themebox" id="dt2"></div>
+                    <p>HEX: #343a40</p>
+                </div>
+                <div id="dark3"></div>
+                <h4>secondary accent</h4>
+                    <div class="themebox" id="dt3"></div>
+                    <p>HEX: #06439F</p>
+                </div>
+                <div id="template2">
+                <img src="Assets\theming templates-01.png" width="90%" >
+                </div>
+            </div>
+        </section>
+</main>
+</body>
+
+
+</html>

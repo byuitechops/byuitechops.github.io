@@ -1,12 +1,26 @@
-#view-modal-content div {
+.hide {
+    display: none;
+}
+
+.left-col, .right-col {
+    width: 450px;
+    margin-top: 10px;
+}
+.detail {
     display: flex;
     flex-flow: row wrap;
     width: 100%;
+    margin: 3px 0;
 }
-#view-modal p {
-    width: 100px;
+.detail p {
+    width: 200px;
     font-weight: 700;
 }
-#view-modal span {
+.detail div,span,input,select,ng-template {
     width: 200px;
+}
+
+textarea {
+    width: 400px;
+    height: 300px;
 }
