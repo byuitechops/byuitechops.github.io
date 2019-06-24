@@ -81,15 +81,15 @@ export class DatabaseService {
     this.afs.collection('accessibility').doc(this.user.actionID).update({
       status
     });
-    if (status === 'Ready for Transcription') {
+    if (status === 'In Prep') {
       this.afs.collection('accessibility').doc(this.user.actionID).update({
         preparer: name
       });
-    } else if (status === 'Ready for Review') {
+    } else if (status === 'In Transcription') {
       this.afs.collection('accessibility').doc(this.user.actionID).update({
         transcriber: name
       });
-    } else if (status === 'Finished' || status === 'Review Completed') {
+    } else if (status === 'In Review' || status === 'Review Completed') {
       this.afs.collection('accessibility').doc(this.user.actionID).update({
         reviewer: name
       });

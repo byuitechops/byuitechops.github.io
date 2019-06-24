@@ -15,7 +15,7 @@ export class TranscribeComponent implements OnInit {
 
 
   ngOnInit() {
-    this.db.checkAction();
+    setTimeout(() => {this.db.checkAction(); }, 1000);
   }
 
   showDetails(id) {
@@ -33,7 +33,6 @@ export class TranscribeComponent implements OnInit {
       currentAction: 'transcribing'
     };
     this.db.updateUser(userData);
-    // this.db.changeTranscriptStep('In ', this.db.user.name);
-    console.log(this.db.userID);
+    this.db.changeTranscriptStep('In Transcription', this.db.user.name);
   }
 }

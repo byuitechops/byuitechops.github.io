@@ -18,7 +18,7 @@ export class PrepareComponent implements OnInit {
 
 
   ngOnInit() {
-    this.db.checkAction();
+    setTimeout(() => {this.db.checkAction(); }, 1000);
   }
 
   showDetails(id) {
@@ -35,5 +35,6 @@ export class PrepareComponent implements OnInit {
       currentAction: 'preparing'
     };
     this.db.updateUser(userData);
+    this.db.changeTranscriptStep('In Prep', this.db.user.name);
   }
 }

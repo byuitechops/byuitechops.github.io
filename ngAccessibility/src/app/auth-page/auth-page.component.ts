@@ -18,11 +18,11 @@ export class AuthPageComponent implements OnInit {
     }
 
     ngOnInit() {
-      setTimeout(() => {
+      setTimeout(async () => {
         if (!this.afAuth.authenticated) {
           this.openModal();
         }
-      }, 1000);
+      }, 800);
     }
 
     signIn() {

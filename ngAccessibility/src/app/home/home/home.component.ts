@@ -24,23 +24,25 @@ export class HomeComponent implements OnInit {
     .forEach(doc => {
       this.announce = doc.data().content;
     });
-    if (db.user.actionID !== '') {
-      const transcript = db.getTranscript(db.user.actionID);
-      transcript.then(doc => {
-        const info = doc.data();
-        console.log(info);
-        this.data.title = info.title;
-        this.data.course = info.courseCode;
-        this.data.priority = info.priority;
-        this.data.lms = info.lmsURL;
-        this.data.media = info.srcURL;
-        this.data.doc = info.docEditURL;
-      });
+    if (db.user !== undefined) {
+      if (db.user.actionID !== '') {
+        const transcript = db.getTranscript(db.user.actionID);
+        transcript.then(doc => {
+          const info = doc.data();
+          console.log(info);
+          this.data.title = info.title;
+          this.data.course = info.courseCode;
+          this.data.priority = info.priority;
+          this.data.lms = info.lmsURL;
+          this.data.media = info.srcURL;
+          this.data.doc = info.docEditURL;
+        });
+      }
     }
   }
 
   async ngOnInit() {
-
+    setTimeout(() => {this.db.checkAction(); }, 1000);
   }
 
 }

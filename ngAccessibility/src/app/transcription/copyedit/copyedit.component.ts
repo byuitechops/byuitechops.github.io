@@ -15,7 +15,7 @@ export class CopyeditComponent implements OnInit {
 
 
   ngOnInit() {
-    this.db.checkAction();
+    setTimeout(() => {this.db.checkAction(); }, 1000);
   }
 
   showDetails(id) {
@@ -32,5 +32,6 @@ export class CopyeditComponent implements OnInit {
       currentAction: 'reviewing'
     };
     this.db.updateUser(userData);
+    this.db.changeTranscriptStep('In Review', this.db.user.name);
   }
 }
