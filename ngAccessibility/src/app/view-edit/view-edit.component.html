@@ -1,136 +1,135 @@
-<section class="dup" id="edit-window" [class.hide]='viewOpen'>
-  <div class="dup-content">
+<section class="modal" id="view-modal" [class.hide]='viewOpen'>
+    
+    <div class="modal-content" id="view-modal-content">
 
-      <div class="dup-header">
-          <h2>Edit Information:</h2>
-      </div>
+        <h1 class="modal-header">Edit Information:</h1>
 
-      <div id="edit-info-field">
-          <h3>Transcript Info</h3>
-          <div class="hide">
-              <p>ID</p>
-              <p id="edit-info-id"></p>
-          </div>
-          <div>
-              <p>Title</p>
-              <input id="edit-info-title" type="text"\>
-          </div>
-          <div>
-              <p>Stage</p>
-              <select id="edit-info-stage">
-                  <option value="0">- - -</option>
-                  <option value="Ready for Prep">Ready for Prep</option>
-                  <option value="In Prep">In Prep</option>
-                  <option value="Ready for Transcription">Ready for Transcription</option>
-                  <option value="In Transcription">In Transcription</option>
-                  <option value="Ready for Review">Ready for Review</option>
-                  <option value="In Review">In Review</option>
-                  <option value="Review Completed">Review Completed</option>
-                  <option value="Finished">Finished</option>
-              </select>
-          </div>
-          <div>
-              <p>Course Code(s)</p>
-              <a class="hide" id="add-course-code">+</a>
-              <input id="edit-info-courses" type="text"\>
-          </div>
-          <div>
-              <p>Priority</p>
-              <select id="edit-info-priority">
-                  <option value="0">- - -</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-              </select>
-          </div>
-          <div>
-              <p>Type</p>
-              <select id="edit-info-type">
-                  <option value="0">- - -</option>
-                  <option value="Video">Video</option>
-                  <option value="Audio">Audio</option>
-                  <option value="Alt Text">Alt Text</option>
-                  <option value="Slide Show">Slide Show</option>
-              </select>
-          </div>
-          <div>
-              <p>Length</p>
-              <input id="edit-info-length" type="text"\>
-          </div>
-          <div>
-              <p>Google Doc Edit Link</p>
-              <input id="edit-info-docedit" type="text"\>
-          </div>
-          <div>
-              <p>Google Doc Publish Link</p>
-              <input id="edit-info-docpub" type="text"\>
-          </div>
-          <div>
-              <p>LMS URL</p>
-              <input id="edit-info-lms" type="text"\>
-          </div>
-          <div>
-              <p>Media URL</p>
-              <input id="edit-info-media" type="text"\>
-          </div>
-          <div>
-              <p>Verbit Used?</p>
-              <select id="edit-info-isverbit">
-                  <option value="0">- - -</option>
-                  <option value="true">True</option>
-                  <option value="false">False</option>
-              </select>
-          </div>
-          <div id="verbit-id-box">
-              <p>Verbit ID</p>
-              <input id="edit-info-verbitid" type="text"\>
-          </div>
-      </div>
+        <div class="left-col" id="edit-info-field">
+            <h2>Transcript Info</h2>
+            <div class="hide">
+                <p>ID</p>
+                <p id="edit-info-id"></p>
+            </div>
+            <div>
+                <p>Title</p>
+                <input id="edit-info-title" type="text"\>
+            </div>
+            <div>
+                <p>Stage</p>
+                <select id="edit-info-stage">
+                    <option value="0">- - -</option>
+                    <option value="Ready for Prep">Ready for Prep</option>
+                    <option value="In Prep">In Prep</option>
+                    <option value="Ready for Transcription">Ready for Transcription</option>
+                    <option value="In Transcription">In Transcription</option>
+                    <option value="Ready for Review">Ready for Review</option>
+                    <option value="In Review">In Review</option>
+                    <option value="Review Completed">Review Completed</option>
+                    <option value="Finished">Finished</option>
+                </select>
+            </div>
+            <div>
+                <p>Course Code(s)</p>
+                <a class="hide" id="add-course-code">+</a>
+                <input id="edit-info-courses" type="text"\>
+            </div>
+            <div>
+                <p>Priority</p>
+                <select id="edit-info-priority">
+                    <option value="0">- - -</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+            </div>
+            <div>
+                <p>Type</p>
+                <select id="edit-info-type">
+                    <option value="0">- - -</option>
+                    <option value="Video">Video</option>
+                    <option value="Audio">Audio</option>
+                    <option value="Alt Text">Alt Text</option>
+                    <option value="Slide Show">Slide Show</option>
+                </select>
+            </div>
+            <div>
+                <p>Length</p>
+                <input id="edit-info-length" type="text"\>
+            </div>
+            <div>
+                <p>Google Doc Edit Link</p>
+                <input id="edit-info-docedit" type="text"\>
+            </div>
+            <div>
+                <p>Google Doc Publish Link</p>
+                <input id="edit-info-docpub" type="text"\>
+            </div>
+            <div>
+                <p>LMS URL</p>
+                <input id="edit-info-lms" type="text"\>
+            </div>
+            <div>
+                <p>Media URL</p>
+                <input id="edit-info-media" type="text"\>
+            </div>
+            <div>
+                <p>Verbit Used?</p>
+                <select id="edit-info-isverbit">
+                    <option value="0">- - -</option>
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                </select>
+            </div>
+            <div id="verbit-id-box">
+                <p>Verbit ID</p>
+                <input id="edit-info-verbitid" type="text"\>
+            </div>
+        </div>
 
-      <div id="notes-info-field">
-          <h3>Participating Users</h3>
-          <div>
-              <p>Requested by</p>
-              <span id="edit-info-requested-by"></span>
-          </div>
-          <div>
-              <p>Requested on</p>
-              <span id="edit-info-requested-on"></span>
-          </div>
-          <div>
-              <p>Prepared by</p>
-              <span id="edit-info-prepared-by"></span>
-          </div>
-          <div>
-              <p>Prepared Completed on</p>
-              <span id="edit-info-prepared-on"></span>
-          </div>
-          <div>
-              <p>Transcribed by</p>
-              <span id="edit-info-transcribe-by"></span>
-          </div>
-          <div>
-              <p>Transcription Completed on</p>
-              <span id="edit-info-transcribe-on"></span>
-          </div>
-          <div>
-              <p>Reviewed by</p>
-              <span id="edit-info-review-by"></span>
-          </div>
-          <div>
-              <p>Review Completed on</p>
-              <span id="edit-info-review-on"></span>
-          </div>
+        <div class="right-col" id="notes-info-field">
+            <h2>Participating Users</h2>
+            <div>
+                <p>Requested by</p>
+                <span id="edit-info-requested-by"></span>
+            </div>
+            <div>
+                <p>Requested on</p>
+                <span id="edit-info-requested-on"></span>
+            </div>
+            <div>
+                <p>Prepared by</p>
+                <span id="edit-info-prepared-by"></span>
+            </div>
+            <div>
+                <p>Prepared Completed on</p>
+                <span id="edit-info-prepared-on"></span>
+            </div>
+            <div>
+                <p>Transcribed by</p>
+                <span id="edit-info-transcribe-by"></span>
+            </div>
+            <div>
+                <p>Transcription Completed on</p>
+                <span id="edit-info-transcribe-on"></span>
+            </div>
+            <div>
+                <p>Reviewed by</p>
+                <span id="edit-info-review-by"></span>
+            </div>
+            <div>
+                <p>Review Completed on</p>
+                <span id="edit-info-review-on"></span>
+            </div>
 
-          <h3>Comments</h3>
-          <span id="edit-info-comment"></span>
-      </div>
+            <h3>Comments</h3>
+            <span id="edit-info-comment"></span>
+        </div>
 
-      <div class="btn-box">
-          <button id="confirmEditBtn">Confirm</button>
-          <button id="cancelEditBtn">Cancel</button>
-          <button class="hide" id="btn-delete-transcript" class="btn-hover red">Delete Transcript</button>
-      </div>
-  </div>
+        <div class="btn-box">
+            <button id="confirmEditBtn">Confirm</button>
+            <button id="cancelEditBtn">Cancel</button>
+            <button class="hide" id="btn-delete-transcript" class="btn-hover red">Delete Transcript</button>
+        </div>
+    </div>
 </section>
