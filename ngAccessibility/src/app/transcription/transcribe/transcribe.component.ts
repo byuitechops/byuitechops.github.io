@@ -26,13 +26,13 @@ export class TranscribeComponent implements OnInit {
     });
   }
 
-  claimTranscript(id: string) {
+  async claimTranscript(id: string) {
     console.log(id);
     const userData = {
       actionID: id,
       currentAction: 'transcribing'
     };
-    this.db.updateUser(userData);
-    this.db.changeTranscriptStep('In Transcription', this.db.user.name);
+    await this.db.updateUser(userData);
+    await this.db.changeTranscriptStep('In Transcription', this.db.user.name);
   }
 }
