@@ -8,7 +8,7 @@
             <h2>Announcements</h2>
             <div>{{ announce }}</div>
         </div>
-        
+
         <div id="banner-box">
             <img class="banner" src="" alt="">
         </div>
@@ -36,24 +36,28 @@
             <div id="claimed-transcript-box">
             <div>
                 <h4>Video</h4>
-                <span></span>
+                <span>{{ data.title }}</span>
             </div>
             <div>
                 <h4>Course</h4>
-                <span></span>
+                <span>{{ data.course }}</span>
             </div>
             <div>
                 <h4>Priority</h4>
-                <span></span>
+                <span>{{ data.priority }}</span>
             </div>
             <div>
                 <h4>Course Link</h4>
-                <a href="" target="_blank"></a>
+                <a [href]="data.lms"  target="_blank">{{ data.course }}</a>
             </div>
             <div>
                 <h4>Media URL</h4>
-                <a href="" target="_blank"></a>
+                <a [href]="data.media" target="_blank">{{ data.title }}</a>
             </div>
+            <div>
+              <h4>Transcript URL</h4>
+              <a [href]="data.doc" target="_blank">{{ data.doc }}</a>
+          </div>
             <div class="btn-box">
                 <button id="return-prep-btn">Return to Prep</button>
                 <button id="complete-tran-btn">Complete</button>

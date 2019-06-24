@@ -36,6 +36,7 @@ export class RequestComponent implements OnInit {
 
   ngOnInit() {
     this.getCourse();
+    this.db.checkAction();
   }
 
   getCourse() {
@@ -43,20 +44,19 @@ export class RequestComponent implements OnInit {
     const xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
-            const x = [];
             const res = JSON.parse(this.responseText);
             const id = res._id;
             const newxhttp = new XMLHttpRequest();
             newxhttp.onreadystatechange = function() {
                 if (this.readyState === 4 && this.status === 200) {
                     const newres = JSON.parse(this.responseText);
-                    let html = '';
+                    let inject = '';
                     newres.forEach((doc) => {
                       const course = doc.__catalogCourseId;
-                      html += `<option>${course}</option>`;
+                      inject += `<option>${course}</option>`;
                       courses.push(course);
                     });
-                    document.getElementById('requestCourse').insertAdjacentHTML('afterend', html);
+                    document.getElementById('requestCourse').insertAdjacentHTML('afterend', inject);
                     return courses;
                 }
             };
@@ -138,6 +138,6 @@ export class RequestComponent implements OnInit {
         this.type = undefined;
       }
     }
-    
+
 }
 
