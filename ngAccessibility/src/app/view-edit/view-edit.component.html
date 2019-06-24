@@ -1,135 +1,234 @@
-<section class="modal" id="view-modal" [class.hide]='viewOpen'>
+<section class="modal hide" id="view-modal" [class.hide]='viewOpen'>
     
     <div class="modal-content" id="view-modal-content">
-
-        <h1 class="modal-header">Edit Information:</h1>
+        
+        <div class="modal-header-box">
+            <h1 class="modal-header" id="edit-info-title">View/Edit Information</h1>
+        </div>
+        
 
         <div class="left-col" id="edit-info-field">
             <h2>Transcript Info</h2>
+
             <div class="hide">
                 <p>ID</p>
-                <p id="edit-info-id"></p>
+                <span id="edit-info-id"></span>
             </div>
+
             <div>
                 <p>Title</p>
-                <input id="edit-info-title" type="text"\>
+                <div *ngIf="editing; else viewTitle">
+                    <input id="edit-info-title">
+                </div>
+                <ng-template #viewTitle>
+                    <span id="view-info-title"></span>
+                </ng-template>
             </div>
+
             <div>
                 <p>Stage</p>
-                <select id="edit-info-stage">
-                    <option value="0">- - -</option>
-                    <option value="Ready for Prep">Ready for Prep</option>
-                    <option value="In Prep">In Prep</option>
-                    <option value="Ready for Transcription">Ready for Transcription</option>
-                    <option value="In Transcription">In Transcription</option>
-                    <option value="Ready for Review">Ready for Review</option>
-                    <option value="In Review">In Review</option>
-                    <option value="Review Completed">Review Completed</option>
-                    <option value="Finished">Finished</option>
-                </select>
+                <div *ngIf="editing; else viewStage">
+                    <select id="edit-info-stage">
+                        <option value="0">- - -</option>
+                        <option value="Ready for Prep">Ready for Prep</option>
+                        <option value="In Prep">In Prep</option>
+                        <option value="Ready for Transcription">Ready for Transcription</option>
+                        <option value="In Transcription">In Transcription</option>
+                        <option value="Ready for Review">Ready for Review</option>
+                        <option value="In Review">In Review</option>
+                        <option value="Review Completed">Review Completed</option>
+                        <option value="Finished">Finished</option>
+                    </select>
+                </div>
+                <ng-template #viewStage>
+                    <span id="view-info-stage"></span>
+                </ng-template>
             </div>
+
             <div>
                 <p>Course Code(s)</p>
-                <a class="hide" id="add-course-code">+</a>
-                <input id="edit-info-courses" type="text"\>
+                <div *ngIf="editing; else viewCourses">
+                    <a class="hide" id="add-course-code">+</a>
+                    <input id="edit-info-courses" type="text">
+                </div>
+                <ng-template #viewCourses *ngFor="let course of courses">
+                    <span id="view-info-courses"></span>
+                </ng-template>
             </div>
+
             <div>
                 <p>Priority</p>
-                <select id="edit-info-priority">
-                    <option value="0">- - -</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                </select>
+                <div *ngIf="editing; else viewPriority">
+                    <select id="edit-info-priority">
+                        <option value="0">- - -</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+                <ng-template #viewPriority>
+                    <span id="view-info-priority"></span>
+                </ng-template>
             </div>
+
             <div>
                 <p>Type</p>
-                <select id="edit-info-type">
-                    <option value="0">- - -</option>
-                    <option value="Video">Video</option>
-                    <option value="Audio">Audio</option>
-                    <option value="Alt Text">Alt Text</option>
-                    <option value="Slide Show">Slide Show</option>
-                </select>
+                <div *ngIf="editing; else viewType">
+                    <select id="edit-info-type">
+                        <option value="0">- - -</option>
+                        <option value="Video">Video</option>
+                        <option value="Audio">Audio</option>
+                        <option value="Alt Text">Alt Text</option>
+                        <option value="Slide Show">Slide Show</option>
+                    </select>
+                </div>
+                <ng-template #viewType>
+                    <span id="view-info-type"></span>
+                </ng-template>
+                
             </div>
+
             <div>
                 <p>Length</p>
-                <input id="edit-info-length" type="text"\>
+                <div *ngIf="editing; else viewLength">
+                    <input id="edit-info-length" type="text">
+                </div>
+                <ng-template #viewLength>
+                    <span id="view-info-length"></span>
+                </ng-template>
             </div>
+
             <div>
                 <p>Google Doc Edit Link</p>
-                <input id="edit-info-docedit" type="text"\>
+                <div *ngIf="editing; else viewDocedit">
+                    <input id="edit-info-docedit" type="text">
+                </div>
+                <ng-template #viewDocedit>
+                    <span id="view-info-docedit"></span>
+                </ng-template>
             </div>
+
             <div>
                 <p>Google Doc Publish Link</p>
-                <input id="edit-info-docpub" type="text"\>
+                <div *ngIf="editing; else viewDocpub">
+                    <input id="edit-info-docpub" type="text">
+                </div>
+                <ng-template #viewDocpub>
+                    <span id="view-info-docpub"></span>
+                </ng-template>
             </div>
+
             <div>
                 <p>LMS URL</p>
-                <input id="edit-info-lms" type="text"\>
+                <div *ngIf="editing; else viewLms">
+                    <input id="edit-info-lms" type=text">
+                </div>
+                <ng-template #viewLms>
+                    <span id="view-info-lms"></span>
+                </ng-template>
             </div>
+
             <div>
                 <p>Media URL</p>
-                <input id="edit-info-media" type="text"\>
+                <div *ngIf="editing; else viewMedia">
+                    <input id="edit-info-media" type="text">
+                </div>
+                <ng-template #viewMedia>
+                    <span id="view-info-media"></span>
+                </ng-template>
+                
             </div>
+
             <div>
                 <p>Verbit Used?</p>
-                <select id="edit-info-isverbit">
-                    <option value="0">- - -</option>
-                    <option value="true">True</option>
-                    <option value="false">False</option>
-                </select>
+                <div *ngIf="editing; else viewIsverbit">
+                    <select id="edit-info-isverbit">
+                        <option value="0">- - -</option>
+                        <option value="true">True</option>
+                        <option value="false">False</option>
+                    </select>
+                </div>
+                <ng-template #viewIsverbit>
+                    <span id="view-info-isverbit"></span>
+                </ng-template>
+                
             </div>
+
             <div id="verbit-id-box">
                 <p>Verbit ID</p>
-                <input id="edit-info-verbitid" type="text"\>
+                <div *ngIf="editing; else viewVerbitID">
+                    <input id="edit-info-verbitid" type="text">
+                </div>
+                <ng-template #viewVerbitID>
+                    <span id="view-info-isverbit"></span>
+                </ng-template>
+                
             </div>
         </div>
 
         <div class="right-col" id="notes-info-field">
             <h2>Participating Users</h2>
+
             <div>
                 <p>Requested by</p>
                 <span id="edit-info-requested-by"></span>
             </div>
+
             <div>
                 <p>Requested on</p>
                 <span id="edit-info-requested-on"></span>
             </div>
+
             <div>
                 <p>Prepared by</p>
                 <span id="edit-info-prepared-by"></span>
             </div>
+
             <div>
                 <p>Prepared Completed on</p>
                 <span id="edit-info-prepared-on"></span>
             </div>
+
             <div>
                 <p>Transcribed by</p>
                 <span id="edit-info-transcribe-by"></span>
             </div>
+
             <div>
                 <p>Transcription Completed on</p>
                 <span id="edit-info-transcribe-on"></span>
             </div>
+
             <div>
                 <p>Reviewed by</p>
                 <span id="edit-info-review-by"></span>
             </div>
+
             <div>
                 <p>Review Completed on</p>
                 <span id="edit-info-review-on"></span>
             </div>
 
             <h3>Comments</h3>
-            <span id="edit-info-comment"></span>
+            <div *ngIf="editing; else viewComments">
+                <textarea id="edit-info-comment"></textarea>
+            </div>
+            <ng-template #viewComments>
+                <span id="view-info-comments"></span>
+            </ng-template>
+            
         </div>
 
-        <div class="btn-box">
+        <div *ngIf="editing; else viewBtnBox" class="btn-box">
             <button id="confirmEditBtn">Confirm</button>
-            <button id="cancelEditBtn">Cancel</button>
+            <button id="cancelEditBtn" (click)="closeModal()">Cancel</button>
             <button class="hide" id="btn-delete-transcript" class="btn-hover red">Delete Transcript</button>
         </div>
+        <ng-template #viewBtnBox class="btn-box">
+            <button id="closeViewBtn" (click)="closeModal()">Close</button>
+        </ng-template>
+        
+
     </div>
 </section>

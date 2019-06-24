@@ -1,0 +1,12 @@
+#view-modal-content div {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+}
+#view-modal p {
+    width: 100px;
+    font-weight: 700;
+}
+#view-modal span {
+    width: 200px;
+}
