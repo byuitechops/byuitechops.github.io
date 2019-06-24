@@ -97,45 +97,47 @@ export class RequestComponent implements OnInit {
       }
       console.log('uh oh 3');
       alert('Please fill in all fields');
-    }
-    let displayName: string;
-    if (this.auth.user.isAnonymous) {
-      displayName = this.name;
     } else {
-      displayName = this.db.user.name;
+        let displayName: string;
+        if (this.auth.user.isAnonymous) {
+          displayName = this.name;
+        } else {
+          displayName = this.db.user.name;
+        }
+        if (this.comments === undefined || this.comments === '') {
+          this.comments = '';
+        } else {
+          this.comments = this.comments + 'Made by ' + displayName;
+        }
+        const data = {
+          backupCode: this.course,
+          copied: false,
+          courseCode: [this.course],
+          datePrepareFinished: '',
+          docEditURL: '',
+          docPublishURL: '',
+          length: '',
+          lmsURL: this.lms,
+          parentTranscript: true,
+          preparer: '',
+          priority: this.priority,
+          requestDate: new Date(),
+          requestNotes: this.comments,
+          requestor: displayName,
+          srcURL: this.media,
+          status: 'Ready for Prep',
+          title: this.title,
+          type: this.type,
+          verbit: false,
+          verbitID: ''
+        };
+        console.log(data);
+        this.db.createTranscript(data);
+        this.comments = '';
+        this.media = '';
+        this.type = undefined;
+      }
     }
-    if (this.comments === undefined || this.comments === '') {
-      this.comments = '';
-    } else {
-      this.comments = this.comments + 'Made by ' + displayName;
-    }
-    const data = {
-      backupCode: this.course,
-      copied: false,
-      courseCode: [this.course],
-      datePrepareFinished: '',
-      docEditURL: '',
-      docPublishURL: '',
-      length: '',
-      lmsURL: this.lms,
-      parentTranscript: true,
-      preparer: '',
-      priority: this.priority,
-      requestDate: new Date(),
-      requestNotes: this.comments,
-      requestor: displayName,
-      srcURL: this.media,
-      status: 'Ready for Prep',
-      title: this.title,
-      type: this.type,
-      verbit: false,
-      verbitID: ''
-    };
-    console.log(data);
-    this.db.createTranscript(data);
-    this.comments = '';
-    this.media = '';
-    this.type = undefined;
-  }
+    
 }
 

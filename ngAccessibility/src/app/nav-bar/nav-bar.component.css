@@ -111,7 +111,7 @@ ais-hits {
     padding: 5px;
 
     font-size: 14px;
-    border-radius: 50px;
+    border-radius: 15px;
     cursor: pointer;
     transition: all .1s;
 }

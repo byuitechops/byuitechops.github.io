@@ -33,6 +33,7 @@ export class ViewEditComponent implements OnInit {
   }
   async openModal(data) {
     this.viewOpen = true;
+    
   }
   closeModal() {
     this.viewOpen = false;
