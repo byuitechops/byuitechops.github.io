@@ -14,7 +14,7 @@
     --black: #000000;
     --darkgray: #444444;
     --medgray: #777777;
-    --lightgray: #eeeeee;
+    --lightgray: #dddddd;
     --verylightgray: #f7f7f7;
 }
 
@@ -146,7 +146,7 @@ button {
     border-radius: 5px;
     outline: none;
     cursor: pointer;
-    transition: all .2s;
+    transition: all .1s;
 }
 button:hover {
     color: var(--primary);
@@ -264,5 +264,12 @@ tr {
     flex-flow: row wrap;
 }
 .modal-body .left-col,.right-col {
-    width: 345px;
+    width: 340px;
+}
+.median {
+    width: 2px;
+    height: 60%;
+    margin: auto;
+    border-radius: 2px;
+    background-color: var(--lightgray);
 }

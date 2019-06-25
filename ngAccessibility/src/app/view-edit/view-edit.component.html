@@ -8,11 +8,6 @@
             <div class="left-col" id="edit-info-field">
                 <h2>Transcript Info</h2>
 
-                <div class="detail hide">
-                    <p>ID</p>
-                    <span id="edit-info-id"></span>
-                </div>
-
                 <div class="detail">
                     <p>Title</p>
                     <div *ngIf="editing; else viewTitle">
@@ -164,6 +159,8 @@
                     
                 </div>
             </div>
+
+            <div class="median"></div>
 
             <div class="right-col" id="notes-info-field">
                 <h2>Participating Users</h2>
