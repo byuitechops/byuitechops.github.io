@@ -11,8 +11,18 @@ import { DatabaseService } from 'src/app/core/database.service';
 export class PrepareComponent implements OnInit {
 
     type: string;
+    course: string;
+    title: string;
+    priority: string;
+    lms: string;
+    docPub: string;
+    docEdit: string;
+    length: string;
+    verbit: string;
+    verbitID: string;
+
     constructor(public search: SearchService, private db: DatabaseService, private view: ViewEditComponent) {
-    // this.showDetails('Xcob9Md829TdPO0y6DUP');
+
 }
 
 
