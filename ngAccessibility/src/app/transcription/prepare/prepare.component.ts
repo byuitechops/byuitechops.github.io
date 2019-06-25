@@ -12,7 +12,7 @@ export class PrepareComponent implements OnInit {
 
     type: string;
     constructor(public search: SearchService, private db: DatabaseService, private view: ViewEditComponent) {
-    this.showDetails('Xcob9Md829TdPO0y6DUP');
+    // this.showDetails('Xcob9Md829TdPO0y6DUP');
 }
 
 
@@ -21,12 +21,13 @@ export class PrepareComponent implements OnInit {
     setTimeout(() => {this.db.checkAction(); }, 1000);
   }
 
-  showDetails(id) {
-    const data = this.db.getTranscript(id);
-    data.then(doc => {
-      console.log(doc.data());
-      this.view.openModal(doc.data());
-    });
+  async showDetails(id) {
+    const file = this.db.getTranscript(id);
+    const data = await file.then(async doc => {
+                    console.log(doc.data());
+                    return doc.data();
+                  });
+    this.view.openModal();
   }
 
   claimTranscript(id) {
