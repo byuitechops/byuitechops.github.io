@@ -22,7 +22,7 @@ export class CopyeditComponent implements OnInit {
     const data = this.db.getTranscript(id);
     data.then(doc => {
       console.log(doc.data());
-      this.view.openModal(doc.data());
+      this.view.openModal();
     });
   }
 
