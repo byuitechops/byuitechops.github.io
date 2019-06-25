@@ -1,110 +1,112 @@
 <main>
 
-  <h1 class="page-title">Prepare</h1>
+    <h1 class="page-title">Prepare</h1>
 
-  <div class="table-box center">
-    <ais-instantsearch [config]="search.config">
-      <ais-configure [searchParameters]="{filters: 'status:\'Ready for Prep\''}"></ais-configure>
-      <div class="search-panel">
-        <div class="search-panel__results">
-          <table>
-            <tr class="table-headers">
-              <th class="priority-col" id="priority-col-head">Priority</th>
-              <th class="course-col" id="course-col-head">Course</th>
-              <th class="type-col" id="type-col-head">Type</th>
-              <th class="title-col" id="title-col-head">Title</th>
-              <th class="last-col">
-                <div class="searchbox">
-                  <ais-search-box placeholder=""></ais-search-box>
-                </div>
-              </th>
-            </tr>
-          </table>
-          <table>
-            <ais-hits>
-              <ng-template let-hits="hits">
-                <ol class="ais-Hits-list">
-                  <tr *ngFor="let hit of hits" class="ais-Hits-item">
-                    <td class="priority-col"> {{ hit.priority }} </td>
-                    <td class="course-col"> {{ hit.courseCode }} </td>
-                    <td class="type-col"> {{ hit.type }} </td>
-                    <td class="title-col"> {{ hit.title }} </td>
-                    <td class="last-col">
-                      <button type="button" (click)="showDetails(hit.objectID)">View</button>
-                      <button type="button" (click)="claimTranscript(hit.objectID)">Claim</button>
-                    </td>
-                  </tr>
-                </ol>
-              </ng-template>
-            </ais-hits>
-          </table>
-          <div class="pagination">
-            <ais-pagination></ais-pagination>
-          </div>
+    <div class="table-box center">
+        <ais-instantsearch [config]="search.config">
+        <ais-configure [searchParameters]="{filters: 'status:\'Ready for Prep\''}"></ais-configure>
+        <div class="search-panel">
+            <div class="search-panel__results">
+            <table>
+                <tr class="table-headers">
+                <th class="priority-col" id="priority-col-head">Priority</th>
+                <th class="course-col" id="course-col-head">Course</th>
+                <th class="type-col" id="type-col-head">Type</th>
+                <th class="title-col" id="title-col-head">Title</th>
+                <th class="last-col">
+                    <div class="searchbox">
+                    <ais-search-box placeholder=""></ais-search-box>
+                    </div>
+                </th>
+                </tr>
+            </table>
+            <table>
+                <ais-hits>
+                <ng-template let-hits="hits">
+                    <ol class="ais-Hits-list">
+                    <tr *ngFor="let hit of hits" class="ais-Hits-item">
+                        <td class="priority-col"> {{ hit.priority }} </td>
+                        <td class="course-col"> {{ hit.courseCode }} </td>
+                        <td class="type-col"> {{ hit.type }} </td>
+                        <td class="title-col"> {{ hit.title }} </td>
+                        <td class="last-col">
+                        <button type="button" (click)="showDetails(hit.objectID)">View</button>
+                        <button type="button" (click)="claimTranscript(hit.objectID)">Claim</button>
+                        </td>
+                    </tr>
+                    </ol>
+                </ng-template>
+                </ais-hits>
+            </table>
+            <div class="pagination">
+                <ais-pagination></ais-pagination>
+            </div>
+            </div>
+
         </div>
+        </ais-instantsearch>
 
-      </div>
-    </ais-instantsearch>
-
-  </div>
+    </div>
 </main>
 
 
 <main>
 
-  <h1 class="page-title">Prepare</h1>
+    <h1 class="page-title">Prepare</h1>
 
-  <section id="requestForm" class="left-col">
-    <form>
-        <p>Did you search the Google Drive and course file before making a new transcript.</p>
-        <select>
-          <option>No</option>
-          <option>Yes</option>
-        </select>
-        <p>Transcript Information</p>
-        <input ngModel="docEdit" placeholder="Editable Google Doc" />
-        <input ngModel="docPub" placeholder="Published Google Doc" />
-        <input ngModel="length" placeholder="Video Length" />
-        <p>Will this use Verbit</p>
-        <select (ngModel)="verbit">
-          <option>No</option>
-          <option>Yes</option>
-        </select>
-        <ng-template *ngIf="'verbit == Yes';">
-        <input ngModel="verbitID" placeholder="Verbit ID" />
-        </ng-template>
-    </form>
-  </section>
+    <section class="left-col" id="requestForm">
+        <form>
+            <p>Did you search the Google Drive and course file before making a new transcript.</p>
+            <select>
+                <option>No</option>
+                <option>Yes</option>
+            </select>
 
-  <section id="transcript-box-info" class="right-col">
-      <h2>Ticket Information</h2>
-      <div class="ticketbox  col">
-          <div>
-              <label>Media Type:</label>
-              <p class="description"> {{ type }} </p>
-          </div>
-          <div>
-              <label>Course Code:</label>
-              <p class="description"> {{ course }} </p>
-          </div>
-          <div>
-              <label>Title:</label>
-              <p class="description"> {{ title }} </p>
-          </div>
-          <div>
-              <label>Priority:</label>
-              <p class="description">{{ priority }} </p>
-          </div>
-          <div>
-              <label>Location in Course:</label>
-              <p class="description"> {{ lms }}</p>
-          </div>
-          <div>
-              <button type="submit">
-                  Submit </button>
-              <p style="margin-left: 2rem; margin-top: .8rem; font-weight: bolder;" id="message"></p>
-          </div>
-      </div>
-  </section>
+            <p>Transcript Information</p>
+            <input class="prepare-input" ngModel="docEdit" placeholder="Editable Google Doc" />
+            <input class="prepare-input" ngModel="docPub" placeholder="Published Google Doc" />
+            <input class="prepare-input" ngModel="length" placeholder="Video Length" />
+
+            <p>Will this use Verbit</p>
+            <select (ngModel)="verbit">
+                <option>No</option>
+                <option>Yes</option>
+            </select>
+            <ng-template *ngIf="'verbit == Yes';">
+                <input ngModel="verbitID" placeholder="Verbit ID" />
+            </ng-template>
+        </form>
+    </section>
+
+    <section class="right-col" id="transcript-box-info">
+        <h2>Ticket Information</h2>
+        <div class="ticketbox">
+            <div>
+                <label>Media Type:</label>
+                <p class="description"> {{ type }} </p>
+            </div>
+            <div>
+                <label>Course Code:</label>
+                <p class="description"> {{ course }} </p>
+            </div>
+            <div>
+                <label>Title:</label>
+                <p class="description"> {{ title }} </p>
+            </div>
+            <div>
+                <label>Priority:</label>
+                <p class="description">{{ priority }} </p>
+            </div>
+            <div>
+                <label>Location in Course:</label>
+                <p class="description"> {{ lms }}</p>
+            </div>
+            <div>
+                <button type="submit">
+                    Submit </button>
+                <p style="margin-left: 2rem; margin-top: .8rem; font-weight: bolder;" id="message"></p>
+            </div>
+        </div>
+    </section>
 
 </main>
