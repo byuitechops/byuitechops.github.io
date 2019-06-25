@@ -121,4 +121,10 @@ closeModal() {
     }
 }
 
+ClickedOut(event) {
+    if (event.target.className === "modal") {
+        this.closeModal();
+    }
+}
+
 }
