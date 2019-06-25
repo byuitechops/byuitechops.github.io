@@ -9,88 +9,88 @@ import { DatabaseService } from '../core/database.service';
 
 export class ViewEditComponent implements OnInit {
 
-  @ViewChild('content') content: any;
-  viewOpen = false;
-  editing = true;
-  copied = true;
-  courseCode = ['ACCTG100'];
-  datePrepareFinished = 'Today';
-  docEditURL = '.com';
-  docPublishURL = '.pub';
-  length = '108 seconds';
-  lmsURL = '.com';
-  parentTranscript = true;
-  preparer = 'Me';
-  priority = '1';
-  requestDate = 'Today';
-  requestNotes = 'None';
-  requestor = 'Me';
-  srcURL = '.com';
-  step = 'Finished';
-  title = 'Me';
-  type = 'Video';
-  verbit = false;
-  verbitID = '';
-  priorities = [
-    '1',
-    '2',
-    '3',
-    '4'
-  ];
-  types = [
-    'Video',
-    'Audio',
-    'Alt Text',
-    'Slide'
-  ];
-  stages = [
-    'Ready for Prep',
-    'In Prep',
-    'Ready for Transcription',
-    'In Transcription',
-    'Ready for Review',
-    'In Review',
-    'Review Completed',
-    'Finished'
-  ];
-  options = [
-    'True',
-    'False'
-  ];
-  constructor() { }
+    @ViewChild('content') content: any;
+    viewOpen = false;
+    editing = true;
+    copied = true;
+    courseCode = ['ACCTG100'];
+    datePrepareFinished = 'Today';
+    docEditURL = '.com';
+    docPublishURL = '.pub';
+    length = '108 seconds';
+    lmsURL = '.com';
+    parentTranscript = true;
+    preparer = 'Me';
+    priority = '1';
+    requestDate = 'Today';
+    requestNotes = 'None';
+    requestor = 'Me';
+    srcURL = '.com';
+    step = 'Finished';
+    title = 'Me';
+    type = 'Video';
+    verbit = false;
+    verbitID = '';
+    priorities = [
+        '1',
+        '2',
+        '3',
+        '4'
+    ];
+    types = [
+        'Video',
+        'Audio',
+        'Alt Text',
+        'Slide'
+    ];
+    stages = [
+        'Ready for Prep',
+        'In Prep',
+        'Ready for Transcription',
+        'In Transcription',
+        'Ready for Review',
+        'In Review',
+        'Review Completed',
+        'Finished'
+    ];
+    options = [
+        'True',
+        'False'
+    ];
+    constructor() { }
 
-  ngOnInit() {
+    ngOnInit() {
 
-  }
-
-
-  async openModal() {
-    const modal       = document.getElementById('view-modal');
-    const navbar      = document.getElementById('main-nav');
-    const content     = document.getElementsByTagName('main');
-    modal.classList.remove('hide');
-    navbar.classList.add('blur');
-    for (let i = 0; i < content.length; i++) {
-        content[i].classList.add('blur');
     }
-  }
 
-  closeModal() {
-    const modal    = document.getElementById('view-modal');
-    const navbar   = document.getElementById('main-nav');
-    const content  = document.getElementsByTagName('main');
 
-    modal.classList.add('hide');
-    navbar.classList.remove('blur');
-    for (let i = 0; i < content.length; i++) {
-        content[i].classList.remove('blur');
+    async openModal() {
+        const modal       = document.getElementById('view-modal');
+        const navbar      = document.getElementById('main-nav');
+        const content     = document.getElementsByTagName('main');
+        modal.classList.remove('hide');
+        navbar.classList.add('blur');
+        for (let i = 0; i < content.length; i++) {
+            content[i].classList.add('blur');
+        }
     }
-  }
-  clickedOut(event) {
-    if (event.target.className === 'modal') {
-        this.closeModal();
+
+    closeModal() {
+        const modal    = document.getElementById('view-modal');
+        const navbar   = document.getElementById('main-nav');
+        const content  = document.getElementsByTagName('main');
+
+        modal.classList.add('hide');
+        navbar.classList.remove('blur');
+        for (let i = 0; i < content.length; i++) {
+            content[i].classList.remove('blur');
+        }
     }
-  }
+    clickedOut(event) {
+        if (event.target.className === 'modal') {
+            this.closeModal();
+        }
+    }
 }
 
 

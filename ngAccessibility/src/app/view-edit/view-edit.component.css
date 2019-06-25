@@ -3,7 +3,7 @@
 }
 
 .modal-body {
-    height: 650px;
+    height: 65vh;
     overflow: auto;
 }
 .left-col, .right-col {

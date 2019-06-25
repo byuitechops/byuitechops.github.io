@@ -154,11 +154,11 @@ button:hover {
     background-color: var(--white);
     border: 3px solid var(--primary);
 }
-.danger-btn {
+.warning-btn {
     background-color: var(--warning);
     float: right;
 }
-.danger-btn:hover {
+.warning-btn:hover {
     color: var(--warning);
     background-color: var(--white);
     border: 3px solid var(--warning);
@@ -250,7 +250,7 @@ tr {
     width: 100%;
     max-width: 1000px;
     height: auto;
-    margin: 75px auto;
+    margin: 50px auto;
     padding: 25px;
 
     background-color: var(--white);
