@@ -11,7 +11,7 @@ export class ViewEditComponent implements OnInit {
     @ViewChild('content') content: any;
     
     viewOpen: boolean;
-    editing: boolean = true;
+    editing: boolean = false;
     copied: boolean;
     courseCode;
     datePrepareFinished;
