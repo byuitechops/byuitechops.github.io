@@ -5,6 +5,25 @@
 ******************************************************/
 
 
+#requestForm input {
+    width: 100%;
+    max-width: 500px
+}
+#ticketbox {
+    display: flex;
+    flex-flow: row wrap;
+}
+.detail {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    padding: 5px;
+}
+.detail label {
+    width: 150px;
+}
+
+
 .left-col, .right-col {
     margin-left: 50px;
 }
@@ -15,17 +34,4 @@
 .right-col {
     background-color: var(--verylightgray);
     box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
-}
-#requestForm input {
-    width: 100%;
-    max-width: 500px
-}
-#transcript-box-info div {
-    display: flex;
-    flex-flow: row wrap;
-    width: 100%;
-    padding: 5px;
-}
-#transcript-box-info label {
-    width: 150px;
 }

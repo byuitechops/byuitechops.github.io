@@ -1,3 +1,70 @@
+<section class="modal hide" id="dup-modal" (click)="clickedOut($event)">
+
+    <div class="modal-content" id="dup-modal-content">
+        <div class="modal-header-box">
+            <h1>Duplicate Found</h1>
+        </div>
+
+        <div class="left-col">
+            <h2>Your Request</h2>
+            <div>
+                <label>Media Type:</label>
+                <p class="description"> {{ type }} </p>
+            </div>
+            <div>
+                <label>Course Code:</label>
+                <p class="description"> {{ course }} </p>
+            </div>
+            <div>
+                <label>Title:</label>
+                <p class="description"> {{ title }} </p>
+            </div>
+            <div>
+                <label>Priority:</label>
+                <p class="description">{{ priority }} </p>
+            </div>
+            <div>
+                <label>Video:</label>
+                <p class="description"> {{ media }}</p>
+            </div>
+        </div>
+
+        <div class="right-col">
+            <h2>Potential Duplicate(s)</h2>
+            <div>
+                <label>Media Type:</label>
+                <p class="description"> {{ type }} </p>
+            </div>
+            <div>
+                <label>Course Code:</label>
+                <p class="description"> {{ course }} </p>
+            </div>
+            <div>
+                <label>Title:</label>
+                <p class="description"> {{ title }} </p>
+            </div>
+            <div>
+                <label>Priority:</label>
+                <p class="description">{{ priority }} </p>
+            </div>
+            <div>
+                <label>Video:</label>
+                <p class="description"> {{ media }} </p>
+            </div>
+        </div>
+        
+        <div class="btn-box" id="dup-btn-box">
+            <p style="margin-left: 2rem; margin-top: .8rem; font-weight: bolder;" id="message"></p>
+            <button type="submit" id="requestSubmit" (click)="newRequest()">Use Duplicate</button>
+            <button type="submit" id="requestSubmit" (click)="newRequest()">Make New Transcript</button>
+            <button class="warning-btn" id="dup-cancel" (click)="closeDup()">Cancel</button>
+        </div>
+
+    </div>
+
+</section>
+    
+
 <main>
 
     <h1 class="page-title">Request</h1>
@@ -33,89 +100,32 @@
     <section id="transcript-box-info" class="right-col">
         <h2>Ticket Information</h2>
         <div class="ticketbox  col">
-            <div>
+            <div class="detail">
                 <label>Media Type:</label>
                 <p class="description"> {{ type }} </p>
             </div>
-            <div>
+            <div class="detail">
                 <label>Course Code:</label>
                 <p class="description"> {{ course }} </p>
             </div>
-            <div>
+            <div class="detail">
                 <label>Title:</label>
                 <p class="description"> {{ title }} </p>
             </div>
-            <div>
+            <div class="detail">
                 <label>Priority:</label>
                 <p class="description">{{ priority }} </p>
             </div>
-            <div>
+            <div class="detail">
                 <label>Location in Course:</label>
                 <p class="description"> {{ lms }}</p>
             </div>
-            <div>
-                <button type="submit" id="requestSubmit" (click)="newRequest()">
-                    Submit </button>
+            <div class="btn-box">
                 <p style="margin-left: 2rem; margin-top: .8rem; font-weight: bolder;" id="message"></p>
+                <button type="submit" id="requestSubmit" (click)="newRequest()">Submit</button>
+                <button id="dup-btn" (click)="openDup()">Open Dup Checker</button>
             </div>
         </div>
     </section>
 
 </main>
-
-<div>
-  <div class="right-col">
-      <div>
-          <label>Media Type:</label>
-          <p class="description"> {{ type }} </p>
-      </div>
-      <div>
-          <label>Course Code:</label>
-          <p class="description"> {{ course }} </p>
-      </div>
-      <div>
-          <label>Title:</label>
-          <p class="description"> {{ title }} </p>
-      </div>
-      <div>
-          <label>Priority:</label>
-          <p class="description">{{ priority }} </p>
-      </div>
-      <div>
-          <label>Video:</label>
-          <p class="description"> {{ media }}</p>
-      </div>
-      <div>
-          <button type="submit" id="requestSubmit" (click)="newRequest()">
-              Duplicate </button>
-          <button type="submit" id="requestSubmit" (click)="newRequest()">
-            Create a New Transcript </button>
-          <p style="margin-left: 2rem; margin-top: .8rem; font-weight: bolder;" id="message"></p>
-      </div>
-  </div>
-  <div class="left-col col">
-    <ng-template>
-
-    </ng-template>
-      <div>
-          <label>Media Type:</label>
-          <p class="description"> {{ type }} </p>
-      </div>
-      <div>
-          <label>Course Code:</label>
-          <p class="description"> {{ course }} </p>
-      </div>
-      <div>
-          <label>Title:</label>
-          <p class="description"> {{ title }} </p>
-      </div>
-      <div>
-          <label>Priority:</label>
-          <p class="description">{{ priority }} </p>
-      </div>
-      <div>
-          <label>Video:</label>
-          <p class="description"> {{ media }}</p>
-      </div>
-  </div>
-</div>
