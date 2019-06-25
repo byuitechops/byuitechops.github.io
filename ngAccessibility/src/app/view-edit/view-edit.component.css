@@ -2,9 +2,12 @@
     display: none;
 }
 
+.modal-body {
+    height: 650px;
+    overflow: auto;
+}
 .left-col, .right-col {
     width: 450px;
-    margin-top: 10px;
 }
 .detail {
     display: flex;
@@ -26,4 +29,21 @@
 textarea {
     width: 400px;
     height: 200px;
+    padding: 5px;
+
+    font-size: 14px;
+    border-radius: 5px;
+    outline: none;
+}
+#comments-header {
+    margin-top: 25px;
+}
+.danger-btn {
+    background-color: var(--warning);
+    float: right;
+}
+.danger-btn:hover {
+    color: var(--warning);
+    background-color: var(--white);
+    border: 3px solid var(--warning);
 }
