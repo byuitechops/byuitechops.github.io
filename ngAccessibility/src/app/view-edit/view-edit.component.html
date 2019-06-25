@@ -1,405 +1,393 @@
-<<<<<<< HEAD
 <section class="modal hide" id="view-modal" [class.hide]='!viewOpen'>
-    <div class="modal-content" id="view-modal-content">
-        <div class="modal-header-box">
-            <h1 class="modal-header" id="edit-info-title">View/Edit Information</h1>
+  <div class="modal-content" id="view-modal-content">
+    <div class="modal-header-box">
+      <h1 class="modal-header" id="edit-info-title">View/Edit Information</h1>
+    </div>
+    <div class="left-col" id="edit-info-field">
+      <h2>Transcript Info</h2>
+      <div>
+        <p>Title</p>
+        <div *ngIf="editing; else viewTitle">
+          <input id="edit-info-title" [(ngModel)]="title" />
         </div>
-        <div class="left-col" id="edit-info-field">
-            <h2>Transcript Info</h2>
-            <div>
-                <p>Title</p>
-                <div *ngIf="editing; else viewTitle">
-                    <input id="edit-info-title" [(ngModel)]="title"/>
-                </div>
-                <ng-template #viewTitle>
-                    <span id="view-info-title">{{ title }}</span>
-                </ng-template>
-            </div>
-            <div>
-                <p>Stage</p>
-                <div *ngIf="editing; else viewStage" >
-                    <select id="edit-info-stage">
-                      <option *ngFor='let stage of stages' value='stage' [selected]="stage == step">{{ stage }}</option>
-                    </select>
-                </div>
-                <ng-template #viewStage>
-                    <span id="view-info-stage">{{ step }}</span>
-                </ng-template>
-            </div>
-            <div>
-                <p>Course Code(s)</p>
-                <div *ngIf="editing; else viewCourses">
-                    <a class="" id="add-course-code">+</a>
-                    <input id="edit-info-courses" type="text" [(ngModel)]="courseCode[0]">
-                </div>
-                <ng-template #viewCourses *ngFor="let course of courseCode">
-                    <span id="view-info-courses">{{ course }}</span>
-                </ng-template>
-            </div>
-            <div>
-                <p>Priority</p>
-                <div *ngIf="editing; else viewPriority">
-                    <select id="edit-info-priority">
-                        <option *ngFor='let priority of priorities' value='priority' selected='priority'>{{ priority }}</option>
-                    </select>
-                </div>
-                <ng-template #viewPriority>
-                    <span id="view-info-priority">{{ priority }}</span>
-                </ng-template>
-            </div>
-            <div>
-                <p>Type</p>
-                <div *ngIf="editing; else viewType">
-                    <select id="edit-info-type">
-                        <option *ngFor='let type of types' value='type' selected='type'>{{ type }}</option>
-                    </select>
-                </div>
-                <ng-template #viewType>
-                    <span id="view-info-type">{{ type }}</span>
-                </ng-template>
-            </div>
-            <div>
-                <p>Length</p>
-                <div *ngIf="editing; else viewLength">
-                    <input id="edit-info-length" type="text" [(ngModel)]="length" />
-                </div>
-                <ng-template #viewLength>
-                    <span id="view-info-length">{{ length }} seconds</span>
-                </ng-template>
-            </div>
-            <div>
-                <p>Google Doc Edit Link</p>
-                <div *ngIf="editing; else viewDocedit">
-                    <input id="edit-info-docedit" type="text"[(ngModel)]="docEditURL" />
-                </div>
-                <ng-template #viewDocedit>
-                    <span id="view-info-docedit">{{ docEditURL }}</span>
-                </ng-template>
-            </div>
-            <div>
-                <p>Google Doc Publish Link</p>
-                <div *ngIf="editing; else viewDocpub">
-                    <input id="edit-info-docpub" type="text" [(ngModel)]="docPublishURL" />
-                </div>
-                <ng-template #viewDocpub>
-                    <span id="view-info-docpub">{{ docPublishURL }}</span>
-                </ng-template>
-            </div>
-            <div>
-                <p>LMS URL</p>
-                <div *ngIf="editing; else viewLms">
-                    <input id="edit-info-lms" type="text" [(ngModel)]="lmsURL" />
-                </div>
-                <ng-template #viewLms>
-                    <span id="view-info-lms">{{ lmsURL }}</span>
-                </ng-template>
-            </div>
-            <div>
-                <p>Media URL</p>
-                <div *ngIf="editing; else viewMedia">
-                    <input id="edit-info-media" type="text" [(ngModel)]="srcURL" />
-                </div>
-                <ng-template #viewMedia>
-                    <span id="view-info-media">{{ srcURL }}</span>
-                </ng-template>
-            </div>
-            <div>
-                <p>Verbit Used?</p>
-                <div *ngIf="editing; else viewIsverbit">
-                    <select id="edit-info-isverbit">
-                      <option *ngFor='let option of options' value='option' [(selected)]='verbit'>{{ option }}</option>
-                    </select>
-                </div>
-                <ng-template #viewIsverbit>
-                    <span id="view-info-isverbit">{{ verbit }}</span>
-                </ng-template>
-            </div>
-            <div id="verbit-id-box" [ngClass]="{hide: verbit}">
-                <p>Verbit ID</p>
-                <div *ngIf="editing; else viewVerbitID">
-                    <input id="edit-info-verbitid" type="text" [(ngModel)]="verbitID" />
-                </div>
-                <ng-template #viewVerbitID>
-                    <span id="view-info-isverbit">{{ verbitID }}</span>
-                </ng-template>
-=======
-<section class="modal hide" id="view-modal" [class.hide]='viewOpen' (click)="ClickedOut($event)">
-    
-    <div class="modal-content" id="view-modal-content">
-        
-        <h1 class="modal-header" id="edit-info-header">View/Edit Information</h1>
-        
-        <div class="modal-body">
-            <div class="left-col" id="edit-info-field">
+        <ng-template #viewTitle>
+          <span id="view-info-title">{{ title }}</span>
+        </ng-template>
+      </div>
+      <div>
+        <p>Stage</p>
+        <div *ngIf="editing; else viewStage">
+          <select id="edit-info-stage">
+            <option *ngFor='let stage of stages' value='stage' [selected]="stage == step">{{ stage }}</option>
+          </select>
+        </div>
+        <ng-template #viewStage>
+          <span id="view-info-stage">{{ step }}</span>
+        </ng-template>
+      </div>
+      <div>
+        <p>Course Code(s)</p>
+        <div *ngIf="editing; else viewCourses">
+          <a class="" id="add-course-code">+</a>
+          <input id="edit-info-courses" type="text" [(ngModel)]="courseCode[0]">
+        </div>
+        <ng-template #viewCourses *ngFor="let course of courseCode">
+          <span id="view-info-courses">{{ course }}</span>
+        </ng-template>
+      </div>
+      <div>
+        <p>Priority</p>
+        <div *ngIf="editing; else viewPriority">
+          <select id="edit-info-priority">
+            <option *ngFor='let priority of priorities' value='priority' selected='priority'>{{ priority }}</option>
+          </select>
+        </div>
+        <ng-template #viewPriority>
+          <span id="view-info-priority">{{ priority }}</span>
+        </ng-template>
+      </div>
+      <div>
+        <p>Type</p>
+        <div *ngIf="editing; else viewType">
+          <select id="edit-info-type">
+            <option *ngFor='let type of types' value='type' selected='type'>{{ type }}</option>
+          </select>
+        </div>
+        <ng-template #viewType>
+          <span id="view-info-type">{{ type }}</span>
+        </ng-template>
+      </div>
+      <div>
+        <p>Length</p>
+        <div *ngIf="editing; else viewLength">
+          <input id="edit-info-length" type="text" [(ngModel)]="length" />
+        </div>
+        <ng-template #viewLength>
+          <span id="view-info-length">{{ length }} seconds</span>
+        </ng-template>
+      </div>
+      <div>
+        <p>Google Doc Edit Link</p>
+        <div *ngIf="editing; else viewDocedit">
+          <input id="edit-info-docedit" type="text" [(ngModel)]="docEditURL" />
+        </div>
+        <ng-template #viewDocedit>
+          <span id="view-info-docedit">{{ docEditURL }}</span>
+        </ng-template>
+      </div>
+      <div>
+        <p>Google Doc Publish Link</p>
+        <div *ngIf="editing; else viewDocpub">
+          <input id="edit-info-docpub" type="text" [(ngModel)]="docPublishURL" />
+        </div>
+        <ng-template #viewDocpub>
+          <span id="view-info-docpub">{{ docPublishURL }}</span>
+        </ng-template>
+      </div>
+      <div>
+        <p>LMS URL</p>
+        <div *ngIf="editing; else viewLms">
+          <input id="edit-info-lms" type="text" [(ngModel)]="lmsURL" />
+        </div>
+        <ng-template #viewLms>
+          <span id="view-info-lms">{{ lmsURL }}</span>
+        </ng-template>
+      </div>
+      <div>
+        <p>Media URL</p>
+        <div *ngIf="editing; else viewMedia">
+          <input id="edit-info-media" type="text" [(ngModel)]="srcURL" />
+        </div>
+        <ng-template #viewMedia>
+          <span id="view-info-media">{{ srcURL }}</span>
+        </ng-template>
+      </div>
+      <div>
+        <p>Verbit Used?</p>
+        <div *ngIf="editing; else viewIsverbit">
+          <select id="edit-info-isverbit">
+            <option *ngFor='let option of options' value='option' [(selected)]='verbit'>{{ option }}</option>
+          </select>
+        </div>
+        <ng-template #viewIsverbit>
+          <span id="view-info-isverbit">{{ verbit }}</span>
+        </ng-template>
+      </div>
+      <div id="verbit-id-box" [ngClass]="{hide: verbit}">
+        <p>Verbit ID</p>
+        <div *ngIf="editing; else viewVerbitID">
+          <input id="edit-info-verbitid" type="text" [(ngModel)]="verbitID" />
+        </div>
+        <ng-template #viewVerbitID>
+          <span id="view-info-isverbit">{{ verbitID }}</span>
+        </ng-template>
+        <section class="modal hide" id="view-modal" [class.hide]='viewOpen' (click)="clickedOut($event)">
+
+          <div class="modal-content" id="view-modal-content">
+
+            <h1 class="modal-header" id="edit-info-header">View/Edit Information</h1>
+
+            <div class="modal-body">
+              <div class="left-col" id="edit-info-field">
                 <h2>Transcript Info</h2>
 
                 <div class="detail">
-                    <p>Title</p>
-                    <div *ngIf="editing; else viewTitle">
-                        <input id="edit-info-title">
-                    </div>
-                    <ng-template #viewTitle>
-                        <span id="view-info-title"></span>
-                    </ng-template>
+                  <p>Title</p>
+                  <div *ngIf="editing; else viewTitle">
+                    <input id="edit-info-title">
+                  </div>
+                  <ng-template #viewTitle>
+                    <span id="view-info-title"></span>
+                  </ng-template>
                 </div>
 
                 <div class="detail">
-                    <p>Stage</p>
-                    <div *ngIf="editing; else viewStage">
-                        <select id="edit-info-stage">
-                            <option value="0">- - -</option>
-                            <option value="Ready for Prep">Ready for Prep</option>
-                            <option value="In Prep">In Prep</option>
-                            <option value="Ready for Transcription">Ready for Transcription</option>
-                            <option value="In Transcription">In Transcription</option>
-                            <option value="Ready for Review">Ready for Review</option>
-                            <option value="In Review">In Review</option>
-                            <option value="Review Completed">Review Completed</option>
-                            <option value="Finished">Finished</option>
-                        </select>
-                    </div>
-                    <ng-template #viewStage>
-                        <span id="view-info-stage"></span>
-                    </ng-template>
+                  <p>Stage</p>
+                  <div *ngIf="editing; else viewStage">
+                    <select id="edit-info-stage">
+                      <option value="0">- - -</option>
+                      <option value="Ready for Prep">Ready for Prep</option>
+                      <option value="In Prep">In Prep</option>
+                      <option value="Ready for Transcription">Ready for Transcription</option>
+                      <option value="In Transcription">In Transcription</option>
+                      <option value="Ready for Review">Ready for Review</option>
+                      <option value="In Review">In Review</option>
+                      <option value="Review Completed">Review Completed</option>
+                      <option value="Finished">Finished</option>
+                    </select>
+                  </div>
+                  <ng-template #viewStage>
+                    <span id="view-info-stage"></span>
+                  </ng-template>
                 </div>
 
                 <div class="detail">
-                    <p>Course Code(s)</p>
-                    <div *ngIf="editing; else viewCourses">
-                        <a class="hide" id="add-course-code">+</a>
-                        <input id="edit-info-courses" type="text">
-                    </div>
-                    <ng-template #viewCourses *ngFor="let course of courses">
-                        <span id="view-info-courses"></span>
-                    </ng-template>
+                  <p>Course Code(s)</p>
+                  <div *ngIf="editing; else viewCourses">
+                    <a class="hide" id="add-course-code">+</a>
+                    <input id="edit-info-courses" type="text">
+                  </div>
+                  <ng-template #viewCourses *ngFor="let course of courseCode">
+                    <span id="view-info-courses"></span>
+                  </ng-template>
                 </div>
 
                 <div class="detail">
-                    <p>Priority</p>
-                    <div *ngIf="editing; else viewPriority">
-                        <select id="edit-info-priority">
-                            <option value="0">- - -</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                        </select>
-                    </div>
-                    <ng-template #viewPriority>
-                        <span id="view-info-priority"></span>
-                    </ng-template>
+                  <p>Priority</p>
+                  <div *ngIf="editing; else viewPriority">
+                    <select id="edit-info-priority">
+                      <option value="0">- - -</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                    </select>
+                  </div>
+                  <ng-template #viewPriority>
+                    <span id="view-info-priority"></span>
+                  </ng-template>
                 </div>
 
                 <div class="detail">
-                    <p>Type</p>
-                    <div *ngIf="editing; else viewType">
-                        <select id="edit-info-type">
-                            <option value="0">- - -</option>
-                            <option value="Video">Video</option>
-                            <option value="Audio">Audio</option>
-                            <option value="Alt Text">Alt Text</option>
-                            <option value="Slide Show">Slide Show</option>
-                        </select>
-                    </div>
-                    <ng-template #viewType>
-                        <span id="view-info-type"></span>
-                    </ng-template>
-                    
+                  <p>Type</p>
+                  <div *ngIf="editing; else viewType">
+                    <select id="edit-info-type">
+                      <option value="0">- - -</option>
+                      <option value="Video">Video</option>
+                      <option value="Audio">Audio</option>
+                      <option value="Alt Text">Alt Text</option>
+                      <option value="Slide Show">Slide Show</option>
+                    </select>
+                  </div>
+                  <ng-template #viewType>
+                    <span id="view-info-type"></span>
+                  </ng-template>
+
                 </div>
 
                 <div class="detail">
-                    <p>Length</p>
-                    <div *ngIf="editing; else viewLength">
-                        <input id="edit-info-length" type="text">
-                    </div>
-                    <ng-template #viewLength>
-                        <span id="view-info-length"></span>
-                    </ng-template>
+                  <p>Length</p>
+                  <div *ngIf="editing; else viewLength">
+                    <input id="edit-info-length" type="text">
+                  </div>
+                  <ng-template #viewLength>
+                    <span id="view-info-length"></span>
+                  </ng-template>
                 </div>
 
                 <div class="detail">
-                    <p>Google Doc Edit Link</p>
-                    <div *ngIf="editing; else viewDocedit">
-                        <input id="edit-info-docedit" type="text">
-                    </div>
-                    <ng-template #viewDocedit>
-                        <span id="view-info-docedit"></span>
-                    </ng-template>
+                  <p>Google Doc Edit Link</p>
+                  <div *ngIf="editing; else viewDocedit">
+                    <input id="edit-info-docedit" type="text">
+                  </div>
+                  <ng-template #viewDocedit>
+                    <span id="view-info-docedit"></span>
+                  </ng-template>
                 </div>
 
                 <div class="detail">
-                    <p>Google Doc Publish Link</p>
-                    <div *ngIf="editing; else viewDocpub">
-                        <input id="edit-info-docpub" type="text">
-                    </div>
-                    <ng-template #viewDocpub>
-                        <span id="view-info-docpub"></span>
-                    </ng-template>
+                  <p>Google Doc Publish Link</p>
+                  <div *ngIf="editing; else viewDocpub">
+                    <input id="edit-info-docpub" type="text">
+                  </div>
+                  <ng-template #viewDocpub>
+                    <span id="view-info-docpub"></span>
+                  </ng-template>
                 </div>
 
                 <div class="detail">
-                    <p>LMS URL</p>
-                    <div *ngIf="editing; else viewLms">
-                        <input id="edit-info-lms" type="text">
-                    </div>
-                    <ng-template #viewLms>
-                        <span id="view-info-lms"></span>
-                    </ng-template>
+                  <p>LMS URL</p>
+                  <div *ngIf="editing; else viewLms">
+                    <input id="edit-info-lms" type="text">
+                  </div>
+                  <ng-template #viewLms>
+                    <span id="view-info-lms"></span>
+                  </ng-template>
                 </div>
 
                 <div class="detail">
-                    <p>Media URL</p>
-                    <div *ngIf="editing; else viewMedia">
-                        <input id="edit-info-media" type="text">
-                    </div>
-                    <ng-template #viewMedia>
-                        <span id="view-info-media"></span>
-                    </ng-template>
-                    
+                  <p>Media URL</p>
+                  <div *ngIf="editing; else viewMedia">
+                    <input id="edit-info-media" type="text">
+                  </div>
+                  <ng-template #viewMedia>
+                    <span id="view-info-media"></span>
+                  </ng-template>
+
                 </div>
 
                 <div class="detail">
-                    <p>Verbit Used?</p>
-                    <div *ngIf="editing; else viewIsverbit">
-                        <select id="edit-info-isverbit">
-                            <option value="0">- - -</option>
-                            <option value="true">True</option>
-                            <option value="false">False</option>
-                        </select>
-                    </div>
-                    <ng-template #viewIsverbit>
-                        <span id="view-info-isverbit"></span>
-                    </ng-template>
-                    
+                  <p>Verbit Used?</p>
+                  <div *ngIf="editing; else viewIsverbit">
+                    <select id="edit-info-isverbit">
+                      <option value="0">- - -</option>
+                      <option value="true">True</option>
+                      <option value="false">False</option>
+                    </select>
+                  </div>
+                  <ng-template #viewIsverbit>
+                    <span id="view-info-isverbit"></span>
+                  </ng-template>
+
                 </div>
 
                 <div class="detail" id="verbit-id-box">
-                    <p>Verbit ID</p>
-                    <div *ngIf="editing; else viewVerbitID">
-                        <input id="edit-info-verbitid" type="text">
-                    </div>
-                    <ng-template #viewVerbitID>
-                        <span id="view-info-isverbit"></span>
-                    </ng-template>
-                    
+                  <p>Verbit ID</p>
+                  <div *ngIf="editing; else viewVerbitID">
+                    <input id="edit-info-verbitid" type="text">
+                  </div>
+                  <ng-template #viewVerbitID>
+                    <span id="view-info-isverbit"></span>
+                  </ng-template>
+
                 </div>
->>>>>>> 91989c900e755e13920ebb665d3f3ab154823558
-            </div>
+              </div>
 
-<<<<<<< HEAD
-        <div class="right-col" id="notes-info-field">
-            <h2>Participating Users</h2>
-            <div>
-                <p>Requested by</p>
-                <span id="edit-info-requested-by"></span>
-            </div>
-            <div>
-                <p>Requested on</p>
-                <span id="edit-info-requested-on"></span>
-            </div>
-            <div>
-                <p>Prepared by</p>
-                <span id="edit-info-prepared-by"></span>
-            </div>
-            <div>
-                <p>Prepared Completed on</p>
-                <span id="edit-info-prepared-on"></span>
-            </div>
-            <div>
-                <p>Transcribed by</p>
-                <span id="edit-info-transcribe-by"></span>
-            </div>
-            <div>
-                <p>Transcription Completed on</p>
-                <span id="edit-info-transcribe-on"></span>
-            </div>
-            <div>
-                <p>Reviewed by</p>
-                <span id="edit-info-review-by"></span>
-            </div>
-            <div>
-                <p>Review Completed on</p>
-                <span id="edit-info-review-on"></span>
-            </div>
-            <h3>Comments</h3>
-            <div *ngIf="editing; else viewComments">
-                <textarea id="edit-info-comment"></textarea>
-            </div>
-            <ng-template #viewComments>
-                <span id="view-info-comments"></span>
-            </ng-template>
-=======
-            <div class="median"></div>
-
-            <div class="right-col" id="notes-info-field">
+              <div class="right-col" id="notes-info-field">
                 <h2>Participating Users</h2>
+                <div>
+                  <p>Requested by</p>
+                  <span id="edit-info-requested-by"></span>
+                </div>
+                <div>
+                  <p>Requested on</p>
+                  <span id="edit-info-requested-on"></span>
+                </div>
+                <div>
+                  <p>Prepared by</p>
+                  <span id="edit-info-prepared-by"></span>
+                </div>
+                <div>
+                  <p>Prepared Completed on</p>
+                  <span id="edit-info-prepared-on"></span>
+                </div>
+                <div>
+                  <p>Transcribed by</p>
+                  <span id="edit-info-transcribe-by"></span>
+                </div>
+                <div>
+                  <p>Transcription Completed on</p>
+                  <span id="edit-info-transcribe-on"></span>
+                </div>
+                <div>
+                  <p>Reviewed by</p>
+                  <span id="edit-info-review-by"></span>
+                </div>
+                <div>
+                  <p>Review Completed on</p>
+                  <span id="edit-info-review-on"></span>
+                </div>
+                <h3>Comments</h3>
+                <div *ngIf="editing; else viewComments">
+                  <textarea id="edit-info-comment"></textarea>
+                </div>
+                <ng-template #viewComments>
+                  <span id="view-info-comments"></span>
+                </ng-template>
+                <div class="median"></div>
 
-                <div class="detail">
+                <div class="right-col" id="notes-info-field">
+                  <h2>Participating Users</h2>
+
+                  <div class="detail">
                     <p>Requested by</p>
                     <span id="edit-info-requested-by"></span>
-                </div>
+                  </div>
 
-                <div class="detail">
+                  <div class="detail">
                     <p>Requested on</p>
                     <span id="edit-info-requested-on"></span>
-                </div>
+                  </div>
 
-                <div class="detail">
+                  <div class="detail">
                     <p>Prepared by</p>
                     <span id="edit-info-prepared-by"></span>
-                </div>
+                  </div>
 
-                <div class="detail">
+                  <div class="detail">
                     <p>Prepared Completed on</p>
                     <span id="edit-info-prepared-on"></span>
-                </div>
+                  </div>
 
-                <div class="detail">
+                  <div class="detail">
                     <p>Transcribed by</p>
                     <span id="edit-info-transcribe-by"></span>
-                </div>
+                  </div>
 
-                <div class="detail">
+                  <div class="detail">
                     <p>Transcription Completed on</p>
                     <span id="edit-info-transcribe-on"></span>
-                </div>
+                  </div>
 
-                <div class="detail">
+                  <div class="detail">
                     <p>Reviewed by</p>
                     <span id="edit-info-review-by"></span>
-                </div>
+                  </div>
 
-                <div class="detail">
+                  <div class="detail">
                     <p>Review Completed on</p>
                     <span id="edit-info-review-on"></span>
-                </div>
+                  </div>
 
-                <h3 id="comments-header">Comments</h3>
-                <div class="detail">
+                  <h3 id="comments-header">Comments</h3>
+                  <div class="detail">
                     <div *ngIf="editing; else viewComments">
-                        <textarea id="edit-info-comment"></textarea>
+                      <textarea id="edit-info-comment"></textarea>
                     </div>
                     <ng-template #viewComments>
-                        <span id="view-info-comments"></span>
+                      <span id="view-info-comments"></span>
                     </ng-template>
+                  </div>
+
                 </div>
-                
+
+              </div>
+              <div *ngIf="editing; else viewBtnBox" class="btn-box">
+                <button id="confirmEditBtn">Confirm</button>
+                <button id="cancelEditBtn" (click)="closeModal()">Cancel</button>
+                <button class="danger-btn" id="btn-delete-transcript" class="btn-hover red">Delete Transcript</button>
+              </div>
+              <ng-template #viewBtnBox class="btn-box">
+                <button id="closeViewBtn" (click)="closeModal()">Close</button>
+              </ng-template>
             </div>
-            
->>>>>>> 91989c900e755e13920ebb665d3f3ab154823558
-        </div>
-        <div *ngIf="editing; else viewBtnBox" class="btn-box">
-            <button id="confirmEditBtn">Confirm</button>
-            <button id="cancelEditBtn" (click)="closeModal()">Cancel</button>
-            <button class="danger-btn" id="btn-delete-transcript" class="btn-hover red">Delete Transcript</button>
-        </div>
-        <ng-template #viewBtnBox class="btn-box">
-            <button id="closeViewBtn" (click)="closeModal()">Close</button>
-        </ng-template>
-<<<<<<< HEAD
-=======
-
->>>>>>> 91989c900e755e13920ebb665d3f3ab154823558
-    </div>
-
-</section>
