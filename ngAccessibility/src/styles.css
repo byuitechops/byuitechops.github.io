@@ -154,11 +154,11 @@ button:hover {
     background-color: var(--white);
     border: 3px solid var(--primary);
 }
-.danger-btn {
+.warning-btn {
     background-color: var(--warning);
     float: right;
 }
-.danger-btn:hover {
+.warning-btn:hover {
     color: var(--warning);
     background-color: var(--white);
     border: 3px solid var(--warning);
