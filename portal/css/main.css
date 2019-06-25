@@ -12,6 +12,8 @@
 * 6. Store.html
 * 7. Profile.html
 * 8. TimeTracker.html
+* 9. Tables Styling
+* 10. Style Guide Page
 ********************************************************** */
 
 /***********************************************************
@@ -1311,4 +1313,147 @@ main {
 }
 .notUsed button:hover {
     background-color: var(--fontPrime);
+}
+
+
+/**********************************************
+* 10. Style Guide Page
+**********************************************/
+#style-guide-main {
+    display: flex;
+    flex-flow: row wrap;
+    padding: 0 50px;
+}
+.color-title {
+    width: 100%;
+    font-weight: 300;
+    font-size: 24px;
+}
+
+#mainColorsSection {
+    width: 40%;
+    margin-left: 0em;
+}
+
+.mainColorBoxes {
+    display:flex;
+    flex-flow:column wrap;
+    width: 100%;
+    padding-top: 1em;
+}
+
+.mainColorBox {
+    padding: 10px;
+    padding-right: 5em;
+    width: 40%;
+    height: 150px;
+    display:flex;
+    flex-flow: column wrap;
+}
+
+.pmain {
+    line-height: 2em;
+}
+
+.box {
+    width: 300px;
+    height: 100px;
+    Margin-bottom: 1em;
+    margin-right: 1em;
+    box-shadow: 3px 1px 5px #888888;   
+}
+.color-section-title {
+    width: 100%;
+}
+
+#m1 {
+    background-color: #0076C6;
+}
+#m2 {
+    background-color: #000000;
+}
+#m3 {
+    background-color: #FFFFFF;
+}
+/**********************************************
+accents Section
+**********************************************/
+#aboutaccents {
+    padding-top: 1em;
+    padding-right:8em;
+}
+
+#accentColorBoxes {
+    display:flex;
+    flex-flow: row wrap;
+    padding-top: 2em;
+}
+.accentColorBox {
+    padding: 1em;
+    width: 30%;
+    padding-left: 0em;
+}
+.boxac {
+    width: 100px;
+    height: 100px;
+    box-shadow: 3px 3px 5px #888888;
+    margin-bottom: 1em;
+}
+
+#ac1 { background-color: #82C242; }
+#ac2 { background-color: #F58300; }
+#ac3 { background-color: #A5216F; }
+#ac4 { background-color: #FEE060; }
+#ac5 { background-color: #E42226; }
+#ac6 { background-color: #ADADAD; }
+
+/**********************************************
+Tints Section
+**********************************************/
+#tintsShades{
+    display:flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+.tintsBox {
+    padding: 10px;
+    margin: 5px 10px;
+    width: 25%;
+}
+#t1  { background-color: #6B9D41; color: white; }
+#t2  { background-color: #B3D68A;                 }
+#t3  { background-color: #CBE3AE;                 }
+#t4  { background-color: #63174E; color: white; }
+#t5  { background-color: #B94F8C; color: white; }
+#t6  { background-color: #C879A9;                 }
+#t7  { background-color: #AD0C20; color: white; }
+#t8  { background-color: #E85156; color: white; }
+#t9  { background-color: #EB7B7E;                 }
+#t10 { background-color: #CB6028; color: white; }
+#t11 { background-color: #F59B42; color: white; }
+#t12 { background-color: #F6B46C;                 }
+#t13 { background-color: #FFCC00;                 }
+#t14 { background-color: #FBE68C;                 }
+#t15 { background-color: #FBEBA6;                 }
+#t16 { background-color: #525252; color: white; }
+#t17 { background-color: #D2D2D2;                 }
+#t18 { background-color: #EBEBEB;                 }
+#t19 { background-color: #0C4496; color: white; }
+#t20 { background-color: #1D9CD4; color: white; }
+#t21 { background-color: #8DD6F0;                 }
+#t22 { background-color: #D2D2D2;                 }
+
+/**********************************************
+Fonts Section
+**********************************************/
+.style-img {
+    width: 100%;
+    height: auto;
+}
+
+/**********************************************
+Logos Section
+**********************************************/
+#logos-section {
+    
 }

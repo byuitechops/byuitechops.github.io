@@ -14,8 +14,9 @@
     --black: #000000;
     --darkgray: #444444;
     --medgray: #777777;
-    --lightgray: #eeeeee;
+    --lightgray: #dddddd;
     --verylightgray: #f7f7f7;
+    --warning: #E85156;
 }
 
 
@@ -48,20 +49,19 @@ h1 {
     width: 100%;
     font-family: "Merriweather";
     font-size: 32px;
+    margin-left: 30px;
 }
 .page-title {
-    padding: 50px 80px 20px;
+    padding: 50px 50px 20px;
 }
 h2 {
     width: 100%;
     font-family: "Merriweather";
-    font-size: 32px;
     padding: 15px 0;
 }
 h3, h4, h5, h6 {
     width: 50%;
     font-family: "Open Sans";
-    font-size: 32px;
     padding: 5px 0 ;
 }
 h2, h3, h4, h5, h6 {
@@ -128,6 +128,8 @@ input:hover, input:active, select:hover, select:active {
 }
 
 .btn-box {
+    display: flex;
+    flex-flow: row nowrap;
     align-self: flex-end;
     width: 100%;
     margin-top: 20px;
@@ -145,12 +147,21 @@ button {
     border-radius: 5px;
     outline: none;
     cursor: pointer;
-    transition: all .2s;
+    transition: all .1s;
 }
 button:hover {
     color: var(--primary);
     background-color: var(--white);
     border: 3px solid var(--primary);
+}
+.danger-btn {
+    background-color: var(--warning);
+    float: right;
+}
+.danger-btn:hover {
+    color: var(--warning);
+    background-color: var(--white);
+    border: 3px solid var(--warning);
 }
 
 .hide {
@@ -246,6 +257,7 @@ tr {
     border-radius: 10px;
     border-left: 10px solid var(--primary);
     box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.75);
+    overflow: auto;
 }
 .modal-header-box, .modal-body, .modal-body h2 {
     display: flex;
@@ -257,7 +269,15 @@ tr {
 .left-col, .right-col {
     display: flex;
     flex-flow: row wrap;
+    margin-top: 10px;
 }
 .modal-body .left-col,.right-col {
-    width: 345px;
+    width: 340px;
+}
+.median {
+    width: 2px;
+    height: 80%;
+    margin-top: 50px;
+    border-radius: 2px;
+    background-color: var(--lightgray);
 }

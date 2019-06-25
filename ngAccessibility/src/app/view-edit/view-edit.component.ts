@@ -88,6 +88,7 @@ export class ViewEditComponent implements OnInit {
   }
 }
 
+<<<<<<< HEAD
 
 
 
@@ -168,3 +169,12 @@ export class ViewEditComponent implements OnInit {
 // this.view.type = this.view.data.type;
 // this.view.verbit = this.view.data.verbit;
 // this.view.verbitID = this.view.data.verbitID;
+=======
+ClickedOut(event) {
+    if (event.target.className === "modal") {
+        this.closeModal();
+    }
+}
+
+}
+>>>>>>> 91989c900e755e13920ebb665d3f3ab154823558
