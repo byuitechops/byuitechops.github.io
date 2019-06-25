@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DatabaseService } from '../core/database.service';
 import { AuthService } from '../core/auth.service';
 import { element } from '@angular/core/src/render3/instructions';
+import { SearchService } from '../core/search.service';
 
 @Component({
   selector: 'app-request',
@@ -30,7 +31,10 @@ export class RequestComponent implements OnInit {
   ];
   course: string;
   comments: string;
-  constructor(private db: DatabaseService, public auth: AuthService) {
+
+
+  dups;
+  constructor(private db: DatabaseService, public auth: AuthService, private search: SearchService) {
 
    }
 
@@ -85,7 +89,7 @@ export class RequestComponent implements OnInit {
 
 
 
-  newRequest() {
+  async newRequest() {
     if (this.course === undefined && this.type === undefined) {
       if ((this.lms === '' || this.lms === undefined) && (this.media === '' || this.media === undefined)) {
         if ((this.title === '' || this.title === undefined) && this.priority === undefined) {
@@ -132,7 +136,12 @@ export class RequestComponent implements OnInit {
           verbitID: ''
         };
         console.log(data);
-        this.db.createTranscript(data);
+        this.dups = await this.search.dupCheck(this.title, this.type, this.media);
+        if (this.dups.length > 0) {
+          console.log(this.dups);
+        } else {
+          this.db.createTranscript(data);
+        }
         this.comments = '';
         this.media = '';
         this.type = undefined;

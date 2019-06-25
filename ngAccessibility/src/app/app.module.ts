@@ -29,7 +29,7 @@ import { ViewEditComponent } from './view-edit/view-edit.component';
     RequestComponent,
     NavBarComponent,
     AuthPageComponent,
-    ViewEditComponent
+    ViewEditComponent,
   ],
   imports: [
     NgAisModule.forRoot(),

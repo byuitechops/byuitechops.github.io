@@ -43,6 +43,7 @@ export class SearchService {
       }
     });
     console.log(results);
+    return results;
   }
 
   cleanSRC(link) {

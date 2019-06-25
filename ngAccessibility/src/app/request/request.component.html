@@ -62,3 +62,60 @@
     </section>
 
 </main>
+
+<div>
+  <div class="right-col">
+      <div>
+          <label>Media Type:</label>
+          <p class="description"> {{ type }} </p>
+      </div>
+      <div>
+          <label>Course Code:</label>
+          <p class="description"> {{ course }} </p>
+      </div>
+      <div>
+          <label>Title:</label>
+          <p class="description"> {{ title }} </p>
+      </div>
+      <div>
+          <label>Priority:</label>
+          <p class="description">{{ priority }} </p>
+      </div>
+      <div>
+          <label>Video:</label>
+          <p class="description"> {{ media }}</p>
+      </div>
+      <div>
+          <button type="submit" id="requestSubmit" (click)="newRequest()">
+              Duplicate </button>
+          <button type="submit" id="requestSubmit" (click)="newRequest()">
+            Create a New Transcript </button>
+          <p style="margin-left: 2rem; margin-top: .8rem; font-weight: bolder;" id="message"></p>
+      </div>
+  </div>
+  <div class="left-col col">
+    <ng-template>
+
+    </ng-template>
+      <div>
+          <label>Media Type:</label>
+          <p class="description"> {{ type }} </p>
+      </div>
+      <div>
+          <label>Course Code:</label>
+          <p class="description"> {{ course }} </p>
+      </div>
+      <div>
+          <label>Title:</label>
+          <p class="description"> {{ title }} </p>
+      </div>
+      <div>
+          <label>Priority:</label>
+          <p class="description">{{ priority }} </p>
+      </div>
+      <div>
+          <label>Video:</label>
+          <p class="description"> {{ media }}</p>
+      </div>
+  </div>
+</div>
