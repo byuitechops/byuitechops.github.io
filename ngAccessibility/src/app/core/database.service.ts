@@ -12,6 +12,9 @@ export class DatabaseService {
 
   constructor(public afs: AngularFirestore, private router: Router) {}
 
+
+  // Services pertaining to collection users
+
   async findUser(dName) {
     await this.afs.collection('users', ref => ref.where('name', '==', dName).limit(1)).get().subscribe(data => {
       this.user = data.docs[0].data();
@@ -22,6 +25,38 @@ export class DatabaseService {
       }
     });
   }
+
+  createUser(dName, contact, position) {
+    this.afs.collection('users').doc(this.afs.createId()).set({
+      actionID: '',
+      currentAction: '',
+      email: contact,
+      lead: false,
+      name: dName,
+      role: position
+    });
+    return;
+  }
+
+  updateUser(data) {
+    this.afs.collection('users').doc(this.userID).update({
+      actionID: data.actionID,
+      currentAction: data.currentAction
+    });
+    console.log('Working');
+  }
+
+  async checkAction() {
+    if (this.user.currentAction === 'preparing' && this.router.url !== '/prepare') {
+      this.router.navigate(['/prepare']);
+      alert('You may only work on one transcript at a time');
+    } else if (this.user.currentAction === 'transcribing' || this.user.currentAction === 'reviewing') {
+      this.router.navigate(['/home']);
+    }
+  }
+
+  // Services pertaining to accessibility collection
+
   getTranscript(id) {
     const transcript = this.afs.collection('accessibility').doc(id).ref.get();
     return transcript;
@@ -53,28 +88,24 @@ export class DatabaseService {
     return;
   }
 
-
-
-
-
-  createUser(dName, contact, position) {
-    this.afs.collection('users').doc(this.afs.createId()).set({
-      actionID: '',
-      currentAction: '',
-      email: contact,
-      lead: false,
-      name: dName,
-      role: position
+  addCourseCode(id, newCode) {
+    let add = true;
+    let codes = [];
+    codes.push(newCode);
+    this.afs.collection('accessibility').doc(id).get().subscribe(res => {
+      (res.data().courseCode).forEach(course => {
+        if (course === newCode) {
+          add = false;
+        } else {
+          codes.push(course);
+        }
+      });
     });
-    return;
-  }
-
-  updateUser(data) {
-    this.afs.collection('users').doc(this.userID).update({
-      actionID: data.actionID,
-      currentAction: data.currentAction
-    });
-    console.log('Working');
+    if (add) {
+      this.afs.collection('accessibility').doc(id).update({
+        courseCode: newCode
+      });
+    }
   }
 
   changeTranscriptStep(status, name) {
@@ -95,15 +126,6 @@ export class DatabaseService {
       });
     }
     console.log('Working');
-  }
-
-  async checkAction() {
-    if (this.user.currentAction === 'preparing' && this.router.url !== '/prepare') {
-      this.router.navigate(['/prepare']);
-      alert('You may only work on one transcript at a time');
-    } else if (this.user.currentAction === 'transcribing' || this.user.currentAction === 'reviewing') {
-      this.router.navigate(['/home']);
-    }
   }
 }
 

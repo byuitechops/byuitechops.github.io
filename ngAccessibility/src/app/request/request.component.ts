@@ -31,7 +31,7 @@ export class RequestComponent implements OnInit {
   ];
   course: string;
   comments: string;
-
+  override = false;
 
   dups;
   constructor(private db: DatabaseService, public auth: AuthService, private search: SearchService) {
@@ -102,51 +102,62 @@ export class RequestComponent implements OnInit {
       console.log('uh oh 3');
       alert('Please fill in all fields');
     } else {
-        let displayName: string;
-        if (this.auth.user.isAnonymous) {
-          displayName = this.name;
-        } else {
-          displayName = this.db.user.name;
-        }
-        if (this.comments === undefined || this.comments === '') {
-          this.comments = '';
-        } else {
-          this.comments = this.comments + 'Made by ' + displayName;
-        }
-        const data = {
-          backupCode: this.course,
-          copied: false,
-          courseCode: [this.course],
-          datePrepareFinished: '',
-          docEditURL: '',
-          docPublishURL: '',
-          length: '',
-          lmsURL: this.lms,
-          parentTranscript: true,
-          preparer: '',
-          priority: this.priority,
-          requestDate: new Date(),
-          requestNotes: this.comments,
-          requestor: displayName,
-          srcURL: this.media,
-          status: 'Ready for Prep',
-          title: this.title,
-          type: this.type,
-          verbit: false,
-          verbitID: ''
-        };
-        console.log(data);
-        this.dups = await this.search.dupCheck(this.title, this.type, this.media);
-        if (this.dups.length > 0) {
-          console.log(this.dups);
-        } else {
-          this.db.createTranscript(data);
-        }
-        this.comments = '';
-        this.media = '';
-        this.type = undefined;
+      let displayName: string;
+      if (this.auth.user.isAnonymous) {
+        displayName = this.name;
+      } else {
+        displayName = this.db.user.name;
       }
+      if (this.comments === undefined || this.comments === '') {
+        this.comments = '';
+      } else {
+        this.comments = this.comments + 'Made by ' + displayName;
+      }
+      const data = {
+        backupCode: this.course,
+        copied: false,
+        courseCode: [this.course],
+        datePrepareFinished: '',
+        docEditURL: '',
+        docPublishURL: '',
+        length: '',
+        lmsURL: this.lms,
+        parentTranscript: true,
+        preparer: '',
+        priority: this.priority,
+        requestDate: new Date(),
+        requestNotes: this.comments,
+        requestor: displayName,
+        srcURL: this.media,
+        status: 'Ready for Prep',
+        title: this.title,
+        type: this.type,
+        verbit: false,
+        verbitID: ''
+      };
+      console.log(data);
+      this.dups = await this.search.dupCheck(this.title, this.type, this.media);
+      if (this.override) {
+        this.db.createTranscript(data);
+        this.override = false;
+      } else if (this.dups.length > 0) {
+        console.log(this.dups);
+      } else {
+        this.db.createTranscript(data);
+      }
+      this.comments = '';
+      this.media = '';
+      this.type = undefined;
     }
+  }
 
+  useDuplicate(id) {
+    this.db.addCourseCode(id, this.course);
+  }
+
+  createNew() {
+    this.override = true;
+    this.newRequest();
+  }
 }
 
