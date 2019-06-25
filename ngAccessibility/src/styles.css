@@ -41,6 +41,7 @@ main {
     width: 600px;
     max-width: 50%;
     margin: auto;
+    margin-top: 10px;
     padding: 25px;
 
     border-radius: 10px;
@@ -176,8 +177,9 @@ button:hover {
     width: 15px;
 }
 ::-webkit-scrollbar-track {
-    background: var(--lightgray);
     padding: 4px;
+    background: var(--lightgray);
+    border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb {
     background: var(--medgray);
@@ -265,11 +267,6 @@ tr {
     width: 100%;
     margin: 0;
     padding: 15px 0;
-}
-.left-col, .right-col {
-    display: flex;
-    flex-flow: row wrap;
-    margin-top: 10px;
 }
 .modal-body .left-col,.right-col {
     width: 340px;
