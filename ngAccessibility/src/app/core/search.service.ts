@@ -19,9 +19,7 @@ export class SearchService {
   };
   showResults = true;
 
-  constructor(public db: AngularFirestore) {
-    this.dupCheck('Join a Meeting', 'Video', 'vFhAEoCF7jg');
-  }
+  constructor(public db: AngularFirestore) { }
 
   // NOTES FOR SHAWN
   // This is the dup checker function, it takes a title , type, and src url to find out what matches it.
@@ -33,6 +31,7 @@ export class SearchService {
   async dupCheck(t, type, src) {
     const results = new Array();
     src = await this.cleanSRC(src);
+    console.log(src);
     const index = searchClient.initIndex('transcripts');
     index.search({query: t}).then(x => {
       for (let y = 0; y < x.hits.length; y++) {
@@ -47,12 +46,16 @@ export class SearchService {
   }
 
   cleanSRC(link) {
-    if (link.includes('youtube')) {
+    if (link.includes('youtube') && link.includes('watch?v=')) {
       link = link.slice(link.indexOf('watch?v=') + 8, (link.indexOf('watch?v=') + 9) + 11);
+    } else if (link.includes('youtube') && link.includes('/embed/')) {
+      link = link.slice(link.indexOf('/embed/') + 7, (link.indexOf('/embed/') + 7) + 11);
     } else if (link.includes('youtu.be')) {
       link = link.slice(link.indexOf('.be/') + 4, (link.indexOf('.be/') + 4) + 11);
     } else if (link.includes('video.byui.edu') && link.includes('/0_')) {
       link = link.slice(link.indexOf('/0_') + 1, (link.indexOf('/0_') + 1) + 10);
+    } else if (link.includes('cdnapisec.kaltura.com')) {
+      link = link.slice(-10);
     } else if (link.includes('video.byui.edu') && link.includes('/1_')) {
       link = link.slice(link.indexOf('/1_') + 1, (link.indexOf('/1_') + 1) + 10);
     } else if (link.includes('vimeo')) {
