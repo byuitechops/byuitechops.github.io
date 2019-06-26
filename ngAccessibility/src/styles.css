@@ -137,7 +137,8 @@ input:hover, input:active, select:hover, select:active {
     padding: 0;
 }
 button {
-    width: 150px;
+    width: 100%;
+    max-width: 150px;
     margin: 2px;
     padding: 10px 15px;
 
@@ -156,8 +157,8 @@ button:hover {
     border: 3px solid var(--primary);
 }
 .warning-btn {
+    margin-left: auto;
     background-color: var(--warning);
-    float: right;
 }
 .warning-btn:hover {
     color: var(--warning);

@@ -91,8 +91,14 @@ export class ViewEditComponent implements OnInit {
             this.closeModal();
         }
     }
-}
 
+    displayPrevDup() {
+        
+    }
+    displayNextDup() {
+
+    }
+}
 
 
 
@@ -124,7 +130,6 @@ export class ViewEditComponent implements OnInit {
 // const viewMedia     = document.getElementById('view-info-media');
 // const viewIsverbit  = document.getElementById('view-info-isverbit');
 // const viewVerbitID  = document.getElementById('view-info-verbitid');
-
 
 // if (this.editing) {
 //   if (data.title)         { editTitle.innerHTML     = data.title; }

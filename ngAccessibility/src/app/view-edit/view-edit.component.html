@@ -203,7 +203,7 @@
 
         <div *ngIf="editing; else viewBtnBox" class="btn-box">
             <button id="confirmEditBtn">Confirm</button>
-            <button id="cancelEditBtn" (click)="closeModal()">Cancel</button>
+            <button id="cancelEditBtn" (click)="closeModal()">Close</button>
             <button class="warning-btn" id="btn-delete-transcript">Delete Transcript</button>
         </div>
         <ng-template #viewBtnBox class="btn-box">

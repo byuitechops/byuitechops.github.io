@@ -9,40 +9,40 @@ import { SearchService } from '../core/search.service';
     styleUrls: ['./request.component.css']
 })
 export class RequestComponent implements OnInit {
-    selectUndefinedOptionValue: any;
-    name: string;
-    lms: string;
-    media: string;
-    title: string;
-    priority: string;
-    priorities = [
-        '1 ADA Emergency of Special Request',
-        '2 Improvement Project for Live Course',
-        '3 New/Re-Development Project',
-        '4 Transcript Project'
-    ];
-    type: string;
-    types = [
-        'Video',
-        'Audio',
-        'Alt Text',
-        'Slide'
-    ];
-    course: string;
-    comments: string;
-    override = false;
+  selectUndefinedOptionValue: any;
+  name: string;
+  lms: string;
+  media: string;
+  title: string;
+  priority: string;
+  priorities = [
+      '1 ADA Emergency of Special Request',
+      '2 Improvement Project for Live Course',
+      '3 New/Re-Development Project',
+      '4 Transcript Project'
+  ];
+  type: string;
+  types = [
+      'Video',
+      'Audio',
+      'Alt Text',
+      'Slide'
+  ];
+  course: string;
+  comments: string;
+  override = false;
 
-    dups = [{
-      type: 'Video',
-      courseCode: ['ACCTG100'],
-      title: 'Testing',
-      srcURL: 'yourface.com',
-      priority: 1,
-      docEditURL: 'youthinkthisisgoogle.google.com.pub',
-      objectID: 'HAHAH'
-    }];
-    dupPage: number = 0;
-    constructor(private db: DatabaseService, public auth: AuthService, private search: SearchService) {}
+  dups = [{
+    type: 'Video',
+    courseCode: ['ACCTG100'],
+    title: 'Testing',
+    srcURL: 'yourface.com',
+    priority: 1,
+    docEditURL: 'youthinkthisisgoogle.google.com.pub',
+    objectID: 'HAHAH'
+  }];
+  dupPage = 0;
+  constructor(private db: DatabaseService, public auth: AuthService, private search: SearchService) {}
 
   ngOnInit() {
     this.getCourse();
@@ -90,81 +90,77 @@ export class RequestComponent implements OnInit {
                   <option value="RELPC122">RELPC122</option>
                   <option value="FDREL250">FDREL250</option>`;
     document.getElementById('requestCourse').insertAdjacentHTML('beforeend', html);
-}
-
-
-
-
+  }
   async newRequest() {
     if (this.course === undefined && this.type === undefined) {
       if ((this.lms === '' || this.lms === undefined) && (this.media === '' || this.media === undefined)) {
-          if ((this.title === '' || this.title === undefined) && this.priority === undefined) {
+        if ((this.title === '' || this.title === undefined) && this.priority === undefined) {
 
-              console.log('uh oh 1');
-          }
-          console.log('uh oh 2');
-          alert('Please fill in all fields');
-      }
+            console.log('uh oh 1');
+        }
+        console.log('uh oh 2');
+        alert('Please fill in all fields');
     } else {
-      let displayName: string;
+        let displayName: string;
 
-      if (this.auth.user.isAnonymous) {
-          displayName = this.name;
-      } else {
-          displayName = this.db.user.name;
+        if (this.auth.user.isAnonymous) {
+            displayName = this.name;
+        } else {
+            displayName = this.db.user.name;
+        }
+
+        if (this.comments === undefined || this.comments === '') {
+            this.comments = '';
+        } else {
+            this.comments = this.comments + 'Made by ' + displayName;
+        }
+        const data = {
+            backupCode: this.course,
+            copied: false,
+            courseCode: [this.course],
+            datePrepareFinished: '',
+            docEditURL: '',
+            docPublishURL: '',
+            length: '',
+            lmsURL: this.lms,
+            parentTranscript: true,
+            preparer: '',
+            priority: this.priority,
+            requestDate: new Date(),
+            requestNotes: this.comments,
+            requestor: displayName,
+            srcURL: this.media,
+            status: 'Ready for Prep',
+            title: this.title,
+            type: this.type,
+            verbit: false,
+            verbitID: ''
+        };
+
+        console.log(data);
+        this.dups = await this.search.dupCheck(this.title, this.type, this.media);
+        console.log(this.dups);
+        if (this.override) {
+            this.db.createTranscript(data);
+            this.override = false;
+            this.comments = '';
+            this.media = '';
+            this.type = undefined;
+        } else if (this.dups.length >= 0) {
+            console.log(this.dups);
+            this.openDup();
+        } else {
+            this.db.createTranscript(data);
+            this.comments = '';
+            this.media = '';
+            this.type = undefined;
+        }
+
       }
-
-      if (this.comments === undefined || this.comments === '') {
-          this.comments = '';
-      } else {
-          this.comments = this.comments + 'Made by ' + displayName;
-      }
-      const data = {
-          backupCode: this.course,
-          copied: false,
-          courseCode: [this.course],
-          datePrepareFinished: '',
-          docEditURL: '',
-          docPublishURL: '',
-          length: '',
-          lmsURL: this.lms,
-          parentTranscript: true,
-          preparer: '',
-          priority: this.priority,
-          requestDate: new Date(),
-          requestNotes: this.comments,
-          requestor: displayName,
-          srcURL: this.media,
-          status: 'Ready for Prep',
-          title: this.title,
-          type: this.type,
-          verbit: false,
-          verbitID: ''
-      };
-
-      console.log(data);
-      this.dups = await this.search.dupCheck(this.title, this.type, this.media);
-      console.log(this.dups);
-      if (this.override) {
-          this.db.createTranscript(data);
-          this.override = false;
-          this.comments = '';
-          this.media = '';
-          this.type = undefined;
-      } else if (this.dups.length >= 0) {
-          console.log(this.dups);
-          this.openDup();
-      } else {
-          this.db.createTranscript(data);
-          this.comments = '';
-          this.media = '';
-          this.type = undefined;
-      }
-
     }
   }
 
-  useDuplicate(id) {
+  useDuplicate(id){
     this.db.addCourseCode(id, this.course);
     this.comments = '';
     this.media = '';
@@ -175,7 +171,7 @@ export class RequestComponent implements OnInit {
   createNew() {
     this.override = true;
     this.newRequest();
-  }
+    }
 
   openDup() {
     const dup     = document.getElementById('dup-modal');
@@ -201,10 +197,4 @@ export class RequestComponent implements OnInit {
     }
   }
 
-  clickedOut(event) {
-    if (event.target.className === 'modal') {
-        this.closeDup();
-    }
-  }
 }
-

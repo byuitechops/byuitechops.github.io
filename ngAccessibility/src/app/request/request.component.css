@@ -1,8 +1,19 @@
 /*****************************************************
 *
-*   HOME COMPONENT CSS
+*   REQUEST COMPONENT CSS
 *
 ******************************************************/
+
+:root {
+    --primary: #0076C6;
+    --white: #ffffff;
+    --black: #000000;
+    --darkgray: #444444;
+    --medgray: #777777;
+    --lightgray: #dddddd;
+    --verylightgray: #f7f7f7;
+    --warning: #E85156;
+}
 
 
 #requestForm input {
@@ -20,9 +31,8 @@
     padding: 5px;
 }
 .detail label {
-    width: 150px;
+    width: 100px;
 }
-
 
 .left-col, .right-col {
     margin-left: 50px;
@@ -34,4 +44,38 @@
 .right-col {
     background-color: var(--verylightgray);
     box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
+}
+
+.modal .left-col, .modal .right-col {
+    margin: 0;
+}
+#dup-modal-content {
+    width: 95%;
+    max-width: 1000px;
+    margin: auto;
+}
+#dup-modal-content .col {
+    width: 100%;
+    max-width: 
+}
+#dup-title-box {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+}
+#dup-number {
+    width: 200px;
+    text-align: center;
+}
+#dup-title-box i {
+    margin: 12px 0;
+    padding: 8px 11px;
+
+    border-radius: 50%;
+    transition: all .2s;
+}
+#dup-title-box i:hover {
+    background-color: var(--lightgray);
 }

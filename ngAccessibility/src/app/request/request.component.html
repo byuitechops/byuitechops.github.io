@@ -1,66 +1,73 @@
-<section class="modal hide" id="dup-modal" (click)="clickedOut($event)">
+<section class="modal hide" id="dup-modal">
 
     <div class="modal-content" id="dup-modal-content">
         <div class="modal-header-box">
             <h1>Duplicate Found</h1>
         </div>
 
-        <div class="left-col">
+        <div class="left-col col">
             <h2>Your Request</h2>
-            <div>
+            <div class="detail">
                 <label>Media Type:</label>
                 <p class="description"> {{ type }} </p>
             </div>
-            <div>
+            <div class="detail">
                 <label>Course Code:</label>
                 <p class="description"> {{ course }} </p>
             </div>
-            <div>
+            <div class="detail">
                 <label>Title:</label>
                 <p class="description"> {{ title }} </p>
             </div>
-            <div>
+            <div class="detail">
                 <label>Priority:</label>
                 <p class="description">{{ priority }} </p>
             </div>
-            <div>
+            <div class="detail">
                 <label>Video:</label>
                 <p class="description"> {{ media }}</p>
             </div>
         </div>
 
-        <div class="right-col">
-            <h2>Potential Duplicate(s)</h2>
-            <div>
-                <label>Media Type:</label>
-                <p class="description"> {{ dups[dupPage].type }} </p>
+        <div class="right-col col">
+            <div id="dup-title-box">
+                <h2 id="dup-title">Potential Duplicate</h2>
+                <i class="fas fa-angle-left hide-if-one-dup" (click)="displayPrevDup()"></i>
+                <h2 class="hide-if-one-dup" id="dup-number">1 / 3</h2>
+                <i class="fas fa-angle-right hide-if-one-dup" (click)="displayNextDup()"></i>
             </div>
-            <div>
-                <label>Course Code:</label>
-                <p class="description"> {{ dups[dupPage].courseCode }} </p>
-            </div>
-            <div>
-                <label>Title:</label>
-                <p class="description"> {{ dups[dupPage].title }} </p>
-            </div>
-            <div>
-                <label>Priority:</label>
-                <p class="description">{{ dups[dupPage].priority }} </p>
-            </div>
-            <div>
-                <label>Video:</label>
-                <p class="description"> {{ dups[dupPage].srcURL }} </p>
-            </div>
-            <div>
-              <label>Transcript:</label>
-              <p class="description"> {{ dups[dupPage].docEditURL }} </p>
-          </div>
+            <!-- <div *ngFor="let dup of dups" class="dup-card"> -->
+                <div class="detail">
+                  <label>Media Type:</label>
+                  <p class="description"> {{ dups[dupPage].type }} </p>
+                </div>
+                <div class="detail">
+                  <label>Course Code:</label>
+                  <p class="description"> {{ dups[dupPage].courseCode }} </p>
+                </div>
+                <div class="detail">
+                  <label>Title:</label>
+                  <p class="description"> {{ dups[dupPage].title }} </p>
+                </div>
+                <div class="detail">
+                    <label>Priority:</label>
+                    <p class="description">{{ priority }} </p>
+                </div>
+                <div class="detail">
+                  <label>Video:</label>
+                  <p class="description"> {{ dups[dupPage].srcURL }} </p>
+                </div>
+                <div class="detail">
+                  <label>Transcript:</label>
+                  <p class="description"> {{ dups[dupPage].docEditURL }} </p>
+                </div>
+            <!-- </div> -->
         </div>
 
         <div class="btn-box" id="dup-btn-box">
             <p style="margin-left: 2rem; margin-top: .8rem; font-weight: bolder;" id="message"></p>
-            <button type="submit" id="requestSubmit" (click)="newRequest()">Use Duplicate</button>
-            <button type="submit" id="requestSubmit" (click)="useDuplicate(dups[dupPage].objectID)">Make New Transcript</button>
+            <button type="submit" id="requestSubmit" (click)="useDuplicate(dups[dupPage].objectID)">Use Duplicate</button>
+            <button type="submit" id="requestSubmit" (click)="newRequest()">Make New Transcript</button>
             <button class="warning-btn" id="dup-cancel" (click)="closeDup()">Cancel</button>
         </div>
 
