@@ -56,7 +56,7 @@
 }
 #dup-modal-content .col {
     width: 100%;
-    max-width: 
+    max-width: 500px;
 }
 #dup-title-box {
     display: flex;
