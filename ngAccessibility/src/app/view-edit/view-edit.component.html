@@ -1,5 +1,5 @@
 <section class="modal hide" id="view-modal" [class.hide]='!viewOpen' (click)="clickedOut($event)">
-    
+
     <div class="modal-content" id="view-modal-content">
 
         <div class="modal-header-box">
@@ -38,10 +38,12 @@
                     <a class="" id="add-course-code">+</a>
                     <input id="edit-info-courses" type="text" [(ngModel)]="courseCode[0]">
                     </div>
-                    <ng-template #viewCourses *ngFor="let course of courseCode">
-                    <span id="view-info-courses">{{ course }}</span>
-                    </ng-template>
-                </div>
+                    <div #viewCourses>
+                      <ng-template *ngFor="let course of courseCode">
+                        <span id="view-info-courses">{{ course }}</span>
+                        </ng-template>
+                    </div>
+                  </div>
 
                 <div class="detail">
                     <p>Priority</p>
