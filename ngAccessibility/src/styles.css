@@ -268,8 +268,8 @@ tr {
     margin: 0;
     padding: 15px 0;
 }
-.modal-body .left-col,.right-col {
-    width: 340px;
+.modal-body .left-col, .modal-body .right-col {
+    width: 320px;
 }
 .median {
     width: 2px;
