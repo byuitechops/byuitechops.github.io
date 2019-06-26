@@ -47,12 +47,14 @@ export class DatabaseService {
   }
 
   async checkAction() {
-    if (this.user.currentAction === 'preparing' && this.router.url !== '/prepare') {
-      this.router.navigate(['/prepare']);
-      alert('You may only work on one transcript at a time');
-    } else if (this.user.currentAction === 'transcribing' || this.user.currentAction === 'reviewing') {
-      this.router.navigate(['/home']);
-    }
+    setTimeout(() => {
+      if (this.user.currentAction === 'preparing' && this.router.url !== '/prepare') {
+        this.router.navigate(['/prepare']);
+        alert('You may only work on one transcript at a time');
+      } else if (this.user.currentAction === 'transcribing' || this.user.currentAction === 'reviewing') {
+        this.router.navigate(['/home']);
+      }
+    }, 800);
   }
 
   // Services pertaining to accessibility collection
@@ -90,7 +92,7 @@ export class DatabaseService {
 
   addCourseCode(id, newCode) {
     let add = true;
-    let codes = [];
+    const codes = [];
     codes.push(newCode);
     this.afs.collection('accessibility').doc(id).get().subscribe(res => {
       (res.data().courseCode).forEach(course => {
@@ -104,6 +106,26 @@ export class DatabaseService {
     if (add) {
       this.afs.collection('accessibility').doc(id).update({
         courseCode: newCode
+      });
+    }
+  }
+
+  addLocation(id, newLocation) {
+    let add = true;
+    const codes = [];
+    codes.push(newLocation);
+    this.afs.collection('accessibility').doc(id).get().subscribe(res => {
+      (res.data().location).forEach(location => {
+        if (location.lmsURL === newLocation.lmsURL) {
+          add = false;
+        } else {
+          codes.push(location);
+        }
+      });
+    });
+    if (add) {
+      this.afs.collection('accessibility').doc(id).update({
+        location: codes
       });
     }
   }

@@ -36,17 +36,25 @@ export class RequestComponent implements OnInit {
     type: 'Video',
     courseCode: ['ACCTG100'],
     title: 'Testing',
-    srcURL: 'yourface.com',
+    srcURL: '1234567890.com',
     priority: 1,
     docEditURL: 'youthinkthisisgoogle.google.com.pub',
     objectID: 'HAHAH'
   }];
   dupPage = 0;
+  location: any;
+
+  hider = false;
   constructor(private db: DatabaseService, public auth: AuthService, private search: SearchService) {}
 
   ngOnInit() {
     this.getCourse();
     this.db.checkAction();
+    setTimeout(() => {
+      if (!this.auth.user.isAnonymous) {
+        this.hider = true;
+      }
+    }, 900);
   }
 
   getCourse() {
@@ -92,87 +100,79 @@ export class RequestComponent implements OnInit {
     document.getElementById('requestCourse').insertAdjacentHTML('beforeend', html);
   }
   async newRequest() {
-    if (this.course === undefined && this.type === undefined) {
-      if ((this.lms === '' || this.lms === undefined) && (this.media === '' || this.media === undefined)) {
-        if ((this.title === '' || this.title === undefined) && this.priority === undefined) {
-
-            console.log('uh oh 1');
-        }
-        console.log('uh oh 2');
-        alert('Please fill in all fields');
+    if (this.course === undefined && this.type === undefined && (this.lms === '' || this.lms === undefined) && (this.media === '' || this.media === undefined) && (this.title === '' || this.title === undefined) && this.priority === undefined) {
+      alert('Please fill in all fields');
     } else {
-        let displayName: string;
+      let displayName: string;
 
-        if (this.auth.user.isAnonymous) {
-            displayName = this.name;
-        } else {
-            displayName = this.db.user.name;
-        }
-
-        if (this.comments === undefined || this.comments === '') {
-            this.comments = '';
-        } else {
-            this.comments = this.comments + 'Made by ' + displayName;
-        }
-        const data = {
-            backupCode: this.course,
-            copied: false,
-            courseCode: [this.course],
-            datePrepareFinished: '',
-            docEditURL: '',
-            docPublishURL: '',
-            length: '',
-            lmsURL: this.lms,
-            parentTranscript: true,
-            preparer: '',
-            priority: this.priority,
-            requestDate: new Date(),
-            requestNotes: this.comments,
-            requestor: displayName,
-            srcURL: this.media,
-            status: 'Ready for Prep',
-            title: this.title,
-            type: this.type,
-            verbit: false,
-            verbitID: ''
-        };
-
-        console.log(data);
-        this.dups = await this.search.dupCheck(this.title, this.type, this.media);
-        console.log(this.dups);
-        if (this.override) {
-            this.db.createTranscript(data);
-            this.override = false;
-            this.comments = '';
-            this.media = '';
-            this.type = undefined;
-        } else if (this.dups.length >= 0) {
-            console.log(this.dups);
-            this.openDup();
-        } else {
-            this.db.createTranscript(data);
-            this.comments = '';
-            this.media = '';
-            this.type = undefined;
-        }
-
+      if (this.auth.user.isAnonymous) {
+          displayName = this.name;
+      } else {
+          displayName = this.db.user.name;
       }
+
+      if (this.comments === undefined || this.comments === '') {
+          this.comments = '';
+      } else {
+          this.comments = this.comments + ' Made by ' + displayName;
+      }
+      const data = {
+          datePrepareFinished: '',
+          docEditURL: '',
+          docPublishURL: '',
+          length: '',
+          location: [{
+            courseCode: this.course,
+            lmsURL: this.lms,
+            requestor: displayName,
+            preparer: '',
+          }],
+          priority: this.priority,
+          requestDate: new Date(),
+          notes: this.comments,
+          srcURL: this.media,
+          status: 'Ready for Prep',
+          title: this.title,
+          type: this.type,
+          verbit: false,
+          verbitID: ''
+      };
+      this.location = data.location;
+      console.log(data);
+      this.dups = await this.search.dupCheck(data);
+      setTimeout(() => {
+        console.log(this.search.areThere);
+        if (this.override) {
+          this.db.createTranscript(data);
+          this.reset();
+          this.override = false;
+        } else if (this.dups.length > 0 && this.search.areThere) {
+          console.log(this.dups);
+          this.openDup();
+        } else {
+          this.db.createTranscript(data);
+        }
+      }, 900);
     }
   }
 
-  useDuplicate(id){
-    this.db.addCourseCode(id, this.course);
-    this.comments = '';
-    this.media = '';
-    this.type = undefined;
+  useDuplicate(id) {
+    this.db.addLocation(id, this.location);
     this.closeDup();
+    this.reset();
   }
 
   createNew() {
     this.override = true;
     this.newRequest();
-    }
+    this.reset();
+  }
 
+  reset() {
+    this.type = undefined;
+    this.title = undefined;
+    this.media = undefined;
+  }
   openDup() {
     const dup     = document.getElementById('dup-modal');
     const navbar  = document.getElementById('main-nav');

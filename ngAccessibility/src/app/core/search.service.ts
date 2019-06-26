@@ -20,7 +20,7 @@ export class SearchService {
   showResults = true;
 
   duplicates = {};
-
+  areThere = false;
   constructor(public db: AngularFirestore) { }
 
   // NOTES FOR SHAWN
@@ -30,21 +30,26 @@ export class SearchService {
   // build the HTML for now, that works too. This is only needed in the request page
 
 
-  async dupCheck(t, type, src) {
+  async dupCheck(data) {
+    const t = data.title;
+    const type = data.type;
+    let src = data.srcURL;
     const results = new Array();
     src = await this.cleanSRC(src);
     console.log(src);
     const index = searchClient.initIndex('transcripts');
-    index.search({query: t}).then(x => {
+    index.search({query: t}).then(async x => {
       for (let y = 0; y < x.hits.length; y++) {
        if (x.hits[y].type === type) {
          if ((x.hits[y].srcURL).includes(src)) {
           results.push(x.hits[y]);
+          this.areThere = true;
+          let zxz = await this.areThere;
          }
        }
       }
     });
-    console.log(results.length);
+    console.log(results);
     this.duplicates = results;
     return results;
   }
