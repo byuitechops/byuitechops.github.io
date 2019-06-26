@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
+import { SearchService } from './search.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DuplicateService {
 
-  constructor() { }
+  duplicates: any;
+
+  constructor(private search: SearchService) {
+
+  }
 }

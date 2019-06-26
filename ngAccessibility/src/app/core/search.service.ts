@@ -19,6 +19,8 @@ export class SearchService {
   };
   showResults = true;
 
+  duplicates = {};
+
   constructor(public db: AngularFirestore) { }
 
   // NOTES FOR SHAWN
@@ -42,7 +44,8 @@ export class SearchService {
        }
       }
     });
-    console.log(results);
+    console.log(results.length);
+    this.duplicates = results;
     return results;
   }
 
