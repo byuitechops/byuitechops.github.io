@@ -1,56 +1,58 @@
-<section class="modal hide" id="dup-modal" (click)="clickedOut($event)">
+<section class="modal hide" id="dup-modal">
 
     <div class="modal-content" id="dup-modal-content">
         <div class="modal-header-box">
             <h1>Duplicate Found</h1>
         </div>
 
-        <div class="left-col">
+        <div class="left-col col">
             <h2>Your Request</h2>
-            <div>
+            <div class="detail">
                 <label>Media Type:</label>
                 <p class="description"> {{ type }} </p>
             </div>
-            <div>
+            <div class="detail">
                 <label>Course Code:</label>
                 <p class="description"> {{ course }} </p>
             </div>
-            <div>
+            <div class="detail">
                 <label>Title:</label>
                 <p class="description"> {{ title }} </p>
             </div>
-            <div>
+            <div class="detail">
                 <label>Priority:</label>
                 <p class="description">{{ priority }} </p>
             </div>
-            <div>
+            <div class="detail">
                 <label>Video:</label>
                 <p class="description"> {{ media }}</p>
             </div>
         </div>
 
-        <div class="right-col">
-            <h2>Potential Duplicate(s)</h2>
-            <div>
-                <label>Media Type:</label>
-                <p class="description"> {{ type }} </p>
-            </div>
-            <div>
-                <label>Course Code:</label>
-                <p class="description"> {{ course }} </p>
-            </div>
-            <div>
-                <label>Title:</label>
-                <p class="description"> {{ title }} </p>
-            </div>
-            <div>
-                <label>Priority:</label>
-                <p class="description">{{ priority }} </p>
-            </div>
-            <div>
-                <label>Video:</label>
-                <p class="description"> {{ media }} </p>
-            </div>
+        <div class="right-col col">
+            <h2>Potential Duplicate</h2>
+            <!-- <div *ngFor="let dup of dups" class="dup-card"> -->
+                <div class="detail">
+                    <label>Media Type:</label>
+                    <p class="description"> {{ type }} </p>
+                </div>
+                <div class="detail">
+                    <label>Course Code:</label>
+                    <p class="description"> {{ course }} </p>
+                </div>
+                <div class="detail">
+                    <label>Title:</label>
+                    <p class="description"> {{ title }} </p>
+                </div>
+                <div class="detail">
+                    <label>Priority:</label>
+                    <p class="description">{{ priority }} </p>
+                </div>
+                <div class="detail">
+                    <label>Video:</label>
+                    <p class="description"> {{ media }} </p>
+                </div>
+            <!-- </div> -->
         </div>
         
         <div class="btn-box" id="dup-btn-box">

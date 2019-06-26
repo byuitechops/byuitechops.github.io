@@ -156,8 +156,8 @@ button:hover {
     border: 3px solid var(--primary);
 }
 .warning-btn {
+    margin-left: auto;
     background-color: var(--warning);
-    float: right;
 }
 .warning-btn:hover {
     color: var(--warning);

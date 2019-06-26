@@ -188,11 +188,5 @@ closeDup() {
     }
 }
 
-clickedOut(event) {
-    if (event.target.className === "modal") {
-        this.closeDup();
-    }
-}
-
 }
 
