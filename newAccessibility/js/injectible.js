@@ -117,8 +117,8 @@ function createEditTranscriptWindow() {
                         </div>
                         <div>
                             <p>Course Code(s)</p>
-                            <a class="hide" id="add-course-code" onclick="addCourseCodeSelect()">+</a>
-                            <input id="edit-info-courses" type="text"></input>
+                            <select id="edit-info-courses">
+                            </select>
                         </div>
                         <div>
                             <p>Priority</p>
@@ -235,7 +235,7 @@ function fillEditFields() {
     const fillID        = document.getElementById("edit-info-id");
     const fillTitle     = document.getElementById("edit-info-title");
     const fillStage     = document.getElementById("edit-info-stage");
-    const fillCourses   = document.getElementById("edit-info-courses");
+    const fillCourses   = "edit-info-courses";
     const fillPriority  = document.getElementById("edit-info-priority");
     const fillType      = document.getElementById("edit-info-type");
     const fillLength    = document.getElementById("edit-info-length");
@@ -273,7 +273,7 @@ function fillEditFields() {
         default:                        fillStage.value = 0;                         break;
     }
     if (currentCourses.innerHTML) {
-        fillCourses.value = currentCourses.innerHTML
+        getCourses(fillCourses);
     }
     switch (currentPriority.innerHTML) {
         case "1":  fillPriority.value = 1; break;
