@@ -120,7 +120,7 @@ input, select {
     padding: 4px 10px;
 
     border: 1px solid var(--primary);
-    border-radius: 5px;
+    border-radius: 10px;
     outline: none;
     cursor: pointer;
 }
@@ -146,7 +146,7 @@ button {
     color: var(--white);
     background-color: var(--primary);
     border: 3px solid var(--white);
-    border-radius: 5px;
+    border-radius: 10px;
     outline: none;
     cursor: pointer;
     transition: all .1s;
