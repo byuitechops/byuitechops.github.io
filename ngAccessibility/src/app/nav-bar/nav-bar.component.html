@@ -1,6 +1,6 @@
 <nav id="main-nav">
 
-    <img class="icon hide" id="menu-icon" src="../../assets/icons/menuIcon.png" alt="Menu">
+    <i class="fas fa-bars"></i>
 
     <ul id="nav-links">
         <a id="home-tab" [routerLink]="['/home']" routerLinkActive="active">
@@ -56,10 +56,10 @@
             </ng-template>
         </ais-hits>
     </ais-instantsearch>
-    <img class="icon" id="nav-search-icon" src="../../assets/icons/searchIcon.png" alt="Search">
+    <i class="fas fa-search"></i>
 
     <div id="logout-box">
-        <img class="icon" src="../../assets/icons/logoutIcon.png" alt="Log Out" (click)="auth.userStatus()">
+        <i class="fas fa-door-open"></i>
     </div>
 
 </nav>

@@ -117,8 +117,7 @@ function createEditTranscriptWindow() {
                         </div>
                         <div>
                             <p>Course Code(s)</p>
-                            <a class="hide" id="add-course-code" onclick="addCourseCodeSelect()">+</a>
-                            <input id="edit-info-courses" type="text"></input>
+                            <select id="edit-info-courses" class="courseCodes"></select>
                         </div>
                         <div>
                             <p>Priority</p>
@@ -272,8 +271,13 @@ function fillEditFields() {
         case "Finished":                fillStage.value = "Finished";                break;
         default:                        fillStage.value = 0;                         break;
     }
+    getCourses("edit-info-courses");
     if (currentCourses.innerHTML) {
-        fillCourses.value = currentCourses.innerHTML
+        setTimeout(() => {
+            $('.courseCodes').val(currentCourses.innerHTML);
+            console.log(currentCourses.innerHTML);
+        }, 900);
+        
     }
     switch (currentPriority.innerHTML) {
         case "1":  fillPriority.value = 1; break;
@@ -391,14 +395,14 @@ function confirmEdit() {
     const fillMedia     = document.getElementById("edit-info-media").value;
     const fillIsVerbit  = document.getElementById("edit-info-isverbit").value;
     const fillVerbitID  = document.getElementById("edit-info-verbitid").value;
-    const editComment  = document.getElementById("edit-info-comment").value;
+    const editComment   = document.getElementById("edit-info-comment").value;
     
     currentID           = document.getElementById("storeTranscriptID").innerHTML;
 
     db.collection("accessibility").doc(currentID).update({
         "title":         fillTitle,
         "status":        fillStage,
-        "courseCode":    fillCourses,
+        "backupCode":    fillCourses,
         "priority":      fillPriority,
         "type":          fillType,
         "length":        fillLength,
