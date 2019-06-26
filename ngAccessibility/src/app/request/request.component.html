@@ -30,7 +30,12 @@
         </div>
 
         <div class="right-col col">
-            <h2>Potential Duplicate</h2>
+            <div id="dup-title-box">
+                <h2 id="dup-title">Potential Duplicate</h2>
+                <i class="fas fa-angle-left hide-if-one-dup" (click)="displayPrevDup()"></i>
+                <h2 class="hide-if-one-dup" id="dup-number">1 / 3</h2>
+                <i class="fas fa-angle-right hide-if-one-dup" (click)="displayNextDup()"></i>
+            </div>
             <!-- <div *ngFor="let dup of dups" class="dup-card"> -->
                 <div class="detail">
                     <label>Media Type:</label>
@@ -57,7 +62,7 @@
         
         <div class="btn-box" id="dup-btn-box">
             <p style="margin-left: 2rem; margin-top: .8rem; font-weight: bolder;" id="message"></p>
-            <button type="submit" id="requestSubmit" (click)="newRequest()">Use Duplicate</button>
+            <button type="submit" id="requestSubmit" (click)="newRequest()">Use This Duplicate</button>
             <button type="submit" id="requestSubmit" (click)="newRequest()">Make New Transcript</button>
             <button class="warning-btn" id="dup-cancel" (click)="closeDup()">Cancel</button>
         </div>
