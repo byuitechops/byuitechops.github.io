@@ -279,3 +279,17 @@ tr {
     border-radius: 2px;
     background-color: var(--lightgray);
 }
+
+.icon-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    margin-top: -10px;
+    padding-top: 5px;
+}
+.icon {
+    margin: auto;
+    font-size: 24px;
+    text-align: center;
+}

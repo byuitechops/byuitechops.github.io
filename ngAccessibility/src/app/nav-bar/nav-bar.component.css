@@ -13,7 +13,9 @@
     --lightgray: #eeeeee;
 }
 
-
+#menu-icon {
+    display: none;
+}
 #main-nav {
     position: relative;
     width: 100%;
@@ -136,12 +138,15 @@ ais-hits {
     ais-search-box {
         display: none;
     }
-    #nav-search-icon {
+    #search-icon {
         display: initial;
     }
 }
 
 @media only screen and (max-width: 700px) {
+    #main-nav {
+        justify-content: space-between;
+    }
     #menu-icon {
         display: initial;
     }
@@ -151,9 +156,6 @@ ais-hits {
 }
 
 @media only screen and (max-width: 300px) {
-    #main-nav {
-        justify-content: space-between;
-    }
     #logo-box {
         display: none;
     }
