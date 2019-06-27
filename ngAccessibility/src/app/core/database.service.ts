@@ -59,7 +59,7 @@ export class DatabaseService {
 
   // Services pertaining to accessibility collection
 
-  getTranscript(id) {
+  async getTranscript(id) {
     const transcript = this.afs.collection('accessibility').doc(id).ref.get();
     return transcript;
   }
