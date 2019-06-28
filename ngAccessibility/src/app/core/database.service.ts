@@ -130,21 +130,23 @@ export class DatabaseService {
     }
   }
 
-  changeTranscriptStep(status, name) {
-    this.afs.collection('accessibility').doc(this.user.actionID).update({
-      status
-    });
+  changeTranscriptStep(status, name, id) {
+    console.log(status);
     if (status === 'In Prep') {
-      this.afs.collection('accessibility').doc(this.user.actionID).update({
-        preparer: name
+      this.afs.collection('accessibility').doc(id).update({
+        preparer: name,
+        status
       });
     } else if (status === 'In Transcription') {
-      this.afs.collection('accessibility').doc(this.user.actionID).update({
-        transcriber: name
+      console.log("DONE");
+      this.afs.collection('accessibility').doc(id).update({
+        transcriber: name,
+        status
       });
     } else if (status === 'In Review' || status === 'Review Completed') {
-      this.afs.collection('accessibility').doc(this.user.actionID).update({
-        reviewer: name
+      this.afs.collection('accessibility').doc(id).update({
+        reviewer: name,
+        status
       });
     }
     console.log('Working');

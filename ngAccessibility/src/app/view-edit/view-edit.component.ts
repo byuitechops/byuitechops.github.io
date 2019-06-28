@@ -1,7 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { DatabaseService } from '../core/database.service';
 import { ViewEditService } from '../core/view-edit.service';
-import { store } from '@angular/core/src/render3/instructions';
 
 @Component({
     selector: 'app-view-edit',

@@ -8,11 +8,17 @@
         <option>No</option>
         <option>Yes</option>
     </select>
-
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <p>Transcript Information</p>
     <input class="prepare-input" [(ngModel)]="docEdit" placeholder="Editable Google Doc" />
     <input class="prepare-input" [(ngModel)]="docPub" placeholder="Published Google Doc" />
-    <input class="prepare-input" [(ngModel)]="length" placeholder="Video Length" />
+    <p>Video Length  -  Total {{ calc() }} seconds&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+    <div class="time-box">
+      <p>Hours</p><input class="prepare-time" [(ngModel)]="hours" placeholder="Hours" />
+      <p>Minutes</p><input class="prepare-time" [(ngModel)]="mins" placeholder="Minutes" />
+      <p>Seconds</p><input class="prepare-time" [(ngModel)]="sec" placeholder="Seconds" />
+    </div>
+
 
     <p>Will this use Verbit</p>
     <select [(ngModel)]="verbit">

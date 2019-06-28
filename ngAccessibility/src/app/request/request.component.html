@@ -9,23 +9,23 @@
             <h2>Your Request</h2>
             <div class="detail">
                 <label>Media Type:</label>
-                <p class="description"> {{ this?.type }} </p>
+                <p class="description"> {{ type }} </p>
             </div>
             <div class="detail">
                 <label>Course Code:</label>
-                <p class="description"> {{ this?.course }} </p>
+                <p class="description"> {{ course }} </p>
             </div>
             <div class="detail">
                 <label>Title:</label>
-                <p class="description"> {{ this?.title }} </p>
+                <p class="description"> {{ title }} </p>
             </div>
             <div class="detail">
                 <label>Priority:</label>
-                <p class="description">{{ this?.priority }} </p>
+                <p class="description">{{ priority }} </p>
             </div>
             <div class="detail">
                 <label>Video:</label>
-                <a class="description" [href]="this?.media"> {{ this?.media }} </a>
+                <a class="description" [href]="media"> {{ media }} </a>
             </div>
             <br><br>
             <div class="hide" id="dupToBeUsedBox">
@@ -116,7 +116,7 @@
 
         <select [(ngModel)]="priority">
             <option disabled hidden [value]="selectUndefinedOptionValue">Select Priority</option>
-            <option *ngFor="let i of priorities" [ngValue]="i">{{ i }}</option>
+            <option *ngFor="let i of priorities" [ngValue]="i.value">{{ i.name }}</option>
         </select>
 
         <input [(ngModel)]="lms" type="url" placeholder="Canvas URL">
@@ -132,23 +132,23 @@
         <div class="ticketbox  col">
             <div class="detail">
                 <label>Media Type:</label>
-                <p class="description"> {{ this?.type }} </p>
+                <p class="description"> {{ type }} </p>
             </div>
             <div class="detail">
                 <label>Course Code:</label>
-                <p class="description"> {{ this?.course }} </p>
+                <p class="description"> {{ course }} </p>
             </div>
             <div class="detail">
                 <label>Title:</label>
-                <p class="description"> {{ this?.title }} </p>
+                <p class="description"> {{ title }} </p>
             </div>
             <div class="detail">
                 <label>Priority:</label>
-                <p class="description">{{ this?.priority }} </p>
+                <p class="description">{{ priority }} </p>
             </div>
             <div class="detail">
                 <label>Location in Course:</label>
-                <p class="description"> {{ this?.lms }}</p>
+                <p class="description"> {{ lms }}</p>
             </div>
             <div class="btn-box">
                 <p style="margin-left: 2rem; margin-top: .8rem; font-weight: bolder;" id="message"></p>

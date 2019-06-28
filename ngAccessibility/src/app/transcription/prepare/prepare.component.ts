@@ -42,7 +42,7 @@ export class PrepareComponent implements OnInit {
       currentAction: 'preparing'
     };
     this.db.updateUser(userData);
-    this.db.changeTranscriptStep('In Prep', this.db.user.name);
+    this.db.changeTranscriptStep('In Prep', this.db.user.name, id);
     this.router.navigate(['pre', id] );
   }
 }

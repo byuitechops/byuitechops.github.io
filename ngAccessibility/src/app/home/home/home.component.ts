@@ -27,26 +27,7 @@ export class HomeComponent implements OnInit {
       this.announce = doc.data().content;
     });
     setTimeout(() => {
-      if (db.user !== undefined) {
-        if (db.user.actionID !== '') {
-          const transcript = db.getTranscript(db.user.actionID);
-          transcript.then(doc => {
-            const info = doc.data();
-            console.log(info);
-            this.data.title = info.title;
-            this.data.course = info.courseCode;
-            this.data.priority = info.priority;
-            this.data.lms = info.lmsURL;
-            this.data.media = info.srcURL;
-            this.data.doc = info.docEditURL;
-            this.data.id = doc.id;
-            if (info.verbit) {
-              this.verbit = true;
-              this.data.verbitID = info.verbitID;
-            }
-          });
-        }
-      }
+      this.updateInProgress()
     }, 680);
   }
 
@@ -57,13 +38,36 @@ export class HomeComponent implements OnInit {
   return() {
 
   }
-
+  updateInProgress() {
+    if (this.db.user !== undefined) {
+      if (this.db.user.actionID !== '') {
+        const transcript = this.db.getTranscript(this.db.user.actionID);
+        transcript.then(doc => {
+          const info = doc.data();
+          console.log(info);
+          this.data.title = info.title;
+          this.data.course = info.courseCode;
+          this.data.priority = info.priority;
+          this.data.lms = info.lmsURL;
+          this.data.media = info.srcURL;
+          this.data.doc = info.docEditURL;
+          this.data.id = doc.id;
+          if (info.verbit) {
+            this.verbit = true;
+            this.data.verbitID = info.verbitID;
+          }
+        });
+      }
+    }
+  }
   forward() {
+    console.log(this.data.id);
     const transcript = this.db.getTranscript(this.data.id);
     transcript.then(doc => {
       const info = doc.data().status;
+      console.log(info);
       if (info === 'In Transcription') {
-        this.db.changeTranscriptStep('Ready for Review', this.db.user.name);
+        this.db.changeTranscriptStep('Ready for Review', this.db.user.name, this.data.id);
         this.db.updateUser({actionID: '', currentAction: ''});
         this.data = {
           title: '',
@@ -77,7 +81,7 @@ export class HomeComponent implements OnInit {
         };
         console.log('Success: ' + doc.data());
       } else if (info === 'In Review') {
-        this.db.changeTranscriptStep('', this.db.user.name);
+        this.db.changeTranscriptStep('', this.db.user.name, this.data.id);
         this.db.updateUser({actionID: '', currentAction: ''});
         this.data = {
           title: '',

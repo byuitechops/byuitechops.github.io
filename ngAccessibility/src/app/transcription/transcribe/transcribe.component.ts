@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SearchService } from '../../core/search.service';
 import { ViewEditComponent } from '../../view-edit/view-edit.component';
 import { DatabaseService } from 'src/app/core/database.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-transcribe',
@@ -10,7 +11,7 @@ import { DatabaseService } from 'src/app/core/database.service';
 })
 export class TranscribeComponent implements OnInit {
 
-  constructor(public search: SearchService, private db: DatabaseService, private view: ViewEditComponent) {}
+  constructor(public search: SearchService, private db: DatabaseService, private view: ViewEditComponent, private router: Router) {}
 
 
 
@@ -28,7 +29,10 @@ export class TranscribeComponent implements OnInit {
       actionID: id,
       currentAction: 'transcribing'
     };
-    await this.db.updateUser(userData);
-    await this.db.changeTranscriptStep('In Transcription', this.db.user.name);
+    this.db.updateUser(userData);
+    setTimeout(() => {
+      this.db.changeTranscriptStep('In Transcription', this.db.user.name, id);
+      this.router.navigate(['/'] );
+    }, 500);
   }
 }

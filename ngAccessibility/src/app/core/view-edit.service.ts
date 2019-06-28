@@ -33,7 +33,7 @@ export class ViewEditService {
   }
 
   async storageEdit(id) {
-    this.id = id
+    this.id = id;
     const file = this.db.getTranscript(id);
     await file.then(async transcript => {
       const data = await transcript.data();
@@ -48,6 +48,7 @@ export class ViewEditService {
       this.verbit = await data.verbit;
       this.verbitID = await data.verbitID;
       this.srcURL = await data.srcURL;
+      this.step = await data.status;
     });
   }
 
