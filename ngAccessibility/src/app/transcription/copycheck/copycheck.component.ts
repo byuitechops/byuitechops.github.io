@@ -18,6 +18,9 @@ export class CopycheckComponent implements OnInit {
     setTimeout(() => {this.db.checkAction(); }, 1000);
   }
 
+  async showDetails(id) {
+    await this.view.openModal(id);
+  }
 
   claimTranscript(id) {
     const userData = {
@@ -25,6 +28,6 @@ export class CopycheckComponent implements OnInit {
       currentAction: 'reviewing'
     };
     this.db.updateUser(userData);
-    this.db.changeTranscriptStep('In Review', this.db.user.name);
+    this.db.changeTranscriptStep('Finished', this.db.user.name);
   }
 }

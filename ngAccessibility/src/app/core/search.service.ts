@@ -18,11 +18,11 @@ export class SearchService {
     searchClient,
   };
   showResults = true;
-
+  index = searchClient.initIndex('transcripts');
   duplicates = {};
   areThere = false;
-  constructor(public db: AngularFirestore) { }
-
+  constructor(public db: AngularFirestore) {
+   }
   // NOTES FOR SHAWN
   // This is the dup checker function, it takes a title , type, and src url to find out what matches it.
   // All the results are stored in an array name..... results. I thought that was a good name.
@@ -37,8 +37,7 @@ export class SearchService {
     const results = new Array();
     src = await this.cleanSRC(src);
     console.log(src);
-    const index = searchClient.initIndex('transcripts');
-    index.search({query: t}).then(async x => {
+    this.index.search({query: t}).then(async x => {
       for (let y = 0; y < x.hits.length; y++) {
        if (x.hits[y].type === type) {
          if ((x.hits[y].srcURL).includes(src)) {

@@ -10,18 +10,18 @@ import { DatabaseService } from 'src/app/core/database.service';
 })
 export class PrepareComponent implements OnInit {
 
-    type: string;
-    course: string;
-    title: string;
-    priority: string;
-    lms: string;
-    docPub: string;
-    docEdit: string;
-    length: string;
-    verbit: string;
-    verbitID: string;
+  type: string;
+  course: string;
+  title: string;
+  priority: string;
+  lms: string;
+  docPub: string;
+  docEdit: string;
+  length: string;
+  verbit: string;
+  verbitID: string;
 
-    constructor(public search: SearchService, private db: DatabaseService, private view: ViewEditComponent) {
+  constructor(public search: SearchService, private db: DatabaseService, private view: ViewEditComponent) {
 
 }
 
@@ -32,12 +32,7 @@ export class PrepareComponent implements OnInit {
   }
 
   async showDetails(id) {
-    const file = this.db.getTranscript(id);
-    const data = await file.then(async doc => {
-                    console.log(doc.data());
-                    return doc.data();
-                  });
-    this.view.openModal();
+    await this.view.openModal(id);
   }
 
   claimTranscript(id) {

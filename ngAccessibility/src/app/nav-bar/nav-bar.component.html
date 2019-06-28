@@ -45,7 +45,7 @@
         <ais-hits *ngIf="showResults">
             <ng-template let-hits="hits">
                 <ol class="ais-Hits-list">
-                <div *ngFor="let hit of hits" class="ais-Hits-item">
+                <div *ngFor="let hit of hits" class="ais-Hits-item" (click)="">
                     <p class="hit-type">{{ hit.type }}</p>
                     <div class="hit-code">
                         <div *ngFor="let code of hit.courseCode">
@@ -53,6 +53,7 @@
                         </div>
                     </div>
                     <p class="hit-title">{{ hit.title }}</p>
+                    <button  (click)="showDetails(hit.objectID)">View</button>
                 </div>
                 </ol>
             </ng-template>

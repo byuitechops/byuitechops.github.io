@@ -18,6 +18,9 @@ export class CopyeditComponent implements OnInit {
     setTimeout(() => {this.db.checkAction(); }, 1000);
   }
 
+  async showDetails(id) {
+    await this.view.openModal(id);
+  }
 
   claimTranscript(id) {
     const userData = {

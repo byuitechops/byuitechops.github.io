@@ -18,6 +18,9 @@ export class TranscribeComponent implements OnInit {
     setTimeout(() => {this.db.checkAction(); }, 1000);
   }
 
+  async showDetails(id) {
+    await this.view.openModal(id);
+  }
 
   async claimTranscript(id: string) {
     console.log(id);
