@@ -17,9 +17,10 @@ export class HomeComponent implements OnInit {
     lms: '',
     media: '',
     doc: '',
-    id: ''
+    id: '',
+    verbitID: ''
   };
-
+  verbit = false;
   constructor(public db: DatabaseService, private afAuth: AuthService) {
     db.afs.collection('announcements').doc('announcement').get()
     .forEach(doc => {
@@ -39,6 +40,10 @@ export class HomeComponent implements OnInit {
             this.data.media = info.srcURL;
             this.data.doc = info.docEditURL;
             this.data.id = doc.id;
+            if (info.verbit) {
+              this.verbit = true;
+              this.data.verbitID = info.verbitID;
+            }
           });
         }
       }
@@ -57,19 +62,7 @@ export class HomeComponent implements OnInit {
     const transcript = this.db.getTranscript(this.data.id);
     transcript.then(doc => {
       const info = doc.data().status;
-      if (info === 'In Prep') {
-        this.db.changeTranscriptStep('Ready for Transcription', this.db.user.name);
-        this.db.updateUser({actionID: '', currentAction: ''});
-        this.data = {
-          title: '',
-          course: '',
-          priority: '',
-          lms: '',
-          media: '',
-          doc: '',
-          id: ''
-        };
-      } else if (info === 'In Transcription') {
+      if (info === 'In Transcription') {
         this.db.changeTranscriptStep('Ready for Review', this.db.user.name);
         this.db.updateUser({actionID: '', currentAction: ''});
         this.data = {
@@ -79,7 +72,8 @@ export class HomeComponent implements OnInit {
           lms: '',
           media: '',
           doc: '',
-          id: ''
+          id: '',
+          verbitID: ''
         };
         console.log('Success: ' + doc.data());
       } else if (info === 'In Review') {
@@ -92,7 +86,8 @@ export class HomeComponent implements OnInit {
           lms: '',
           media: '',
           doc: '',
-          id: ''
+          id: '',
+          verbitID: ''
         };
       }
     });

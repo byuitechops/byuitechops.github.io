@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SearchService } from '../../core/search.service';
 import { ViewEditComponent } from '../../view-edit/view-edit.component';
 import { DatabaseService } from 'src/app/core/database.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-prepare',
@@ -21,7 +22,7 @@ export class PrepareComponent implements OnInit {
   verbit: string;
   verbitID: string;
 
-  constructor(public search: SearchService, private db: DatabaseService, private view: ViewEditComponent) {
+  constructor(public search: SearchService, private db: DatabaseService, private view: ViewEditComponent, private router: Router) {
 
 }
 
@@ -42,5 +43,6 @@ export class PrepareComponent implements OnInit {
     };
     this.db.updateUser(userData);
     this.db.changeTranscriptStep('In Prep', this.db.user.name);
+    this.router.navigate(['pre', id] );
   }
 }

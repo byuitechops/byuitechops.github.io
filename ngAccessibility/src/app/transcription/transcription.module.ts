@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SearchService } from '../core/search.service';
 import { NgAisModule } from 'angular-instantsearch';
@@ -12,6 +13,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ViewEditComponent } from '../view-edit/view-edit.component';
 import { AuthPageComponent } from '../auth-page/auth-page.component';
+import { PreparingComponent } from './preparing/preparing.component';
 
 @NgModule({
   declarations: [
@@ -19,10 +21,12 @@ import { AuthPageComponent } from '../auth-page/auth-page.component';
   TranscribeComponent,
   CopyeditComponent,
   CopycheckComponent,
+  PreparingComponent,
   ],
   imports: [
     CommonModule,
     NgAisModule.forRoot(),
+    FormsModule,
   ],
   providers: [
     AuthService,

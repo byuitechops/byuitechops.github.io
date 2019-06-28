@@ -1,8 +1,7 @@
-import { Component, OnInit, Directive, ContentChildren } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { DatabaseService } from '../core/database.service';
 import { AuthService } from '../core/auth.service';
 import { SearchService } from '../core/search.service';
-import { createEmptyStateSnapshot } from '@angular/router/src/router_state';
 
 @Component({
     selector: 'app-request',
@@ -10,6 +9,7 @@ import { createEmptyStateSnapshot } from '@angular/router/src/router_state';
     styleUrls: ['./request.component.css']
 })
 export class RequestComponent implements OnInit {
+    constructor(private db: DatabaseService, public auth: AuthService, private search: SearchService) {}
     selectUndefinedOptionValue: any;
     name: string;
     lms: string;
@@ -40,29 +40,37 @@ export class RequestComponent implements OnInit {
         srcURL: '1234567890.com',
         priority: 1,
         docEditURL: 'youthinkthisisgoogle.google.com.pub',
-        objectID: 'HAHAH'
-    },{
+        objectID: 'HAHAH',
+        media: ''
+    }, {
         type: 'Video',
         courseCode: ['ACCTG101', 'ACCTG102'],
         title: 'Testing 2',
         srcURL: 'yellow.com',
         priority: 2,
         docEditURL: 'youthinkthisisgoogle.google.com.pub',
-        objectID: 'HAHAH'
-    },{
+        objectID: 'HAHAH',
+        media: ''
+    }, {
         type: 'Video',
         courseCode: ['ACCTG101', 'ACCTG102', 'ACCTG103'],
         title: 'Testing 3',
         srcURL: 'youtube.com',
         priority: 3,
         docEditURL: 'youthinkthisisgoogle.google.com.pub',
-        objectID: 'HAHAH'
+        objectID: 'HAHAH',
+        media: ''
     }];
     dupPage = 0;
     location: any;
 
     hider = false;
-    constructor(private db: DatabaseService, public auth: AuthService, private search: SearchService) {}
+
+    toBeUsedType: string;
+    toBeUsedCourse: string;
+    toBeUsedTitle: string;
+    toBeUsedPriority: string;
+    toBeUsedMedia: string;
 
     ngOnInit() {
         this.getCourse();
@@ -114,7 +122,7 @@ export class RequestComponent implements OnInit {
                     <option value="RELPC121">RELPC121</option>
                     <option value="RELPC122">RELPC122</option>
                     <option value="FDREL250">FDREL250</option>`;
-        document.getElementById('requestCourse').insertAdjacentHTML('beforeend', html);
+        document.getElementById('requestCourse').insertAdjacentHTML('afterend', html);
     }
     async newRequest() {
         if (this.course === undefined && this.type === undefined && (this.lms === '' || this.lms === undefined) && (this.media === '' || this.media === undefined) && (this.title === '' || this.title === undefined) && this.priority === undefined) {
@@ -197,6 +205,7 @@ export class RequestComponent implements OnInit {
 
         dup.classList.remove('hide');
         navbar.classList.add('blur');
+        // tslint:disable-next-line: prefer-for-of
         for (let i = 0; i < content.length; i++) {
             content[i].classList.add('blur');
         }
@@ -209,21 +218,16 @@ export class RequestComponent implements OnInit {
 
         dup.classList.add('hide');
         navbar.classList.remove('blur');
+        // tslint:disable-next-line: prefer-for-of
         for (let i = 0; i < content.length; i++) {
             content[i].classList.remove('blur');
         }
-        
-        document.getElementById("dupToBeUsedBox").classList.add("hide");
+
+        document.getElementById('dupToBeUsedBox').classList.add('hide');
     }
 
-    toBeUsedType: string;
-    toBeUsedCourse: string;
-    toBeUsedTitle: string;
-    toBeUsedPriority: string;
-    toBeUsedMedia: string;
-
     dupToBeUsed(usedDup) {
-        document.getElementById("dupToBeUsedBox").classList.remove("hide");
+        document.getElementById('dupToBeUsedBox').classList.remove('hide');
 
         this.toBeUsedType = usedDup.type;
         this.toBeUsedCourse = usedDup.courseCode;

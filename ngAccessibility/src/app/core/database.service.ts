@@ -49,7 +49,7 @@ export class DatabaseService {
   async checkAction() {
     setTimeout(() => {
       if (this.user.currentAction === 'preparing' && this.router.url !== '/prepare') {
-        this.router.navigate(['/prepare']);
+        this.router.navigate(['/pre', this.user.actionID]);
         alert('You may only work on one transcript at a time');
       } else if (this.user.currentAction === 'transcribing' || this.user.currentAction === 'reviewing') {
         this.router.navigate(['/home']);
