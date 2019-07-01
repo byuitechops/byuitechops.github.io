@@ -35,3 +35,9 @@ describe('AppComponent', () => {
     expect(compiled.querySelector('h1').textContent).toContain('Welcome to ngAccessibility!');
   });
 });
+
+
+/****************************************************************************
+ * There is no real reason to touch this page if you do not know what you are
+ * doing. Please don't break this site.
+ ****************************************************************************/
