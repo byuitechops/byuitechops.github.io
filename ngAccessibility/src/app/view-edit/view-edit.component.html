@@ -151,51 +151,31 @@
 
                 <div class="detail">
                     <p>Requested by</p>
-                    <span id="edit-info-requested-by"></span>
-                </div>
-
-                <div class="detail">
-                    <p>Requested on</p>
-                    <span id="edit-info-requested-on"></span>
+                    <span id="edit-info-requested-by">{{ storage.requestor }}</span>
                 </div>
 
                 <div class="detail">
                     <p>Prepared by</p>
-                    <span id="edit-info-prepared-by"></span>
-                </div>
-
-                <div class="detail">
-                    <p>Prepared Completed on</p>
-                    <span id="edit-info-prepared-on"></span>
+                    <span id="edit-info-prepared-by">{{ storage.preparer }}</span>
                 </div>
 
                 <div class="detail">
                     <p>Transcribed by</p>
-                    <span id="edit-info-transcribe-by"></span>
-                </div>
-
-                <div class="detail">
-                    <p>Transcription Completed on</p>
-                    <span id="edit-info-transcribe-on"></span>
+                    <span id="edit-info-transcribe-by">{{ storage.transcriber }}</span>
                 </div>
 
                 <div class="detail">
                     <p>Reviewed by</p>
-                    <span id="edit-info-review-by"></span>
-                </div>
-
-                <div class="detail">
-                    <p>Review Completed on</p>
-                    <span id="edit-info-review-on"></span>
+                    <span id="edit-info-review-by">{{ storage.reviewer }}</span>
                 </div>
 
                 <h3 id="comments-header">Comments</h3>
                 <div class="detail">
                     <div *ngIf="storage.editing; else viewComments">
-                        <textarea id="edit-info-comment"></textarea>
+                        <textarea id="edit-info-comment" [(ngModel)]="storage.comments">{{ storage.comments }}</textarea>
                     </div>
                     <ng-template #viewComments>
-                        <span id="view-info-comments"></span>
+                        <span id="view-info-comments">{{ storage.comments }}</span>
                     </ng-template>
                 </div>
 
