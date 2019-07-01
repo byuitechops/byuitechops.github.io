@@ -69,8 +69,8 @@ export class ViewEditComponent implements OnInit {
     }
 
     confirmEdit() {
-      this.closeModal();
       this.storage.confirmEdit();
+      this.storage.editing = false;
     }
     edit() {
       this.storage.editing = !this.storage.editing;
