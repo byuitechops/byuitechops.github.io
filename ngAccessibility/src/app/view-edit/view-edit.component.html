@@ -1,4 +1,4 @@
-<section class="modal hide" id="view-modal" [class.hide]='!viewOpen' (click)="clickedOut($event)">
+<section class="modal hide" id="view-modal" (click)="clickedOut($event)">
 
     <div class="modal-content" id="view-modal-content">
 
@@ -12,133 +12,133 @@
                 <h2>Transcript Info</h2>
                 <div class="detail">
                     <p>Title</p>
-                    <div *ngIf="editing; else viewTitle">
-                    <input id="edit-info-title" [(ngModel)]="title" />
+                    <div *ngIf="storage.editing; else viewTitle">
+                    <input id="edit-info-title" [(ngModel)]="storage.title" />
                     </div>
                     <ng-template #viewTitle>
-                    <span id="view-info-title">{{ title }}</span>
+                    <span id="view-info-title">{{ storage.title }}</span>
                     </ng-template>
                 </div>
 
                 <div class="detail">
                     <p>Stage</p>
-                    <div *ngIf="editing; else viewStage">
+                    <div *ngIf="storage.editing; else viewStage">
                     <select id="edit-info-stage">
-                        <option *ngFor='let stage of stages' value='stage' [selected]="stage == step">{{ stage }}</option>
+                        <option *ngFor='let stage of stages' [value]='stage' (selected)="stage == storage.step">{{ stage }}</option>
                     </select>
                     </div>
                     <ng-template #viewStage>
-                    <span id="view-info-stage">{{ step }}</span>
+                    <span id="view-info-stage">{{ storage.step }}</span>
                     </ng-template>
                 </div>
 
                 <div class="detail">
                     <p>Course Code(s)</p>
-                    <div *ngIf="editing; else viewCourses">
-                    <a class="" id="add-course-code">+</a>
-                    <input id="edit-info-courses" type="text" [(ngModel)]="courseCode[0]">
+                    <div *ngIf="storage.editing; else viewCourses">
+                    <a class="hide" id="add-course-code">+</a>
+                    <input id="edit-info-courses" type="text" [(ngModel)]="storage.courseCode">
                     </div>
                     <ng-template #viewCourses>
-                      <ng-template *ngFor="let course of courseCode">
-                        <span id="view-info-courses">{{ course }}</span>
-                      </ng-template>
+                        <span id="view-info-courses">{{ storage.courseCode }}</span>
                     </ng-template>
                   </div>
 
                 <div class="detail">
                     <p>Priority</p>
-                    <div *ngIf="editing; else viewPriority">
+                    <div *ngIf="storage.editing; else viewPriority">
                     <select id="edit-info-priority">
-                        <option *ngFor='let priority of priorities' value='priority' selected='priority'>{{ priority }}</option>
+                        <option *ngFor='let priority of priorities' [value]='priority' (selected)='storage.priority'>{{ priority }}</option>
                     </select>
                     </div>
                     <ng-template #viewPriority>
-                    <span id="view-info-priority">{{ priority }}</span>
+                    <span id="view-info-priority">{{ storage.priority }}</span>
                     </ng-template>
                 </div>
 
                 <div class="detail">
                     <p>Type</p>
-                    <div *ngIf="editing; else viewType">
+                    <div *ngIf="storage.editing; else viewType">
                     <select id="edit-info-type">
-                        <option *ngFor='let type of types' value='type' selected='type'>{{ type }}</option>
+                        <option *ngFor='let type of types' [value]='type' (selected)='storage.type'>{{ type }}</option>
                     </select>
                     </div>
                     <ng-template #viewType>
-                    <span id="view-info-type">{{ type }}</span>
+                    <span id="view-info-type">{{ storage.type }}</span>
                     </ng-template>
                 </div>
 
                 <div class="detail">
                     <p>Length</p>
-                    <div *ngIf="editing; else viewLength">
-                    <input id="edit-info-length" type="text" [(ngModel)]="length" />
+                    <div *ngIf="storage.editing; else viewLength">
+                    <input id="edit-info-length" type="text" [(ngModel)]="storage.length" />
                     </div>
                     <ng-template #viewLength>
-                    <span id="view-info-length">{{ length }} seconds</span>
+                    <span id="view-info-length">{{ storage.length}} seconds</span>
                     </ng-template>
                 </div>
 
                 <div class="detail">
                     <p>Google Doc Edit Link</p>
-                    <div *ngIf="editing; else viewDocedit">
-                    <input id="edit-info-docedit" type="text" [(ngModel)]="docEditURL" />
+                    <div *ngIf="storage.editing; else viewDocedit">
+                    <input id="edit-info-docedit" type="text" [(ngModel)]="storage.docEditURL" />
                     </div>
                     <ng-template #viewDocedit>
-                    <span id="view-info-docedit">{{ docEditURL }}</span>
+                    <span id="view-info-docedit"><a [href]="storage.docEditURL">{{ storage.docEditURL }}</a></span>
                     </ng-template>
                 </div>
 
                 <div class="detail">
                     <p>Google Doc Publish Link</p>
-                    <div *ngIf="editing; else viewDocpub">
-                    <input id="edit-info-docpub" type="text" [(ngModel)]="docPublishURL" />
+                    <div *ngIf="storage.editing; else viewDocpub">
+                    <input id="edit-info-docpub" type="text" [(ngModel)]="storage.docPublishURL" />
                     </div>
                     <ng-template #viewDocpub>
-                    <span id="view-info-docpub">{{ docPublishURL }}</span>
+                    <span id="view-info-docpub"><a [href]="storage.docPublishURL">{{ storage.docPublishURL }}</a></span>
                     </ng-template>
                 </div>
 
                 <div class="detail">
                     <p>LMS URL</p>
-                    <div *ngIf="editing; else viewLms">
-                    <input id="edit-info-lms" type="text" [(ngModel)]="lmsURL" />
+                    <div *ngIf="storage.editing; else viewLms">
+                    <input id="edit-info-lms" type="text" [(ngModel)]="storage.lmsURL" />
                     </div>
                     <ng-template #viewLms>
-                    <span id="view-info-lms">{{ lmsURL }}</span>
+                    <span id="view-info-lms"><a [href]="storage.lmsURL">{{ storage.lmsURL }}</a></span>
                     </ng-template>
                 </div>
 
                 <div class="detail">
                     <p>Media URL</p>
-                    <div *ngIf="editing; else viewMedia">
-                    <input id="edit-info-media" type="text" [(ngModel)]="srcURL" />
+                    <div *ngIf="storage.editing; else viewMedia">
+                    <input id="edit-info-media" type="text" [(ngModel)]="storage.srcURL" />
                     </div>
                     <ng-template #viewMedia>
-                    <span id="view-info-media">{{ srcURL }}</span>
+                    <span id="view-info-media"><a [href]="storage.srcURL">{{ storage.srcURL }}</a></span>
                     </ng-template>
                 </div>
 
                 <div class="detail">
                     <p>Verbit Used?</p>
-                    <div *ngIf="editing; else viewIsverbit">
-                        <select id="edit-info-isverbit">
-                            <option *ngFor='let option of options' value='option' [(selected)]='verbit'>{{ option }}</option>
+                    <div *ngIf="storage.editing; else viewIsverbit">
+                        <select [(ngModel)]="storage.verbit">
+                            <option [ngValue]=true (selected)='storage.verbit'>True</option>
+                            <option [ngValue]=false (selected)='storage.verbit'>False</option>
                         </select>
                     </div>
                     <ng-template #viewIsverbit>
-                        <span id="view-info-isverbit">{{ verbit }}</span>
+                        <span id="view-info-isverbit">{{ storage.verbit }}</span>
                     </ng-template>
                 </div>
-
-                <div class="detail" id="verbit-id-box" [ngClass]="{hide: verbit}">
+                <div [class.hide]="!storage.verbit">
+                  <div class="detail" id="verbit-id-box">
                     <p>Verbit ID</p>
-                    <div *ngIf="editing; else viewVerbitID">
-                        <input id="edit-info-verbitid" type="text" [(ngModel)]="verbitID" />
+                    <div *ngIf="storage.editing; else viewVerbitID">
+                        <input id="edit-info-verbitid" type="text" [(ngModel)]="storage.verbitID" />
                     </div>
                     <ng-template #viewVerbitID>
-                        <span id="view-info-isverbit">{{ verbitID }}</span>
+                        <span id="view-info-isverbit">{{ storage.verbitID }}</span>
                     </ng-template>
+                  </div>
                 </div>
             </div>
 
@@ -191,7 +191,7 @@
 
                 <h3 id="comments-header">Comments</h3>
                 <div class="detail">
-                    <div *ngIf="editing; else viewComments">
+                    <div *ngIf="storage.editing; else viewComments">
                         <textarea id="edit-info-comment"></textarea>
                     </div>
                     <ng-template #viewComments>
@@ -203,13 +203,14 @@
 
         </div>
 
-        <div *ngIf="editing; else viewBtnBox" class="btn-box">
-            <button id="confirmEditBtn">Confirm</button>
-            <button id="cancelEditBtn" (click)="closeModal()">Close</button>
+        <div *ngIf="storage.editing; else viewBtnBox" class="btn-box">
+            <button id="confirmEditBtn" (click)="confirmEdit()">Confirm</button>
+            <button id="cancelEditBtn" (click)="edit()">Cancel</button>
             <button class="warning-btn" id="btn-delete-transcript">Delete Transcript</button>
         </div>
         <ng-template #viewBtnBox class="btn-box">
             <button id="closeViewBtn" (click)="closeModal()">Close</button>
+            <button id="closeViewBtn" class="warning-btn" (click)="edit()">Edit</button>
         </ng-template>
 
     </div>

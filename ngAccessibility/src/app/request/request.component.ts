@@ -1,8 +1,7 @@
-import { Component, OnInit, Directive, ContentChildren } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { DatabaseService } from '../core/database.service';
 import { AuthService } from '../core/auth.service';
 import { SearchService } from '../core/search.service';
-import { createEmptyStateSnapshot } from '@angular/router/src/router_state';
 
 @Component({
     selector: 'app-request',
@@ -10,6 +9,7 @@ import { createEmptyStateSnapshot } from '@angular/router/src/router_state';
     styleUrls: ['./request.component.css']
 })
 export class RequestComponent implements OnInit {
+    constructor(private db: DatabaseService, public auth: AuthService, private search: SearchService) {}
     selectUndefinedOptionValue: any;
     name: string;
     lms: string;
@@ -17,10 +17,10 @@ export class RequestComponent implements OnInit {
     title: string;
     priority: string;
     priorities = [
-        '1 ADA Emergency of Special Request',
-        '2 Improvement Project for Live Course',
-        '3 New/Re-Development Project',
-        '4 Transcript Project'
+        {name: '1 ADA Emergency of Special Request', value: '1'},
+        {name: '2 Improvement Project for Live Course', value: '2'},
+        {name: '3 New/Re-Development Project', value: '3'},
+        {name: '4 Transcript Project', value: '4'}
     ];
     type: string;
     types = [
@@ -40,29 +40,37 @@ export class RequestComponent implements OnInit {
         srcURL: '1234567890.com',
         priority: 1,
         docEditURL: 'youthinkthisisgoogle.google.com.pub',
-        objectID: 'HAHAH'
-    },{
+        objectID: 'HAHAH',
+        media: ''
+    }, {
         type: 'Video',
         courseCode: ['ACCTG101', 'ACCTG102'],
         title: 'Testing 2',
         srcURL: 'yellow.com',
         priority: 2,
         docEditURL: 'youthinkthisisgoogle.google.com.pub',
-        objectID: 'HAHAH'
-    },{
+        objectID: 'HAHAH',
+        media: ''
+    }, {
         type: 'Video',
         courseCode: ['ACCTG101', 'ACCTG102', 'ACCTG103'],
         title: 'Testing 3',
         srcURL: 'youtube.com',
         priority: 3,
         docEditURL: 'youthinkthisisgoogle.google.com.pub',
-        objectID: 'HAHAH'
+        objectID: 'HAHAH',
+        media: ''
     }];
     dupPage = 0;
     location: any;
 
     hider = false;
-    constructor(private db: DatabaseService, public auth: AuthService, private search: SearchService) {}
+
+    toBeUsedType: string;
+    toBeUsedCourse: string;
+    toBeUsedTitle: string;
+    toBeUsedPriority: string;
+    toBeUsedMedia: string;
 
     ngOnInit() {
         this.getCourse();
@@ -88,7 +96,7 @@ export class RequestComponent implements OnInit {
                         let inject = '';
                         newres.forEach((doc) => {
                             const course = doc.__catalogCourseId;
-                            inject += `<option>${course}</option>`;
+                            inject += `<option [value]="${course}">${course}</option>`;
                             courses.push(course);
                         });
                         document.getElementById('requestCourse').insertAdjacentHTML('afterend', inject);
@@ -101,20 +109,20 @@ export class RequestComponent implements OnInit {
         };
         xhttp.open('GET', 'https://byui.kuali.co/api/v1/catalog/public/catalogs/current', true);
         xhttp.send();
-        const html = `<option value="ENG106">ENG106</option>
-                    <option value="ENG106L">ENG106L</option>
-                    <option value="GSPC120L">GSPC120L</option>
-                    <option value="MATH100G">MATH100G</option>
-                    <option value="MATH100L">MATH100L</option>
-                    <option value="PC101">PC101</option>
-                    <option value="PC101L">PC101L</option>
-                    <option value="PC102">PC102</option>
-                    <option value="PC102L">PC102L</option>
-                    <option value="PC103">PC103</option>
-                    <option value="RELPC121">RELPC121</option>
-                    <option value="RELPC122">RELPC122</option>
-                    <option value="FDREL250">FDREL250</option>`;
-        document.getElementById('requestCourse').insertAdjacentHTML('beforeend', html);
+        const html = `<option [value]="ENG106">ENG106</option>
+                    <option [value]="ENG106L">ENG106L</option>
+                    <option [value]="GSPC120L">GSPC120L</option>
+                    <option [value]="MATH100G">MATH100G</option>
+                    <option [value]="MATH100L">MATH100L</option>
+                    <option [value]="PC101">PC101</option>
+                    <option [value]="PC101L">PC101L</option>
+                    <option [value]="PC102">PC102</option>
+                    <option [value]="PC102L">PC102L</option>
+                    <option [value]="PC103">PC103</option>
+                    <option [value]="RELPC121">RELPC121</option>
+                    <option [value]="RELPC122">RELPC122</option>
+                    <option [value]="FDREL250">FDREL250</option>`;
+        document.getElementById('requestCourse').insertAdjacentHTML('afterend', html);
     }
     async newRequest() {
         if (this.course === undefined && this.type === undefined && (this.lms === '' || this.lms === undefined) && (this.media === '' || this.media === undefined) && (this.title === '' || this.title === undefined) && this.priority === undefined) {
@@ -161,8 +169,8 @@ export class RequestComponent implements OnInit {
             console.log(this.search.areThere);
             if (this.override) {
             this.db.createTranscript(data);
-            this.reset();
             this.override = false;
+            window.location.reload();
             } else if (this.dups.length > 0 && this.search.areThere) {
             console.log(this.dups);
             this.openDup();
@@ -176,19 +184,11 @@ export class RequestComponent implements OnInit {
     useDuplicate(id) {
         this.db.addLocation(id, this.location);
         this.closeDup();
-        this.reset();
     }
 
     createNew() {
         this.override = true;
         this.newRequest();
-        this.reset();
-    }
-
-    reset() {
-        this.type = undefined;
-        this.title = undefined;
-        this.media = undefined;
     }
     openDup() {
         const dup     = document.getElementById('dup-modal');
@@ -197,6 +197,7 @@ export class RequestComponent implements OnInit {
 
         dup.classList.remove('hide');
         navbar.classList.add('blur');
+        // tslint:disable-next-line: prefer-for-of
         for (let i = 0; i < content.length; i++) {
             content[i].classList.add('blur');
         }
@@ -209,21 +210,16 @@ export class RequestComponent implements OnInit {
 
         dup.classList.add('hide');
         navbar.classList.remove('blur');
+        // tslint:disable-next-line: prefer-for-of
         for (let i = 0; i < content.length; i++) {
             content[i].classList.remove('blur');
         }
-        
-        document.getElementById("dupToBeUsedBox").classList.add("hide");
+
+        document.getElementById('dupToBeUsedBox').classList.add('hide');
     }
 
-    toBeUsedType: string;
-    toBeUsedCourse: string;
-    toBeUsedTitle: string;
-    toBeUsedPriority: string;
-    toBeUsedMedia: string;
-
     dupToBeUsed(usedDup) {
-        document.getElementById("dupToBeUsedBox").classList.remove("hide");
+        document.getElementById('dupToBeUsedBox').classList.remove('hide');
 
         this.toBeUsedType = usedDup.type;
         this.toBeUsedCourse = usedDup.courseCode;

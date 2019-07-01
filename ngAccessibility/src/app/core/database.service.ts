@@ -49,7 +49,7 @@ export class DatabaseService {
   async checkAction() {
     setTimeout(() => {
       if (this.user.currentAction === 'preparing' && this.router.url !== '/prepare') {
-        this.router.navigate(['/prepare']);
+        this.router.navigate(['/pre', this.user.actionID]);
         alert('You may only work on one transcript at a time');
       } else if (this.user.currentAction === 'transcribing' || this.user.currentAction === 'reviewing') {
         this.router.navigate(['/home']);
@@ -59,7 +59,7 @@ export class DatabaseService {
 
   // Services pertaining to accessibility collection
 
-  getTranscript(id) {
+  async getTranscript(id) {
     const transcript = this.afs.collection('accessibility').doc(id).ref.get();
     return transcript;
   }
@@ -130,21 +130,23 @@ export class DatabaseService {
     }
   }
 
-  changeTranscriptStep(status, name) {
-    this.afs.collection('accessibility').doc(this.user.actionID).update({
-      status
-    });
+  changeTranscriptStep(status, name, id) {
+    console.log(status);
     if (status === 'In Prep') {
-      this.afs.collection('accessibility').doc(this.user.actionID).update({
-        preparer: name
+      this.afs.collection('accessibility').doc(id).update({
+        preparer: name,
+        status
       });
     } else if (status === 'In Transcription') {
-      this.afs.collection('accessibility').doc(this.user.actionID).update({
-        transcriber: name
+      console.log("DONE");
+      this.afs.collection('accessibility').doc(id).update({
+        transcriber: name,
+        status
       });
     } else if (status === 'In Review' || status === 'Review Completed') {
-      this.afs.collection('accessibility').doc(this.user.actionID).update({
-        reviewer: name
+      this.afs.collection('accessibility').doc(id).update({
+        reviewer: name,
+        status
       });
     }
     console.log('Working');

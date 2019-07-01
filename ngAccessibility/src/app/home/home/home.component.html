@@ -1,5 +1,5 @@
 <main id="home-content">
-    
+
     <h1 class="page-title">Home</h1>
 
     <section class="left-col">
@@ -57,7 +57,11 @@
             <div>
               <h4>Transcript URL</h4>
               <a [href]="data.doc" target="_blank">{{ data.doc }}</a>
-          </div>
+            </div>
+            <div>
+              <h4 [class.hide]="!verbit">Verbit ID</h4>
+              <p [class.hide]="!verbit">{{ data.verbitID }}</p>
+            </div>
             <div class="btn-box">
                 <button id="return-prep-btn" (click)="return()">Return to Prep</button>
                 <button id="complete-tran-btn" (click)="forward()">Complete</button>

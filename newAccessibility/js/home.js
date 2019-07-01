@@ -41,7 +41,9 @@ function fillTranscriptBox(transcriptID, role) {
             document.getElementById('updateMediaLink').href = doc.data().srcURL;
             document.getElementById('btn-finish').value = transcriptID;
             document.getElementById('submit-report').value = transcriptID;
-            document.getElementById('verbitID-display').innerText = doc.data().verbitID ? !'' : "--";
+            if (doc.data().verbit) {
+                document.getElementById('verbitID-display').innerText = doc.data().verbitID;
+            }
             if (!doc.data().copied) {
                 document.getElementById('get-comments').innerText = `Request Notes: ${doc.data().requestNotes}`;
             } else {

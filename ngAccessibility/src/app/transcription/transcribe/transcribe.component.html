@@ -33,7 +33,7 @@
                                     <td class="title-col"> {{ hit.title }} </td>
                                     <td class="length-col"> {{ hit.length }} sec </td>
                                     <td class="last-col">
-                                        <button type="button" (click)="showDetails()">View</button>
+                                        <button type="button" (click)="showDetails(hit.objectID)">View</button>
                                         <button type="button" (click)="claimTranscript(hit.objectID)">Claim</button>
                                     </td>
                                 </tr>
@@ -41,33 +41,10 @@
                         </ng-template>
                     </ais-hits>
                 </table>
-
-                    <table>
-                        <ais-hits>
-                            <ng-template let-hits="hits">
-                                <ol class="ais-Hits-list">
-                                    <tr *ngFor="let hit of hits" class="ais-Hits-item">
-                                        <td class="priority-col"> {{ hit.priority }} </td>
-                                        <td class="course-col"> {{ hit.courseCode }} </td>
-                                        <td class="type-col"> {{ hit.type }} </td>
-                                        <td class="title-col"> {{ hit.title }} </td>
-                                        <td class="length-col"> {{ hit.length }} sec </td>
-                                        <td class="last-col">
-                                            <button type="button" (click)="showDetails(hit.objectID)">View</button>
-                                            <button type="button">Claim</button>
-                                        </td>
-                                    </tr>
-                                </ol>
-                            </ng-template>
-                        </ais-hits>
-                    </table>
-
-
-                    <div class="pagination">
-                        <ais-pagination></ais-pagination>
-                    </div>
+                <div class="pagination">
+                    <ais-pagination></ais-pagination>
                 </div>
-
+              </div>
             </div>
         </ais-instantsearch>
     </div>

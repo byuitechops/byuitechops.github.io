@@ -7,6 +7,7 @@ import { PrepareComponent } from './transcription/prepare/prepare.component';
 import { TranscribeComponent } from './transcription/transcribe/transcribe.component';
 import { CopyeditComponent } from './transcription/copyedit/copyedit.component';
 import { CopycheckComponent } from './transcription/copycheck/copycheck.component';
+import { PreparingComponent } from './transcription/preparing/preparing.component';
 
 const routes: Routes = [
     {
@@ -20,6 +21,10 @@ const routes: Routes = [
     {
         path: 'prepare',
         component: PrepareComponent
+    },
+    {
+      path: 'pre/:id',
+      component: PreparingComponent
     },
     {
         path: 'transcibe',

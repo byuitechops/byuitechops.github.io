@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { DatabaseService } from '../core/database.service';
+import { ViewEditService } from '../core/view-edit.service';
 
 @Component({
     selector: 'app-view-edit',
@@ -10,27 +10,6 @@ import { DatabaseService } from '../core/database.service';
 export class ViewEditComponent implements OnInit {
 
     @ViewChild('content') content: any;
-    viewOpen = false;
-    editing = true;
-    copied = true;
-    courseCode = ['ACCTG100'];
-    datePrepareFinished = 'Today';
-    docEditURL = '.com';
-    docPublishURL = '.pub';
-    length = '108 seconds';
-    lmsURL = '.com';
-    parentTranscript = true;
-    preparer = 'Me';
-    priority = '1';
-    requestDate = 'Today';
-    requestNotes = 'None';
-    requestor = 'Me';
-    srcURL = '.com';
-    step = 'Finished';
-    title = 'Me';
-    type = 'Video';
-    verbit = false;
-    verbitID = '';
     priorities = [
         '1',
         '2',
@@ -53,47 +32,51 @@ export class ViewEditComponent implements OnInit {
         'Review Completed',
         'Finished'
     ];
-    options = [
-        'True',
-        'False'
-    ];
-    constructor() { }
+    constructor(public storage: ViewEditService) { }
 
     ngOnInit() {
 
     }
 
 
-    async openModal() {
-        const modal       = document.getElementById('view-modal');
-        const navbar      = document.getElementById('main-nav');
-        const content     = document.getElementsByTagName('main');
-        modal.classList.remove('hide');
-        navbar.classList.add('blur');
-        for (let i = 0; i < content.length; i++) {
-            content[i].classList.add('blur');
-        }
+    async openModal(id) {
+      const modal       = document.getElementById('view-modal');
+      const navbar      = document.getElementById('main-nav');
+      const content     = document.getElementsByTagName('main');
+      modal.classList.remove('hide');
+      navbar.classList.add('blur');
+      for (let i = 0; i < content.length; i++) {
+          content[i].classList.add('blur');
+      }
+      this.storage.storageEdit(id);
     }
 
     closeModal() {
-        const modal    = document.getElementById('view-modal');
-        const navbar   = document.getElementById('main-nav');
-        const content  = document.getElementsByTagName('main');
-
-        modal.classList.add('hide');
-        navbar.classList.remove('blur');
-        for (let i = 0; i < content.length; i++) {
-            content[i].classList.remove('blur');
-        }
+      const modal    = document.getElementById('view-modal');
+      const navbar   = document.getElementById('main-nav');
+      const content  = document.getElementsByTagName('main');
+      modal.classList.add('hide');
+      navbar.classList.remove('blur');
+      for (let i = 0; i < content.length; i++) {
+          content[i].classList.remove('blur');
+      }
     }
     clickedOut(event) {
-        if (event.target.className === 'modal') {
-            this.closeModal();
-        }
+      if (event.target.className === 'modal') {
+          this.closeModal();
+      }
+    }
+
+    confirmEdit() {
+      this.closeModal();
+      this.storage.confirmEdit();
+    }
+    edit() {
+      this.storage.editing = !this.storage.editing;
     }
 
     displayPrevDup() {
-        
+
     }
     displayNextDup() {
 
