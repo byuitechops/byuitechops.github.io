@@ -132,6 +132,7 @@ function fillPrepTicket(transcriptID) {
             document.getElementById('locationSide').setAttribute('href', doc.data().lmsURL);
             document.getElementById('mediaSide').setAttribute('href', doc.data().srcURL);
             document.getElementById('storeTranscriptID').innerText = transcriptID;
+            document.getElementById('comments-box').innerText = doc.data().requestNotes;
         })
         .then(function () {
             // if the element selected to fill the box is undefined, instead of showing undefined, shows only
@@ -188,6 +189,7 @@ document.getElementById('requestSubmit').addEventListener('click', () => {
     var verbitID = '' ? !verbit : document.getElementById('getVerbitId');
     var height = document.getElementById('requestHeight');
     var length = document.getElementById('requestLength');
+    var comment = document.getElementById('comments-box');
 
     if (!document.getElementById('radio-check1').checked && !document.getElementById('radio-check2').checked) {
         message.innerHTML = 'You must fill in all inputs';
@@ -215,9 +217,14 @@ document.getElementById('requestSubmit').addEventListener('click', () => {
                 verbit: Boolean(verbit.checked),
                 height: Number(height.value),
                 length: Number(length.value),
-                datePrepareFinished: new Date()
+                datePrepareFinished: new Date(),
             })
             .then(() => {
+                if (comment !== '' || comment !== undefined){
+                    db.collection('accessibility').doc(transcriptID).update({
+                        requestNotes: comment
+                    });
+                }
                 var idUser = userID[0];
                 db.collection('users').doc(idUser).update({
                         currentAction: '',
