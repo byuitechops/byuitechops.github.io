@@ -11,16 +11,19 @@ export class AuthService {
   userName: any = 'Guest';
   user: any;
   authenticated = false;
+  contact: string;
+  position: string;
 
   constructor(private af: AngularFireAuth, private db: DatabaseService) {
-
+    //  This loads on every page in the Site, it check if the user is authenticated
+    // and then finds that user in the database.
     this.af.auth.onAuthStateChanged(async user => {
       if (user) {
         this.authenticated = true;
         this.userName = user.displayName;
         this.user = user;
         if (!user.isAnonymous) {
-          db.findUser(this.userName);
+          this.db.findUser(this.userName);
           console.log(this.user);
         }
       } else {
@@ -33,17 +36,18 @@ export class AuthService {
     if (email.includes('@byui.edu')) {
       this.af.auth
       .createUserWithEmailAndPassword(email, password)
-      .then(value => {
-        console.log('Success!', value);
-      })
-      .catch(err => {
+      .then(() => {
+        // This creates a new user in the Database Service
+        this.db.createUser(this.userName, this.contact, this.position);
+      }).catch(err => {
         console.log('Something went wrong:', err.message);
       });
     } else {
       alert('Please use your BYU - Idaho email or contact an Administrator');
     }
   }
-
+  // A simple login function. currently not using a very Angular fashion, however
+  // functional and fast.
   login(email: string, password: string) {
     this.af.auth
       .signInWithEmailAndPassword(email, password)
@@ -55,6 +59,8 @@ export class AuthService {
       });
   }
 
+  // Designers will request things in guest mode. This will be need for our icon that
+  // dissplay next to the request to know that this was requested outside our team.
   guestMode() {
     this.af.auth.signInAnonymously().then(() => {
       console.log('Ghost Mode');
@@ -64,10 +70,9 @@ export class AuthService {
     });
   }
 
+  // Extremely simple auth login function. We also set authenticated to false so the
+  // the login popup, pops up.
   logout() {
-    this.af.auth
-      .signOut().then(() => {
-        this.authenticated = false;
-      });
+    this.af.auth.signOut().then(() => {this.authenticated = false; });
   }
 }

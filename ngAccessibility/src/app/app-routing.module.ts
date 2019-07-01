@@ -55,3 +55,9 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
+
+/****************************************************************************
+ * This is all the routing for the entire website. We tried to keep it very
+ * simple. We export this into the app.module.ts file and use it as the routing
+ ****************************************************************************/

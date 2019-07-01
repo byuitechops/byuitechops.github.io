@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import * as algoliasearch from 'algoliasearch';
-import { InvokeMethodExpr } from '@angular/compiler';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 const searchClient = algoliasearch(
@@ -23,11 +22,10 @@ export class SearchService {
   areThere = false;
   constructor(public db: AngularFirestore) {
    }
-  // NOTES FOR SHAWN
+
   // This is the dup checker function, it takes a title , type, and src url to find out what matches it.
   // All the results are stored in an array name..... results. I thought that was a good name.
-  // All you will need is the objectID of each to pull from the firestore, however, if you only want to
-  // build the HTML for now, that works too. This is only needed in the request page
+  // All you will need is the objectID of each to pull from the firestore.
 
 
   async dupCheck(data) {
@@ -38,12 +36,12 @@ export class SearchService {
     src = await this.cleanSRC(src);
     console.log(src);
     this.index.search({query: t}).then(async x => {
+    // tslint:disable-next-line: prefer-for-of
       for (let y = 0; y < x.hits.length; y++) {
        if (x.hits[y].type === type) {
          if ((x.hits[y].srcURL).includes(src)) {
           results.push(x.hits[y]);
           this.areThere = true;
-          let zxz = await this.areThere;
          }
        }
       }

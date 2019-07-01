@@ -132,7 +132,6 @@ export class RequestComponent implements OnInit {
         if (this.course === undefined && this.type === undefined && (this.lms === '' || this.lms === undefined) && (this.media === '' || this.media === undefined) && (this.title === '' || this.title === undefined) && this.priority === undefined) {
         alert('Please fill in all fields');
         } else {
-        let displayName: string;
 
         if (this.auth.user.isAnonymous) {
 
@@ -143,7 +142,7 @@ export class RequestComponent implements OnInit {
         if (this.comments === undefined || this.comments === '') {
             this.comments = '';
         } else {
-            this.comments = this.comments + ' Made by ' + displayName;
+            this.comments = this.comments + ' Made by ' + this.name;
         }
         const data = {
             datePrepareFinished: '',
