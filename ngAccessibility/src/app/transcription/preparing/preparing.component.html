@@ -1,67 +1,67 @@
-<main>
+    <main>
 
-  <h1 class="page-title">Prepare</h1>
+    <h1 class="page-title">Prepare</h1>
 
-  <section class="left-col" id="requestForm">
-    <p>Did you search the Google Drive and course file before making a new transcript.</p>
-    <select>
-        <option>No</option>
-        <option>Yes</option>
-    </select>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <p>Transcript Information</p>
-    <input class="prepare-input" [(ngModel)]="docEdit" placeholder="Editable Google Doc" />
-    <input class="prepare-input" [(ngModel)]="docPub" placeholder="Published Google Doc" />
-    <p>Video Length  -  Total {{ calc() }} seconds&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-    <div class="time-box">
-      <p>Hours</p><input class="prepare-time" [(ngModel)]="hours" placeholder="Hours" />
-      <p>Minutes</p><input class="prepare-time" [(ngModel)]="mins" placeholder="Minutes" />
-      <p>Seconds</p><input class="prepare-time" [(ngModel)]="sec" placeholder="Seconds" />
-    </div>
+    <section class="left-col" id="requestForm">
+        <p>Did you search the Google Drive and course file before making a new transcript.</p>
+        <select>
+            <option>No</option>
+            <option>Yes</option>
+        </select>
+        <p>Transcript Information</p>
+        <input class="prepare-input" [(ngModel)]="docEdit" placeholder="Editable Google Doc" />
+        <input class="prepare-input" [(ngModel)]="docPub" placeholder="Published Google Doc" />
+        <p>Video Length</p>
+        <div id="time-box">
+            <input class="prepare-time" [(ngModel)]="hours" placeholder="hr" /><span>hrs</span>
+            <input class="prepare-time" [(ngModel)]="mins" placeholder="min" /><span>mins</span>
+            <input class="prepare-time" [(ngModel)]="sec" placeholder="sec" /><span>secs</span>
+            <h4>Total {{ calc() }} secs</h4>
+        </div>
 
 
-    <p>Will this use Verbit</p>
-    <select [(ngModel)]="verbit">
-      <option disabled hidden [value]="" (selected)="verbit">Select Verbit</option>
-      <option [ngValue]=false>No</option>
-      <option [ngValue]=true>Yes</option>
-    </select>
-    <div [class.hide]="!verbit">
-      <p>Verbit ID</p>
-      <input [(ngModel)]="verbitID" placeholder="Verbit ID" />
-    </div>
+        <p>Will this use Verbit</p>
+        <select [(ngModel)]="verbit">
+            <option disabled hidden [value]="" (selected)="verbit">Select Verbit</option>
+            <option [ngValue]=false>No</option>
+            <option [ngValue]=true>Yes</option>
+        </select>
+        <div [class.hide]="!verbit">
+            <p>Verbit ID</p>
+            <input [(ngModel)]="verbitID" placeholder="Verbit ID" />
+        </div>
 
-  </section>
+    </section>
 
-  <section class="right-col" id="transcript-box-info">
-      <h2>Ticket Information</h2>
-      <div class="ticketbox">
-          <div>
-              <label>Media Type:</label>
-              <p class="description"> {{ type }} </p>
-          </div>
-          <div>
-              <label>Course Code:</label>
-              <p class="description"> {{ course }} </p>
-          </div>
-          <div>
-              <label>Title:</label>
-              <p class="description"> {{ title }} </p>
-          </div>
-          <div>
-              <label>Priority:</label>
-              <p class="description">{{ priority }} </p>
-          </div>
-          <div>
-              <label>Location in Course:</label>
-              <p class="description"> {{ lms }}</p>
-          </div>
-          <div>
-              <button type="submit" (click)="submit()">
-                  Submit </button>
-              <p style="margin-left: 2rem; margin-top: .8rem; font-weight: bolder;" id="message"></p>
-          </div>
-      </div>
-  </section>
+    <section class="right-col" id="transcript-box-info">
+        <h2>Ticket Information</h2>
+        <div class="ticketbox">
+            <div>
+                <label>Media Type:</label>
+                <p class="description"> {{ type }} </p>
+            </div>
+            <div>
+                <label>Course Code:</label>
+                <p class="description"> {{ course }} </p>
+            </div>
+            <div>
+                <label>Title:</label>
+                <p class="description"> {{ title }} </p>
+            </div>
+            <div>
+                <label>Priority:</label>
+                <p class="description">{{ priority }} </p>
+            </div>
+            <div>
+                <label>Location in Course:</label>
+                <p class="description"> {{ lms }}</p>
+            </div>
+            <div>
+                <button type="submit" (click)="submit()">
+                    Submit </button>
+                <p style="margin-left: 2rem; margin-top: .8rem; font-weight: bolder;" id="message"></p>
+            </div>
+        </div>
+    </section>
 
 </main>

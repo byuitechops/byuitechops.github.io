@@ -57,17 +57,28 @@ h1 {
 }
 h2 {
     width: 100%;
-    font-family: "Merriweather";
     padding: 15px 0;
+
+    font-family: "Merriweather";
+    font-weight: 300;
+    font-size: 20px;
 }
 h3, h4, h5, h6 {
     width: 50%;
-    font-family: "Open Sans";
     padding: 5px 0 ;
-}
-h2, h3, h4, h5, h6 {
+
+    font-family: "Open Sans";
     font-weight: 300;
     font-size: 20px;
+}
+h4 {
+    font-size: 16px;
+}
+h5 {
+    font-size: 14px;
+}
+h6 {
+    font-size: 12px;
 }
 a {
     text-decoration: none;
