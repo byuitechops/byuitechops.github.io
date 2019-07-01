@@ -2,3 +2,6 @@
     width: 95%;
     max-width: 750px;
 }
+.left-col {
+    margin: 0;
+}

@@ -66,16 +66,37 @@ export class AuthPageComponent implements OnInit {
         }
 
     }
-    signUp() {
-        const name = document.getElementById('name-box');
-        const loginBtn = document.getElementById('signin-btn');
-        console.log(name);
-        if (!this.signingUp) {
-            name.classList.remove('hide');
-            loginBtn.classList.add('hide');
-        } else {
+    showSignUp() {
+        const title       = document.getElementById("login-header");
+        const showContent = document.getElementsByClassName("show-on-signup");
+        const hideContent = document.getElementsByClassName("hide-on-signup");
 
+        title.innerHTML = "Sign Up";
+        for (let i = 0; i < showContent.length; i++) {
+            showContent[i].classList.remove("hide");
         }
+        for (let i = 0; i < hideContent.length; i++) {
+            hideContent[i].classList.add("hide");
+        }
+    }
+    hideSignUp() {
+        const title       = document.getElementById("login-header");
+        const hideContent = document.getElementsByClassName("show-on-signup");
+        const showContent = document.getElementsByClassName("hide-on-signup");
+
+        title.innerHTML = "Log In";
+        for (let i = 0; i < hideContent.length; i++) {
+            hideContent[i].classList.add("hide");
+        }
+        for (let i = 0; i < showContent.length; i++) {
+            showContent[i].classList.remove("hide");
+        }
+    }
+    verifyInfo() {
+        
+    }
+    signUpUser() {
+
     }
 
 }

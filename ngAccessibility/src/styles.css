@@ -33,16 +33,16 @@
 main {
     display: flex;
     flex-flow: row wrap;
+    justify-content: center;
 }
 .left-col, .right-col {
     display: flex;
     flex-flow: row wrap;
     align-self: flex-start;
-    width: 600px;
-    max-width: 50%;
-    margin: auto;
+    width: 100%;
+    max-width: 725px;
     margin-top: 10px;
-    padding: 25px;
+    padding: 0 25px;
 
     border-radius: 10px;
 }
@@ -50,14 +50,14 @@ h1 {
     width: 100%;
     font-family: "Merriweather";
     font-size: 32px;
-    margin-left: 30px;
 }
 .page-title {
-    padding: 50px 50px 20px;
+    width: 1500px;
+    padding: 50px 0;
 }
 h2 {
     width: 100%;
-    padding: 15px 0;
+    padding: 25px 0;
 
     font-family: "Merriweather";
     font-weight: 300;
