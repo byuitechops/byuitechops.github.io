@@ -13,30 +13,30 @@
                 <div class="detail">
                     <p>Title</p>
                     <div *ngIf="storage.editing; else viewTitle">
-                    <input id="edit-info-title" [(ngModel)]="storage.title" />
+                        <input id="edit-info-title" [(ngModel)]="storage.title" />
                     </div>
                     <ng-template #viewTitle>
-                    <span id="view-info-title">{{ storage.title }}</span>
+                        <span id="view-info-title">{{ storage.title }}</span>
                     </ng-template>
                 </div>
 
                 <div class="detail">
                     <p>Stage</p>
                     <div *ngIf="storage.editing; else viewStage">
-                    <select id="edit-info-stage">
-                        <option *ngFor='let stage of stages' [value]='stage' (selected)="stage == storage.step">{{ stage }}</option>
-                    </select>
+                        <select id="edit-info-stage">
+                            <option *ngFor='let stage of stages' [value]='stage' (selected)="stage == storage.step">{{ stage }}</option>
+                        </select>
                     </div>
                     <ng-template #viewStage>
-                    <span id="view-info-stage">{{ storage.step }}</span>
+                        <span id="view-info-stage">{{ storage.step }}</span>
                     </ng-template>
                 </div>
 
                 <div class="detail">
                     <p>Course Code(s)</p>
                     <div *ngIf="storage.editing; else viewCourses">
-                    <a class="hide" id="add-course-code">+</a>
-                    <input id="edit-info-courses" type="text" [(ngModel)]="storage.courseCode">
+                        <a class="hide" id="add-course-code">+</a>
+                        <input id="edit-info-courses" type="text" [(ngModel)]="storage.courseCode">
                     </div>
                     <ng-template #viewCourses>
                         <span id="view-info-courses">{{ storage.courseCode }}</span>
@@ -46,74 +46,74 @@
                 <div class="detail">
                     <p>Priority</p>
                     <div *ngIf="storage.editing; else viewPriority">
-                    <select id="edit-info-priority">
-                        <option *ngFor='let priority of priorities' [value]='priority' (selected)='storage.priority'>{{ priority }}</option>
-                    </select>
+                        <select id="edit-info-priority">
+                            <option *ngFor='let priority of priorities' [value]='priority' (selected)='storage.priority'>{{ priority }}</option>
+                        </select>
                     </div>
                     <ng-template #viewPriority>
-                    <span id="view-info-priority">{{ storage.priority }}</span>
+                        <span id="view-info-priority">{{ storage.priority }}</span>
                     </ng-template>
                 </div>
 
                 <div class="detail">
                     <p>Type</p>
                     <div *ngIf="storage.editing; else viewType">
-                    <select id="edit-info-type">
-                        <option *ngFor='let type of types' [value]='type' (selected)='storage.type'>{{ type }}</option>
-                    </select>
+                        <select id="edit-info-type">
+                            <option *ngFor='let type of types' [value]='type' (selected)='storage.type'>{{ type }}</option>
+                        </select>
                     </div>
                     <ng-template #viewType>
-                    <span id="view-info-type">{{ storage.type }}</span>
+                        <span id="view-info-type">{{ storage.type }}</span>
                     </ng-template>
                 </div>
 
                 <div class="detail">
                     <p>Length</p>
                     <div *ngIf="storage.editing; else viewLength">
-                    <input id="edit-info-length" type="text" [(ngModel)]="storage.length" />
+                        <input id="edit-info-length" type="text" [(ngModel)]="storage.length" />
                     </div>
                     <ng-template #viewLength>
-                    <span id="view-info-length">{{ storage.length}} seconds</span>
+                        <span id="view-info-length">{{ storage.length}} seconds</span>
                     </ng-template>
                 </div>
 
                 <div class="detail">
                     <p>Google Doc Edit Link</p>
                     <div *ngIf="storage.editing; else viewDocedit">
-                    <input id="edit-info-docedit" type="text" [(ngModel)]="storage.docEditURL" />
+                        <input id="edit-info-docedit" type="text" [(ngModel)]="storage.docEditURL" />
                     </div>
                     <ng-template #viewDocedit>
-                    <span id="view-info-docedit"><a [href]="storage.docEditURL">{{ storage.docEditURL }}</a></span>
+                        <span id="view-info-docedit"><a [href]="storage.docEditURL" target="_blank">{{ storage.docEditURL }}</a></span>
                     </ng-template>
                 </div>
 
                 <div class="detail">
                     <p>Google Doc Publish Link</p>
                     <div *ngIf="storage.editing; else viewDocpub">
-                    <input id="edit-info-docpub" type="text" [(ngModel)]="storage.docPublishURL" />
+                        <input id="edit-info-docpub" type="text" [(ngModel)]="storage.docPublishURL" />
                     </div>
                     <ng-template #viewDocpub>
-                    <span id="view-info-docpub"><a [href]="storage.docPublishURL">{{ storage.docPublishURL }}</a></span>
+                        <span id="view-info-docpub"><a [href]="storage.docPublishURL" target="_blank">{{ storage.docPublishURL }}</a></span>
                     </ng-template>
                 </div>
 
                 <div class="detail">
                     <p>LMS URL</p>
                     <div *ngIf="storage.editing; else viewLms">
-                    <input id="edit-info-lms" type="text" [(ngModel)]="storage.lmsURL" />
+                        <input id="edit-info-lms" type="text" [(ngModel)]="storage.lmsURL" />
                     </div>
                     <ng-template #viewLms>
-                    <span id="view-info-lms"><a [href]="storage.lmsURL">{{ storage.lmsURL }}</a></span>
+                        <span id="view-info-lms"><a [href]="storage.lmsURL" target="_blank">{{ storage.lmsURL }}</a></span>
                     </ng-template>
                 </div>
 
                 <div class="detail">
                     <p>Media URL</p>
                     <div *ngIf="storage.editing; else viewMedia">
-                    <input id="edit-info-media" type="text" [(ngModel)]="storage.srcURL" />
+                        <input id="edit-info-media" type="text" [(ngModel)]="storage.srcURL" />
                     </div>
                     <ng-template #viewMedia>
-                    <span id="view-info-media"><a [href]="storage.srcURL">{{ storage.srcURL }}</a></span>
+                        <span id="view-info-media"><a [href]="storage.srcURL" target="_blank">{{ storage.srcURL }}</a></span>
                     </ng-template>
                 </div>
 

@@ -60,6 +60,7 @@ export class ViewEditComponent implements OnInit {
       for (let i = 0; i < content.length; i++) {
           content[i].classList.remove('blur');
       }
+      this.storage.editing = false;
     }
     clickedOut(event) {
       if (event.target.className === 'modal') {
@@ -68,19 +69,13 @@ export class ViewEditComponent implements OnInit {
     }
 
     confirmEdit() {
-      this.closeModal();
       this.storage.confirmEdit();
+      this.storage.editing = false;
     }
     edit() {
       this.storage.editing = !this.storage.editing;
     }
 
-    displayPrevDup() {
-
-    }
-    displayNextDup() {
-
-    }
 }
 
 
