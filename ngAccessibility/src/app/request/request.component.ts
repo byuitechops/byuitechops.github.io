@@ -41,7 +41,8 @@ export class RequestComponent implements OnInit {
         priority: 1,
         docEditURL: 'youthinkthisisgoogle.google.com.pub',
         objectID: 'HAHAH',
-        media: ''
+        media: '',
+        id: '1231233'
     }, {
         type: 'Video',
         courseCode: ['ACCTG101', 'ACCTG102'],
@@ -50,7 +51,8 @@ export class RequestComponent implements OnInit {
         priority: 2,
         docEditURL: 'youthinkthisisgoogle.google.com.pub',
         objectID: 'HAHAH',
-        media: ''
+        media: '',
+        id: '1231233'
     }, {
         type: 'Video',
         courseCode: ['ACCTG101', 'ACCTG102', 'ACCTG103'],
@@ -59,7 +61,8 @@ export class RequestComponent implements OnInit {
         priority: 3,
         docEditURL: 'youthinkthisisgoogle.google.com.pub',
         objectID: 'HAHAH',
-        media: ''
+        media: '',
+        id: '1231233'
     }];
     dupPage = 0;
     location: any;
@@ -71,6 +74,7 @@ export class RequestComponent implements OnInit {
     toBeUsedTitle: string;
     toBeUsedPriority: string;
     toBeUsedMedia: string;
+    toBeUsedID: string;
 
     ngOnInit() {
         this.getCourse();
@@ -131,9 +135,9 @@ export class RequestComponent implements OnInit {
         let displayName: string;
 
         if (this.auth.user.isAnonymous) {
-            displayName = this.name;
+
         } else {
-            displayName = this.db.user.name;
+          this.name = this.db.user.name;
         }
 
         if (this.comments === undefined || this.comments === '') {
@@ -149,7 +153,7 @@ export class RequestComponent implements OnInit {
             location: [{
                 courseCode: this.course,
                 lmsURL: this.lms,
-                requestor: displayName,
+                requestor: this.name,
                 preparer: '',
             }],
             priority: this.priority,
@@ -182,8 +186,14 @@ export class RequestComponent implements OnInit {
     }
 
     useDuplicate(id) {
-        this.db.addLocation(id, this.location);
-        this.closeDup();
+      this.location = {
+        courseCode: this.course,
+        lmsURL: this.lms,
+        requestor: this.name,
+        preparer: '',
+      };
+      this.db.addLocation(this.toBeUsedID, this.location);
+      this.closeDup();
     }
 
     createNew() {
@@ -218,9 +228,9 @@ export class RequestComponent implements OnInit {
         document.getElementById('dupToBeUsedBox').classList.add('hide');
     }
 
-    dupToBeUsed(usedDup) {
+    dupToBeUsed(usedDup, id) {
         document.getElementById('dupToBeUsedBox').classList.remove('hide');
-
+        this.toBeUsedID =  id;
         this.toBeUsedType = usedDup.type;
         this.toBeUsedCourse = usedDup.courseCode;
         this.toBeUsedTitle = usedDup.title;
