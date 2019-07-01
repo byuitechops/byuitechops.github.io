@@ -39,6 +39,7 @@ export class SearchService {
     // tslint:disable-next-line: prefer-for-of
       for (let y = 0; y < x.hits.length; y++) {
        if (x.hits[y].type === type) {
+         console.log(x.hits[y]);
          if ((x.hits[y].srcURL).includes(src)) {
           results.push(x.hits[y]);
           this.areThere = true;
