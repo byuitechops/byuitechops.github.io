@@ -59,7 +59,7 @@
                 <h2 id="dup-number">{{ dups.length }}</h2>
             </div>
             <div class="dup-window">
-                <div *ngFor="let dup of dups" class="dup" (click)="dupToBeUsed(this.dup)">
+                <div *ngFor="let dup of dups" class="dup" (click)="dupToBeUsed(dup, dup.objectID)">
                     <div class="detail">
                         <label>Media Type:</label>
                         <p class="description"> {{ dup.type }} </p>
