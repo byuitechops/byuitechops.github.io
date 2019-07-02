@@ -138,6 +138,9 @@ input, select {
 input:hover, input:active, select:hover, select:active {
     box-shadow: 0 0 5px 0px var(--black);
 }
+::-webkit-input-placeholder {
+    opacity: .5;
+}
 
 .btn-box {
     display: flex;

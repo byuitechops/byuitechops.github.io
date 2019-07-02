@@ -1,7 +1,30 @@
+
+
+:root {
+    --primary: #0076C6;
+    --white: #ffffff;
+    --black: #000000;
+    --darkgray: #444444;
+    --medgray: #777777;
+    --lightgray: #dddddd;
+    --verylightgray: #f7f7f7;
+    --warning: #f71616;
+}
+
+
 #signin-modal-content {
     width: 95%;
     max-width: 750px;
 }
 .left-col {
     margin: 0;
+}
+.left-col div {
+    width: 100%;
+}
+#signin-error {
+    padding-top: 10px;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--warning);
 }
