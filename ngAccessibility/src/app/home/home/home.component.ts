@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DatabaseService } from 'src/app/core/database.service';
 import { AuthService } from 'src/app/core/auth.service';
+import { resolve, reject } from 'q';
 
 @Component({
   selector: 'app-home',
@@ -25,18 +26,29 @@ export class HomeComponent implements OnInit {
     db.afs.collection('announcements').doc('announcement').get()
     .forEach(doc => {
       this.announce = doc.data().content;
+      setTimeout(() => {
+        this.updateInProgress();
+      }, 900);
     });
-    setTimeout(() => {
-      this.updateInProgress()
-    }, 680);
   }
 
   async ngOnInit() {
-    setTimeout(() => {this.db.checkAction(); }, 1000);
+    this.db.checkAction();
   }
 
-  return() {
-
+  async return() {
+    await this.db.changeTranscriptStep('Ready for Prep', this.db.user.name, this.db.user.actionID);
+    this.db.updateUser({actionID: '', currentAction: ''});
+    this.data = {
+      title: '',
+      course: '',
+      priority: '',
+      lms: '',
+      media: '',
+      doc: '',
+      id: '',
+      verbitID: ''
+    };
   }
   updateInProgress() {
     if (this.db.user !== undefined) {
@@ -46,9 +58,17 @@ export class HomeComponent implements OnInit {
           const info = doc.data();
           console.log(info);
           this.data.title = info.title;
-          this.data.course = info.courseCode;
+          if (info.location[0].courseCode) {
+            this.data.course = info.location[0].courseCode;
+          } else {
+            this.data.course = info.courseCode;
+          }
           this.data.priority = info.priority;
-          this.data.lms = info.lmsURL;
+          if (info.locatiom[0].lmsURL) {
+            this.data.lms = info.locatiom[0].lmsURL;
+          } else {
+            this.data.lms = info.lmsURL;
+          }
           this.data.media = info.srcURL;
           this.data.doc = info.docEditURL;
           this.data.id = doc.id;

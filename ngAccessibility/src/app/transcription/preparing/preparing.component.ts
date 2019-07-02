@@ -39,26 +39,43 @@ export class PreparingComponent implements OnInit {
         this.priority = doc.data().priority;
       });
     });
+    this.db.checkAction();
   }
 
   submit() {
-    const x = String(this.calc());
-    const data = {
-      docEditURL:  this.docEdit,
-      docPublishedURL:  this.docPub,
-      verbit: this.verbit,
-      verbitID: this.verbitID,
-      length: x
-    };
-    this.router.navigate(['prepare'] );
-    this.db.changeTranscriptStep('Ready for Transcription', this.db.user.name, this.docID);
+    let x = String(this.calc());
+    let data;
+    if (this.verbit) {
+      data = {
+        docEditURL:  this.docEdit,
+        docPublishedURL:  this.docPub,
+        verbit: this.verbit,
+        verbitID: this.verbitID,
+        length: x
+      };
+    } else {
+      data = {
+        docEditURL:  this.docEdit,
+        docPublishedURL:  this.docPub,
+        length: x
+      };
+    }
+    this.activeRoute.params.subscribe(param => {
+      this.db.changeTranscriptStep('Ready for Transcription', this.db.user.name, param.id);
+    });
     const userData = {
       actionID: '',
       currentAction: ''
     };
-    this.db.updateUser(userData);
-    this.db.updateTranscript(data, this.docID);
-    this.router.navigate(['/'] );
+
+    const promise = new Promise((resolve, reject) => {
+      this.db.updateUser(userData);
+      this.db.updateTranscript(data, this.docID);
+    }).then(() => {
+      this.router.navigate(['/'] );
+    }).catch(err => {
+      console.log(err.message);
+    });
   }
 
   calc() {

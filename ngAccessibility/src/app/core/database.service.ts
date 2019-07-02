@@ -44,17 +44,26 @@ export class DatabaseService {
       currentAction: data.currentAction
     });
     console.log('Working');
+    setTimeout(() => {
+      this.findUser(this.user.name);
+    }, 500);
   }
 
   async checkAction() {
     setTimeout(() => {
-      if (this.user.currentAction === 'preparing' && this.router.url !== '/prepare') {
+      if (this.user.currentAction === '' && this.router.url.includes('/pre')) {
+        this.router.navigate(['/home']);
+      } else if (this.user.currentAction === '') {
+
+      } else if (this.user.currentAction === 'preparing' && !this.router.url.includes('/pre')) {
         this.router.navigate(['/pre', this.user.actionID]);
         alert('You may only work on one transcript at a time');
-      } else if (this.user.currentAction === 'transcribing' || this.user.currentAction === 'reviewing') {
+      } else if ((this.user.currentAction === 'transcribing' || this.user.currentAction === 'reviewing') && this.router.url.includes('/home')) {
+        this.router.navigate(['/home']);
+      } else if (this.user.currentAction !== 'preparing' && this.router.url.includes('/pre')) {
         this.router.navigate(['/home']);
       }
-    }, 800);
+    }, 300);
   }
 
   // Services pertaining to accessibility collection
@@ -146,6 +155,10 @@ export class DatabaseService {
     } else if (status === 'In Review' || status === 'Review Completed') {
       this.afs.collection('accessibility').doc(id).update({
         reviewer: name,
+        status
+      });
+    } else {
+      this.afs.collection('accessibility').doc(id).update({
         status
       });
     }

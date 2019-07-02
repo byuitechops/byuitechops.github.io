@@ -16,7 +16,9 @@ export class CopycheckComponent implements OnInit {
 
 
   ngOnInit() {
-    setTimeout(() => {this.db.checkAction(); }, 1000);
+    const promise = new Promise((resolve, reject) => {
+      this.db.checkAction();
+    });
   }
 
   async showDetails(id) {

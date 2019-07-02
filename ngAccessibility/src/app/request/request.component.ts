@@ -77,13 +77,13 @@ export class RequestComponent implements OnInit {
     toBeUsedID: string;
 
     ngOnInit() {
-        this.getCourse();
+      const promise = new Promise((resolve, reject) => {
         this.db.checkAction();
-        setTimeout(() => {
         if (!this.auth.user.isAnonymous) {
-            this.hider = true;
+          this.hider = true;
         }
-        }, 900);
+      });
+      this.getCourse();
     }
 
     getCourse() {
