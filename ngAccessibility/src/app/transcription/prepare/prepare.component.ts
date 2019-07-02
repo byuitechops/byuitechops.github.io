@@ -29,9 +29,7 @@ export class PrepareComponent implements OnInit {
 
 
   ngOnInit() {
-    const promise = new Promise((resolve, reject) => {
-      this.db.checkAction();
-    });
+    this.db.checkAction();
   }
 
   async showDetails(id) {

@@ -242,12 +242,17 @@ export class RequestComponent implements OnInit {
     }
 
     submitMsg() {
-        document.getElementById("sub-msg").innerHTML = "Your Request has been Submitted!";
-        document.getElementById("transcript-box-info").classList.add("submitted");
-        setTimeout(() => {
-            document.getElementById("sub-msg").innerHTML = "";
-            document.getElementById("transcript-box-info").classList.remove("submitted");
-        }, 1500);
+      document.getElementById("sub-msg").innerHTML = "Your Request has been Submitted!";
+      document.getElementById("transcript-box-info").classList.add("submitted");
+      setTimeout(() => {
+          document.getElementById("sub-msg").innerHTML = "";
+          document.getElementById("transcript-box-info").classList.remove("submitted");
+      }, 1500);
+      this.media = '';
+      this.title = '';
+      this.comments = '';
+      this.priority = '';
+      this.type = '';
     }
 
 }

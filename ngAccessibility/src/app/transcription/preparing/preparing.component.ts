@@ -48,7 +48,7 @@ export class PreparingComponent implements OnInit {
     if (this.verbit) {
       data = {
         docEditURL:  this.docEdit,
-        docPublishedURL:  this.docPub,
+        docPublishURL:  this.docPub,
         verbit: this.verbit,
         verbitID: this.verbitID,
         length: x
@@ -56,7 +56,7 @@ export class PreparingComponent implements OnInit {
     } else {
       data = {
         docEditURL:  this.docEdit,
-        docPublishedURL:  this.docPub,
+        docPublishURL:  this.docPub,
         length: x
       };
     }
@@ -68,17 +68,16 @@ export class PreparingComponent implements OnInit {
       currentAction: ''
     };
 
-    const promise = new Promise((resolve, reject) => {
-      this.db.updateUser(userData);
-      this.db.updateTranscript(data, this.docID);
-    }).then(() => {
-      this.router.navigate(['/'] );
-    }).catch(err => {
-      console.log(err.message);
-    });
+    this.db.updateUser(userData);
+    this.db.updateTranscript(data, this.docID);
+    this.router.navigate(['/'] );
   }
 
   calc() {
     return Number(this.sec) + (Number(this.mins) * 60) + (Number(this.hours) * 60 * 60);
+  }
+
+  cancelPrep() {
+
   }
 }

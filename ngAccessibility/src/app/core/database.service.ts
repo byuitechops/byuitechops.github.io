@@ -51,7 +51,7 @@ export class DatabaseService {
 
   async checkAction() {
     setTimeout(() => {
-      if (this.user.currentAction === '' && this.router.url.includes('/pre')) {
+      if (this.user.currentAction === '' && (this.router.url.includes('/pre') && !this.router.url.includes('pare'))) {
         this.router.navigate(['/home']);
       } else if (this.user.currentAction === '') {
 
