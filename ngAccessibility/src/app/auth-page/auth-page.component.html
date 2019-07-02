@@ -13,11 +13,11 @@
                     </div>
                     <div class="show-on-signup hide">
                         <p>Role</p>
-                        <select>
-                            <option disabled hidden [value]="" (selected)="verbit">Role</option>
-                            <option [ngValue]="Copyedit">Copyedit</option>
-                            <option [ngValue]="Designer">Designer</option>
-                            <option [ngValue]="QA">Quality Assurance</option>
+                        <select [(ngModel)]="role">
+                            <option disabled hidden [value]="Role" [(selected)]="role">Role</option>
+                            <option [value]="Copyedit">Copyedit</option>
+                            <option [value]="Designer">Designer</option>
+                            <option [value]="QA">Quality Assurance</option>
                         </select>
                     </div>
                     <div>
@@ -30,15 +30,18 @@
                     </div>
                     <div class="show-on-signup hide">
                         <p>Confirm Password</p>
-                        <input type="password" id="signin-confirm-password" placeholder="*********" [(ngModel)]="password" />
+                        <input type="password" id="signin-confirm-password" placeholder="*********" [(ngModel)]="confirmPassword" />
                     </div>
                 </div>
+
+                <div id="signin-error" [(ngModel)]="error"></div>
+
                 <div class="btn-box hide-on-signup">
                     <button id="login-btn" (click)="signIn()">Log In</button>
                     <button id="show-signup-btn" (click)="showSignUp()">Sign Up</button>
                 </div>
                 <div class="btn-box show-on-signup hide">
-                    <button id="signup-btn" (click)="signUp()">Sign Up</button>
+                    <button id="signup-btn" (click)="signUpUser()">Sign Up</button>
                     <button id="cancel-btn" (click)="hideSignUp()">Cancel</button>
                 </div>
             </div>

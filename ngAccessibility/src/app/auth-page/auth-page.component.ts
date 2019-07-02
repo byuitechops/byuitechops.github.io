@@ -8,10 +8,12 @@ import { AuthService } from '../core/auth.service';
 })
 export class AuthPageComponent implements OnInit {
 
-    signingUp: false;
     email: string;
     password: string;
+    confirmPassword: string;
     name: string;
+    role: string;
+    error: string;
 
     constructor(public afAuth: AuthService) {
 
@@ -93,10 +95,20 @@ export class AuthPageComponent implements OnInit {
         }
     }
     verifyInfo() {
-        
+        if ((this.name != '' || this.name != undefined) && 
+            (this.role != 'Role') && this.email != '' && this.password != '' && this.confirmPassword != '') {
+            console.log('No Errors!' + this.name + this.role);
+            return true;
+        } else {
+            this.error = 'All fields must be filled to Sign Up.';
+        }
+        console.log(this.error);
+        return false;
     }
     signUpUser() {
-
+        if (this.verifyInfo()) {
+            return true;
+        }
     }
 
 }
