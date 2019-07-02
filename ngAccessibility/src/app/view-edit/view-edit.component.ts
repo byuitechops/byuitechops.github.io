@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ViewEditService } from '../core/view-edit.service';
+import { AuthService } from '../core/auth.service';
 
 @Component({
     selector: 'app-view-edit',
@@ -32,7 +33,7 @@ export class ViewEditComponent implements OnInit {
         'Review Completed',
         'Finished'
     ];
-    constructor(public storage: ViewEditService) { }
+    constructor(public storage: ViewEditService, private auth: AuthService) { }
 
     ngOnInit() {
 
@@ -75,6 +76,7 @@ export class ViewEditComponent implements OnInit {
     edit() {
       this.storage.editing = !this.storage.editing;
     }
+
 
 }
 

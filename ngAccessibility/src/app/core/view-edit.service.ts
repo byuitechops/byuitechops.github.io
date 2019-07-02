@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DatabaseService } from './database.service';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,6 @@ export class ViewEditService {
   editing = false;
   courseCode = ['ACCTG100'];
   comments = '';
-  datePrepareFinished = 'Today';
   docEditURL = '.com';
   docPublishURL = '.pub';
   length = '108 seconds';
@@ -17,7 +17,6 @@ export class ViewEditService {
   parentTranscript = true;
   preparer = 'Him';
   priority = '1';
-  requestDate = 'Today';
   requestNotes = 'None';
   requestor = 'Me';
   reviewer = 'Her';
@@ -31,11 +30,15 @@ export class ViewEditService {
 
   id;
 
-  constructor(private db: DatabaseService) {
+  hider = false;
+  admin = false;
+
+  constructor(private db: DatabaseService, private auth: AuthService) {
 
   }
 
   async storageEdit(id) {
+    this.check();
     this.id = id;
     const file = this.db.getTranscript(id);
     await file.then(async transcript => {
@@ -58,6 +61,18 @@ export class ViewEditService {
       this.srcURL = await data.srcURL;
       this.step = await data.status;
     });
+  }
+  check() {
+    if (this.auth.user.isAnonymous) {
+      this.hider = true;
+    } else {
+      this.hider = false;
+    }
+    if (this.db.user.lead) {
+      this.admin = true;
+    } else {
+      this.admin = false;
+    }
   }
 
   confirmEdit() {
