@@ -4,6 +4,18 @@
 *
 ******************************************************/
 
+:root {
+    --primary: #0076C6;
+    --white: #ffffff;
+    --black: #000000;
+    --darkgray: #444444;
+    --medgray: #777777;
+    --lightgray: #dddddd;
+    --verylightgray: #f7f7f7;
+    --warning: #E85156;
+}
+
+
 .left-col, .right-col {
     margin-right: 50px;
 }

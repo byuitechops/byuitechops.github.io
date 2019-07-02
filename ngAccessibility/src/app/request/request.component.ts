@@ -2,6 +2,7 @@ import { Component, OnInit, } from '@angular/core';
 import { DatabaseService } from '../core/database.service';
 import { AuthService } from '../core/auth.service';
 import { SearchService } from '../core/search.service';
+import { timeout } from 'q';
 
 @Component({
     selector: 'app-request',
@@ -171,14 +172,16 @@ export class RequestComponent implements OnInit {
         setTimeout(() => {
             console.log(this.search.areThere);
             if (this.override) {
-            this.db.createTranscript(data);
-            this.override = false;
-            window.location.reload();
+                this.db.createTranscript(data);
+                this.override = false;
+                window.location.reload();
+                this.submitMsg();
             } else if (this.dups.length > 0 && this.search.areThere) {
-            console.log(this.dups);
-            this.openDup();
+                console.log(this.dups);
+                this.openDup();
             } else {
-            this.db.createTranscript(data);
+                this.db.createTranscript(data);
+                this.submitMsg();
             }
         }, 900);
         }
@@ -193,6 +196,7 @@ export class RequestComponent implements OnInit {
       };
       this.db.addLocation(this.toBeUsedID, this.location);
       this.closeDup();
+      this.submitMsg();
     }
 
     createNew() {
@@ -235,6 +239,15 @@ export class RequestComponent implements OnInit {
         this.toBeUsedTitle = usedDup.title;
         this.toBeUsedPriority = usedDup.priority;
         this.toBeUsedMedia = usedDup.media;
+    }
+
+    submitMsg() {
+        document.getElementById("sub-msg").innerHTML = "Your Request has been Submitted!";
+        document.getElementById("transcript-box-info").classList.add("submitted");
+        setTimeout(() => {
+            document.getElementById("sub-msg").innerHTML = "";
+            document.getElementById("transcript-box-info").classList.remove("submitted");
+        }, 1500);
     }
 
 }

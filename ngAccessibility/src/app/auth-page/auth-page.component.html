@@ -14,11 +14,11 @@
                     <div class="show-on-signup hide">
                         <p>Role</p>
                         <select [(ngModel)]="role">
-                                <option [ngValue]="selectUndefinedOptionValue" disabled hidden>Role</option>
-                                <option [ngValue]="'Qualily Assurance'">Qualily Assurance</option>
-                                <option [ngValue]="'Copyedit'">Copyedit</option>
-                                <option [ngValue]="'Designer'">Designer</option>
-                            </select>
+                            <option [ngValue]="selectUndefinedOptionValue" disabled hidden></option>
+                            <option [ngValue]="'Qualily Assurance'">Qualily Assurance</option>
+                            <option [ngValue]="'Copyedit'">Copyedit</option>
+                            <option [ngValue]="'Designer'">Designer</option>
+                        </select>
                     </div>
                     <div>
                         <p>BYU-I Email</p>
@@ -26,15 +26,15 @@
                     </div>
                     <div>
                         <p>Password</p>
-                        <input type="password" id="signin-password" placeholder="*********" [(ngModel)]="password" />
+                        <input type="password" id="signin-password" placeholder="*****" [(ngModel)]="password" />
                     </div>
                     <div class="show-on-signup hide">
                         <p>Confirm Password</p>
-                        <input type="password" id="signin-confirm-password" placeholder="*********" [(ngModel)]="confirmPassword" />
+                        <input type="password" id="signin-confirm-password" placeholder="*****" [(ngModel)]="confirmPassword" />
                     </div>
                 </div>
 
-                <div id="signin-error" [(ngModel)]="error"></div>
+                <div id="signin-error"> {{ error }} </div>
 
                 <div class="btn-box hide-on-signup">
                     <button id="login-btn" (click)="signIn()">Log In</button>
