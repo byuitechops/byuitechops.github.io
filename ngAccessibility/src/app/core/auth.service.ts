@@ -11,8 +11,6 @@ export class AuthService {
   userName: any = 'Guest';
   user: any;
   authenticated = false;
-  contact: string;
-  position: string;
 
   constructor(private af: AngularFireAuth, private db: DatabaseService) {
     //  This loads on every page in the Site, it check if the user is authenticated
@@ -32,13 +30,13 @@ export class AuthService {
     });
   }
 
-  signup(email: string, password: string) {
+  signup(email: string, password: string, name: string, position: string) {
     if (email.includes('@byui.edu')) {
       this.af.auth
       .createUserWithEmailAndPassword(email, password)
       .then(() => {
         // This creates a new user in the Database Service
-        this.db.createUser(this.userName, this.contact, this.position);
+        this.db.createUser(name, email, position);
       }).catch(err => {
         console.log('Something went wrong:', err.message);
       });

@@ -7,7 +7,7 @@ import { AuthService } from '../core/auth.service';
   styleUrls: ['./auth-page.component.css'],
 })
 export class AuthPageComponent implements OnInit {
-
+    selectUndefinedOptionValue: any;
     email: string;
     password: string;
     confirmPassword: string;
@@ -95,18 +95,26 @@ export class AuthPageComponent implements OnInit {
         }
     }
     verifyInfo() {
-        if ((this.name != '' || this.name != undefined) && 
-            (this.role != 'Role') && this.email != '' && this.password != '' && this.confirmPassword != '') {
-            console.log('No Errors!' + this.name + this.role);
-            return true;
+        if ((this.name != '' && this.name != undefined) && 
+        (this.role != 'Role' && this.role != undefined) && 
+        (this.email != '' && this.email != undefined) && 
+        (this.password != '' && this.password != undefined) && 
+        (this.confirmPassword != '' && this.confirmPassword != undefined)) {
+            if (this.password === this.confirmPassword) {
+                console.log('No Errors!');
+                return true;
+            } else {
+                this.error = 'Make sure that your passwords match'
+            }
         } else {
             this.error = 'All fields must be filled to Sign Up.';
         }
-        console.log(this.error);
+        alert(this.error);
         return false;
     }
     signUpUser() {
         if (this.verifyInfo()) {
+            this.afAuth.signup(this.email, this.password, this.name, this.role);
             return true;
         }
     }

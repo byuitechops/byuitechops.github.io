@@ -14,11 +14,11 @@
                     <div class="show-on-signup hide">
                         <p>Role</p>
                         <select [(ngModel)]="role">
-                            <option disabled hidden [value]="Role" [(selected)]="role">Role</option>
-                            <option [value]="Copyedit">Copyedit</option>
-                            <option [value]="Designer">Designer</option>
-                            <option [value]="QA">Quality Assurance</option>
-                        </select>
+                                <option [ngValue]="selectUndefinedOptionValue" disabled hidden>Role</option>
+                                <option [ngValue]="'Qualily Assurance'">Qualily Assurance</option>
+                                <option [ngValue]="'Copyedit'">Copyedit</option>
+                                <option [ngValue]="'Designer'">Designer</option>
+                            </select>
                     </div>
                     <div>
                         <p>BYU-I Email</p>
