@@ -1,73 +1,78 @@
 <main id="home-content">
 
-    <h1 class="page-title">Home</h1>
+    <div class="main-box">
 
-    <section class="left-col">
+        <h1 class="page-title">Home</h1>
 
-        <div id="banner-box">
-            <!-- <div id="faux-banner"></div> -->
-            <img class="banner" src="../../../assets/banners/quote01.jpg" alt="">
-        </div>
+        <section class="left-col">
 
-        <div id="announcement-box">
-            <h2>Announcements</h2>
-            <div>{{ announce }}</div>
-        </div>
+            <div id="banner-box">
+                <!-- <div id="faux-banner"></div> -->
+                <img class="banner" src="../../../assets/banners/quote01.jpg" alt="">
+            </div>
 
-        <div class="links-box">
-            <a href="https://drive.google.com/drive/u/0/folders/0AJzE0BZcnVJpUk9PVA" target="_blank">
-                <p>Google Drive</p>
-            </a>
-            <a href="https://platform.verbit.co/users/sign_in" target="_blank">
-                <p>Verbit</p>
-            </a>
-            <a href="" target="_blank">
-                <p>Transcript Guide</p>
-            </a>
-            <a href="https://docs.google.com/spreadsheets/d/1755CupoDLtrpePFnj_Dd_Y-FZEH8_6QMX4gAVDNh_AQ/edit#gid=1437701904" target="_blank">
-                <p>Training</p>
-            </a>
-        </div>
-    </section>
+            <div id="announcement-box">
+                <h2>Announcements</h2>
+                <div>{{ announce }}</div>
+            </div>
+
+            <div class="links-box">
+                <a href="https://drive.google.com/drive/u/0/folders/0AJzE0BZcnVJpUk9PVA" target="_blank">
+                    <p>Google Drive</p>
+                </a>
+                <a href="https://platform.verbit.co/users/sign_in" target="_blank">
+                    <p>Verbit</p>
+                </a>
+                <a href="" target="_blank">
+                    <p>Transcript Guide</p>
+                </a>
+                <a href="https://docs.google.com/spreadsheets/d/1755CupoDLtrpePFnj_Dd_Y-FZEH8_6QMX4gAVDNh_AQ/edit#gid=1437701904" target="_blank">
+                    <p>Training</p>
+                </a>
+            </div>
+        </section>
 
 
-    <section class="right-col">
-        <h2>In Progress</h2>
+        <section class="right-col">
+            <h2>In Progress</h2>
 
-            <div id="claimed-transcript-box">
-            <div>
-                <h4>Video</h4>
-                <span>{{ data.title }}</span>
+                <div id="claimed-transcript-box">
+                <div>
+                    <h4>Video</h4>
+                    <span>{{ data.title }}</span>
+                </div>
+                <div>
+                    <h4>Course</h4>
+                    <span>{{ data.course }}</span>
+                </div>
+                <div>
+                    <h4>Priority</h4>
+                    <span>{{ data.priority }}</span>
+                </div>
+                <div>
+                    <h4>Course Link</h4>
+                    <a [href]="data.lms"  target="_blank">{{ data.course }}</a>
+                </div>
+                <div>
+                    <h4>Media URL</h4>
+                    <a [href]="data.media" target="_blank">{{ data.title }}</a>
+                </div>
+                <div>
+                <h4>Transcript URL</h4>
+                <a [href]="data.doc" target="_blank">{{ data.doc }}</a>
+                </div>
+                <div>
+                <h4 [class.hide]="!verbit">Verbit ID</h4>
+                <p [class.hide]="!verbit">{{ data.verbitID }}</p>
+                </div>
+                <div class="btn-box">
+                    <button id="return-prep-btn" (click)="return()">Return to Prep</button>
+                    <button id="complete-tran-btn" (click)="forward()">Complete</button>
+                </div>
+                <img id="comments-expander" src="" alt="">
             </div>
-            <div>
-                <h4>Course</h4>
-                <span>{{ data.course }}</span>
-            </div>
-            <div>
-                <h4>Priority</h4>
-                <span>{{ data.priority }}</span>
-            </div>
-            <div>
-                <h4>Course Link</h4>
-                <a [href]="data.lms"  target="_blank">{{ data.course }}</a>
-            </div>
-            <div>
-                <h4>Media URL</h4>
-                <a [href]="data.media" target="_blank">{{ data.title }}</a>
-            </div>
-            <div>
-              <h4>Transcript URL</h4>
-              <a [href]="data.doc" target="_blank">{{ data.doc }}</a>
-            </div>
-            <div>
-              <h4 [class.hide]="!verbit">Verbit ID</h4>
-              <p [class.hide]="!verbit">{{ data.verbitID }}</p>
-            </div>
-            <div class="btn-box">
-                <button id="return-prep-btn" (click)="return()">Return to Prep</button>
-                <button id="complete-tran-btn" (click)="forward()">Complete</button>
-            </div>
-            <img id="comments-expander" src="" alt="">
-        </div>
-    </section>
+        </section>
+
+    </div>
+
 </main>

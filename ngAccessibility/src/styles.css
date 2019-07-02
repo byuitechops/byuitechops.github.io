@@ -31,16 +31,20 @@
     transition: all .2s;
 }
 
-main {
+.main-box {
     display: flex;
     flex-flow: row wrap;
-    justify-content: center;
+
+    width: 100%;
+    max-width: 1600px;
+    margin: auto;
+    padding: 25px;
 }
 .left-col, .right-col {
     display: flex;
     flex-flow: row wrap;
     align-self: flex-start;
-    width: 100%;
+    width: 50%;
     max-width: 725px;
     margin-top: 10px;
     padding: 0 25px;
@@ -307,4 +311,12 @@ tr {
     margin: auto;
     font-size: 24px;
     text-align: center;
+}
+
+
+@media only screen and (max-width: 1000px) {
+    
+    .left-col, .right-col {
+        width: 100%;
+    }
 }
