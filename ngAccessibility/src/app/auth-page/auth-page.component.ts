@@ -97,23 +97,23 @@ export class AuthPageComponent implements OnInit {
     }
     verifyInfo() {
         if ((this.name != '' && this.name != undefined) && 
-        (this.role != 'Role' && this.role != undefined) && 
-        (this.email != '' && this.email != undefined) && 
-        (this.password != '' && this.password != undefined) && 
-        (this.confirmPassword != '' && this.confirmPassword != undefined)) {
-            if (this.email.)
+            (this.role != 'Role' && this.role != undefined) && 
+            (this.email != '' && this.email != undefined) && 
+            (this.password != '' && this.password != undefined) && 
+            (this.confirmPassword != '' && this.confirmPassword != undefined)) {
+            if (this.email.includes('@byui.edu')) {
                 if (this.password === this.confirmPassword) {
                     console.log('No Errors!');
+                    this.error = '';
                 } else {
-                    this.error = 'Make sure that your passwords match'
+                    this.error = 'Make sure that your passwords match';
                 }
             } else {
-                this.error = 'The email entered is not valid'
+                this.error = 'The email entered is not valid';
             }
         } else {
             this.error = 'All fields must be filled to Sign Up';
         }
-        alert(this.error);
         return false;
     }
     signUpUser() {
