@@ -20,6 +20,7 @@ export class SearchService {
   index = searchClient.initIndex('transcripts');
   duplicates = {};
   areThere = false;
+  debug: true;
   constructor(public db: AngularFirestore) {
    }
 
