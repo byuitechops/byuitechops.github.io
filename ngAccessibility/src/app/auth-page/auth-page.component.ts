@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../core/auth.service';
+import { validateConfig } from '@angular/router/src/config';
 
 @Component({
   selector: 'app-auth-page',
@@ -100,14 +101,17 @@ export class AuthPageComponent implements OnInit {
         (this.email != '' && this.email != undefined) && 
         (this.password != '' && this.password != undefined) && 
         (this.confirmPassword != '' && this.confirmPassword != undefined)) {
-            if (this.password === this.confirmPassword) {
-                console.log('No Errors!');
-                return true;
+            if (this.email.)
+                if (this.password === this.confirmPassword) {
+                    console.log('No Errors!');
+                } else {
+                    this.error = 'Make sure that your passwords match'
+                }
             } else {
-                this.error = 'Make sure that your passwords match'
+                this.error = 'The email entered is not valid'
             }
         } else {
-            this.error = 'All fields must be filled to Sign Up.';
+            this.error = 'All fields must be filled to Sign Up';
         }
         alert(this.error);
         return false;
