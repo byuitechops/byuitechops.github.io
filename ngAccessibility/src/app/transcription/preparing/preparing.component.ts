@@ -23,6 +23,7 @@ export class PreparingComponent implements OnInit {
   mins = 0;
   sec = 0;
   docID: string;
+  code = '';
 
   isEmbeded = true;
   withVideo: string;
@@ -92,4 +93,38 @@ export class PreparingComponent implements OnInit {
     this.withVideo = "";
     this.withNoVideo = "";
   }
+  // generates the code to the user, according to the media url received
+  showCodeEmbedded() {
+  const transcript = this.db.getTranscript(this.docID);
+  transcript.then(doc => {
+    if (doc.data().srcURL.includes('youtube')) {
+      const id = doc.data().srcURL.slice(doc.data().srcURL.indexOf('watch?v=') + 8, (doc.data().srcURL.indexOf('watch?v=') + 9) + 11);
+      this.code = `<p><iframe width="560" height="315px" src="https://www.youtube-nocookie.com/embed/${id}?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe><br>(${this.calc()} mins, <a href="${this.docPub}" target="_blank">${this.title} Transcript</a>)</p>`;
+    } else if (doc.data().srcURL.includes('youtu.be')) {
+      const id = doc.data().srcURL.slice(doc.data().srcURL.indexOf('.be/') + 4, (doc.data().srcURL.indexOf('.be/') + 4) + 11);
+      this.code = `<p><iframe width="560" height="315px" src="https://www.youtube-nocookie.com/embed/${id}?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe><br>(${this.calc()} mins, <a href="${this.docPub}" target="_blank">${this.title} Transcript</a>)</p>`;
+    } else if (doc.data().srcURL.includes('video.byui.edu')) {
+      const id = doc.data().srcURL.slice(doc.data().srcURL.indexOf('/0_') + 1, (doc.data().srcURL.indexOf('/0_') + 1) + 10);
+      this.code = `<p><iframe id="kaltura_player_1534785808" src="https://cdnapisec.kaltura.com/p/1157612/sp/115761200/embedIframeJs/uiconf_id/33020032/partner_id/1157612?iframeembed=true&playerId=kaltura_player_1534785808&entry_id=${id}&flashvars[streamerType]=auto" width="560" height="315" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay; fullscreen; encrypted-media" frameborder="0"></iframe><br>(${this.calc()} mins, <a href="${this.docPub}" target="_blank">${this.title} Transcript</a>)</p>`;
+    } else if (doc.data().srcURL.includes('vimeo')) {
+      const id = doc.data().srcURL.slice(doc.data().srcURL.indexOf('vimeo.com/') + 10, (doc.data().srcURL.indexOf('vimeo.com/') + 10) + 9);
+      this.code = `<p><iframe src="https://player.vimeo.com/video/${id}?title=0&byline=0&portrait=0" width="560" height="315px" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe><br>
+  (${this.calc()} mins, <a href="${this.docPub}" target="_blank">${this.title} Transcript</a>)</p>`;
+    } else if (doc.data().srcURL.includes('fod.infobase.com')) {
+      const id = doc.data().srcURL.slice(doc.data().srcURL.indexOf('loid=') + 5, (doc.data().srcURL.indexOf('loid=') + 5) + 5);
+      this.code = `<p><iframe allow='encrypted-media' height='315' frameborder='0' width='560' style='border: 1px solid #ddd;'  src='https://byui.idm.oclc.org/login?url=https://fod-infobase-com.byui.idm.oclc.org/OnDemandEmbed.aspx?token=42704&wID=104034&loid=${id}&plt=FOD&w=560&h=360' allowfullscreen >&nbsp;</iframe><br>(${this.calc()} mins, <a href="${this.docPub}" target="_blank">${this.title} Transcript</a>)</p>`;
+    } else {
+      this.code = `<p><a href='${doc.data().srcURL}' target="_blank">Go to this link and get the embed code to place</a><br>Copy the rest of this and place it in with the embedded in a single p tag<br>(${this.calc()} mins, <a href="${this.docPub}" target="_blank">${this.title} Transcript</a>)</p>`;
+    }
+  });
+
+}
+  showCodeLink() {
+    if (this.docPub !== '' && this.docPub.includes('/pub') && (this.calc()) !== 0) {
+      this.code = `(${this.calc()} mins, <a href="${this.docPub}" target="_blank">${this.title} Transcript</a>)</p>`;
+    } else {
+        alert('Before getting the code, make sure to add a published google doc to the transcript as well as a height a and a length for the transcript, if necessary.');
+    }
+  }
+
 }

@@ -186,11 +186,11 @@
         <div *ngIf="storage.editing; else viewBtnBox" class="btn-box">
             <button id="confirmEditBtn" (click)="confirmEdit()">Confirm</button>
             <button id="cancelEditBtn" (click)="edit()">Cancel</button>
-            <button class="warning-btn" id="btn-delete-transcript">Delete Transcript</button>
+            <button class="warning-btn" id="btn-delete-transcript" [class.hide]="storage.admin">Delete Transcript</button>
         </div>
         <ng-template #viewBtnBox class="btn-box">
             <button id="closeViewBtn" (click)="closeModal()">Close</button>
-            <button id="closeViewBtn" class="warning-btn" (click)="edit()">Edit</button>
+            <button id="closeViewBtn" class="warning-btn" (click)="edit()" [class.hide]="storage.hider">Edit</button>
         </ng-template>
 
     </div>
