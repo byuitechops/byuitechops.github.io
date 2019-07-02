@@ -160,3 +160,7 @@ ais-hits {
         display: none;
     }
 }
+
+ais-hits {
+    display: block;
+}
