@@ -19,9 +19,9 @@ export class PreparingComponent implements OnInit {
   verbit: string;
   verbitID: string;
 
-  hours: number = 0;
-  mins: number = 0;
-  sec: number = 0;
+  hours = 0;
+  mins = 0;
+  sec = 0;
   docID: string;
 
   constructor(private db: DatabaseService, private activeRoute: ActivatedRoute, private router: Router) { }
@@ -43,7 +43,7 @@ export class PreparingComponent implements OnInit {
   }
 
   submit() {
-    let x = String(this.calc());
+    const x = String(this.calc());
     let data;
     if (this.verbit) {
       data = {

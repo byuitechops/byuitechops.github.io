@@ -147,7 +147,7 @@ export class DatabaseService {
         status
       });
     } else if (status === 'In Transcription') {
-      console.log("DONE");
+      console.log('DONE');
       this.afs.collection('accessibility').doc(id).update({
         transcriber: name,
         status
