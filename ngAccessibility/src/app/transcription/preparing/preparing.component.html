@@ -31,6 +31,16 @@
             <input [(ngModel)]="verbitID" placeholder="Verbit ID" />
         </div>
 
+        <div class="btn-box">
+            <button id="embedVidBtn" (click)="showEmbedCode(true)">Embed With Video</button>
+            <button id="embedNoVidBtn" (click)="showEmbedCode(false)">Embed Without Video</button>
+        </div>
+
+        <div id="embed-code-box hide">
+            <p *ngIf="withVideo"> {{ withVideo }} </p>
+            <p *ngIf="!withVideo"> {{ withNoVideo }} </p>
+        </div>
+
     </section>
 
     <section class="right-col" id="transcript-box-info">

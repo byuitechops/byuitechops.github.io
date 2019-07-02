@@ -24,6 +24,11 @@ export class PreparingComponent implements OnInit {
   sec = 0;
   docID: string;
 
+  isEmbeded = true;
+  withVideo: string;
+  withNoVideo: string;
+
+
   constructor(private db: DatabaseService, private activeRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
@@ -78,6 +83,13 @@ export class PreparingComponent implements OnInit {
   }
 
   cancelPrep() {
+    
+  }
 
+  showEmbedCode(isEmbed: boolean) {
+    this.isEmbeded = isEmbed;
+
+    this.withVideo = "";
+    this.withNoVideo = "";
   }
 }
