@@ -1,6 +1,7 @@
 <section class="modal hide" id="dup-modal">
 
     <div class="modal-content" id="dup-modal-content">
+
         <div class="modal-header-box">
             <h1>Duplicate Found</h1>
         </div>
@@ -97,67 +98,71 @@
 </section>
 
 <main>
-    <h1 class="page-title">Request</h1>
 
-    <section id="requestForm" class="left-col">
-        <input [(ngModel)]="name" id="guestName" placeholder="Name" [class.hide]="hider">
+    <div class="main-box">
 
-        <select [(ngModel)]="type" placeholder="Select Type">
-            <option disabled hidden [value]="selectUndefinedOptionValue">Select Type</option>
-            <option *ngFor="let y of types" [ngValue]="y">{{ y }}</option>
-        </select>
+        <h1 class="page-title">Request</h1>
 
-        <select [(ngModel)]="course">
-            <option [ngValue]="null" hidden>Select Course</option>
-            <option id="requestCourse" hidden></option>
-        </select>
+        <section id="requestForm" class="left-col">
+            <input [(ngModel)]="name" id="guestName" placeholder="Name" [class.hide]="hider">
 
-        <input [(ngModel)]="title" type="text" placeholder="Transcript Title">
+            <select [(ngModel)]="type" placeholder="Select Type">
+                <option disabled hidden [value]="selectUndefinedOptionValue">Select Type</option>
+                <option *ngFor="let y of types" [ngValue]="y">{{ y }}</option>
+            </select>
 
-        <select [(ngModel)]="priority">
-            <option disabled hidden [value]="selectUndefinedOptionValue">Select Priority</option>
-            <option *ngFor="let i of priorities" [ngValue]="i.value">{{ i.name }}</option>
-        </select>
+            <select [(ngModel)]="course">
+                <option [ngValue]="null" hidden>Select Course</option>
+                <option id="requestCourse" hidden></option>
+            </select>
 
-        <input [(ngModel)]="lms" type="url" placeholder="Canvas URL">
-        <input  [(ngModel)]="media" type="url" placeholder="Media URL">
-        <label id="requestCommentsLabel">
-            <h3>Comments</h3>
-        </label>
-        <input [(ngModel)]="comments" type="text">
-    </section>
+            <input [(ngModel)]="title" type="text" placeholder="Transcript Title">
 
-    <section id="transcript-box-info" class="right-col">
-        <h2>Ticket Information</h2>
-        <div class="ticketbox  col">
-            <div class="detail">
-                <label>Media Type:</label>
-                <p class="description"> {{ type }} </p>
+            <select [(ngModel)]="priority">
+                <option disabled hidden [value]="selectUndefinedOptionValue">Select Priority</option>
+                <option *ngFor="let i of priorities" [ngValue]="i.value">{{ i.name }}</option>
+            </select>
+
+            <input [(ngModel)]="lms" type="url" placeholder="Canvas URL">
+            <input  [(ngModel)]="media" type="url" placeholder="Media URL">
+            <label id="requestCommentsLabel">
+                <h3>Comments</h3>
+            </label>
+            <input [(ngModel)]="comments" type="text">
+        </section>
+
+        <section id="transcript-box-info" class="right-col">
+            <h2>Ticket Information</h2>
+            <div class="ticketbox  col">
+                <div class="detail">
+                    <label>Media Type:</label>
+                    <p class="description"> {{ type }} </p>
+                </div>
+                <div class="detail">
+                    <label>Course Code:</label>
+                    <p class="description"> {{ course }} </p>
+                </div>
+                <div class="detail">
+                    <label>Title:</label>
+                    <p class="description"> {{ title }} </p>
+                </div>
+                <div class="detail">
+                    <label>Priority:</label>
+                    <p class="description"> {{ priority }} </p>
+                </div>
+                <div class="detail">
+                    <label>Location in Course:</label>
+                    <p class="description"> {{ lms }} </p>
+                </div>
+                <div class="btn-box">
+                    <button type="submit" id="requestSubmit" (click)="newRequest()">Submit</button>
+                    <button class="hide" id="dup-btn" (click)="openDup()">Open Dup Checker</button>
+                </div>
+                <div>
+                    <h3 id="sub-msg"></h3>
+                </div>
             </div>
-            <div class="detail">
-                <label>Course Code:</label>
-                <p class="description"> {{ course }} </p>
-            </div>
-            <div class="detail">
-                <label>Title:</label>
-                <p class="description"> {{ title }} </p>
-            </div>
-            <div class="detail">
-                <label>Priority:</label>
-                <p class="description"> {{ priority }} </p>
-            </div>
-            <div class="detail">
-                <label>Location in Course:</label>
-                <p class="description"> {{ lms }} </p>
-            </div>
-            <div class="btn-box">
-                <button type="submit" id="requestSubmit" (click)="newRequest()">Submit</button>
-                <button class="hide" id="dup-btn" (click)="openDup()">Open Dup Checker</button>
-            </div>
-            <div>
-                <h3 id="sub-msg"></h3>
-            </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
 </main>

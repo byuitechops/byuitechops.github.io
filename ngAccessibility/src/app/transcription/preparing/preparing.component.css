@@ -13,7 +13,6 @@
 .left-col, .right-col {
   width: 100%;
   max-width: 600px;
-  margin-left: 50px;
 }
 .right-col {
   background-color: var(--verylightgray);

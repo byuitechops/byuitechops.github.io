@@ -36,7 +36,7 @@
     flex-flow: row wrap;
 
     width: 100%;
-    max-width: 1600px;
+    max-width: 1500px;
     margin: auto;
     padding: 25px;
 }
@@ -58,7 +58,7 @@ h1 {
 }
 .page-title {
     width: 1500px;
-    padding: 50px 0;
+    padding: 50px 25px;
 }
 h2 {
     width: 100%;
@@ -257,6 +257,9 @@ tr {
 }
 .search-box {
     position: relative;
+}
+.table-box button {
+    width: 45%;
 }
 
 .modal {
