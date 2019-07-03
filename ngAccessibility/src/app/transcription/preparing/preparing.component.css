@@ -31,3 +31,12 @@
 #time-box input {
     width: 50px;
 }
+
+.ticketbox div {
+    display: flex;
+    flex-flow: row nowrap;
+    padding: 5px;
+}
+.ticketbox label {
+    width: 150px;
+}
