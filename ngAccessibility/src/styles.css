@@ -261,6 +261,12 @@ tr {
 .table-box button {
     width: 45%;
 }
+.ais-SearchBox button {
+    width: 25px;
+    height: 25px;
+    margin: 0;
+    padding: 3px;
+}
 
 .modal {
     z-index: 10;

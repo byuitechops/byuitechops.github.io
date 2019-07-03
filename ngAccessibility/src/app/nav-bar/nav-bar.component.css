@@ -92,7 +92,7 @@ ais-instantsearch {
     margin: 20px 10px 0 auto;
 }
 ais-hits {
-    z-index: 12;
+    z-index: 102;
     width: 600px;
     display: flex;
     padding: 15px;
@@ -130,9 +130,6 @@ ais-hits {
 .hit-title {
     width: 70%;
 }
-
-
-
 
 
 @media only screen and (max-width: 1000px) {
