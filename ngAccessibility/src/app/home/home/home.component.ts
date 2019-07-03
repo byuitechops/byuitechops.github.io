@@ -55,27 +55,21 @@ export class HomeComponent implements OnInit {
       if (this.db.user.actionID !== '') {
         const transcript = this.db.getTranscript(this.db.user.actionID);
         transcript.then(doc => {
-          const info = doc.data();
-          console.log(info);
-          this.data.title = info.title;
-          if (info.location[0].courseCode) {
-            this.data.course = info.location[0].courseCode;
-          } else {
+          setTimeout(() => {
+            const info = doc.data();
+            console.log(info);
+            this.data.title = info.title;
             this.data.course = info.courseCode;
-          }
-          this.data.priority = info.priority;
-          if (info.locatiom[0].lmsURL) {
-            this.data.lms = info.locatiom[0].lmsURL;
-          } else {
+            this.data.priority = info.priority;
             this.data.lms = info.lmsURL;
-          }
-          this.data.media = info.srcURL;
-          this.data.doc = info.docEditURL;
-          this.data.id = doc.id;
-          if (info.verbit) {
-            this.verbit = true;
-            this.data.verbitID = info.verbitID;
-          }
+            this.data.media = info.srcURL;
+            this.data.doc = info.docEditURL;
+            this.data.id = doc.id;
+            if (info.verbit) {
+              this.verbit = true;
+              this.data.verbitID = info.verbitID;
+            }
+          }, 300);
         });
       }
     }
