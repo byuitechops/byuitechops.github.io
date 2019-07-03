@@ -92,9 +92,8 @@ ais-instantsearch {
     margin: 20px 10px 0 auto;
 }
 ais-hits {
-    z-index: 102;
+    z-index: 1002;
     width: 600px;
-    display: flex;
     padding: 15px;
 
     color: var(--black);
@@ -130,7 +129,16 @@ ais-hits {
 .hit-title {
     width: 70%;
 }
+ais-hits {
+    display: block;
+}
 
+
+/*******************************
+*   This is a Media Query.
+*   It only applies these styles to the website if the screen
+*   it's being displayed on is 1000 pixels wide or less.
+*******************************/
 
 @media only screen and (max-width: 1000px) {
     ais-search-box {
@@ -139,9 +147,6 @@ ais-hits {
     #search-icon {
         display: initial;
     }
-}
-
-@media only screen and (max-width: 700px) {
     #main-nav {
         justify-content: space-between;
     }
@@ -151,14 +156,4 @@ ais-hits {
     #nav-links {
         display: none !important;
     }
-}
-
-@media only screen and (max-width: 300px) {
-    #logo-box {
-        display: none;
-    }
-}
-
-ais-hits {
-    display: block;
 }

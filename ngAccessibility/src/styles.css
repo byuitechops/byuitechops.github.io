@@ -324,7 +324,7 @@ tr {
 
 
 @media only screen and (max-width: 1000px) {
-
+    
     .left-col, .right-col {
         width: 100%;
     }
