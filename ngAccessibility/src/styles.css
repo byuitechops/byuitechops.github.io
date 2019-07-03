@@ -186,10 +186,10 @@ button:hover {
 }
 
 .hide {
-    display: none;
+    display: none !important;
 }
 .blur {
-    filter: blur(5px);
+    filter: blur(5px) !important;
 }
 
 
@@ -300,22 +300,22 @@ tr {
 }
 
 .icon-box {
+    width: 50px;
+    height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 5px;
-    margin-top: -10px;
+    margin: 5px 10px;
     padding-top: 5px;
 }
 .icon {
     margin: auto;
     font-size: 24px;
-    text-align: center;
 }
 
 
 @media only screen and (max-width: 1000px) {
-    
+
     .left-col, .right-col {
         width: 100%;
     }

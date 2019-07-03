@@ -55,19 +55,19 @@
                             </div>
                         </div>
                         <p class="hit-title">{{ hit.title }}</p>
-                        <button  (click)="showDetails(hit.objectID)">View</button>
+                        <button (click)="showDetails(hit.objectID)">View</button>
                     </div>
                     </ol>
                 </ng-template>
             </ais-hits>
         </ais-instantsearch>
 
-        <div class="icon-box">
-            <i class="fas fa-search icon hide" id="search-icon"></i>
+        <div class="icon-box hide" id="search-icon">
+            <i class="fas fa-search icon"></i>
         </div>
 
-        <div class="icon-box">
-            <i class="fas fa-door-open icon" id="logout-icon" (click)="auth.userStatus()"></i>
+        <div class="icon-box" id="logout-icon">
+            <i class="fas fa-door-open icon" (click)="auth.userStatus()"></i>
         </div>
     </div>
 
