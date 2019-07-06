@@ -116,12 +116,12 @@ export class RequestComponent implements OnInit {
   getCourse() {
     const courses = [];
     const xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
+    xhttp.onreadystatechange = function() {
       if (this.readyState === 4 && this.status === 200) {
         const res = JSON.parse(this.responseText);
         const id = res._id;
         const newxhttp = new XMLHttpRequest();
-        newxhttp.onreadystatechange = function () {
+        newxhttp.onreadystatechange = function() {
           if (this.readyState === 4 && this.status === 200) {
             const newres = JSON.parse(this.responseText);
             let inject = '';

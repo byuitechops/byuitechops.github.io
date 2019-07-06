@@ -31,55 +31,69 @@ export class PreparingComponent implements OnInit {
   constructor(private db: DatabaseService, private activeRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
-    this.activeRoute.params.subscribe(params => {
-      console.log(params);
-      this.docID = params.id;
-      const transcript = this.db.getTranscript(params.id);
-      transcript.then(doc => {
-        this.title = doc.data().title;
-        this.course = doc.data().courseCode;
-        this.type = doc.data().type;
-        this.lms = doc.data().lmsURL;
-        this.priority = doc.data().priority;
+    try {
+      this.activeRoute.params.subscribe(params => {
+        this.docID = params.id;
+        const transcript = this.db.getTranscript(params.id);
+        transcript.then(doc => {
+          this.title = doc.data().title;
+          this.course = doc.data().location[0].courseCode;
+          this.type = doc.data().type;
+          this.lms = doc.data().location[0].lmsURL;
+          this.priority = doc.data().priority;
+        });
       });
-    });
-    this.db.checkAction();
+    } catch (e) {
+      console.log(e);
+    } finally {
+      this.db.checkAction();
+    }
   }
 
   submit() {
-    const x = String(this.calc());
-    let data;
-    if (this.verbit) {
-      data = {
-        docEditURL:  this.docEdit,
-        docPublishURL:  this.docPub,
-        verbit: this.verbit,
-        verbitID: this.verbitID,
-        length: x
-      };
+    if (this.docEdit !== undefined &&
+        this.docPub !== undefined) {
+      if (this.docPub.includes('pub')) {
+        const x = String(this.calc());
+        let data;
+        if (this.verbit) {
+          data = {
+            docEditURL:  this.docEdit,
+            docPublishURL:  this.docPub,
+            verbit: this.verbit,
+            verbitID: this.verbitID,
+            length: x
+          };
+        } else {
+          data = {
+            docEditURL:  this.docEdit,
+            docPublishURL:  this.docPub,
+            length: x
+          };
+        }
+        const userData = {
+          actionID: '',
+          currentAction: ''
+        };
+        try {
+          this.activeRoute.params.subscribe(param => {
+            this.db.changeTranscriptStep('Ready for Transcription', this.db.user.name, param.id);
+          });
+          this.db.updateUser(userData);
+          this.db.updateTranscript(data, this.docID);
+        } catch (error) {
+          console.log(error);
+        } finally {
+          setTimeout(() => {
+            this.router.navigate(['/prepare'] );
+          }, 300);
+        }
+      } else {
+        alert('Please fill in the Published link with the proper link');
+      }
     } else {
-      data = {
-        docEditURL:  this.docEdit,
-        docPublishURL:  this.docPub,
-        length: x
-      };
+      alert('Please fill in the Google doc links');
     }
-    const userData = {
-      actionID: '',
-      currentAction: ''
-    };
-    try {
-      this.activeRoute.params.subscribe(param => {
-        this.db.changeTranscriptStep('Ready for Transcription', this.db.user.name, param.id);
-      });
-      this.db.updateUser(userData);
-      this.db.updateTranscript(data, this.docID);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      this.router.navigate(['/'] );
-    }
-
   }
 
   calc() {
@@ -106,9 +120,8 @@ export class PreparingComponent implements OnInit {
 
   // generates the code to the user, according to the media url received
     showCodeEmbedded() {
-        this.isEmbeded = true;
-
-
+      if (this.docEdit !== undefined &&
+        this.docPub !== undefined) {
         const transcript = this.db.getTranscript(this.docID);
         transcript.then(doc => {
             if (doc.data().srcURL.includes('youtube')) {
@@ -131,26 +144,40 @@ export class PreparingComponent implements OnInit {
                 this.code = `<p><a href='${doc.data().srcURL}' target="_blank">Go to this link and get the embed code to place</a><br>Copy the rest of this and place it in with the embedded in a single p tag<br>(${this.calc()} mins, <a href="${this.docPub}" target="_blank">${this.title} Transcript</a>)</p>`;
             }
         });
+        } else {
+          alert('Please fill in the Google doc links');
+        }
     }
     showCodeLink() {
-        this.isEmbeded = false;
-        let placeholdS = ''
-        let placeholdM = ''
-        if (this.docPub !== '' && this.docPub.includes('/pub') && (this.calc()) !== 0) {
-        if (this.mins < 10) {
-            placeholdM = '0'
-        } else {
+      if (this.docEdit !== undefined &&
+        this.docPub !== undefined) {
+        let placeholdS = '';
+        let placeholdM = '';
+        let colon = '';
+        if (this.docPub !== '' && this.docPub.includes('/pub')
+            && (this.calc()) !== 0 || !(this.type === 'Video' || this.type === 'Audio')) {
+        if (this.mins < 10 && (this.type === 'Video' || this.type === 'Audio')) {
+            placeholdM = '0';
+            colon = ': ';
+        } else if (this.type === 'Video' || this.type === 'Audio') {
             placeholdM = '';
+            colon = ': ';
         }
-        if (this.sec < 10) {
-            placeholdS = '0'
-        } else {
+        if (this.sec < 10 && (this.type === 'Video' || this.type === 'Audio')) {
+            placeholdS = '0';
+            colon = ': ';
+        } else if (this.type === 'Video' || this.type === 'Audio') {
             placeholdS = '';
+            colon = ': ';
         }
-        this.code = `<p>(${placeholdM}${this.mins}: ${placeholdS}${this.sec} mins, <a href="${this.docPub}" target="_blank">${this.title} Transcript</a>)</p>`;
+        this.code = `<p>(${placeholdM}${this.mins}${colon}${placeholdS}${this.sec} mins,
+                     <a href="${this.docPub}" target="_blank">${this.title} Transcript</a>)</p>`;
         } else {
             alert('Before getting the code, make sure to add a published google doc to the transcript as well as a height a and a length for the transcript, if necessary.');
         }
+      } else {
+        alert('Please fill in the Google doc links');
+      }
     }
 
 }

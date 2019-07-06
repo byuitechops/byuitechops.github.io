@@ -50,17 +50,24 @@ export class DatabaseService {
   }
 
   async checkAction() {
-    setTimeout(() => {
-      if (this.user.currentAction === '' && (this.router.url.includes('/pre') && !this.router.url.includes('pare'))) {
-        this.router.navigate(['/prepare']);
-      } else if (this.user.currentAction === '') {
+    try {
+      if (this.user) {
+        if (this.user.currentAction === '' && (this.router.url.includes('/pre') && !this.router.url.includes('pare'))) {
+          this.router.navigate(['/prepare']);
+        } else if (this.user.currentAction === '') {
 
-      } else if (this.user.currentAction === 'preparing' && !this.router.url.includes('/pre')) {
-        this.router.navigate(['/pre', this.user.actionID]);
-      } else if ((this.user.currentAction === 'transcribing' || this.user.currentAction === 'reviewing') && this.router.url.includes('/home')) {
-        this.router.navigate(['/home']);
+        } else if (this.user.currentAction === 'preparing' && !this.router.url.includes('/pre')) {
+          this.router.navigate(['/pre', this.user.actionID]);
+        } else if ((this.user.currentAction === 'transcribing' || this.user.currentAction === 'reviewing')
+                    && this.router.url.includes('/home')) {
+          this.router.navigate(['/home']);
+        }
+      } else {
+        setTimeout(() => {this.checkAction(); }, 100);
       }
-    }, 300);
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   // Services pertaining to accessibility collection
@@ -74,10 +81,7 @@ export class DatabaseService {
     this.afs.collection('accessibility').doc(this.afs.createId()).set({
       ...data
     })
-    .then(doc => {
-      console.log(doc);
-    })
-    .catch(err => {
+    .then(() => {}).catch(err => {
       console.log('Huston, we have a problem: ' + err);
     });
     return;
@@ -87,10 +91,7 @@ export class DatabaseService {
     this.afs.collection('accessibility').doc(id).update({
       ...data
     })
-    .then(doc => {
-      console.log(doc);
-    })
-    .catch(err => {
+    .then(() => {}).catch(err => {
       console.log('Huston, we have a problem: ' + err);
     });
     return;

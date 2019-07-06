@@ -11,20 +11,12 @@ import { Router } from '@angular/router';
 })
 export class PrepareComponent implements OnInit {
 
-  type: string;
-  course: string;
-  title: string;
-  priority: string;
-  lms: string;
-  docPub: string;
-  docEdit: string;
-  length: string;
-  verbit: string;
-  verbitID: string;
-
   constructor(public search: SearchService, private db: DatabaseService, private view: ViewEditComponent, private router: Router) {
-
-}
+    // To sort the course codes alphabetically. Doesn't work with our key...
+    // this.search.index.setSettings({
+    //   customRanking: ['asc(courseCode)']
+    // });
+  }
 
 
 
@@ -32,17 +24,28 @@ export class PrepareComponent implements OnInit {
     this.db.checkAction();
   }
 
+  // Open the view edit.
   async showDetails(id) {
     await this.view.openModal(id);
   }
 
-  claimTranscript(id) {
+  // Async functions that update the user action and trascript step.
+  // I use try try catch finally statements to make sure that it logs errors
+  // and that the database action happens first.
+  async claimTranscript(id) {
     const userData = {
       actionID: id,
       currentAction: 'preparing'
     };
-    this.db.updateUser(userData);
-    this.db.changeTranscriptStep('In Prep', this.db.user.name, id);
-    this.router.navigate(['pre', id] );
+    try {
+      await this.db.updateUser(userData);
+      await this.db.changeTranscriptStep('In Prep', this.db.user.name, id);
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setTimeout(() => {
+        this.router.navigate(['pre', id] );
+      }, 300);
+    }
   }
 }

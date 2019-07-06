@@ -76,6 +76,12 @@ export class ViewEditService {
   }
 
   confirmEdit() {
+    if (this.docEditURL === undefined) {
+      this.docEditURL = '';
+    }
+    if (this.docPublishURL === undefined) {
+      this.docPublishURL = '';
+    }
     const data = {
       requestNotes: this.comments,
       courseCode: this.courseCode,

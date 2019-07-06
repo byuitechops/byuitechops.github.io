@@ -35,17 +35,16 @@
 
             <div class="btn-box">
                 <button id="embedVidBtn" (click)="showCodeEmbedded()">Embed Code With Video</button>
-                <button id="embedNoVidBtn" (click)="showCodeLink()">Embed Code 
+                <button id="embedNoVidBtn" (click)="showCodeLink()">Embed Code
                     Without Video</button>
             </div>
 
             <div id="embed-code-box">
-                <p *ngIf="isEmbeded"> {{ code }} </p>
-                <p *ngIf="!isEmbeded"> {{ code }} </p>
+                <p> {{ code }} </p>
             </div>
 
         </section>
-        
+
 
         <section class="right-col" id="transcript-box-info">
             <h2>Ticket Information</h2>
