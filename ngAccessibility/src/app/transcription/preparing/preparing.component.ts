@@ -64,17 +64,22 @@ export class PreparingComponent implements OnInit {
         length: x
       };
     }
-    this.activeRoute.params.subscribe(param => {
-      this.db.changeTranscriptStep('Ready for Transcription', this.db.user.name, param.id);
-    });
     const userData = {
       actionID: '',
       currentAction: ''
     };
+    try {
+      this.activeRoute.params.subscribe(param => {
+        this.db.changeTranscriptStep('Ready for Transcription', this.db.user.name, param.id);
+      });
+      this.db.updateUser(userData);
+      this.db.updateTranscript(data, this.docID);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      this.router.navigate(['/'] );
+    }
 
-    this.db.updateUser(userData);
-    this.db.updateTranscript(data, this.docID);
-    this.router.navigate(['/'] );
   }
 
   calc() {
@@ -82,14 +87,27 @@ export class PreparingComponent implements OnInit {
   }
 
   cancelPrep() {
-    
+    const userData = {
+      actionID: '',
+      currentAction: ''
+    };
+    try {
+      this.activeRoute.params.subscribe(param => {
+        this.db.changeTranscriptStep('Ready for Prep', this.db.user.name, param.id);
+      });
+      this.db.updateUser(userData);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      this.router.navigate(['/prepare'] );
+    }
   }
 
 
   // generates the code to the user, according to the media url received
     showCodeEmbedded() {
         this.isEmbeded = true;
-        
+
 
         const transcript = this.db.getTranscript(this.docID);
         transcript.then(doc => {
