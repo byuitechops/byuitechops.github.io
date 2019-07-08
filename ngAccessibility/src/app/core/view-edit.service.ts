@@ -33,6 +33,7 @@ export class ViewEditService {
 
   hider = false;
   admin = false;
+  counter = false;
 
   constructor(private db: DatabaseService, private auth: AuthService, private search: SearchService) {
 
@@ -101,5 +102,17 @@ export class ViewEditService {
     };
     this.db.updateTranscript(data, this.id);
     this.search.index.clearCache();
+  }
+  delete() {
+    if (this.counter) {
+      this.db.delete(this.id);
+      this.counter = false;
+      this.editing = false;
+      return true;
+    } else if (!this.counter) {
+      alert('This action is not reverable, please be sure of this action.');
+      this.counter = true;
+      return false;
+    }
   }
 }
