@@ -281,12 +281,18 @@ export class RequestComponent implements OnInit {
       document.getElementById('sub-msg').innerHTML = '';
       document.getElementById('transcript-box-info').classList.remove('submitted');
     }, 1500);
-    this.media = '';
-    this.title = '';
+    this.media = undefined;
+    this.title = undefined;
     this.comments = this.selectUndefinedOptionValue;
     this.priority = this.selectUndefinedOptionValue;
-    this.type = '';
-    this.course = null;
+    this.type = null;
+    if (this.multi) {
+      console.log("TESTING");
+
+    } else {
+      this.course = null;
+      this.lms = undefined;
+    }
   }
 
 }
