@@ -218,7 +218,7 @@ button:hover {
 }
 table {
     width: 100%;
-    padding: 10px 80px;
+    padding: 10px 40px;
 }
 .table-headers .priority-col{
     width: 70px;
@@ -319,7 +319,10 @@ tr {
 }
 .icon {
     margin: auto;
+    padding: 10px;
+    text-align: center;
     font-size: 24px;
+    line-height: 30px;
 }
 
 

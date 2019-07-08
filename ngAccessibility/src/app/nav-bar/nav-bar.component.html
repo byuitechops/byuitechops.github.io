@@ -47,16 +47,15 @@
             <ais-hits *ngIf="showResults">
                 <ng-template let-hits="hits">
                     <ol class="ais-Hits-list">
-                    <div *ngFor="let hit of hits" class="ais-Hits-item">
-                        <p class="hit-type">{{ hit.type }}</p>
-                        <div class="hit-code">
-                            <div *ngFor="let code of hit.courseCode">
-                                <p> {{ code }} </p>
+                        <div *ngFor="let hit of hits" class="ais-Hits-item" (click)="showDetails(hit.objectID)">
+                            <p class="hit-type">{{ hit.type }}</p>
+                            <div class="hit-code">
+                                <div *ngFor="let code of hit.courseCode">
+                                    <p> {{ code }} </p>
+                                </div>
                             </div>
+                            <p class="hit-title">{{ hit.title }}</p>
                         </div>
-                        <p class="hit-title">{{ hit.title }}</p>
-                        <button (click)="showDetails(hit.objectID)">View</button>
-                    </div>
                     </ol>
                 </ng-template>
             </ais-hits>
