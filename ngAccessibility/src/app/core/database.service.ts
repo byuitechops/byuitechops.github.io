@@ -162,5 +162,8 @@ export class DatabaseService {
     }
     console.log('Working');
   }
+  delete(id) {
+    this.afs.collection('accessibility').doc(id).delete();
+  }
 }
 

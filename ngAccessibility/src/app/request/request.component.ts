@@ -78,6 +78,7 @@ export class RequestComponent implements OnInit {
   dupPage = 0;
   location: any;
 
+  multi = false;
   hider = false;
 
   toBeUsedType: string;
@@ -282,9 +283,10 @@ export class RequestComponent implements OnInit {
     }, 1500);
     this.media = '';
     this.title = '';
-    this.comments = '';
-    this.priority = '';
+    this.comments = this.selectUndefinedOptionValue;
+    this.priority = this.selectUndefinedOptionValue;
     this.type = '';
+    this.course = null;
   }
 
 }
