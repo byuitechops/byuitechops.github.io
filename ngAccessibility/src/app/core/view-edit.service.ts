@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DatabaseService } from './database.service';
 import { AuthService } from './auth.service';
+import { SearchService } from './search.service';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +34,7 @@ export class ViewEditService {
   hider = false;
   admin = false;
 
-  constructor(private db: DatabaseService, private auth: AuthService) {
+  constructor(private db: DatabaseService, private auth: AuthService, private search: SearchService) {
 
   }
 
@@ -99,5 +100,6 @@ export class ViewEditService {
       verbitID: this.verbitID,
     };
     this.db.updateTranscript(data, this.id);
+    this.search.index.clearCache();
   }
 }

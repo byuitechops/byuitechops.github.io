@@ -32,20 +32,17 @@ export class PrepareComponent implements OnInit {
   // Async functions that update the user action and trascript step.
   // I use try try catch finally statements to make sure that it logs errors
   // and that the database action happens first.
-  async claimTranscript(id) {
+  claimTranscript(id) {
     const userData = {
       actionID: id,
       currentAction: 'preparing'
     };
     try {
-      await this.db.updateUser(userData);
-      await this.db.changeTranscriptStep('In Prep', this.db.user.name, id);
+      this.db.updateUser(userData);
+      this.db.changeTranscriptStep('In Prep', this.db.user.name, id);
     } catch (e) {
       console.log(e);
-    } finally {
-      setTimeout(() => {
-        this.router.navigate(['pre', id] );
-      }, 300);
     }
+    this.router.navigate(['/pre', id] );
   }
 }
