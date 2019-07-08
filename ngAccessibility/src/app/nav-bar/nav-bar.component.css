@@ -84,6 +84,7 @@
     display: none;
 }
 ais-instantsearch {
+    z-index: 1002;
     width: 40%;
     margin-left: auto;
     margin-top: 20px;
@@ -92,7 +93,6 @@ ais-instantsearch {
     margin: 20px 10px 0 auto;
 }
 ais-hits {
-    z-index: 1002;
     width: 600px;
     padding: 15px;
 
@@ -100,7 +100,7 @@ ais-hits {
     background-color: var(--white);
     border-left: 4px solid var(--primary);
     border-radius: 15px;
-    box-shadow: 0 0 5px 0px var(--darkgray);
+    box-shadow: 0 0 8px 3px var(--darkgray);
     overflow: auto;
 }
 .ais-Hits-item {
@@ -110,6 +110,8 @@ ais-hits {
     margin: 5px;
     padding: 5px;
 
+    color: var(--black);
+    background-color: var(--white);
     font-size: 14px;
     border-radius: 15px;
     cursor: pointer;
