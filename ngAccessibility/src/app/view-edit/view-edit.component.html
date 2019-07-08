@@ -149,28 +149,28 @@
             <div class="right-col" id="notes-info-field">
                 <h2>Participating Users</h2>
 
-                <div class="detail">
+                <div class="right-detail">
                     <p>Requested by</p>
                     <span id="edit-info-requested-by">{{ storage.requestor }}</span>
                 </div>
 
-                <div class="detail">
+                <div class="right-detail">
                     <p>Prepared by</p>
                     <span id="edit-info-prepared-by">{{ storage.preparer }}</span>
                 </div>
 
-                <div class="detail">
+                <div class="right-detail">
                     <p>Transcribed by</p>
                     <span id="edit-info-transcribe-by">{{ storage.transcriber }}</span>
                 </div>
 
-                <div class="detail">
+                <div class="right-detail">
                     <p>Reviewed by</p>
                     <span id="edit-info-review-by">{{ storage.reviewer }}</span>
                 </div>
 
                 <h3 id="comments-header">Comments</h3>
-                <div class="detail">
+                <div class="right-detail">
                     <div *ngIf="storage.editing; else viewComments">
                         <textarea id="edit-info-comment" [(ngModel)]="storage.comments">{{ storage.comments }}</textarea>
                     </div>
