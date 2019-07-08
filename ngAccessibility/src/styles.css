@@ -166,7 +166,7 @@ input:hover, input:active, select:hover, select:active {
 button {
     width: 100%;
     max-width: 150px;
-    margin: 2px;
+    margin: 5px;
     padding: 10px 15px;
 
     font-size: 13px;
