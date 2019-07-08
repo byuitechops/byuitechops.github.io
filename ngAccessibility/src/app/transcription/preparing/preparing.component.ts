@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DatabaseService } from 'src/app/core/database.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { SearchService } from 'src/app/core/search.service';
 
 @Component({
   selector: 'app-preparing',
@@ -28,7 +29,7 @@ export class PreparingComponent implements OnInit {
   isEmbeded = true;
 
 
-  constructor(private db: DatabaseService, private activeRoute: ActivatedRoute, private router: Router) { }
+  constructor(private search: SearchService, private db: DatabaseService, private activeRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     try {
@@ -173,7 +174,7 @@ export class PreparingComponent implements OnInit {
         this.code = `<p>(${placeholdM}${this.mins}${colon}${placeholdS}${this.sec} mins,
                      <a href="${this.docPub}" target="_blank">${this.title} Transcript</a>)</p>`;
         } else {
-            alert('Before getting the code, make sure to add a published google doc to the transcript as well as a height a and a length for the transcript, if necessary.');
+            alert('Before getting the code, make sure to add a published Google doc to the transcript as well as a height a and a length for the transcript, if necessary.');
         }
       } else {
         alert('Please fill in the Google doc links');

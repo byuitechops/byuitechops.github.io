@@ -56,7 +56,7 @@ export class DatabaseService {
           this.router.navigate(['/prepare']);
         } else if (this.user.currentAction === '') {
 
-        } else if (this.user.currentAction === 'preparing' && !this.router.url.includes('/pre')) {
+        } else if (this.user.currentAction === 'preparing' && !(this.router.url.includes('/pre') !== this.router.url.includes('pare'))) {
           this.router.navigate(['/pre', this.user.actionID]);
         } else if ((this.user.currentAction === 'transcribing' || this.user.currentAction === 'reviewing')
                     && this.router.url.includes('/home')) {
