@@ -105,24 +105,19 @@
 
         <section id="requestForm" class="left-col">
             <input [(ngModel)]="name" id="guestName" placeholder="Name" [class.hide]="hider">
-
             <select [(ngModel)]="type" placeholder="Select Type">
                 <option disabled hidden [value]="selectUndefinedOptionValue">Select Type</option>
                 <option *ngFor="let y of types" [ngValue]="y">{{ y }}</option>
             </select>
-
             <select [(ngModel)]="course">
                 <option [ngValue]="null" hidden>Select Course</option>
                 <option id="requestCourse" hidden></option>
             </select>
-
-            <input [(ngModel)]="title" type="text" placeholder="Transcript Title">
-
             <select [(ngModel)]="priority">
                 <option disabled hidden [value]="selectUndefinedOptionValue">Select Priority</option>
                 <option *ngFor="let i of priorities" [ngValue]="i.value">{{ i.name }}</option>
             </select>
-
+            <input [(ngModel)]="title" type="text" placeholder="Transcript Title">
             <input [(ngModel)]="lms" type="url" placeholder="Canvas URL">
             <input  [(ngModel)]="media" type="url" placeholder="Media URL">
 
@@ -155,7 +150,7 @@
                     <label>Location in Course:</label>
                     <p class="description"> {{ lms }} </p>
                 </div>
-                <input type="checkbox" class="checkbox"><span>Request Another Transcript for this Course?</span>
+                <input type="checkbox" class="checkbox" id="moreClassTrans"><span class="check-text">Request Another Transcript for this Course?</span>
                 <div class="btn-box">
                     <button type="submit" id="requestSubmit" (click)="newRequest()">Submit</button>
                     <button class="hide" id="dup-btn" (click)="openDup()">Open Dup Checker</button>

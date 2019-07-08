@@ -146,6 +146,14 @@ input:hover, input:active, select:hover, select:active {
 ::-webkit-input-placeholder {
     opacity: .4;
 }
+.checkbox {
+    width: 15px;
+    height: 15px;
+
+    border-style: none;
+    border: 2px solid var(--primary);
+    background-color: var(--white);
+}
 
 .btn-box {
     display: flex;
