@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { DatabaseService } from './database.service';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -16,7 +17,7 @@ export class AuthService {
   review = false;
   role: any;
 
-  constructor(private af: AngularFireAuth, private db: DatabaseService) {
+  constructor(private af: AngularFireAuth, private db: DatabaseService, private router: Router) {
     //  This loads on every page in the Site, it check if the user is authenticated
     // and then finds that user in the database.
     this.af.auth.onAuthStateChanged(async user => {
@@ -41,6 +42,11 @@ export class AuthService {
       this.guest = true;
       this.review = false;
       this.transcribe = false;
+      if (this.router.url.includes('request') || this.router.url.includes('master')) {
+        // do nothing
+      } else {
+        this.router.navigate(['request']);
+      }
       return;
     }
     this.guest = false;

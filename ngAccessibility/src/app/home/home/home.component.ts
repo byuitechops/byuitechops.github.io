@@ -33,8 +33,10 @@ export class HomeComponent implements OnInit {
     });
   }
   edit() {
-    if (this.db.user.lead) {
-      this.editAnnouce = !this.editAnnouce;
+    if (!this.afAuth.user.isAnonymous) {
+      if (this.db.user.lead) {
+        this.editAnnouce = !this.editAnnouce;
+      }
     }
   }
   sumbitEdit() {
