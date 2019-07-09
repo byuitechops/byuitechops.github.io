@@ -13,7 +13,11 @@
 
             <div id="announcement-box">
                 <h2>Announcements</h2>
-                <div>{{ announce }}</div>
+                <div (click)="edit()" *ngIf="!editAnnouce">{{ announce }}</div>
+                <div *ngIf="editAnnouce">
+                  <textarea [(ngModel)]="announce"></textarea>
+                  <button type="button" (click)="sumbitEdit()">Sumbit</button>
+                </div>
             </div>
 
             <div class="links-box">

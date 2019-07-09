@@ -22,10 +22,10 @@
         <h1 class="page-title">Prepare</h1>
 
         <section class="left-col" id="requestForm">
-            <p>Did you find a file in the Google Drive and course file before making a new transcript?</p>
-            <select>
-                <option>No</option>
-                <option>Yes</option>
+            <p>Did you find an existing transcript in the Google Drive and/or course files before making a new transcript?</p>
+            <select [(ngModel)]="found">
+                <option [ngValue]=false>No</option>
+                <option [ngValue]=true>Yes</option>
             </select>
             <p>Transcript Information</p>
             <input class="prepare-input" [(ngModel)]="docEdit" placeholder="Editable Google Doc" />
@@ -39,8 +39,8 @@
             </div>
 
 
-            <p>Will this use Verbit?</p>
-            <select [(ngModel)]="verbit">
+            <p *ngIf="!found">Will this use Verbit?</p>
+            <select [(ngModel)]="verbit" *ngIf="!found">
                 <option disabled hidden [value]="" (selected)="verbit">Select Verbit</option>
                 <option [ngValue]=false>No</option>
                 <option [ngValue]=true>Yes</option>
@@ -49,13 +49,12 @@
                 <p>Verbit ID</p>
                 <input [(ngModel)]="verbitID" placeholder="Verbit ID" />
             </div>
+            <div>
+              <textarea [(ngModel)]="notes" placeholder="Notes"></textarea>
+            </div>
 
             <div class="btn-box">
                 <button id="embedCodeBtn" (click)="showCodePopup()">Embed Code</button>
-            </div>
-
-            <div id="embed-code-box">
-                <p> {{ code }} </p>
             </div>
 
         </section>

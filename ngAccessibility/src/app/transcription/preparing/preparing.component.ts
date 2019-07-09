@@ -10,6 +10,7 @@ import { SearchService } from 'src/app/core/search.service';
 })
 export class PreparingComponent implements OnInit {
 
+  found = false;
   type: string;
   course: string;
   title: string;
@@ -19,6 +20,7 @@ export class PreparingComponent implements OnInit {
   docEdit: string;
   verbit: string;
   verbitID: string;
+  notes: string;
 
   hours = 0;
   mins = 0;
@@ -43,6 +45,7 @@ export class PreparingComponent implements OnInit {
           this.type = doc.data().type;
           this.lms = doc.data().location[0].lmsURL;
           this.priority = doc.data().priority;
+          this.notes = doc.data().notes;
         });
       });
     } catch (e) {
@@ -64,7 +67,8 @@ export class PreparingComponent implements OnInit {
             docPublishURL:  this.docPub,
             verbit: this.verbit,
             verbitID: this.verbitID,
-            length: x
+            length: x,
+            notes: this.notes
           };
         } else {
           data = {
@@ -186,7 +190,7 @@ export class PreparingComponent implements OnInit {
       const modal = document.getElementById('embed-modal');
       const navbar = document.getElementById('main-nav');
       const content = document.getElementsByTagName('main');
-  
+
       modal.classList.remove('hide');
       navbar.classList.add('blur');
       for (let i = 0; i < content.length; i++) {
@@ -195,18 +199,18 @@ export class PreparingComponent implements OnInit {
 
       this.showCodeEmbedded();
       this.showCodeLink();
-  
+
     }
     closeCodePopup() {
       const modal = document.getElementById('embed-modal');
       const navbar = document.getElementById('main-nav');
       const content = document.getElementsByTagName('main');
-  
+
       modal.classList.add('hide');
       navbar.classList.remove('blur');
       for (let i = 0; i < content.length; i++) {
         content[i].classList.remove('blur');
       }
-  
+
     }
 }
