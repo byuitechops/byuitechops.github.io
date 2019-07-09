@@ -10,6 +10,7 @@ import { SearchService } from 'src/app/core/search.service';
 })
 export class PreparingComponent implements OnInit {
 
+  found = false;
   type: string;
   course: string;
   title: string;
