@@ -126,6 +126,22 @@ ais-hits {
 .hit-title {
     width: 70%;
 }
+.black-btn {
+  background-color: black;
+  border: none;
+  font-weight: 600;
+  height: 40px;
+  width: 120px;
+  position: relative;
+  float: right;
+  margin: 18px 0 0 0;
+  transition: all 0.3s;
+  text-align: center;
+}
+.black-btn:hover {
+  color: white;
+  box-shadow: 0 0 4px 1px var(--lightgray);
+}
 
 
 /*******************************
