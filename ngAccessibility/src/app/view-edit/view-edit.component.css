@@ -8,12 +8,12 @@
     border-radius: 10px;
 }
 .left-col {
-    width: 600px;
+    width: 500px;
 }    
 .right-col {
-    width: 300px;
+    width: 400px;
 }
-.detail, .right-detail {
+.detail {
     display: flex;
     flex-flow: row wrap;
     width: 100%;
@@ -25,16 +25,38 @@
     font-weight: 700;
 }
 .detail span {
-
+    width: 330px;
 }
-.right-detail span {
-    width: 
+#notes-info-field span {
+    width: 230px;
 }
 .detail a {
+    width: 100%;
     word-break: break-word;
 }
 .median {
     height: 100%;
+}
+#loc-title {
+    width: 330px;
+}
+#add-location {
+    width: 20px;
+    height: 20px;
+    padding: 3px;
+    
+    font-size: 14px;
+}
+.loc {
+    width: 340px;
+    padding: 30px !important;
+}
+.sidebar {
+    width: 4px;
+    height: 100%;
+    margin: 3px;
+    border-radius: 5px;
+    background-color: slateblue;
 }
 
 textarea {

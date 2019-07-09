@@ -4,12 +4,12 @@
 
         <div class="modal-header-box">
             <h1 class="modal-header" id="edit-info-title">View/Edit Information</h1>
+            <h2>Transcript Info</h2>
         </div>
 
         <div class="modal-body">
 
             <div class="left-col" id="edit-info-field">
-                <h2>Transcript Info</h2>
                 <div class="detail">
                     <p>Title</p>
                     <div *ngIf="storage.editing; else viewTitle">
@@ -129,16 +129,37 @@
                         <span id="view-info-isverbit">{{ storage.verbit }}</span>
                     </ng-template>
                 </div>
+
                 <div [class.hide]="!storage.verbit">
-                  <div class="detail" id="verbit-id-box">
-                    <p>Verbit ID</p>
-                    <div *ngIf="storage.editing; else viewVerbitID">
-                        <input id="edit-info-verbitid" type="text" [(ngModel)]="storage.verbitID" />
+                    <div class="detail" id="verbit-id-box">
+                        <p>Verbit ID</p>
+                        <div *ngIf="storage.editing; else viewVerbitID">
+                            <input id="edit-info-verbitid" type="text" [(ngModel)]="storage.verbitID" />
+                        </div>
+                        <ng-template #viewVerbitID>
+                            <span id="view-info-isverbit">{{ storage.verbitID }}</span>
+                        </ng-template>
                     </div>
-                    <ng-template #viewVerbitID>
-                        <span id="view-info-isverbit">{{ storage.verbitID }}</span>
+                </div>
+
+                <div class="detail">
+                    <p>Transcribed by</p>
+                    <span id="edit-info-transcribe-by">{{ storage.transcriber }}</span>
+                </div>
+
+                <div class="detail">
+                    <p>Reviewed by</p>
+                    <span id="edit-info-review-by">{{ storage.reviewer }}</span>
+                </div>
+
+                <h3 id="comments-header">Comments</h3>
+                <div class="detail">
+                    <div *ngIf="storage.editing; else viewComments">
+                        <textarea id="edit-info-comment" [(ngModel)]="storage.comments">{{ storage.comments }}</textarea>
+                    </div>
+                    <ng-template #viewComments>
+                        <span id="view-info-comments">{{ storage.comments }}</span>
                     </ng-template>
-                  </div>
                 </div>
             </div>
 
@@ -147,36 +168,42 @@
 
 
             <div class="right-col" id="notes-info-field">
-                <h2>Participating Users</h2>
 
-                <div class="right-detail">
-                    <p>Requested by</p>
-                    <span id="edit-info-requested-by">{{ storage.requestor }}</span>
-                </div>
-
-                <div class="right-detail">
-                    <p>Prepared by</p>
-                    <span id="edit-info-prepared-by">{{ storage.preparer }}</span>
-                </div>
-
-                <div class="right-detail">
-                    <p>Transcribed by</p>
-                    <span id="edit-info-transcribe-by">{{ storage.transcriber }}</span>
-                </div>
-
-                <div class="right-detail">
-                    <p>Reviewed by</p>
-                    <span id="edit-info-review-by">{{ storage.reviewer }}</span>
-                </div>
-
-                <h3 id="comments-header">Comments</h3>
-                <div class="right-detail">
-                    <div *ngIf="storage.editing; else viewComments">
-                        <textarea id="edit-info-comment" [(ngModel)]="storage.comments">{{ storage.comments }}</textarea>
+                <h3 id="loc-title">Locations</h3>
+                <a class="" id="add-location">+</a>
+                
+                <div class="detail">
+                    <div *ngIf="storage.editing; else viewLocations" class="loc">
+                        <div>
+                            <select [(ngModel)]="locCode">
+                                <option [ngValue]="null" hidden class="initial-opt">Select Course</option>
+                                <option id="requestCourse" hidden></option>
+                            </select>
+                            <input [(ngModel)]="locLMS" type="url" placeholder="Canvas URL">
+                            <input [(ngModel)]="locReq" type="text" placeholder="Requestor">
+                            <input [(ngModel)]="locPrep" type="text" placeholder="Preparer">
+                        </div>
                     </div>
-                    <ng-template #viewComments>
-                        <span id="view-info-comments">{{ storage.comments }}</span>
+                    <div *ngIf="storage.editing" class="sidebar"></div>
+                    <ng-template #viewLocations class="loc">
+                        <div class="detail">
+                            <p>Course</p>
+                            <span> {{ currentCourse }} AAA 100</span>
+                        </div>
+                        <div class="detail">
+                            <p>LMS URL</p>
+                            <span> {{ currentLMS }} www.google.com</span>
+                        </div>
+                        <div class="detail">
+                            <p>Requestor</p>
+                            <span> {{ currentReq }} Shawn (Test) Hillman</span>
+                        </div>
+                        <div class="detail">
+                            <p>Preparer</p>
+                            <span> {{ currentPrep }} Shawn (Test) Hillman</span>
+                        </div>
                     </ng-template>
+                    <div *ngIf="!storage.editing" class="sidebar"></div>
                 </div>
 
             </div>
