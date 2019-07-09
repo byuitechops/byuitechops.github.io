@@ -23,7 +23,6 @@
     max-width: 1500px;
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-between;
     margin: auto;
 }
 #nav-links {
