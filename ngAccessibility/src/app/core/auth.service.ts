@@ -97,6 +97,15 @@ export class AuthService {
       });
   }
 
+  reset(email) {
+    this.af.auth.sendPasswordResetEmail(email).then(() => {
+      // Email sent.
+    }).catch((error) => {
+      // An error happened.
+      console.log(error)
+    });
+  }
+
   // Designers will request things in guest mode. This will be need for our icon that
   // dissplay next to the request to know that this was requested outside our team.
   guestMode() {

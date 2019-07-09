@@ -15,6 +15,7 @@ export class AuthPageComponent implements OnInit {
   role: string;
   error: string;
 
+  passBox = document.getElementById('signin-password');
   constructor(public afAuth: AuthService) {
 
   }
@@ -27,12 +28,21 @@ export class AuthPageComponent implements OnInit {
     }, 1000);
   }
 
+  hitEnter(event) {
+    if (event.keyCode === 13) {
+      this.signIn();
+    }
+  }
   async signIn() {
     const login = await this.afAuth.login(this.email, this.password);
     this.checkAuth().then(() => {
       this.closeModal();
     }).catch((err) => {
       console.log(err);
+      this.error = err;
+      setTimeout(() => {
+        this.error = '';
+      }, 2500);
     });
   }
 
@@ -42,11 +52,21 @@ export class AuthPageComponent implements OnInit {
         if (this.afAuth.authenticated) {
           resolve();
         } else {
-          alert('Check if your password is correct.');
           reject('Check if your password is correct.');
         }
       }, 500);
     });
+  }
+
+  resetPass() {
+    if (this.email === undefined || this.email === '') {
+      this.afAuth.reset(this.email);
+    } else {
+      this.error = 'Please put in your email to reset password';
+      setTimeout(() => {
+        this.error = '';
+      }, 2000);
+    }
   }
 
   guest() {
