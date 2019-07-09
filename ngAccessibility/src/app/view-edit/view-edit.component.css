@@ -58,16 +58,6 @@
     border-radius: 5px;
     background-color: slateblue;
 }
-
-textarea {
-    width: 400px;
-    height: 200px;
-    padding: 5px;
-
-    font-size: 14px;
-    border-radius: 5px;
-    outline: none;
-}
 #comments-header {
     margin-top: 25px;
 }

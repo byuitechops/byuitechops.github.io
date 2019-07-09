@@ -1,12 +1,36 @@
 /*****************************************************
 *
-*   GENERAL STYLES CSS
+*   GENERAL STYLES CSS / [styles.css]
 *
+*   a. Imports
+*   1. Variables
+*   2. General
+*   3. Headings
+*   4. Icons
+*   5. Links
+*   6. Form Inputs
+*   7. Buttons
+*   8. Hide & Blur
+*   9. Scrollbar
+*   10. Transcript Tables
+*   11. Modals
+*   12. Screen Sizes (Media Queries)
+*   
 ******************************************************/
 
 
+/****************************
+ *  a. IMPORTS
+ ****************************/
+
 @import url('https://fonts.googleapis.com/css?family=Merriweather:300,400,700|Open+Sans:300,400,700&display=swap');
 
+
+
+
+/****************************
+ *  1. VARIABLES
+ ****************************/
 
 :root {
     --primary: #0076C6;
@@ -19,6 +43,11 @@
     --warning: #E85156;
 }
 
+
+
+/****************************
+ *  2. GENERAL
+ ****************************/
 
 * {
     box-sizing: border-box;
@@ -53,6 +82,13 @@
 
     border-radius: 10px;
 }
+
+
+
+/****************************
+ *  3. HEADINGS
+ ****************************/
+
 h1 {
     width: 100%;
     font-family: "Merriweather";
@@ -92,12 +128,31 @@ a {
     font-weight: 700;
 }
 
+
+
+
+/****************************
+ *  4. ICONS
+ ****************************/
+
+ .icon-box {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 10px;
+    padding-top: 5px;
+}
 .icon {
     width: 50px;
     height: 50px;
     margin: 5px;
     padding: 10px;
 
+    text-align: center;
+    font-size: 24px;
+    line-height: 30px;
     border-radius: 50%;
     cursor: pointer;
     transition: .2s;
@@ -109,6 +164,11 @@ a {
     box-shadow: none;
 }
 
+
+
+/****************************
+ *  5. LINKS
+ ****************************/
 
 .links-box {
     display: flex;
@@ -130,6 +190,13 @@ a {
     box-shadow: 0 0 3px 0px var(--black);
     cursor: pointer;
 }
+
+
+
+
+/****************************
+ *  6. FORM INPUTS
+ ****************************/
 
 input, select {
     width: 100%;
@@ -159,6 +226,20 @@ input:hover, input:active, select:hover, select:active {
 .initial-opt {
     color: var(--lightgray);
 }
+textarea {
+    width: 100%;
+    height: 150px;
+    padding: 5px;
+
+    font-size: 14px;
+    border-radius: 5px;
+    outline: none;
+}
+
+
+/****************************
+ *  7. BUTTONS
+ ****************************/
 
 .btn-box {
     display: flex;
@@ -197,14 +278,43 @@ button:hover {
     background-color: var(--white);
     border: 3px solid var(--warning);
 }
+.black-btn {
+  background-color: black;
+  border: none;
+  font-weight: 600;
+  height: 40px;
+  width: 120px;
+  position: relative;
+  float: right;
+  margin: 18px 0 0 0;
+  transition: all 0.3s;
+  text-align: center;
+}
+.black-btn:hover {
+  color: var(--black);
+  border: 3px solid var(--black);
+}
+
+
+
+
+/****************************
+ *  8. HIDE & BLUR
+ ****************************/
 
 .hide {
     display: none !important;
 }
 .blur {
-    filter: blur(5px) !important;
+    filter: blur(10px) !important;
 }
 
+
+
+
+/****************************
+ *  9. SCROLLBAR
+ ****************************/
 
 ::-webkit-scrollbar {
     width: 15px;
@@ -222,6 +332,13 @@ button:hover {
 ::-webkit-scrollbar-thumb:hover {
     background: var(--primary); 
 }
+
+
+
+
+/****************************
+ *  10. TRANSCRIPT TABLES
+ ****************************/
 
 .search-panel {
     width: 100%;
@@ -281,6 +398,13 @@ tr {
     padding: 3px;
 }
 
+
+
+
+/****************************
+ *  11. MODALS
+ ****************************/
+
 .modal {
     z-index: 10;
     position: fixed;
@@ -321,23 +445,12 @@ tr {
     background-color: var(--lightgray);
 }
 
-.icon-box {
-    width: 50px;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 5px 10px;
-    padding-top: 5px;
-}
-.icon {
-    margin: auto;
-    padding: 10px;
-    text-align: center;
-    font-size: 24px;
-    line-height: 30px;
-}
 
+
+
+/****************************
+ *  12. SCREEN SIZE: Tablet
+ ****************************/
 
 @media only screen and (max-width: 1000px) {
     
