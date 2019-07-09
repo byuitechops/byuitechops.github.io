@@ -1,3 +1,18 @@
+<section class="modal hide" id="follow-modal">
+    <div class="modal-content" id="follow-modal-content">
+        <div class="modal-header-box">
+            <h1>Follow Transcript to Prep?</h1>
+        </div>
+        <div class="modal-body">
+            <h3>Continue this transcript's progress through to the Preparation Step?</h3>
+        </div>
+        <div class="btn-box">
+            <button id="done-btn" (click)="followTranscript()">Yes</button>
+            <button id="done-btn" (click)="closeFollow()">No</button>
+        </div>
+    </div>
+</section>
+
 <section class="modal hide" id="dup-modal">
 
     <div class="modal-content" id="dup-modal-content">
@@ -106,15 +121,15 @@
         <section id="requestForm" class="left-col">
             <input [(ngModel)]="name" id="guestName" placeholder="Name" [class.hide]="hider">
             <select [(ngModel)]="type" placeholder="Select Type">
-                <option disabled hidden [value]="selectUndefinedOptionValue">Select Type</option>
+                <option disabled hidden [value]="selectUndefinedOptionValue" class="initial-opt">Select Type</option>
                 <option *ngFor="let y of types" [ngValue]="y">{{ y }}</option>
             </select>
             <select [(ngModel)]="course">
-                <option [ngValue]="null" hidden>Select Course</option>
+                <option [ngValue]="null" hidden class="initial-opt">Select Course</option>
                 <option id="requestCourse" hidden></option>
             </select>
             <select [(ngModel)]="priority">
-                <option disabled hidden [value]="selectUndefinedOptionValue">Select Priority</option>
+                <option disabled hidden [value]="selectUndefinedOptionValue" class="initial-opt">Select Priority</option>
                 <option *ngFor="let i of priorities" [ngValue]="i.value">{{ i.name }}</option>
             </select>
             <input [(ngModel)]="title" type="text" placeholder="Transcript Title">

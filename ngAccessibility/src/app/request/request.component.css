@@ -103,6 +103,12 @@
     backface-visibility: hidden;
     perspective: 1000px;
 }
+#follow-modal-content {
+    width: 500px;
+}
+#follow-modal-content h3 {
+    width: 100%;
+}
 
 @keyframes shake {
     10%, 90%      { transform: translate3d(-1px, 0, 0); }

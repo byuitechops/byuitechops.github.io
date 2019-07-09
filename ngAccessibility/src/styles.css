@@ -34,6 +34,7 @@
 .main-box {
     display: flex;
     flex-flow: row wrap;
+    justify-content: space-between;
 
     width: 100%;
     max-width: 1500px;
@@ -154,6 +155,9 @@ input:hover, input:active, select:hover, select:active {
     border: 2px solid var(--primary);
     background-color: var(--white);
 }
+.initial-opt {
+    color: var(--lightgray);
+}
 
 .btn-box {
     display: flex;
@@ -166,7 +170,7 @@ input:hover, input:active, select:hover, select:active {
 button {
     width: 100%;
     max-width: 150px;
-    margin: 2px;
+    margin: 5px;
     padding: 10px 15px;
 
     font-size: 13px;

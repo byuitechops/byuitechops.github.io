@@ -1,3 +1,20 @@
+<section class="modal hide" id="embed-modal">
+    <div class="modal-content" id="embed-modal-content">
+        <div class="modal-header-box">
+            <h1>Embeded Code</h1>
+        </div>
+        <div class="modal-body">
+            <h2>Video</h2>
+            <p> {{ vidCode }} </p>
+            <h2>No Video</h2>
+            <p> {{ noVidCode }} </p>
+        </div>
+        <div class="btn-box">
+            <button id="done-btn" (click)="closeCodePopup()">Done</button>
+        </div>
+    </div>
+</section>
+
 <main>
 
     <div class="main-box">
@@ -22,7 +39,7 @@
             </div>
 
 
-            <p>Will this use Verbit</p>
+            <p>Will this use Verbit?</p>
             <select [(ngModel)]="verbit">
                 <option disabled hidden [value]="" (selected)="verbit">Select Verbit</option>
                 <option [ngValue]=false>No</option>
@@ -34,9 +51,7 @@
             </div>
 
             <div class="btn-box">
-                <button id="embedVidBtn" (click)="showCodeEmbedded()">Embed Code With Video</button>
-                <button id="embedNoVidBtn" (click)="showCodeLink()">Embed Code
-                    Without Video</button>
+                <button id="embedCodeBtn" (click)="showCodePopup()">Embed Code</button>
             </div>
 
             <div id="embed-code-box">

@@ -215,6 +215,7 @@ export class RequestComponent implements OnInit {
           this.submitMsg();
         }
       }
+      this.showFollow();
     }
   }
 
@@ -291,6 +292,34 @@ export class RequestComponent implements OnInit {
       this.course = null;
       this.lms = undefined;
     }
+  }
+
+  showFollow() {
+    const modal = document.getElementById('follow-modal');
+    const navbar = document.getElementById('main-nav');
+    const content = document.getElementsByTagName('main');
+
+    modal.classList.remove('hide');
+    navbar.classList.add('blur');
+    for (let i = 0; i < content.length; i++) {
+      content[i].classList.add('blur');
+    }
+
+  }
+  closeFollow() {
+    const modal = document.getElementById('follow-modal');
+    const navbar = document.getElementById('main-nav');
+    const content = document.getElementsByTagName('main');
+
+    modal.classList.add('hide');
+    navbar.classList.remove('blur');
+    for (let i = 0; i < content.length; i++) {
+      content[i].classList.remove('blur');
+    }
+
+  }
+  followTranscript() {
+
   }
 
 }
