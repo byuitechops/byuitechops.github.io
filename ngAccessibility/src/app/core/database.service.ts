@@ -9,8 +9,11 @@ export class DatabaseService {
 
   user: any;
   userID: string;
+  count = 0;
 
-  constructor(public afs: AngularFirestore, private router: Router) {}
+  constructor(public afs: AngularFirestore, private router: Router) {
+
+  }
 
 
   // Services pertaining to collection users

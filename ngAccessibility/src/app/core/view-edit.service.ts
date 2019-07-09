@@ -46,7 +46,7 @@ export class ViewEditService {
     await file.then(async transcript => {
       const data = await transcript.data();
       this.comments = await data.requestNotes;
-      this.courseCode = await data.courseCode;
+      this.courseCode = await data.location.courseCode;
       this.priority = await data.priority;
       this.lmsURL = await data.lmsURL;
       this.docPublishURL = await data.docPublishURL;
@@ -84,13 +84,20 @@ export class ViewEditService {
     if (this.docPublishURL === undefined) {
       this.docPublishURL = '';
     }
+    if (this.comments === undefined) {
+      this.comments = '';
+    }
     const data = {
-      requestNotes: this.comments,
-      courseCode: this.courseCode,
+      notes: this.comments,
+      location: [{
+        courseCode: this.courseCode,
+        lmsURL: this.lmsURL,
+        preparer: this.preparer,
+        requestor: this.requestor
+      }],
       docEditURL: this.docEditURL,
       docPublishURL: this.docPublishURL,
       length: this.length,
-      lmsURL: this.lmsURL,
       parentTranscript: this.parentTranscript,
       priority: this.priority,
       srcURL: this.srcURL,

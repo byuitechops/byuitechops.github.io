@@ -177,7 +177,6 @@ export class RequestComponent implements OnInit {
         this.comments = this.comments + ' Made by ' + this.name;
       }
       const data = {
-        datePrepareFinished: '',
         docEditURL: '',
         docPublishURL: '',
         length: '',
@@ -188,7 +187,6 @@ export class RequestComponent implements OnInit {
           preparer: '',
         }],
         priority: this.priority,
-        requestDate: new Date(),
         notes: this.comments,
         srcURL: this.media,
         status: 'Ready for Prep',
@@ -282,12 +280,18 @@ export class RequestComponent implements OnInit {
       document.getElementById('sub-msg').innerHTML = '';
       document.getElementById('transcript-box-info').classList.remove('submitted');
     }, 1500);
-    this.media = '';
-    this.title = '';
+    this.media = undefined;
+    this.title = undefined;
     this.comments = this.selectUndefinedOptionValue;
     this.priority = this.selectUndefinedOptionValue;
-    this.type = '';
-    this.course = null;
+    this.type = null;
+    if (this.multi) {
+
+
+    } else {
+      this.course = null;
+      this.lms = undefined;
+    }
   }
 
   showFollow() {

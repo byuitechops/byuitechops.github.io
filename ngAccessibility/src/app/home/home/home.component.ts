@@ -19,7 +19,8 @@ export class HomeComponent implements OnInit {
     media: '',
     doc: '',
     id: '',
-    verbitID: ''
+    verbitID: '',
+    comment: '',
   };
   verbit = false;
   constructor(public db: DatabaseService, private afAuth: AuthService) {
@@ -47,7 +48,8 @@ export class HomeComponent implements OnInit {
       media: '',
       doc: '',
       id: '',
-      verbitID: ''
+      verbitID: '',
+      comment: ''
     };
   }
   updateInProgress() {
@@ -69,6 +71,8 @@ export class HomeComponent implements OnInit {
               this.verbit = true;
               this.data.verbitID = info.verbitID;
             }
+            this.data.comment = info.requestNotes;
+            this.data.comment += info.notes;
           }, 300);
         });
       }
@@ -91,7 +95,8 @@ export class HomeComponent implements OnInit {
           media: '',
           doc: '',
           id: '',
-          verbitID: ''
+          verbitID: '',
+          comment: ''
         };
         console.log('Success: ' + doc.data());
       } else if (info === 'In Review') {
@@ -105,7 +110,8 @@ export class HomeComponent implements OnInit {
           media: '',
           doc: '',
           id: '',
-          verbitID: ''
+          verbitID: '',
+          comment: ''
         };
       }
     });

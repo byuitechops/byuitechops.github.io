@@ -8,6 +8,7 @@ import { TranscribeComponent } from './transcription/transcribe/transcribe.compo
 import { CopyeditComponent } from './transcription/copyedit/copyedit.component';
 import { CopycheckComponent } from './transcription/copycheck/copycheck.component';
 import { PreparingComponent } from './transcription/preparing/preparing.component';
+import { MasterComponent } from './transcription/master/master.component';
 
 const routes: Routes = [
     {
@@ -37,6 +38,10 @@ const routes: Routes = [
     {
         path: 'copycheck',
         component: CopycheckComponent
+    },
+    {
+      path: 'master',
+      component: MasterComponent
     },
     {
       path: '',

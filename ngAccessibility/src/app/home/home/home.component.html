@@ -65,6 +65,10 @@
                 <h4 [class.hide]="!verbit">Verbit ID</h4>
                 <p [class.hide]="!verbit">{{ data.verbitID }}</p>
                 </div>
+                <div>
+                <h4>Comments</h4>
+                <p>{{ data.comment }}</p>
+                </div>
                 <div class="btn-box">
                     <button id="return-prep-btn" (click)="return()">Return to Prep</button>
                     <button id="complete-tran-btn" (click)="forward()">Complete</button>
