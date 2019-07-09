@@ -22,7 +22,7 @@
         <h1 class="page-title">Prepare</h1>
 
         <section class="left-col" id="requestForm">
-            <p>Did you find a file in the Google Drive and course file before making a new transcript?</p>
+            <p>Did you find an existing transcript in the Google Drive and/or course files before making a new transcript?</p>
             <select>
                 <option>No</option>
                 <option>Yes</option>
@@ -49,13 +49,12 @@
                 <p>Verbit ID</p>
                 <input [(ngModel)]="verbitID" placeholder="Verbit ID" />
             </div>
+            <div>
+              <textarea [(ngModel)]="notes" placeholder="Notes"></textarea>
+            </div>
 
             <div class="btn-box">
                 <button id="embedCodeBtn" (click)="showCodePopup()">Embed Code</button>
-            </div>
-
-            <div id="embed-code-box">
-                <p> {{ code }} </p>
             </div>
 
         </section>
