@@ -26,7 +26,7 @@
                     </div>
                     <div>
                         <p>Password</p>
-                        <input type="password" id="signin-password" placeholder="*****" [(ngModel)]="password" />
+                        <input type="password" id="signin-password" placeholder="*****" [(ngModel)]="password" (keydown)="hitEnter($event)" />
                     </div>
                     <div class="show-on-signup hide">
                         <p>Confirm Password</p>
