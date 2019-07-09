@@ -23,7 +23,6 @@ export class DatabaseService {
       this.user = data.docs[0].data();
       this.userID = data.docs[0].id;
       if (this.user !== undefined) {
-        console.log(this.user);
         this.checkAction();
       }
     });
