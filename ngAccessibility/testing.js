@@ -75,54 +75,125 @@ this.afs.collection("accessibility").get().subscribe((querySnapshot) => {
   });
 });
 
-async dupCheck(data) {
-  const t = data.title;
-  const type = data.type;
-  let src = data.srcURL;
-  const results = new Array();
-  src = await this.cleanSRC(src);
-  console.log(src);
-  this.index.search({
-    query: t
-  }).then(async x => {
-    // tslint:disable-next-line: prefer-for-of
-    for (let y = 0; y < x.hits.length; y++) {
-      if (x.hits[y].type === type) {
-        console.log(x.hits[y]);
-        if ((x.hits[y].srcURL).includes(src)) {
-          results.push(x.hits[y]);
-          this.areThere = true;
-        }
+this.afs.collection("accessibility").get().subscribe((querySnapshot) => {
+  querySnapshot.forEach((documentSnapshot) => {
+    console.log(documentSnapshot.data().title);
+    var data = documentSnapshot.data();
+    if (data.courseCode === undefined) {
+
+    } else {
+      let preparer = '';
+      let requester = '';
+      if (data.preparer !== undefined) {
+        preparer = data.preparer;
       }
+      if (data.requestor !== undefined) {
+        requester = data.requestor;
+      }
+      this.afs.collection('accessibility').doc(documentSnapshot.id).update({
+        location: [{
+          courseCode: data.courseCode,
+          lmsURL: data.lmsURL,
+          preparer,
+          requester
+        }]
+      });
     }
   });
-  console.log(results);
-  this.duplicates = results;
-  return results;
-}
+});
+this.afs.collection("accessibility").get().subscribe((querySnapshot) => {
+  querySnapshot.forEach((documentSnapshot) => {
+    console.log(documentSnapshot.data().title);
+    var data = documentSnapshot.data();
+    if (data.guestCreated === undefined) {
+      this.afs.collection('accessibility').doc(documentSnapshot.id).update({
+        guestCreated: false
+      });
+
+    } else {
+
+    }
+  });
+});
+
 
 this.afs.collection("accessibility").get().subscribe((querySnapshot) => {
   querySnapshot.forEach((documentSnapshot) => {
-      console.log(documentSnapshot.data().title);
-      var data = documentSnapshot.data();
-      if (data.location === undefined) {
-        this.afs.collection('accessibility').doc(documentSnapshot.id).update({
-          location: [{
-            courseCode: '',
-            lmsURL: '',
-            preparer: '',
-            requester: ''
-          }]
-        });
-      } else if (data.location[0].courseCode !== undefined && data.location[0].preparer === '') {
-        this.afs.collection('accessibility').doc(documentSnapshot.id).update({
-          location: [{
-            courseCode: data.location[0].courseCode,
-            lmsURL: data.location[0].lmsURL,
-            preparer: '',
-            requester: ''
-          }]
-        });
+    let x = {};
+    console.log(documentSnapshot.data().title);
+    var data = documentSnapshot.data();
+    if (data.courseCode !== undefined) {
+      if (data.location.courseCode !== undefined) {
+        x.location[0].courseCode = data.location.courseCode;
+        x.location[0].lmsURL = data.location.lmsURL;
+        if (data.location.preparer !== undefined) {
+          x.location[0].preparer = data.location.preparer;
+        } else {
+          x.location[0].preparer = '';
+        }
+        if (data.location.requestor !== undefined) {
+          x.location[0].requestor = data.location.requestor;
+        } else {
+          x.location[0].requestor = '';
+        }
+      } else {
+        if (data.location[0] !== undefined) {
+          if (data.location[0].courseCode !== undefined) {
+            if (data.location[0].courseCode[0] !== undefined) {
+              let i = 0
+              (data.location[0].courseCode).forEach(course => {
+                x.location[i].courseCode = course;
+                x.location[i].lmsURL = data.location.lmsURL;
+                x.location[i].preparer = data.location.preparer;
+                x.location[i].requestor = data.location.requester;
+                i++;
+              });
+            }
+          } else {
+            x.location[0].courseCode = '';
+            x.location[0].lmsURL = '';
+            x.location[0].preparer = '';
+            x.location[0].requestor = '';
+          }
+        }
       }
+    } else {
+      if (data.location[0] !== undefined) {
+        if (data.location[0].courseCode === undefined) {
+          x.location[0].courseCode = '';
+          x.location[0].lmsURL = '';
+          x.location[0].preparer = '';
+          x.location[0].requestor = '';
+        } else {
+          x.location[0].courseCode = data.location.courseCode;
+          if (data.location.lmsURL !== undefined) {
+            x.location[0].lmsURL = data.location.lmsURL;
+          } else {
+            x.location[0].lmsURL = '';
+          }
+          x.location[0].preparer = '';
+          x.location[0].requestor = '';
+        }
+      }
+    }
+    x.docEditURL = data.docEditURL;
+    x.docPublishURL = data.docPublishURL;
+    if (data.guestCreated === undefined) {
+      x.guestCreated = false;
+    } else {
+      x.guestCreated = data.guestCreated;
+    }
+    x.length = data.length;
+    x.priority = data.priority;
+    x.notes = data.notes;
+    x.srcURL = data.srcURL;
+    x.status = data.status;
+    x.title = data.title;
+    x.type = data.type;
+    x.verbit = data.verbit;
+    x.verbitID = data.verbitID;
   });
 });
+
+
+

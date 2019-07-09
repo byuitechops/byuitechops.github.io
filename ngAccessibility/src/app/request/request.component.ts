@@ -157,6 +157,7 @@ export class RequestComponent implements OnInit {
     document.getElementById('requestCourse').insertAdjacentHTML('afterend', html);
   }
   async newRequest() {
+    let data;
     if (this.course === undefined &&
       this.type === undefined &&
       (this.lms === '' || this.lms === undefined) &&
@@ -166,35 +167,59 @@ export class RequestComponent implements OnInit {
       alert('Please fill in all fields');
     } else {
       if (this.auth.user.isAnonymous) {
-
+        if (this.comments === undefined || this.comments === '') {
+          this.comments = '';
+        } else {
+          this.comments = this.comments + ' Made by ' + this.name;
+        }
+        data = {
+          docEditURL: '',
+          docPublishURL: '',
+          guestCreated: true,
+          length: '',
+          location: [{
+            courseCode: this.course,
+            lmsURL: this.lms,
+            requestor: this.name,
+            preparer: '',
+          }],
+          priority: this.priority,
+          notes: this.comments,
+          srcURL: this.media,
+          status: 'Ready for Prep',
+          title: this.title,
+          type: this.type,
+          verbit: false,
+          verbitID: ''
+        };
       } else {
         this.name = this.db.user.name;
+        if (this.comments === undefined || this.comments === '') {
+          this.comments = '';
+        } else {
+          this.comments = this.comments + ' Made by ' + this.name;
+        }
+        data = {
+          docEditURL: '',
+          docPublishURL: '',
+          guestCreated: false,
+          length: '',
+          location: [{
+            courseCode: this.course,
+            lmsURL: this.lms,
+            requestor: this.name,
+            preparer: '',
+          }],
+          priority: this.priority,
+          notes: this.comments,
+          srcURL: this.media,
+          status: 'Ready for Prep',
+          title: this.title,
+          type: this.type,
+          verbit: false,
+          verbitID: ''
+        };
       }
-
-      if (this.comments === undefined || this.comments === '') {
-        this.comments = '';
-      } else {
-        this.comments = this.comments + ' Made by ' + this.name;
-      }
-      const data = {
-        docEditURL: '',
-        docPublishURL: '',
-        length: '',
-        location: [{
-          courseCode: this.course,
-          lmsURL: this.lms,
-          requestor: this.name,
-          preparer: '',
-        }],
-        priority: this.priority,
-        notes: this.comments,
-        srcURL: this.media,
-        status: 'Ready for Prep',
-        title: this.title,
-        type: this.type,
-        verbit: false,
-        verbitID: ''
-      };
       try {
         this.location = data.location;
         console.log(data);
@@ -224,7 +249,7 @@ export class RequestComponent implements OnInit {
       courseCode: this.course,
       lmsURL: this.lms,
       requestor: this.name,
-      preparer: '',
+      preparer: this.name,
     };
     this.db.addLocation(this.toBeUsedID, this.location);
     this.closeDup();

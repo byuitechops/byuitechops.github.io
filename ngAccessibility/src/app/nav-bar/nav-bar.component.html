@@ -7,7 +7,7 @@
         </div>
 
         <ul id="nav-links">
-            <a id="home-tab" [routerLink]="['/home']" routerLinkActive="active">
+            <a id="home-tab" [routerLink]="['/home']" routerLinkActive="active" [class.hide]="af.guest">
             <li><i class="fas fa-home fa-2x"></i>
                 Home
             </li>
@@ -17,22 +17,22 @@
                 Request
             </li>
             </a>
-            <a id="prepare-tab" [routerLink]="['/prepare']" routerLinkActive="router-link-active"  routerLinkActive="active">
+            <a id="prepare-tab" [routerLink]="['/prepare']" routerLinkActive="router-link-active"  routerLinkActive="active" [class.hide]="af.guest || !af.transcribe">
             <li> <i class="far fa-file-alt fa-2x"></i>
                 Prepare
             </li>
             </a>
-            <a id="transcribe-tab" routerLink="/transcibe" routerLinkActive="active">
+            <a id="transcribe-tab" routerLink="/transcibe" routerLinkActive="active" [class.hide]="af.guest || !af.transcribe">
             <li> <i class="far fa-edit fa-2x"></i>
                 Transcribe
             </li>
             </a>
-            <a id="copyEdit-tab" routerLink="./copyedit" routerLinkActive="active" class="hide">
+            <a id="copyEdit-tab" routerLink="./copyedit" routerLinkActive="active" [class.hide]="af.guest || !af.review">
             <li> <i class="fas fa-clipboard-check fa-2x"></i>
                 Copyedit
             </li>
             </a>
-            <a id="copyEditCheck-tab" routerLink="./copycheck" routerLinkActive="active" class="hide">
+            <a id="copyEditCheck-tab" routerLink="./copycheck" routerLinkActive="active" [class.hide]="af.guest || !af.review">
             <li> <i class="fas fa-check-double fa-2x "></i>
                 Final Check
             </li>
@@ -40,7 +40,7 @@
         </ul>
 
 
-        <ais-instantsearch [config]="search.config">
+        <!-- <ais-instantsearch [config]="search.config">
             <ais-search-box (change)="searchChanged($event)"></ais-search-box>
             <ais-configure [searchParameters]="{ hitsPerPage: 10 }"></ais-configure>
 
@@ -63,9 +63,9 @@
 
         <div class="icon-box hide" id="search-icon">
             <i class="fas fa-search icon"></i>
-        </div>
+        </div> -->
 
-        <div class="icon-box" id="logout-icon">
+        <div class="icon-box" id="logout-icon" (click)="auth.userStatus()">
             <p>Log Out</p>
         </div>
 

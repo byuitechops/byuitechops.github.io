@@ -1,8 +1,7 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { SearchService } from '../core/search.service';
 import { AuthPageComponent } from '../auth-page/auth-page.component';
-import { ViewEditComponent } from '../view-edit/view-edit.component';
-import { TargetLocator } from 'selenium-webdriver';
+import { AuthService } from '../core/auth.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -11,29 +10,16 @@ import { TargetLocator } from 'selenium-webdriver';
 })
 export class NavBarComponent implements OnInit {
 
-  showResults = false;
+  hider = false;
 
   constructor(public search: SearchService,
               public auth: AuthPageComponent,
-              private view: ViewEditComponent) {
-  
-               }
+              public af: AuthService) {}
 
   ngOnInit() {
+
   }
 
-  async showDetails(id, e) {
-    e.preventDefault()
-    await this.view.openModal(id);
-    console.log('Hello there');
-  }
-  searchChanged(query) {
-    if (query.length >= 3) {
-      this.showResults = true;
-    } else {
-      this.showResults = false;
-    }
-  }
 
   /** Bind autocomplete feature to the input */
 

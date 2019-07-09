@@ -11,6 +11,10 @@ export class AuthService {
   userName: any = 'Guest';
   user: any;
   authenticated = false;
+  guest = false;
+  transcribe = false;
+  review = false;
+  role: any;
 
   constructor(private af: AngularFireAuth, private db: DatabaseService) {
     //  This loads on every page in the Site, it check if the user is authenticated
@@ -22,12 +26,37 @@ export class AuthService {
         this.user = user;
         if (!user.isAnonymous) {
           this.db.findUser(this.userName);
-          console.log(this.user);
         }
+        setTimeout(() => {
+          this.isGuest();
+        }, 200);
       } else {
         this.authenticated = false;
       }
     });
+  }
+
+  async isGuest() {
+    if (this.user.isAnonymous) {
+      this.guest = true;
+      this.review = false;
+      this.transcribe = false;
+      return;
+    }
+    this.guest = false;
+    this.role = await this.db.user.role;
+    if (this.role === 'Copyedit') {
+      this.review = true;
+      this.transcribe = false;
+
+    } else if (this.role === 'Quality Assurance') {
+      this.review = false;
+      this.transcribe = true;
+
+    } else {
+      this.review = false;
+      this.transcribe = false;
+    }
   }
 
   signup(email: string, password: string, name: string, position: string) {
@@ -49,8 +78,9 @@ export class AuthService {
   login(email: string, password: string) {
     this.af.auth
       .signInWithEmailAndPassword(email, password)
-      .then(value => {
+      .then(() => {
         console.log('Nice, it worked!');
+        this.isGuest();
       })
       .catch(err => {
         console.log('Something went wrong:', err.message);
@@ -62,6 +92,7 @@ export class AuthService {
   guestMode() {
     this.af.auth.signInAnonymously().then(() => {
       console.log('Ghost Mode');
+      this.isGuest();
     })
     .catch(() => {
       console.log('Not ghost');
@@ -72,5 +103,6 @@ export class AuthService {
   // the login popup, pops up.
   logout() {
     this.af.auth.signOut().then(() => {this.authenticated = false; });
+    this.isGuest();
   }
 }
