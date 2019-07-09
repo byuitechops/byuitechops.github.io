@@ -76,7 +76,7 @@ export class AuthService {
         console.log('Something went wrong:', err.message);
       });
     } else {
-      alert('Please use your BYU - Idaho email or contact an Administrator');
+      alert('Please use your BYU-Idaho email or contact an Administrator');
     }
   }
   // A simple login function. currently not using a very Angular fashion, however

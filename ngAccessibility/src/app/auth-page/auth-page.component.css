@@ -1,5 +1,3 @@
-
-
 :root {
     --primary: #0076C6;
     --white: #ffffff;
@@ -10,7 +8,6 @@
     --verylightgray: #f7f7f7;
     --warning: #f71616;
 }
-
 
 #signin-modal-content {
     width: 95%;

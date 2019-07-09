@@ -28,8 +28,8 @@ export class AuthPageComponent implements OnInit {
   }
 
   signIn() {
-    this.closeModal();
     this.afAuth.login(this.email, this.password);
+    this.closeModal();
   }
   guest() {
     this.closeModal();
@@ -105,6 +105,7 @@ export class AuthPageComponent implements OnInit {
         if (this.password === this.confirmPassword) {
           console.log('No Errors!');
           this.error = '';
+          return true;
         } else {
           this.error = 'Make sure that your passwords match';
         }
@@ -120,7 +121,9 @@ export class AuthPageComponent implements OnInit {
   signUpUser() {
     if (this.verifyInfo()) {
       this.afAuth.signup(this.email, this.password, this.name, this.role);
+      this.closeModal();
       return true;
+    } else {
     }
   }
 
