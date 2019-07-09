@@ -27,10 +27,28 @@ export class AuthPageComponent implements OnInit {
     }, 1000);
   }
 
-  signIn() {
-    this.closeModal();
-    this.afAuth.login(this.email, this.password);
+  async signIn() {
+    const login = await this.afAuth.login(this.email, this.password);
+    this.checkAuth().then(() => {
+      this.closeModal();
+    }).catch((err) => {
+      console.log(err);
+    });
   }
+
+  checkAuth() {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (this.afAuth.authenticated) {
+          resolve();
+        } else {
+          alert('Check if your password is correct.');
+          reject('Check if your password is correct.');
+        }
+      }, 500);
+    });
+  }
+
   guest() {
     this.closeModal();
     this.afAuth.guestMode();
@@ -105,6 +123,7 @@ export class AuthPageComponent implements OnInit {
         if (this.password === this.confirmPassword) {
           console.log('No Errors!');
           this.error = '';
+          return true;
         } else {
           this.error = 'Make sure that your passwords match';
         }

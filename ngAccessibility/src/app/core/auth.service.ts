@@ -72,8 +72,10 @@ export class AuthService {
       .then(() => {
         // This creates a new user in the Database Service
         this.db.createUser(name, email, position);
+        return true;
       }).catch(err => {
         console.log('Something went wrong:', err.message);
+        return false;
       });
     } else {
       alert('Please use your BYU - Idaho email or contact an Administrator');
@@ -82,6 +84,7 @@ export class AuthService {
   // A simple login function. currently not using a very Angular fashion, however
   // functional and fast.
   login(email: string, password: string) {
+    let error = '';
     this.af.auth
       .signInWithEmailAndPassword(email, password)
       .then(() => {
@@ -90,6 +93,7 @@ export class AuthService {
       })
       .catch(err => {
         console.log('Something went wrong:', err.message);
+
       });
   }
 
