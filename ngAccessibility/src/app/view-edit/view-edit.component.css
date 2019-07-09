@@ -28,7 +28,7 @@
     width: 330px;
 }
 #notes-info-field span {
-    width: 230px;
+    width: 200px;
 }
 .detail a {
     width: 100%;
@@ -38,7 +38,7 @@
     height: 100%;
 }
 #loc-title {
-    width: 330px;
+    width: 300px;
 }
 #add-location {
     width: 20px;
@@ -48,13 +48,13 @@
     font-size: 14px;
 }
 .loc {
-    width: 340px;
-    padding: 30px !important;
+    width: 300px;
+    max-width: 300px;
 }
 .sidebar {
-    width: 4px;
+    width: 5px;
     height: 100%;
-    margin: 3px;
+    margin-right: 15px;
     border-radius: 5px;
     background-color: slateblue;
 }

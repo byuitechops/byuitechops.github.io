@@ -172,38 +172,42 @@
                 <h3 id="loc-title">Locations</h3>
                 <a class="" id="add-location">+</a>
                 
-                <div class="detail">
-                    <div *ngIf="storage.editing; else viewLocations" class="loc">
-                        <div>
-                            <select [(ngModel)]="locCode">
-                                <option [ngValue]="null" hidden class="initial-opt">Select Course</option>
-                                <option id="requestCourse" hidden></option>
-                            </select>
-                            <input [(ngModel)]="locLMS" type="url" placeholder="Canvas URL">
-                            <input [(ngModel)]="locReq" type="text" placeholder="Requestor">
-                            <input [(ngModel)]="locPrep" type="text" placeholder="Preparer">
+                <div class="detail"> <!-- *ngFor="let location of locations" -->
+                    <div *ngIf="storage.editing; else viewLocations">
+                        <div class="sidebar"></div>
+                        <div class="loc">
+                            <div>
+                                <select [(ngModel)]="locCode">
+                                    <option [ngValue]="null" hidden class="initial-opt">Select Course</option>
+                                    <option id="requestCourse" hidden></option>
+                                </select>
+                                <input [(ngModel)]="locLMS" type="url" placeholder="Canvas URL">
+                                <input [(ngModel)]="locReq" type="text" placeholder="Requestor">
+                                <input [(ngModel)]="locPrep" type="text" placeholder="Preparer">
+                            </div>
                         </div>
                     </div>
-                    <div *ngIf="storage.editing" class="sidebar"></div>
-                    <ng-template #viewLocations class="loc">
-                        <div class="detail">
-                            <p>Course</p>
-                            <span> {{ currentCourse }} AAA 100</span>
+                    <ng-template #viewLocations>
+                        <div class="sidebar"></div>
+                        <div class="loc">
+                            <div class="detail">
+                                <p>Course</p>
+                                <span> {{ currentCourse }} AAA 100</span>
+                            </div>
+                            <div class="detail">
+                                <p>LMS URL</p>
+                                <span> {{ currentLMS }} www.google.com</span>
+                            </div>
+                            <div class="detail">
+                                <p>Requestor</p>
+                                <span> {{ currentReq }} Shawn (Test) Hillman</span>
+                            </div>
+                            <div class="detail">
+                                <p>Preparer</p>
+                                <span> {{ currentPrep }} Shawn (Test) Hillman</span>
+                            </div>
                         </div>
-                        <div class="detail">
-                            <p>LMS URL</p>
-                            <span> {{ currentLMS }} www.google.com</span>
-                        </div>
-                        <div class="detail">
-                            <p>Requestor</p>
-                            <span> {{ currentReq }} Shawn (Test) Hillman</span>
-                        </div>
-                        <div class="detail">
-                            <p>Preparer</p>
-                            <span> {{ currentPrep }} Shawn (Test) Hillman</span>
-                        </div>
-                    </ng-template>
-                    <div *ngIf="!storage.editing" class="sidebar"></div>
+                    </ng-template>      
                 </div>
 
             </div>
