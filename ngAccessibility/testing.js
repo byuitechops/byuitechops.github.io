@@ -23,15 +23,15 @@ this.afs.collection("accessibility").get().subscribe((querySnapshot) => {
             location[i] = {
               courseCode: data.location.courseCode,
               lmsURL: data.location.lmsURL,
-              preparer: '',
-              requester: ''
+              preparer,
+              requester
             };
           } else if (data.location === []) {
             location[i] = {
-              courseCode: '',
-              lmsURL: '',
-              preparer: '',
-              requester: ''
+              courseCode,
+              lmsURL,
+              preparer,
+              requester
             };
           } else {
             location[i] = {
@@ -59,10 +59,10 @@ this.afs.collection("accessibility").get().subscribe((querySnapshot) => {
             }
           } else {
             location[i] = {
-              courseCode: '',
-              lmsURL: '',
-              preparer: '',
-              requester: ''
+              courseCode,
+              lmsURL,
+              preparer,
+              requester
             };
           }
           this.afs.collection('accessibility').doc(documentSnapshot.id).update({
@@ -116,84 +116,108 @@ this.afs.collection("accessibility").get().subscribe((querySnapshot) => {
   });
 });
 
-
 this.afs.collection("accessibility").get().subscribe((querySnapshot) => {
   querySnapshot.forEach((documentSnapshot) => {
-    let x = {};
+    let array = []
+    let courseCode,
+        lmsURL,
+        requestor,
+        preparer;
     console.log(documentSnapshot.data().title);
     var data = documentSnapshot.data();
     if (data.courseCode !== undefined) {
       if (data.location.courseCode !== undefined) {
-        x.location[0].courseCode = data.location.courseCode;
-        x.location[0].lmsURL = data.location.lmsURL;
+         courseCode = data.location.courseCode;
+         lmsURL = data.location.lmsURL;
         if (data.location.preparer !== undefined) {
-          x.location[0].preparer = data.location.preparer;
+          preparer = data.location.preparer;
         } else {
-          x.location[0].preparer = '';
+          preparer = '';
         }
         if (data.location.requestor !== undefined) {
-          x.location[0].requestor = data.location.requestor;
+          requestor = data.location.requestor;
         } else {
-          x.location[0].requestor = '';
+          requestor = '';
         }
       } else {
         if (data.location[0] !== undefined) {
           if (data.location[0].courseCode !== undefined) {
             if (data.location[0].courseCode[0] !== undefined) {
-              let i = 0
               (data.location[0].courseCode).forEach(course => {
-                x.location[i].courseCode = course;
-                x.location[i].lmsURL = data.location.lmsURL;
-                x.location[i].preparer = data.location.preparer;
-                x.location[i].requestor = data.location.requester;
-                i++;
+                let y = {
+                  courseCode: course,
+                  lmsURL: data.location[0].lmsURL,
+                  preparer: data.location[0].preparer,
+                  requestor: data.location[0].requester
+                }
+                array.push(y);
               });
             }
           } else {
-            x.location[0].courseCode = '';
-            x.location[0].lmsURL = '';
-            x.location[0].preparer = '';
-            x.location[0].requestor = '';
+             courseCode = '';
+             lmsURL = '';
+             preparer = '';
+             requestor = '';
           }
         }
       }
     } else {
       if (data.location[0] !== undefined) {
         if (data.location[0].courseCode === undefined) {
-          x.location[0].courseCode = '';
-          x.location[0].lmsURL = '';
-          x.location[0].preparer = '';
-          x.location[0].requestor = '';
+           courseCode = '';
+           lmsURL = '';
+           preparer = '';
+           requestor = '';
         } else {
-          x.location[0].courseCode = data.location.courseCode;
+           courseCode = data.location.courseCode;
           if (data.location.lmsURL !== undefined) {
-            x.location[0].lmsURL = data.location.lmsURL;
+             lmsURL = data.location.lmsURL;
           } else {
-            x.location[0].lmsURL = '';
+             lmsURL = '';
           }
-          x.location[0].preparer = '';
-          x.location[0].requestor = '';
+           preparer = '';
+           requestor = '';
         }
       }
     }
-    x.docEditURL = data.docEditURL;
-    x.docPublishURL = data.docPublishURL;
+    let location = [{
+      courseCode,
+      lmsURL,
+      preparer,
+      requestor
+    }];
+    let docEditURL = data.docEditURL;
+    let docPublishURL = data.docPublishURL;
+    let guestCreated;
     if (data.guestCreated === undefined) {
-      x.guestCreated = false;
+      guestCreated = false;
     } else {
-      x.guestCreated = data.guestCreated;
+      guestCreated = data.guestCreated;
     }
-    x.length = data.length;
-    x.priority = data.priority;
-    x.notes = data.notes;
-    x.srcURL = data.srcURL;
-    x.status = data.status;
-    x.title = data.title;
-    x.type = data.type;
-    x.verbit = data.verbit;
-    x.verbitID = data.verbitID;
+    let length = data.length;
+    let priority = data.priority;
+    let notes = data.notes;
+    let srcURL = data.srcURL;
+    let status = data.status;
+    let title = data.title;
+    let type = data.type;
+    let verbit = data.verbit;
+    let verbitID = data.verbitID;
+    let x = {
+      docEditURL,
+      docPublishURL,
+      guestCreated,
+      length,
+      location,
+      priority,
+      notes,
+      srcURL,
+      status,
+      title,
+      type,
+      verbit,
+      verbitID
+    };
+    console.log(x);
   });
 });
-
-
-
