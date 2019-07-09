@@ -2,119 +2,46 @@
 
     <div id="main-nav-box">
 
-        <div class="icon-box">
-            <i class="fas fa-bars icon" id="menu-icon"></i>
-        </div>
-
-        <ul id="nav-links">
-            <a id="home-tab" [routerLink]="['/home']" routerLinkActive="active" [class.hide]="af.guest">
-            <li><i class="fas fa-home fa-2x"></i>
-                Home
-            </li>
-            </a>
-            <a id="request-tab" routerLink="./request" routerLinkActive="active">
-            <li> <i class="fas fa-concierge-bell fa-2x bg-white"></i>
-                Request
-            </li>
-            </a>
-            <a id="prepare-tab" [routerLink]="['/prepare']" routerLinkActive="router-link-active"  routerLinkActive="active" [class.hide]="af.guest || !af.transcribe">
-            <li> <i class="far fa-file-alt fa-2x"></i>
-                Prepare
-            </li>
-            </a>
-            <a id="transcribe-tab" routerLink="/transcibe" routerLinkActive="active" [class.hide]="af.guest || !af.transcribe">
-            <li> <i class="far fa-edit fa-2x"></i>
-                Transcribe
-            </li>
-            </a>
-            <a id="copyEdit-tab" routerLink="./copyedit" routerLinkActive="active" [class.hide]="af.guest || !af.review">
-            <li> <i class="fas fa-clipboard-check fa-2x"></i>
-                Copyedit
-            </li>
-            </a>
-            <a id="copyEditCheck-tab" routerLink="./copycheck" routerLinkActive="active" [class.hide]="af.guest || !af.review">
-            <li> <i class="fas fa-check-double fa-2x "></i>
-                Final Check
-            </li>
-            </a>
-            <a id="master-tab" routerLink="./master" routerLinkActive="active">
-            <li> <i class="fas fa-user-shield fa-2x"></i>
-                Master
-            </li>
-            </a>
-        </ul>
-
-
-        <!-- <ais-instantsearch [config]="search.config">
-            <ais-search-box (change)="searchChanged($event)"></ais-search-box>
-            <ais-configure [searchParameters]="{ hitsPerPage: 10 }"></ais-configure>
-
-            <ais-hits *ngIf="showResults">
-                <ng-template let-hits="hits">
-                    <ol class="ais-Hits-list">
-                        <div *ngFor="let hit of hits" class="ais-Hits-item" (click)="showDetails(hit.objectID)">
-                            <p class="hit-type">{{ hit.type }}</p>
-                            <div class="hit-code">
-                                <div *ngFor="let code of hit.courseCode">
-                                    <p> {{ code }} </p>
-                                </div>
-                            </div>
-                            <p class="hit-title">{{ hit.title }}</p>
-                        </div>
-                    </ol>
-                </ng-template>
-            </ais-hits>
-        </ais-instantsearch>
-
-        <div class="icon-box hide" id="search-icon">
-            <i class="fas fa-search icon"></i>
-        </div> -->
-
-        <button type="button" class="black-btn" id="logout-btn" (click)="auth.userStatus()">
-            <p>Log Out</p>
-        </button>
-
+    <div class="icon-box">
+        <i class="fas fa-bars icon" id="menu-icon"></i>
     </div>
 
     <ul id="nav-links">
-      <a id="home-tab" [routerLink]="['/home']" routerLinkActive="active" [class.hide]="af.guest">
+        <a id="home-tab" [routerLink]="['/home']" routerLinkActive="active" [class.hide]="af.guest">
         <li><i class="fas fa-home fa-2x"></i>
-          Home
+            Home
         </li>
-      </a>
-      <a id="request-tab" routerLink="./request" routerLinkActive="active">
+        </a>
+        <a id="request-tab" routerLink="./request" routerLinkActive="active">
         <li> <i class="fas fa-concierge-bell fa-2x bg-white"></i>
-          Request
+            Request
         </li>
-      </a>
-      <a id="prepare-tab" [routerLink]="['/prepare']" routerLinkActive="router-link-active" routerLinkActive="active"
-        [class.hide]="af.guest || !af.transcribe">
+        </a>
+        <a id="prepare-tab" [routerLink]="['/prepare']" routerLinkActive="router-link-active"  routerLinkActive="active" [class.hide]="af.guest || !af.transcribe">
         <li> <i class="far fa-file-alt fa-2x"></i>
-          Prepare
+            Prepare
         </li>
-      </a>
-      <a id="transcribe-tab" routerLink="/transcibe" routerLinkActive="active"
-        [class.hide]="af.guest || !af.transcribe">
+        </a>
+        <a id="transcribe-tab" routerLink="/transcibe" routerLinkActive="active" [class.hide]="af.guest || !af.transcribe">
         <li> <i class="far fa-edit fa-2x"></i>
-          Transcribe
+            Transcribe
         </li>
-      </a>
-      <a id="copyEdit-tab" routerLink="./copyedit" routerLinkActive="active" [class.hide]="af.guest || !af.review">
+        </a>
+        <a id="copyEdit-tab" routerLink="./copyedit" routerLinkActive="active" [class.hide]="af.guest || !af.review">
         <li> <i class="fas fa-clipboard-check fa-2x"></i>
-          Copyedit
+            Copyedit
         </li>
-      </a>
-      <a id="copyEditCheck-tab" routerLink="./copycheck" routerLinkActive="active"
-        [class.hide]="af.guest || !af.review">
+        </a>
+        <a id="copyEditCheck-tab" routerLink="./copycheck" routerLinkActive="active" [class.hide]="af.guest || !af.review">
         <li> <i class="fas fa-check-double fa-2x "></i>
-          Final Check
+            Final Check
         </li>
-      </a>
-      <a id="master-tab" routerLink="./master" routerLinkActive="active">
+        </a>
+        <a id="master-tab" routerLink="./master" routerLinkActive="active">
         <li> <i class="fas fa-user-shield fa-2x"></i>
-          Master
+            Master
         </li>
-      </a>
+        </a>
     </ul>
     <button type="button" class="black-btn" id="logout-icon" (click)="auth.userStatus()">
       <p>Log Out</p>
