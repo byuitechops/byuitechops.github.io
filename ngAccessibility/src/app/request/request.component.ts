@@ -177,7 +177,6 @@ export class RequestComponent implements OnInit {
         this.comments = this.comments + ' Made by ' + this.name;
       }
       const data = {
-        datePrepareFinished: '',
         docEditURL: '',
         docPublishURL: '',
         length: '',
@@ -188,7 +187,6 @@ export class RequestComponent implements OnInit {
           preparer: '',
         }],
         priority: this.priority,
-        requestDate: new Date(),
         notes: this.comments,
         srcURL: this.media,
         status: 'Ready for Prep',
@@ -287,7 +285,7 @@ export class RequestComponent implements OnInit {
     this.priority = this.selectUndefinedOptionValue;
     this.type = null;
     if (this.multi) {
-      console.log("TESTING");
+
 
     } else {
       this.course = null;

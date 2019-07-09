@@ -27,12 +27,12 @@
                 Transcribe
             </li>
             </a>
-            <a id="copyEdit-tab" routerLink="./copyedit" routerLinkActive="active" class="">
+            <a id="copyEdit-tab" routerLink="./copyedit" routerLinkActive="active" class="hide">
             <li> <i class="fas fa-clipboard-check fa-2x"></i>
                 Copyedit
             </li>
             </a>
-            <a id="copyEditCheck-tab" routerLink="./copycheck" routerLinkActive="active" class="">
+            <a id="copyEditCheck-tab" routerLink="./copycheck" routerLinkActive="active" class="hide">
             <li> <i class="fas fa-check-double fa-2x "></i>
                 Final Check
             </li>
@@ -68,7 +68,7 @@
         <div class="icon-box" id="logout-icon">
             <i class="fas fa-door-open icon" (click)="auth.userStatus()"></i>
         </div>
-        
+
     </div>
 
 </nav>

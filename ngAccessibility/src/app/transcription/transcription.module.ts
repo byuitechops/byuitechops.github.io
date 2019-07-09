@@ -14,6 +14,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { ViewEditComponent } from '../view-edit/view-edit.component';
 import { AuthPageComponent } from '../auth-page/auth-page.component';
 import { PreparingComponent } from './preparing/preparing.component';
+import { MasterComponent } from './master/master.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { PreparingComponent } from './preparing/preparing.component';
   CopyeditComponent,
   CopycheckComponent,
   PreparingComponent,
+  MasterComponent,
   ],
   imports: [
     CommonModule,
