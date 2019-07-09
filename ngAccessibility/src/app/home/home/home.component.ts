@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DatabaseService } from 'src/app/core/database.service';
 import { AuthService } from 'src/app/core/auth.service';
-import { resolve, reject } from 'q';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +10,7 @@ import { resolve, reject } from 'q';
 export class HomeComponent implements OnInit {
 
   announce = 'Loading....';
+  editAnnouce = false;
   data = {
     title: '',
     course: '',
@@ -31,6 +31,21 @@ export class HomeComponent implements OnInit {
         this.updateInProgress();
       }, 900);
     });
+  }
+  edit() {
+    if (this.db.user.lead) {
+      this.editAnnouce = !this.editAnnouce;
+    }
+  }
+  sumbitEdit() {
+    if (this.announce !== undefined || this.announce !== ''){
+      this.db.afs.collection('announcements').doc('announcement').update({
+        content: this.announce
+      });
+      this.editAnnouce = !this.editAnnouce;
+    } else {
+      alert('Be sure to put in an annoucement');
+    }
   }
 
   async ngOnInit() {

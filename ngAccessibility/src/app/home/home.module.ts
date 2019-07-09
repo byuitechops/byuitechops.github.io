@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { StatsComponent } from './stats/stats.component';
 import { NgAisModule } from 'angular-instantsearch';
@@ -12,6 +13,7 @@ import { NgAisModule } from 'angular-instantsearch';
   imports: [
     CommonModule,
     NgAisModule,
+    FormsModule
   ]
 })
 export class HomeModule { }
