@@ -133,4 +133,17 @@ export class HomeComponent implements OnInit {
       }
     });
   }
+
+  openReturn() {
+    const modal = document.getElementById('return-prep-modal');
+    const navbar = document.getElementById('main-nav');
+    const content = document.getElementsByTagName('main');
+
+    modal.classList.remove('hide');
+    navbar.classList.add('blur');
+    for (let i = 0; i < content.length; i++) {
+      content[i].classList.add('blur');
+    }
+
+  }
 }

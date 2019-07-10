@@ -1,3 +1,18 @@
+<section class="modal hide" id="checkEmail-modal">
+    <div class="modal-content" id="checkEmail-modal-content">
+        <div class="modal-header-box">
+            <h1>Check Your Email</h1>
+        </div>
+        <div class="modal-body">
+            <h3>An Email has been sent to you to reset your password.</h3>
+            <h3>Click done when ready to </h3>
+        </div>
+        <div class="btn-box">
+            <button id="yes-btn" (click)="closeCheckEmail()">Done</button>
+        </div>
+    </div>
+</section>
+
 <section class="modal hide" id="signin-modal">
 
     <div class="modal-content" id="signin-modal-content">
@@ -39,6 +54,9 @@
                 <div class="btn-box hide-on-signup">
                     <button id="login-btn" (click)="signIn()">Log In</button>
                     <button id="show-signup-btn" (click)="showSignUp()">Sign Up</button>
+                </div>
+                <div class="hide-on-signup" id="reset-password-box">
+                    <p><a href="#" (click)="resetPass()">Reset Password</a></p>
                 </div>
                 <div class="btn-box show-on-signup hide">
                     <button id="signup-btn" (click)="signUpUser()">Sign Up</button>

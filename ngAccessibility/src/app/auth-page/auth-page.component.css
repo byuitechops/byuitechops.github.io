@@ -25,3 +25,9 @@
     font-size: 16px;
     color: var(--warning);
 }
+#reset-password-box {
+    text-align: center;
+}
+#reset-password-box a {
+    font-size: 12px;
+}
