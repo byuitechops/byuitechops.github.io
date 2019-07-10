@@ -229,9 +229,6 @@ input:hover, input:active, select:hover, select:active {
     border: 2px solid var(--primary);
     background-color: var(--white);
 }
-.initial-opt {
-    color: var(--lightgray);
-}
 textarea {
     width: 450px;
     height: 150px;
@@ -458,7 +455,7 @@ tr {
  *  12. SCREEN SIZE: Tablet
  ****************************/
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 800px) {
 
     .left-col, .right-col {
         width: 100%;

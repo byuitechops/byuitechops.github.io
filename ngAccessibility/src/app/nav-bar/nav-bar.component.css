@@ -37,7 +37,7 @@
     width: 100%;
     max-width: 1500px;
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
     margin: auto;
 }
 #nav-links {
@@ -169,7 +169,7 @@ ais-hits {
 *   it's being displayed on is 1000 pixels wide or less.
 *******************************/
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 800px) {
     ais-search-box {
         display: none;
     }
