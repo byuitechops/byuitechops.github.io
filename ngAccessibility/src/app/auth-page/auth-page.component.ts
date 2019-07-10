@@ -54,7 +54,7 @@ export class AuthPageComponent implements OnInit {
         } else {
           reject('Check if your password is correct.');
         }
-      }, 500);
+      }, 800);
     });
   }
 

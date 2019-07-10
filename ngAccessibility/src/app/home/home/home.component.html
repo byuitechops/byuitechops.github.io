@@ -31,7 +31,7 @@
                 <div (click)="edit()" *ngIf="!editAnnouce">{{ announce }}</div>
                 <div *ngIf="editAnnouce">
                   <textarea [(ngModel)]="announce"></textarea>
-                  <button type="button" (click)="sumbitEdit()">Sumbit</button>
+                  <button type="button" (click)="submitEdit()">Submit</button>
                 </div>
             </div>
 

@@ -60,7 +60,6 @@ export class RequestComponent implements OnInit {
     priority: 1,
     docEditURL: 'youthinkthisisgoogle.google.com.pub',
     objectID: 'HAHAH',
-    media: '',
     id: '1231233'
   }, {
     type: 'Video',
@@ -70,7 +69,6 @@ export class RequestComponent implements OnInit {
     priority: 2,
     docEditURL: 'youthinkthisisgoogle.google.com.pub',
     objectID: 'HAHAH',
-    media: '',
     id: '1231233'
   }, {
     type: 'Video',
@@ -80,7 +78,6 @@ export class RequestComponent implements OnInit {
     priority: 3,
     docEditURL: 'youthinkthisisgoogle.google.com.pub',
     objectID: 'HAHAH',
-    media: '',
     id: '1231233'
   }];
   dupPage = 0;
@@ -235,19 +232,22 @@ export class RequestComponent implements OnInit {
       } catch (e) {
         console.log(e);
       } finally {
-        if (this.override) {
-          this.db.createTranscript(data);
-          this.showFollow();
-          this.override = false;
-          this.submitMsg();
-        } else if (this.dups.length > 0 && this.search.areThere) {
-          console.log(this.dups);
-          this.openDup();
-        } else {
-          this.id = this.db.createTranscript(data);
-          this.showFollow();
-          this.submitMsg();
-        }
+        setTimeout(() => {
+          if (this.override) {
+            this.db.createTranscript(data);
+            this.showFollow();
+            this.override = false;
+            this.submitMsg();
+          }
+          if (this.search.areThere) {
+            console.log(this.dups);
+            this.openDup();
+          } else {
+            this.id = this.db.createTranscript(data);
+            this.showFollow();
+            this.submitMsg();
+          }
+        }, 400);
       }
     }
   }

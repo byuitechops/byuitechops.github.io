@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
       }
     }
   }
-  sumbitEdit() {
+  submitEdit() {
     if (this.announce !== undefined || this.announce !== '') {
       this.db.afs.collection('announcements').doc('announcement').update({
         content: this.announce

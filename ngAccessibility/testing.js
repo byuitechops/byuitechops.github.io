@@ -118,74 +118,51 @@ this.afs.collection("accessibility").get().subscribe((querySnapshot) => {
 
 this.afs.collection("accessibility").get().subscribe((querySnapshot) => {
   querySnapshot.forEach((documentSnapshot) => {
-    let array = []
-    let courseCode,
-        lmsURL,
-        requestor,
-        preparer;
-    console.log(documentSnapshot.data().title);
+    let location = [];
+    console.log(documentSnapshot.data());
     var data = documentSnapshot.data();
-    if (data.courseCode !== undefined) {
-      if (data.location.courseCode !== undefined) {
-         courseCode = data.location.courseCode;
-         lmsURL = data.location.lmsURL;
-        if (data.location.preparer !== undefined) {
-          preparer = data.location.preparer;
-        } else {
-          preparer = '';
-        }
-        if (data.location.requestor !== undefined) {
-          requestor = data.location.requestor;
-        } else {
-          requestor = '';
-        }
-      } else {
-        if (data.location[0] !== undefined) {
-          if (data.location[0].courseCode !== undefined) {
-            if (data.location[0].courseCode[0] !== undefined) {
-              (data.location[0].courseCode).forEach(course => {
-                let y = {
+    if (data.backupCode !== undefined
+        && data.courseCode !== undefined
+        && Array.isArray(data.location)) {
+          if (Array.isArray(data.location[0].courseCode)
+              && data.requester !== undefined) {
+            (data.location[0].courseCode).forEach(course => {
+              if (data.preparer === undefined
+                  && data.location[0].preparer === undefined) {
+                    location.push({
+                      courseCode: course,
+                      lmsURL: data.lmsURL,
+                      requestor: data.requestor,
+                      preparer: ''
+                    });
+              } else if (data.preparer === undefined) {
+                location.push({
                   courseCode: course,
-                  lmsURL: data.location[0].lmsURL,
-                  preparer: data.location[0].preparer,
-                  requestor: data.location[0].requester
+                  lmsURL: data.lmsURL,
+                  requestor: data.requestor,
+                  preparer: data.location[0].preparer
+                });
+              } else {
+                location.push({
+                  courseCode: course,
+                  lmsURL: data.lmsURL,
+                  requestor: data.requestor,
+                  preparer: data.preparer
+                });
+              }
+
+            });
+          } else if (data.preparer !== undefined
+                && data.lmsURL !== undefined){
+                  if (data.requester)
+                  location.push({
+                    courseCode: data.courseCode,
+                    lmsURL: data.lmsURL,
+                    requestor: data.requestor,
+                    preparer: data.preparer
+                  });
                 }
-                array.push(y);
-              });
-            }
-          } else {
-             courseCode = '';
-             lmsURL = '';
-             preparer = '';
-             requestor = '';
-          }
-        }
       }
-    } else {
-      if (data.location[0] !== undefined) {
-        if (data.location[0].courseCode === undefined) {
-           courseCode = '';
-           lmsURL = '';
-           preparer = '';
-           requestor = '';
-        } else {
-           courseCode = data.location.courseCode;
-          if (data.location.lmsURL !== undefined) {
-             lmsURL = data.location.lmsURL;
-          } else {
-             lmsURL = '';
-          }
-           preparer = '';
-           requestor = '';
-        }
-      }
-    }
-    let location = [{
-      courseCode,
-      lmsURL,
-      preparer,
-      requestor
-    }];
     let docEditURL = data.docEditURL;
     let docPublishURL = data.docPublishURL;
     let guestCreated;
