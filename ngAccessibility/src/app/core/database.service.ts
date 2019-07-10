@@ -120,24 +120,25 @@ export class DatabaseService {
     }
   }
 
-  addLocation(id, newLocation) {
-    let add = true;
+  async addLocation(id, newLocation) {
     const codes = [];
     codes.push(newLocation);
-    this.afs.collection('accessibility').doc(id).get().subscribe(res => {
-      (res.data().location).forEach(location => {
-        if (location.lmsURL === newLocation.lmsURL) {
-          add = false;
-        } else {
-          codes.push(location);
-        }
-      });
+    const transcript = this.getTranscript(id);
+    await transcript.then(res => {
+        res.data().location.forEach(location => {
+            console.log(location);
+          if (location.lmsURL !== newLocation.lmsURL) {
+            codes.push(location);
+            console.log(codes);
+          }
+        });
     });
-    if (add) {
-      this.afs.collection('accessibility').doc(id).update({
-        location: codes
-      });
-    }
+    setTimeout(() => {
+        console.log(codes);
+        this.afs.collection('accessibility').doc(id).update({
+            location: codes
+        });
+    }, 200);
   }
 
   changeTranscriptStep(status, name, id) {
