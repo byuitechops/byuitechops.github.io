@@ -1,5 +1,12 @@
 import { Component } from '@angular/core';
 import { trigger, transition, group, query, style, animate } from '@angular/animations';
+// Firebase App (the core Firebase SDK) is always required and must be listed first
+import * as firebase from 'firebase/app';
+import { environment } from '../environments/environment';
+import 'firebase/performance';
+firebase.initializeApp(environment.firebaseConfig);
+const perf = firebase.performance();
+
 
 @Component({
     selector: 'app-root',
@@ -40,9 +47,9 @@ import { trigger, transition, group, query, style, animate } from '@angular/anim
     ]
 })
 export class AppComponent {
-    title = 'ngAccessibility';
+  title = 'ngAccessibility';
 
-    getDepth(outlet) {
-        return outlet.activatedRouteData['depth'];
-    }
+  getDepth(outlet) {
+      return outlet.activatedRouteData['depth'];
+  }
 }
