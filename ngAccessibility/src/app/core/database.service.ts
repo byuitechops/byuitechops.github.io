@@ -80,13 +80,14 @@ export class DatabaseService {
   }
 
   createTranscript(data) {
-    this.afs.collection('accessibility').doc(this.afs.createId()).set({
+    let id = this.afs.createId();
+    this.afs.collection('accessibility').doc(id).set({
       ...data
     })
     .then(() => {}).catch(err => {
       console.log('Huston, we have a problem: ' + err);
     });
-    return;
+    return id;
   }
 
   updateTranscript(data, id) {

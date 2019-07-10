@@ -33,16 +33,17 @@ export class PrepareComponent implements OnInit {
   // I use try try catch finally statements to make sure that it logs errors
   // and that the database action happens first.
   claimTranscript(id) {
-    const userData = {
-      actionID: id,
-      currentAction: 'preparing'
-    };
     try {
-      this.db.updateUser(userData);
+      this.db.updateUser({
+        actionID: id,
+        currentAction: 'preparing'
+      });
       this.db.changeTranscriptStep('In Prep', this.db.user.name, id);
     } catch (e) {
       console.log(e);
     }
-    this.router.navigate(['/pre', id] );
+    setTimeout(() => {
+      this.router.navigate(['/pre', id] );
+    }, 500);
   }
 }

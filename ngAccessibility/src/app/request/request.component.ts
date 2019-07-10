@@ -2,6 +2,7 @@ import { Component, OnInit, } from '@angular/core';
 import { DatabaseService } from '../core/database.service';
 import { AuthService } from '../core/auth.service';
 import { SearchService } from '../core/search.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-request',
@@ -9,7 +10,13 @@ import { SearchService } from '../core/search.service';
   styleUrls: ['./request.component.css']
 })
 export class RequestComponent implements OnInit {
-  constructor(private db: DatabaseService, public auth: AuthService, private search: SearchService) {}
+  constructor(private db: DatabaseService,
+              public auth: AuthService,
+              private search: SearchService,
+              private activeRoute: ActivatedRoute,
+              private router: Router) {}
+
+  id: string;
   selectUndefinedOptionValue: any;
   name: string;
   lms: string;
@@ -229,18 +236,18 @@ export class RequestComponent implements OnInit {
       } finally {
         if (this.override) {
           this.db.createTranscript(data);
+          this.showFollow();
           this.override = false;
-          window.location.reload();
           this.submitMsg();
         } else if (this.dups.length > 0 && this.search.areThere) {
           console.log(this.dups);
           this.openDup();
         } else {
-          this.db.createTranscript(data);
+          this.id = this.db.createTranscript(data);
+          this.showFollow();
           this.submitMsg();
         }
       }
-      this.showFollow();
     }
   }
 
@@ -344,7 +351,20 @@ export class RequestComponent implements OnInit {
 
   }
   followTranscript() {
-
+    try {
+      this.db.changeTranscriptStep('In Prep', this.db.user.name, this.id);
+      this.db.updateUser({
+        actionID: this.id,
+        currentAction: 'preparing'
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      this.closeFollow();
+      setTimeout(() => {
+        this.router.navigate(['/pre', this.id] );
+      }, 500);
+    }
   }
 
 }
