@@ -3,8 +3,6 @@ import { DatabaseService } from '../core/database.service';
 import { AuthService } from '../core/auth.service';
 import { SearchService } from '../core/search.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { PreparingComponent } from '../transcription/preparing/preparing.component';
 
 @Component({
   selector: 'app-request',
@@ -257,7 +255,7 @@ export class RequestComponent implements OnInit {
     }
   }
 
-  useDuplicate(id) {
+  useDuplicate() {
     this.location = {
       courseCode: this.course,
       lmsURL: this.lms,
@@ -270,8 +268,11 @@ export class RequestComponent implements OnInit {
   }
 
   createNew() {
+    this.closeDup();
     this.override = true;
-    this.newRequest();
+    setTimeout(() => {
+      this.newRequest();
+    }, 200);
   }
   openDup() {
     const dup = document.getElementById('dup-modal');
@@ -370,7 +371,7 @@ export class RequestComponent implements OnInit {
       this.closeFollow();
       setTimeout(() => {
         this.router.navigate(['/pre', this.id] );
-      }, 500);
+      }, 1000);
     }
   }
 
@@ -385,9 +386,6 @@ export class RequestComponent implements OnInit {
     for (let i = 0; i < content.length; i++) {
         content[i].classList.add('blur');
     }
-
-    PreparingComponent.showCodeEmbedded();
-    PreparingComponent.showCodeLink();
 
   }
   closeCodePopup() {

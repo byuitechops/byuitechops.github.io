@@ -80,7 +80,7 @@ export class DatabaseService {
   }
 
   createTranscript(data) {
-    let id = this.afs.createId();
+    const id = this.afs.createId();
     this.afs.collection('accessibility').doc(id).set({
       ...data
     })
