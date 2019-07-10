@@ -387,9 +387,6 @@ export class RequestComponent implements OnInit {
         content[i].classList.add('blur');
     }
 
-    PreparingComponent.showCodeEmbedded();
-    PreparingComponent.showCodeLink();
-
   }
   closeCodePopup() {
     const modal = document.getElementById('embed-modal');
