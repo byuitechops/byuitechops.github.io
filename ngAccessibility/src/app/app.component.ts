@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { trigger, transition, group, query, style, animate } from '@angular/animations';
-import { isAbsolute } from 'path';
 
 @Component({
     selector: 'app-root',
