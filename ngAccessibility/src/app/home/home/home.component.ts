@@ -146,4 +146,16 @@ export class HomeComponent implements OnInit {
     }
 
   }
+  closeReturn() {
+    const modal = document.getElementById('return-prep-modal');
+    const navbar = document.getElementById('main-nav');
+    const content = document.getElementsByTagName('main');
+
+    modal.classList.add('hide');
+    navbar.classList.remove('blur');
+    for (let i = 0; i < content.length; i++) {
+      content[i].classList.remove('blur');
+    }
+
+  }
 }
