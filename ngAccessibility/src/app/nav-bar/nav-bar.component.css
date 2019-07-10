@@ -40,6 +40,13 @@
     flex-flow: row nowrap;
     margin: auto;
 }
+#nav-logo {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    left: 65px;
+    margin-left: 35px;
+}
 #nav-links {
     width: 650px;
     display: flex;
