@@ -168,7 +168,8 @@ export class RequestComponent implements OnInit {
       (this.lms === '' || this.lms === undefined) &&
       (this.media === '' || this.media === undefined) &&
       (this.title === '' || this.title === undefined) &&
-      this.priority === undefined) {
+      this.priority === undefined &&
+      (this.name === undefined || this.name === '' || !this.auth.user.isAnonymous)) {
       alert('Please fill in all fields');
     } else {
       if (this.auth.user.isAnonymous) {
@@ -242,6 +243,9 @@ export class RequestComponent implements OnInit {
           if (this.search.areThere) {
             console.log(this.dups);
             this.openDup();
+            setTimeout(() => {
+              this.search.areThere = false;
+            }, 200);
           } else {
             this.id = this.db.createTranscript(data);
             this.showFollow();

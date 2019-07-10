@@ -48,6 +48,16 @@ export class SearchService {
        }
       }
     });
+    this.index.search({query: src}).then(async a => {
+      // tslint:disable-next-line: prefer-for-of
+      for (let y = 0; y < a.hits.length; y++) {
+        if (a.hits[y].type === type) {
+          results.push(a.hits[y]);
+          this.areThere = true;
+          console.log(a.hits[y]);
+        }
+       }
+    });
     console.log(results);
     this.duplicates = results;
     return results;
