@@ -116,17 +116,18 @@ this.afs.collection("accessibility").get().subscribe((querySnapshot) => {
   });
 });
 
+
 this.afs.collection("accessibility").get().subscribe((querySnapshot) => {
   querySnapshot.forEach((documentSnapshot) => {
     let location = [];
-    console.log(documentSnapshot.data());
     var data = documentSnapshot.data();
+    var id = documentSnapshot.id;
     if (data.backupCode !== undefined
         && data.courseCode !== undefined
         && Array.isArray(data.location)) {
-          if (Array.isArray(data.location[0].courseCode)
-              && data.requester !== undefined) {
-            (data.location[0].courseCode).forEach(course => {
+          if (Array.isArray(data.courseCode)
+              && data.requestor !== undefined) {
+            (data.courseCode).forEach(course => {
               if (data.preparer === undefined
                   && data.location[0].preparer === undefined) {
                     location.push({
@@ -154,15 +155,34 @@ this.afs.collection("accessibility").get().subscribe((querySnapshot) => {
             });
           } else if (data.preparer !== undefined
                 && data.lmsURL !== undefined){
-                  if (data.requester)
-                  location.push({
-                    courseCode: data.courseCode,
-                    lmsURL: data.lmsURL,
-                    requestor: data.requestor,
-                    preparer: data.preparer
-                  });
+                  if (data.requester !== undefined) {
+                    location.push({
+                      courseCode: data.courseCode,
+                      lmsURL: data.lmsURL,
+                      requestor: data.requestor,
+                      preparer: data.preparer
+                    });
+                  }
                 }
+    } else {
+      if (data.location !== undefined) {
+        if (data.location.courseCode === undefined) {
+          location.push({
+            courseCode: '',
+            lmsURL: '',
+            requestor: '',
+            preparer: ''
+          });
+        } else if (data.location.courseCode) {
+          location.push({
+            courseCode: data.location.courseCode,
+            lmsURL: data.location.lmsURL,
+            requestor: '',
+            preparer: ''
+          });
+        }
       }
+    }
     let docEditURL = data.docEditURL;
     let docPublishURL = data.docPublishURL;
     let guestCreated;
@@ -173,7 +193,13 @@ this.afs.collection("accessibility").get().subscribe((querySnapshot) => {
     }
     let length = data.length;
     let priority = data.priority;
-    let notes = data.notes;
+    let notes = '';
+    if (data.notes !== undefined) {
+      notes = data.notes;
+      if (data.requestNotes !== undefined) {
+        notes += data.requestNotes;
+      }
+    }
     let srcURL = data.srcURL;
     let status = data.status;
     let title = data.title;
@@ -195,6 +221,9 @@ this.afs.collection("accessibility").get().subscribe((querySnapshot) => {
       verbit,
       verbitID
     };
-    console.log(x);
+    if (x.title !== '3.3 C Solutions 1-6') {
+      console.log(x);
+      this.afs.collection('accessibility').doc(id).set(x);
+    }
   });
 });
