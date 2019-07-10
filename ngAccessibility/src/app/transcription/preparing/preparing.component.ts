@@ -9,6 +9,8 @@ import { SearchService } from 'src/app/core/search.service';
   styleUrls: ['./preparing.component.css']
 })
 export class PreparingComponent implements OnInit {
+    static showCodeLink: any;
+    static showCodeEmbedded: any;
 
   found = false;
   type: string;

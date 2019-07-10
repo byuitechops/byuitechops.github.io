@@ -233,7 +233,7 @@ input:hover, input:active, select:hover, select:active {
     color: var(--lightgray);
 }
 textarea {
-    width: 100%;
+    width: 450px;
     height: 150px;
     padding: 5px;
 

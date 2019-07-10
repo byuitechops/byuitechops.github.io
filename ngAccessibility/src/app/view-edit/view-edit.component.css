@@ -15,7 +15,7 @@
 }
 .detail {
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
     width: 100%;
     margin: 0;
     padding: 3px 0;
@@ -48,8 +48,7 @@
     font-size: 14px;
 }
 .loc {
-    width: 300px;
-    max-width: 300px;
+    width: 350px;
 }
 .sidebar {
     width: 5px;
@@ -60,13 +59,4 @@
 }
 #comments-header {
     margin-top: 25px;
-}
-.danger-btn {
-    background-color: var(--warning);
-    float: right;
-}
-.danger-btn:hover {
-    color: var(--warning);
-    background-color: var(--white);
-    border: 3px solid var(--warning);
 }

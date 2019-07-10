@@ -178,7 +178,6 @@ export class AuthPageComponent implements OnInit {
     for (let i = 0; i < content.length; i++) {
       content[i].classList.add('blur');
     }
-
   }
   closeCheckEmail() {
     const modal = document.getElementById('checkEmail-modal');
@@ -192,7 +191,6 @@ export class AuthPageComponent implements OnInit {
     for (let i = 0; i < content.length; i++) {
       content[i].classList.remove('blur');
     }
-
   }
 
 }
