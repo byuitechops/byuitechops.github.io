@@ -23,6 +23,8 @@ export class HomeComponent implements OnInit {
     comment: '',
   };
   verbit = false;
+
+  hide = false;
   constructor(public db: DatabaseService, private afAuth: AuthService) {
     db.afs.collection('announcements').doc('announcement').get()
     .forEach(doc => {
@@ -57,6 +59,7 @@ export class HomeComponent implements OnInit {
   async return() {
     await this.db.changeTranscriptStep('Ready for Prep', this.db.user.name, this.db.user.actionID);
     this.db.updateUser({actionID: '', currentAction: ''});
+    this.db.updateTranscript({notes: this.data.comment }, this.db.user.actionID);
     this.data = {
       title: '',
       course: '',
@@ -68,10 +71,12 @@ export class HomeComponent implements OnInit {
       verbitID: '',
       comment: ''
     };
+    this.closeReturn();
   }
   updateInProgress() {
     if (this.db.user !== undefined) {
       if (this.db.user.actionID !== '') {
+        this.hide = false;
         const transcript = this.db.getTranscript(this.db.user.actionID);
         transcript.then(doc => {
           setTimeout(() => {
@@ -92,6 +97,8 @@ export class HomeComponent implements OnInit {
             this.data.comment += info.notes;
           }, 300);
         });
+      } else {
+        this.hide = true;
       }
     }
   }

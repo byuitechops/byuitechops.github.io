@@ -5,10 +5,10 @@
         </div>
         <div class="modal-body">
             <h3>Please add a note explaining why this transcript has been returned to Prep.</h3>
-            <textarea id="return-to-prep-comment"></textarea>
+            <textarea id="return-to-prep-comment" [(ngModel)]="data.comment"></textarea>
         </div>
         <div class="btn-box">
-            <button id="done-btn" (click)="openReturn()">Done</button>
+            <button id="done-btn" (click)="return()">Done</button>
         </div>
     </div>
 </section>
@@ -89,8 +89,8 @@
                 <p>{{ data.comment }}</p>
                 </div>
                 <div class="btn-box">
-                    <button id="return-prep-btn" (click)="return()">Return to Prep</button>
-                    <button id="complete-tran-btn" (click)="forward()">Complete</button>
+                    <button id="return-prep-btn" (click)="openReturn()" *ngIf="!hide">Return to Prep</button>
+                    <button id="complete-tran-btn" (click)="forward()" *ngIf="!hide">Complete</button>
                 </div>
                 <img id="comments-expander" src="" alt="">
             </div>
