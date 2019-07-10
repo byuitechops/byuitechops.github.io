@@ -165,10 +165,10 @@
                     <label>Location in Course:</label>
                     <p class="description"> {{ lms }} </p>
                 </div>
-                <input type="checkbox" class="checkbox" id="moreClassTrans" [(ngModel)]="multi"><span class="check-text">Request Another Transcript for this Course?</span>
                 <div class="btn-box">
                     <button type="submit" id="requestSubmit" (click)="newRequest()">Submit</button>
                     <button class="hide" id="dup-btn" (click)="openDup()">Open Dup Checker</button>
+                    <input type="checkbox" class="checkbox" id="moreClassTrans" [(ngModel)]="multi"><span class="check-text">Request Another Transcript for this Course?</span>
                 </div>
                 <div>
                     <h3 id="sub-msg"></h3>
