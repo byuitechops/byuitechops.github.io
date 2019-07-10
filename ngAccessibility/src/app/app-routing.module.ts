@@ -40,10 +40,10 @@ const routes: Routes = [
       component: PreparingComponent
     },
     {
-        path: 'transcibe',
+        path: 'transcribe',
         component: TranscribeComponent,
         data: {
-            title: 'transcibe',
+            title: 'transcribe',
             depth: 4
         }
     },
