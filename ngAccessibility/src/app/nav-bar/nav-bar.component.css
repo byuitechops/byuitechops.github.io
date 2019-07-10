@@ -5,6 +5,21 @@
 ******************************************************/
 
 
+/****************************
+ *  1. VARIABLES
+ ****************************/
+
+ :root {
+    --primary: #0076C6;
+    --white: #ffffff;
+    --black: #000000;
+    --darkgray: #444444;
+    --medgray: #777777;
+    --lightgray: #dddddd;
+    --verylightgray: #f7f7f7;
+    --warning: #E85156;
+}
+
 #menu-icon {
     display: none;
 }
@@ -72,7 +87,17 @@
     font-size: 16px;
 }
 #logout-btn {
+    width: 90px;
+    height: 65px;
+    margin-top: 10px;
     margin-left: auto;
+
+    border: none;
+    background: none;
+}
+#logout-btn:hover {
+    border: none;
+    background-color: var(--white);
 }
 
 

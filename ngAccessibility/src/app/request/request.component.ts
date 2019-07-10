@@ -4,6 +4,7 @@ import { AuthService } from '../core/auth.service';
 import { SearchService } from '../core/search.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { PreparingComponent } from '../transcription/preparing/preparing.component';
 
 @Component({
   selector: 'app-request',
@@ -371,6 +372,35 @@ export class RequestComponent implements OnInit {
         this.router.navigate(['/pre', this.id] );
       }, 500);
     }
+  }
+
+
+  showCodePopup() {
+    const modal = document.getElementById('embed-modal');
+    const navbar = document.getElementById('main-nav');
+    const content = document.getElementsByTagName('main');
+
+    modal.classList.remove('hide');
+    navbar.classList.add('blur');
+    for (let i = 0; i < content.length; i++) {
+        content[i].classList.add('blur');
+    }
+
+    PreparingComponent.showCodeEmbedded();
+    PreparingComponent.showCodeLink();
+
+  }
+  closeCodePopup() {
+    const modal = document.getElementById('embed-modal');
+    const navbar = document.getElementById('main-nav');
+    const content = document.getElementsByTagName('main');
+
+    modal.classList.add('hide');
+    navbar.classList.remove('blur');
+    for (let i = 0; i < content.length; i++) {
+        content[i].classList.remove('blur');
+    }
+
   }
 
 }
