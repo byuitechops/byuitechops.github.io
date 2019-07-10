@@ -15,7 +15,7 @@
 *   10. Transcript Tables
 *   11. Modals
 *   12. Screen Sizes (Media Queries)
-*   
+*
 ******************************************************/
 
 
@@ -58,7 +58,6 @@
     font-weight: 400;
     font-size: 14px;
     outline: none;
-    transition: all .2s;
 }
 
 .main-box {
@@ -162,7 +161,7 @@ a {
     line-height: 30px;
     border-radius: 50%;
     cursor: pointer;
-    transition: .2s;
+    transition: all .2s;
 }
 .icon:hover {
     box-shadow: 0 0 5px 0px var(--black);
@@ -337,7 +336,7 @@ button:hover {
     transition: all .2s;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--primary); 
+    background: var(--primary);
 }
 
 
@@ -460,7 +459,7 @@ tr {
  ****************************/
 
 @media only screen and (max-width: 1000px) {
-    
+
     .left-col, .right-col {
         width: 100%;
     }

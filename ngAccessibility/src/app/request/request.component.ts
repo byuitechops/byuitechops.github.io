@@ -3,6 +3,7 @@ import { DatabaseService } from '../core/database.service';
 import { AuthService } from '../core/auth.service';
 import { SearchService } from '../core/search.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-request',
@@ -327,16 +328,17 @@ export class RequestComponent implements OnInit {
   }
 
   showFollow() {
-    const modal = document.getElementById('follow-modal');
-    const navbar = document.getElementById('main-nav');
-    const content = document.getElementsByTagName('main');
+    if (!this.auth.user.isAnonymous) {
+      const modal = document.getElementById('follow-modal');
+      const navbar = document.getElementById('main-nav');
+      const content = document.getElementsByTagName('main');
 
-    modal.classList.remove('hide');
-    navbar.classList.add('blur');
-    for (let i = 0; i < content.length; i++) {
-      content[i].classList.add('blur');
+      modal.classList.remove('hide');
+      navbar.classList.add('blur');
+      for (let i = 0; i < content.length; i++) {
+        content[i].classList.add('blur');
+      }
     }
-
   }
   closeFollow() {
     const modal = document.getElementById('follow-modal');

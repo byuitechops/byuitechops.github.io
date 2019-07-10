@@ -52,10 +52,10 @@
         </section>
 
 
-        <section class="right-col">
+        <section class="right-col" *ngIf="!hide">
             <h2>In Progress</h2>
 
-                <div id="claimed-transcript-box">
+              <div id="claimed-transcript-box">
                 <div>
                     <h4>Video</h4>
                     <span>{{ data.title }}</span>
@@ -89,8 +89,8 @@
                 <p>{{ data.comment }}</p>
                 </div>
                 <div class="btn-box">
-                    <button id="return-prep-btn" (click)="openReturn()" *ngIf="!hide">Return to Prep</button>
-                    <button id="complete-tran-btn" (click)="forward()" *ngIf="!hide">Complete</button>
+                    <button id="return-prep-btn" (click)="openReturn()">Return to Prep</button>
+                    <button id="complete-tran-btn" (click)="forward()">Complete</button>
                 </div>
                 <img id="comments-expander" src="" alt="">
             </div>
