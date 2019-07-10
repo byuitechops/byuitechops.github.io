@@ -3,7 +3,10 @@
 <app-auth-page></app-auth-page>
 <app-view-edit></app-view-edit>
 <app-nav-bar></app-nav-bar>
-<router-outlet></router-outlet>
+
+<div class="routeContainer" [@routeAnimation]="getDepth(myOutlet)">
+    <router-outlet #myOutlet="outlet"></router-outlet>
+</div>
 
 <!-- <section [@routeAnimations]="prepareRoute(outlet)">
 

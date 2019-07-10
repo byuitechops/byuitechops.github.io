@@ -13,15 +13,27 @@ import { MasterComponent } from './transcription/master/master.component';
 const routes: Routes = [
     {
         path: 'home',
-        component: HomeComponent
+        component: HomeComponent,
+        data: {
+            title: 'home',
+            depth: 1
+        }
     },
     {
         path: 'request',
-        component: RequestComponent
+        component: RequestComponent,
+        data: {
+            title: 'request',
+            depth: 2
+        }
     },
     {
         path: 'prepare',
-        component: PrepareComponent
+        component: PrepareComponent,
+        data: {
+            title: 'prepare',
+            depth: 3
+        }
     },
     {
       path: 'pre/:id',
@@ -29,19 +41,35 @@ const routes: Routes = [
     },
     {
         path: 'transcibe',
-        component: TranscribeComponent
+        component: TranscribeComponent,
+        data: {
+            title: 'transcibe',
+            depth: 4
+        }
     },
     {
         path: 'copyedit',
-        component: CopyeditComponent
+        component: CopyeditComponent,
+        data: {
+            title: 'copyedit',
+            depth: 5
+        }
     },
     {
         path: 'copycheck',
-        component: CopycheckComponent
+        component: CopycheckComponent,
+        data: {
+            title: 'copycheck',
+            depth: 6
+        }
     },
     {
       path: 'master',
-      component: MasterComponent
+      component: MasterComponent,
+      data: {
+          title: 'master',
+          depth: 7
+      }
     },
     {
       path: '',

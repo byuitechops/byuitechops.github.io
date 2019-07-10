@@ -83,6 +83,13 @@
     border-radius: 10px;
 }
 
+.routeContainer {
+    position: relative;
+}
+.routeContainer>* {
+    display: block;
+}
+
 
 
 /****************************
