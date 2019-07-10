@@ -168,11 +168,13 @@ export class AuthPageComponent implements OnInit {
 
   openCheckEmail() {
     const modal = document.getElementById('checkEmail-modal');
+    const signin = document.getElementById('signin-modal');
     const navbar = document.getElementById('main-nav');
     const content = document.getElementsByTagName('main');
 
     modal.classList.remove('hide');
     navbar.classList.add('blur');
+    signin.classList.add('blur');
     for (let i = 0; i < content.length; i++) {
       content[i].classList.add('blur');
     }
@@ -180,11 +182,13 @@ export class AuthPageComponent implements OnInit {
   }
   closeCheckEmail() {
     const modal = document.getElementById('checkEmail-modal');
+    const signin = document.getElementById('signin-modal');
     const navbar = document.getElementById('main-nav');
     const content = document.getElementsByTagName('main');
 
     modal.classList.add('hide');
     navbar.classList.remove('blur');
+    signin.classList.remove('blur');
     for (let i = 0; i < content.length; i++) {
       content[i].classList.remove('blur');
     }
