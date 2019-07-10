@@ -99,6 +99,9 @@
     border: none;
     background-color: var(--white);
 }
+#logout-btn p {
+    font-size: 12px;
+}
 
 
 /* .ais-SearchBox-submit {
