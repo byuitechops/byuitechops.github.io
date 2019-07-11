@@ -216,7 +216,7 @@ a {
 input, select {
     width: 100%;
     max-width: 250px;
-    margin: 2px;
+    margin: 5px;
     padding: 4px 10px;
 
     border: 1px solid var(--primary);
