@@ -33,17 +33,6 @@
                 </div>
 
                 <div class="detail">
-                    <p>Course Code(s)</p>
-                    <div *ngIf="storage.editing; else viewCourses">
-                        <a class="hide" id="add-course-code">+</a>
-                        <input id="edit-info-courses" type="text" [(ngModel)]="storage.courseCode">
-                    </div>
-                    <ng-template #viewCourses>
-                        <span id="view-info-courses">{{ storage.courseCode }}</span>
-                    </ng-template>
-                  </div>
-
-                <div class="detail">
                     <p>Priority</p>
                     <div *ngIf="storage.editing; else viewPriority">
                         <select id="edit-info-priority">
@@ -97,15 +86,6 @@
                     </ng-template>
                 </div>
 
-                <div class="detail">
-                    <p>LMS URL</p>
-                    <div *ngIf="storage.editing; else viewLms">
-                        <input id="edit-info-lms" type="text" [(ngModel)]="storage.lmsURL" />
-                    </div>
-                    <ng-template #viewLms>
-                        <span id="view-info-lms"><a [href]="storage.lmsURL" target="_blank">{{ storage.lmsURL }}</a></span>
-                    </ng-template>
-                </div>
 
                 <div class="detail">
                     <p>Media URL</p>
@@ -171,43 +151,43 @@
 
                 <h3 id="loc-title">Locations</h3>
                 <a class="" id="add-location">+</a>
-                
+
                 <div class="detail"> <!-- *ngFor="let location of locations" -->
                     <div *ngIf="storage.editing; else viewLocations">
                         <div class="sidebar"></div>
-                        <div class="loc">
+                        <div class="loc" *ngFor="let location of storage.locations">
                             <div>
-                                <select [(ngModel)]="locCode">
-                                    <option [ngValue]="null" hidden class="initial-opt">Select Course</option>
-                                    <option id="requestCourse" hidden></option>
+                                <select [(ngModel)]="location.courseCode">
+                                    <option [ngValue]="null" hidden class="initial-opt"(selected)="location.courseCode">Select Course</option>
+                                    <option class="requestCourse" hidden (selected)="location.courseCode"></option>
                                 </select>
-                                <input [(ngModel)]="locLMS" type="url" placeholder="Canvas URL">
-                                <input [(ngModel)]="locReq" type="text" placeholder="Requestor">
-                                <input [(ngModel)]="locPrep" type="text" placeholder="Preparer">
+                                <input [(ngModel)]="location.lmsURL" type="url" placeholder="Canvas URL">
+                                <input [(ngModel)]="location.requestor" type="text" placeholder="Requestor">
+                                <input [(ngModel)]="location.preparer" type="text" placeholder="Preparer">
                             </div>
                         </div>
                     </div>
                     <ng-template #viewLocations>
                         <div class="sidebar"></div>
-                        <div class="loc">
+                        <div class="loc" *ngFor="let location of storage.locations">
                             <div class="detail">
                                 <p>Course</p>
-                                <span> {{ currentCourse }} </span>
+                                <span> {{ location.courseCode }} </span>
                             </div>
                             <div class="detail">
                                 <p>LMS URL</p>
-                                <span> {{ currentLMS }} </span>
+                                <span> {{ location.lmsURL }} </span>
                             </div>
                             <div class="detail">
                                 <p>Requestor</p>
-                                <span> {{ currentReq }} </span>
+                                <span> {{ location.requestor }} </span>
                             </div>
                             <div class="detail">
                                 <p>Preparer</p>
-                                <span> {{ currentPrep }} </span>
+                                <span> {{ location.preparer }} </span>
                             </div>
                         </div>
-                    </ng-template>      
+                    </ng-template>
                 </div>
 
             </div>

@@ -39,6 +39,59 @@ export class ViewEditComponent implements OnInit {
 
     }
 
+    getCourse() {
+      const courses = [];
+      const xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+      if (this.readyState === 4 && this.status === 200) {
+          const res = JSON.parse(this.responseText);
+          const id = res._id;
+          const newxhttp = new XMLHttpRequest();
+          newxhttp.onreadystatechange = function() {
+          if (this.readyState === 4 && this.status === 200) {
+              const newres = JSON.parse(this.responseText);
+              let inject = '';
+              newres.forEach((doc) => {
+              const course = doc.__catalogCourseId;
+              inject += `<option [value]="${course}">${course}</option>`;
+              courses.push(course);
+              });
+              let content = document.getElementsByClassName('requestCourse');
+              for (let i = 0; i < content.length; i++) {
+                content[i].insertAdjacentHTML('afterend', inject);
+              }
+              return courses;
+          }
+          };
+          newxhttp.open('GET', 'https://byui.kuali.co/api/v1/catalog/courses/' + id, true);
+          newxhttp.send();
+      }
+      };
+      try {
+        xhttp.open('GET', 'https://byui.kuali.co/api/v1/catalog/public/catalogs/current', true);
+        xhttp.send();
+        const html = `<option [value]="ENG106">ENG106</option>
+                        <option [value]="ENG106L">ENG106L</option>
+                        <option [value]="GSPC120L">GSPC120L</option>
+                        <option [value]="MATH100G">MATH100G</option>
+                        <option [value]="MATH100L">MATH100L</option>
+                        <option [value]="PC101">PC101</option>
+                        <option [value]="PC101L">PC101L</option>
+                        <option [value]="PC102">PC102</option>
+                        <option [value]="PC102L">PC102L</option>
+                        <option [value]="PC103">PC103</option>
+                        <option [value]="RELPC121">RELPC121</option>
+                        <option [value]="RELPC122">RELPC122</option>
+                        <option [value]="FDREL250">FDREL250</option>`;
+        let content = document.getElementsByClassName('requestCourse');
+        for (let i = 0; i < content.length; i++) {
+          content[i].insertAdjacentHTML('afterend', html);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
 
     async openModal(id) {
       const modal       = document.getElementById('view-modal');
@@ -74,6 +127,9 @@ export class ViewEditComponent implements OnInit {
       this.storage.editing = false;
     }
     edit() {
+      setTimeout(() => {
+        this.getCourse();
+      }, 500);
       this.storage.editing = !this.storage.editing;
     }
     delete() {

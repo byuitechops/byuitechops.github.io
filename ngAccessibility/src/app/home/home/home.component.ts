@@ -111,30 +111,35 @@ export class HomeComponent implements OnInit {
   }
   forward() {
     console.log(this.data.id);
-    const transcript = this.db.getTranscript(this.data.id);
-    transcript.then(doc => {
-      const info = doc.data().status;
-      console.log(info);
-      if (info === 'In Transcription') {
-        this.db.changeTranscriptStep('Ready for Review', this.db.user.name, this.data.id);
-        this.db.updateUser({actionID: '', currentAction: ''});
-        console.log('Success: ' + doc.data());
-      } else if (info === 'In Review') {
-        this.db.changeTranscriptStep('Review Completed', this.db.user.name, this.data.id);
-        this.db.updateUser({actionID: '', currentAction: ''});
-      }
-    });
-    this.data = {
-      title: '',
-      course: '',
-      priority: '',
-      lms: '',
-      media: '',
-      doc: '',
-      id: '',
-      verbitID: '',
-      comment: ''
-    };
+    try {
+      const transcript = this.db.getTranscript(this.data.id);
+      transcript.then(doc => {
+        const info = doc.data().status;
+        console.log(info);
+        if (info === 'In Transcription') {
+          this.db.changeTranscriptStep('Ready for Review', this.db.user.name, this.data.id);
+          this.db.updateUser({actionID: '', currentAction: ''});
+          console.log('Success: ' + doc.data());
+        } else if (info === 'In Review') {
+          this.db.changeTranscriptStep('Review Completed', this.db.user.name, this.data.id);
+          this.db.updateUser({actionID: '', currentAction: ''});
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      this.data = {
+        title: '',
+        course: '',
+        priority: '',
+        lms: '',
+        media: '',
+        doc: '',
+        id: '',
+        verbitID: '',
+        comment: ''
+      };
+    }
   }
 
   openReturn() {

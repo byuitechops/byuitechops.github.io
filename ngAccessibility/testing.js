@@ -74,7 +74,6 @@ this.afs.collection("accessibility").get().subscribe((querySnapshot) => {
     }
   });
 });
-
 this.afs.collection("accessibility").get().subscribe((querySnapshot) => {
   querySnapshot.forEach((documentSnapshot) => {
     console.log(documentSnapshot.data().title);

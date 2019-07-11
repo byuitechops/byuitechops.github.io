@@ -9,17 +9,13 @@ import { SearchService } from './search.service';
 export class ViewEditService {
 
   editing = false;
-  courseCode = ['ACCTG100'];
   comments = '';
   docEditURL = '.com';
   docPublishURL = '.pub';
   length = '108 seconds';
-  lmsURL = '.com';
   parentTranscript = true;
-  preparer = 'Him';
   priority = '1';
   requestNotes = 'None';
-  requestor = 'Me';
   reviewer = 'Her';
   srcURL = '.com';
   step = 'Finished';
@@ -29,6 +25,12 @@ export class ViewEditService {
   verbit = false;
   verbitID = '';
 
+  locations = [{
+    courseCode: 'testing',
+    lmsURL: 'xesmoot.com',
+    preparer: 'Me',
+    requestor: 'I'
+  }];
   id;
 
   hider = false;
@@ -39,21 +41,18 @@ export class ViewEditService {
 
   }
 
+
   async storageEdit(id) {
     this.check();
     this.id = id;
     const file = this.db.getTranscript(id);
     await file.then(async transcript => {
       const data = await transcript.data();
-      this.comments = await data.requestNotes;
-      this.courseCode = await data.location.courseCode;
+      this.comments = await data.notes;
       this.priority = await data.priority;
-      this.lmsURL = await data.lmsURL;
       this.docPublishURL = await data.docPublishURL;
       this.docEditURL = await data.docEditURL;
       this.length = await data.length;
-      this.preparer = await data.preparer;
-      this.requestor = await data.requestor;
       this.reviewer = await data.reviewer;
       this.title = await data.title;
       this.transcriber = await data.transcriber;
@@ -62,6 +61,8 @@ export class ViewEditService {
       this.verbitID = await data.verbitID;
       this.srcURL = await data.srcURL;
       this.step = await data.status;
+
+      this.locations = await data.location;
     });
   }
   check() {
@@ -89,12 +90,7 @@ export class ViewEditService {
     }
     const data = {
       notes: this.comments,
-      location: [{
-        courseCode: this.courseCode,
-        lmsURL: this.lmsURL,
-        preparer: this.preparer,
-        requestor: this.requestor
-      }],
+      location: this.locations,
       docEditURL: this.docEditURL,
       docPublishURL: this.docPublishURL,
       length: this.length,
