@@ -102,7 +102,7 @@ h1 {
 }
 .page-title {
     width: 1500px;
-    padding: 50px 25px;
+    padding: 25px 25px 75px;
 }
 h2 {
     width: 100%;
@@ -179,20 +179,22 @@ a {
 .links-box {
     display: flex;
     flex-flow: row wrap;
+    justify-content: flex-start;
+    width: 100%;
     margin: 50px 0;
 }
 .links-box a {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 120px;
+    width: 130px;
     height: 100px;
-    margin: 5px;
+    margin: 15px;
 
     text-align: center;
     color: var(--white);
     background-color: var(--primary);
-    border-radius: 10px;
+    border-radius: 20px;
     box-shadow: 0 0 3px 0px var(--black);
     cursor: pointer;
 }
@@ -254,8 +256,8 @@ textarea {
 }
 button {
     width: 100%;
-    max-width: 150px;
-    margin: 5px;
+    max-width: 140px;
+    margin: 5px 10px;
     padding: 10px 15px;
 
     font-size: 13px;
