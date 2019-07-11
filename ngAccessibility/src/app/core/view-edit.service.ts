@@ -61,10 +61,9 @@ export class ViewEditService {
       this.verbitID = await data.verbitID;
       this.srcURL = await data.srcURL;
       this.step = await data.status;
-
-      this.locations = await data.location;
-    });
-  }
+      this.locations = data.location;
+      });
+    }
   check() {
     if (this.auth.user.isAnonymous) {
       this.hider = true;

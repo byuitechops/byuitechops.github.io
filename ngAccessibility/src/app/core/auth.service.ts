@@ -38,34 +38,46 @@ export class AuthService {
   }
 
   async isGuest() {
-    if (this.user.isAnonymous) {
-      this.guest = true;
-      this.review = false;
-      this.transcribe = false;
-      if (this.router.url.includes('request') || this.router.url.includes('master')) {
-        // do nothing
-      } else {
-        this.router.navigate(['request']);
+    try {
+      if (this.user.isAnonymous) {
+        this.guest = true;
+        this.review = false;
+        this.transcribe = false;
+        if (this.router.url.includes('request') || this.router.url.includes('master')) {
+          // do nothing
+        } else {
+          this.router.navigate(['request']);
+        }
+        return;
       }
-      return;
+    } catch (e) {
+      console.log(e);
     }
-    this.guest = false;
-    this.role = await this.db.user.role;
-    if (this.role === 'Copyedit') {
-      this.review = true;
-      this.transcribe = false;
+    try {
+      this.guest = false;
+      this.role = await this.db.user.role;
+      if (this.role === 'Copyedit') {
+        this.review = true;
+        this.transcribe = false;
 
-    } else if (this.role === 'Quality Assurance') {
-      this.review = false;
-      this.transcribe = true;
+      } else if (this.role === 'Quality Assurance') {
+        this.review = false;
+        this.transcribe = true;
 
-    } else if (this.role === 'Master') {
-      this.review = true;
-      this.transcribe = true;
-    } else {
-      this.review = false;
-      this.transcribe = false;
+      } else if (this.role === 'Master') {
+        this.review = true;
+        this.transcribe = true;
+      } else {
+        this.review = false;
+        this.transcribe = false;
+      }
+    } catch (e) {
+      console.log('Role was undefined. Trying again in 100ms');
+      setTimeout(() => {
+        this.isGuest();
+      }, 100);
     }
+
   }
 
   signup(email: string, password: string, name: string, position: string) {

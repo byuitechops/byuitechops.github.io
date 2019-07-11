@@ -172,7 +172,7 @@ export class RequestComponent implements OnInit {
         (this.title === '' || this.title === undefined) &&
         this.priority === undefined &&
         (this.name === undefined || this.name === '' || !this.auth.user.isAnonymous)) {
-        alert('Please fill in all fields');
+          alert('Please fill in all fields');
         } else {
         if (this.auth.user.isAnonymous) {
             if (this.comments === undefined || this.comments === '') {
