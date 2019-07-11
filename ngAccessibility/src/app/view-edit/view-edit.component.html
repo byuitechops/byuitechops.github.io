@@ -158,7 +158,7 @@
                         <div class="loc">
                             <div>
                                 <select [(ngModel)]="location.courseCode">
-                                    <option [ngValue]="null" hidden class="initial-opt"(selected)="location.courseCode">Select Course</option>
+                                    <option [ngValue]="null" hidden class="initial-opt"(selected)="location.courseCode">Change Course</option>
                                     <option class="requestCourse" hidden (selected)="location.courseCode"></option>
                                 </select>
                                 <input [(ngModel)]="location.lmsURL" type="url" placeholder="Canvas URL">

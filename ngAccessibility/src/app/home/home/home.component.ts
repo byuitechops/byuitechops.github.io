@@ -25,7 +25,9 @@ export class HomeComponent implements OnInit {
   verbit = false;
 
   hide = false;
+  quote = '';
   constructor(public db: DatabaseService, private afAuth: AuthService) {
+    this.chooseQuote();
     db.afs.collection('announcements').doc('announcement').get()
     .forEach(doc => {
       this.announce = doc.data().content;
@@ -52,6 +54,8 @@ export class HomeComponent implements OnInit {
     if (this.announce !== undefined || this.announce !== '') {
       this.db.afs.collection('announcements').doc('announcement').update({
         content: this.announce
+      }).catch(err => {
+        console.log(err.message);
       });
       this.editAnnouce = !this.editAnnouce;
     } else {
@@ -88,7 +92,6 @@ export class HomeComponent implements OnInit {
         transcript.then(doc => {
           setTimeout(() => {
             const info = doc.data();
-            console.log(info);
             this.data.title = info.title;
             this.data.course = info.courseCode;
             this.data.priority = info.priority;
@@ -115,7 +118,6 @@ export class HomeComponent implements OnInit {
       const transcript = this.db.getTranscript(this.data.id);
       transcript.then(doc => {
         const info = doc.data().status;
-        console.log(info);
         if (info === 'In Transcription') {
           this.db.changeTranscriptStep('Ready for Review', this.db.user.name, this.data.id);
           this.db.updateUser({actionID: '', currentAction: ''});
@@ -124,6 +126,8 @@ export class HomeComponent implements OnInit {
           this.db.changeTranscriptStep('Review Completed', this.db.user.name, this.data.id);
           this.db.updateUser({actionID: '', currentAction: ''});
         }
+      }).catch(err => {
+        console.log(err.message);
       });
     } catch (error) {
       console.log(error);
@@ -165,5 +169,28 @@ export class HomeComponent implements OnInit {
       content[i].classList.remove('blur');
     }
 
+  }
+
+  getWeek() {
+    var date = new Date();
+    date.setHours(0, 0, 0, 0);
+    // Thursday in current week decides the year.
+    date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
+    // January 4 is always in week 1.
+    var week1 = new Date(date.getFullYear(), 0, 4);
+    // Adjust to Thursday in week 1 and count number of weeks from date to week1.
+    return 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000
+                          - 3 + (week1.getDay() + 6) % 7) / 7);
+  }
+
+  chooseQuote() {
+    let week = String(this.getWeek());
+    if (Number(week) < 10) {
+      week = '0' + week;
+    }
+    const fireQuote = this.db.getQuote(week);
+    fireQuote.then(url => {
+      this.quote = url;
+    });
   }
 }

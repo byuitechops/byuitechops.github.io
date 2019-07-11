@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
+import * as firebase from 'firebase/app';
+import 'firebase/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -19,13 +21,17 @@ export class DatabaseService {
   // Services pertaining to collection users
 
   async findUser(dName) {
-    await this.afs.collection('users', ref => ref.where('name', '==', dName).limit(1)).get().subscribe(data => {
-      this.user = data.docs[0].data();
-      this.userID = data.docs[0].id;
-      if (this.user !== undefined) {
-        this.checkAction();
-      }
-    });
+    try {
+      this.afs.collection('users', ref => ref.where('name', '==', dName).limit(1)).get().subscribe(data => {
+        this.user = data.docs[0].data();
+        this.userID = data.docs[0].id;
+        if (this.user !== undefined) {
+          this.checkAction();
+        }
+      });
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   createUser(dName, contact, position) {
@@ -36,6 +42,8 @@ export class DatabaseService {
       lead: false,
       name: dName,
       role: position
+    }).catch(err => {
+      console.log(err.message);
     });
     return;
   }
@@ -44,11 +52,14 @@ export class DatabaseService {
     this.afs.collection('users').doc(this.userID).update({
       actionID: data.actionID,
       currentAction: data.currentAction
+    }).then(() => {
+      setTimeout(() => {
+        this.findUser(this.user.name);
+      }, 500);
+    }).catch(err => {
+      console.log(err.message);
     });
-    console.log('Working');
-    setTimeout(() => {
-      this.findUser(this.user.name);
-    }, 500);
+
   }
 
   async checkAction() {
@@ -83,8 +94,7 @@ export class DatabaseService {
     const id = this.afs.createId();
     this.afs.collection('accessibility').doc(id).set({
       ...data
-    })
-    .then(() => {}).catch(err => {
+    }).then(() => {}).catch(err => {
       console.log('Huston, we have a problem: ' + err);
     });
     return id;
@@ -93,8 +103,7 @@ export class DatabaseService {
   updateTranscript(data, id) {
     this.afs.collection('accessibility').doc(id).update({
       ...data
-    })
-    .then(() => {}).catch(err => {
+    }).then(() => {}).catch(err => {
       console.log('Huston, we have a problem: ' + err);
     });
     return;
@@ -120,54 +129,67 @@ export class DatabaseService {
     }
   }
 
-  async addLocation(id, newLocation) {
+  addLocation(id, newLocation) {
     const codes = [];
     codes.push(newLocation);
     const transcript = this.getTranscript(id);
-    await transcript.then(res => {
+    try {
+      transcript.then(res => {
         res.data().location.forEach(location => {
-            console.log(location);
           if (location.lmsURL !== newLocation.lmsURL) {
             codes.push(location);
-            console.log(codes);
           }
         });
-    });
-    setTimeout(() => {
+      });
+      setTimeout(() => {
         console.log(codes);
         this.afs.collection('accessibility').doc(id).update({
             location: codes
         });
-    }, 200);
+      }, 200);
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   changeTranscriptStep(status, name, id) {
-    console.log(status);
-    if (status === 'In Prep') {
-      this.afs.collection('accessibility').doc(id).update({
-        preparer: name,
-        status
-      });
-    } else if (status === 'In Transcription') {
-      console.log('DONE');
-      this.afs.collection('accessibility').doc(id).update({
-        transcriber: name,
-        status
-      });
-    } else if (status === 'In Review' || status === 'Review Completed') {
-      this.afs.collection('accessibility').doc(id).update({
-        reviewer: name,
-        status
-      });
-    } else {
-      this.afs.collection('accessibility').doc(id).update({
-        status
-      });
+    try {
+      if (status === 'In Prep') {
+        this.afs.collection('accessibility').doc(id).update({
+          preparer: name,
+          status
+        });
+      } else if (status === 'In Transcription') {
+        console.log('DONE');
+        this.afs.collection('accessibility').doc(id).update({
+          transcriber: name,
+          status
+        });
+      } else if (status === 'In Review' || status === 'Review Completed') {
+        this.afs.collection('accessibility').doc(id).update({
+          reviewer: name,
+          status
+        });
+      } else {
+        this.afs.collection('accessibility').doc(id).update({
+          status
+        });
+      }
+    } catch (e) {
+      console.log(e);
     }
-    console.log('Working');
   }
   delete(id) {
-    this.afs.collection('accessibility').doc(id).delete();
+    this.afs.collection('accessibility').doc(id).delete().catch(err => {
+      console.log(err.message);
+    });
+  }
+
+  // Firebase Storage
+  getQuote(id) {
+    id = '02';
+    const url = firebase.storage().ref().child(`quote${id}.jpg`).getDownloadURL();
+    return url;
   }
 }
 

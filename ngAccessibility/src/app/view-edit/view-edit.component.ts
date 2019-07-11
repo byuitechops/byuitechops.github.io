@@ -53,7 +53,7 @@ export class ViewEditComponent implements OnInit {
               let inject = '';
               newres.forEach((doc) => {
               const course = doc.__catalogCourseId;
-              inject += `<option [value]="${course}">${course}</option>`;
+              inject += `<option [ngValue]="${course}">${course}</option>`;
               courses.push(course);
               });
               let content = document.getElementsByClassName('requestCourse');
@@ -70,19 +70,19 @@ export class ViewEditComponent implements OnInit {
       try {
         xhttp.open('GET', 'https://byui.kuali.co/api/v1/catalog/public/catalogs/current', true);
         xhttp.send();
-        const html = `<option [value]="ENG106">ENG106</option>
-                        <option [value]="ENG106L">ENG106L</option>
-                        <option [value]="GSPC120L">GSPC120L</option>
-                        <option [value]="MATH100G">MATH100G</option>
-                        <option [value]="MATH100L">MATH100L</option>
-                        <option [value]="PC101">PC101</option>
-                        <option [value]="PC101L">PC101L</option>
-                        <option [value]="PC102">PC102</option>
-                        <option [value]="PC102L">PC102L</option>
-                        <option [value]="PC103">PC103</option>
-                        <option [value]="RELPC121">RELPC121</option>
-                        <option [value]="RELPC122">RELPC122</option>
-                        <option [value]="FDREL250">FDREL250</option>`;
+        const html = `<option [ngValue]="ENG106">ENG106</option>
+                        <option [ngValue]="ENG106L">ENG106L</option>
+                        <option [ngValue]="GSPC120L">GSPC120L</option>
+                        <option [ngValue]="MATH100G">MATH100G</option>
+                        <option [ngValue]="MATH100L">MATH100L</option>
+                        <option [ngValue]="PC101">PC101</option>
+                        <option [ngValue]="PC101L">PC101L</option>
+                        <option [ngValue]="PC102">PC102</option>
+                        <option [ngValue]="PC102L">PC102L</option>
+                        <option [ngValue]="PC103">PC103</option>
+                        <option [ngValue]="RELPC121">RELPC121</option>
+                        <option [ngValue]="RELPC122">RELPC122</option>
+                        <option [ngValue]="FDREL250">FDREL250</option>`;
         let content = document.getElementsByClassName('requestCourse');
         for (let i = 0; i < content.length; i++) {
           content[i].insertAdjacentHTML('afterend', html);
@@ -129,6 +129,9 @@ export class ViewEditComponent implements OnInit {
     edit() {
       setTimeout(() => {
         this.getCourse();
+        setTimeout(() => {
+          this.storage.locations = this.storage.locations;
+        }, 100);
       }, 500);
       this.storage.editing = !this.storage.editing;
     }
