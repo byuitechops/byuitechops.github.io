@@ -23,8 +23,8 @@
                 <div class="detail">
                     <p>Stage</p>
                     <div *ngIf="storage.editing; else viewStage">
-                        <select id="edit-info-stage">
-                            <option *ngFor='let stage of stages' [value]='stage' (selected)="stage == storage.step">{{ stage }}</option>
+                        <select id="edit-info-stage" [(ngModel)]="storage.step">
+                            <option *ngFor='let stage of stages' [ngValue]='stage' [(selected)]="stage == storage.step">{{ stage }}</option>
                         </select>
                     </div>
                     <ng-template #viewStage>
@@ -35,8 +35,8 @@
                 <div class="detail">
                     <p>Priority</p>
                     <div *ngIf="storage.editing; else viewPriority">
-                        <select id="edit-info-priority">
-                            <option *ngFor='let priority of priorities' [value]='priority' (selected)='storage.priority'>{{ priority }}</option>
+                        <select id="edit-info-priority" [(ngModel)]="storage.priority">
+                            <option *ngFor='let priority of priorities' [ngValue]='priority' [(selected)]='storage.priority'>{{ priority }}</option>
                         </select>
                     </div>
                     <ng-template #viewPriority>
@@ -47,8 +47,8 @@
                 <div class="detail">
                     <p>Type</p>
                     <div *ngIf="storage.editing; else viewType">
-                        <select id="edit-info-type">
-                            <option *ngFor='let type of types' [value]='type' (selected)='storage.type'>{{ type }}</option>
+                        <select id="edit-info-type" [(ngModel)]="storage.type">
+                            <option *ngFor='let type of types' [ngValue]='type' [(selected)]='storage.type'>{{ type }}</option>
                         </select>
                     </div>
                     <ng-template #viewType>

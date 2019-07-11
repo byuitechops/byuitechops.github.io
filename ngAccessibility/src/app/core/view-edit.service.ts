@@ -79,6 +79,7 @@ export class ViewEditService {
   }
 
   confirmEdit() {
+    let data;
     if (this.docEditURL === undefined) {
       this.docEditURL = '';
     }
@@ -88,23 +89,31 @@ export class ViewEditService {
     if (this.comments === undefined) {
       this.comments = '';
     }
-    const data = {
-      notes: this.comments,
-      location: this.locations,
-      docEditURL: this.docEditURL,
-      docPublishURL: this.docPublishURL,
-      length: this.length,
-      parentTranscript: this.parentTranscript,
-      priority: this.priority,
-      srcURL: this.srcURL,
-      status: this.step,
-      title: this.title,
-      type: this.type,
-      verbit: this.verbit,
-      verbitID: this.verbitID,
-    };
-    this.db.updateTranscript(data, this.id);
-    this.search.index.clearCache();
+    try {
+      data = {
+        notes: this.comments,
+        location: this.locations,
+        docEditURL: this.docEditURL,
+        docPublishURL: this.docPublishURL,
+        length: this.length,
+        parentTranscript: this.parentTranscript,
+        priority: this.priority,
+        srcURL: this.srcURL,
+        status: this.step,
+        title: this.title,
+        type: this.type,
+        verbit: this.verbit,
+        verbitID: this.verbitID,
+      };
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setTimeout(() => {
+        this.db.updateTranscript(data, this.id);
+        console.log(data);
+        this.search.index.clearCache();
+      }, 500);
+    }
   }
   delete() {
     if (this.counter) {

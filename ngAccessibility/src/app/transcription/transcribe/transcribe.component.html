@@ -31,7 +31,7 @@
                                 <ol class="ais-Hits-list">
                                     <tr *ngFor="let hit of hits" class="ais-Hits-item">
                                         <td class="priority-col"> {{ hit.priority }} </td>
-                                        <td class="course-col"> {{ hit.courseCode }} </td>
+                                        <td class="course-col"> {{ hit.location[0].courseCode }} <span *ngIf="((hit.location).length > 1)">...</span></td>
                                         <td class="type-col"> {{ hit.type }} </td>
                                         <td class="title-col"> {{ hit.title }} </td>
                                         <td><i *ngIf="hit.guestCreated" class="fas fa-exclamation-circle fa-lg"></i></td>
@@ -54,5 +54,5 @@
         </div>
 
     </div>
-    
+
 </main>
