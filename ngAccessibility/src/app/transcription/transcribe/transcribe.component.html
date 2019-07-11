@@ -34,7 +34,7 @@
                                         <td class="course-col"> {{ hit.courseCode }} </td>
                                         <td class="type-col"> {{ hit.type }} </td>
                                         <td class="title-col"> {{ hit.title }} </td>
-                                        <td><i *ngIf="hit.guestCreated" class="fas fa-user-plus fa-lg"></i></td>
+                                        <td><i *ngIf="hit.guestCreated" class="fas fa-user-plus fa-lg guest-created"></i></td>
                                         <td class="length-col"> {{ hit.length }} sec </td>
                                         <td class="last-col">
                                             <button type="button" (click)="showDetails(hit.objectID)">View</button>
