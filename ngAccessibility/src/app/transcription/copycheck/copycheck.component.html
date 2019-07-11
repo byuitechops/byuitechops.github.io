@@ -15,6 +15,8 @@
                             <th class="course-col" id="course-col-head">Course</th>
                             <th class="type-col" id="type-col-head">Type</th>
                             <th class="title-col" id="title-col-head">Title</th>
+                            <td class="doc-col">Doc</td>
+                            <td class="src-col">Media</td>
                             <th class="length-col" id="length-col-head">Length</th>
                             <th class="last-col">
                                 <div class="searchbox">
@@ -33,6 +35,8 @@
                                         <td class="course-col"> {{ hit.location[0].courseCode }} <span *ngIf="((hit.location).length > 1)">...</span></td>
                                         <td class="type-col"> {{ hit.type }} </td>
                                         <td class="title-col"> {{ hit.title }} </td>
+                                        <td class="doc-col"><a [href]="hit.docEditURL" target="_blank"><i class="fas fa-file-alt fa-2x"></i></a></td>
+                                        <td class="src-col"><a [href]="hit.srcURL" target="_blank"><i class="fas fa-play-circle fa-2x"></i></a></td>
                                         <td class="length-col"> {{ hit.length }} sec </td>
                                         <td class="last-col">
                                             <button type="button" (click)="showDetails(hit.objectID)">View</button>

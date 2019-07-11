@@ -169,13 +169,6 @@ a {
 .icon:active {
     box-shadow: none;
 }
-#algolia-icon {
-    width: 20px;
-    height: auto;
-    position: relative;
-    bottom: 30px;
-    left: 230px;
-}
 .guest-created {
     color: #F58300;
 }
@@ -382,7 +375,7 @@ tr {
     text-align: center;
 }
 .course-col {
-    width: 100px;
+    width: 120px;
 }
 .type-col {
     width: 100px;
@@ -395,13 +388,18 @@ tr {
     text-align: right;
 }
 .last-col {
-    width: 500px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+
+    width: 300px;
 }
 .pagination {
     margin: 50px auto 100px;
 }
 .search-box {
     position: relative;
+    right: 20px;
 }
 .table-box button {
     width: 45%;
@@ -411,6 +409,18 @@ tr {
     height: 25px;
     margin: 0;
     padding: 3px;
+}
+.fa-ellipsis-h {
+    position: relative;
+    top: 3.5px;
+}
+#algolia-icon {
+    z-index: 5;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    top: 10px;
+    right: 20px;
 }
 
 
