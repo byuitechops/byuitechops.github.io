@@ -150,12 +150,12 @@
             <div class="right-col" id="notes-info-field">
 
                 <h3 id="loc-title">Locations</h3>
-                <a class="" id="add-location">+</a>
+                <a class="hide" id="add-location">+</a>
 
-                <div class="detail"> <!-- *ngFor="let location of locations" -->
-                    <div *ngIf="storage.editing; else viewLocations">
+                <div class="detail" *ngFor="let location of storage.locations">
+                    <div *ngIf="storage.editing; else viewLocations" class="edit-loc">
                         <div class="sidebar"></div>
-                        <div class="loc" *ngFor="let location of storage.locations">
+                        <div class="loc">
                             <div>
                                 <select [(ngModel)]="location.courseCode">
                                     <option [ngValue]="null" hidden class="initial-opt"(selected)="location.courseCode">Select Course</option>
@@ -167,16 +167,16 @@
                             </div>
                         </div>
                     </div>
-                    <ng-template #viewLocations>
+                    <ng-template #viewLocations class="edit-loc">
                         <div class="sidebar"></div>
-                        <div class="loc" *ngFor="let location of storage.locations">
+                        <div class="loc">
                             <div class="detail">
                                 <p>Course</p>
                                 <span> {{ location.courseCode }} </span>
                             </div>
                             <div class="detail">
                                 <p>LMS URL</p>
-                                <span> {{ location.lmsURL }} </span>
+                                <span><a href="location.lmsURL"> {{ location.lmsURL }} </a></span>
                             </div>
                             <div class="detail">
                                 <p>Requestor</p>
