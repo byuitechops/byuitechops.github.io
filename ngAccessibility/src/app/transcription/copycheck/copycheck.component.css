@@ -17,6 +17,6 @@
 }
 #algolia-icon {
     position: relative;
-    bottom: 30px;
+    top: -30px;
     left: 200px;
 }

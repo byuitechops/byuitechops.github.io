@@ -399,7 +399,6 @@ tr {
 }
 .search-box {
     position: relative;
-    right: 20px;
 }
 .table-box button {
     width: 45%;
@@ -420,9 +419,8 @@ tr {
     height: 20px;
     position: relative;
     top: 10px;
-    right: 20px;
+    left: 10px;
 }
-
 
 
 
