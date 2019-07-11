@@ -17,7 +17,7 @@ export class AuthService {
   review = false;
   role: any;
 
-  constructor(private af: AngularFireAuth, private db: DatabaseService, private router: Router) {
+  constructor(public af: AngularFireAuth, private db: DatabaseService, private router: Router) {
     //  This loads on every page in the Site, it check if the user is authenticated
     // and then finds that user in the database.
     this.af.auth.onAuthStateChanged(async user => {
@@ -59,6 +59,9 @@ export class AuthService {
       this.review = false;
       this.transcribe = true;
 
+    } else if (this.role === 'Master') {
+      this.review = true;
+      this.transcribe = true;
     } else {
       this.review = false;
       this.transcribe = false;

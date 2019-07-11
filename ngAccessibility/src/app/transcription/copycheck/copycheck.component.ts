@@ -26,12 +26,6 @@ export class CopycheckComponent implements OnInit {
   }
 
   claimTranscript(id) {
-    const userData = {
-      actionID: id,
-      currentAction: 'reviewing'
-    };
-    this.db.updateUser(userData);
     this.db.changeTranscriptStep('Finished', this.db.user.name, id);
-    this.router.navigate(['/'] );
   }
 }

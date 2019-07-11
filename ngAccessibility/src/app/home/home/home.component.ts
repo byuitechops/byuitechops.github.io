@@ -33,6 +33,13 @@ export class HomeComponent implements OnInit {
         this.updateInProgress();
       }, 900);
     });
+    this.afAuth.af.auth.onAuthStateChanged(user => {
+      if (user) {
+        setTimeout(() => {
+          this.updateInProgress();
+        }, 500);
+      }
+    });
   }
   edit() {
     if (!this.afAuth.user.isAnonymous) {
@@ -111,34 +118,23 @@ export class HomeComponent implements OnInit {
       if (info === 'In Transcription') {
         this.db.changeTranscriptStep('Ready for Review', this.db.user.name, this.data.id);
         this.db.updateUser({actionID: '', currentAction: ''});
-        this.data = {
-          title: '',
-          course: '',
-          priority: '',
-          lms: '',
-          media: '',
-          doc: '',
-          id: '',
-          verbitID: '',
-          comment: ''
-        };
         console.log('Success: ' + doc.data());
       } else if (info === 'In Review') {
-        this.db.changeTranscriptStep('', this.db.user.name, this.data.id);
+        this.db.changeTranscriptStep('Review Completed', this.db.user.name, this.data.id);
         this.db.updateUser({actionID: '', currentAction: ''});
-        this.data = {
-          title: '',
-          course: '',
-          priority: '',
-          lms: '',
-          media: '',
-          doc: '',
-          id: '',
-          verbitID: '',
-          comment: ''
-        };
       }
     });
+    this.data = {
+      title: '',
+      course: '',
+      priority: '',
+      lms: '',
+      media: '',
+      doc: '',
+      id: '',
+      verbitID: '',
+      comment: ''
+    };
   }
 
   openReturn() {
