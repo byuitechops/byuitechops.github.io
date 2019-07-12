@@ -35,32 +35,36 @@ export class SearchService {
     let src = data.srcURL;
     const results = new Array();
     src = await this.cleanSRC(src);
-    console.log(src);
-    this.index.search({query: t}).then(async x => {
-    // tslint:disable-next-line: prefer-for-of
-      for (let y = 0; y < x.hits.length; y++) {
-       if (x.hits[y].type === type) {
-         console.log(x.hits[y]);
-         if ((x.hits[y].srcURL).includes(src)) {
-          results.push(x.hits[y]);
-          this.areThere = true;
-         }
-       }
-      }
-    });
-    this.index.search({query: src}).then(async a => {
-      // tslint:disable-next-line: prefer-for-of
-      for (let y = 0; y < a.hits.length; y++) {
-        if (a.hits[y].type === type) {
-          results.push(a.hits[y]);
-          this.areThere = true;
-          console.log(a.hits[y]);
-        }
-       }
-    });
+    try {
+      this.index.search({query: t}).then(async x => {
+        // tslint:disable-next-line: prefer-for-of
+          for (let y = 0; y < x.hits.length; y++) {
+           if (x.hits[y].type === type) {
+             console.log(x.hits[y]);
+             if ((x.hits[y].srcURL).includes(src)) {
+              results.push(x.hits[y]);
+              this.areThere = true;
+             }
+           }
+          }
+        });
+      this.index.search({query: src}).then(async a => {
+        // tslint:disable-next-line: prefer-for-of
+        for (let y = 0; y < a.hits.length; y++) {
+          if (a.hits[y].type === type) {
+            results.push(a.hits[y]);
+            this.areThere = true;
+            console.log(a.hits[y]);
+          }
+          }
+      });
+    } catch (err) {
+      console.log(err.message);
+    }
     console.log(results);
     this.duplicates = results;
     return results;
+
   }
 
   cleanSRC(link) {
