@@ -180,7 +180,7 @@
                 </div>
                 <div class="detail">
                     <label>Location in Course:</label>
-                    <p class="description"> {{ lms }} </p>
+                    <a [href]="this.lms" target="_blank" class="description"> {{ lms }} </a>
                 </div>
                 <div class="btn-box">
                     <button type="submit" id="requestSubmit" (click)="newRequest()">Submit</button>
