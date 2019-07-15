@@ -13,9 +13,7 @@ export class DatabaseService {
   userID: string;
   count = 0;
 
-  constructor(public afs: AngularFirestore, private router: Router) {
-
-  }
+  constructor(public afs: AngularFirestore, private router: Router) { }
 
 
   // Services pertaining to collection users
@@ -95,7 +93,7 @@ export class DatabaseService {
     this.afs.collection('accessibility').doc(id).set({
       ...data
     }).then(() => {}).catch(err => {
-      console.log('Huston, we have a problem: ' + err);
+      console.log('Huston, we have a problem: ' + err.message);
     });
     return id;
   }
@@ -104,7 +102,7 @@ export class DatabaseService {
     this.afs.collection('accessibility').doc(id).update({
       ...data
     }).then(() => {}).catch(err => {
-      console.log('Huston, we have a problem: ' + err);
+      console.log('Huston, we have a problem: ' + err.message);
     });
     return;
   }
@@ -125,6 +123,8 @@ export class DatabaseService {
     if (add) {
       this.afs.collection('accessibility').doc(id).update({
         courseCode: newCode
+      }).catch(err => {
+        console.log(err.message);
       });
     }
   }
