@@ -190,6 +190,7 @@ export class RequestComponent implements OnInit {
         data = {
           docEditURL: '',
           docPublishURL: '',
+          courseCode: [this.course],
           guestCreated: true,
           length: '',
           location: [{
@@ -365,7 +366,7 @@ export class RequestComponent implements OnInit {
       setTimeout(() => {
         document.getElementById('sub-msg').innerHTML = '';
         document.getElementById('transcript-box-info').classList.remove('submitted');
-      }, 1500);
+      }, 10000);
       this.media = undefined;
       this.title = undefined;
       this.comments = this.selectUndefinedOptionValue;

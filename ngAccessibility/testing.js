@@ -114,8 +114,6 @@ this.afs.collection("accessibility").get().subscribe((querySnapshot) => {
     }
   });
 });
-
-
 this.afs.collection("accessibility").get().subscribe((querySnapshot) => {
   querySnapshot.forEach((documentSnapshot) => {
     let location = [];
@@ -224,5 +222,23 @@ this.afs.collection("accessibility").get().subscribe((querySnapshot) => {
       console.log(x);
       this.afs.collection('accessibility').doc(id).set(x);
     }
+  });
+});
+
+this.afs.collection("accessibility").get().subscribe((querySnapshot) => {
+  querySnapshot.forEach((documentSnapshot) => {
+    let courses = []
+    const locations = documentSnapshot.data().location;
+    locations.forEach(location => {
+      courses.push(location.courseCode);
+    });
+    console.log(courses);
+    // this.afs.collection("accessibility").doc(documentSnapshot.id).update({
+    //   courses
+    // }).then(() => {
+    //   console.log("Good");
+    // }).catch(err => {
+    //   console.log(err);
+    // });
   });
 });

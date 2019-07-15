@@ -13,7 +13,8 @@ export class DatabaseService {
   userID: string;
   count = 0;
 
-  constructor(public afs: AngularFirestore, private router: Router) { }
+  constructor(public afs: AngularFirestore, private router: Router) {
+  }
 
 
   // Services pertaining to collection users
@@ -111,25 +112,32 @@ export class DatabaseService {
     let add = true;
     const codes = [];
     codes.push(newCode);
-    this.afs.collection('accessibility').doc(id).get().subscribe(res => {
-      (res.data().courseCode).forEach(course => {
-        if (course === newCode) {
-          add = false;
-        } else {
-          codes.push(course);
+    try {
+      this.afs.collection('accessibility').doc(id).get().subscribe(res => {
+        (res.data().courses).forEach(course => {
+          if (course === newCode) {
+            add = false;
+          } else {
+            codes.push(course);
+          }
+        });
+      });
+      setTimeout(() => {
+        if (add) {
+          this.afs.collection('accessibility').doc(id).update({
+            courseCode: newCode
+          }).catch(err => {
+            console.log(err.message);
+          });
         }
-      });
-    });
-    if (add) {
-      this.afs.collection('accessibility').doc(id).update({
-        courseCode: newCode
-      }).catch(err => {
-        console.log(err.message);
-      });
+      }, 100);
+    } catch (err) {
+      console.log(err);
     }
   }
 
   addLocation(id, newLocation) {
+    this.addCourseCode(id, newLocation.courseCode);
     const codes = [];
     codes.push(newLocation);
     const transcript = this.getTranscript(id);

@@ -10,6 +10,7 @@ export class ViewEditService {
 
   editing = false;
   comments = '';
+  courses = [];
   docEditURL = '.com';
   docPublishURL = '.pub';
   length = '108 seconds';
