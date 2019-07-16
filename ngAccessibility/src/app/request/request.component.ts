@@ -297,22 +297,30 @@ export class RequestComponent implements OnInit {
     }
   }
 
+    clickDupMsg: string;
     useDuplicate() {
-      this.location = {
-        courseCode: this.course,
-        lmsURL: this.lms,
-        requestor: this.name,
-        preparer: this.name,
-      };
-      this.db.addLocation(this.toBeUsedID, this.location);
-      this.closeDup();
-      const transcript = this.db.getTranscript(this.toBeUsedID);
-      transcript.then(doc => {
-        if (doc.data().status !== 'In Prep' && doc.data().status !== 'Ready for Prep') {
-          this.showCodePopup();
+        if (this.toBeUsedCourse !== undefined || this.toBeUsedID !== undefined ||
+            this.toBeUsedTitle !== undefined || this.toBeUsedType !== undefined ||
+            this.toBeUsedMedia !== undefined || this.toBeUsedPriority !== undefined) {
+            this.clickDupMsg = '';
+            this.location = {
+                courseCode: this.course,
+                lmsURL: this.lms,
+                requestor: this.name,
+                preparer: this.name,
+                };
+            this.db.addLocation(this.toBeUsedID, this.location);
+            this.closeDup();
+            const transcript = this.db.getTranscript(this.toBeUsedID);
+            transcript.then(doc => {
+                if (doc.data().status !== 'In Prep' && doc.data().status !== 'Ready for Prep') {
+                    this.showCodePopup();
+                }
+            });
+            this.submitMsg();
+        } else {
+            this.clickDupMsg = 'Please select a duplicate on the right';
         }
-      });
-      this.submitMsg();
     }
 
     createNew() {

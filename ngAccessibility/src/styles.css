@@ -433,7 +433,6 @@ tr {
     position: fixed;
     width: 100%;
     height: 100%;
-    backdrop-filter: blur(3px);
 }
 .modal-content {
     display: flex;

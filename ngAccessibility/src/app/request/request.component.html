@@ -117,9 +117,10 @@
             </div>
 
         </div>
+        
+        <p id="message"> {{ clickDupMsg }} </p>
 
         <div class="btn-box" id="dup-btn-box">
-            <p style="margin-left: 2rem; margin-top: .8rem; font-weight: bolder;" id="message"></p>
             <button type="submit" id="requestSubmit" (click)="useDuplicate()">Use Duplicate</button>
             <button type="submit" id="requestSubmit" (click)="createNew()">Make New Transcript</button>
             <button class="warning-btn" id="dup-cancel" (click)="closeDup()">Cancel</button>
