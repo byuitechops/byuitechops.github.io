@@ -64,7 +64,7 @@ export class ViewEditService {
       this.step = await data.status;
       this.locations = data.location;
       });
-    }
+  }
   check() {
     if (this.auth.user.isAnonymous) {
       this.hider = true;
@@ -76,10 +76,14 @@ export class ViewEditService {
     } else {
       this.admin = false;
     }
+    console.log(this.admin);
   }
 
   confirmEdit() {
     let data;
+    this.locations.forEach(location => {
+      this.courses.push(location.courseCode);
+    });
     if (this.docEditURL === undefined) {
       this.docEditURL = '';
     }
@@ -91,6 +95,7 @@ export class ViewEditService {
     }
     try {
       data = {
+        courses: this.courses,
         notes: this.comments,
         location: this.locations,
         docEditURL: this.docEditURL,
