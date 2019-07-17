@@ -1,0 +1,163 @@
+<main class="col9">
+
+  <h1 class="page-title col7">Home</h1>
+
+  <!---------------------------------------------
+  - 4a. SLIDE SHOW
+  -     This is where you will add any announcements
+  -     and banners to the slideshow on the home page
+  -     of the portal.
+  -     If the number of slides changes, make sure to
+  -     change the number of dots, accordingly.
+  ---------------------------------------------->
+
+  <section class="center-section col8">
+
+      <section id="welcome">
+          <div class="slideshow-container">
+
+              <a class="mySlides" href="https://docs.google.com/spreadsheets/d/1DetufZwdKE5uq7tZWAfLuKM6HNs3IxXC_zZ48quGS04/edit#gid=1426389316" target="_blank">
+                  <img src="assets/banners/reminderDevotional.jpg">
+              </a>
+              <a class="mySlides" href="https://docs.google.com/spreadsheets/d/18U2hkUafZ1EXmtze9BWI_1U4t6619uy4FZmPiQxfWss/edit#gid=590424193" target="_blank">
+                  <img src="assets/banners/reminderFridgeCleaning.jpg">
+              </a>
+              <a class="mySlides" href="https://docs.google.com/spreadsheets/d/1oXLNWu9sWyWhDwcTurzDvNF-Wo-B5SXeywuMD_hKfqM/edit#gid=0" target="_blank">
+                  <img src="assets/banners/reminderFTC.jpg">
+              </a>
+              <a class="mySlides" href="profile.html">
+                  <img src="assets/banners/reminderPoints.jpg">
+              </a>
+
+              <a class="slide-button prev" onclick="plusSlides(-1)">&#10094;</a>
+              <a class="slide-button next" onclick="plusSlides(1)">&#10095;</a>
+
+          </div>
+
+          <div id="dots-box">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+            <!-- <span class="dot" onclick="currentSlide(5)"></span> -->
+          </div>
+
+      </section>
+
+      <!---------------------------------------------
+      - 4b. HOME PAGE LINKS
+      -     This is where you will update any links,
+      -     images, or style that need to be updated
+      -     on the home page of the portal.
+      ---------------------------------------------->
+
+      <section class="links-container flex-container">
+
+          <div class="box-link" id="canvas">
+              <a href="https://byui.instructure.com/login/canvas" target="_blank" >
+                  <p>Canvas</p>
+                  <img src="./assets/icons/canvas.png" alt="Canvas Icon"/>
+              </a>
+          </div>
+
+          <div class="box-link" id="pathway">
+              <a href="https://pathway.brightspace.com/d2l/local" target="_blank" >
+                  <p>Pathway</p>
+                  <img src="./assets/icons/pathway.png" alt="Pathway Icon"/>
+              </a>
+          </div>
+
+          <div class="box-link" id="brightspace">
+              <a href="http://byui.brightspace.com/d2l/local" target="_blank" >
+                  <p>Brightspace</p>
+                  <img src="./assets/icons/brightspace.png" alt="Brightspace Icon"/>
+              </a>
+          </div>
+
+          <div class="box-link" id="googledrive">
+              <a href="https://drive.google.com/drive/team-drives" target="_blank" >
+                  <p>Google Drive</p>
+                  <img src="./assets/icons/drive.png" alt="Google Drive Icon"/>
+              </a>
+          </div>
+
+          <div class="box-link" id="office365">
+              <a href="https://outlook.office365.com/owa/?realm=byui.edu&exsvurl=1&ll-cc=1033&modurl=0" target="_blank" >
+                  <p>Office 365</p>
+                  <img src="./assets/icons/office365.png" alt="Office 365 Icon"/>
+              </a>
+          </div>
+
+          <div class="box-link" id="katana">
+              <a href="http://10.5.188.122:8000/" target="_blank" >
+                  <p>Katana</p>
+                  <img src="./assets/icons/katana.png" alt="Katana Icon"/>
+              </a>
+          </div>
+
+          <div class="box-link" id="equella">
+              <a href="https://content.byui.edu/access/home.do" target="_blank" >
+                  <p>Equella</p>
+                  <img src="./assets/icons/equella.png" alt="Equella Icon"/>
+              </a>
+          </div>
+
+          <div class="box-link" id="trello">
+              <a href="https://trello.com/b/Jop28eai/online-canvas-transition" target="_blank" >
+                  <p>Trello</p>
+                  <img src="./assets/icons/trello.png" alt="Trello Icon"/>
+              </a>
+          </div>
+
+          <div class="box-link" id="accessibility">
+              <a href="https://byui-accessibility-redemption.web.app/" target="_blank" >
+                  <p>Accessibility</p>
+                  <img src="./assets/icons/accessibility.png" alt="Accessibility Icon"/>
+              </a>
+          </div>
+
+          <div class="box-link" id="googlechat">
+              <a href="https://chat.google.com/room/AAAAGWGIzV4" target="_blank" >
+                  <p>Google Chat</p>
+                  <img src="./assets/icons/googleChat.png" alt="Google Chat Icon"/>
+              </a>
+          </div>
+
+      </section>
+
+  </section>
+
+  <!---------------------------------------------
+  - 4c. HOME RIGHT SIDEBAR
+  -     This is where you might need to update anything
+  -     pertaining to what you see on the right sidebar
+  -     of the home page on the portal.
+  ---------------------------------------------->
+
+  <section class="right-sidebar col2 flex-container">
+
+      <div id="time-n-date">
+          <p id="time"></p>
+          <p id="apm"></p>
+          <p id="date"></p>
+      </div>
+
+      <button id="checkInBtn" class="clock btn2">
+          Clock In
+      </button>
+      <button id="checkOutBtn" class="clock btn2 hiddenBtn">
+          Clock Out
+      </button>
+
+      <a id="workday-link" href="https://www.myworkday.com/byuhi/d/home.htmld" target="_blank"><h3 id="last-checked"></h3></a>
+      <h3 id="last-break"></h3>
+
+      <button class="btn2" id="break-button">
+          <p id="break-button-text" >Start Break</p>
+          <span id="mins">15</span>
+          <span>:</span>
+          <span id="secs">00</span>
+      </button>
+
+  </section>
+</main>
