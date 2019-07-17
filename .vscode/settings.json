@@ -1,5 +1,0 @@
-{
-    "diffEditor.ignoreTrimWhitespace": false,
-    "editor.cursorStyle": "line-thin",
-    "files.autoSave": "onWindowChange"
-}
