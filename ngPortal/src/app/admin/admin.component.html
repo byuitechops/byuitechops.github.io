@@ -1,26 +1,51 @@
 <main>
-
   <h1 class="page-title">Profile</h1>
-
   <section id="admin" class="table-box">
-      <div>
-          <h2>List of Users</h2>
-          <span id="show-all">Show All </span><input type="checkbox" id="checkShow">
-          <a class="back-to-profile" href="/portal/profile.html">
-              <img src="/portal/assets/misc/backArrow.png" alt="Back to Profile"/>
-          </a>
-      </div>
-      <table class="table-generate" id="users-list-generate">
-          <tr>
-              <th class="usernum">#</th>
-              <th class="username">Name</th>
-              <th class="usertime">Accumulated Time </th>
-              <th class="userteam">Team</th>
-              <th class="usertitle">Title</th>
-              <th class="useradmin">Admin</th>
-              <th class="userstore">Store</th>
-          </tr>
-      </table>
+    <div>
+      <h2>List of Users</h2>
+      <span id="show-all">Show All </span><input type="checkbox" id="checkShow">
+      <a class="back-to-profile" href="/portal/profile.html">
+        <img src="../../assets/misc/backArrow.png" alt="Back to Profile" />
+      </a>
+    </div>
+    <table class="table-generate">
+      <tr>
+        <th class="username">Name</th>
+        <th class="usertime">Accumulated Time </th>
+        <th class="userteam">Team</th>
+        <th class="usertitle">Title</th>
+        <th class="useradmin">Admin</th>
+        <th class="userstore">Store</th>
+      </tr>
+        <tr [class.grayYes]="counter()" *ngFor="let user of u.users">
+          <td class="username">{{user.nameDisplay}}</td>
+          <td class="usertime hours" (click)="u.editing(user.id)"><span *ngIf="!(u.edit === user.id)">{{ user.time }}</span>
+            <span *ngIf="u.edit === user.id">
+              <input [(ngModel)]="user.time"/>
+              <button (click)="u.update(user.id, user.time)" type="submit"> Send </button>
+              <button (click)="u.hide()" type="Text">Close</button>
+            </span>
+          </td>
+          <td class="userteam">
+            <select class="table-select teamSelect" [(ngModel)]="user.team" (selected)="user.team">
+              <option value="default">default</option>
+              <option value="lms">lms</option>
+              <option value="accessibility">accessibility</option>
+            </select>
+          </td>
+          <td class="usertitle">
+            <select class="table-select roleSelect" [(ngModel)]="user.title" (selected)="user.title">
+              <option value="Team Member">Team Member</option>
+              <option value="Project Lead">Project Lead</option>
+              <option value="Assistant Lead">Assistant Lead</option>
+              <option value="Student Lead">Student Lead</option>
+              <option value="Trainer">Trainer</option>
+            </select>
+          </td>
+          <td class="useradmin"><input class="admin" type="checkbox" [(ngModel)]="user.admin" /></td>
+          <td class="userstore"><input class="manager" type="checkbox" [(ngModel)]="user.storeManager" /></td>
+        </tr>
+    </table>
   </section>
 
 </main>
