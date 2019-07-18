@@ -6,6 +6,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { FormsModule } from '@angular/forms';
+import { ThemeService } from './core/theme.service';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -39,7 +41,8 @@ import { LoginComponent } from './login/login.component';
   providers: [
     AngularFirestore,
     AngularFireStorage,
-    AngularFireAuth
+    AngularFireAuth,
+    ThemeService
   ],
   bootstrap: [AppComponent]
 })

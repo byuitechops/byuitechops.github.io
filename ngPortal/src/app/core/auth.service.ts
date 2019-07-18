@@ -7,6 +7,9 @@ import {
 import {
   AngularFirestore
 } from '@angular/fire/firestore';
+import {
+  ThemeService
+} from './theme.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +21,12 @@ export class AuthService {
   password: string;
   dName: string;
   user: any;
+  id: string;
   signingIn = true;
-  constructor(private afs: AngularFireAuth, private db: AngularFirestore) {
+  selectedTheme;
+
+  navbarImage = '';
+  constructor(private afs: AngularFireAuth, private db: AngularFirestore, public theme: ThemeService) {
     this.afs.auth.onAuthStateChanged(user => {
       if (user) {
         console.log(user);
@@ -57,6 +64,11 @@ export class AuthService {
       users.subscribe(x => {
         if (x.size > 0 && x.size < 2) {
           this.user = x.docs[0].data();
+          this.selectedTheme = this.user.viewMode;
+          this.id = x.docs[0].id;
+          setTimeout(() => {
+            this.changeTheme();
+          }, 100);
         } else {
           alert('Contact your database administrator with error code 5012');
         }
@@ -67,20 +79,10 @@ export class AuthService {
   }
   signup() {
     if (!this.signingIn) {
-      //   nameBox.classList.remove('hide');
-      //   loginBtn.classList.add('hide');
-      //   signingIn = true;
-      // } else if (this.signingIn) {
-      //   const displayName = document.getElementById('displayName').value;
-      //   const email = document.getElementById('login').value;
-      //   const password = document.getElementById('password').value;
-
-      console.log(this.dName + ' ' + this.email + ' ' + this.password);
       if (this.dName === '' || this.email === '' || this.password === '') {
         alert('Please make sure all fields are filled');
         return;
       }
-
       this.afs.auth.createUserWithEmailAndPassword(this.email, this.password)
         .then(() => {
           const docData = {
@@ -150,5 +152,43 @@ export class AuthService {
 
   logout() {
     this.afs.auth.signOut();
+  }
+
+  updateTheme(newTheme) {
+    try {
+      this.db.collection('users').doc(this.id).update({
+        viewMode: newTheme
+      }).then(() => {
+        console.log('Success');
+      }).catch(err => {
+        console.log('Failed: ' + err.message);
+      });
+      this.selectedTheme = newTheme;
+      setTimeout(() => {
+        this.changeTheme();
+      }, 100);
+    } catch (err) {
+      console.log(err.message);
+    }
+  }
+
+  changeTheme() {
+    switch (this.selectedTheme) {
+      case 'light':
+        this.theme.toggleLight();
+        break;
+      case 'dark':
+        this.theme.toggleDark();
+        break;
+      case 'jedi':
+        this.theme.toggleJedi();
+        break;
+      case 'sith':
+        this.theme.toggleSith();
+        break;
+      case 'merica':
+        this.theme.toggleMerica();
+        break;
+    }
   }
 }

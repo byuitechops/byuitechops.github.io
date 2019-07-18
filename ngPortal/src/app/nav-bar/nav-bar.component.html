@@ -6,6 +6,6 @@
     <a [routerLink]="['/profile']" routerLinkActive="active">Profile</a>
   </div>
   <div id="nav-img-box">
-    <img id="nav-img" src="" alt="">
+    <img id="nav-img" [src]="auth.navbarImage" alt="">
   </div>
 </nav>
