@@ -29,7 +29,6 @@ export class AuthService {
   constructor(private afs: AngularFireAuth, private db: AngularFirestore, public theme: ThemeService) {
     this.afs.auth.onAuthStateChanged(user => {
       if (user) {
-        console.log(user);
         this.auth = true;
         this.findUser();
       } else {

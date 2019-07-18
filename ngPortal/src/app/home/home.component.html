@@ -137,26 +137,21 @@
   <section class="right-sidebar col2 flex-container">
 
       <div id="time-n-date">
-          <p id="time"></p>
-          <p id="apm"></p>
-          <p id="date"></p>
+          <p id="time">12:00</p>
+          <p id="apm">am</p>
+          <p id="date">May</p>
       </div>
 
-      <button id="checkInBtn" class="clock btn2">
-          Clock In
-      </button>
-      <button id="checkOutBtn" class="clock btn2 hiddenBtn">
-          Clock Out
+      <button class="btn2" (click)="clockInOut()">
+          Clock <p [class.hide]="time.check">In</p><p [class.hide]="!time.check">Out</p>
       </button>
 
-      <a id="workday-link" href="https://www.myworkday.com/byuhi/d/home.htmld" target="_blank"><h3 id="last-checked"></h3></a>
-      <h3 id="last-break"></h3>
+      <a href="https://www.myworkday.com/byuhi/d/home.htmld" target="_blank">{{checkMsg}}</a>
+      <p>{{'breakTime'}}</p>
 
-      <button class="btn2" id="break-button">
-          <p id="break-button-text" >Start Break</p>
-          <span id="mins">15</span>
-          <span>:</span>
-          <span id="secs">00</span>
+      <button class="btn2" id="break-button" [class.hide]="!time.check">
+          <p>{{breakBtn}}</p>
+          <span>{{15 + ':' + '00'}}</span>
       </button>
 
   </section>
