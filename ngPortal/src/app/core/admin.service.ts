@@ -9,31 +9,44 @@ export class AdminService {
   users = [];
   edit = 'none';
   makingChanges = false;
+  view = false;
   constructor(private db: AngularFirestore) {
-    const stuff = db.collection('users').get();
-    stuff.forEach(raw => {
-      raw.forEach(item => {
-        try {
-          const time = item.data().time.accumulatedTime;
-          const nameDisplay = item.data().nameDisplay;
-          const team = item.data().team;
-          const title = item.data().title;
-          const admin = item.data().admin;
-          const storeManager = item.data().storeManager;
-          const id = item.id;
-          this.users.push({
-            nameDisplay,
-            team,
-            title,
-            admin,
-            storeManager,
-            time,
-            id
+
+  }
+
+  getTable() {
+    this.users = [];
+    const teams = ['lms', 'accessibility', 'default'];
+    teams.forEach(x => {
+      if (x !== 'default' || this.view) {
+        const stuff = this.db.collection('users', ref =>
+        ref.where('team', '==', x).orderBy('name')
+        ).get();
+        stuff.forEach(raw => {
+          raw.forEach(item => {
+            try {
+              const time = item.data().time.accumulatedTime;
+              const nameDisplay = item.data().nameDisplay;
+              const team = item.data().team;
+              const title = item.data().title;
+              const admin = item.data().admin;
+              const storeManager = item.data().storeManager;
+              const id = item.id;
+              this.users.push({
+                nameDisplay,
+                team,
+                title,
+                admin,
+                storeManager,
+                time,
+                id
+              });
+            } catch (error) {
+              console.log(error.code);
+            }
           });
-        } catch (error) {
-          console.log(error.code);
-        }
-      });
+        });
+      }
     });
   }
 
@@ -68,5 +81,19 @@ export class AdminService {
       this.edit = 'none';
       this.makingChanges = false;
     }, 100);
+  }
+
+  updateUser(user) {
+    console.log(user);
+    this.db.collection('users').doc(user.id).update({
+      team: user.team,
+      title: user.title,
+      admin: user.admin,
+      storeManager: user.storeManager
+    }).then(() => {
+        console.log('Document Written with Success');
+    }).catch((error) => {
+        console.log(error);
+    });
   }
 }

@@ -15,6 +15,7 @@ export class AdminComponent implements OnInit {
 
   ngOnInit() {
     this.checkAuth();
+    this.u.getTable();
   }
 
   checkAuth() {

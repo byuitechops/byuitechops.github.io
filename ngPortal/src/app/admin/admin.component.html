@@ -3,7 +3,7 @@
   <section id="admin" class="table-box">
     <div>
       <h2>List of Users</h2>
-      <span id="show-all">Show All </span><input type="checkbox" id="checkShow">
+      <span id="show-all">Show All </span><input type="checkbox" [(ngModel)]="u.view" (change)="u.getTable()">
       <a class="back-to-profile" href="/portal/profile.html">
         <img src="../../assets/misc/backArrow.png" alt="Back to Profile" />
       </a>
@@ -27,14 +27,14 @@
             </span>
           </td>
           <td class="userteam">
-            <select class="table-select teamSelect" [(ngModel)]="user.team" (selected)="user.team">
+            <select class="table-select teamSelect" [(ngModel)]="user.team" (selected)="user.team" (change)="u.updateUser(user)">
               <option value="default">default</option>
               <option value="lms">lms</option>
               <option value="accessibility">accessibility</option>
             </select>
           </td>
           <td class="usertitle">
-            <select class="table-select roleSelect" [(ngModel)]="user.title" (selected)="user.title">
+            <select class="table-select roleSelect" [(ngModel)]="user.title" (selected)="user.title" (change)="u.updateUser(user)">
               <option value="Team Member">Team Member</option>
               <option value="Project Lead">Project Lead</option>
               <option value="Assistant Lead">Assistant Lead</option>
@@ -42,8 +42,8 @@
               <option value="Trainer">Trainer</option>
             </select>
           </td>
-          <td class="useradmin"><input class="admin" type="checkbox" [(ngModel)]="user.admin" /></td>
-          <td class="userstore"><input class="manager" type="checkbox" [(ngModel)]="user.storeManager" /></td>
+          <td class="useradmin"><input class="admin" type="checkbox" [(ngModel)]="user.admin" (change)="u.updateUser(user)"/></td>
+          <td class="userstore"><input class="manager" type="checkbox" [(ngModel)]="user.storeManager" (change)="u.updateUser(user)"/></td>
         </tr>
     </table>
   </section>
