@@ -1,3 +1,11 @@
-<p>
-  nav-bar works!
-</p>
+<nav class="col1" *ngIf="auth.auth">
+  <a [routerLink]="['/home']" routerLinkActive="active"><img id="logo" src="../../assets/logos/logo.png"></a>
+  <div class="nav-links flex-container">
+    <a [routerLink]="['/schedule']" routerLinkActive="active">Schedule</a>
+    <a [routerLink]="['/store']" routerLinkActive="active">Store</a>
+    <a [routerLink]="['/profile']" routerLinkActive="active">Profile</a>
+  </div>
+  <div id="nav-img-box">
+    <img id="nav-img" src="" alt="">
+  </div>
+</nav>

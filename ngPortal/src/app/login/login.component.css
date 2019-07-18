@@ -1,0 +1,139 @@
+/***********************************************************
+* MAIN.CSS | Tech-Ops Portal Style Sheet
+* CSS Table of Contents
+*
+* 1. Imports
+* 2. General Styles
+* 3. Body Styles
+***********************************************************/
+
+
+
+/***********************************************************
+* 1. Imports
+***********************************************************/
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
+
+
+
+/***********************************************************
+* 2. General Styles
+***********************************************************/
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto';
+    font-weight: 300;
+    outline: none;
+}
+.hide {
+    display: none !important;
+}
+
+/***********************************************************
+* 3. Body Styles
+***********************************************************/
+
+body {
+    overflow: hidden;
+}
+
+#backgroundImg {
+    float: left;
+    width: 100%;
+    object-fit: fill;
+}
+
+body section {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 40%;
+    z-index: 1;
+    background-color: rgba(11, 109, 172, 0.7);
+
+}
+#logo {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    flex-flow: column nowrap;
+    padding-left: 17%;
+}
+#school {
+    width: 50%;
+    margin-top: 100px;
+}
+#techops {
+    width: 20%;
+    margin: 100px 15% 40px;
+}
+
+
+.fieldbox {
+    width: 60%;
+    display: flex;
+    padding: 5px;
+    text-align: left;
+}
+#lower {
+    margin: 30px 5%;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    color: white;
+
+    font-size: 20px;
+}
+.fieldbox span {
+    width: 30%;
+    padding: 7px 10px;
+    font-size: 1vw;
+    text-align: right;
+}
+.fieldbox input {
+    width: 70%;
+    height: 35px;
+    padding: 7px;
+    border-style: none;
+    border-radius: 5px;
+    position: relative;
+    font-size: 15px;
+    font-weight: 400;
+    right: 0;
+}
+
+#buttons {
+    display: flex;
+    width: 60%;
+    justify-content: flex-end;
+}
+#lower .button {
+    border-radius: 4px;
+    background-color: #0076c6;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 26px;
+    font-weight: 400;
+    margin: 1%;
+    padding: 10px;
+    width: 40%;
+    cursor: pointer;
+    transition: background-color,color 0.5s;
+}
+#lower .button:hover {
+    background-color: #FFFFFF;
+    color: #0076c6;
+}
+#detail, #recover {
+    width: 60%;
+    margin: 30px;
+    text-align: center;
+    font-size: 14px;
+}
