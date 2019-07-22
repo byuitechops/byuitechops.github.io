@@ -1,11 +1,28 @@
 <nav class="col1" *ngIf="auth.auth">
-  <a [routerLink]="['/home']" routerLinkActive="active"><img id="logo" src="../../assets/logos/logo.png"></a>
-  <div class="nav-links flex-container">
-    <a [routerLink]="['/schedule']" routerLinkActive="active">Schedule</a>
-    <a [routerLink]="['/store']" routerLinkActive="active">Store</a>
-    <a [routerLink]="['/profile']" routerLinkActive="active">Profile</a>
-  </div>
-  <div id="nav-img-box">
-    <img id="nav-img" [src]="auth.navbarImage" alt="">
-  </div>
+    <div class="logo">
+        <a [routerLink]="['/home']" routerLinkActive="active">
+            <img id="logo" src="../../assets/logos/logo.png">
+        </a>
+    </div>
+    <div class="tab">
+        <a [routerLink]="['/schedule']" routerLinkActive="active" class="tab">
+            <p>Schedule</p>
+            <i class="far fa-calendar-alt fa-2x"></i>
+        </a>
+    </div>
+    <div class="tab">
+        <a [routerLink]="['/store']" routerLinkActive="active" class="tab">
+            <p>Store</p>
+            <i class="fas fa-shopping-cart fa-2x"></i>
+        </a>
+    </div>
+    <div class="tab">
+        <a [routerLink]="['/profile']" routerLinkActive="active" class="tab">
+            <p>Profile</p>
+            <i class="fas fa-user-circle fa-2x"></i>
+        </a>
+    </div>
+    <div id="nav-img-box">
+        <img id="nav-img" [src]="auth.navbarImage" alt="">
+    </div>
 </nav>
