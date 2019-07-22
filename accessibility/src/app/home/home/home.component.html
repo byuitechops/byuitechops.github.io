@@ -70,23 +70,23 @@
                 </div>
                 <div>
                     <h4>Course Link</h4>
-                    <a [href]="data.lms"  target="_blank">{{ data.course }}</a>
+                    <a [href]="data.lms"  target="_blank">{{ data.lms }}</a>
                 </div>
                 <div>
                     <h4>Media URL</h4>
                     <a [href]="data.media" target="_blank">{{ data.title }}</a>
                 </div>
                 <div>
-                <h4>Transcript URL</h4>
-                <a [href]="data.doc" target="_blank">{{ data.doc }}</a>
+                    <h4>Transcript URL</h4>
+                    <a [href]="data.doc" target="_blank">{{ data.doc }}</a>
                 </div>
                 <div>
-                <h4 [class.hide]="!verbit">Verbit ID</h4>
-                <p [class.hide]="!verbit">{{ data.verbitID }}</p>
+                    <h4 [class.hide]="!verbit">Verbit ID</h4>
+                    <p [class.hide]="!verbit">{{ data.verbitID }}</p>
                 </div>
                 <div>
-                <h4>Comments</h4>
-                <p>{{ data.comment }}</p>
+                    <h4>Comments</h4>
+                    <p>{{ data.comment }}</p>
                 </div>
                 <div class="btn-box">
                     <button id="return-prep-btn" (click)="openReturn()">Return to Prep</button>
