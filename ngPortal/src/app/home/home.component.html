@@ -1,17 +1,17 @@
 <main class="col9">
 
-  <h1 class="page-title col7">Home</h1>
+    <h1 class="page-title col7">Home</h1>
 
-  <!---------------------------------------------
-  - 4a. SLIDE SHOW
-  -     This is where you will add any announcements
-  -     and banners to the slideshow on the home page
-  -     of the portal.
-  -     If the number of slides changes, make sure to
-  -     change the number of dots, accordingly.
-  ---------------------------------------------->
+    <!---------------------------------------------
+    - 4a. SLIDE SHOW
+    -     This is where you will add any announcements
+    -     and banners to the slideshow on the home page
+    -     of the portal.
+    -     If the number of slides changes, make sure to
+    -     change the number of dots, accordingly.
+    ---------------------------------------------->
 
-  <section class="center-section col8">
+    <section class="home-content col8">
 
         <!---------------------------------------------
         - 4a. TIME N DATE
@@ -19,9 +19,9 @@
         ---------------------------------------------->
     
         <section id="time-n-date">
-            <p id="time">12:00</p>
-            <p id="apm">am</p>
-            <p id="date">May</p>
+            <p id="time">12:34</p>
+            <p id="apm">pm</p>
+            <p id="date">July 23, 2019</p>
         </section>
 
         <!---------------------------------------------
@@ -60,20 +60,20 @@
         -     Where the Clock-In/Clock-Out & Take Break buttons are displayed on the Home Screen
         ---------------------------------------------->
         
-        <section>
-        
-            <button class="btn2" (click)="clockInOut()">
-                Clock <p [class.hide]="time.check">In</p><p [class.hide]="!time.check">Out</p>
-            </button>
-        
-            <a href="https://www.myworkday.com/byuhi/d/home.htmld" target="_blank">{{checkMsg}}</a>
-            <p>{{'breakTime'}}</p>
-        
-            <button class="btn2" id="break-button" [class.hide]="!time.check">
-                <p>{{breakBtn}}</p>
-                <span>{{15 + ':' + '00'}}</span>
-            </button>
-        
+        <section class="time-box">
+            <div>
+                <button class="btn2" (click)="clockInOut()">
+                    <p>Clock <span [class.hide]="time.check">In</span><span [class.hide]="!time.check">Out</span></p>
+                </button>
+                <a class="btn-note" href="https://www.myworkday.com/byuhi/d/home.htmld" target="_blank">{{checkMsg}}</a>
+            </div>
+            <div>
+                <button class="btn2" id="break-btn" [class.hide]="!time.check">
+                    <p id="break-words">{{breakBtn}}</p>
+                    <p id="break-timer">{{15 + ':' + '00'}}</p>
+                </button>
+                <p class="btn-note">{{ breakTime }}</p>
+            </div>
         </section>
 
         <!---------------------------------------------
@@ -81,75 +81,75 @@
         -     Where all the links are displayed on the Home Screen
         ---------------------------------------------->
 
-        <section class="links-container flex-container">
+        <section class="links-box">
 
             <div class="box-link" id="canvas">
                 <a href="https://byui.instructure.com/login/canvas" target="_blank" >
-                    <p>Canvas</p>
                     <img src="./assets/icons/canvas.png" alt="Canvas Icon"/>
+                    <p>Canvas</p>
                 </a>
             </div>
 
             <div class="box-link" id="pathway">
                 <a href="https://pathway.brightspace.com/d2l/local" target="_blank" >
-                    <p>Pathway</p>
                     <img src="./assets/icons/pathway.png" alt="Pathway Icon"/>
+                    <p>Pathway</p>
                 </a>
             </div>
 
             <div class="box-link" id="brightspace">
                 <a href="http://byui.brightspace.com/d2l/local" target="_blank" >
-                    <p>Brightspace</p>
                     <img src="./assets/icons/brightspace.png" alt="Brightspace Icon"/>
+                    <p>Brightspace</p>
                 </a>
             </div>
 
             <div class="box-link" id="googledrive">
                 <a href="https://drive.google.com/drive/team-drives" target="_blank" >
-                    <p>Google Drive</p>
                     <img src="./assets/icons/drive.png" alt="Google Drive Icon"/>
+                    <p>Google Drive</p>
                 </a>
             </div>
 
             <div class="box-link" id="office365">
                 <a href="https://outlook.office365.com/owa/?realm=byui.edu&exsvurl=1&ll-cc=1033&modurl=0" target="_blank" >
-                    <p>Office 365</p>
                     <img src="./assets/icons/office365.png" alt="Office 365 Icon"/>
+                    <p>Office 365</p>
                 </a>
             </div>
 
             <div class="box-link" id="katana">
                 <a href="http://10.5.188.122:8000/" target="_blank" >
-                    <p>Katana</p>
                     <img src="./assets/icons/katana.png" alt="Katana Icon"/>
+                    <p>Katana</p>
                 </a>
             </div>
 
             <div class="box-link" id="equella">
                 <a href="https://content.byui.edu/access/home.do" target="_blank" >
-                    <p>Equella</p>
                     <img src="./assets/icons/equella.png" alt="Equella Icon"/>
+                    <p>Equella</p>
                 </a>
             </div>
 
             <div class="box-link" id="trello">
                 <a href="https://trello.com/b/Jop28eai/online-canvas-transition" target="_blank" >
-                    <p>Trello</p>
                     <img src="./assets/icons/trello.png" alt="Trello Icon"/>
+                    <p>Trello</p>
                 </a>
             </div>
 
             <div class="box-link" id="accessibility">
                 <a href="https://byui-accessibility-redemption.web.app/" target="_blank" >
-                    <p>Accessibility</p>
                     <img src="./assets/icons/accessibility.png" alt="Accessibility Icon"/>
+                    <p>Accessibility</p>
                 </a>
             </div>
 
             <div class="box-link" id="googlechat">
                 <a href="https://chat.google.com/room/AAAAGWGIzV4" target="_blank" >
-                    <p>Google Chat</p>
                     <img src="./assets/icons/googleChat.png" alt="Google Chat Icon"/>
+                    <p>Google Chat</p>
                 </a>
             </div>
 

@@ -1,16 +1,27 @@
 /***********************************************************
 *
-*   Navbar Styles
+*   Home Page Styles
 *
 ***********************************************************/
 
+.home-content {
+    display: flex;
+    flex-flow: row-reverse wrap;
+    justify-content: space-between;
+}
+
 #time-n-date {
+    width: 100%;
     display: none;
+}
+#welcome {
+    width: 100%;
+    max-width: 800px;
 }
 .slideshow-container {
     position: relative;
     
-    border-radius: 10px;
+    border-radius: 15px;
     overflow: hidden;
 }
 .slide-btn {
@@ -33,6 +44,79 @@
     background-color: var(--darkgray);
 }
 
+.time-box {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+.time-box div {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    width: 110px;
+    height: 80px;
+    margin: 15px 5px;
+}
+.btn2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
+    border: none;
+    background-color: var(--first);
+    border-radius: 15px;
+}
+.btn2 p, .btn2 span {
+    color: var(--white);
+    font-size: 16px;
+    font-weight: 300;
+}
+#break-btn {
+    display: flex;
+    flex-flow: column nowrap;
+}
+#break-timer {
+    margin-top: -10px;
+    font-size: 36px;
+}
+.btn-note {
+    margin: 2px 0;
+    font-size: 11px;
+}
+
+.links-box {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    width: 100%;
+    margin-top: 25px;
+}
+.box-link {
+    width: 125px;
+    height: 125px;
+    margin: 10px;
+    position: relative;
+
+    background-color: var(--first);
+    border-radius: 15px;
+    overflow: hidden;
+}
+.box-link p {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+
+    color: var(--white);
+    font-size: 16px;
+    font-weight: 300;
+    font-family: "Merriweather";
+}
+.box-link img {
+    opacity: .6;
+}
 
 
 /***********************************************************
@@ -41,6 +125,25 @@
 
 @media only screen and (min-width: 800px) {
 
+    #time-n-date {
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: center;
+        align-items: center;
+        width: 30%;
+    }
+    #time {
+        font-size: 4vw;
+        font-weight: 300;
+    }
+    #apm {
+        margin-top: -10px;
+    }
+
+    #welcome {
+        width: 70%;
+        max-width: 70%;
+    }
     .slide-btn {
         display: flex;
         justify-content: flex-start;
@@ -79,4 +182,16 @@
         font-size: 24px;
     }
 
+    .time-box {
+        width: 30%;
+    }
+    .time-box 
+
+    .links-box {
+        width: 70%;
+    }
+    .box-link {
+        width: 16%;
+        height: 150px;
+    }
 }
