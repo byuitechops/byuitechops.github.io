@@ -8,12 +8,14 @@
     display: flex;
     flex-flow: row-reverse wrap;
     justify-content: space-between;
+    position: relative;
 }
 
 #time-n-date {
     width: 100%;
     display: none;
 }
+
 #welcome {
     width: 100%;
     max-width: 800px;
@@ -54,7 +56,8 @@
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
-    width: 110px;
+    width: 100%;
+    max-width: 110px;
     height: 80px;
     margin: 15px 5px;
 }
@@ -67,7 +70,11 @@
 
     border: none;
     background-color: var(--first);
-    border-radius: 15px;
+    border-radius: 30px;
+    transition: all .2s;
+}
+.btn2:hover {
+    transform: scale(1.05);
 }
 .btn2 p, .btn2 span {
     color: var(--white);
@@ -77,6 +84,7 @@
 #break-btn {
     display: flex;
     flex-flow: column nowrap;
+    position: relative;
 }
 #break-timer {
     margin-top: -10px;
@@ -91,18 +99,23 @@
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
+    align-items: flex-start;
     width: 100%;
     margin-top: 25px;
 }
 .box-link {
-    width: 125px;
-    height: 125px;
-    margin: 10px;
+    width: 100px;
+    height: 100px;
+    margin: 5px;
     position: relative;
 
     background-color: var(--first);
     border-radius: 15px;
     overflow: hidden;
+    transition: all .2s;
+}
+.box-link:hover {
+    transform: scale(1.1);
 }
 .box-link p {
     position: absolute;
@@ -110,7 +123,7 @@
     left: 15px;
 
     color: var(--white);
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 300;
     font-family: "Merriweather";
 }
@@ -138,6 +151,11 @@
     }
     #apm {
         margin-top: -10px;
+        font-size: 1vw;
+    }
+    #date {
+        font-size: 1vw;
+        font-weight: 700;
     }
 
     #welcome {
@@ -155,9 +173,6 @@
         position: absolute;
         top: 0;
         transition: all .2s;
-    }
-    .slide {
-        height: 105%;
     }
     .slide-btn p {
         padding: 10px;
@@ -184,14 +199,60 @@
 
     .time-box {
         width: 30%;
+        flex-flow: column nowrap;
+        justify-content: space-between;
+        align-items: center;
     }
-    .time-box 
+    .time-box div {
+        width: 70%;
+        max-width: 70%;
+        height: 8vw;
+    }
+    #clockbtn p, #clockbtn span {
+        font-size: 2vw;
+    }
+    #break-btn {
+        transition: all .5s,
+                    bottom .125s 0s,
+                    right .125s 0s,
+                    top .125s .125s,
+                    left .25s .25s;
+
+    }
+    #break-btn.expanded {
+        z-index: 5;
+        position: absolute;
+        top: -5px;
+        left: -5px;
+        right: 25px;
+        bottom: 25px;
+        transition: all .5s,
+                    top .125s 0s,
+                    left .25s 125s,
+                    bottom .125s .375s,
+                    right .125s .375s;
+    }
+    #break-words {
+        font-size: 1.5vw;
+    }
+    #break-timer {
+        font-size: 3vw;
+    }
+    .btn-note {
+        font-size: .7vw;
+    }
+
 
     .links-box {
         width: 70%;
+        margin-top: 0;
     }
     .box-link {
         width: 16%;
-        height: 150px;
+        height: 9vw;
+        margin: 10px;
+    }
+    .box-link p {
+        font-size: 1vw;
     }
 }

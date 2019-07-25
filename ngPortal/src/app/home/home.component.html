@@ -62,17 +62,17 @@
         
         <section class="time-box">
             <div>
-                <button class="btn2" (click)="clockInOut()">
-                    <p>Clock <span [class.hide]="time.check">In</span><span [class.hide]="!time.check">Out</span></p>
+                <button class="btn2" id="clockbtn" (click)="clockInOut()">
+                    <p id="clockp">Clock <span [class.hide]="time.check">In</span><span [class.hide]="!time.check">Out</span></p>
                 </button>
                 <a class="btn-note" href="https://www.myworkday.com/byuhi/d/home.htmld" target="_blank">{{checkMsg}}</a>
             </div>
             <div>
-                <button class="btn2" id="break-btn" [class.hide]="!time.check">
+                <button class="btn2 active" id="break-btn" [class.hide]="!time.check" [class.expanded]="click">
                     <p id="break-words">{{breakBtn}}</p>
                     <p id="break-timer">{{15 + ':' + '00'}}</p>
                 </button>
-                <p class="btn-note">{{ breakTime }}</p>
+                <p class="btn-note">{{ breakTime }}Last break finished @ 9:15 am</p>
             </div>
         </section>
 
