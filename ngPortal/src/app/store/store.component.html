@@ -4,147 +4,151 @@
 
 <main class="col9" id="shoppingPage">
 
-  <h1 class="page-title">Store</h1>
-  <button class="store-btn hide" id="invoiceStore">Store Invoice</button>
-  <button class="store-btn hide" id="editStore">Edit Store</button>
+    <h1 class="page-title">Store</h1>
+    <button class="store-btn hide" id="invoiceStore">Store Invoice</button>
+    <button class="store-btn hide" id="editStore">Edit Store</button>
 
-  <!---------------------------------------------
-      - 4a.
-      ---------------------------------------------->
+    <!---------------------------------------------
+        - 4a.
+        ---------------------------------------------->
 
-  <section class="snacks-container col6 flex-container">
-    <div *ngFor="let x of store.items">
-      <section id class="snack col5 flex-container" *ngIf="x.count > 0 || store.edit"
-       (click)="store.addToCart(x.id, x.price, x.count)">
-        <div class="snack-pic col10">
-          <img [src]='x.url | async' alt='x.name' />
+    <section class="snacks-container">
+        <div *ngFor="let x of store.items">
+            <section class="snack" *ngIf="x.count > 0 || store.edit"
+            (click)="store.addToCart(x.id, x.price, x.count)">
+                <div class="snack-pic">
+                    <img [src]='x.url | async' [alt]='x.name' />
+                </div>
+                <div class="snack-info">
+                    <h3 class="snack-name">{{x.name}}</h3>
+                    <p class="snack-count">{{x.count}}</p>
+                    <p class="snack-cost">{{x.price}}</p>
+                    <button type="button" class="btnPlusMinus" id="plus" *ngIf="store.edit" onclick="changeCount(`${event}`, `${x.id}`)">+</button>
+                    <button type="button" class="btnPlusMinus" id="minus" *ngIf="store.edit" onclick="changeCount(`${event}`, `${x.id}`)">-</button>
+                </div>
+            </section>
         </div>
-        <div class="snack-info col10">
-          <h3 class="snack-name">{{x.name}}</h3>
-          <p class="snack-count">{{x.count}}</p>
-          <p class="snack-cost">{{x.price}}</p>
-          <button type="button" class="btnPlusMinus" id="plus" *ngIf="store.edit" onclick="changeCount(`${event}`, `${x.id}`)">+</button>
-          <button type="button" class="btnPlusMinus" id="minus" *ngIf="store.edit" onclick="changeCount(`${event}`, `${x.id}`)">-</button>
-        </div>
-      </section>
-    </div>
-  </section>
-
-  <!----------------------------------------------
-      -   SNACKS SECTION
-      -   You do not need to hard code the store items
-      -   in this file. They are dynamically created using
-      -   the store manager's privileges and Javascript.
-      ----------------------------------------------->
-
-  <section class="snacks-section col4 flex-container">
-
-    <!-- SNACK CART -->
-
-    <section class="snack-manage col10" id="snack-cart">
-
-      <h2>Shopping Cart</h2>
-
-      <div id="snack-shopping-list">
-      </div>
-
-      <div id="snack-cart-receipt">
-        <span class="col7">Total: </span>
-        <span class="col3" id="shopping-list-total">${{ store.total }}</span>
-      </div>
-      <div id="snack-cart-btns">
-        <button id="snack-cart-cancel">Cancel</button>
-        <button id="snack-cart-checkout">Check Out</button>
-      </div>
-
     </section>
 
-    <!-- SNACK ADD -->
+    <!----------------------------------------------
+        -   SNACKS SECTION
+        -   You do not need to hard code the store items
+        -   in this file. They are dynamically created using
+        -   the store manager's privileges and Javascript.
+        ----------------------------------------------->
 
-    <section class="snack-manage col10 hide" id="snack-add">
-      <form class="flex-container col10 wrap">
-        <h2>Add Item</h2>
-        <p>Name: </p><input type="text" placeholder="Double Stuff Oreos" id="nameEdit" />
-        <p>Cost: </p><input type="text" placeholder="0.00" id="priceEdit" />
-        <p>Count: </p><input type="text" placeholder="12" id="countEdit" />
-        <p>Image: </p><input id="add-img" type="file" id="imgFile" />
-        <button id="cancel-add">Cancel Add</button>
-        <button id="confirm-add">Confirm Add</button>
-      </form>
+    <section class="snacks-section col4 flex-container">
+
+        <!-- SNACK CART -->
+
+        <section class="snack-manage" id="snack-cart">
+
+            <h2>Shopping Cart</h2>
+
+            <div id="snack-shopping-list">
+            </div>
+
+            <div id="snack-cart-receipt">
+                <span>Total: </span>
+                <span id="shopping-list-total">${{ store.total }}</span>
+            </div>
+            <div class="btn-box" id="snack-cart-btns">
+                <button id="snack-cart-cancel">Cancel</button>
+                <button id="snack-cart-checkout">Check Out</button>
+            </div>
+
+        </section>
+
+        <!-- SNACK ADD -->
+
+        <section class="snack-manage " id="snack-add">
+            <form class="flex-container">
+                <h2>Add Item</h2>
+                <div><p>Name </p><input type="text" placeholder="Double Stuff Oreos" id="nameEdit" /></div>
+                <div><p>Cost </p><input type="text" placeholder="0.00" id="priceEdit" /></div>
+                <div><p>Count </p><input type="text" placeholder="12" id="countEdit" /></div>
+                <div><p>Image </p><input id="add-img" type="file" /></div>
+                <div class="btn-box">
+                    <button id="cancel-add">Cancel Add</button>
+                    <button id="confirm-add">Confirm Add</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- SNACK EDIT -->
+
+        <section class="snack-manage " id="snack-edit">
+            <form class="flex-container col10 wrap">
+                <h2>Edit Item</h2>
+                <div><p>Name </p><input type="text" id="oldName" readonly /></div>
+                <div><p>New Name </p><input type="text" id="newName" placeholder="..." /></div>
+                <div><p>Cost </p><input type="text" id="editCost" placeholder="..." /></div>
+                <div><p>Count </p><input type="text" id="editCount" placeholder="..." /></div>
+                <div class="btn-box">
+                    <button id="cancel-edit">Cancel Edit</button>
+                    <button id="confirm-edit">Confirm Edit</button>
+                </div>
+            </form>
+        </section>
+
     </section>
-
-    <!-- SNACK EDIT -->
-
-    <section class="snack-manage col10 hide" id="snack-edit">
-      <form class="flex-container col10 wrap">
-        <h2>Edit Item</h2>
-        <p>Name: </p><input type="text" id="oldName" readonly />
-        <p>New Name: </p><input type="text" id="newName" />
-        <p>Cost: </p><input type="text" id="editCost" />
-        <p>Count: </p><input type="text" id="editCount" />
-        <button id="cancel-edit">Cancel Edit</button>
-        <button id="confirm-edit">Confirm Edit</button>
-      </form>
-    </section>
-
-  </section>
 
 </main>
 
 
 <main class="hide" id="invoicePage">
-  <h1 class="page-title">Store</h1>
-  <section id="heading">
-    <aside id="invoice-sum">
-      <span>Cash:&nbsp; <span id="cash"></span></span>
-      <span>Venmo:&nbsp; <span id="venmo"></span></span>
-      <span>Storage:&nbsp;<span id="storage"></span></span>
-      <button onclick="submitMoney()">Submit</button>
-    </aside>
-  </section>
-  <section class="table-box">
-    <div>
-      <h2>Invoice - Store</h2>
-      <a class="back-to-profile" href="/portal/store.html">
-        <img src="/../../assets/misc/backArrow.png" alt="Back to Profile" />
-      </a>
-    </div>
-    <table class="table-generate" id="invoice-table">
-      <tr>
-        <th>Date</th>
-        <th>Items</th>
-        <th>Total Paid</th>
-        <th>Payment</th>
-        <th>User</th>
-      </tr>
-    </table>
-  </section>
+    <h1 class="page-title">Store</h1>
+    <section id="heading">
+        <aside id="invoice-sum">
+        <span>Cash:&nbsp; <span id="cash"></span></span>
+        <span>Venmo:&nbsp; <span id="venmo"></span></span>
+        <span>Storage:&nbsp;<span id="storage"></span></span>
+        <button onclick="submitMoney()">Submit</button>
+        </aside>
+    </section>
+    <section class="table-box">
+        <div>
+        <h2>Invoice - Store</h2>
+        <a class="back-to-profile" href="/portal/store.html">
+            <i class="fas fa-chevron-left"></i>
+        </a>
+        </div>
+        <table class="table-generate" id="invoice-table">
+        <tr>
+            <th>Date</th>
+            <th>Items</th>
+            <th>Total Paid</th>
+            <th>Payment</th>
+            <th>User</th>
+        </tr>
+        </table>
+    </section>
 </main>
 
 <div class="popup hide" id="confirm-checkout">
-  <div class="popup-content">
-    <h2>Shopping Cart</h2>
-    <div id="confirm-content">
-      <span>Total: </span>
-      <span id="confirm-total"></span>
-      <br>
-      <div class="radio-box">
-        <input type="radio" name="radio" id="radioCash" value="1">Cash
-        <span class="checkmark"></span>
-        <input type="radio" name="radio" id="radioVenmo" value="2">Venmo
-        <span class="checkmark"></span>
-      </div>
-      <br>
-      <button id="cancel-purchase">Cancel</button>
-      <button id="confirm-purchase">Purchase</button>
-      <br>
-      <span id="error-purchase"></span>
+    <div class="popup-content">
+        <h2>Shopping Cart</h2>
+        <div id="confirm-content">
+            <span>Total: </span>
+            <span id="confirm-total"></span>
+            <br>
+            <div class="radio-box">
+                <input type="radio" name="radio" id="radioCash" value="1">Cash
+                <span class="checkmark"></span>
+                <input type="radio" name="radio" id="radioVenmo" value="2">Venmo
+                <span class="checkmark"></span>
+            </div>
+            <div class="btn-box">
+                <button id="cancel-purchase">Cancel</button>
+                <button id="confirm-purchase">Purchase</button>
+            </div>
+            <span id="error-purchase"></span>
+        </div>
     </div>
-  </div>
 </div>
 
 <div class="popup hide" id="enjoy-snacks">
-  <div class="popup-content" id="confirm-content">
-    <h2>Enjoy Your Snacks!</h2>
-  </div>
+    <div class="popup-content" id="confirm-content">
+        <h2>Enjoy Your Snacks!</h2>
+    </div>
 </div>

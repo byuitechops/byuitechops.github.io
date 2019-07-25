@@ -85,6 +85,7 @@
     outline: none;
 }
 h1 {
+    width: 100%;
     margin-bottom: 25px;
 
     font-family: "Merriweather";
@@ -101,9 +102,50 @@ img {
     width: 100%;
 }
 
+form {
+    width: 100%;
+}
+input, select, textarea {
+    width: 100%;
+    height: 30px;
+    padding: 3px 7px;
+    border: none;
+    border-radius: 50px;
+    box-shadow: 1px 1px 2px 0 rgba(0,0,0,0.5);
+    transition: all .2s;
+}
+input:hover, select:hover, textarea:hover {
+    box-shadow: inset 1px 1px 2px 0 rgba(0,0,0,0.5);
+}
+.btn-box {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: 10px;
+}
+button {
+    margin: 5px;
+    padding: 2px;
+    width: 100px;
+    height: 25px;
+
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--first);
+    text-align: center;
+    background-color: var(--backgroundLight);
+    border: 3px solid var(--backgroundLight);
+    border-radius: 100px;
+    box-shadow: 1px 1px 5px 0 rgba(0,0,0,0.5);
+    transition: all .2s;
+}
+button:hover {
+    transform: scale(1.1);
+}
 
 .hide {
-    display: none;
+    display: none !important;
 }
 .disabled {
     opacity: 0.6;

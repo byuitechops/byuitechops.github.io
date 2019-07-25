@@ -1,0 +1,164 @@
+main {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+}
+.snacks-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    width: 100%;
+    max-width: 275px;
+}
+.snack {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    max-width: 120px;
+    margin: 5px;
+    padding: 5px;
+
+    border: 5px solid var(--first);
+    border-radius: 15px;
+    box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.4);
+}
+.snack-pic {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40vw;
+    max-height: 125px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.snack-info {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+}
+.snack-name {
+    width: 100%;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 14px;
+}
+.snack-count {
+    width: 20%;
+    align-self: flex-end;
+
+    font-size: 14px;
+    font-weight: 400;
+}
+.snack-cost {
+    width: 80%;
+    font-size: 20px;
+    font-weight: 300;
+    text-align: right;
+}
+
+.snacks-section {
+    width: 50%;
+}
+.snack-manage {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    max-width: 275px;
+    padding: 10px;
+    
+    color: var(--white);
+    background-color: var(--first);
+    border: none;
+    border-radius: 15px;
+    box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.4);
+}
+form div {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    padding: 3px;
+}
+.snack-manage h2 {
+    width: 100%;
+    margin-bottom: 25px;
+
+    font-family: "Merriweather";
+    font-weight: 300;
+}
+.snack-manage p, .snack-manage span {
+    width: 80px;
+    font-size: 14px;
+}
+.snack-manage input {
+    width: 150px;
+    height: 25px;
+}
+
+
+/***********************************************************
+* a. Media Queries
+***********************************************************/
+
+@media only screen and (min-width: 800px) {
+
+    main {
+        justify-content: space-between;
+    }
+    .snacks-container {
+        justify-content: flex-start;
+        width: 50%;
+        max-width: 500px;
+    }
+    .snack {
+        margin: 15px;
+    }
+}
+
+
+/***********************************************************
+* a. Media Queries
+***********************************************************/
+
+@media only screen and (min-width: 1200px) {
+
+    main {
+        justify-content: space-between;
+    }
+    .snacks-container {
+        justify-content: flex-start;
+        width: 50%;
+        max-width: 500px;
+    }
+    .snack {
+        width: 100%;
+        max-width: 200px;
+        margin: 15px;
+    }
+    .snack-pic {
+        height: 10vw;
+        max-height: 10vw;
+    }
+    .snacks-section {
+        width: 50%;
+    }
+    .snack-manage {
+        width: 100%;
+        max-width: 500px;
+    }
+    .snack-manage input {
+        width: 250px;
+        height: 25px;
+    }
+    .snack-manage h2 {
+        font-size: 1.5vw;
+    }
+    .snack-manage p, .snack-manage span {
+        font-size: .85vw;
+    }
+    .snack-manage button {
+        width: auto;
+        height: auto;
+        font-size: .65vw;
+    }
+    
+}

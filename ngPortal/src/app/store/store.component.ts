@@ -8,9 +8,10 @@ import { StoreService } from '../core/store.service';
 })
 export class StoreComponent implements OnInit {
 
-  constructor(public store: StoreService) { }
+    constructor(public store: StoreService) { }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+
+    }
 
 }
