@@ -1,0 +1,135 @@
+.profile-top-bar {
+    display: flex;
+    flex-flow: row nowrap;
+    width: 100%;
+}
+.page-title-profile {
+    width: auto;
+}
+#clock-box {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    width: 150px;
+    height: 30px;
+    margin-left: auto;
+}
+#signOutBtn {
+    padding: 5px;
+    font-size: 20px;
+    border: 3px solid var(--first);
+    border-radius: 100px;
+}
+
+.far, .fas {
+    margin: 0 10px;
+    padding: 5px;
+    color: var(--fontPrime);
+    transition: all .2s;
+}
+.far:hover, .fas:hover {
+    transform: scale(1.1);
+    color: var(--white);
+    background-color: var(--first);
+    border-radius: 100px;
+}
+
+#main-profile {
+    display: flex;
+    flex-flow: row wrap;
+}
+.profile-box {
+    display: flex;
+    flex-flow: column nowrap;
+    width: 100%;
+    max-width: 500px;
+    padding: 10px;
+    position: relative;
+
+    border: 4px solid var(--first);
+    border-radius: 15px;
+}
+.profile-box div {
+    margin-bottom: 10px;
+}
+#profile-info h3 {
+    width: 100%;
+    font-size: 30px;
+}
+#profile-info h4 {
+    font-size: 20px;
+}
+#profile-info p {
+    font-size: 16px;
+    font-weight: 300;
+}
+.fa-pen {
+    position: absolute;
+    top: 50px;
+    right: 10px;
+}
+
+#resources div {
+    width: 100%;
+}
+#resources h3 {
+    text-align: center;
+}
+.profile-links {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 350px;
+    margin: auto;
+}
+.profile-links a {
+    width: 90%;
+    max-width: 300px;
+    margin: 3px;
+    padding: 3px;
+    
+    font-size: 14px;
+    text-align: center;
+    color: var(--white);
+    background-color: var(--first);
+    border: none;
+    border-radius: 100px;
+    box-shadow: 1px 1px 2px 0 rgba(0,0,0,0.5);
+    transition: all .2s;
+}
+.profile-links a:hover {
+    transform: scale(1.1);
+}
+
+.themes {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    width: 100%;
+}
+.themes button {
+    width: 35px;
+    height: 35px;
+}
+
+
+
+/***********************************************************
+* a. Media Queries
+***********************************************************/
+
+@media only screen and (min-width: 800px) {
+
+    .profile-box {
+        width: 50%;
+    }
+    #profile-info {
+        margin-right: 5%;
+    }
+    #resources {
+        width: 45%;
+    }
+
+}
