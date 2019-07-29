@@ -13,10 +13,10 @@ function loadPage() {
             if (!(myData.admin || myData.lead)){
                 $(teamSelector).addClass('hide')
             }
-            if (myData.team == "lms") {
+            if (myData.team == "Team 1") {
                 iframe.src = ssCanvas1;
                 newTab.href = ssCanvas1;
-            } else if (myData.team == "accessibility") {
+            } else if (myData.team == "Team 2") {
                 iframe.src = ssCanvas2;
                 newTab.href = ssCanvas2;
 

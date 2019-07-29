@@ -75,8 +75,8 @@ function generateList(all) {
                                     <td class="userteam">
                                         <select onchange="teamChange('${doc.id}')" class="table-select teamSelect">
                                             <option>default</option>
-                                            <option>lms</option>
-                                            <option>accessibility</option>
+                                            <option>Team 1</option>
+                                            <option>Team 2</option>
                                         </select>
                                     </td>
                                     <td class="usertitle">
