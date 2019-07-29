@@ -89,9 +89,11 @@ h1 {
     margin-bottom: 25px;
 
     font-family: "Merriweather";
+    font-size: 24px;
     text-align: center;
 }
 main {
+    max-width: 1800px;
     margin-top: 80px;
     padding: 25px;
 }
@@ -162,11 +164,12 @@ button:hover {
     h1 {
         margin-bottom: 25px;
         text-align: left;
+        font-size: 36px;
     }
     main {
         margin-top: 0;
         margin-left: 175px;
-        padding: 50px;
+        padding: 50px 100px;
     }
     main section {
         margin-bottom: 25px;

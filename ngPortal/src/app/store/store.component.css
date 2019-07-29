@@ -127,12 +127,13 @@ form div {
     .snacks-container {
         justify-content: flex-start;
         width: 50%;
-        max-width: 500px;
+        max-width: 750px;
     }
     .snack {
         width: 100%;
         max-width: 200px;
         margin: 15px;
+        padding: 15px;
     }
     .snack-pic {
         height: 10vw;

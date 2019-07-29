@@ -59,9 +59,16 @@
 
         </section>
 
+        <!-- SNACK ADD & EDIT BUTTONS (for store manager) -->
+
+        <div class="btn-box" id="snack-cart-btns">
+            <button id="snack-cart-cancel">Cancel</button>
+            <button id="snack-cart-checkout">Check Out</button>
+        </div>
+
         <!-- SNACK ADD -->
 
-        <section class="snack-manage " id="snack-add">
+        <section class="snack-manage hide" id="snack-add">
             <form class="flex-container">
                 <h2>Add Item</h2>
                 <div><p>Name </p><input type="text" placeholder="Double Stuff Oreos" id="nameEdit" /></div>
@@ -77,7 +84,7 @@
 
         <!-- SNACK EDIT -->
 
-        <section class="snack-manage " id="snack-edit">
+        <section class="snack-manage hide" id="snack-edit">
             <form class="flex-container col10 wrap">
                 <h2>Edit Item</h2>
                 <div><p>Name </p><input type="text" id="oldName" readonly /></div>
