@@ -1,5 +1,3 @@
-
-
 const users = db.collection('users');
 const admin = document.getElementById('admin');
 const generate = document.getElementById("users-list-generate");
