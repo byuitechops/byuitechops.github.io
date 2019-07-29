@@ -81,11 +81,11 @@ function generateList(all) {
                                     </td>
                                     <td class="usertitle">
                                         <select onchange="titleChange('${doc.id}')" class = "table-select roleSelect">
-                                            <option>Team Member</option>
-                                            <option>Project Lead</option>
-                                            <option>Assistant Lead</option>
                                             <option>Student Lead</option>
+                                            <option>Human Resources</option>
                                             <option>Trainer</option>
+                                            <option>Project Lead</option>
+                                            <option>Team Member</option>
                                         </select>
                                     </td>`
                     if (doc.data().admin) {
