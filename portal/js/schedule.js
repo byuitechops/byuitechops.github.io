@@ -10,8 +10,8 @@ function loadPage() {
         var userId = querySnapshot.docs[0].id;
         db.collection("users").doc(userId).get().then(function (doc) {
             const myData = doc.data();
-            if (!(myData.admin || myData.lead)){
-                $(teamSelector).addClass('hide')
+            if (myData.admin || myData.lead){
+                $(teamSelector).removeClass('hide')
             }
             if (myData.team == "Team 1") {
                 iframe.src = ssCanvas1;
