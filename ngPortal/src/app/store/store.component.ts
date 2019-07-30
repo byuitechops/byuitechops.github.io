@@ -9,7 +9,7 @@ import { AuthService } from '../core/auth.service';
 })
 export class StoreComponent implements OnInit {
 
-    constructor(public store: StoreService) { }
+    constructor(public store: StoreService, public auth: AuthService) { }
 
     ngOnInit() {
 
