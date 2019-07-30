@@ -883,6 +883,7 @@ main {
     width: 80px;
     height: 80px;
     padding: 15px;
+    color: var(--white);
     background-color: var(--second);
     transition: all .2s;
     border-radius: 25%;
@@ -907,14 +908,15 @@ main {
 }
 #editContact {
     float: right;
-    width: 40px;
     padding: 10px;
     background-color: white;
     border-radius: 50%;
     transition: all .2s;
+    opacity: .5;
 }
 #editContact:hover {
     transform: scale(1.25);
+    color: var(--white);
     background-color: var(--third);
 }
 #dbName {

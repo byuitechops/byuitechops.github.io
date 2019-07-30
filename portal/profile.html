@@ -20,7 +20,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="shortcut icon" type="image/x-icon" href="/portal/assets/misc/byui_favicon.gif">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/misc/byui_favicon.gif">
 
     <!-- Scripts -->
 
@@ -28,7 +28,9 @@
     <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
     <!-- CSS -->
-    <link rel="stylesheet" href="/portal/css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <title>Profile | Quality Assurance Portal</title>
 </head>
 
@@ -43,7 +45,7 @@
     ---------------------------------------------->
 
     <nav class="col1">
-        <a href="home.html"><img id="logo" src="/portal/assets/logos/logo.png"></a>
+        <a href="home.html"><img id="logo" src="assets/logos/logo.png"></a>
         <div class="nav-links flex-container">
             <a href="schedule.html">Schedule</a>
             <a href="store.html">Store</a>
@@ -64,7 +66,7 @@
             <h2 class="page-title-profile page-title">Profile</h2>
             <div class="flex-container" id="clock-box">
                 <h2 id="signOutBtn">Sign Out</h2>
-                <img id="clock" src="/oldPortal/assets/clockWhite.png">
+                <i class="fas fa-history fa-3x" id="clock"></i>
             </div>
         </section>
 
@@ -73,7 +75,7 @@
 
                 <section class="profile-box-info col4" id="profile-info">
                     <div class="col10">
-                        <img id="editContact" src="/oldPortal/assets/edit.png">
+                        <i class="fas fa-pencil-alt fa-2x" id="editContact"></i>
                         <h3 id="dbName"></h3>
                         <p id="dbTitle"></p>
                         <p id="dbTeam"></p>
@@ -269,7 +271,7 @@
 ---------------------------------------------->
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"
     integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-<script src="/portal/js/main.js"></script>
-<script src="/portal/js/profile.js"></script>
+<script src="js/main.js"></script>
+<script src="js/profile.js"></script>
 
 </html>
