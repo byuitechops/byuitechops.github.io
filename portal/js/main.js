@@ -232,6 +232,18 @@ function changeTheme(preferance) {
                     });
                     navbarImage.src="./assets/logos/eagleLogo.png";
                     break;
+                case 'troll':
+                    setTheme({
+                        'first': '#890000',
+                        'second': '#000000',
+                        'third': '#000000',
+                        'background': '#000000',
+                        'backgroundSecondary': '#000000', 
+                        'backgroundGrade': '#000000',
+                        'shadow': '#000000',
+                        'fontPrime': '#06439F'
+                    })
+                    navbarImage.src="./assets/logos/cattroll.jpg";
             }
         })
 
