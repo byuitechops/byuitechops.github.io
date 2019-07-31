@@ -41,7 +41,7 @@ p, #nav-img-box {
 i {
     display: inherit;
 }
-.active-tab {
+.active {
     border-left: 8px solid var(--white);
 }
 
@@ -81,7 +81,7 @@ i {
     }
     .tab:hover {
         width: 180px;
-        padding-left: 5px;
+        padding-left: 3px;
 
         background-color: var(--second);
     }

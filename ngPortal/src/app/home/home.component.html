@@ -19,9 +19,9 @@
         ---------------------------------------------->
     
         <section id="time-n-date">
-            <p id="time">12:34</p>
-            <p id="apm">pm</p>
-            <p id="date">July 23, 2019</p>
+            <p id="time">  </p>
+            <p id="apm">  </p>
+            <p id="date">  </p>
         </section>
 
         <!---------------------------------------------
@@ -68,7 +68,7 @@
                 <a class="btn-note" href="https://www.myworkday.com/byuhi/d/home.htmld" target="_blank">{{checkMsg}}</a>
             </div>
             <div>
-                <button class="btn2 active" id="break-btn" [class.hide]="!time.check" [class.expanded]="click">
+                <button class="btn2 active" id="break-btn" [class.hide]="!time.check" (click)="status=!status" [ngClass]="status ? big : small">
                     <p id="break-words">{{breakBtn}}</p>
                     <p id="break-timer">{{15 + ':' + '00'}}</p>
                 </button>
