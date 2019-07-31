@@ -1,4 +1,4 @@
-<main class="col9">
+<main>
 
     <h1 class="page-title col7">Home</h1>
 
@@ -19,9 +19,9 @@
         ---------------------------------------------->
     
         <section id="time-n-date">
-            <p id="time">  </p>
-            <p id="apm">  </p>
-            <p id="date">  </p>
+            <p id="time"> {{ today | date:'h:mm' }} </p>
+            <p id="apm"> {{ today | date:'a' }} </p>
+            <p id="date"> {{ today | date:'EEEE, MMMM d' }} </p>
         </section>
 
         <!---------------------------------------------
@@ -42,15 +42,15 @@
                     <img src="assets/banners/reminderFTC.jpg">
                 </a>
 
-                <a class="slide-btn prev" onclick="plusSlides(-1)"><p><i class="fas fa-chevron-left"></i></p></a>
-                <a class="slide-btn next" onclick="plusSlides(1)"><p><i class="fas fa-chevron-right"></i></p></a>
+                <a class="slide-btn prev" (click)="prevSlide()"><p><i class="fas fa-chevron-left"></i></p></a>
+                <a class="slide-btn next" (click)="nextSlide()"><p><i class="fas fa-chevron-right"></i></p></a>
 
             </div>
 
             <div id="dots-box">
-                <span class="dot active-dot" onclick="currentSlide(1)"></span>
-                <span class="dot" onclick="currentSlide(2)"></span>
-                <span class="dot" onclick="currentSlide(3)"></span>
+                <span class="dot active-dot" (click)="nowThisSlide(0)"></span>
+                <span class="dot" (click)="nowThisSlide(1)"></span>
+                <span class="dot" (click)="nowThisSlide(2)"></span>
             </div>
 
         </section>

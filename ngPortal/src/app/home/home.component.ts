@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AuthService } from '../core/auth.service';
+import { splitDepsDsl } from '@angular/core/src/view/util';
+import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
-selector: 'app-home',
-templateUrl: './home.component.html',
-styleUrls: ['./home.component.css']
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
 
     time = {
         accumlatedTime: '',
@@ -20,6 +21,8 @@ export class HomeComponent implements OnInit {
     };
     breakBtn = 'Start Break';
     checkMsg = '';
+    today = Date.now();
+
     constructor(public db: AngularFirestore, private auth: AuthService) { }
 
     ngOnInit() {
@@ -71,11 +74,9 @@ export class HomeComponent implements OnInit {
         window.open('https://www.myworkday.com/byuhi/d/home.htmld', '_blank');
         }
         setTimeout(() => {
-        this.checkTime();
+            this.checkTime();
         }, 100);
     }
-
-
     editDate(date) {
         const month = ('0' + (date.getMonth() + 1)).slice(-2);
         const day = ('0' + date.getDate()).slice(-2);
@@ -85,19 +86,22 @@ export class HomeComponent implements OnInit {
         const setDate = `${year}-${month}-${day} ${hour}:${minute}`;
         return setDate;
     }
-    prettyTime(time) {
-        let hour = time.split(':')[0];
-        let min = time.split(':')[1];
-        let mer = 'am';
-        if (time.split(':')[0] > 12) {
-        hour = time.split(':')[0] - 12;
-        mer = 'pm';
-        }
-        return hour + ':' + min + ' ' + mer;
-    }
 
-    takeBreak() {
-        
+    slides = document.getElementsByClassName('slide');
+    dots = document.getElementsByClassName('dot');
+    size: number = this.slides.length;
+    current: number = 0;
+
+    nowThisSlide(this1: number) {
+        this.slides[this.current].classList.add('hide');
+        this.slides[this1].classList.remove('hide');
+        this.current = this1;
+    }
+    nextSlide() {
+        this.nowThisSlide((this.current + 1) % this.size);
+    }
+    prevSlide() {
+        this.nowThisSlide(((this.current + this.size) - 1) % this.size);
     }
 
 }
