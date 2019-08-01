@@ -201,9 +201,27 @@
         </div>
         <ng-template #viewBtnBox class="btn-box">
             <button id="closeViewBtn" (click)="closeModal()">Close</button>
-            <button id="closeViewBtn" class="warning-btn" (click)="edit()" [class.hide]="storage.hider">Edit</button>
+            <button id="openEmbedBtn" (click)="openEmbed()">Embed Code</button>
+            <button id="editBtn" class="warning-btn" (click)="edit()" [class.hide]="storage.hider">Edit</button>
         </ng-template>
 
     </div>
 
+</section>
+
+<section class="modal hide" id="embed-modal" (click)="clickedOut2($event)">
+    <div class="modal-content" id="embed-modal-content">
+        <div class="modal-header-box">
+            <h1>Embeded Code</h1>
+        </div>
+        <div class="modal-body">
+            <h2>Video</h2>
+            <p> {{ vidCode }} In Progress :) </p>
+            <h2>No Video</h2>
+            <p> {{ noVidCode }} In Progress :) </p>
+        </div>
+        <div class="btn-box">
+            <button id="done-btn" (click)="closeEmbed()">Done</button>
+        </div>
+    </div>
 </section>

@@ -67,3 +67,11 @@
     flex-flow: row nowrap;
     margin-bottom: 10px;
 }
+#embed-modal-content {
+    z-index: 2000;
+    width: 800px;
+    height: 500px;
+}
+#embed-modal-content .modal-body {
+    height: auto;
+}
