@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AuthService } from '../core/auth.service';
 import { splitDepsDsl } from '@angular/core/src/view/util';
-import { forEach } from '@angular/router/src/utils/collection';
 
+@Pipe({
+    name: 'today',
+    pure: false
+})
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
@@ -21,31 +24,38 @@ export class HomeComponent implements OnInit {
     };
     breakBtn = 'Start Break';
     checkMsg = '';
-    today = Date.now();
+    today;
 
     constructor(public db: AngularFirestore, private auth: AuthService) { }
 
     ngOnInit() {
         this.checkTime();
+        this.hideOthers();
+        this.clock();
+    }
+
+    clock() {
+        this.today = Date.now();
+        setTimeout(this.clock, 1000);
     }
 
     checkTime() {
         setTimeout(() => {
-        try {
-            this.db.collection('users').doc(this.auth.id).get().subscribe(doc => {
-            this.time = doc.data().time;
-            if (this.time.check) {
-                this.checkMsg = 'Clock in time was ' + (doc.data().time.checkKey).slice(-5);
-            } else if (!this.time.check) {
-                this.checkMsg = 'Clock out time was ' + (doc.data().time.checkKey).slice(-5);
+            try {
+                this.db.collection('users').doc(this.auth.id).get().subscribe(doc => {
+                this.time = doc.data().time;
+                if (this.time.check) {
+                    this.checkMsg = 'Clock in time was ' + (doc.data().time.checkKey).slice(-5);
+                } else if (!this.time.check) {
+                    this.checkMsg = 'Clock out time was ' + (doc.data().time.checkKey).slice(-5);
+                }
+                });
+            } catch (err) {
+                setTimeout(() => {
+                    console.log('Error retry in: 100ms' );
+                    this.checkTime();
+                }, 100);
             }
-            });
-        } catch (err) {
-            setTimeout(() => {
-            console.log('Error retry in: 100ms' );
-            this.checkTime();
-            }, 100);
-        }
         }, 200);
     }
 
@@ -92,6 +102,11 @@ export class HomeComponent implements OnInit {
     size: number = this.slides.length;
     current: number = 0;
 
+    hideOthers() {
+        for (let i = 1; i < this.slides.length; i++) {
+            this.slides[i].classList.add('hide');
+        }
+    }
     nowThisSlide(this1: number) {
         this.slides[this.current].classList.add('hide');
         this.slides[this1].classList.remove('hide');
@@ -104,4 +119,12 @@ export class HomeComponent implements OnInit {
         this.nowThisSlide(((this.current + this.size) - 1) % this.size);
     }
 
+    takeBreak() {
+        document.getElementById('break-btn').classList.toggle('expanded');
+        document.getElementById('break-words').classList.toggle('hide');
+    }
+
+    breakMins: number;
+    breakSecs: number;
+    
 }

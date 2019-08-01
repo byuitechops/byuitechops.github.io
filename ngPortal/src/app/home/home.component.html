@@ -20,7 +20,7 @@
     
         <section id="time-n-date">
             <p id="time"> {{ today | date:'h:mm' }} </p>
-            <p id="apm"> {{ today | date:'a' }} </p>
+            <p id="apm"> {{ today | date:'a' | lowercase }} </p>
             <p id="date"> {{ today | date:'EEEE, MMMM d' }} </p>
         </section>
 
@@ -32,15 +32,17 @@
         <section id="welcome">
             <div class="slideshow-container">
 
-                <a class="slide" href="https://docs.google.com/spreadsheets/d/1DetufZwdKE5uq7tZWAfLuKM6HNs3IxXC_zZ48quGS04/edit#gid=1426389316" target="_blank">
-                    <img src="assets/banners/reminderDevotional.jpg">
-                </a>
-                <a class="slide hide" href="https://docs.google.com/spreadsheets/d/18U2hkUafZ1EXmtze9BWI_1U4t6619uy4FZmPiQxfWss/edit#gid=590424193" target="_blank">
-                    <img src="assets/banners/reminderFridgeCleaning.jpg">
-                </a>
-                <a class="slide hide" href="https://docs.google.com/spreadsheets/d/1oXLNWu9sWyWhDwcTurzDvNF-Wo-B5SXeywuMD_hKfqM/edit#gid=0" target="_blank">
-                    <img src="assets/banners/reminderFTC.jpg">
-                </a>
+                <div id="slide-box">
+                    <a class="slide" href="https://docs.google.com/spreadsheets/d/1DetufZwdKE5uq7tZWAfLuKM6HNs3IxXC_zZ48quGS04/edit#gid=1426389316" target="_blank">
+                        <img src="assets/banners/reminderDevotional.jpg">
+                    </a>
+                    <a class="slide" href="https://docs.google.com/spreadsheets/d/18U2hkUafZ1EXmtze9BWI_1U4t6619uy4FZmPiQxfWss/edit#gid=590424193" target="_blank">
+                        <img src="assets/banners/reminderFridgeCleaning.jpg">
+                    </a>
+                    <a class="slide" href="https://docs.google.com/spreadsheets/d/1oXLNWu9sWyWhDwcTurzDvNF-Wo-B5SXeywuMD_hKfqM/edit#gid=0" target="_blank">
+                        <img src="assets/banners/reminderFTC.jpg">
+                    </a>
+                </div>
 
                 <a class="slide-btn prev" (click)="prevSlide()"><p><i class="fas fa-chevron-left"></i></p></a>
                 <a class="slide-btn next" (click)="nextSlide()"><p><i class="fas fa-chevron-right"></i></p></a>
@@ -65,12 +67,12 @@
                 <button class="btn2" id="clockbtn" (click)="clockInOut()">
                     <p id="clockp">Clock <span [class.hide]="time.check">In</span><span [class.hide]="!time.check">Out</span></p>
                 </button>
-                <a class="btn-note" href="https://www.myworkday.com/byuhi/d/home.htmld" target="_blank">{{checkMsg}}</a>
+                <a class="btn-note" href="https://www.myworkday.com/byuhi/d/home.htmld" target="_blank">{{ checkMsg }}</a>
             </div>
             <div>
-                <button class="btn2 active" id="break-btn" [class.hide]="!time.check" (click)="status=!status" [ngClass]="status ? big : small">
-                    <p id="break-words">{{breakBtn}}</p>
-                    <p id="break-timer">{{15 + ':' + '00'}}</p>
+                <button class="btn2 active" id="break-btn" [class.hide]="!time.check" (click)="takeBreak()">
+                    <p id="break-words">{{ breakBtn }}</p>
+                    <p id="break-timer">{{ breakMins }} : {{ breakSecs }}</p>
                 </button>
                 <p class="btn-note">{{ breakTime }}Last break finished @ 9:15 am</p>
             </div>
