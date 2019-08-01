@@ -137,7 +137,7 @@
         <h1 class="page-title">Request</h1>
 
         <section id="requestForm" class="left-col">
-            <input [(ngModel)]="name" id="guestName" placeholder="Name" [class.hide]="hider">
+            <input [(ngModel)]="name" id="guestName" placeholder="Full Name" [class.hide]="hider">
             <select [(ngModel)]="type" placeholder="Select Type">
                 <option disabled hidden [value]="selectUndefinedOptionValue" class="initial-opt">Select Type</option>
                 <option *ngFor="let y of types" [ngValue]="y">{{ y }}</option>
