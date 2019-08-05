@@ -72,7 +72,8 @@
                 <h3>Team Points</h3>
                 <div id="select-points">
                     <select name="" id="pointsOptions" class="profile-points">
-                    <option id="pointStart" value="start">- - -</option>
+                        <option id="pointStart" value="start">- - -</option>
+                        <option *ngFor="let item of pointItems" (click)="selectPoints(item)">{{ title }}...</option>
                     </select>
                     <button type="submit" id="submitPoints" class="btn-profile" onclick="submitTeamPoints()">Submit</button>
                 </div>
