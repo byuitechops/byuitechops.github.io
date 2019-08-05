@@ -85,24 +85,27 @@
     display: flex;
     flex-flow: column nowrap;
     position: relative;
-    transition: all .5s,
-                bottom .125s 0s,
-                right .125s 0s,
-                top .125s .125s,
-                left .25s .25s;
 }
 #break-btn.expanded {
     z-index: 5;
+    justify-content: flex-end;
+    align-items: flex-end;
     position: absolute;
     top: -25px;
     left: -5px;
     right: 5px;
     bottom: 25px;
-    transition: all .5s,
-                top .125s 0s,
-                left .25s 125s,
-                bottom .125s .375s,
-                right .125s .375s;
+}
+#break-btn.warning {
+    background-color: var(--warning);
+}
+#break-btn.danger {
+    background-color: var(--danger);
+}
+#break-btn.expanded p {
+    margin-right: 50px;
+    font-size: 200px;
+    opacity: .3;
 }
 #break-timer {
     margin-top: -10px;

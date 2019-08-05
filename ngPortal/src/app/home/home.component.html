@@ -11,7 +11,7 @@
     -     change the number of dots, accordingly.
     ---------------------------------------------->
 
-    <section class="home-content col8">
+    <section class="home-content">
 
         <!---------------------------------------------
         - 4a. TIME N DATE
@@ -72,9 +72,9 @@
             <div>
                 <button class="btn2 active" id="break-btn" [class.hide]="!time.check" (click)="takeBreak()">
                     <p id="break-words">{{ breakBtn }}</p>
-                    <p id="break-timer">{{ breakMins }} : {{ breakSecs }}</p>
+                    <p id="break-timer">{{ breakMins }}:{{zero}}{{ breakSecs }}</p>
                 </button>
-                <p class="btn-note">{{ breakTime }}Last break finished @ 9:15 am</p>
+                <p class="btn-note">{{ breakMsg }} </p>
             </div>
         </section>
 
