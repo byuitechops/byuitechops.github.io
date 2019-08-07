@@ -21,25 +21,28 @@ export class AuthService {
     //  This loads on every page in the Site, it check if the user is authenticated
     // and then finds that user in the database.
     this.af.auth.onAuthStateChanged(async user => {
-      if (user) {
-        this.authenticated = true;
-        this.userName = user.displayName;
-        this.user = user;
-        if (!user.isAnonymous) {
-          this.db.findUser(this.userName);
+        console.log(this.role);
+        if (user) {
+            this.authenticated = true;
+            this.userName = user.displayName;
+            this.user = user;
+            if (!user.isAnonymous) {
+                this.db.findUser(this.userName);
+            }
+            setTimeout(() => {
+                this.isGuest();
+            }, 200);
+        } else {
+            this.authenticated = false;
         }
-        setTimeout(() => {
-          this.isGuest();
-        }, 200);
-      } else {
-        this.authenticated = false;
-      }
     });
   }
 
   async isGuest() {
     try {
+        console.log(this.role);
       if (this.user.isAnonymous) {
+        console.log(this.role);
         this.guest = true;
         this.review = false;
         this.transcribe = false;
@@ -54,6 +57,7 @@ export class AuthService {
       console.log(e);
     }
     try {
+        console.log(this.role);
       this.guest = false;
       this.role = await this.db.user.role;
       if (this.role === 'Copyedit') {
@@ -108,7 +112,6 @@ export class AuthService {
       })
       .catch(err => {
         console.log('Something went wrong:', err.message);
-
       });
   }
 
