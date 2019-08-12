@@ -5,8 +5,8 @@
             <div>
                 <select class="teamItem" id="selectTeam" *ngIf="teamSelector" [(ngModel)]="selector" (change)="changeSheet()">
                     <option [value]="0">Select Team</option>
-                    <option id="canvas1" [value]="1">LMS</option>
-                    <option id="canvas2" [value]="2">Accessibility</option>
+                    <option id="canvas1" [value]="1">Team 1</option>
+                    <option id="canvas2" [value]="2">Team 2</option>
                 </select>
                 <a class="teamItem" id="newTab" target="_blank" [href]="sanLink()">
                     <i class="fas fa-external-link-alt"></i>

@@ -118,16 +118,18 @@ export class HomeComponent implements OnInit {
         }
     }
     nowThisSlide(this1: number) {
+        if (!this1) {
+            this1 = 0;
+        }
         this.slides = document.getElementsByClassName('slide');
         this.dots = document.getElementsByClassName('dot');
         this.size = this.slides.length;
-        console.log(this.size);
+
         this.slides[this.current].classList.add('hide');
         this.slides[this1].classList.remove('hide');
         this.dots[this.current].classList.remove('active-dot');
         this.dots[this1].classList.add('active-dot');
         this.current = this1;
-        console.log(this.current);
     }
     nextSlide() {
         this.nowThisSlide((this.current + 1) % this.size);

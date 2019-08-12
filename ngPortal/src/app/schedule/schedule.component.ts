@@ -10,12 +10,13 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class ScheduleComponent implements OnInit {
 
 
-    ssCanvas2 = 'https://docs.google.com/spreadsheets/d/1jUFL2Dr-_MjAE7axb6rEZy0vSfH6y_8fOHSo1b0oLDo/edit?rm=minimal';
-    ssCanvas1 = 'https://docs.google.com/spreadsheets/d/1g53WojmX1wG7fTGU1Q1Hg93-QJ5GBadcCU7rbeyGWoc/edit?rm=minimal';
+    ssCanvas2 = 'https://docs.google.com/spreadsheets/d/1I8_4D8T4mXJOlR9GysuuCDvHq2qlpcjCUNfjorphqKs/edit#';
+    ssCanvas1 = 'https://docs.google.com/spreadsheets/d/1DdQfPe-JuB0pjPQ1qTUmFHl6RlGG3WJPyS_tcogQ-Zs/edit#';
     selector = '0';
     teamSelector = false;
     sheet = 'https://docs.google.com/spreadsheets/d/1g53WojmX1wG7fTGU1Q1Hg93-QJ5GBadcCU7rbeyGWoc/edit?rm=minimal';
     link = 'https://docs.google.com/spreadsheets/d/1g53WojmX1wG7fTGU1Q1Hg93-QJ5GBadcCU7rbeyGWoc/edit?rm=minimal';
+    
     constructor(private auth: AuthService, private san: DomSanitizer) {}
 
     ngOnInit() {
@@ -37,8 +38,8 @@ export class ScheduleComponent implements OnInit {
                 this.link = this.ssCanvas2;
             }
         } catch (err) {
+            console.log('Error. Retry is 200ms');
             setTimeout(() => {
-                console.log('Error. Retry is 200ms');
                 this.checkTeam();
             }, 200);
         }
@@ -54,11 +55,11 @@ export class ScheduleComponent implements OnInit {
     changeSheet() {
         console.log(this.selector);
         if (this.selector === '1') {
-        this.sheet = this.ssCanvas1;
-        this.link = this.ssCanvas1;
+            this.sheet = this.ssCanvas1;
+            this.link = this.ssCanvas1;
         } else if (this.selector === '2') {
-        this.sheet = this.ssCanvas2;
-        this.link = this.ssCanvas2;
+            this.sheet = this.ssCanvas2;
+            this.link = this.ssCanvas2;
         }
     }
 }
