@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
         this.clock();
         setTimeout(() => {
             this.autoSlide();
-        }, 100);
+        }, 300);
     }
 
     clock() {
