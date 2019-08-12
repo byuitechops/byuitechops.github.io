@@ -159,9 +159,9 @@ export class HomeComponent implements OnInit {
         document.getElementById('break-words').classList.toggle('hide');
         document.getElementById('break-btn').classList.toggle('expanded');
         
-        if(this.time.break) {
+        if(!this.time.break) {
             this.startBreak();
-        } else if (!this.time.break) {
+        } else if (this.time.break) {
             this.endBreak();
         }
         this.time.break = !this.time.break;
