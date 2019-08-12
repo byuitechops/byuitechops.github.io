@@ -1,13 +1,6 @@
-import {
-  Component,
-  OnInit
-} from '@angular/core';
-import {
-  AuthService
-} from './../core/auth.service';
-import {
-  DomSanitizer
-} from '@angular/platform-browser';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from './../core/auth.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-schedule',
@@ -31,23 +24,23 @@ export class ScheduleComponent implements OnInit {
 
     checkTeam() {
         try {
-        if (!(this.auth.user.admin || this.auth.user.lead)) {
-            this.teamSelector = false;
-        } else {
-            this.teamSelector = true;
-        }
-        if (this.auth.user.team === 'lms') {
-            this.sheet = this.ssCanvas1;
-            this.link = this.ssCanvas1;
-        } else if (this.auth.user.team === 'accessibility') {
-            this.sheet = this.ssCanvas2;
-            this.link = this.ssCanvas2;
-        }
+            if (!(this.auth.user.admin || this.auth.user.lead)) {
+                this.teamSelector = false;
+            } else {
+                this.teamSelector = true;
+            }
+            if (this.auth.user.team === 'Team 1') {
+                this.sheet = this.ssCanvas1;
+                this.link = this.ssCanvas1;
+            } else if (this.auth.user.team === 'Team 2') {
+                this.sheet = this.ssCanvas2;
+                this.link = this.ssCanvas2;
+            }
         } catch (err) {
-        setTimeout(() => {
-            console.log('Error. Retry is 200ms');
-            this.checkTeam();
-        }, 200);
+            setTimeout(() => {
+                console.log('Error. Retry is 200ms');
+                this.checkTeam();
+            }, 200);
         }
     }
     sanSheet() {

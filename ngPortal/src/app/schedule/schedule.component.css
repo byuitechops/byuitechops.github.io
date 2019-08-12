@@ -1,0 +1,45 @@
+/***********************************************************
+*
+*   Schedule Page Styles
+*
+***********************************************************/
+
+.teamSelector div {
+    display: flex;
+    flex-flow: row nowrap;
+}
+#newTab i {
+    padding: 10px;
+    border-radius: 15px;
+}
+#newTab i:hover {
+    background-color: var(--first);
+    color: var(--white);
+}
+iframe {
+    display: inherit;
+    width: 100%;
+    height: 80vh;
+}
+
+
+/***********************************************************
+*   a. Media Queries
+***********************************************************/
+
+@media only screen and (min-width: 800px) {
+
+    .teamSelector {
+        display: flex;
+        flex-flow: row nowrap;
+        width: 100%;
+    }
+    .teamSelector div {
+        display: inherit;
+    }
+    #selectTeam {
+        width: 100%;
+        max-width: 500px;
+        margin-left: auto;
+    }
+}

@@ -104,7 +104,7 @@
 }
 #break-btn.expanded p {
     margin-right: 50px;
-    font-size: 200px;
+    font-size: 15vw;
     opacity: .3;
 }
 #break-timer {

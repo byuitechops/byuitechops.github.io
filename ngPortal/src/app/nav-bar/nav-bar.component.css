@@ -41,9 +41,6 @@ p, #nav-img-box {
 i {
     display: inherit;
 }
-.active {
-    border-left: 8px solid var(--white);
-}
 
 
 
@@ -97,6 +94,9 @@ i {
     }
     i {
         display: none;
+    }
+    .active {
+        border-left: 8px solid var(--white);
     }
 
 }

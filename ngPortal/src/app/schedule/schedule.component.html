@@ -1,19 +1,20 @@
-<main id="scheduleSection" class="col9">
-
-  <section>
-      <div class="col10 teamSelector">
-          <select class="teamItem" id="selectTeam" *ngIf="teamSelector" [(ngModel)]="selector" (change)="changeSheet()">
-              <option [value]="0">Select Team</option>
-              <option id="canvas1" [value]="1">LMS</option>
-              <option id="canvas2" [value]="2">Accessibility</option>
-          </select>
-          <a class="teamItem" id="newTab" target="_blank"
-              [href]="sanLink()">
-              <img src="../../assets/misc/newTab.png">
-          </a>
-      </div>
-      <div id="teams" class="col10"><iframe id="spreadsheet" class="col10 spreadsheet"
-              [src]="sanSheet()"></iframe>
-      </div>
-  </section>
+<main id="scheduleSection">
+    <section>
+        <div class="teamSelector">
+            <h1 class="page-title">Schedule</h1>
+            <div>
+                <select class="teamItem" id="selectTeam" *ngIf="teamSelector" [(ngModel)]="selector" (change)="changeSheet()">
+                    <option [value]="0">Select Team</option>
+                    <option id="canvas1" [value]="1">LMS</option>
+                    <option id="canvas2" [value]="2">Accessibility</option>
+                </select>
+                <a class="teamItem" id="newTab" target="_blank" [href]="sanLink()">
+                    <i class="fas fa-external-link-alt"></i>
+                </a>
+            </div>
+        </div>
+        <div id="teams">
+            <iframe id="spreadsheet" class="spreadsheet" [src]="sanSheet()"></iframe>
+        </div>
+    </section>
 </main>

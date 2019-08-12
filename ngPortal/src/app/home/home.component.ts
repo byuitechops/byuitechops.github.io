@@ -29,7 +29,9 @@ export class HomeComponent implements OnInit {
         this.checkTime();
         this.hideOthers();
         this.clock();
-        //this.autoSlide();
+        setTimeout(() => {
+            this.autoSlide();
+        }, 100);
     }
 
     clock() {
@@ -99,9 +101,15 @@ export class HomeComponent implements OnInit {
         return setDate;
     }
 
+    /*******************************
+     *  SLIDE SHOW
+     *  
+     *  Everything used with the break button
+     ******************************/
+
     slides = document.getElementsByClassName('slide');
     dots = document.getElementsByClassName('dot');
-    size: number = this.slides.length;
+    size: number;
     current: number = 0;
 
     hideOthers() {
@@ -110,9 +118,16 @@ export class HomeComponent implements OnInit {
         }
     }
     nowThisSlide(this1: number) {
+        this.slides = document.getElementsByClassName('slide');
+        this.dots = document.getElementsByClassName('dot');
+        this.size = this.slides.length;
+        console.log(this.size);
         this.slides[this.current].classList.add('hide');
         this.slides[this1].classList.remove('hide');
+        this.dots[this.current].classList.remove('active-dot');
+        this.dots[this1].classList.add('active-dot');
         this.current = this1;
+        console.log(this.current);
     }
     nextSlide() {
         this.nowThisSlide((this.current + 1) % this.size);
@@ -123,8 +138,14 @@ export class HomeComponent implements OnInit {
     autoSlide() {
         setInterval(() => {
             this.nowThisSlide((this.current + 1) % this.size);
-        }, 10000);
+        }, 8000);
     }
+
+    /*******************************
+     *  BREAK BUTTON
+     *  
+     *  Everything used with the break button
+     ******************************/
 
     breakMins: number = 15;
     breakSecs: number = 0;
