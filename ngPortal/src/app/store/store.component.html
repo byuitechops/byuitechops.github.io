@@ -2,11 +2,11 @@
     - 4. Main
     ---------------------------------------------->
 
-<main class="col9" id="shoppingPage">
+<main>
 
     <h1 class="page-title">Store</h1>
-    <button class="store-btn hide" id="invoiceStore">Store Invoice</button>
-    <button class="store-btn hide" id="editStore">Edit Store</button>
+    <button class="store-btn" id="invoiceStore" [class.hide]="!userManager">Store Invoice</button>
+    <button class="store-btn" id="editStore" [class.hide]="!userManager">Edit Store</button>
 
     <!---------------------------------------------
         - 4a.

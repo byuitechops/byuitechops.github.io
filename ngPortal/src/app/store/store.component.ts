@@ -12,12 +12,14 @@ export class StoreComponent implements OnInit {
     constructor(public store: StoreService, public auth: AuthService) { }
 
     ngOnInit() {
-
+        this.canUserManageStore();
     }
 
-    snackManageBtns() {
-        if (this.auth.user.admin || this.auth.user.storeManager) {
 
+    userManage: boolean = false;
+    canUserManageStore() {
+        if (this.auth.user.admin || this.auth.user.storeManager || this.auth.user.lead) {
+            this.userManage = true;
         }
     }
 
