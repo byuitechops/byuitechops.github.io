@@ -1,38 +1,51 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from 'src/environments/environment';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { StoreComponent } from './store/store.component';
-import { ScheduleComponent } from './schedule/schedule.component';
-import { ProfileComponent } from './profile/profile.component';
-import { AuthComponent } from './auth/auth.component';
-import { NavbarComponent } from './navbar/navbar.component';
 import { AdminComponent } from './admin/admin.component';
-import { CoreComponent } from './core/core.component';
+import { AppComponent } from './app.component';
+import { AuthComponent } from './auth/auth.component';
+import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ScheduleComponent } from './schedule/schedule.component';
+import { StoreComponent } from './store/store.component';
 import { StyleGuideComponent } from './style-guide/style-guide.component';
+
+import { ThemeService } from './core/theme.service';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HomeComponent,
-    StoreComponent,
-    ScheduleComponent,
-    ProfileComponent,
-    AuthComponent,
-    NavbarComponent,
     AdminComponent,
-    CoreComponent,
+    AppComponent,
+    AuthComponent,
+    HomeComponent,
     LoginComponent,
-    StyleGuideComponent
+    NavbarComponent,
+    ProfileComponent,
+    ScheduleComponent,
+    StoreComponent,
+    StyleGuideComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AppRoutingModule,
+    FormsModule,
   ],
-  providers: [],
+  providers: [
+    AngularFirestore,
+    AngularFireStorage,
+    AngularFireAuth,
+    ThemeService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
