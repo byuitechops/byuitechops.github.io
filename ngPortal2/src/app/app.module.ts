@@ -20,6 +20,7 @@ import { StoreComponent } from './store/store.component';
 import { StyleGuideComponent } from './style-guide/style-guide.component';
 
 import { ThemeService } from './core/theme.service';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,7 @@ import { ThemeService } from './core/theme.service';
     AngularFirestore,
     AngularFireStorage,
     AngularFireAuth,
-    ThemeService,
+    ThemeService, 
   ],
   bootstrap: [AppComponent]
 })
