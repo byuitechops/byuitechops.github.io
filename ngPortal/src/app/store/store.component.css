@@ -6,7 +6,7 @@ main {
 .snacks-container {
     display: flex;
     flex-flow: row wrap;
-    justify-content: center;
+    justify-content: space-between;
     width: 100%;
     max-width: 275px;
 }
@@ -67,6 +67,7 @@ main {
 
 .snacks-section {
     width: 50%;
+    max-width: 300px;
 }
 .snack-manage {
     display: flex;
@@ -87,22 +88,44 @@ form div {
     justify-content: space-between;
     padding: 3px;
 }
+.snack-manage div {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+}
 .snack-manage h2 {
     width: 100%;
     margin-bottom: 25px;
-
     font-family: "Merriweather";
     font-weight: 300;
 }
 .snack-manage p, .snack-manage span {
     width: 80px;
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: 300;
 }
 .snack-manage input {
     width: 150px;
     height: 25px;
 }
-
+.cart-item {
+    display: flex;
+    flex-flow: row nowrap;
+    width: 100%;
+}
+.cart-name {
+    width: 75%;
+}
+.cart-price {
+    width: 15%;
+}
+.cart-x {
+    width: 10%;
+}
+#snack-cart-receipt span {
+    font-size: 20px;
+    font-weight: 400;
+}
 
 /***********************************************************
 *   Media Queries

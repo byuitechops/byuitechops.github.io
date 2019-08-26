@@ -1,32 +1,33 @@
 <body>
+  
   <img id="backgroundImg" src="assets/banners/bannerPic.png" alt="Beautiful Sunset">
   <section>
-      <div id="logo">
-          <img id="school" src="/../../assets/misc/byuiLogo.png">
-          <img id="techops" src="/../../assets/logos/logo.png">
+    <div id="logo">
+      <img id="school" src="/../../assets/misc/byuiLogo.png">
+      <img id="techops" src="/../../assets/logos/logo.png">
+    </div>
+    <div id="lower">
+      <div class="fieldbox" id="namebox" *ngIf="!auth.signingIn">
+        <span>Name</span>
+        <input id="displayName" [(ngModel)]="auth.dName" placeholder="Name">
       </div>
-      <div id="lower">
-          <div class="fieldbox" id="namebox" *ngIf="!auth.signingIn">
-              <span>Name</span>
-              <input id="displayName" [(ngModel)]="auth.dName" placeholder="Name">
-          </div>
-          <div class="fieldbox" id="emailbox">
-              <span>Email</span>
-              <input id="login" [(ngModel)]="auth.email" placeholder="E-mail">
-          </div>
-          <div class="fieldbox" id="passwordbox">
-              <span> Password </span>
-              <input id="password" type="Password" [(ngModel)]="auth.password"  placeholder="Password">
-          </div>
+      <div class="fieldbox" id="emailbox">
+        <span>Email</span>
+        <input id="login" [(ngModel)]="auth.email" placeholder="E-mail">
+      </div>
+      <div class="fieldbox" id="passwordbox">
+        <span> Password </span>
+        <input id="password" type="Password" [(ngModel)]="auth.password"  placeholder="Password">
+      </div>
 
-          <span id="detail">Your e-mail username is the provided<br> account from your institution.</span>
-          <div id="buttons">
-              <button class="button" id="btnlogin" (click)="auth.login()" type="submit" *ngIf="auth.signingIn"><span>Login</span></button>
-              <button class="button" id="btnsignup" (click)="auth.signup()"><span>Sign Up</span></button>
-              <button class="button" id="btnsignup" (click)="auth.cancel()" *ngIf="!auth.signingIn"><span>Cancel</span></button>
-          </div>
-          <span id="recover">Forgot Your Username/Password?</span>
+      <span id="detail">Your e-mail username is the provided <br>account from your institution.</span>
+      <div id="buttons">
+        <button class="button" id="btnlogin" (click)="auth.login()" type="submit" *ngIf="auth.signingIn"><span>Login</span></button>
+        <button class="button" id="btnsignup" (click)="auth.signup()"><span>Sign Up</span></button>
+        <button class="button" id="btnsignup" (click)="auth.cancel()" *ngIf="!auth.signingIn"><span>Cancel</span></button>
       </div>
+      <span id="recover">Forgot Your Username/Password?</span>
+    </div>
   </section>
 
 </body>
