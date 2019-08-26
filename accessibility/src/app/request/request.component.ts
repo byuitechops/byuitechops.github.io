@@ -57,7 +57,8 @@ export class RequestComponent implements OnInit {
     'Video',
     'Audio',
     'Alt Text',
-    'Slide'
+    'Slide',
+    'Full Course'
   ];
   course: string;
   comments: string;
