@@ -44,7 +44,7 @@
 
         <section class="snack-manage" id="snack-cart">
 
-            <h2>Shopping Cart ({{count}})</h2>
+            <h2>Shopping Cart ({{store.count}})</h2>
 
             <div id="snack-shopping-list">
                 <div class="cart-item" *ngFor="let item of store.cart">
@@ -53,7 +53,6 @@
                     <span class="cart-x" (click)="store.removeItem(item)"><i class="far fa-times-circle"></i></span>
                 </div>
             </div>
-
             <div id="snack-cart-receipt">
                 <span>Total: </span>
                 <span id="shopping-list-total">{{ store.total | currency }}</span>
