@@ -46,16 +46,18 @@
                     <img src="assets/misc/backArrow.png" alt="Back to Profile"/>
                 </a>
             </div>
-            <table class="table-generate" id="users-list-generate">
-                <tr>
+            <table class="table-generate" id="users-list-header">
+                <thead>
                     <th class="usernum">#</th>
-                    <th class="username">Name</th>
-                    <th class="usertime">Accumulated Time </th>
-                    <th class="userteam">Team</th>
-                    <th class="usertitle">Title</th>
-                    <th class="useradmin">Admin</th>
-                    <th class="userstore">Store</th>
-                </tr>
+                    <th class="username" onclick="changeOrder('name')">Name</th>
+                    <th class="usertime">Accumulated Time</th>
+                    <th class="userteam" onclick="changeOrder('team')">Team</th>
+                    <th class="usertitle" onclick="changeOrder('title')">Title</th>
+                    <th class="useradmin" onclick="changeOrder('admin')">Admin</th>
+                    <th class="userstore" onclick="changeOrder('storeManager')">Store</th>
+                </thead>
+                <tbody id="users-list-generate">
+                </tbody>
             </table>
         </section>
 

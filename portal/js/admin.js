@@ -2,6 +2,7 @@ const users = db.collection('users');
 const admin = document.getElementById('admin');
 const generate = document.getElementById("users-list-generate");
 const checkShow = document.getElementById("checkShow");
+var orderBy = "name";
 
 function loadPage() {
     users.where("name", "==", userName)
@@ -55,7 +56,8 @@ function storeChange(id) {
 }
 
 function generateList(all) {
-    users.orderBy("nameDisplay", "asc").get()
+    console.log('generateList called');
+    users.orderBy(orderBy, "asc").get()
         .then(function (documents) {
             let count = 1
 
@@ -66,7 +68,7 @@ function generateList(all) {
                         var interpolate = "grayYes"
                     }
 
-                    let row = `<tr class='${interpolate}' id=${doc.id}>
+                    let row = `<tr class='generated ${interpolate}' id=${doc.id}>
                                     <td class="usernum admin-count">${count}</td>
                                     <td class="username">${doc.data().nameDisplay}</td>
                                     <td class="usertime hours"><span id="count${doc.id}" onclick="editTime('${doc.id}', '${doc.data().time.accumulatedTime}')">${doc.data().time.accumulatedTime}</span></td>
@@ -109,18 +111,31 @@ function generateList(all) {
             });
         });
 }
+function clearTable() {
+    var rows = document.getElementsByClassName('generated');
+    var length = rows.length;
+    console.log(rows);
+    console.log(length);
+
+    document.getElementById("users-list-generate").innerHTML = "";
+}
+function changeOrder(order) {
+    orderBy = order;
+    console.log(order, orderBy);
+    clearTable();
+    generateList();
+}
 
 
-
-    $(checkShow).change(() => {
-        if ($(checkShow).is(':checked')) {
-            $(generate).empty();
-            generateList(true)
-        } else {
-            $(generate).empty();
-            generateList(false);
-        }
-    });
+$(checkShow).change(() => {
+    if ($(checkShow).is(':checked')) {
+        $(generate).empty();
+        generateList(true)
+    } else {
+        $(generate).empty();
+        generateList(false);
+    }
+});
 
 function editTime(firestore, time) {
     let notUsed = document.getElementsByClassName('notUsed');
