@@ -56,7 +56,7 @@ function storeChange(id) {
 }
 
 function generateList(all) {
-    console.log('generateList called');
+    // console.log('generateList called');
     users.orderBy(orderBy, "asc").get()
         .then(function (documents) {
             let count = 1
@@ -114,14 +114,14 @@ function generateList(all) {
 function clearTable() {
     var rows = document.getElementsByClassName('generated');
     var length = rows.length;
-    console.log(rows);
-    console.log(length);
+    // console.log(rows);
+    // console.log(length);
 
     document.getElementById("users-list-generate").innerHTML = "";
 }
 function changeOrder(order) {
     orderBy = order;
-    console.log(order, orderBy);
+    // console.log(order, orderBy);
     clearTable();
     generateList();
 }
