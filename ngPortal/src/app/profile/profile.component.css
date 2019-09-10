@@ -185,14 +185,33 @@
         max-height: 500px;
     }
     .alt-profile h2 {
+        width: 100%;
         margin-bottom: 25px;
         font-family: "Merriweather";
     }
-    .banner-tile {
+    .banner-tile-box {
         display: flex;
         flex-flow: row wrap;
         justify-content: space-between;
-        width: 50%;
+    }
+    .banner-tile {
+        width: 45%;
+        margin-bottom: 10px;
+
+        box-shadow: 0 0 5px 0 #444;
+        border-radius: 15px;
+        overflow: hidden;
+    }
+    .banner-tile img {
+        height: auto;
+    }
+    .banner-text-box {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        padding: 0px 10px;
+
+        font-size: 14px;
     }
 
 }

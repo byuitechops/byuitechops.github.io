@@ -83,24 +83,28 @@
 
     <section class="alt-profile" id="edit-banners-box" *ngIf="editingBanners">
         <section class="profile-box">
-            <div class="banner-tile" id="all-banners-box">
+            <div class="banner-tile-box" id="all-banners-box">
                 <h2>All Banners</h2>
                 <div class="banner-tile" *ngFor="let banner of slides.banners">
                     <img [src]="banner.url | async" [alt]="banner.name">
-                    <h4>{{ banner.name }}</h4>
-                    <p>{{ banner.link }}</p>
-                    <p *ngIf="banner.place != -1"># {{ banner.place + 1 }}</p>
+                    <div class="banner-text-box">
+                        <h4>{{ banner.name }}</h4>
+                        <p>{{ banner.link }}</p>
+                        <p *ngIf="banner.place != -1"># {{ banner.place + 1 }}</p>
+                    </div>
                 </div>
             </div>
         </section>
         <section class="profile-box">
-            <div class="banner-tile" id="active-banners-box">
+            <div class="banner-tile-box" id="active-banners-box">
                 <h2>Active Banners</h2>
                 <div class="banner-tile" *ngFor="let banner of slides.orderedBanners">
                     <img [src]="banner.url | async" [alt]="banner.name">
-                    <h4>{{ banner.name }}</h4>
-                    <p>{{ banner.link }}</p>
-                    <p># {{ banner.place + 1 }}</p>
+                    <div class="banner-text-box">
+                        <p>{{ banner.name }}</p>
+                        <p>{{ banner.link }}</p>
+                        <p># {{ banner.place + 1 }}</p>
+                    </div>
                 </div>
             </div>
             <div id="add-banner-box">
