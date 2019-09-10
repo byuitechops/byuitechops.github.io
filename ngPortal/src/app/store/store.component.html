@@ -2,20 +2,22 @@
 - 4. Main
 ---------------------------------------------->
 
-<main>
+<main class="store-main" *ngIf="!viewingInvoice">
 
-    <h1 class="page-title">Store</h1>
-    <div class="btn-box" *ngIf="store.edit">
-        <button class="store-btn" id="invoiceStore">Store Invoice</button>
-        <button class="store-btn" id="editStore">Edit Store</button>
-    </div>
+    <section class="title-box">
+        <h1 class="page-title">Store</h1>
+        <div class="btn-box" *ngIf="isManager">
+            <button class="store-btn" id="invoiceStore" (click)="viewingInvoice = true">Store Invoice</button>
+            <button class="store-btn" id="editStore" (click)="editStore()">Edit Store</button>
+        </div>
+    </section>
 
     <!---------------------------------------------
     - 4a. SNACKS CONTAINER
     ---------------------------------------------->
 
     <section class="snacks-container">
-        <div *ngFor="let item of store.items" (click)="store.addToCart(item)">
+        <div *ngFor="let item of store.items" (click)="itemClicked(item)">
             <section class="snack" *ngIf="item.count > 0 || store.edit">
                 <div class="snack-pic">
                     <img [src]='item.url | async' [alt]='item.name'/>
@@ -42,9 +44,12 @@
 
         <!-- SNACK CART -->
 
-        <section class="snack-manage" id="snack-cart">
+        <section class="snack-manage" id="snack-cart" *ngIf="!isEditing">
 
-            <h2>Shopping Cart ({{store.count}})</h2>
+            <div class="title-box">
+                <h2>Shopping Cart</h2>
+                <h2 *ngIf="store.count">({{store.count}})</h2>
+            </div>
 
             <div id="snack-shopping-list">
                 <div class="cart-item" *ngFor="let item of store.cart">
@@ -64,16 +69,9 @@
 
         </section>
 
-        <!-- SNACK ADD & EDIT BUTTONS (for store manager) -->
-
-        <div class="btn-box" id="snack-manage-btns">
-            <button id="snack-add-btn">Add Snack</button>
-            <button id="snack-edit-btn">Edit Snack</button>
-        </div>
-
         <!-- SNACK ADD -->
 
-        <section class="snack-manage hide" id="snack-add">
+        <section class="snack-manage" id="snack-add" *ngIf="isEditing && !editOneItem">
             <form class="flex-container">
                 <h2>Add Item</h2>
                 <div><p>Name </p><input type="text" placeholder="Double Stuff Oreos" id="nameEdit" /></div>
@@ -89,7 +87,7 @@
 
         <!-- SNACK EDIT -->
 
-        <section class="snack-manage hide" id="snack-edit">
+        <section class="snack-manage" id="snack-edit" *ngIf="editOneItem">
             <form class="flex-container col10 wrap">
                 <h2>Edit Item</h2>
                 <div><p>Name </p><input type="text" id="oldName" readonly /></div>
@@ -108,7 +106,7 @@
 </main>
 
 
-<main class="hide" id="invoicePage">
+<main id="invoice-main" *ngIf="viewingInvoice">
     <h1 class="page-title">Store</h1>
     <section id="heading">
         <aside id="invoice-sum">
@@ -133,11 +131,20 @@
             <th>Payment</th>
             <th>User</th>
         </tr>
+        <tr *ngFor="let receipt of receipts">
+            <td>{{ receipt.key }}</td>
+            <td *ngFor="let snack of receipt.items">
+                <span>{{ snack.key }}</span>
+            </td>
+            <td>{{ receipt.payTotal }}</td>
+            <td>{{ receipt.payType }}</td>
+            <td>{{ receipt.user }}</td>
+        </tr>
         </table>
     </section>
 </main>
 
-<div class="popup hide" id="confirm-checkout">
+<div class="popup" id="confirm-checkout" *ngIf="checkingOut">
     <div class="popup-content">
         <h2>Shopping Cart</h2>
         <div id="confirm-content">

@@ -6,7 +6,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { FormsModule } from '@angular/forms';
-import { ThemeService } from './core/theme.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -19,6 +19,10 @@ import { ScheduleComponent } from './schedule/schedule.component';
 import { StyleGuideComponent } from './style-guide/style-guide.component';
 import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
+import { SlideshowComponent } from './slideshow/slideshow.component';
+import { ThemeComponent } from './theme/theme.component';
+import { SlideshowService } from './core/slideshow.service';
+import { ThemeService } from './core/theme.service';
 
 @NgModule({
   declarations: [
@@ -30,18 +34,22 @@ import { LoginComponent } from './login/login.component';
     ScheduleComponent,
     StyleGuideComponent,
     AdminComponent,
-    LoginComponent
+    LoginComponent,
+    SlideshowComponent,
+    ThemeComponent
   ],
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [
     AngularFirestore,
     AngularFireStorage,
     AngularFireAuth,
+    SlideshowService,
     ThemeService
   ],
   bootstrap: [AppComponent]

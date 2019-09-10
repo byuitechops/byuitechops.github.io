@@ -9,9 +9,18 @@ import { AuthService } from '../core/auth.service';
 })
 export class StoreComponent implements OnInit {
 
+    viewingInvoice = false;
+    receipts:any;
+
     constructor(public store: StoreService, public auth: AuthService) { }
 
     ngOnInit() {
+
+    }
+
+    viewInvoice() {
+        this.viewingInvoice = true;
+        this.receipts = this.store.getReceipts();
     }
 
 }

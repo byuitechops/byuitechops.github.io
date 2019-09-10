@@ -19,9 +19,9 @@
         ---------------------------------------------->
     
         <section id="time-n-date">
-            <p id="time"> {{ today | date:'h:mm' }} </p>
-            <p id="apm"> {{ today | date:'a' | lowercase }} </p>
-            <p id="date"> {{ today | date:'EEEE, MMMM d' }} </p>
+            <p id="time">{{ today | date:'h:mm' }}</p>
+            <p id="apm"> {{ today | date:'a' | lowercase }}</p>
+            <p id="date">{{ today | date:'EEEE, MMMM d' }}</p>
         </section>
 
         <!---------------------------------------------
@@ -29,37 +29,7 @@
         -     Where the banner slideshow is displayed on the Home Screen
         ---------------------------------------------->
 
-        <section id="welcome">
-            <div class="slideshow-container">
-
-                <div id="slide-box">
-                    <a class="slide">
-                        <img src="assets/banners/breakWelcome.jpg">
-                    </a>
-                    <a class="slide">
-                        <img src="assets/banners/teamMeeting.jpg">
-                    </a>
-                    <a class="slide">
-                        <img src="assets/banners/devoTime.jpg">
-                    </a>
-                    <a class="slide">
-                        <img src="assets/banners/rigbyLake.jpg">
-                    </a>
-                </div>
-
-                <a class="slide-btn prev" (click)="prevSlide()"><p><i class="fas fa-chevron-left"></i></p></a>
-                <a class="slide-btn next" (click)="nextSlide()"><p><i class="fas fa-chevron-right"></i></p></a>
-
-            </div>
-
-            <div id="dots-box">
-                <span class="dot active-dot" (click)="nowThisSlide(0)"></span>
-                <span class="dot" (click)="nowThisSlide(1)"></span>
-                <span class="dot" (click)="nowThisSlide(2)"></span>
-                <span class="dot" (click)="nowThisSlide(3)"></span>
-            </div>
-
-        </section>
+        <app-slideshow></app-slideshow>
 
         <!---------------------------------------------
         - 4c. CLOCKED IN

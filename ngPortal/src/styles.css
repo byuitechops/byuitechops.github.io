@@ -121,6 +121,13 @@ input, select, textarea {
 input:hover, select:hover, textarea:hover {
     box-shadow: inset 1px 1px 2px 0 rgba(0,0,0,0.5);
 }
+
+.title-box {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    width: 100%;
+}
 .btn-box {
     display: flex;
     flex-flow: row nowrap;

@@ -27,11 +27,7 @@ export class HomeComponent implements OnInit {
 
     ngOnInit() {
         this.checkTime();
-        this.hideOthers();
         this.clock();
-        setTimeout(() => {
-            this.autoSlide();
-        }, 300);
     }
 
     clock() {
@@ -56,7 +52,7 @@ export class HomeComponent implements OnInit {
                 });
             } catch (err) {
                 setTimeout(() => {
-                    console.log('Error retry in: 100ms' );
+                    console.log('Error retry in: 100ms');
                     this.checkTime();
                 }, 100);
             }
@@ -100,52 +96,10 @@ export class HomeComponent implements OnInit {
         const setDate = `${year}-${month}-${day} ${hour}:${minute}`;
         return setDate;
     }
-
-    /*******************************
-     *  SLIDE SHOW
-     *  
-     *  Everything used with the break button
-     ******************************/
-
-    slides = document.getElementsByClassName('slide');
-    dots = document.getElementsByClassName('dot');
-    size: number;
-    current: number = 0;
-
-    hideOthers() {
-        for (let i = 1; i < this.slides.length; i++) {
-            this.slides[i].classList.add('hide');
-        }
-    }
-    nowThisSlide(this1: number) {
-        if (!this1) {
-            this1 = 0;
-        }
-        this.slides = document.getElementsByClassName('slide');
-        this.dots = document.getElementsByClassName('dot');
-        this.size = this.slides.length;
-
-        this.slides[this.current].classList.add('hide');
-        this.slides[this1].classList.remove('hide');
-        this.dots[this.current].classList.remove('active-dot');
-        this.dots[this1].classList.add('active-dot');
-        this.current = this1;
-    }
-    nextSlide() {
-        this.nowThisSlide((this.current + 1) % this.size);
-    }
-    prevSlide() {
-        this.nowThisSlide(((this.current + this.size) - 1) % this.size);
-    }
-    autoSlide() {
-        setInterval(() => {
-            this.nowThisSlide((this.current + 1) % this.size);
-        }, 8000);
-    }
+    
 
     /*******************************
      *  BREAK BUTTON
-     *  
      *  Everything used with the break button
      ******************************/
 

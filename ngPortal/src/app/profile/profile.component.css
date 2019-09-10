@@ -34,7 +34,7 @@
     border-radius: 100px;
 }
 
-#main-profile {
+#main-profile, .alt-profile {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
@@ -86,9 +86,10 @@
     max-width: 350px;
     margin: auto;
 }
-.profile-links a {
+.btn2 {
     width: 90%;
-    max-width: 300px;
+    max-width: 200px;
+    height: auto;
     margin: 3px;
     padding: 3px;
     
@@ -101,8 +102,20 @@
     box-shadow: 1px 1px 2px 0 rgba(0,0,0,0.5);
     transition: all .2s;
 }
-.profile-links a:hover {
+.center {
+    width: 100%;
+    display: flex;
+    justify-content: center !important;
+    align-items: center;
+}
+.btn2:hover {
     transform: scale(1.1);
+}
+
+.banners-themes-box {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
 }
 
 .themes {
@@ -154,6 +167,32 @@
     }
     #resources {
         width: 45%;
+    }
+    #links-box {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+    }
+    h3 {
+        width: 100%;
+    }
+    #links-box div {
+        width: 50%;
+    }
+
+    .alt-profile {
+        height: auto;
+        max-height: 500px;
+    }
+    .alt-profile h2 {
+        margin-bottom: 25px;
+        font-family: "Merriweather";
+    }
+    .banner-tile {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        width: 50%;
     }
 
 }

@@ -1,0 +1,247 @@
+/***************************************
+*
+*   STYLE GUIDE CSS
+*
+****************************************/
+
+
+
+/*******************************
+*   GENERAL
+*******************************/
+main {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    width: 90%;
+}
+h1 {
+    width: 100%;
+}
+h3 {
+    width: 100%;
+    margin-bottom: 10px;
+    font-family: "Merriweather";
+}
+section {
+    margin-top: 20px;
+}
+.color {
+    border-top-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+}
+img {
+    width: 100%;
+    height: auto;
+}
+
+
+
+/*******************************
+*   MAIN COLOR SECTION
+*******************************/
+#mainColorsSection, #accentColorsSection, #tintsShades {
+    width: 30%;
+}
+.mainColorBoxes {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+}
+.mainColorBox {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    width: 100%;
+    height: 120px;
+}
+.box {
+    width: 200px;
+    height: 100px;
+}
+#m1 {
+    background-color: #0076c6;
+}
+#m2 {
+    background-color: #000000;
+}
+#m3 {
+    background-color: #ffffff;
+}
+
+
+
+/*******************************
+*   ACCENT COLORS
+*******************************/
+#accentColorBoxes {
+    display: flex;
+    flex-flow: row wrap;
+}
+.accentColorBox {
+    width: 30%;
+}
+.boxac {
+    width: 100px;
+    height: 75px;
+}
+#ac1 {
+    background-color: #82c242;
+}
+#ac2 {
+    background-color: #f58300;
+}
+#ac3 {
+    background-color: #a5216f;
+}
+#ac4 {
+    background-color: #fee060;
+}
+#ac5 {
+    background-color: #e42226;
+}
+#ac6 {
+    background-color: #adadad;
+}
+#aboutaccents {
+    margin-top: 20px;
+    font-size: 15px;
+}
+
+
+
+/*******************************
+*   TINTS & SHADES
+*******************************/
+#tintsShades {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+.tintsBox {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    width: 30%;
+    height: 30px;
+}
+#t1 {
+    background-color: #6b9d41;
+    color: white;
+}
+#t2 {
+    background-color: #b3d68a;
+}
+#t3 {
+    background-color: #cbe3ae;
+}
+#t4 {
+    background-color: #63174e;
+    color: white;
+}
+#t5 {
+    background-color: #b94f8c;
+    color: white;
+}
+#t6 {
+    background-color: #c879a9;
+}
+#t7 {
+    background-color: #ad0c20;
+    color: white;
+}
+#t8 {
+    background-color: #e85156;
+}
+#t9 {
+    background-color: #eb7b7e;
+}
+#t10 {
+    background-color: #cb6028;
+    color: white;
+}
+#t11 {
+    background-color: #f59b42;
+}
+#t12 {
+    background-color: #f6b46c;
+}
+#t13 {
+    background-color: #ffcc00;
+}
+#t14 {
+    background-color: #fbe68c;
+}
+#t15 {
+    background-color: #fbeba6;
+}
+#t16 {
+    background-color: #525252;
+    color: white;
+}
+#t17 {
+    background-color: #d2d2d2;
+}
+#t18 {
+    background-color: #ebebeb;
+}
+#t19 {
+    background-color: #0c4496;
+    color: white;
+}
+#t20 {
+    background-color: #1d9cd4;
+    color: white;
+}
+#t21 {
+    background-color: #8dd6f0;
+}
+
+
+
+/*******************************
+*   BANNERS SECTION
+*******************************/
+.bannerimg {
+    margin: 20px;
+    border-radius: 20px;
+    box-shadow: 3px 3px 5px 0 #000;
+}
+
+
+
+/*******************************
+*   LOGO SECTIONS
+*******************************/
+#logos-section {
+    display: flex;
+    flex-flow: row wrap;
+}
+.logo-box {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    width: 30%;
+}
+
+
+
+/*******************************
+*   THEMES SECTION
+*******************************/
+#themesection {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+}
+#themeinfo {
+    width: 100%;
+    margin-bottom: 30px;
+}
+#theme1 {
+    width: 45%;
+}
+#theme2 {
+    width: 45%;
+}

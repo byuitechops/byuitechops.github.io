@@ -1,0 +1,19 @@
+<section id="welcome">
+    <div class="slideshow-container">
+
+        <div id="slide-box">
+            <a class="slide" *ngFor="let banner of slide.orderedBanners" [href]="banner.link" target="_blank">
+                <img [src]="banner.url | async" [alt]="banner.name"/>
+            </a>
+        </div>
+
+        <a class="slide-btn prev" (click)="prevSlide()"><p><i class="fas fa-chevron-left"></i></p></a>
+        <a class="slide-btn next" (click)="nextSlide()"><p><i class="fas fa-chevron-right"></i></p></a>
+
+    </div>
+
+    <div id="dots-box">
+        <span class="dot" (click)="nowThisSlide()" *ngFor="let dot of dots"></span>
+    </div>
+
+</section>

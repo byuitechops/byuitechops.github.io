@@ -3,7 +3,7 @@ import * as firebase from 'firebase/app/';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 
-import { AuthService } from '../core/auth.service';
+import { AuthService } from './auth.service';
 import { listenToElementOutputs } from '@angular/core/src/view/element';
 
 @Injectable({
@@ -12,12 +12,13 @@ import { listenToElementOutputs } from '@angular/core/src/view/element';
 export class StoreService {
 
     user: any;
-    edit: boolean = false;
     total: number = 0;
     items = [];
     cart = [];
     count: number;
     payType: '';
+
+    viewingInvoice = false;
 
     constructor(
         private db: AngularFirestore, 
@@ -60,7 +61,7 @@ export class StoreService {
     sumTotal() {
         this.total = 0;
         this.cart.forEach(item => {
-            this.total += item.price;
+            this.total += parseFloat(item.price);
         });
         this.count = this.cart.length;
     }
@@ -149,5 +150,14 @@ export class StoreService {
      */
     updateSnackCount() {
 
+    }
+
+    /********************************
+     * GET RECEIPTS
+     * Retreives the receipts to be view on the store invoice.
+     */
+    getReceipts() {
+        let receipts = this.db.collection('store/transactions/receipts');
+        return receipts;
     }
 }

@@ -112,8 +112,8 @@ function generateList(all) {
         });
 }
 function clearTable() {
-    var rows = document.getElementsByClassName('generated');
-    var length = rows.length;
+    // var rows = document.getElementsByClassName('generated');
+    // var length = rows.length;
     // console.log(rows);
     // console.log(length);
 

@@ -11,41 +11,15 @@
     position: relative;
 }
 
+app-slideshow {
+    width: 100%;
+    max-width: 750px;
+}
+
 #time-n-date {
     width: 100%;
     display: none;
 }
-
-#welcome {
-    width: 100%;
-    max-width: 800px;
-}
-.slideshow-container {
-    position: relative;
-    
-    border-radius: 15px;
-    overflow: hidden;
-}
-.slide-btn {
-    display: none;
-}
-#dots-box {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-.dot {
-    width: 20px;
-    height: 20px;
-    margin: 5px;
-
-    border-radius: 50px;
-    background-color: var(--lightgray);
-}
-.active-dot {
-    background-color: var(--darkgray);
-}
-
 .time-box {
     width: 100%;
     display: flex;
@@ -75,7 +49,7 @@
 }
 .btn2:hover {
     width: 100%;
-    height: 105%;
+    height: 102%;
 }
 .btn2 p, .btn2 span {
     color: var(--white);
@@ -178,53 +152,6 @@
     #date {
         font-size: 1vw;
         font-weight: 700;
-    }
-
-    #welcome {
-        width: 70%;
-        max-width: 70%;
-    }
-    #slide-box {
-        display: flex;
-        width: 100%;
-        height: 10vw;
-    }
-    .slide {
-        width: 100%;
-    }
-    .slide-btn {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        text-align: left;
-        width: 20%;
-        height: 100%;
-    
-        position: absolute;
-        top: 0;
-        transition: all .2s;
-    }
-    .slide-btn p {
-        padding: 10px;
-        color: var(--white);
-        font-size: 16px;
-        transition: all .2s;
-    }
-    .next {
-        justify-content: flex-end;
-        right: 0;
-    }
-    .prev:hover {
-        background: linear-gradient(to right, rgba(0,0,0,.75) 0%, rgba(0,0,0,0) 100%);
-    }
-    .prev:hover p {
-        font-size: 24px;
-    }
-    .next:hover {
-        background: linear-gradient(to left, rgba(0,0,0,.75) 0%, rgba(0,0,0,0) 100%);
-    }
-    .next:hover p {
-        font-size: 24px;
     }
 
     .time-box {
