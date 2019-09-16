@@ -153,13 +153,10 @@ function changeTheme(preferance) {
         preferance = "dark";
         changeViewMode(preferance);
     } else if (preferance == 2) {
-        preferance = "jedi";
+        preferance = "falllight";
         changeViewMode(preferance);
     } else if (preferance == 3) {
-        preferance = "sith";
-        changeViewMode(preferance);
-    } else if (preferance == 4) {
-        preferance = "merica";
+        preferance = "falldark";
         changeViewMode(preferance);
     }
   
@@ -193,57 +190,32 @@ function changeTheme(preferance) {
                     });
                     navbarImage.src="";
                     break;
-                case 'jedi':
+                case 'falllight':
                     setTheme({
-                        'first': '#06439F',
-                        'second': '#343a40',
-                        'third': '#343a40',
+                        'first': '#eb8a00',
+                        'second': '#c79763',
+                        'third': '#c79763',
                         'background': 'none',
                         'backgroundSecondary': '#ffffff',
-                        'backgroundGrade': 'linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)',
+                        'backgroundGrade': 'linear-gradient(0deg, rgba(241,90,41,1) 0%, rgba(241,90,41,1) 100%)',
                         'shadow': 'var(--gray-dark)',
                         'fontPrime': '#000000'
                     });
-                    navbarImage.src="./assets/logos/jediLogo.png";
+                    navbarImage.src="./assets/logos/leavesColored.png";
                     break;
-                case 'sith':
+                case 'falldark':
                     setTheme({
-                        'first': '#343a40',
+                        'first': '#f57600',
                         'second': '#343a40',
                         'third': '#890000',
                         'background': '#1c1b1b',
                         'backgroundSecondary': '#777777',
-                        'backgroundGrade': 'linear-gradient(180deg, rgba(36,0,0,1) 0%, rgba(121,9,9,1) 35%, rgba(255,0,0,1) 100%)',
+                        'backgroundGrade': 'linear-gradient(0deg, rgba(140,68,0,1) 0%, rgba(245,118,0,1) 100%)',
                         'shadow': 'none',
                         'fontPrime': '#ffffff'
                     });
-                    navbarImage.src="./assets/logos/sithLogo.png";
+                    navbarImage.src="./assets/logos/treenpumpkin.png";
                     break;
-                case 'merica':
-                    setTheme({
-                        'first': '#0076c6',
-                        'second': '#343a40',
-                        'third': '#ed2525',
-                        'background': '#ffffff',
-                        'backgroundSecondary': '#ffffff',
-                        'backgroundGrade': 'linear-gradient(9deg, rgba(255,0,0,1) 0%, rgba(221,59,59,1) 16%, rgba(235,208,208,1) 32%, rgba(255,255,255,1) 39%, rgba(191,230,241,1) 45%, rgba(69,163,190,1) 64%, rgba(51,83,185,1) 80%)',
-                        'shadow': 'var(--gray)',
-                        'fontPrime': '#000000'
-                    });
-                    navbarImage.src="./assets/logos/eagleLogo.png";
-                    break;
-                case 'troll':
-                    setTheme({
-                        'first': '#890000',
-                        'second': '#000000',
-                        'third': '#000000',
-                        'background': '#000000',
-                        'backgroundSecondary': '#000000', 
-                        'backgroundGrade': '#000000',
-                        'shadow': '#000000',
-                        'fontPrime': '#06439F'
-                    })
-                    navbarImage.src="./assets/logos/cattroll.jpg";
             }
         })
 
@@ -284,8 +256,8 @@ function setValue(property, value) {
 
         const input = document.querySelector(`#${property}`);
         if (input) {
-        value = value.replace('px', '');
-        input.value = value;
+            value = value.replace('px', '');
+            input.value = value;
         }
     }
 }

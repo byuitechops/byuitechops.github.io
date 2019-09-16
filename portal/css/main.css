@@ -125,6 +125,7 @@ nav {
     position: fixed;
     box-shadow: 5px 0 10px var(--shadow);
     z-index: 3;
+    overflow: hidden !important;
 }
 .nav-links {
     width: 100%;
@@ -156,12 +157,13 @@ nav {
     flex-wrap: wrap;
 }
 #nav-img-box {
+    z-index: -50;
     width: 250%;
     display: fixed;
-    margin-top: 130px;
-    margin-left: -230px;
+    margin-top: 180px;
+    margin-left: -100px;
     opacity: .65;
-    overflow: hidden;
+    transform: scale(1.7);
 }
 
 
@@ -845,6 +847,11 @@ main {
 .snack-info .btnPlusMinus#minus {
     bottom: 7%;
     padding: 3px 7.5px;
+}
+
+#request-btn {
+    position: fixed;
+    top: 480px;
 }
 
 

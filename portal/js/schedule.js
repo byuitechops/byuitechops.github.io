@@ -19,8 +19,6 @@ function loadPage() {
             } else if (myData.team == "Team 2") {
                 iframe.src = ssCanvas2;
                 newTab.href = ssCanvas2;
-
-
             }
         })
     })

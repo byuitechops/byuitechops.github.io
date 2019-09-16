@@ -30,6 +30,7 @@ const confirmAdd = document.getElementById("confirm-add");
 const nameEdit = document.getElementById("nameEdit");
 const priceEdit = document.getElementById("priceEdit");
 const countEdit = document.getElementById("countEdit");
+const requestItem = document.getElementById("request-snack");
 
 
 
@@ -489,4 +490,10 @@ function submitMoney() {
             // The document probably doesn't exist.
             console.error("Error updating document: ", error);
         });
+}
+
+
+function openNewRequest() {
+    this.requestItem.classList.remove('hide');
+    this.snackCart.classList.add('hide');
 }
