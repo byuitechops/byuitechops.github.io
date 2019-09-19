@@ -206,7 +206,7 @@ function changeTheme(preferance) {
                 case 'falldark':
                     setTheme({
                         'first': '#f57600',
-                        'second': '#343a40',
+                        'second': '#890000',
                         'third': '#890000',
                         'background': '#1c1b1b',
                         'backgroundSecondary': '#777777',
