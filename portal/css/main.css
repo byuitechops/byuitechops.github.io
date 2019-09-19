@@ -128,6 +128,7 @@ nav {
     overflow: hidden !important;
 }
 .nav-links {
+    z-index: 1900;
     width: 100%;
     height: auto;
     flex-flow: column wrap;
@@ -157,13 +158,16 @@ nav {
     flex-wrap: wrap;
 }
 #nav-img-box {
-    z-index: -50;
+    z-index: -5;
     width: 250%;
     display: fixed;
-    margin-top: 180px;
-    margin-left: -100px;
+    margin-top: 170px;
+    margin-left: -50px;
     opacity: .65;
     transform: scale(1.7);
+}
+#nav-img {
+    z-index: -5;
 }
 
 
@@ -691,13 +695,14 @@ main {
     font-size: 1.2em;
     font-weight: 300;
 }
-#snack-edit p, #snack-add p {
+.snack-manage p {
     width: 30%;
     margin: 5px;
     font-size: 1vw;
     font-weight: 500;
+    color: var(--fontPrime);
 }
-#snack-edit input, #snack-add input {
+.snack-manage input {
     float: right;
     width: 58%;
     margin: 5px;
@@ -711,7 +716,7 @@ main {
     transition: all .2s;
     cursor: pointer;
 }
-#snack-edit input:hover, #snack-add input:hover {
+.snack-manage input:hover {
     width: 60%;
 }
 #add-img {
@@ -851,7 +856,10 @@ main {
 
 #request-btn {
     position: fixed;
-    top: 480px;
+    top: 750px;
+}
+#request-snack form div{
+    width: 100%;
 }
 
 

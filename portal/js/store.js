@@ -31,6 +31,7 @@ const nameEdit = document.getElementById("nameEdit");
 const priceEdit = document.getElementById("priceEdit");
 const countEdit = document.getElementById("countEdit");
 const requestItem = document.getElementById("request-snack");
+const requestName = document.getElementById("newItemName");
 
 
 
@@ -494,6 +495,22 @@ function submitMoney() {
 
 
 function openNewRequest() {
-    this.requestItem.classList.remove('hide');
-    this.snackCart.classList.add('hide');
+    requestItem.classList.remove('hide');
+    snackCart.classList.add('hide');
+}
+function isRequestValid() {
+    if (requestName.innerHTML != "") {
+        console.log('name is valid');
+        return true;
+    }
+    console.log('name is invalid');
+    return false;
+}
+function confirmRequestSnack() {
+    if (isRequestValid()) {
+        
+    }
+}
+function cancelRequestSnack() {
+
 }
