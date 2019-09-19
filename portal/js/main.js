@@ -210,7 +210,7 @@ function changeTheme(preferance) {
                         'third': '#890000',
                         'background': '#1c1b1b',
                         'backgroundSecondary': '#777777',
-                        'backgroundGrade': 'linear-gradient(0deg, rgba(140,68,0,1) 0%, rgba(245,118,0,1) 100%)',
+                        'backgroundGrade': 'linear-gradient(180deg, rgba(245,118,0,1) 0%, rgba(137,0,0,1) 100%)',
                         'shadow': 'none',
                         'fontPrime': '#ffffff'
                     });
