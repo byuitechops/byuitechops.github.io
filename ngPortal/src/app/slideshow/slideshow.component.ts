@@ -16,7 +16,7 @@ export class SlideshowComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.banners = this.slide.getActiveBanners();
+        this.banners = this.slide.orderBanners();
         this.takeTurns();
     }
 

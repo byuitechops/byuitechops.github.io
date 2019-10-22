@@ -6,6 +6,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 
@@ -43,6 +44,7 @@ import { ThemeService } from './core/theme.service';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule
   ],
   providers: [

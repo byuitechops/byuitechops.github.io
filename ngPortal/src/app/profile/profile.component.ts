@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { defineBase } from '@angular/core/src/render3';
 import { async } from '@angular/core/testing';
 import { HttpClient } from '@angular/common/http';
+import { Validators, FormControl, FormGroup } from '@angular/forms';
 
 import { AuthService } from '../core/auth.service';
 import { SlideshowService } from '../core/slideshow.service';
@@ -36,11 +37,11 @@ export class ProfileComponent implements OnInit {
     activeBanners = [];
     orderedBanners = [];
 
-    newBannerName = '';
-    newBannerImage = '';
-    newBannerLink = '';
-    newBannerPlace = -1;
-    newBannerIsActive = false;
+    bannerForm = new FormGroup({
+        name: new FormControl(''),
+        link: new FormControl(''),
+        image: new FormControl(),
+    });
 
     constructor(
         public db: AngularFirestore, 
@@ -97,18 +98,17 @@ export class ProfileComponent implements OnInit {
     editBanners() {
         this.editingBanners = true;
     }
+    cancelBannerEdit() {
 
+    }
+    makeNewBanner() {
+
+    }
     onFileSelected(event) {
         console.log(event);
-        this.newBannerName = event.target.files[0].name;
-        this.newBannerImage = event.target.files[0];
     }
-    onUpload() {
-        const fd = new FormData;
-        fd.append('image', this.newBannerImage, this.newBannerName)
-        this.http.post('', fd).subscribe(res => {
-            console.log(res);
-        });
+    onSubmit() {
+        console.warn(this.bannerForm.value);
     }
     
     editThemes() {

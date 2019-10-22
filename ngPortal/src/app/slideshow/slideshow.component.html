@@ -2,7 +2,7 @@
     <div class="slideshow-container">
 
         <div id="slide-box">
-            <a class="slide" *ngFor="let banner of slide.orderedBanners" [href]="banner.link" target="_blank">
+            <a class="slide" *ngFor="let banner of banners" [href]="banner.link" target="_blank">
                 <img [src]="banner.url | async" [alt]="banner.name"/>
             </a>
         </div>

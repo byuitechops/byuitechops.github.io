@@ -3,10 +3,27 @@
         <div class="teamSelector">
             <h1 class="page-title">Schedule</h1>
             <div>
+                <form *ngIf="editingSchedules">
+                    <div>
+                        <p>Schedule 1</p>
+                        <input type="text" [(ngModel)]="name1" placeholder="Name"/>
+                        <input type="url" [(ngModel)]="link1" placeholder="Link"/>
+                    </div>
+                    <div>
+                        <p>Schedule 2</p>
+                        <input type="text" [(ngModel)]="name2" placeholder="Name"/>
+                        <input type="url" [(ngModel)]="link2" placeholder="Link"/>
+                    </div>
+                    <div>
+                        <button (click)="cancelEdit()">Cancel</button>
+                        <button (click)="updateSchedules()">Update</button>
+                    </div>
+                </form>
+                <button id="edit-sched-btn" *ngIf="isEditor && !editingSchedules" (click)="editSchedules()">Edit Schedules</button>
                 <select class="teamItem" id="selectTeam" *ngIf="teamSelector" [(ngModel)]="selector" (change)="changeSheet()">
                     <option [value]="0">Select Team</option>
-                    <option id="canvas1" [value]="1">Team 1</option>
-                    <option id="canvas2" [value]="2">Team 2</option>
+                    <option id="canvas1" [value]="1">{{ name1 }}</option>
+                    <option id="canvas2" [value]="2">{{ name2 }}</option>
                 </select>
                 <a class="teamItem" id="newTab" target="_blank" [href]="sanLink()">
                     <i class="fas fa-external-link-alt"></i>

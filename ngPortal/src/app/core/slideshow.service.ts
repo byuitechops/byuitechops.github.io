@@ -54,6 +54,7 @@ export class SlideshowService {
             this.dots = this.activeBanners.length;
             this.orderBanners();
         }, 1000);
+        return this.activeBanners;
     }
 
     orderBanners() {
@@ -62,8 +63,18 @@ export class SlideshowService {
             for(let j = 0; j < this.activeBanners.length; j++) {
                 if(this.activeBanners[j].place == i) {
                     this.orderedBanners.push(this.activeBanners[j]);
+                    console.log('Pushed ') + 
                 }
             }
         }
+        return this.orderedBanners;
+    }
+
+    editBanner(banner: []) {
+        
+    }
+
+    createNewBanner(banner: []) {
+
     }
 }

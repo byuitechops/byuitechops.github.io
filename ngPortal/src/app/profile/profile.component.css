@@ -213,9 +213,29 @@
 
         font-size: 14px;
     }
-
+    .form {
+        display: flex;
+        flex-flow: row wrap;
+    }
+    .form div {
+        display: flex;
+        width: 100%;
+    }
+    .form div span {
+        width: 75px;
+    }
+    .form div input {
+        width: 50%;
+        max-width: 300px;
+    }
+    .form em {
+        font-size: 12px;
+    }
 }
 
+/*******************************
+*   Media Queries
+*******************************/
 @media only screen and (min-width: 2000px) {
 
     #profile-info h3 {

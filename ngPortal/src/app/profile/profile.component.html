@@ -89,8 +89,8 @@
                     <img [src]="banner.url | async" [alt]="banner.name">
                     <div class="banner-text-box">
                         <h4>{{ banner.name }}</h4>
-                        <p>{{ banner.link }}</p>
                         <p *ngIf="banner.place != -1"># {{ banner.place + 1 }}</p>
+                        <p *ngIf="banner.link">{{ banner.link }}</p>
                     </div>
                 </div>
             </div>
@@ -102,17 +102,30 @@
                     <img [src]="banner.url | async" [alt]="banner.name">
                     <div class="banner-text-box">
                         <p>{{ banner.name }}</p>
-                        <p>{{ banner.link }}</p>
                         <p># {{ banner.place + 1 }}</p>
+                        <p *ngIf="banner.link">{{ banner.link }}</p>
                     </div>
                 </div>
             </div>
             <div id="add-banner-box">
                 <h2>Add a Banner</h2>
-                <form>
-                    <span>Name</span><input type="text" [(ngModel)]="addBannerName" placeholder="New Banner"/>
-                    <span>Image</span><input type="file" [(ngModel)]="addBannerImage" (change)="onFileSelected($event)">
-                    <button type="button" (click)="onUpload()">Upload</button>
+                <form class="form" id="edit-banner-form" [formGroup]="bannerForm" (ngSubmit)="onSubmit()">
+                    <label>
+                        <span>Name: {{ name.value }}</span>
+                        <input type="text" formControlName="name">
+                    </label>
+                    <label>
+                        <span>Link <em>optional</em></span>
+                        <input type="url" formControlName="link" placeholder="www.example.com/when-clicked"/>
+                    </label>
+                    <label>
+                        <span>Image</span>
+                        <input type="file" formControlName="image" (change)="onFileSelected($event)">
+                    </label>
+                    <div>
+                        <button type="button" (click)="cancelBannerEdit()">Cancel</button>
+                        <button type="submit" [disabled]="!bannerForm.valid" (click)="makeNewBanner()">Upload</button>
+                    </div>
                 </form>
             </div>
         </section>

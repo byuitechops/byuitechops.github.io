@@ -4,11 +4,23 @@
 *
 ***********************************************************/
 
+main {
+    overflow: hidden;
+}
+h1 {
+    width: auto;
+}
+.teamSelector {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
 .teamSelector div {
     display: flex;
     flex-flow: row nowrap;
-    align-items: center;
-    width: 100%;
+    justify-content: flex-end;
+    align-items: flex-start;
+    width: auto;
 }
 #newTab {
     width: auto;
@@ -31,6 +43,29 @@ iframe {
     border-radius: 15px;
     box-shadow: 3px 3px 6px 0 rgba(0,0,0,0.5);
 }
+form {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+}
+form div {
+    display: flex;
+    flex-flow: column nowrap !important;
+}
+form p {
+    padding-left: 15px;
+}
+form input {
+    width: 300px;
+    max-width: 300px;
+    margin: 5px;
+    padding: 0 10px;
+}
+#edit-sched-btn {
+    width: 175px;
+    max-width: auto;
+}
+
 
 
 /***********************************************************
@@ -39,9 +74,6 @@ iframe {
 
 @media only screen and (min-width: 800px) {
 
-    .teamSelector div {
-        max-width: 200px;
-    }
     .teamSelector {
         display: flex;
         flex-flow: row nowrap;
@@ -52,7 +84,10 @@ iframe {
     }
     #selectTeam {
         width: 100%;
-        max-width: 500px;
+        max-width: 150px;
         margin-left: auto;
+    }
+    form {
+        margin-top: -40px;
     }
 }
