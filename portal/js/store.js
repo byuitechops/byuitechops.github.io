@@ -498,19 +498,13 @@ function openNewRequest() {
     requestItem.classList.remove('hide');
     snackCart.classList.add('hide');
 }
-function isRequestValid() {
-    if (requestName.innerHTML != "") {
-        console.log('name is valid');
-        return true;
-    }
-    console.log('name is invalid');
-    return false;
-}
 function confirmRequestSnack() {
-    if (isRequestValid()) {
-        
+    if (requestName.innerHTML != "") {
+        var db = firebase.firestore();
+        var request = requestName.innerHTML;
+        db.collection('store/inventory/requests').set({
+            name: request,
+            requestor: request
+        });
     }
-}
-function cancelRequestSnack() {
-
 }
