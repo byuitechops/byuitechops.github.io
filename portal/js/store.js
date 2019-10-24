@@ -34,7 +34,6 @@ const requestItem = document.getElementById("request-snack");
 const requestName = document.getElementById("newItemName");
 
 
-
 var editingStore = false;
 
 class storeItem {
@@ -500,9 +499,8 @@ function openNewRequest() {
 }
 function confirmRequestSnack() {
     if (requestName.innerHTML != "") {
-        var db = firebase.firestore();
         var request = requestName.innerHTML;
-        db.collection('store/inventory/requests').set({
+        db.collection("store").doc("inventory").collection("requests").doc(`${request}`).set({
             name: request,
             requestor: request
         });
