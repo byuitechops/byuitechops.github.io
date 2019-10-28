@@ -2,7 +2,7 @@ const users = db.collection('users');
 const admin = document.getElementById('admin');
 const generate = document.getElementById("users-list-generate");
 const checkShow = document.getElementById("checkShow");
-var orderBy = "name";
+var orderBy = "nameDisplay";
 
 function loadPage() {
     users.where("name", "==", userName)
