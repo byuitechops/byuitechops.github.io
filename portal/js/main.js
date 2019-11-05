@@ -214,7 +214,7 @@ function changeTheme(preferance) {
                         'shadow': 'none',
                         'fontPrime': '#ffffff'
                     });
-                    navbarImage.src="./assets/logos/treenpumpkin.png";
+                    navbarImage.src="./assets/logos/Turkeys.png";
                     break;
             }
         })
