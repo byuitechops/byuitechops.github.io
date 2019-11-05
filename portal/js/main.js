@@ -158,6 +158,12 @@ function changeTheme(preferance) {
     } else if (preferance == 3) {
         preferance = "falldark";
         changeViewMode(preferance);
+    } else if (preferance == 4) {
+        preferance = "christmaslight";
+        changeViewMode(preferance);
+    } else if (preferance == 5) {
+        preferance = "christmasdark";
+        changeViewMode(preferance);
     }
   
     db.collection("users").where("name", "==", userName)
@@ -214,7 +220,33 @@ function changeTheme(preferance) {
                         'shadow': 'none',
                         'fontPrime': '#ffffff'
                     });
-                    navbarImage.src="./assets/logos/Turkeys.png";
+                    navbarImage.src="./assets/logos/turkeys.png";
+                    break;
+                case 'christmaslight':
+                    setTheme({
+                        'first': '#054d00',
+                        'second': '#054d00', 
+                        'third': '#054d00',
+                        'background': '#eeffed',
+                        'backgroundSecondary': '#eeffed',
+                        'backgroundGrade': 'linear-gradient(0deg, rgba(133,0,0,1) 0%, rgba(191,0,0,1) 100%)',
+                        'shadow': 'none',
+                        'fontPrime': '#000000'
+                    });
+                    navbarImage.src="./assets/logos/treelight.png";
+                    break;
+                case 'christmasdark':
+                    setTheme({
+                        'first': '#9c0000',
+                        'second': '#9c0000', 
+                        'third': '#9c0000',
+                        'background': '#032e00',
+                        'backgroundSecondary': '#032e00',
+                        'backgroundGrade': 'linear-gradient(0deg, rgba(133,0,0,1) 0%, rgba(191,0,0,1) 100%)',
+                        'shadow': 'none',
+                        'fontPrime': '#ffffff'
+                    });
+                    navbarImage.src="./assets/logos/treedark.png";
                     break;
             }
         })
