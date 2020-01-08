@@ -1,5 +1,5 @@
-const ssCanvas1 = "https://docs.google.com/spreadsheets/d/1I_rpipDSY_RHpZ36JpVwC8rkzsROhGJYM68JPrkzuq4/edit#gid=1252080894";
-const ssCanvas2 = "https://docs.google.com/spreadsheets/d/1YIBTNayjrKxJS541j7wyMEm7uJoYUb0A5mfZJ6zC_JI/edit#gid=1252080894";
+const ssCanvas1 = "https://docs.google.com/spreadsheets/d/1qrrSnZcuTThKtrHlwndkOwEuk5e7QpYu4DBItT9VWow/edit#gid=266358356";
+const ssCanvas2 = "https://docs.google.com/spreadsheets/d/1qrrSnZcuTThKtrHlwndkOwEuk5e7QpYu4DBItT9VWow/edit#gid=266358356";
 const team = document.getElementById("teams");
 const iframe = document.getElementById("spreadsheet");
 const teamSelector = document.getElementById("selectTeam");
