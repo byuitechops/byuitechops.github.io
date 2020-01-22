@@ -71,7 +71,6 @@ function generateList(all) {
                     let row = `<tr class='generated ${interpolate}' id=${doc.id}>
                                     <td class="usernum admin-count">${count}</td>
                                     <td class="username">${doc.data().nameDisplay}</td>
-                                    <td class="usertime hours"><span id="count${doc.id}" onclick="editTime('${doc.id}', '${doc.data().time.accumulatedTime}')">${doc.data().time.accumulatedTime}</span></td>
                                     <td class="userteam">
                                         <select onchange="teamChange('${doc.id}')" class="table-select teamSelect">
                                             <option>default</option>

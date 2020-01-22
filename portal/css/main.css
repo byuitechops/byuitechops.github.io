@@ -1253,6 +1253,9 @@ main {
 .table-generate select {
     width: 100%;
 }
+.table-generate .username {
+    width: 40%;
+}
 .criteria {
     width: 60%;
     margin-left: 20px;
