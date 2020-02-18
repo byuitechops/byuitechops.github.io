@@ -150,19 +150,10 @@ function changeTheme(preferance) {
         preferance = "light";
         changeViewMode(preferance);
     } else if (preferance == 1) {
-        preferance = "dark";
+        preferance = "dark-blue";
         changeViewMode(preferance);
     } else if (preferance == 2) {
-        preferance = "falllight";
-        changeViewMode(preferance);
-    } else if (preferance == 3) {
-        preferance = "falldark";
-        changeViewMode(preferance);
-    } else if (preferance == 4) {
-        preferance = "christmaslight";
-        changeViewMode(preferance);
-    } else if (preferance == 5) {
-        preferance = "christmasdark";
+        preferance = "dark";
         changeViewMode(preferance);
     }
   
@@ -180,6 +171,19 @@ function changeTheme(preferance) {
                         'backgroundGrade': 'none',
                         'shadow': 'var(--gray)',
                         'fontPrime': '#000000'
+                    });
+                    navbarImage.src="";
+                    break;
+                case 'dark-blue':
+                    setTheme({
+                        'first': '#000121',
+                        'second': '#000121',
+                        'third': '#000121',
+                        'background': '#087096',
+                        'backgroundSecondary': '#087096',
+                        'backgroundGrade': 'none',
+                        'shadow': 'none',
+                        'fontPrime': '#ffffff'
                     });
                     navbarImage.src="";
                     break;
