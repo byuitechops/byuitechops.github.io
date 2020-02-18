@@ -27,6 +27,7 @@
 ********************************************************** */
 :root {
     --blue: #0076c6;
+    --dark-blue: #000121;
     --indigo: #6610f2;
     --purple: #6f42c1;
     --pink: #e83e8c;
@@ -1151,6 +1152,7 @@ main {
     font-size: 1.5rem;
 }
 #light {background-color: var(--blue)}
+#dark-blue {background-color: var(--dark-blue)}
 #dark {background-color: var(--gray-dark)}
 #jedi {background-image: linear-gradient(45deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);}
 #sith {background-image: linear-gradient(45deg, rgba(36, 0, 0, 1) 0%, rgba(121, 9, 9, 1) 35%, rgba(255, 0, 0, 1) 100%);}
